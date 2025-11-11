@@ -1,1 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work History — Tymofii Pidlisnyi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #8B9199;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+        }
+
+        [data-theme="bright"] {
+            --bg: #FDFCFA;
+            --bg-secondary: #F9F7F4;
+            --text: #2B2622;
+            --text-muted: #6B7280;
+            --border: #E8E4DF;
+            --accent-cyan: #3498DB;
+            --accent-yellow: #F39C12;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="bright"] .theme-toggle-slider {
+            transform: translateX(30px);
+            background: var(--accent-yellow);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-cyan);
+            transform: translateX(-5px);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-yellow));
+            opacity: 0.5;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 40px rgba(93, 173, 226, 0.15);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.4rem;
+            top: 2.5rem;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 20px rgba(93, 173, 226, 0.5);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .timeline-company-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .timeline-company {
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        .timeline-company a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .timeline-company a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .timeline-company-note {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .timeline-role {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .timeline-description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timeline-bullets {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .timeline-bullets li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .timeline-bullets li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .timeline-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .timeline-link {
+            padding: 0.6rem 1.2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-link:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .timeline-link.primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border: none;
+            color: var(--bg);
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item {
+                padding: 1.5rem;
+            }
+
+            .timeline-company {
+                font-size: 1.4rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider">
+            <span id="theme-icon">🌙</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Back to Home</a>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Work History</h1>
+            <p class="page-subtitle">
+                5+ years building zero-to-one products across AI, SaaS, e-commerce, and CPG. 
+                From scaling startups to founding companies, here's the journey.
+            </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <!-- Evatar.ai -->
+            <div class="timeline-item">
+                <div class="timeline-date">MAY 2024 — PRESENT</div>
+                <div class="timeline-company-wrapper">
+                    <img src="../evatar_logo.PNG" alt="Evatar" class="company-logo" onerror="this.style.display='none'">
+                    <div class="timeline-company"><a href="evatar.html">Evatar.ai</a></div>
+                </div>
+                <div class="timeline-role">Founder & CEO • Los Angeles, CA</div>
+                <p class="timeline-description">
+                    Launched agentic GenAI platform from idea to live beta in 16 weeks. Built and led cross-functional team of 8 
+                    (2 engineers, 3 designers, 1 PM, 2 marketers). Acquired 121 users generating 400K+ weekly impressions. 
+                    Designed Eva — voice-to-content AI assistant transforming casual speech into platform-optimized social posts.
+                </p>
+                <ul class="timeline-bullets">
+                    <li>Led product strategy and roadmap for AI-powered social media automation platform</li>
+                    <li>Shipped MVP in 16 weeks, iterating through 4 major product versions based on user feedback</li>
+                    <li>Built multimodal AI system processing voice, text, and visual inputs for content generation</li>
+                    <li>Grew to 121 beta users, 400K+ weekly social media impressions across platforms</li>
+                    <li>Managed cross-functional team across engineering, design, product, and marketing</li>
+                </ul>
+                <div class="timeline-links">
+                    <a href="evatar.html" class="timeline-link primary">Full Case Study →</a>
+                    <a href="https://evatar.ai" target="_blank" class="timeline-link">Visit Website</a>
+                </div>
+            </div>
+
+            <!-- Elegatto -->
+            <div class="timeline-item">
+                <div class="timeline-date">NOV 2020 — MAR 2024</div>
+                <div class="timeline-company-wrapper">
+                    <div class="company-logo" style="background: #1a1a1a;"></div>
+                    <div class="timeline-company"><a href="elegatto.html">Elegatto</a></div>
+                </div>
+                <div class="timeline-role">Head of Strategy & Operations • Los Angeles, CA</div>
+                <p class="timeline-description">
+                    Scaled DTC jewelry e-commerce from $100K to $3M ARR over 3 years. Led end-to-end operations including 
+                    supply chain, marketing, customer experience, and strategic partnerships. Secured $300K Meta marketing campaign 
+                    (2.8x ROAS). Built scalable operational infrastructure supporting 10x revenue growth.
+                </p>
+                <ul class="timeline-bullets">
+                    <li>Grew revenue from $100K to $3M ARR, tripling revenue in final 24 months through operational excellence</li>
+                    <li>Secured and executed $300K Meta Boost campaign, achieving 2.8x ROAS</li>
+                    <li>Built end-to-end supply chain across 3 countries (US, Thailand, India), reducing lead times 40%</li>
+                    <li>Led customer experience strategy, improving NPS from 45 to 72 and reducing support tickets 35%</li>
+                    <li>Managed P&L, inventory, logistics, marketing, and CX for high-growth DTC brand</li>
+                </ul>
+                <div class="timeline-links">
+                    <a href="elegatto.html" class="timeline-link primary">Full Case Study →</a>
+                    <a href="https://elegatto.com" target="_blank" class="timeline-link">Visit Website</a>
+                </div>
+            </div>
+
+            <!-- ofNature -->
+            <div class="timeline-item">
+                <div class="timeline-date">DEC 2020 — MAR 2022</div>
+                <div class="timeline-company-wrapper">
+                    <img src="../OFNATURE_LOGO.PNG" alt="ofNature" class="company-logo" onerror="this.style.display='none'">
+                    <div class="timeline-company"><a href="ofnature.html">ofNature</a></div>
+                </div>
+                <div class="timeline-role">Co-Founder & CEO • Los Angeles, CA</div>
+                <p class="timeline-description">
+                    Launched sustainable CPG brand pioneering acetate-cellulose disposables. Products adopted by McDonald's for 
+                    pilot testing. Raised $150K pre-seed funding. Built manufacturing partnerships in Ukraine. Led product development, 
+                    fundraising, and go-to-market strategy for eco-friendly alternatives to plastic disposables.
+                </p>
+                <ul class="timeline-bullets">
+                    <li>Developed bio-based disposable products from acetate-cellulose, adopted by McDonald's for pilot program</li>
+                    <li>Raised $150K pre-seed funding from angel investors and sustainability-focused grants</li>
+                    <li>Built supply chain and manufacturing partnerships across Ukraine amid challenging conditions</li>
+                    <li>Led R&D, regulatory compliance (FDA, EU), and pilot program execution with major QSR chain</li>
+                    <li>Managed all aspects of early-stage startup: product, operations, fundraising, partnerships</li>
+                </ul>
+                <div class="timeline-links">
+                    <a href="ofnature.html" class="timeline-link primary">Full Case Study →</a>
+                    <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="timeline-link">Crunchbase</a>
+                </div>
+            </div>
+
+            <!-- Pero Pero -->
+            <div class="timeline-item">
+                <div class="timeline-date">MAY 2024 — AUG 2025</div>
+                <div class="timeline-company-wrapper">
+                    <img src="../peropero_logo.png" alt="Pero Pero" class="company-logo" onerror="this.style.display='none'">
+                    <div class="timeline-company"><a href="peropero.html">Pero Pero</a></div>
+                </div>
+                <div class="timeline-role">COO • Los Angeles, CA</div>
+                <p class="timeline-description">
+                    Built pet care brand from scratch for celebrity founders Stella Maxwell and Barbara Palvin. Developed products, 
+                    multi-channel sales strategy, and complete operational infrastructure. Launched DTC e-commerce and retail 
+                    partnerships within 6 months of founding.
+                </p>
+                <ul class="timeline-bullets">
+                    <li>Built brand identity, product line, and e-commerce platform from zero to launch</li>
+                    <li>Developed multi-channel sales strategy: DTC, retail partnerships (Petco, local boutiques), and wholesale</li>
+                    <li>Established supply chain and fulfillment operations supporting rapid growth trajectory</li>
+                    <li>Launched to market in 6 months with celebrity founder backing and press coverage</li>
+                    <li>Managed all operations: product development, supplier relationships, logistics, e-commerce</li>
+                </ul>
+                <div class="timeline-links">
+                    <a href="peropero.html" class="timeline-link primary">Full Case Study →</a>
+                </div>
+            </div>
+
+            <!-- Allset -->
+            <div class="timeline-item">
+                <div class="timeline-date">JUL 2019 — JUN 2020</div>
+                <div class="timeline-company-wrapper">
+                    <div class="company-logo" style="background: #ff6b6b;"></div>
+                    <div class="timeline-company">
+                        <a href="allset.html">Allset</a> 
+                        <span class="timeline-company-note">(acquired by SoundHound)</span>
+                    </div>
+                </div>
+                <div class="timeline-role">VP of Sales • Los Angeles, CA</div>
+                <p class="timeline-description">
+                    Scaled from commission-only sales rep to VP in 8 months. Built and led sales team that drove $5M Series A. 
+                    Expanded restaurant partner network 3x. Developed sales playbooks and go-to-market strategy for foodtech 
+                    platform connecting diners with restaurants for pre-ordered dine-in experiences.
+                </p>
+                <ul class="timeline-bullets">
+                    <li>Promoted from sales rep to VP of Sales in 8 months based on performance and leadership</li>
+                    <li>Built sales team and processes that supported $5M Series A fundraise</li>
+                    <li>Expanded restaurant partner network from 150 to 450+ locations across Los Angeles</li>
+                    <li>Developed scalable sales playbook and training program for rapid team growth</li>
+                    <li>Led B2B partnerships and drove revenue growth that contributed to eventual acquisition</li>
+                </ul>
+                <div class="timeline-links">
+                    <a href="allset.html" class="timeline-link primary">Full Case Study →</a>
+                    <a href="https://www.crunchbase.com/organization/allset" target="_blank" class="timeline-link">Crunchbase</a>
+                </div>
+            </div>
+
+            <!-- Additional roles can be added here -->
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">Core Competencies</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                A blend of product management, operations, and creative leadership built through hands-on experience.
+            </p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Product Management</h3>
+                    <ul>
+                        <li>Zero-to-one product development</li>
+                        <li>Product strategy & roadmapping</li>
+                        <li>User research & feedback loops</li>
+                        <li>Agile & sprint management</li>
+                        <li>Cross-functional team leadership</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>AI & Technical</h3>
+                    <ul>
+                        <li>AI product design & implementation</li>
+                        <li>Multimodal AI systems</li>
+                        <li>API integrations & automation</li>
+                        <li>Technical documentation</li>
+                        <li>No-code/low-code tools</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Operations</h3>
+                    <ul>
+                        <li>Supply chain management</li>
+                        <li>P&L ownership</li>
+                        <li>Process optimization</li>
+                        <li>Vendor & partner management</li>
+                        <li>Scaling operational systems</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Go-to-Market</h3>
+                    <ul>
+                        <li>Sales strategy & execution</li>
+                        <li>Marketing campaign management</li>
+                        <li>Customer acquisition & retention</li>
+                        <li>Brand development</li>
+                        <li>Partnership development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 5rem;">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'bright');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'bright');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
