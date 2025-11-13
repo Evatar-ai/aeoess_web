@@ -352,18 +352,19 @@
         .profile-overlay {
             position: fixed;
             top: 4rem;
-            left: 2rem;
-            width: 50vw;
-            max-width: 900px;
-            min-width: 700px;
-            max-height: 85vh;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            width: 66vw;
+            max-width: 1200px;
+            min-width: 900px;
+            height: 80vh;
+            max-height: 700px;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 24px;
             z-index: 999;
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-20px);
             transition: all 0.3s ease;
             box-shadow: 0 30px 80px rgba(0,0,0,0.4);
             display: flex;
@@ -373,12 +374,12 @@
         .profile-overlay.show {
             opacity: 1;
             pointer-events: all;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
 
         .profile-overlay-content {
             flex: 1;
-            padding: 3rem;
+            padding: 4rem 4rem 4rem 5rem;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -403,12 +404,13 @@
         }
 
         .profile-overlay-photo {
-            width: 350px;
+            width: 400px;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center center;
             border-left: 3px solid var(--accent-cyan);
             box-shadow: -10px 0 30px rgba(93, 173, 226, 0.3);
+            flex-shrink: 0;
         }
 
         .profile-overlay-name h3 {
@@ -602,9 +604,12 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin: 3rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .stat-card {
@@ -639,9 +644,20 @@
 
         .lab-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @supports (grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))) {
+            @media (min-width: 1200px) {
+                .lab-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
         }
 
         .lab-card {
@@ -1219,23 +1235,30 @@
 
             .profile-overlay {
                 width: 90%;
-                max-width: 600px;
                 min-width: auto;
                 height: auto;
                 max-height: 85vh;
                 flex-direction: column;
+                left: 50%;
+                transform: translateX(-50%) translateY(-20px);
+            }
+
+            .profile-overlay.show {
+                transform: translateX(-50%) translateY(0);
             }
 
             .profile-overlay-photo {
                 width: 100%;
-                height: 250px;
+                height: 300px;
                 border-left: none;
                 border-bottom: 3px solid var(--accent-cyan);
+                box-shadow: 0 10px 30px rgba(93, 173, 226, 0.3);
             }
 
             .profile-overlay-content {
                 max-height: 60vh;
                 overflow-y: auto;
+                padding: 2rem;
             }
 
             .cookie-banner {
@@ -1245,7 +1268,7 @@
             }
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1393,13 +1416,13 @@
         <div class="container">
             <div class="text-center">
                 <h1 class="hero-text text-glow">BUILDING THINGS</h1>
-                <h1 class="hero-text text-glow">THAT FEEL <span class="italic gradient-text">IMPOSSIBLE</span></h1>
-                <h1 class="hero-text text-glow">UNTIL THEY <span class="italic gradient-text">EXIST</span></h1>
+                <h1 class="hero-text text-glow"><span class="italic gradient-text">DREAMER</span> TURNED</h1>
+                <h1 class="hero-text text-glow"><span class="italic gradient-text">BUILDER</span></h1>
                 
                 <p class="hero-intro">
-                    I'm Tymofii "Tima" Pidlisnyi — a creative founder who moves between worlds. Film director turned Product Manager. 
-                    I build products that amplify human creativity rather than replace it. Currently scaling Evatar.ai, 
-                    an agentic GenAI platform that runs social media on autopilot. Cross-functional PM with 5+ years building zero-to-one products in AI, SaaS and e-commerce.
+                    I'm Tymofii "Tima" Pidlisnyi — a creative founder unlocking human creativity with AI. 
+                    Currently building Evatar.ai, AI agents for social media that handle execution while you stay creative. 
+                    Cross-functional PM with 5+ years shipping products across AI, SaaS, and e-commerce.
                 </p>
             </div>
         </div>
@@ -1795,6 +1818,10 @@
             function noise() {
                 const w = ctx.canvas.width;
                 const h = ctx.canvas.height;
+                
+                // Don't create image data if dimensions are invalid
+                if (w <= 0 || h <= 0) return;
+                
                 const iData = ctx.createImageData(w, h);
                 const buffer32 = new Uint32Array(iData.data.buffer);
                 
@@ -1814,7 +1841,10 @@
 
             resize();
             window.addEventListener('resize', resize);
-            animate();
+            // Wait a frame before starting animation
+            requestAnimationFrame(() => {
+                animate();
+            });
         }
 
         // Cookie Consent Management
