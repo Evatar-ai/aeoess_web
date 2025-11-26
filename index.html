@@ -1402,6 +1402,17 @@
             opacity: 0.2;
             animation-direction: reverse;
         }
+
+        /* Updated Grid Layouts */
+        @media (min-width: 900px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .lab-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
     </style>
 </head>
 
@@ -1482,7 +1493,7 @@
             <li class="nav-item"><a href="mywork/index.html">WORK</a></li>
             <li class="nav-item"><a href="#lab">LAB</a></li>
             <li class="nav-item"><a href="#ideas">IDEAS</a></li>
-            <li class="nav-item"><a href="#services">SERVICES</a></li>
+
             <li class="nav-item"><a href="#contact">CONNECT</a></li>
         </ul>
     </nav>
@@ -1523,17 +1534,7 @@
             </div>
 
             <div class="projects-grid">
-                <div class="project-card">
-                    <span class="project-tag active">3D Experience</span>
-                    <h3>Skyscraper</h3>
-                    <p>Quick 3D sketch of my dream tower. It’s a 167-floor skyscraper where the ceiling of floor 1 is
-                        the floor of 160 — the level I “live” on. Full glass under the apartment so you can see all the
-                        way down. Just messing around and building weird ideas for fun.</p>
-                    <a href="https://evatar-ai.github.io/skyscraper/" target="_blank"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">Launch
-                        3D Environment →</a>
-                </div>
-
+                <!-- 1. Evatar.ai (Active) -->
                 <div class="project-card">
                     <span class="project-tag active">Active</span>
                     <h3>Evatar.ai</h3>
@@ -1547,43 +1548,21 @@
                         more →</a>
                 </div>
 
-                <div class="project-card">
-                    <span class="project-tag active">Active Tool</span>
-                    <h3>Prompt Director</h3>
-                    <p>Platform for generating structured, multi-layered AI prompts for creative and product workflows.
-                    </p>
-                    <a href="https://prompt-director.rork.app" target="_blank"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">prompt-director.rork.app
-                        →</a>
-                    <a href="mywork/prompt-director.html"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn
-                        more →</a>
-                </div>
-
+                <!-- 2. Pero Pero (Past Project) -->
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
-                    <h3>æœss</h3>
-                    <p>IoT breathing wearable nose device for personalized breathing analytics and mindfulness.</p>
-                    <a href="https://aeoess.com" target="_blank"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">aeoess.com
-                        →</a>
-                    <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
-                        target="_blank"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View
-                        deck →</a>
+                    <h3>Pero Pero</h3>
+                    <p>COO of a creative marketplace. Managed operations and strategy for a platform connecting artists
+                        with clients.</p>
+                    <a href="https://myperopero.com" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">Visit
+                        Pero Pero →</a>
+                    <a href="mywork/peropero.html"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Full
+                        Case Study →</a>
                 </div>
 
-                <div class="project-card">
-                    <span class="project-tag active">Music</span>
-                    <h3>æœss</h3>
-                    <p>AI-generated music born from a story of love that never happened — released raw and unfiltered.
-                    </p>
-                    <a href="https://open.spotify.com/artist/6N4IO6ByfmjqJGbufMAmwA?si=U1z0Lms-RySkycoSXWQsRw"
-                        target="_blank"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">Listen
-                        on Spotify →</a>
-                </div>
-
+                <!-- 3. ofNature (Past Project) -->
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
                     <h3>ofNature</h3>
@@ -1598,20 +1577,7 @@
                         deck →</a>
                 </div>
 
-                <div class="project-card">
-                    <span class="project-tag">Past Project</span>
-                    <h3>SheetHappens</h3>
-                    <p>Premium toilet paper brand concept exploring the intersection of consumer wellness and
-                        sustainable design.</p>
-                    <a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing"
-                        target="_blank"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
-                        deck →</a>
-                    <a href="mywork/sheethappens.html"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn
-                        more →</a>
-                </div>
-
+                <!-- 4. Amplifier Agency (Past Project) -->
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
                     <h3>Amplifier Agency</h3>
@@ -1620,17 +1586,8 @@
                         style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
                         Community →</a>
                 </div>
-
-                <div class="project-card">
-                    <span class="project-tag">Collection</span>
-                    <h3>Creative Projects</h3>
-                    <p>Film direction, multimedia installations, and creative experiments that blend art with
-                        technology.</p>
-                    <a href="mywork/creative-projects.html"
-                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
-                        portfolio →</a>
-                </div>
             </div>
+
 
         </div>
     </section>
@@ -1647,6 +1604,7 @@
             </div>
 
             <div class="lab-grid">
+                <!-- 1. Prompt Director (Active) -->
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
                     <h4><a href="https://prompt-director.rork.app" target="_blank">Prompt Director</a></h4>
@@ -1654,6 +1612,7 @@
                     </p>
                 </div>
 
+                <!-- 2. Memoir App (Active) -->
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
                     <h4><a href="https://memoir-vault.rork.app" target="_blank">Memoir App</a></h4>
@@ -1661,6 +1620,48 @@
                         video.</p>
                 </div>
 
+                <!-- 3. AEOESS Device (Prototype) -->
+                <div class="lab-card">
+                    <div class="lab-status">Prototype</div>
+                    <h4><a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
+                            target="_blank">ÆŒSS Device</a></h4>
+                    <p>IoT breathing wearable for personalized breathing analytics. Built hardware prototype, started
+                        software development.</p>
+                </div>
+
+                <!-- 4. SheetHappens (Concept) -->
+                <div class="lab-card">
+                    <div class="lab-status">Concept</div>
+                    <h4><a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing"
+                            target="_blank">SheetHappens</a></h4>
+                    <p>Premium toilet paper brand concept exploring consumer wellness and sustainable design.</p>
+                </div>
+
+                <!-- 5. Skyscraper (Creative) -->
+                <div class="lab-card">
+                    <div class="lab-status">Creative</div>
+                    <h4><a href="https://evatar-ai.github.io/skyscraper/" target="_blank">Skyscraper</a></h4>
+                    <p>3D sketch of my dream tower — 167 floors, glass floor apartment at level 160. Just messing around
+                        and building weird ideas.</p>
+                </div>
+
+                <!-- 6. AEOESS Music (Music) -->
+                <div class="lab-card">
+                    <div class="lab-status">Music</div>
+                    <h4><a href="https://open.spotify.com/artist/6N4IO6ByfmjqJGbufMAmwA" target="_blank">æœss Music</a>
+                    </h4>
+                    <p>AI-generated music born from a story of love that never happened — released raw and unfiltered.
+                    </p>
+                </div>
+
+                <!-- 7. Creative Projects (Collection) -->
+                <div class="lab-card">
+                    <div class="lab-status">Collection</div>
+                    <h4><a href="mywork/creative-projects.html">Creative Projects</a></h4>
+                    <p>Film direction, music videos, multimedia installations. Co-directed videos with 14M+ views.</p>
+                </div>
+
+                <!-- 8. ACI (Research) -->
                 <div class="lab-card">
                     <div class="lab-status">Research</div>
                     <h4>ACI — Artificial Creative Intelligence</h4>
@@ -1668,24 +1669,12 @@
                         directing experience.</p>
                 </div>
 
-                <div class="lab-card">
-                    <div class="lab-status">Prototype</div>
-                    <h4>Multimodal Integration</h4>
-                    <p>Testing Reka.AI and other services for richer, more expressive AI interactions.</p>
-                </div>
-
-                <div class="lab-card">
-                    <div class="lab-status">Exploration</div>
-                    <h4>Autonomous Workflows</h4>
-                    <p>Building AI agents that handle complete workflows end-to-end without human intervention.</p>
-                </div>
-
+                <!-- 9. Vibe Coding (Active) -->
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
                     <h4>Vibe Coding</h4>
-                    <p>Building and experimenting with apps and webpages through rapid prototyping and creative
-                        exploration. This website, Prompt Director, and various other projects are born from this
-                        experimental approach to development.</p>
+                    <p>Building apps and webpages through rapid prototyping and creative exploration. This website and
+                        various other projects are born from this approach.</p>
                 </div>
             </div>
         </div>
@@ -1863,67 +1852,14 @@
         </div>
     </div>
 
-    <section id="services" class="section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-header-top">
-                    <div class="section-header-line"></div>
-                    <h2 class="section-numeral">IV</h2>
-                    <div class="section-header-line"></div>
-                </div>
-                <h3 class="section-title">WHAT I OFFER</h3>
-            </div>
 
-            <div class="now-card">
-                <div class="now-item">
-                    <div class="now-icon">⚡</div>
-                    <div>
-                        <h4>Fundraising & Collaboration</h4>
-                        <p>Constantly learning, experimenting, and building connections with investors and creators. If
-                            you're into AI startups or creative tech — let's chat.</p>
-                    </div>
-                </div>
-
-                <div class="now-item">
-                    <div class="now-icon">🧩</div>
-                    <div>
-                        <h4>AI Agents & Automation</h4>
-                        <p>Building custom AI agents for any industry — from customer engagement to workflow automation.
-                            I also design and run complete marketing systems: inbound, outbound, and retention
-                            automation, including full infrastructure setup.</p>
-                    </div>
-                </div>
-
-                <div class="now-item">
-                    <div class="now-icon">💡</div>
-                    <div>
-                        <h4>Strategy, Ideation & Product Development</h4>
-                        <p>Helping founders brainstorm and solve product challenges. From feature ideation and creative
-                            problem-solving to prototyping and supplier connections — I help bring ideas to life and
-                            turn them into market-ready products.</p>
-                    </div>
-                </div>
-
-                <div class="now-item">
-                    <div class="now-icon">🗞️</div>
-                    <div>
-                        <h4>PR & Media Strategy</h4>
-                        <p>Helping brands gain visibility and credibility through powerful storytelling and earned
-                            media. I can help get you featured in top publications such as Forbes, Business Insider,
-                            TechCrunch, Wired, TIME, Able News, and Fast Company — turning your story into meaningful
-                            press coverage.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section id="contact" class="section">
         <div class="container">
             <div class="section-header">
                 <div class="section-header-top">
                     <div class="section-header-line"></div>
-                    <h2 class="section-numeral">V</h2>
+                    <h2 class="section-numeral">IV</h2>
                     <div class="section-header-line"></div>
                 </div>
                 <h3 class="section-title">CONNECT</h3>
