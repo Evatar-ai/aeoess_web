@@ -228,16 +228,99 @@
             display: block;
         }
 
-        /* Hero Section */
+        /* Hero Section - Enhanced Split Layout */
         .hero {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
             padding: 8rem 2rem 4rem;
             position: relative;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                align-items: center;
+                order: 2;
+            }
+        }
+
+        .hero-device {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-device {
+                order: 1;
+            }
+        }
+
+        .hero-device-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 24px;
+            animation: heroFloat 6s ease-in-out infinite, fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+            filter: drop-shadow(0 30px 60px rgba(59, 130, 246, 0.2));
+        }
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .hero-device::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
         }
 
         .hero-eyebrow {
@@ -249,17 +332,34 @@
             margin-bottom: 1.5rem;
             font-weight: 500;
             letter-spacing: 0.05em;
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
         }
 
         .hero-eyebrow .dot {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: var(--accent-primary);
             border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
         }
 
         .hero-logo {
-            max-width: 280px;
+            max-width: 220px;
             margin-bottom: 1rem;
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
@@ -273,20 +373,26 @@
             font-family: 'JetBrains Mono', monospace;
             color: var(--accent-primary);
             font-size: 1.1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             letter-spacing: 0.1em;
             opacity: 0;
             animation: fadeInUp 0.8s ease 0.1s forwards;
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
+            font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+            font-weight: 800;
             margin-bottom: 1.5rem;
             color: var(--text-primary);
-            max-width: 700px;
+            line-height: 1.2;
             opacity: 0;
             animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 {
+                max-width: 600px;
+            }
         }
 
         .hero h1 .gradient-text {
@@ -300,9 +406,15 @@
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             opacity: 0;
             animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-cta-row {
+                justify-content: center;
+            }
         }
 
         .btn-primary {
@@ -976,39 +1088,48 @@
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-eyebrow">
-            <span class="dot"></span>
-            Hardware R&D
-            <span class="dot"></span>
-            On Hold
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="dot"></span>
+                Hardware R&D
+                <span class="dot"></span>
+                On Hold
+            </div>
+
+            <img src="../assets/aeoess/aeoess_logo-05.png" alt="ÆOESS Logo" class="hero-logo">
+
+            <div class="hero-pronunciation">[áios]</div>
+
+            <h1>An IoT breath-training wearable with AI coaching — <span class="gradient-text">the Peloton for
+                    breathing.</span></h1>
+
+            <div class="hero-cta-row">
+                <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
+                    target="_blank" class="btn-primary">
+                    📄 View Pitch Deck
+                </a>
+                <a href="https://aeoess.com" target="_blank" class="btn-secondary">
+                    🌐 aeoess.com
+                </a>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">The Core Insight</div>
+                <blockquote>
+                    "Breathing is the only autonomic function humans can consciously control — training it changes
+                    everything."
+                </blockquote>
+            </div>
         </div>
 
-        <img src="../assets/aeoess/aeoess_logo-05.png" alt="ÆOESS Logo" class="hero-logo">
-
-        <div class="hero-pronunciation">[áios]</div>
-
-        <h1>An IoT breath-training wearable with AI coaching — <span class="gradient-text">the Peloton for
-                breathing.</span></h1>
-
-        <div class="hero-cta-row">
-            <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank"
-                class="btn-primary">
-                📄 View Pitch Deck
-            </a>
-            <a href="https://aeoess.com" target="_blank" class="btn-secondary">
-                🌐 aeoess.com
-            </a>
+        <div class="hero-device">
+            <img src="../assets/aeoess/1.1.png" alt="ÆOESS Device Render" class="hero-device-image">
         </div>
+    </section>
 
-        <div class="insight-box">
-            <div class="insight-label">The Core Insight</div>
-            <blockquote>
-                "Breathing is the only autonomic function humans can consciously control — training it changes
-                everything."
-            </blockquote>
-        </div>
-
-        <div class="stats-row">
+    <!-- Stats Section -->
+    <section class="stats-section" style="padding: 0 2rem 4rem; max-width: 1400px; margin: 0 auto;">
+        <div class="stats-row" style="opacity: 1; animation: none;">
             <div class="stat-card">
                 <div class="stat-icon">⏱️</div>
                 <span class="stat-value">6</span>
