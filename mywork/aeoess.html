@@ -1046,6 +1046,37 @@
             }
         }
 
+        /* Marketing Box */
+        .marketing-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .marketing-box:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .marketing-box h4 {
+            color: var(--accent-primary);
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .marketing-box p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
         /* Scroll Progress */
         .scroll-progress {
             position: fixed;
@@ -1210,6 +1241,11 @@
                 <div class="vision-quote">
                     "There is no Peloton for breathing. So I decided to build it."
                 </div>
+            </div>
+
+            <div class="marketing-box">
+                <h4>🧊 Go-to-Market: Wim Hof Community First</h4>
+                <p>The Wim Hof Method community represents the perfect initial market — highly engaged practitioners who already understand the value of breath work but lack tools to measure and optimize their practice. This community provides built-in distribution through instructors, events, and online communities before expanding to broader wellness audiences.</p>
             </div>
         </section>
 
@@ -1446,6 +1482,27 @@
                     <div>
                         <h4>Product Website</h4>
                         <p>aeoess.com — landing page and brand presence</p>
+                    </div>
+                </a>
+                <a href="../assets/aeoess/aeoess_id.pdf" target="_blank" class="resource-card">
+                    <span class="resource-icon">🎨</span>
+                    <div>
+                        <h4>Brand Identity Guide</h4>
+                        <p>Logo, colors, typography, and applications</p>
+                    </div>
+                </a>
+                <a href="../assets/aeoess/aeoess_design_concepts.pdf" target="_blank" class="resource-card">
+                    <span class="resource-icon">✨</span>
+                    <div>
+                        <h4>Design Concepts</h4>
+                        <p>Early brand directions explored</p>
+                    </div>
+                </a>
+                <a href="../assets/aeoess/mathematical_modeling_respiratory.pdf" target="_blank" class="resource-card">
+                    <span class="resource-icon">📄</span>
+                    <div>
+                        <h4>Respiratory Signal Research</h4>
+                        <p>Mathematical modeling of breath-to-signal processing</p>
                     </div>
                 </a>
             </div>
