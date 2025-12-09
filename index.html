@@ -611,25 +611,9 @@
             opacity: 1;
         }
 
-        /* ===== RESUME NAV ITEM HIGHLIGHT ===== */
+        /* ===== RESUME NAV ITEM HIGHLIGHT - Subtle yellow ===== */
         .nav-item.highlight a {
             color: var(--accent-yellow);
-            font-weight: 500;
-            position: relative;
-        }
-
-        .nav-item.highlight a::after {
-            content: '→';
-            margin-left: 0.5rem;
-            opacity: 0;
-            transform: translateX(-5px);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .nav-item.highlight a:hover::after {
-            opacity: 1;
-            transform: translateX(0);
         }
 
         .nav-item.highlight a:hover {
@@ -687,26 +671,59 @@
             animation: none;
         }
 
-        /* Click hint indicator */
-        .logo-container::after {
-            content: 'Click me';
+        /* Click hint indicator - Silver shimmer under photo */
+        .click-hint {
             position: absolute;
-            left: 80px;
-            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 78px;
             font-size: 0.65rem;
-            color: var(--accent-cyan);
             letter-spacing: 0.1em;
-            opacity: 0;
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
+            white-space: nowrap;
             pointer-events: none;
-            animation: hintPulse 2s ease-in-out infinite;
-            animation-delay: 3s;
+            animation: silverShimmer 2.5s ease-in-out infinite;
+            animation-delay: 2s;
+            color: #C0C0C0;
+            text-shadow: 
+                0 0 10px rgba(192, 192, 192, 0.8),
+                0 0 20px rgba(192, 192, 192, 0.6),
+                0 0 30px rgba(192, 192, 192, 0.4);
         }
 
-        @keyframes hintPulse {
-            0%, 100% { opacity: 0; transform: translateY(-5px); }
-            10%, 90% { opacity: 0.7; transform: translateY(0); }
+        @keyframes silverShimmer {
+            0%, 100% { 
+                opacity: 0;
+                transform: translateX(-50%) translateY(-5px);
+                text-shadow: 
+                    0 0 10px rgba(192, 192, 192, 0.4),
+                    0 0 20px rgba(192, 192, 192, 0.2);
+            }
+            15%, 85% { 
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+                text-shadow: 
+                    0 0 15px rgba(220, 220, 220, 1),
+                    0 0 30px rgba(192, 192, 192, 0.8),
+                    0 0 45px rgba(192, 192, 192, 0.5);
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 1),
+                    0 0 40px rgba(220, 220, 220, 0.9),
+                    0 0 60px rgba(192, 192, 192, 0.6);
+            }
+        }
+
+        /* Make logo container clickable area for popup */
+        .logo-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
         }
 
         .logo {
@@ -718,6 +735,11 @@
             line-height: 1.3;
             display: flex;
             flex-direction: column;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-cyan);
         }
 
         /* ===== ENHANCED PROFILE OVERLAY ===== */
@@ -749,6 +771,32 @@
             opacity: 1;
             pointer-events: all;
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* Close button - hidden on desktop, visible on mobile */
+        .profile-overlay-close {
+            display: none;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .profile-overlay-close:hover {
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
         }
 
         .profile-overlay-content {
@@ -1664,6 +1712,23 @@
                 display: none;
             }
 
+            .burger-menu {
+                display: flex;
+            }
+
+            .mobile-drawer {
+                display: block;
+            }
+
+            .mobile-drawer-overlay {
+                display: block;
+                pointer-events: none;
+            }
+
+            .mobile-drawer-overlay.show {
+                pointer-events: all;
+            }
+
             .section {
                 padding: 4rem 0;
             }
@@ -1690,32 +1755,61 @@
                 height: 60vh;
             }
 
+            /* Mobile Bio Drawer - from LEFT */
             .profile-overlay {
                 width: 90%;
+                max-width: 380px;
                 min-width: auto;
-                height: auto;
-                max-height: 85vh;
+                height: 100vh;
+                max-height: 100vh;
                 flex-direction: column;
-                left: 50%;
-                transform: translateX(-50%) translateY(-20px);
+                left: 0;
+                top: 0;
+                transform: translateX(-100%);
+                border-radius: 0 20px 20px 0;
+                border-left: none;
             }
 
             .profile-overlay.show {
-                transform: translateX(-50%) translateY(0);
+                transform: translateX(0);
             }
 
             .profile-overlay-photo {
                 width: 100%;
-                height: 300px;
+                height: 200px;
                 border-left: none;
                 border-bottom: 3px solid var(--accent-cyan);
                 box-shadow: 0 10px 30px rgba(93, 173, 226, 0.3);
             }
 
             .profile-overlay-content {
-                max-height: 60vh;
+                max-height: calc(100vh - 200px);
                 overflow-y: auto;
-                padding: 2rem;
+                padding: 1.5rem;
+            }
+
+            .profile-overlay-name h3 {
+                font-size: 1.8rem;
+            }
+
+            .profile-overlay-name p {
+                font-size: 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .profile-overlay-bio {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+
+            .profile-overlay-bio p {
+                margin-bottom: 1rem;
+                font-size: 0.9rem;
+            }
+
+            /* Close button for mobile drawer */
+            .profile-overlay-close {
+                display: flex;
             }
 
             .cookie-banner {
@@ -1726,6 +1820,11 @@
 
             .stats-grid {
                 grid-template-columns: 1fr;
+            }
+
+            /* Hide click hint on mobile */
+            .click-hint {
+                display: none;
             }
         }
 
@@ -1830,7 +1929,7 @@
                 height: 55px;
             }
 
-            .logo-container::after {
+            .click-hint {
                 display: none;
             }
 
@@ -1844,6 +1943,16 @@
 
             .idea-item h3 {
                 font-size: 1.5rem;
+            }
+
+            /* Adjust logo container for mobile */
+            .logo-container {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .logo {
+                font-size: 1rem;
             }
         }
 
@@ -1871,6 +1980,181 @@
             .lab-card p {
                 font-size: 0.75rem;
             }
+        }
+
+        /* ===== MOBILE BURGER MENU ===== */
+        .burger-menu {
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1100;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .burger-line {
+            width: 20px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile Drawer */
+        .mobile-drawer {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border);
+            z-index: 1050;
+            padding: 5rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+        }
+
+        .mobile-drawer.open {
+            right: 0;
+        }
+
+        .mobile-drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1040;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-drawer-overlay.show {
+            opacity: 1;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .mobile-nav-links .highlight a {
+            color: var(--accent-yellow);
+        }
+
+        .mobile-drawer-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1.5rem 0;
+        }
+
+        .mobile-drawer-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-control-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .mobile-theme-toggle,
+        .mobile-design-toggle {
+            width: 50px;
+            height: 28px;
+            background: var(--border);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-theme-toggle::after,
+        .mobile-design-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: var(--text);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-theme-toggle.active::after,
+        .mobile-design-toggle.active::after {
+            transform: translateX(22px);
+        }
+
+        .mobile-theme-toggle.active {
+            background: var(--accent-cyan);
+        }
+
+        .mobile-design-toggle.active {
+            background: var(--accent-yellow);
+        }
+
+        /* ===== MOBILE BIO DRAWER (from left) ===== */
+        .profile-overlay-mobile {
+            display: none;
         }
 
         .text-center {
@@ -2034,15 +2318,50 @@
         <source src="assets/audio/ambient.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="logo-container">
-        <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-photo" id="profilePhoto" onclick="toggleProfileOverlay()">
-        <a href="/" class="logo">
+    <div class="logo-container" onclick="toggleProfileOverlay()">
+        <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-photo" id="profilePhoto">
+        <a class="logo">
             <span>TYMOFII</span>
             <span>PIDLISNYI</span>
         </a>
+        <span class="click-hint">Hover here</span>
+    </div>
+
+    <!-- Mobile Burger Menu -->
+    <div class="burger-menu" id="burgerMenu" onclick="toggleMobileDrawer()">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" onclick="closeMobileDrawer()"></div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <ul class="mobile-nav-links">
+            <li><a onclick="openProfileOverlay(); closeMobileDrawer();">ABOUT</a></li>
+            <li><a href="#projects" onclick="closeMobileDrawer()">PROJECTS</a></li>
+            <li class="highlight"><a href="mywork/index.html">RÉSUMÉ</a></li>
+            <li><a href="#lab" onclick="closeMobileDrawer()">LAB</a></li>
+            <li><a href="#ideas" onclick="closeMobileDrawer()">IDEAS</a></li>
+            <li><a href="#contact" onclick="closeMobileDrawer()">CONNECT</a></li>
+        </ul>
+        <div class="mobile-drawer-divider"></div>
+        <div class="mobile-drawer-controls">
+            <div class="mobile-control-row">
+                <span class="mobile-control-label">Dark Mode</span>
+                <div class="mobile-theme-toggle" id="mobileThemeToggle" onclick="toggleTheme()"></div>
+            </div>
+            <div class="mobile-control-row">
+                <span class="mobile-control-label">Alt Design</span>
+                <div class="mobile-design-toggle" id="mobileDesignToggle" onclick="switchDesign()"></div>
+            </div>
+        </div>
     </div>
 
     <div class="profile-overlay" id="profileOverlay">
+        <button class="profile-overlay-close" onclick="closeProfileOverlay()">×</button>
         <div class="profile-overlay-content">
             <div class="profile-overlay-name">
                 <h3>Tymofii "Tima" Pidlisnyi</h3>
@@ -2450,8 +2769,7 @@
                 </p>
 
                 <div class="contact-links">
-                    <a href="mailto:tima@aeoess.com"
-                        class="contact-link">EMAIL</a>
+                    <a href="/cdn-cgi/l/email-protection#ea9e83878baa8b8f858f9999c4898587" class="contact-link">EMAIL</a>
                     <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link"
                         target="_blank">LINKEDIN</a>
                     <a href="https://instagram.com/tima.fey" class="contact-link" target="_blank">INSTAGRAM</a>
@@ -2462,7 +2780,7 @@
         </div>
     </section>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Animated Grain Effect
         const canvas = document.getElementById('grain-canvas');
         if (canvas) {
@@ -2554,15 +2872,18 @@
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('theme-icon');
+            const mobileToggle = document.getElementById('mobileThemeToggle');
             const currentTheme = body.getAttribute('data-theme');
 
             if (currentTheme === 'dark') {
                 body.setAttribute('data-theme', 'bright');
                 if (themeIcon) themeIcon.textContent = '☀️';
+                if (mobileToggle) mobileToggle.classList.remove('active');
                 localStorage.setItem('theme', 'bright');
             } else {
                 body.setAttribute('data-theme', 'dark');
                 if (themeIcon) themeIcon.textContent = '🌙';
+                if (mobileToggle) mobileToggle.classList.add('active');
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -2621,6 +2942,44 @@
             }
         }
 
+        function closeProfileOverlay() {
+            if (profileOverlay) {
+                profileOverlay.classList.remove('show');
+            }
+        }
+
+        // Mobile Drawer Functions
+        const burgerMenu = document.getElementById('burgerMenu');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        const mobileDesignToggle = document.getElementById('mobileDesignToggle');
+
+        function toggleMobileDrawer() {
+            burgerMenu.classList.toggle('active');
+            mobileDrawer.classList.toggle('open');
+            mobileDrawerOverlay.classList.toggle('show');
+            document.body.style.overflow = mobileDrawer.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeMobileDrawer() {
+            burgerMenu.classList.remove('active');
+            mobileDrawer.classList.remove('open');
+            mobileDrawerOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Sync mobile toggles with current state
+        function syncMobileToggles() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (mobileThemeToggle) {
+                mobileThemeToggle.classList.toggle('active', currentTheme === 'dark');
+            }
+        }
+
+        // Call sync on load
+        syncMobileToggles();
+
         if (profilePhoto && profileOverlay) {
             profilePhoto.addEventListener('mouseenter', () => {
                 hoverTimeout = setTimeout(() => {
@@ -2645,7 +3004,9 @@
         // Close overlay when clicking outside
         document.addEventListener('click', (e) => {
             if (profileOverlay && profileOverlay.classList.contains('show')) {
-                if (!profileOverlay.contains(e.target) && !profilePhoto.contains(e.target)) {
+                const logoContainer = document.querySelector('.logo-container');
+                const closeBtn = document.querySelector('.profile-overlay-close');
+                if (!profileOverlay.contains(e.target) && !logoContainer.contains(e.target)) {
                     profileOverlay.classList.remove('show');
                 }
             }
@@ -2868,7 +3229,42 @@
                 }
             });
         }
-    </script>
-</body>
 
+        // Grain Animation
+        const grainCanvas = document.getElementById('grain-canvas');
+        if (grainCanvas) {
+            const ctx = grainCanvas.getContext('2d');
+
+            function resizeCanvas() {
+                grainCanvas.width = window.innerWidth;
+                grainCanvas.height = window.innerHeight;
+            }
+
+            function generateNoise() {
+                const imageData = ctx.createImageData(grainCanvas.width, grainCanvas.height);
+                const data = imageData.data;
+
+                for (let i = 0; i < data.length; i += 4) {
+                    const value = Math.random() * 255;
+                    data[i] = value;
+                    data[i + 1] = value;
+                    data[i + 2] = value;
+                    data[i + 3] = 20;
+                }
+
+                ctx.putImageData(imageData, 0, 0);
+            }
+
+            function animateGrain() {
+                generateNoise();
+                requestAnimationFrame(animateGrain);
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            animateGrain();
+        }
+    </script>
+
+</body>
 </html>
