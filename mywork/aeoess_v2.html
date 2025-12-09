@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>æœss — Technical Blueprint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-blueprint: #0a111c;
+            --grid-major: rgba(69, 123, 157, 0.2);
+            --grid-minor: rgba(69, 123, 157, 0.05);
+            --accent-blue: #457b9d;
+            --accent-cyan: #a8dadc;
+            --text-primary: #f1faee;
+            --text-dim: #8d99ae;
+            --border-tech: 1px solid var(--accent-blue);
+        }
+
+        body {
+            background-color: var(--bg-blueprint);
+            color: var(--text-primary);
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            overflow-x: hidden;
+            background-image:
+                linear-gradient(var(--grid-major) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+                linear-gradient(var(--grid-minor) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        }
+
+        /* --- Layout --- */
+        .wrapper {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* --- Sticky Nav --- */
+        .tech-nav {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            border-right: var(--border-tech);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(10, 17, 28, 0.9);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-cyan);
+        }
+
+        .nav-link::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: currentColor;
+            display: inline-block;
+        }
+
+        .status-block {
+            border: var(--border-tech);
+            padding: 15px;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        /* --- Main Content --- */
+        main {
+            padding: 0;
+        }
+
+        section {
+            padding: 100px 60px;
+            border-bottom: var(--border-tech);
+            position: relative;
+        }
+
+        .section-marker {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.1;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 5rem;
+            margin: 0 0 20px 0;
+            line-height: 1;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .lead-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            color: var(--text-dim);
+        }
+
+        /* --- Schematic Visuals (CSS Only) --- */
+        .schematic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .blueprint-card {
+            border: var(--border-tech);
+            padding: 20px;
+            background: rgba(69, 123, 157, 0.05);
+            position: relative;
+        }
+
+        .blueprint-card::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid var(--accent-cyan);
+            border-left: 2px solid var(--accent-cyan);
+        }
+
+        .blueprint-card::before {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
+        }
+
+        .fig-label {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+        }
+
+        /* CSS Drawing: Nose Wearable Placeholder */
+        .drawing-canvas {
+            height: 200px;
+            width: 100%;
+            border: 1px dashed var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .nose-shape {
+            width: 60px;
+            height: 40px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 30px;
+            position: relative;
+        }
+
+        .nose-shape::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 2px;
+            background: var(--accent-blue);
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- Timeline --- */
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-mark {
+            min-width: 100px;
+            text-align: right;
+            color: var(--accent-cyan);
+        }
+
+        .timeline-content {
+            border-left: 2px solid var(--accent-blue);
+            padding-left: 30px;
+        }
+
+        /* --- Download Table --- */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .data-table th,
+        .data-table td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid rgba(69, 123, 157, 0.3);
+        }
+
+        .data-table th {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 5px 15px;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-blueprint);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent-cyan);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sticky Left Nav -->
+        <nav class="tech-nav">
+            <div>
+                <div class="nav-logo">æœss</div>
+                <div class="nav-links">
+                    <a href="#overview" class="nav-link">01. OVERVIEW</a>
+                    <a href="#hardware" class="nav-link">02. HARDWARE</a>
+                    <a href="#software" class="nav-link">03. SOFTWARE</a>
+                    <a href="#timeline" class="nav-link">04. TIMELINE</a>
+                    <a href="#data" class="nav-link">05. DATA BANK</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="status-block">
+                    PROJECT: ARCHIVED<br>
+                    ID: AE-2023-X<br>
+                    STATUS: R&D COMPLETE
+                </div>
+                <a href="projects_v4.html" class="back-btn">← RETURN TO BASE</a>
+            </div>
+        </nav>
+
+        <!-- Main Scrollable Content -->
+        <main>
+            <!-- Hero / Overview -->
+            <section id="overview">
+                <div class="section-marker">01</div>
+                <h1>THE PROTOCOL</h1>
+                <p class="lead-text">
+                    An IoT breath-training wearable with AI coaching. Most people breathe incorrectly, governing anxiety
+                    and performance. æœss is the "Peloton for Breathing" — a medical-grade nasal wearable that
+                    digitizes the diaphragm.
+                </p>
+
+                <div class="schematic-grid">
+                    <div class="blueprint-card">
+                        <span class="fig-label">FIG 1.0: PROBLEM</span>
+                        <h3>INVISIBLE DYSFUNCTION</h3>
+                        <p style="color: var(--accent-cyan)">> Shallow Breathing detected</p>
+                        <p style="font-size: 0.9rem; color: #888;">Existing solutions (apps) are passive. No hardware
+                            feedback loop.</p>
+                    </div>
+                    <div class="blueprint-card">
+                        <span class="fig-label">FIG 1.1: SOLUTION</span>
+                        <h3>VISIBLE COMPLIANCE</h3>
+                        <p style="color: var(--accent-cyan)">> Real-time Airflow Metrics</p>
+                        <p style="font-size: 0.9rem; color: #888;">Dual optical sensors measure pressure. AI acts as a
+                            physical coach.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hardware Schematics -->
+            <section id="hardware">
+                <div class="section-marker">02</div>
+                <h2>HARDWARE_ARCHITECTURE</h2>
+                <p class="lead-text" style="margin-bottom: 40px;">
+                    The journey from concept to working prototype involved multiple iterations of geometry, sensor
+                    integration, and miniaturization.
+                </p>
+
+                <div class="schematic-grid">
+                    <!-- Drawing 1 -->
+                    <div class="blueprint-card">
+                        <div class="drawing-canvas">
+                            <div class="nose-shape"></div>
+                        </div>
+                        <span class="fig-label">REV A: MVP V2</span>
+                        <h4>CORE ASSEMBLY</h4>
+                        <p style="font-size: 0.8rem; color: #888;">Early prototype with primitive pressure sensing.</p>
+                    </div>
+
+                    <!-- Drawing 2 -->
+                    <div class="blueprint-card">
+                        <div class="drawing-canvas">
+                            <div
+                                style="width: 80px; height: 30px; border: 1px solid var(--accent-cyan); border-radius: 10px;">
+                            </div>
+                        </div>
+                        <span class="fig-label">REV B: FORM FACTOR</span>
+                        <h4>ERGONOMICS</h4>
+                        <p style="font-size: 0.8rem; color: #888;">Device + Charging Case geometry.</p>
+                    </div>
+
+                    <!-- Drawing 3 -->
+                    <div class="blueprint-card">
+                        <div class="drawing-canvas">
+                            <div style="width: 20px; height: 20px; background: var(--accent-blue); border-radius: 50%;">
+                            </div>
+                        </div>
+                        <span class="fig-label">REV C: SENSOR ARRAY</span>
+                        <h4>OPTICAL SENSORS</h4>
+                        <p style="font-size: 0.8rem; color: #888;">Dual emission sensors for airflow velocity.</p>
+                    </div>
+
+                    <!-- Drawing 4 -->
+                    <div class="blueprint-card">
+                        <div class="drawing-canvas">
+                            <div style="width: 100px; height: 60px; border: 1px dotted var(--accent-cyan);"></div>
+                        </div>
+                        <span class="fig-label">REV D: PCB</span>
+                        <h4>ELECTRONICS LAYOUT</h4>
+                        <p style="font-size: 0.8rem; color: #888;">Custom PCB design for nasal bridge fit.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Software / AI -->
+            <section id="software">
+                <div class="section-marker">03</div>
+                <h2>AI_COACHING_LAYER</h2>
+                <div class="timeline-item">
+                    <div class="timeline-content" style="border: none;">
+                        <h3 style="color: var(--text-primary)">REAL-TIME GUIDANCE</h3>
+                        <p>Voice-guided exercises correcting form, pace, and rhythm. "Breathe slower. Engage diaphragm."
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content" style="border: none;">
+                        <h3 style="color: var(--text-primary)">PATTERN RECOGNITION</h3>
+                        <p>Algorithms to detect stress markers and sleep apnea precursors in raw signal data.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline -->
+            <section id="timeline">
+                <div class="section-marker">04</div>
+                <h2>DEVELOPMENT_LOG</h2>
+
+                <div class="timeline-item">
+                    <div class="timeline-mark">PHASE 1</div>
+                    <div class="timeline-content">
+                        <strong>CONCEPT & RESEARCH</strong><br>
+                        Researched resistance breathing mechanics and airflow measurement. Established core hypothesis.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-mark">PHASE 2</div>
+                    <div class="timeline-content">
+                        <strong>MVP PROTOTYPING</strong><br>
+                        Built hardware with pressure sensing. Tested nasal insert geometries.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-mark">PHASE 3</div>
+                    <div class="timeline-content">
+                        <strong>APP ARCHITECTURE</strong><br>
+                        Developed BLE protocol. Designed data pipeline for signal processing.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-mark">PHASE 4</div>
+                    <div class="timeline-content">
+                        <strong>PRODUCTION DESIGN</strong><br>
+                        Industrial design for manufacturing. Pitch deck creation. Project archived for Evatar.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Bank (Resources) -->
+            <section id="data">
+                <div class="section-marker">05</div>
+                <h2>DATA_BANK</h2>
+                <p class="lead-text">Access restricted project files and documentation.</p>
+
+                <table class="data-table" style="margin-top: 40px;">
+                    <thead>
+                        <tr>
+                            <th>FILE_NAME</th>
+                            <th>TYPE</th>
+                            <th>DESCRIPTION</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NVYR_PITCH_DECK_FINAL</td>
+                            <td>PDF</td>
+                            <td>Complete investor deck with market analysis.</td>
+                            <td><a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
+                                    target="_blank" class="download-btn">DOWNLOAD</a></td>
+                        </tr>
+                        <tr>
+                            <td>BRAND_IDENTITY</td>
+                            <td>PDF</td>
+                            <td>Logo, colors, typography.</td>
+                            <td><a href="https://aeoess.com/assets/aeoess/aeoess_id.pdf" target="_blank"
+                                    class="download-btn">ACCESS</a></td>
+                        </tr>
+                        <tr>
+                            <td>SIGNAL_RESEARCH</td>
+                            <td>PDF</td>
+                            <td>Mathematical modeling of breath signals.</td>
+                            <td><a href="https://aeoess.com/assets/aeoess/mathematical_modeling_respiratory.pdf"
+                                    target="_blank" class="download-btn">ACCESS</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
