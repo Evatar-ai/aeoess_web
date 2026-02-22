@@ -132,6 +132,15 @@
             --border: #262320;
             --accent-cyan: #5DADE2;
             --accent-yellow: #F4D03F;
+            --glass-bg: rgba(26, 23, 21, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-border-hover: rgba(93, 173, 226, 0.2);
+            --glass-highlight: rgba(255, 255, 255, 0.04);
+            --glass-shadow: var(--glass-shadow);
+            --glass-shadow-hover: var(--glass-shadow-hover);
+            --glass-btn: rgba(255, 255, 255, 0.04);
+            --glass-btn-border: rgba(255, 255, 255, 0.06);
+            --glass-inner: rgba(255, 255, 255, 0.02);
         }
 
         [data-theme="bright"] {
@@ -142,6 +151,15 @@
             --border: #E8E4DF;
             --accent-cyan: #3498DB;
             --accent-yellow: #B8E6D5;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.06);
+            --glass-border-hover: rgba(52, 152, 219, 0.25);
+            --glass-highlight: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            --glass-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.1);
+            --glass-btn: rgba(0, 0, 0, 0.04);
+            --glass-btn-border: rgba(0, 0, 0, 0.08);
+            --glass-inner: rgba(0, 0, 0, 0.02);
         }
 
         html {
@@ -378,18 +396,18 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            background: rgba(26, 23, 21, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 30px;
             padding: 0.5rem 1rem 0.5rem 0.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--glass-shadow);
         }
 
         .music-player:hover {
-            border-color: rgba(93, 173, 226, 0.2);
+            border-color: var(--glass-border-hover);
         }
 
         .music-btn {
@@ -472,10 +490,10 @@
             z-index: 1001;
             width: 60px;
             height: 30px;
-            background: rgba(26, 23, 21, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 30px;
             cursor: pointer;
             padding: 3px;
@@ -483,7 +501,7 @@
         }
 
         .theme-toggle:hover {
-            border-color: rgba(93, 173, 226, 0.2);
+            border-color: var(--glass-border-hover);
         }
 
         .theme-toggle-slider {
@@ -522,10 +540,10 @@
         .design-switcher {
             width: 40px;
             height: 30px;
-            background: rgba(26, 23, 21, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 8px;
             cursor: pointer;
             display: flex;
@@ -556,10 +574,10 @@
             right: 0;
             margin-top: 8px;
             padding: 0.5rem 0.75rem;
-            background: rgba(26, 23, 21, 0.8);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 8px;
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -580,7 +598,7 @@
             gap: 0.75rem;
             margin-top: 1.25rem;
             padding-top: 1.25rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 1px solid var(--glass-border);
             position: relative;
             z-index: 10;
         }
@@ -590,8 +608,8 @@
             align-items: center;
             gap: 0.4rem;
             padding: 0.6rem 1.2rem;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: var(--glass-btn);
+            border: 1px solid var(--glass-border);
             border-radius: 8px;
             color: var(--text);
             text-decoration: none;
@@ -623,8 +641,8 @@
             align-items: center;
             gap: 0.35rem;
             padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: var(--glass-btn);
+            border: 1px solid var(--glass-border);
             border-radius: 6px;
             color: var(--text-muted);
             text-decoration: none;
@@ -651,12 +669,12 @@
         /* ===== AEOESS SPECIAL BADGE ===== */
         .lab-card.featured {
             border: 1px solid rgba(244, 208, 63, 0.15);
-            background: linear-gradient(135deg, rgba(244, 208, 63, 0.04) 0%, rgba(26, 23, 21, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.04) 0%, var(--glass-bg) 100%);
         }
 
         .lab-card.featured:hover {
             border-color: rgba(244, 208, 63, 0.3);
-            box-shadow: 0 16px 48px rgba(244, 208, 63, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            box-shadow: 0 16px 48px rgba(244, 208, 63, 0.08), inset 0 1px 0 var(--glass-highlight);
         }
 
         .lab-card.featured::after {
@@ -1130,16 +1148,16 @@
         }
 
         .project-card {
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
             padding: 2rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
         }
 
         .project-card::before {
@@ -1160,18 +1178,18 @@
 
         .project-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(93, 173, 226, 0.2);
+            border-color: var(--glass-border-hover);
             box-shadow:
-                0 16px 48px rgba(0, 0, 0, 0.4),
+                var(--glass-shadow-hover),
                 0 0 0 1px rgba(93, 173, 226, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+                inset 0 1px 0 var(--glass-highlight);
         }
 
         .project-tag {
             display: inline-block;
             padding: 0.4rem 1rem;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: var(--glass-btn);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -1208,21 +1226,21 @@
         }
 
         .stat-card {
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
         }
 
         .stat-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(93, 173, 226, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            border-color: var(--glass-border-hover);
+            box-shadow: var(--glass-shadow-hover), inset 0 1px 0 var(--glass-highlight);
         }
 
         .stat-number {
@@ -1260,16 +1278,16 @@
         }
 
         .lab-card {
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 1.5rem;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
         }
 
         .lab-card::after {
@@ -1287,8 +1305,8 @@
 
         .lab-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(93, 173, 226, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            border-color: var(--glass-border-hover);
+            box-shadow: var(--glass-shadow-hover), inset 0 1px 0 var(--glass-highlight);
         }
 
         .lab-card:hover::after {
@@ -1355,10 +1373,10 @@
             max-width: 900px;
             height: 55vh;
             margin: 3rem auto;
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 0;
             position: relative;
@@ -1366,7 +1384,7 @@
             transition: all 0.4s ease;
             box-shadow: 
                 0 20px 60px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+                inset 0 1px 0 var(--glass-highlight);
         }
 
         .ideas-single-box::before {
@@ -1387,11 +1405,11 @@
         }
 
         .ideas-single-box:hover {
-            border-color: rgba(93, 173, 226, 0.15);
+            border-color: var(--glass-border-hover);
             box-shadow: 
                 0 30px 80px rgba(0, 0, 0, 0.4),
                 0 0 40px rgba(93, 173, 226, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+                inset 0 1px 0 var(--glass-highlight);
         }
 
         .ideas-scroll-indicator {
@@ -1437,18 +1455,18 @@
         .idea-item {
             margin-bottom: 3rem;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--glass-inner);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
             transition: all 0.3s ease;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .idea-item:hover {
-            border-color: rgba(93, 173, 226, 0.12);
-            background: rgba(255, 255, 255, 0.035);
+            border-color: var(--glass-border-hover);
+            background: var(--glass-inner);
         }
 
         .idea-item:last-child {
@@ -1477,10 +1495,10 @@
             flex-direction: column;
             align-items: center;
             gap: 0.3rem;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--glass-btn);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 10px;
             padding: 0.6rem 1rem;
             cursor: pointer;
@@ -1489,7 +1507,7 @@
         }
 
         .upvote-btn:hover {
-            border-color: rgba(93, 173, 226, 0.25);
+            border-color: var(--glass-border-hover);
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(93, 173, 226, 0.12);
         }
@@ -1555,10 +1573,10 @@
             gap: 0.5rem;
             margin: 3rem auto;
             padding: 1rem 2.5rem;
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 30px;
             color: var(--text);
             font-weight: 400;
@@ -1585,7 +1603,7 @@
 
         .comments-button:hover {
             transform: translateY(-2px);
-            border-color: rgba(93, 173, 226, 0.2);
+            border-color: var(--glass-border-hover);
         }
 
         .comments-button:hover::before {
@@ -1767,14 +1785,14 @@
         }
 
         .now-card {
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 3rem;
             margin-top: 3rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
         }
 
         .now-item {
@@ -1830,10 +1848,10 @@
 
         .contact-link {
             padding: 1rem 2.5rem;
-            background: rgba(26, 23, 21, 0.5);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: 30px;
             text-decoration: none;
             color: var(--text);
@@ -1860,8 +1878,8 @@
 
         .contact-link:hover {
             transform: translateY(-3px);
-            border-color: rgba(93, 173, 226, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(93, 173, 226, 0.06);
+            border-color: var(--glass-border-hover);
+            box-shadow: var(--glass-shadow), 0 0 20px rgba(93, 173, 226, 0.06);
         }
 
         .contact-link:hover::before {
