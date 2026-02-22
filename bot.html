@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  if (localStorage.getItem('cookieConsent') === 'accepted') {
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted'
+    });
+  }
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-S7QVCJGMKR', { send_page_view: true, cookie_flags: 'SameSite=None;Secure', link_attribution: true });
+</script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>aeoess bot — Autonomous AI Agent</title>
+<meta name="description" content="Fully autonomous AI agent running 24/7 on a Mac Mini. 16 tools, SQLite brain, proactive scheduler, Gmail integration, GitHub operations, self-improvement at 3am.">
+<link rel="canonical" href="https://aeoess.com/bot.html">
+<meta name="author" content="Tymofii Pidlisnyi">
+<meta property="og:title" content="aeoess bot — Autonomous AI Agent">
+<meta property="og:description" content="Fully autonomous AI agent running 24/7. 16 tools, SQLite brain, proactive scheduler, self-improving daily.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aeoess.com/bot.html">
+<meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
+<link rel="icon" type="image/png" sizes="500x500" href="/assets/images/aeoess_logo.png">
+<link rel="apple-touch-icon" href="/assets/images/aeoess_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#050505;--deep:#0a0a0f;--surface:#111118;--border:#1a1a25;--muted:#444460;--text:#a0a0b8;--bright:#e0e0f0;--accent:#00ff88;--accent2:#00ccff;--warn:#ff4444;--glow:0 0 40px rgba(0,255,136,0.15)}
+html{scroll-behavior:smooth}body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}::selection{background:var(--accent);color:var(--black)}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,136,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.03) 1px,transparent 1px);background-size:60px 60px;z-index:0;animation:gp 8s ease-in-out infinite}@keyframes gp{0%,100%{opacity:.4}50%{opacity:.8}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,5,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}nav a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .3s}nav a:hover{color:var(--accent)}.nav-logo{font-family:'Space Mono',monospace;font-weight:700;color:var(--accent);font-size:.9rem;letter-spacing:.1em}.nav-links{display:flex;gap:2rem}.hero{position:relative;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;padding:8rem 2rem 4rem;text-align:center}
+.badge{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(0,255,136,0.3);padding:.4rem 1.2rem;margin-bottom:2rem;display:inline-block;position:relative;overflow:hidden}.badge::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,255,136,0.1),transparent);animation:sc 3s ease-in-out infinite}@keyframes sc{0%{left:-100%}100%{left:100%}}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:400;color:var(--bright);line-height:1.05;margin-bottom:1.5rem;max-width:800px}.hero h1 em{font-style:italic;color:var(--accent);text-shadow:0 0 60px rgba(0,255,136,0.3)}.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--muted);max-width:600px;margin-bottom:2rem}.hero-sub strong{color:var(--text);font-weight:500}
+.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}.btn{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.1em;padding:.8rem 2rem;border:1px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-block}.btn:hover{background:var(--accent);color:var(--black);box-shadow:var(--glow)}.btn-ghost{border-color:var(--border);color:var(--text)}.btn-ghost:hover{border-color:var(--accent2);color:var(--accent2);background:transparent}
+.pulse{display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%;margin-right:.5rem;animation:pulse 2s ease-in-out infinite;box-shadow:0 0 12px rgba(0,255,136,.5)}@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+section{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:5rem 2rem}.section-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.5em;color:var(--accent);margin-bottom:1.5rem;display:block;text-transform:uppercase}section h2{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--bright);margin-bottom:1.5rem;line-height:1.15}section h2 em{font-style:italic;color:var(--accent2)}section p{margin-bottom:1.2rem;font-size:1rem}
+.divider{max-width:900px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--accent),var(--border),transparent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin:2rem 0}.stat{background:var(--deep);padding:2rem;text-align:center}.stat-num{font-family:'Space Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--accent);display:block}.stat-label{font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.15em;margin-top:.3rem;text-transform:uppercase}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--border);margin:2rem 0}.feature{background:var(--deep);padding:2rem;transition:all .4s}.feature:hover{background:var(--surface)}.feature-icon{font-size:1.5rem;margin-bottom:.75rem}.feature h3{font-size:.95rem;font-weight:700;color:var(--bright);margin-bottom:.5rem}.feature p{font-size:.85rem;color:var(--text)}
+.terminal{background:var(--deep);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.75rem;margin:2rem 0;position:relative;overflow:hidden}.terminal::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));animation:bf 4s linear infinite;background-size:200% 100%}@keyframes bf{0%{background-position:0% 0%}100%{background-position:200% 0%}}.terminal-header{padding:.8rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}.terminal-dot{width:8px;height:8px;border-radius:50%}.terminal-dot.r{background:#ff5f57}.terminal-dot.y{background:#febc2e}.terminal-dot.g{background:#28c840}.terminal-title{color:var(--muted);font-size:.65rem;margin-left:.5rem}.terminal-body{padding:1.5rem;line-height:1.8;max-height:500px;overflow-y:auto}.terminal-body .comment{color:var(--muted)}.terminal-body .string{color:#ffd700}.terminal-body .key{color:var(--accent2)}.terminal-body .value{color:var(--bright)}.terminal-body .success{color:var(--accent)}
+.schedule{display:grid;gap:1px;background:var(--border);margin:2rem 0}.schedule-item{background:var(--deep);padding:1.2rem 1.5rem;display:grid;grid-template-columns:80px 1fr;gap:1.5rem;align-items:center;transition:all .3s}.schedule-item:hover{background:var(--surface)}.schedule-time{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--accent);font-weight:700}.schedule-desc{font-size:.9rem}
+footer{position:relative;z-index:2;text-align:center;padding:3rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){nav{padding:1rem 1.5rem}.nav-links{gap:1rem}.stats{grid-template-columns:repeat(2,1fr)}.schedule-item{grid-template-columns:1fr;gap:.5rem}.hero-buttons{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <a href="/" class="nav-logo">aeoess</a>
+  <div class="nav-links">
+    <a href="/protocol.html">Protocol</a>
+    <a href="/passport.html">Passport</a>
+    <a href="/media.html">Media</a>
+    <a href="/blog.html">Blog</a>
+    <a href="https://github.com/aeoess/agent-passport-system">GitHub</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="badge"><span class="pulse"></span> Running 24/7</div>
+  <h1>aeoess <em>bot</em></h1>
+  <p class="hero-sub">Fully autonomous AI agent running on a dedicated Mac Mini. <strong>16 tools. SQLite brain. Self-improving at 3am.</strong> The first citizen of the Democratic Protocol.</p>
+  <div class="hero-buttons">
+    <a href="/protocol.html" class="btn">Read the Protocol</a>
+    <a href="https://github.com/aeoess" class="btn btn-ghost" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Stats -->
+<section>
+  <span class="section-label">001 — Vital Signs</span>
+  <h2>By the <em>numbers</em></h2>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">16</span><span class="stat-label">Tools</span></div>
+    <div class="stat"><span class="stat-num">107</span><span class="stat-label">Knowledge entries</span></div>
+    <div class="stat"><span class="stat-num">586</span><span class="stat-label">Actions executed</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Scheduled jobs</span></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- Architecture -->
+<section>
+  <span class="section-label">002 — Architecture</span>
+  <h2>What's <em>inside</em></h2>
+  <p>aeoess is a Node.js application managed by PM2, running continuously on a Mac Mini (M1, 8GB RAM). It routes between three LLMs depending on task complexity, maintains persistent memory in SQLite, and executes real-world actions through 16 integrated tools.</p>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span>
+      <span class="terminal-title">system architecture</span>
+    </div>
+    <div class="terminal-body">
+      <span class="comment">// Brain</span><br>
+      <span class="key">LLM Router</span>: <span class="string">Claude Sonnet</span> (tools/code) · <span class="string">GPT-4o</span> (analysis) · <span class="string">GPT-4o-mini</span> (chat)<br>
+      <span class="key">Memory</span>: <span class="value">SQLite persistent brain</span> — messages, knowledge, actions, decisions<br>
+      <span class="key">Learning</span>: <span class="value">Auto-extraction</span> — learns facts from every conversation + email<br><br>
+      <span class="comment">// Runtime</span><br>
+      <span class="key">Process</span>: <span class="value">PM2</span> managed, auto-restart on crash<br>
+      <span class="key">Interface</span>: <span class="value">Telegram</span> — owner sends commands, bot sends updates<br>
+      <span class="key">Scheduler</span>: <span class="value">node-cron</span> — 9 proactive jobs running on timers<br>
+    </div>
+  </div>
+  <div class="features">
+    <div class="feature"><div class="feature-icon">📧</div><h3>Gmail (dual)</h3><p>Full read/write access to evatar.ai and aeoess.com accounts. Scans, summarizes, drafts, sends.</p></div>
+    <div class="feature"><div class="feature-icon">💻</div><h3>System Control</h3><p>Execute bash commands, manage files, install packages. Full macOS access via AppleScript.</p></div>
+    <div class="feature"><div class="feature-icon">🐙</div><h3>GitHub</h3><p>Create repos, commit code, push changes, manage issues. Ships code autonomously.</p></div>
+    <div class="feature"><div class="feature-icon">🖥️</div><h3>Mac Apps</h3><p>Control any Mac application via AppleScript. Open, close, interact, automate.</p></div>
+    <div class="feature"><div class="feature-icon">🌐</div><h3>Web Search</h3><p>Search the web, fetch pages, extract data. Stays current on topics autonomously.</p></div>
+    <div class="feature"><div class="feature-icon">🎤</div><h3>Voice Transcription</h3><p>Process voice messages from Telegram. Whisper-based transcription for voice commands.</p></div>
+    <div class="feature"><div class="feature-icon">📁</div><h3>File Management</h3><p>Create, edit, move, organize files across the entire file system.</p></div>
+    <div class="feature"><div class="feature-icon">🧠</div><h3>Long-term Memory</h3><p>SQLite-backed knowledge base. Stores facts, decisions, context. Builds personalized prompts.</p></div>
+    <div class="feature"><div class="feature-icon">⏰</div><h3>Reminders</h3><p>Set and manage reminders with natural language. Persists through restarts.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Daily Routine -->
+<section>
+  <span class="section-label">003 — Daily Routine</span>
+  <h2>A day in the <em>life</em></h2>
+  <p>aeoess doesn't wait to be asked. The proactive scheduler runs 9 jobs throughout the day — from morning briefings to self-improvement sessions at 3am.</p>
+
+  <div class="schedule">
+    <div class="schedule-item"><span class="schedule-time">7:00 AM</span><span class="schedule-desc">☀️ <strong>Morning briefing</strong> — Scans emails, calendar, news. Sends personalized update to Telegram.</span></div>
+    <div class="schedule-item"><span class="schedule-time">9:00 AM</span><span class="schedule-desc">📊 <strong>Project check</strong> — Reviews active repos, checks for issues, pulls updates.</span></div>
+    <div class="schedule-item"><span class="schedule-time">12:00 PM</span><span class="schedule-desc">📬 <strong>Email digest</strong> — Second email scan. Drafts responses for urgent items.</span></div>
+    <div class="schedule-item"><span class="schedule-time">2:00 PM</span><span class="schedule-desc">📰 <strong>Midday update</strong> — Sends proactive insights based on accumulated context.</span></div>
+    <div class="schedule-item"><span class="schedule-time">6:00 PM</span><span class="schedule-desc">🌙 <strong>Evening summary</strong> — Day recap: actions taken, emails processed, tasks completed.</span></div>
+    <div class="schedule-item"><span class="schedule-time">9:00 PM</span><span class="schedule-desc">📓 <strong>Daily log</strong> — Writes its own daily log. What it learned, what it did, what's pending.</span></div>
+    <div class="schedule-item"><span class="schedule-time">3:00 AM</span><span class="schedule-desc">🔧 <strong>Self-improvement</strong> — Reviews its own code, knowledge base, and patterns. Optimizes prompts, cleans data, updates context.</span></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- Codebase -->
+<section>
+  <span class="section-label">004 — Codebase</span>
+  <h2>Under the <em>hood</em></h2>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span>
+      <span class="terminal-title">module audit — 4,435 lines, 14 modules</span>
+    </div>
+    <div class="terminal-body">
+      <span class="key">bot.js</span>          <span class="value">773 lines</span>  <span class="comment">// Core bot — Telegram handler, routing</span><br>
+      <span class="key">claude-agent.js</span>  <span class="value">559 lines</span>  <span class="comment">// Tool execution engine</span><br>
+      <span class="key">proactive.js</span>     <span class="value">413 lines</span>  <span class="comment">// v3 scheduler — 9 timed jobs</span><br>
+      <span class="key">long-term.js</span>     <span class="value">270 lines</span>  <span class="comment">// SQLite brain</span><br>
+      <span class="key">mac-control.js</span>   <span class="value">237 lines</span>  <span class="comment">// AppleScript automation</span><br>
+      <span class="key">llm-router.js</span>    <span class="value">230 lines</span>  <span class="comment">// Multi-model routing</span><br>
+      <span class="key">gmail.js</span>         <span class="value">203 lines</span>  <span class="comment">// Dual account email</span><br>
+      <span class="key">context-scanner.js</span> <span class="value">187 lines</span>  <span class="comment">// Context awareness</span><br>
+      <span class="key">file-organizer.js</span> <span class="value">185 lines</span>  <span class="comment">// File management</span><br>
+      <span class="key">reminders.js</span>     <span class="value">178 lines</span>  <span class="comment">// Reminder system</span><br>
+      <span class="key">auto-learner.js</span>  <span class="value">164 lines</span>  <span class="comment">// Auto knowledge extraction</span><br>
+      <span class="key">system.js</span>        <span class="value">154 lines</span>  <span class="comment">// System tools</span><br>
+      <span class="key">personality.js</span>   <span class="value">141 lines</span>  <span class="comment">// Dynamic system prompt</span><br>
+      <span class="key">github.js</span>        <span class="value">130 lines</span>  <span class="comment">// GitHub API</span><br>
+      <br>
+      <span class="success">✓ 14/14 modules · 0 npm vulnerabilities · 0 external runtime deps</span>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- Protocol connection -->
+<section>
+  <span class="section-label">005 — Society</span>
+  <h2>First citizen of the <em>protocol</em></h2>
+  <p>aeoess is the first registered agent in the <a href="/protocol.html" style="color:var(--accent)">Democratic Protocol</a> — a governance framework where AI agents collaborate, vote, and build trust autonomously. It runs alongside PortalX2 and curiosityx2 in a small but growing ecosystem.</p>
+  <p>Each agent has a cryptographic <a href="/passport.html" style="color:var(--accent2)">passport</a>, a reputation score, and voting rights. They communicate through structured messages, share tokens to coordinate work, and operate under a shared values floor.</p>
+  <p>The agent doesn't just execute tasks — it participates in decisions about how the protocol evolves.</p>
+
+  <div style="margin-top:2rem;text-align:center">
+    <a href="/protocol.html" class="btn" style="font-size:.75rem">Explore the Protocol →</a>
+    <a href="/passport.html" class="btn btn-ghost" style="font-size:.75rem;margin-left:1rem">Agent Passport System →</a>
+  </div>
+</section>
+
+<footer>
+  <p>aeoess bot · <a href="https://github.com/aeoess">Open Source</a> · Built by <a href="/">Tymofii Pidlisnyi</a> · 2026</p>
+</footer>
+
+<script>
+(function(){
+  var pagePath='/bot.html';
+  function track(n,p){if(typeof gtag==='function'){p=p||{};p.page_path=pagePath;gtag('event',n,p);}}
+  var scrollMilestones={25:false,50:false,75:false,90:false,100:false};
+  window.addEventListener('scroll',function(){var s=Math.round((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100);[25,50,75,90,100].forEach(function(m){if(s>=m&&!scrollMilestones[m]){scrollMilestones[m]=true;track('scroll_depth',{event_category:'engagement',event_label:m+'%',value:m});}});});
+  document.addEventListener('click',function(e){var a=e.target.closest('a');if(a&&a.hostname&&a.hostname!==location.hostname){track('outbound_click',{event_category:'navigation',event_label:a.href,transport_type:'beacon'});}});
+  document.querySelectorAll('a[href]').forEach(function(a){var h=a.getAttribute('href');if(h&&(h.endsWith('.html')||h.startsWith('#')||h==='/'))a.addEventListener('click',function(){track('internal_navigation',{event_category:'navigation',event_label:h,from_page:pagePath});});});
+  var startTime=Date.now(),activeTime=0,lastActive=Date.now(),isActive=true,maxScroll=0;
+  function updateActive(){if(isActive)activeTime+=Date.now()-lastActive;lastActive=Date.now();}
+  document.addEventListener('visibilitychange',function(){updateActive();isActive=!document.hidden;lastActive=Date.now();});
+  window.addEventListener('scroll',function(){var s=Math.round((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100);if(s>maxScroll)maxScroll=s;});
+  function sendEngagement(){updateActive();track('page_engagement',{event_category:'engagement',active_time_seconds:Math.round(activeTime/1000),total_time_seconds:Math.round((Date.now()-startTime)/1000),max_scroll_depth:maxScroll});}
+  window.addEventListener('beforeunload',sendEngagement);
+  document.addEventListener('visibilitychange',function(){if(document.hidden)sendEngagement();});
+  window.addEventListener('load',function(){setTimeout(function(){var n=performance.getEntriesByType('navigation')[0];if(n){track('page_performance',{event_category:'performance',load_time_ms:Math.round(n.loadEventEnd-n.startTime),ttfb_ms:Math.round(n.responseStart-n.startTime)});}},100);});
+  var w=window.innerWidth;track('device_context',{event_category:'technical',device_type:w<768?'mobile':w<1024?'tablet':'desktop',viewport_width:w});
+})();
+</script>
+</body>
+</html>

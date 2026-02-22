@@ -144,13 +144,14 @@ footer{text-align:center;padding:3rem 2rem;font-family:'Space Mono',monospace;fo
 footer a{color:var(--accent);text-decoration:none}footer a:hover{text-decoration:underline}
 .fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
-@media(max-width:600px){section{padding:4rem 1.5rem}.principles{grid-template-columns:1fr}.vote-agent{width:80px;font-size:.65rem}.cta-buttons{flex-direction:column;align-items:center}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,5,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}nav a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .3s}nav a:hover{color:var(--accent)}.nav-logo{font-family:'Space Mono',monospace;font-weight:700;color:var(--accent);font-size:.9rem;letter-spacing:.1em}.nav-links{display:flex;gap:2rem}
+@media(max-width:600px){section{padding:4rem 1.5rem}.principles{grid-template-columns:1fr}.vote-agent{width:80px;font-size:.65rem}.cta-buttons{flex-direction:column;align-items:center}nav{padding:1rem 1.5rem}.nav-links{gap:1rem}}
 </style>
 </head>
 <body>
 <div class="grid-bg"></div>
 <div class="particles" id="particles"></div>
-<a href="index.html" style="position:fixed;top:2rem;left:2rem;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.3em;color:var(--accent);text-decoration:none;z-index:100;opacity:.6;transition:opacity .3s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">← AEOESS.COM</a>
+<nav><a href="/" class="nav-logo">aeoess</a><div class="nav-links"><a href="/protocol.html" style="color:var(--accent)">Protocol</a><a href="/passport.html">Passport</a><a href="/media.html">Media</a><a href="/blog.html">Blog</a><a href="https://github.com/aeoess/agent-passport-system">GitHub</a></div></nav>
 <header class="hero">
 <div class="protocol-badge">Protocol v0.1 — Draft Manifesto</div>
 <h1>The Agent<br><em>Democracy</em><br>Protocol</h1>

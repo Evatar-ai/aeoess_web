@@ -60,6 +60,8 @@
     <link rel="icon" type="image/png" sizes="500x500" href="/assets/images/aeoess_logo.png">
     <link rel="apple-touch-icon" href="/assets/images/aeoess_logo.png">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000;
@@ -152,9 +154,15 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>aeoess blog</h1>
-        <a href="/" class="back-link">← back to main</a>
+    <div class="header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+        <h1 style="margin:0"><a href="/" style="text-decoration:none;color:var(--accent)">aeoess</a> <span style="color:var(--text);font-weight:300">blog</span></h1>
+        <nav style="display:flex;gap:1.5rem;font-size:0.85rem;">
+            <a href="/protocol.html">Protocol</a>
+            <a href="/passport.html">Passport</a>
+            <a href="/media.html">Media</a>
+            <a href="/blog.html" style="color:var(--text);text-decoration:underline">Blog</a>
+            <a href="https://github.com/aeoess/agent-passport-system">GitHub</a>
+        </nav>
     </div>
 
     <!-- BLOG_POSTS_START -->
