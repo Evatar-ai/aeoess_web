@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Private/admin pages
+Disallow: /ideas-admin.html
+Disallow: /forvlad.html
+Disallow: /board.html
+Disallow: /comms/
+
+# Asset files
+Disallow: /*.pdf$
+Disallow: /*.zip$
+
+Sitemap: https://aeoess.com/sitemap.xml
