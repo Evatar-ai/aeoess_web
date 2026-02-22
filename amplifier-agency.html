@@ -3,6 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 with Consent Mode v2 — aeoess.com -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  if (localStorage.getItem('cookieConsent') === 'accepted') {
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted'
+    });
+  }
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-S7QVCJGMKR', {
+    send_page_view: true,
+    cookie_flags: 'SameSite=None;Secure',
+    link_attribution: true
+  });
+</script>
+
     <title>Amplifier Entertainment Agency - Tymofii Pidlisnyi</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -74,5 +106,113 @@
             document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
         });
     </script>
+<script>
+(function() {
+  'use strict';
+  function track(e, p) { if (typeof gtag === 'function') gtag('event', e, p || {}); }
+  var pageStartTime = Date.now();
+  var pagePath = window.location.pathname;
+
+  // Scroll Depth
+  var sT = { 25: false, 50: false, 75: false, 90: false, 100: false };
+  function gSP() {
+    var h = document.documentElement, b = document.body;
+    return Math.round(((h.scrollTop || b.scrollTop) / ((h.scrollHeight || b.scrollHeight) - h.clientHeight)) * 100);
+  }
+  window.addEventListener('scroll', function() {
+    var p = gSP();
+    [25,50,75,90,100].forEach(function(t) {
+      if (p >= t && !sT[t]) { sT[t] = true; track('scroll_depth', { event_category: 'engagement', event_label: t+'%', page: pagePath }); }
+    });
+  }, { passive: true });
+
+  // Link Clicks
+  document.addEventListener('click', function(e) {
+    var l = e.target.closest('a[href]');
+    if (!l) return;
+    var h = l.getAttribute('href');
+    if (!h) return;
+    if (h.startsWith('http') && !h.includes('aeoess.com')) {
+      track('outbound_click', { event_category: 'outbound', event_label: h, page: pagePath, transport_type: 'beacon' });
+    }
+    if (h.endsWith('.html') || h.startsWith('#')) {
+      track('internal_navigation', { event_category: 'navigation', event_label: h, from_page: pagePath });
+    }
+  });
+
+  // Social Links
+  [
+    { s: 'a[href*="linkedin"]', n: 'linkedin' }, { s: 'a[href*="instagram"]', n: 'instagram' },
+    { s: 'a[href*="github"]', n: 'github' }, { s: 'a[href*="spotify"]', n: 'spotify' },
+    { s: 'a[href*="substack"]', n: 'substack' },
+    { s: 'a[href*="email-protection"], a[href*="mailto"]', n: 'email' }
+  ].forEach(function(x) {
+    document.querySelectorAll(x.s).forEach(function(l) {
+      l.addEventListener('click', function() { track('social_click', { event_category: 'social', event_label: x.n, page: pagePath }); });
+    });
+  });
+
+  // Text Copy
+  document.addEventListener('copy', function() {
+    var s = window.getSelection();
+    track('text_copy', { event_category: 'engagement', event_label: (s ? s.toString().substring(0,100) : ''), page: pagePath });
+  });
+
+  // UTM / Referral
+  (function() {
+    var p = new URLSearchParams(window.location.search);
+    var u = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var has = false, d = {};
+    u.forEach(function(f) { var v = p.get(f); if (v) { d[f] = v; has = true; } });
+    if (has) { d.event_category = 'traffic'; d.event_label = d.utm_source || 'direct'; d.page = pagePath; track('campaign_visit', d); }
+    if (!has && document.referrer && !document.referrer.includes('aeoess.com')) {
+      track('referral_visit', { event_category: 'traffic', event_label: document.referrer, page: pagePath });
+    }
+  })();
+
+  // Engagement Time
+  var eT = 0, iA = true, aS = Date.now();
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) { if (iA) { eT += Date.now() - aS; iA = false; } } else { iA = true; aS = Date.now(); }
+  });
+  ['mousemove','keydown','scroll','touchstart'].forEach(function(ev) {
+    document.addEventListener(ev, function() { if (!iA) { iA = true; aS = Date.now(); } }, { passive: true });
+  });
+  function sE() {
+    if (iA) eT += Date.now() - aS;
+    track('page_engagement', { event_category: 'engagement', event_label: pagePath, value: Math.round(eT/1000),
+      total_time_seconds: Math.round((Date.now()-pageStartTime)/1000), max_scroll_depth: gSP(), transport_type: 'beacon' });
+  }
+  window.addEventListener('beforeunload', sE);
+  document.addEventListener('visibilitychange', function() { if (document.hidden) sE(); });
+
+  // Performance
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      if (window.performance && performance.getEntriesByType) {
+        var n = performance.getEntriesByType('navigation')[0];
+        if (n) track('page_performance', { event_category: 'performance', event_label: pagePath,
+          value: Math.round(n.loadEventEnd - n.startTime), ttfb_ms: Math.round(n.responseStart - n.startTime) });
+      }
+    }, 1000);
+  });
+
+  // Device Context
+  (function() { var w = window.innerWidth;
+    track('device_context', { event_category: 'context', event_label: w<768?'mobile':(w<1024?'tablet':'desktop'), viewport_width: w, page: pagePath });
+  })();
+
+  // First Interaction
+  var fT = false;
+  ['click','scroll','keydown'].forEach(function(ev) {
+    document.addEventListener(ev, function f() {
+      if (!fT) { fT = true; track('first_interaction', { event_category: 'engagement', event_label: ev, value: Math.round((Date.now()-pageStartTime)/1000), page: pagePath }); }
+      document.removeEventListener(ev, f);
+    }, { once: true, passive: true });
+  });
+
+  console.log('[aeoess-analytics] Subpage tracking active — ' + pagePath);
+})();
+</script>
 </body>
 </html>

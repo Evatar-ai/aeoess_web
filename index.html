@@ -2,14 +2,36 @@
 <html lang="en">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
+    <!-- Google Analytics 4 with Consent Mode v2 — aeoess.com -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  if (localStorage.getItem('cookieConsent') === 'accepted') {
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted'
+    });
+  }
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
+<script>
   gtag('js', new Date());
-
-  gtag('config', 'G-S7QVCJGMKR');
+  gtag('config', 'G-S7QVCJGMKR', {
+    send_page_view: true,
+    cookie_flags: 'SameSite=None;Secure',
+    link_attribution: true
+  });
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3013,6 +3035,13 @@
 
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
+            });
+            gtag('event', 'consent_granted', { event_category: 'consent', event_label: 'cookie_banner' });
             const banner = document.getElementById('cookieBanner');
             if (banner) {
                 banner.classList.remove('show');
@@ -3021,6 +3050,12 @@
 
         function rejectCookies() {
             localStorage.setItem('cookieConsent', 'rejected');
+            gtag('consent', 'update', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied'
+            });
             const banner = document.getElementById('cookieBanner');
             if (banner) {
                 banner.classList.remove('show');
@@ -3465,5 +3500,131 @@
         }
     </script>
 
+<script>
+(function() {
+  'use strict';
+  function track(e, p) { if (typeof gtag === 'function') gtag('event', e, p || {}); }
+  function cT(el, m) { m=m||50; var t=(el.textContent||el.innerText||'').trim().replace(/\s+/g,' '); return t.substring(0,m); }
+  var pST = Date.now();
+
+  // 1. Scroll Depth
+  var sT={25:false,50:false,75:false,90:false,100:false};
+  function gSP(){var h=document.documentElement,b=document.body;return Math.round(((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight))*100);}
+  window.addEventListener('scroll',function(){var p=gSP();[25,50,75,90,100].forEach(function(t){if(p>=t&&!sT[t]){sT[t]=true;track('scroll_depth',{event_category:'engagement',event_label:t+'%',value:t});}});},{passive:true});
+
+  // 2. Section Visibility
+  var sO={};
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){
+      if(e.isIntersecting){var id=e.target.id||e.target.getAttribute('data-section');
+      if(id&&!sO[id]){sO[id]=true;track('section_view',{event_category:'engagement',event_label:id});}}
+    });},{threshold:0.3});
+    document.querySelectorAll('section[id],[id="projects"],[id="lab"],[id="ideas"],[id="contact"]').forEach(function(el){obs.observe(el);});
+  }
+
+  // 3. Project Card Clicks
+  document.querySelectorAll('.project-card a').forEach(function(l){l.addEventListener('click',function(){
+    var c=this.closest('.project-card');var t=c?cT(c.querySelector('h3,h4')):'';
+    track('project_click',{event_category:'projects',event_label:t,link_url:this.getAttribute('href')||''});
+  });});
+
+  // 4. Lab Card Clicks
+  document.querySelectorAll('.lab-card a').forEach(function(l){l.addEventListener('click',function(){
+    var c=this.closest('.lab-card');var t=c?cT(c.querySelector('h4,h3')):'';
+    track('lab_click',{event_category:'lab',event_label:t,link_url:this.getAttribute('href')||''});
+  });});
+
+  // 5. All Link Clicks
+  document.addEventListener('click',function(e){var l=e.target.closest('a[href]');if(!l)return;var h=l.getAttribute('href');if(!h)return;
+    if(h.startsWith('http')&&!h.includes('aeoess.com')){track('outbound_click',{event_category:'outbound',event_label:h,link_text:cT(l,30),transport_type:'beacon'});}
+    if(h.endsWith('.html')||h.startsWith('#')){track('internal_navigation',{event_category:'navigation',event_label:h,link_text:cT(l,30)});}
+  });
+
+  // 6. Social Links
+  [{s:'a[href*="linkedin"]',n:'linkedin'},{s:'a[href*="instagram"]',n:'instagram'},{s:'a[href*="github"]',n:'github'},
+   {s:'a[href*="spotify"]',n:'spotify'},{s:'a[href*="substack"]',n:'substack'},
+   {s:'a[href*="email-protection"],a[href*="mailto"]',n:'email'},{s:'a[href*="crunchbase"]',n:'crunchbase'}
+  ].forEach(function(x){document.querySelectorAll(x.s).forEach(function(l){
+    l.addEventListener('click',function(){track('social_click',{event_category:'social',event_label:x.n});});
+  });});
+
+  // 7. Idea Upvotes
+  var _tU=window.toggleUpvote;window.toggleUpvote=function(id){track('idea_upvote',{event_category:'ideas',event_label:id});if(_tU)_tU.call(this,id);};
+
+  // 8. Comment Submit
+  var _sC=window.submitComment;window.submitComment=function(){track('comment_submit',{event_category:'engagement',event_label:'ideas_comment'});if(_sC)_sC.call(this);};
+
+  // 9. Theme Toggle
+  var _tT=window.toggleTheme;window.toggleTheme=function(){var c=document.documentElement.getAttribute('data-theme');
+    track('theme_toggle',{event_category:'ui_interaction',event_label:c==='bright'?'dark':'bright'});if(_tT)_tT.call(this);};
+
+  // 10. Design Switch
+  var _sD=window.switchDesign;window.switchDesign=function(){track('design_switch',{event_category:'ui_interaction',event_label:'alt_design'});if(_sD)_sD.call(this);};
+
+  // 11. Music Toggle
+  var _tM=window.toggleMusic;window.toggleMusic=function(){var b=document.getElementById('musicBtn');var ip=b&&b.textContent.trim()==='⏸';
+    track('music_toggle',{event_category:'engagement',event_label:ip?'pause':'play'});if(_tM)_tM.call(this);};
+
+  // 12. Profile Overlay
+  var _tP=window.toggleProfileOverlay;window.toggleProfileOverlay=function(){track('profile_overlay',{event_category:'engagement',event_label:'open'});if(_tP)_tP.call(this);};
+  var _oP=window.openProfileOverlay;window.openProfileOverlay=function(){track('profile_overlay',{event_category:'engagement',event_label:'open'});if(_oP)_oP.call(this);};
+
+  // 13. Blog Banner
+  document.querySelectorAll('.blog-banner .cookie-btn.accept').forEach(function(b){b.addEventListener('click',function(){track('blog_banner_click',{event_category:'cta',event_label:'read_the_blog'});});});
+  var _dB=window.dismissBlogBanner;window.dismissBlogBanner=function(){track('blog_banner_dismiss',{event_category:'cta',event_label:'maybe_later'});if(_dB)_dB.call(this);};
+
+  // 14. Mobile Drawer
+  var _tMD=window.toggleMobileDrawer;window.toggleMobileDrawer=function(){track('mobile_drawer',{event_category:'ui_interaction',event_label:'toggle'});if(_tMD)_tMD.call(this);};
+
+  // 15-16. Engagement Time + Exit Intent
+  var eT=0,iA=true,aS=Date.now();
+  document.addEventListener('visibilitychange',function(){if(document.hidden){if(iA){eT+=Date.now()-aS;iA=false;}}else{iA=true;aS=Date.now();}});
+  ['mousemove','keydown','scroll','touchstart'].forEach(function(ev){document.addEventListener(ev,function(){if(!iA){iA=true;aS=Date.now();}},{passive:true});});
+  function sE(){if(iA)eT+=Date.now()-aS;track('page_engagement',{event_category:'engagement',event_label:window.location.pathname,value:Math.round(eT/1000),
+    total_time_seconds:Math.round((Date.now()-pST)/1000),active_time_seconds:Math.round(eT/1000),max_scroll_depth:gSP(),transport_type:'beacon'});}
+  window.addEventListener('beforeunload',sE);
+  document.addEventListener('visibilitychange',function(){if(document.hidden)sE();});
+  var eiF=false;document.addEventListener('mouseout',function(e){if(!eiF&&e.clientY<5&&e.relatedTarget==null){eiF=true;
+    track('exit_intent',{event_category:'engagement',event_label:window.location.pathname,max_scroll:gSP(),time_on_page:Math.round((Date.now()-pST)/1000)});}});
+
+  // 17. Text Copy
+  document.addEventListener('copy',function(){var s=window.getSelection();track('text_copy',{event_category:'engagement',event_label:s?s.toString().substring(0,100):''});});
+
+  // 18. File Downloads
+  document.querySelectorAll('a[href$=".pdf"],a[href$=".zip"],a[href$=".doc"],a[href$=".docx"]').forEach(function(l){
+    l.addEventListener('click',function(){track('file_download',{event_category:'download',event_label:this.getAttribute('href')});});});
+
+  // 19. UTM / Referral
+  (function(){var p=new URLSearchParams(window.location.search);var u=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];var has=false,d={};
+    u.forEach(function(f){var v=p.get(f);if(v){d[f]=v;has=true;}});
+    if(has){d.event_category='traffic';d.event_label=d.utm_source||'direct';track('campaign_visit',d);}
+    if(!has&&document.referrer&&!document.referrer.includes('aeoess.com')){track('referral_visit',{event_category:'traffic',event_label:document.referrer});}
+  })();
+
+  // 20. Performance
+  window.addEventListener('load',function(){setTimeout(function(){if(window.performance&&performance.getEntriesByType){var n=performance.getEntriesByType('navigation')[0];
+    if(n)track('page_performance',{event_category:'performance',event_label:window.location.pathname,value:Math.round(n.loadEventEnd-n.startTime),
+    dom_interactive_ms:Math.round(n.domInteractive-n.startTime),ttfb_ms:Math.round(n.responseStart-n.startTime)});}},1000);});
+
+  // 21. Device Context
+  (function(){var w=window.innerWidth;track('device_context',{event_category:'context',event_label:w<768?'mobile':(w<1024?'tablet':'desktop'),
+    viewport_width:w,viewport_height:window.innerHeight,pixel_ratio:window.devicePixelRatio||1,
+    touch_capable:('ontouchstart' in window)?'yes':'no',connection_type:(navigator.connection&&navigator.connection.effectiveType)||'unknown'});})();
+
+  // 22. Rage Clicks
+  var cTs=[];document.addEventListener('click',function(e){var now=Date.now();cTs.push({time:now,x:e.clientX,y:e.clientY});if(cTs.length>5)cTs.shift();
+    if(cTs.length>=3){var r=cTs.slice(-3);var td=r[2].time-r[0].time;var xS=Math.max.apply(null,r.map(function(c){return c.x}))-Math.min.apply(null,r.map(function(c){return c.x}));
+    var yS=Math.max.apply(null,r.map(function(c){return c.y}))-Math.min.apply(null,r.map(function(c){return c.y}));
+    if(td<2000&&xS<50&&yS<50){var tg=e.target.tagName+(e.target.className?'.'+String(e.target.className).split(' ')[0]:'');
+    track('rage_click',{event_category:'ux_issue',event_label:tg});cTs=[];}}});
+
+  // 23. First Interaction
+  var fIT=false;['click','scroll','keydown'].forEach(function(ev){document.addEventListener(ev,function f(){
+    if(!fIT){fIT=true;track('first_interaction',{event_category:'engagement',event_label:ev,value:Math.round((Date.now()-pST)/1000)});}
+    document.removeEventListener(ev,f);},{once:true,passive:true});});
+
+  console.log('[aeoess-analytics] Main page tracking — 23 event categories active');
+})();
+</script>
 </body>
 </html>
