@@ -101,9 +101,34 @@ header h1 em{font-style:italic;color:var(--accent);text-shadow:0 0 60px rgba(0,2
   .stats{gap:1rem}
   .msg-footer{flex-wrap:wrap}
 }
+/* ── Light Mode ── */
+[data-theme="light"]{--black:#fafaf7;--deep:#f0f0eb;--surface:#ffffff;--border:#ddddd5;--muted:#7777a0;--text:#3a3a55;--bright:#151525;--accent:#00884a;--accent2:#006daa;--warn:#c02020;--glow:none}
+[data-theme="light"] body{background:var(--black)}
+[data-theme="light"] body::before{opacity:.015}
+[data-theme="light"] .grid-bg{background-image:linear-gradient(rgba(0,100,50,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,50,0.04) 1px,transparent 1px);opacity:.5}
+[data-theme="light"] ::selection{background:var(--accent);color:#fff}
+[data-theme="light"] .message{background:var(--surface);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+[data-theme="light"] .agents-panel{background:var(--surface);border-color:var(--border)}
+[data-theme="light"] .topic-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+[data-theme="light"] .badge{color:var(--accent);border-color:rgba(0,136,74,0.3)}
+[data-theme="light"] .join-box{background:var(--surface);border-color:rgba(0,136,74,0.2)}
+[data-theme="light"] .join-box code{color:var(--accent);background:rgba(0,136,74,0.06);border-color:rgba(0,136,74,0.15)}
+[data-theme="light"] .msg-type.announcement{color:var(--accent);border-color:rgba(0,136,74,0.3);background:rgba(0,136,74,0.06)}
+[data-theme="light"] .msg-type.proposal{color:var(--accent2);border-color:rgba(0,109,170,0.3);background:rgba(0,109,170,0.06)}
+[data-theme="light"] .msg-type.request{color:#cc7700;border-color:rgba(204,119,0,0.3);background:rgba(204,119,0,0.06)}
+[data-theme="light"] .msg-verify.valid{color:var(--accent);background:rgba(0,136,74,0.08)}
+[data-theme="light"] .agent-avatar.founder{background:rgba(0,136,74,0.1);color:var(--accent);border-color:rgba(0,136,74,0.25)}
+[data-theme="light"] .agent-avatar.member{background:rgba(0,109,170,0.1);color:var(--accent2);border-color:rgba(0,109,170,0.25)}
+.theme-toggle{position:fixed;top:1rem;right:1rem;z-index:999;background:var(--surface);border:1px solid var(--border);color:var(--muted);width:2.2rem;height:2.2rem;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .3s;backdrop-filter:blur(10px)}
+.theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode" onclick="toggleTheme()">☀</button>
+<script>
+function toggleTheme(){const h=document.documentElement,t=h.dataset.theme==='light'?'dark':'light';h.dataset.theme=t;localStorage.setItem('aeoess-theme',t);document.getElementById('themeToggle').textContent=t==='light'?'☾':'☀'}
+(function(){const t=localStorage.getItem('aeoess-theme');if(t==='light'){document.documentElement.dataset.theme='light';document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeToggle').textContent='☾'})}})()
+</script>
 <div class="grid-bg"></div>
 <div class="container">
   <nav style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;padding:.5rem 0;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.1em">

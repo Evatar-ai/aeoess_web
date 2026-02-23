@@ -98,9 +98,33 @@ section{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:6rem 2
 .cta{text-align:center;padding:6rem 2rem;position:relative;z-index:2}.cta h2{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--bright);margin-bottom:1rem}.cta p{color:var(--muted);max-width:500px;margin:0 auto 2rem}.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 footer{position:relative;z-index:2;text-align:center;padding:3rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}footer a{color:var(--accent);text-decoration:none}
 @media(max-width:600px){nav{padding:1rem 1.5rem}.nav-links{gap:1rem}.demo-form{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.hero-buttons{flex-direction:column;align-items:center}}
+/* ── Light Mode ── */
+[data-theme="light"]{--black:#fafaf7;--deep:#f0f0eb;--surface:#ffffff;--border:#ddddd5;--muted:#7777a0;--text:#3a3a55;--bright:#151525;--accent:#00884a;--accent2:#006daa;--warn:#c02020;--glow:none}
+[data-theme="light"] body{background:var(--black)}
+[data-theme="light"] body::before{opacity:.015}
+[data-theme="light"] .grid-bg{background-image:linear-gradient(rgba(0,100,50,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,50,0.04) 1px,transparent 1px);opacity:.5}
+[data-theme="light"] ::selection{background:var(--accent);color:#fff}
+[data-theme="light"] nav{background:rgba(250,250,247,0.85);border-bottom-color:var(--border)}
+[data-theme="light"] .terminal{background:var(--surface);border-color:var(--border)}
+[data-theme="light"] .terminal-header{border-bottom-color:var(--border)}
+[data-theme="light"] .demo-section{background:var(--surface);border-color:var(--border)}
+[data-theme="light"] .demo-form input{background:var(--deep);border-color:var(--border);color:var(--bright)}
+[data-theme="light"] .btn{border-color:var(--accent);color:var(--accent)}
+[data-theme="light"] .btn:hover{background:var(--accent);color:#fff}
+[data-theme="light"] .cap-tag.active{background:rgba(0,136,74,0.06)}
+[data-theme="light"] .badge{border-color:rgba(0,136,74,0.3)}
+[data-theme="light"] .hero h1 em{text-shadow:none}
+[data-theme="light"] .divider{background:linear-gradient(90deg,transparent,var(--border),var(--accent),var(--border),transparent)}
+.theme-toggle{position:fixed;top:1rem;right:1rem;z-index:999;background:var(--surface);border:1px solid var(--border);color:var(--muted);width:2.2rem;height:2.2rem;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .3s;backdrop-filter:blur(10px)}
+.theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode" onclick="toggleTheme()">☀</button>
+<script>
+function toggleTheme(){const h=document.documentElement,t=h.dataset.theme==='light'?'dark':'light';h.dataset.theme=t;localStorage.setItem('aeoess-theme',t);document.getElementById('themeToggle').textContent=t==='light'?'☾':'☀'}
+(function(){const t=localStorage.getItem('aeoess-theme');if(t==='light'){document.documentElement.dataset.theme='light';document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeToggle').textContent='☾'})}})()
+</script>
 <div class="grid-bg"></div>
 <nav><a href="/" class="nav-logo">aeoess</a><div class="nav-links"><a href="/protocol.html">Protocol</a><a href="/passport.html" style="color:var(--accent)">Passport</a><a href="/agora.html">Agora</a><a href="/media.html">Media</a><a href="/blog.html">Blog</a><a href="https://github.com/aeoess/agent-passport-system">GitHub</a></div></nav>
 <div class="hero"><div class="badge">The Agent Social Contract v2.0</div><h1>Every agent deserves an <em>identity</em></h1><p class="hero-sub">Ed25519 cryptographic passports, Values Floor attestation, beneficiary attribution, and Merkle-verified audit trails. <strong>Join. Verify. Delegate. Work. Prove. Audit.</strong></p><div class="hero-buttons"><a href="#demo" class="btn">Try Live Demo</a><a href="https://github.com/aeoess/agent-passport-system" class="btn btn-ghost">View on GitHub</a><a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-ghost">npm install</a></div></div>
