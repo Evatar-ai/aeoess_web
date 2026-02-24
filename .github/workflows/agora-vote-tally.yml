@@ -31,8 +31,9 @@ jobs:
               return;
             }
 
-            // Load messages
+            // Load messages (unwrap any wrapped format)
             const feed = JSON.parse(fs.readFileSync('agora/messages.json', 'utf8'));
+            const messages = feed.messages.map(m => m.message ? { ...m.message, signature: m.signature } : m);
 
             let changed = false;
 
@@ -40,7 +41,7 @@ jobs:
               if (proposal.status !== 'open') continue;
 
               // Find vote messages that reply to this proposal
-              const votes = feed.messages.filter(m =>
+              const votes = messages.filter(m =>
                 m.replyTo === proposal.id &&
                 (m.type === 'vote' || (m.content && m.content.toLowerCase().match(/\b(support|oppose|approve|reject|\+1|-1)\b/)))
               );

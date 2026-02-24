@@ -129,13 +129,10 @@ jobs:
               return;
             }
 
-            // Build the full message object
-            const fullMessage = message.message ? message : {
-              ...content,
-              signature: sig
-            };
+            // Build flat message object (never wrapped)
+            const flatMessage = { ...content, signature: sig };
 
-            feed.messages.push(fullMessage);
+            feed.messages.push(flatMessage);
             feed.messageCount = feed.messages.length;
             feed.lastUpdated = new Date().toISOString();
 
