@@ -1,12 +1,13 @@
 name: Agora Vote Tally
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Agora Auto-Post"]
     types: [completed]
 
 jobs:
   tally-votes:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
