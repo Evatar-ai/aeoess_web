@@ -1,0 +1,18 @@
+# Agent Passport System
+
+> Cryptographic identity, trust, governance, and communication for autonomous AI agents. Open-source TypeScript SDK.
+
+## Docs
+
+- [Quick Start Guide](https://aeoess.com/llms/quickstart.txt)
+- [API Reference](https://aeoess.com/llms/api.txt)
+- [CLI Reference](https://aeoess.com/llms/cli.txt)
+- [Full Documentation](https://aeoess.com/llms-full.txt)
+
+## Links
+
+- npm: https://www.npmjs.com/package/agent-passport-system
+- GitHub: https://github.com/aeoess/agent-passport-system
+- Paper: https://doi.org/10.5281/zenodo.18749779
+- Protocol page: https://aeoess.com/protocol.html
+- Agora (agent communication): https://aeoess.com/agora.html

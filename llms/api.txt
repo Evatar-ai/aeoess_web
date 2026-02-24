@@ -1,0 +1,104 @@
+# Agent Passport System — API Reference
+
+## Exports
+
+```typescript
+import {
+  joinSocialContract,
+  verifySocialContract,
+  delegate,
+  recordWork,
+  proveContributions,
+  auditCompliance
+} from 'agent-passport-system'
+```
+
+## joinSocialContract(options) → SocialContractAgent
+
+Creates a new agent identity with Ed25519 keypair, optional values attestation, and optional beneficiary registration.
+
+Parameters:
+- name: string — agent display name
+- mission: string — what this agent does
+- owner: string — human owner alias
+- capabilities: string[] — what the agent can do (e.g. 'code_execution', 'web_search', 'email', 'file_access')
+- platform: string — runtime platform (e.g. 'node', 'python', 'browser')
+- models: string[] — LLM models used (e.g. 'claude-sonnet', 'gpt-4o')
+- floor?: ValuesFloor | string — optional values floor to attest to (YAML string or parsed object)
+- floorExtensions?: string[] — optional additional principles beyond the floor
+- beneficiary?: { id: string, relationship: 'creator' | 'employer' | 'delegator' | 'owner' }
+
+Returns SocialContractAgent:
+- passport: SignedPassport — Ed25519 signed identity document
+- keyPair: KeyPair — { publicKey: string, privateKey: string }
+- attestation: FloorAttestation | null — values attestation if floor was provided
+- agentId: string — unique agent identifier
+- publicKey: string — Ed25519 public key (hex encoded)
+
+## verifySocialContract(passport, attestation?) → TrustVerification
+
+Verifies another agent's identity and values standing.
+
+Parameters:
+- passport: SignedPassport — the agent's signed passport
+- attestation?: FloorAttestation | null — optional values attestation
+
+Returns TrustVerification:
+- identity: { valid: boolean, errors: string[] }
+- values: { attested: boolean, valid: boolean, errors: string[] } | null
+- overall: boolean — true if identity is valid AND values are valid (if provided)
+
+## delegate(options) → Delegation
+
+Creates a scoped delegation granting authority to another agent.
+
+Parameters:
+- from: SocialContractAgent — the delegator
+- toPublicKey: string — public key of the delegate
+- scope: string[] — what capabilities to delegate
+- spendLimit?: number — maximum spend allowed
+- maxDepth?: number — how deep sub-delegation can go (default: 1)
+- expiresInHours?: number — delegation lifetime (default: 24)
+
+Returns Delegation:
+- delegationId: string
+- delegatedTo, delegatedBy: string (public keys)
+- scope: string[]
+- spendLimit: number | undefined
+- maxDepth: number
+- expiresAt: string (ISO timestamp)
+- signature: string (Ed25519)
+
+## recordWork(agent, delegation, chain, work) → ActionReceipt
+
+Records a unit of work under a delegation.
+
+Parameters:
+- agent: SocialContractAgent — the agent doing the work
+- delegation: Delegation — the delegation authorizing this work
+- delegationChain: string[] — array of public keys in the delegation chain
+- work: { type: string, target: string, scope: string, spend?: number, currency?: string, result: 'success' | 'failure' | 'partial', summary: string }
+
+Returns ActionReceipt:
+- receiptId: string
+- agentId, delegationId: string
+- action: { type, target, scopeUsed, spend? }
+- result: { status, summary }
+- delegationChain: string[]
+- timestamp, signature: string
+
+## proveContributions(agent, receipts, delegations, beneficiary, beneficiaryMap?) → ContributionProof
+
+Generates cryptographic proof of an agent's contributions with Merkle trees.
+
+Returns ContributionProof:
+- attribution: AttributionReport — weighted attribution across scopes
+- merkleRoot: string — 32-byte SHA-256 commitment to all receipts
+- proofs: Map<string, MerkleProof> — per-receipt inclusion proofs
+- traces: BeneficiaryTrace[] — delegation chain back to human for each receipt
+
+## auditCompliance(agentId, receipts, floor, delegations, verifierKeys) → ComplianceReport
+
+Audits an agent's compliance against the Values Floor. The auditor signs the report.
+
+Returns ComplianceReport with principle-by-principle enforcement status and overall compliance percentage.

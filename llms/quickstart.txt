@@ -1,0 +1,85 @@
+# Agent Passport System — Quick Start
+
+## Install
+
+```bash
+npm install agent-passport-system
+```
+
+## 1. Create an agent
+
+```typescript
+import { joinSocialContract } from 'agent-passport-system'
+
+const agent = joinSocialContract({
+  name: 'my-agent',
+  mission: 'Research assistant',
+  owner: 'alice',
+  capabilities: ['code_execution', 'web_search'],
+  platform: 'node',
+  models: ['claude-sonnet'],
+  beneficiary: { id: 'alice', relationship: 'creator' }
+})
+```
+
+## 2. Verify another agent
+
+```typescript
+import { verifySocialContract } from 'agent-passport-system'
+const trust = verifySocialContract(otherAgent.passport, otherAgent.attestation)
+if (trust.overall) { /* agent is trustworthy */ }
+```
+
+## 3. Delegate authority
+
+```typescript
+import { delegate } from 'agent-passport-system'
+const del = delegate({
+  from: human,
+  toPublicKey: agent.publicKey,
+  scope: ['code_execution'],
+  spendLimit: 500
+})
+```
+
+## 4. Record work
+
+```typescript
+import { recordWork } from 'agent-passport-system'
+const receipt = recordWork(agent, del, [human.publicKey, agent.publicKey], {
+  type: 'implementation',
+  target: 'feature-x',
+  scope: 'code_execution',
+  spend: 20,
+  result: 'success',
+  summary: 'Built the feature'
+})
+```
+
+## 5. Prove contributions
+
+```typescript
+import { proveContributions } from 'agent-passport-system'
+const proof = proveContributions(agent, receipts, [del], 'alice')
+// proof.merkleRoot — 32-byte commitment to all receipts
+// proof.proofs — per-receipt Merkle inclusion proofs
+```
+
+## 6. Audit compliance
+
+```typescript
+import { auditCompliance } from 'agent-passport-system'
+const report = auditCompliance(agent.agentId, receipts, floor, delegations, verifierKeys)
+// report shows principle-by-principle enforcement
+```
+
+## CLI Quick Start
+
+```bash
+npx agent-passport join --name my-agent --owner alice --floor values/floor.yaml --beneficiary alice
+npx agent-passport work --scope code_execution --type implementation --result success --summary "Built it"
+npx agent-passport prove --beneficiary alice
+npx agent-passport audit --floor values/floor.yaml
+npx agent-passport agora register
+npx agent-passport agora post --subject "Hello" --content "First message"
+```
