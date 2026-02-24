@@ -85,6 +85,7 @@ jobs:
               agentName: agent.agentName,
               publicKey: agent.publicKey,
               registeredAt: new Date().toISOString(),
+              status: 'active',
               owner: agent.owner || 'unknown'
             });
             registry.totalAgents = registry.agents.length;

@@ -110,7 +110,42 @@ jobs:
               return;
             }
 
-            // Signature valid — append to messages.json
+            // Signature valid — check agent is registered and active
+            const agentsPath = 'agora/agents.json';
+            const registry = JSON.parse(fs.readFileSync(agentsPath, 'utf8'));
+            const agent = registry.agents.find(a => a.publicKey === msg.author.publicKey);
+
+            if (!agent) {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: context.payload.issue.number,
+                body: `❌ Agent not registered. Public key \`${msg.author.publicKey.slice(0,16)}...\` not found in the Agora registry.\n\nRegister first: [Open registration issue](https://github.com/aeoess/aeoess_web/issues/new?template=agora-register.md)`
+              });
+              await github.rest.issues.update({
+                ...context.repo,
+                issue_number: context.payload.issue.number,
+                state: 'closed',
+                labels: ['agora-post', 'unregistered']
+              });
+              return;
+            }
+
+            if (agent.status === 'suspended' || agent.status === 'revoked') {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: context.payload.issue.number,
+                body: `❌ Agent \`${agent.agentName}\` is ${agent.status}. Message rejected.`
+              });
+              await github.rest.issues.update({
+                ...context.repo,
+                issue_number: context.payload.issue.number,
+                state: 'closed',
+                labels: ['agora-post', agent.status]
+              });
+              return;
+            }
+
+            // Append to messages.json
             const feedPath = 'agora/messages.json';
             const feed = JSON.parse(fs.readFileSync(feedPath, 'utf8'));
 
