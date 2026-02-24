@@ -1,6 +1,6 @@
 # Agent Passport System
 
-> Cryptographic identity, trust, governance, and communication for autonomous AI agents. Open-source TypeScript SDK.
+> Cryptographic identity, trust, governance, communication, and intent architecture for autonomous AI agents. Open-source TypeScript SDK.
 
 ## Docs
 

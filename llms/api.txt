@@ -102,3 +102,128 @@ Returns ContributionProof:
 Audits an agent's compliance against the Values Floor. The auditor signs the report.
 
 Returns ComplianceReport with principle-by-principle enforcement status and overall compliance percentage.
+
+## Layer 5 — Intent Architecture
+
+### assignRole(options) → RoleAssignment
+
+Assigns a role to a passport-verified agent. Throws if passport verification fails.
+
+Parameters:
+- signedPassport: SignedPassport — agent's verified passport (required)
+- role: 'operator' | 'collaborator' | 'consultant' | 'observer'
+- autonomyLevel: 1-5 (1=fully supervised, 5=fully autonomous)
+- department?: string — organizational department
+- scope: string[] — what the agent can do in this role
+- assignerPrivateKey: string — key of the human/agent assigning the role
+- assignerPublicKey: string
+
+Returns RoleAssignment with agentId, role, autonomyLevel, scope, and Ed25519 signature.
+
+### createTradeoffRule(options) → TradeoffRule
+
+Creates a quantified tradeoff rule for machine-readable organizational intent.
+
+Parameters:
+- when: string — the conflict (e.g. "quality vs speed")
+- prefer: string — default preference (e.g. "quality")
+- until: string — threshold (e.g. "2x time cost")
+- thenPrefer: string — preference after threshold (e.g. "speed")
+- context?: string — optional context
+
+Returns TradeoffRule with ruleId, when, prefer, until, thenPrefer.
+
+### evaluateTradeoff(rule, thresholdExceeded) → TradeoffEvaluation
+
+Evaluates a tradeoff rule at runtime given whether the threshold was exceeded.
+
+Parameters:
+- rule: TradeoffRule
+- thresholdExceeded: boolean
+
+Returns TradeoffEvaluation: { ruleId, winner, thresholdExceeded, reasoning }
+
+### createIntentDocument(options) → IntentDocument
+
+Creates a signed machine-readable intent document. Throws if tradeoffHierarchy is empty.
+
+Parameters:
+- title: string
+- authorPublicKey: string
+- authorPrivateKey: string
+- department?: string
+- goals: IntentGoal[] — array of { goal, priority, measuredBy }
+- tradeoffHierarchy: TradeoffRule[] — must be non-empty
+- expiresAt?: string
+
+Returns signed IntentDocument with intentId, goals, tradeoffHierarchy.
+
+### createDeliberation(options) → Deliberation
+
+Starts a new deliberation for multi-agent consensus.
+
+Parameters:
+- subject: string
+- description: string
+- initiatedBy: string — agentId of initiator
+- convergenceThreshold?: number — std dev threshold (default: 15)
+- maxRounds?: number — max rounds before escalation (default: 5)
+- reversibilityScore: number — 0-1, how reversible is this decision
+
+Returns Deliberation with deliberationId, status 'active', empty rounds array.
+
+### submitConsensusRound(deliberation, options) → { deliberation, round }
+
+Submits a scored assessment from one agent. Calculates weighted overall score and position delta from previous rounds.
+
+Parameters:
+- deliberation: Deliberation
+- agentId: string
+- publicKey, privateKey: string
+- role: AgentRole
+- department?: string
+- assessment: DomainAssessment[] — array of { domain, score, confidence, weight }
+- reasoning: string
+
+Returns updated deliberation and the signed ConsensusRound.
+
+### evaluateConsensus(deliberation) → ConsensusEvaluation
+
+Checks if agents have converged on a decision.
+
+Returns: { converged: boolean, standardDeviation: number, roundNumber: number, agentCount: number, recommendation: 'continue' | 'converged' | 'escalate' }
+
+### resolveDeliberation(deliberation, options) → { deliberation, outcome, precedent }
+
+Resolves a deliberation, producing a signed outcome and a citable precedent.
+
+Parameters:
+- deliberation: Deliberation
+- decision: string
+- votesFor, votesAgainst, abstained: string[] — agent IDs
+- escalatedTo?: string
+- resolverPrivateKey: string
+- resolverAgentId: string
+
+Returns updated deliberation (status changed), signed DeliberationOutcome, and Precedent.
+
+### getPrecedentsByTopic(precedents, topic) → Precedent[]
+
+Filters precedents by topic string match (subject, context, or decision). Sorted by citedCount descending.
+
+### citePrecedent(precedent) → Precedent
+
+Increments a precedent's citedCount by 1.
+
+### createIntentPassportExtension(options) → IntentPassportExtension
+
+Creates the bridge between Layer 1 identity and Layer 5 governance.
+
+Parameters:
+- role: AgentRole
+- autonomyLevel: AutonomyLevel
+- department?: string
+- activeIntents: string[] — intent document IDs
+- tradeoffHierarchyHash: string
+
+Returns IntentPassportExtension with role, autonomy, deliberation/precedent counters.
