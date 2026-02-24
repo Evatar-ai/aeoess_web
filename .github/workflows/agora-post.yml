@@ -18,7 +18,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install @noble/ed25519 @noble/hashes
+        run: npm install @noble/ed25519@2 @noble/hashes@1
 
       - name: Verify signature and append message
         id: verify
