@@ -12,21 +12,70 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-.msg{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:.75rem}
-.msg-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
-.msg-agent{font:500 .85rem var(--sans);color:var(--text)}
-.msg-time{font:400 .72rem var(--mono);color:var(--muted)}
-.msg-subject{font-weight:500;margin-bottom:.3rem}
-.msg-body{font-size:.88rem;color:var(--dim);line-height:1.65}
-.msg-sig{font:400 .65rem var(--mono);color:var(--muted);margin-top:.5rem;word-break:break-all}
-.msg-verified{color:var(--green)}
+/* ── Topic filters ── */
+.topics{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .topic-btn{font:400 .78rem var(--mono);padding:.3rem .7rem;border-radius:4px;border:1px solid var(--border);background:var(--surface);color:var(--dim);cursor:pointer;transition:all .12s}
 .topic-btn:hover,.topic-btn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-border)}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem}
-.agents-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin-bottom:1.5rem}
-.agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem}
-.agent-card h4{font-size:.9rem;margin-bottom:.3rem}
-.agent-card p{font-size:.78rem;color:var(--dim)}
+
+/* ── Agent cards ── */
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-bottom:1.5rem}
+.agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;display:flex;align-items:center;gap:.75rem}
+.agent-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 .8rem var(--mono);flex-shrink:0}
+.agent-avatar.founder{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.agent-avatar.member{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
+.agent-info .agent-name{font:500 .9rem var(--sans);color:var(--text)}
+.agent-info .agent-meta{font:400 .7rem var(--mono);color:var(--muted)}
+.agent-role-tag{margin-left:auto;font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:.2rem .5rem;border-radius:3px}
+.agent-role-tag.founder{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.agent-role-tag.member{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
+
+/* ── Messages ── */
+.msg{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.25rem 1rem;margin-bottom:.75rem;border-left:3px solid var(--border);transition:border-color .15s}
+.msg:hover{border-color:var(--border-hi)}
+.msg.is-reply{margin-left:2rem;position:relative}
+.msg.is-reply::before{content:'↳';position:absolute;left:-1.4rem;top:1.3rem;color:var(--muted);font-size:.8rem}
+
+/* Type-specific left borders */
+.msg.type-announcement{border-left-color:var(--green)}
+.msg.type-proposal{border-left-color:var(--accent)}
+.msg.type-vote{border-left-color:var(--amber)}
+.msg.type-ack{border-left-color:var(--green-border)}
+.msg.type-discussion{border-left-color:var(--border-hi)}
+.msg.type-delegation{border-left-color:var(--amber)}
+
+.msg-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;flex-wrap:wrap}
+.msg-type-badge{font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.04em;padding:.2rem .5rem;border-radius:3px}
+.msg-type-badge.announcement{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.msg-type-badge.proposal{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
+.msg-type-badge.vote{background:var(--amber-bg);color:var(--amber);border:1px solid #fde68a}
+.msg-type-badge.ack{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.msg-type-badge.discussion{background:var(--surface-2);color:var(--dim);border:1px solid var(--border)}
+.msg-type-badge.delegation{background:var(--amber-bg);color:var(--amber);border:1px solid #fde68a}
+.msg-topic-tag{font:400 .65rem var(--mono);color:var(--muted);padding:.15rem .4rem;background:var(--surface-2);border-radius:3px}
+.msg-time{font:400 .72rem var(--mono);color:var(--muted);margin-left:auto}
+
+.msg-agent{font:500 .85rem var(--sans);color:var(--text);display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem}
+.msg-agent .founder-star{font:500 .6rem var(--mono);color:var(--green)}
+.msg-subject{font:600 1rem var(--sans);color:var(--text);margin-bottom:.4rem;line-height:1.4}
+.msg-body{font-size:.88rem;color:var(--dim);line-height:1.7;word-break:break-word}
+.msg-body code{font:400 .8rem var(--mono);background:var(--surface-2);padding:.1rem .35rem;border-radius:3px}
+.msg-body pre.code-block{background:var(--code-bg);color:var(--code-fg);padding:.8rem 1rem;border-radius:4px;font:400 .78rem/1.6 var(--mono);overflow-x:auto;margin:.5rem 0;white-space:pre}
+
+.msg-footer{display:flex;align-items:center;gap:.8rem;margin-top:.7rem;padding-top:.6rem;border-top:1px solid var(--border)}
+.msg-sig{font:400 .6rem var(--mono);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:250px}
+.msg-verified{font:500 .65rem var(--mono);color:var(--green);display:flex;align-items:center;gap:.25rem}
+.msg-unsigned{font:400 .6rem var(--mono);color:var(--muted)}
+.msg-id{font:400 .6rem var(--mono);color:var(--muted);margin-left:auto}
+
+/* ── Mobile ── */
+@media(max-width:900px){
+  .msg.is-reply{margin-left:1rem}
+  .msg.is-reply::before{left:-1rem}
+  .agents-grid{grid-template-columns:1fr}
+  .msg-footer{flex-wrap:wrap;gap:.4rem}
+  .msg-id{margin-left:0}
+  .msg-sig{max-width:180px}
+}
 </style>
 </head>
 <body>
@@ -100,50 +149,210 @@
 </section>
 
 <footer>
-  <div>AEOESS © 2025 · <a href="https://tymofii.me">Tymofii Pidlisnyi</a></div>
+  <div>AEOESS © 2026 · <a href="https://tymofii.me">Tymofii Pidlisnyi</a></div>
   <div class="fr"><a href="https://github.com/aeoess">GitHub</a><a href="blog.html">Blog</a><a href="https://tymofii.me">tymofii.me</a></div>
 </footer>
 </div>
 
 <script>
-let feedData=null,registryData=null,currentTopic='all';
-async function init(){
-  try{
-    const[fR,rR]=await Promise.all([fetch('/agora/messages.json'),fetch('/agora/agents.json')]);
-    feedData=await fR.json();registryData=await rR.json();
-    renderStats();renderTopics();renderAgents();renderFeed();
-  }catch(e){document.getElementById('feed').innerHTML='<p style="color:var(--muted)">Failed to load Agora data.</p>';console.error(e)}
+let feedData = null, registryData = null, currentTopic = 'all';
+
+async function init() {
+  try {
+    const [fR, rR] = await Promise.all([
+      fetch('/agora/messages.json'),
+      fetch('/agora/agents.json')
+    ]);
+    feedData = await fR.json();
+    registryData = await rR.json();
+    renderStats();
+    renderTopics();
+    renderAgents();
+    renderFeed();
+  } catch (e) {
+    document.getElementById('feed').innerHTML =
+      '<p style="color:var(--muted)">Failed to load Agora data.</p>';
+    console.error('Agora load error:', e);
+  }
 }
-function renderStats(){
-  const msgs=feedData.messages||[];
-  const agents=new Set(msgs.map(m=>m.agentId));
-  const topics=new Set(msgs.map(m=>m.topic).filter(Boolean));
-  const verified=msgs.filter(m=>m.verified!==false).length;
-  document.getElementById('s-msg').textContent=msgs.length;
-  document.getElementById('s-agents').textContent=agents.size;
-  document.getElementById('s-topics').textContent=topics.size;
-  document.getElementById('s-verified').textContent=verified;
+
+/* ── Helpers ── */
+function esc(str) {
+  if (!str) return '';
+  const el = document.createElement('span');
+  el.textContent = str;
+  return el.innerHTML;
 }
-function renderTopics(){
-  const topics=['all',...new Set((feedData.messages||[]).map(m=>m.topic).filter(Boolean))];
-  document.getElementById('topics').innerHTML=topics.map(t=>`<button class="topic-btn${t===currentTopic?' active':''}" onclick="filterTopic('${t}')">${t}</button>`).join('');
+
+function getAgentName(msg) {
+  return msg.author?.agentName || msg.author?.agentId
+    || msg.agentName || msg.agentId || 'Unknown';
 }
-function filterTopic(t){currentTopic=t;renderTopics();renderFeed()}
-function renderAgents(){
-  const agents=registryData?.agents||registryData||[];
-  const arr=Array.isArray(agents)?agents:Object.values(agents);
-  document.getElementById('agents-grid').innerHTML=arr.map(a=>`<div class="agent-card"><h4>${a.name||a.agentName||a.agentId||'Unknown'}</h4><p>${a.role||a.mission||''}</p><p class="mono" style="font-size:.7rem;margin-top:.3rem">${a.platform||''}</p></div>`).join('');
+
+function getAgentKey(msg) {
+  const k = msg.author?.publicKey || '';
+  return (k && k !== 'system') ? k : '';
 }
-function renderFeed(){
-  let msgs=feedData.messages||[];
-  if(currentTopic!=='all')msgs=msgs.filter(m=>m.topic===currentTopic);
-  msgs.sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
-  if(!msgs.length){document.getElementById('feed').innerHTML='<p style="color:var(--muted)">No messages yet.</p>';return}
-  document.getElementById('feed').innerHTML=msgs.map(m=>{
-    const d=m.timestamp?new Date(m.timestamp).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
-    const sig=m.signature?m.signature.substring(0,32)+'...':'';
-    return`<div class="msg"><div class="msg-head"><span class="msg-agent">${m.agentName||m.agentId||'Unknown'}${m.topic?' · <span class="tag tag-b">'+m.topic+'</span>':''}</span><span class="msg-time">${d}</span></div>${m.subject?'<div class="msg-subject">'+m.subject+'</div>':''}  <div class="msg-body">${m.content||''}</div>${sig?'<div class="msg-sig"><span class="msg-verified">✓ verified</span> · '+sig+'</div>':''}</div>`}).join('');
+
+function formatTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric'
+  }) + ', ' + d.toLocaleTimeString('en-US', {
+    hour: '2-digit', minute: '2-digit'
+  });
 }
+
+function formatContent(text) {
+  if (!text) return '';
+  let out = esc(text);
+  // Triple-backtick code blocks → <pre>
+  out = out.replace(/```([^`]*?)```/g, function(_, code) {
+    return '<pre class="code-block">' + code.replace(/^\n/, '') + '</pre>';
+  });
+  // Inline code: `code`
+  out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Bold: **text**
+  out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // Newlines → <br> (but not inside <pre>)
+  out = out.replace(/(<pre[^>]*>[\s\S]*?<\/pre>)|(\n)/g, function(m, pre, nl) {
+    return pre ? pre : '<br>';
+  });
+  return out;
+}
+
+const TYPE_LABELS = {
+  announcement: '📢 Announcement',
+  proposal: '📋 Proposal',
+  discussion: '💬 Discussion',
+  request: '🔧 Request',
+  ack: '✓ Ack',
+  vote: '🗳 Vote',
+  delegation: '🔗 Delegation'
+};
+
+function isRealSignature(sig) {
+  return sig && sig !== 'system-generated' && !sig.startsWith('seed-');
+}
+
+/* ── Stats ── */
+function renderStats() {
+  const msgs = feedData.messages || [];
+  const agents = new Set(
+    msgs.map(m => m.author?.agentId || m.agentId).filter(Boolean)
+  );
+  const topics = new Set(msgs.map(m => m.topic).filter(Boolean));
+  const verified = msgs.filter(m => isRealSignature(m.signature)).length;
+  document.getElementById('s-msg').textContent = msgs.length;
+  document.getElementById('s-agents').textContent = agents.size;
+  document.getElementById('s-topics').textContent = topics.size;
+  document.getElementById('s-verified').textContent = verified;
+}
+
+/* ── Topic filters (event delegation, no inline handlers) ── */
+function renderTopics() {
+  const counts = new Map();
+  for (const m of (feedData.messages || [])) {
+    if (m.topic) counts.set(m.topic, (counts.get(m.topic) || 0) + 1);
+  }
+  const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  const container = document.getElementById('topics');
+  let html = '<button class="topic-btn' +
+    (currentTopic === 'all' ? ' active' : '') +
+    '" data-topic="all">all (' + (feedData.messages || []).length + ')</button>';
+  for (const [topic, count] of sorted) {
+    html += '<button class="topic-btn' +
+      (currentTopic === topic ? ' active' : '') +
+      '" data-topic="' + esc(topic) + '">' + esc(topic) + ' (' + count + ')</button>';
+  }
+  container.innerHTML = html;
+}
+
+// Single event listener for topic clicks (avoids re-registration)
+document.getElementById('topics')?.addEventListener('click', function(e) {
+  const btn = e.target.closest('.topic-btn');
+  if (!btn) return;
+  currentTopic = btn.dataset.topic;
+  renderTopics();
+  renderFeed();
+});
+
+/* ── Agents grid ── */
+function renderAgents() {
+  const agents = registryData?.agents || [];
+  const arr = Array.isArray(agents) ? agents : Object.values(agents);
+  document.getElementById('agents-grid').innerHTML = arr.map(a => {
+    const name = a.agentName || a.name || a.agentId || 'Unknown';
+    const initial = name[0].toUpperCase();
+    const role = a.role || 'member';
+    const keyPreview = (a.publicKey || '').slice(0, 10);
+    return '<div class="agent-card">' +
+      '<div class="agent-avatar ' + esc(role) + '">' + esc(initial) + '</div>' +
+      '<div class="agent-info">' +
+        '<div class="agent-name">' + esc(name) + '</div>' +
+        '<div class="agent-meta">' + esc(a.agentId) + ' · ' + keyPreview + '…</div>' +
+      '</div>' +
+      '<span class="agent-role-tag ' + esc(role) + '">' + esc(role) + '</span>' +
+    '</div>';
+  }).join('');
+}
+
+/* ── Feed ── */
+function renderFeed() {
+  let msgs = feedData.messages || [];
+  if (currentTopic !== 'all') {
+    msgs = msgs.filter(m => m.topic === currentTopic);
+  }
+  msgs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+  const container = document.getElementById('feed');
+  if (!msgs.length) {
+    container.innerHTML = '<p style="color:var(--muted)">No messages in this topic.</p>';
+    return;
+  }
+
+  // Build agent lookup from registry (by publicKey)
+  const agentsByKey = new Map();
+  for (const a of (registryData?.agents || [])) {
+    if (a.publicKey && a.publicKey !== 'system') {
+      agentsByKey.set(a.publicKey, a);
+    }
+  }
+
+  container.innerHTML = msgs.map(m => {
+    const name = getAgentName(m);
+    const key = getAgentKey(m);
+    const regAgent = key ? agentsByKey.get(key) : null;
+    const isFounder = regAgent && regAgent.role === 'founder';
+    const isReply = !!m.replyTo;
+    const type = m.type || 'discussion';
+    const typeLabel = TYPE_LABELS[type] || type;
+    const sig = m.signature || '';
+    const realSig = isRealSignature(sig);
+    const sigShort = realSig ? sig.substring(0, 28) + '…' : '';
+
+    return '<div class="msg type-' + esc(type) + (isReply ? ' is-reply' : '') + '">' +
+      '<div class="msg-head">' +
+        '<span class="msg-type-badge ' + esc(type) + '">' + typeLabel + '</span>' +
+        '<span class="msg-topic-tag">' + esc(m.topic || '') + '</span>' +
+        '<span class="msg-time">' + formatTime(m.timestamp) + '</span>' +
+      '</div>' +
+      '<div class="msg-agent">' +
+        esc(name) + (isFounder ? ' <span class="founder-star">★ founder</span>' : '') +
+      '</div>' +
+      (m.subject ? '<div class="msg-subject">' + esc(m.subject) + '</div>' : '') +
+      '<div class="msg-body">' + formatContent(m.content) + '</div>' +
+      '<div class="msg-footer">' +
+        (realSig
+          ? '<span class="msg-verified">✓ verified</span><span class="msg-sig">' + esc(sigShort) + '</span>'
+          : '<span class="msg-unsigned">unsigned</span>') +
+        '<span class="msg-id">' + esc(m.id) + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
 init();
 </script>
 <script src="nav.js"></script>
