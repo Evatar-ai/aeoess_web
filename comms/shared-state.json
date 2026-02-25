@@ -1,33 +1,54 @@
 {
-  "last_updated": "2026-02-23T18:25:00Z",
+  "last_updated": "2026-02-25T22:30:00Z",
   "updated_by": "claude",
   "projects": {
     "agent-passport-system": {
-      "status": "v1.2.0 — Agent Agora shipped",
+      "status": "v1.2.0 — Agora + Values Floor under discussion",
       "npm": "agent-passport-system@1.2.0 (publish pending — need npm login)",
       "github": "github.com/aeoess/agent-passport-system (pushed)",
-      "arxiv": "submitted, awaiting moderation",
+      "zenodo": "10.5281/zenodo.18749779 (published, DOI live)",
       "tests": "65/65 passing",
-      "paper": "12,000 words, 15 pages, 13 references",
+      "paper": "12,000 words, 15 pages, 13 references — published on Zenodo",
       "layers": {
         "1": "Identity & Accountability (Ed25519 passports, delegations, receipts)",
-        "2": "Human Values Floor (attestation, compliance, common ground)",
+        "2": "Human Values Floor (attestation, compliance, common ground) — NEEDS IMPLEMENTATION DISCUSSION",
         "3": "Beneficiary Attribution (Merkle proofs, traces, reports)",
-        "4": "Agent Agora (protocol-native communication) — NEW"
+        "4": "Agent Agora (protocol-native communication)"
       }
     },
+    "aeoess-web": {
+      "status": "MAJOR REBUILD — Feb 25",
+      "repo": "~/aeoess_web",
+      "url": "aeoess.com",
+      "pages": ["index.html", "passport.html", "agora.html", "protocol.html", "board.html", "media.html", "blog.html", "bot.html"],
+      "recent_changes": [
+        "New logo (aeoess_logo-06.png) deployed across all pages",
+        "Dark/light toggle moved to top-right with visible contrast styling",
+        "Board (kanban) added to site navigation across all 7 pages",
+        "Agora feed fixed: Unknown agent names resolved, visual type differentiation added",
+        "Deep code audit: XSS fixes, markdown rendering, reply threading, founder badges",
+        "Agent Times article link added to media page",
+        "Zenodo DOI updated to 18749779 across all pages",
+        "Duplicate GitHub nav link removed, numbering corrected",
+        "Mobile responsive fixes"
+      ]
+    },
     "agent-agora": {
-      "status": "LIVE",
+      "status": "LIVE — feed rendering fixed",
       "web_ui": "https://aeoess.com/agora.html",
       "data": "https://aeoess.com/agora/messages.json",
-      "messages": 7,
+      "messages": 37,
       "agents": 3,
-      "cli": "agent-passport agora post/read/list/verify/register/topics"
+      "fixes_applied": "Agent names now resolve correctly, type-specific colors/badges, reply threading, code block rendering, signature verification display"
+    },
+    "board": {
+      "status": "LIVE — now discoverable in nav",
+      "url": "https://aeoess.com/board.html",
+      "note": "Was orphaned (no links from any page). Now added to side-nav and mobile drawer across all pages as item IV."
     },
     "aeoess-bot": {
       "status": "running on GPT-5.2",
       "location": "~/clawbot",
-      "managed_by": "pm2 (process: aeoess)",
       "models": {
         "code_tools": "gpt-5.2",
         "chat": "gpt-5.2-chat-latest",
@@ -35,31 +56,22 @@
       },
       "note": "Claude API credits exhausted — all Anthropic calls will fail"
     },
-    "aeoess-web": {
-      "status": "live — now includes Agora UI",
-      "repo": "~/aeoess_web",
-      "url": "aeoess.com",
-      "pages": ["index.html", "passport.html", "agora.html"]
-    },
     "evatar": {
       "status": "active, 300+ users, 1.6M+ monthly impressions"
     }
   },
   "priorities": [
-    "Tima: run npm login + npm publish to ship 1.2.0 to npm",
-    "Get arXiv paper approved (endorsement code: A7HKSM)",
-    "aeoess: post first live message to Agora via CLI",
-    "Portal: submit first external agent message via GitHub PR",
-    "Respond to AgenticAgora technically — integrate with Agora",
-    "Ship AIP spec PR",
+    "DISCUSS: Values Floor implementation — what should it actually be? (see claude-local msg)",
+    "Review full website rebuild for errors/inconsistencies",
+    "Post values floor discussion to MoltBook",
     "Get first external passport issued",
+    "Ship AIP spec PR",
     "Evatar growth + new features"
   ],
   "blockers": [
     "npm login needed to publish 1.2.0",
     "Anthropic API credits = $0 (permanent)",
-    "arXiv endorsement still pending",
-    "Machine: M1 8GB RAM, 0GB free, load ~4.x"
+    "Values Floor has no enforcement engine — just a spec document"
   ],
   "moltbook": {
     "karma": 109,
@@ -67,8 +79,8 @@
     "active_threads": ["AgenticAgora", "LnHyper", "Purplex", "AIP"]
   },
   "agent_status": {
-    "claude": "active in chat sessions, built Agent Agora today",
-    "aeoess": "Telegram bot, GPT-5.2, pm2 managed, 24/7",
-    "portalx2": "OpenClaw agent, cron every 30m, pushed paper PDF today"
+    "claude": "active — rebuilt website, fixed Agora, working with Tima on protocol design",
+    "aeoess": "CHECK STATUS — last comms Feb 24",
+    "portalx2": "CHECK STATUS — last comms Feb 24"
   }
 }
