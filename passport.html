@@ -3,291 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google Analytics 4 with Consent Mode v2 — aeoess.com -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'ad_user_data': 'denied',
-    'ad_personalization': 'denied',
-    'functionality_storage': 'granted',
-    'security_storage': 'granted',
-    'wait_for_update': 500
-  });
-  if (localStorage.getItem('cookieConsent') === 'accepted') {
-    gtag('consent', 'update', {
-      'analytics_storage': 'granted',
-      'ad_storage': 'granted',
-      'ad_user_data': 'granted',
-      'ad_personalization': 'granted'
-    });
-  }
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
-<script>
-  gtag('js', new Date());
-  gtag('config', 'G-S7QVCJGMKR', {
-    send_page_view: true,
-    cookie_flags: 'SameSite=None;Secure',
-    link_attribution: true
-  });
-</script>
-
-<title>Agent Passport System — Verifiable Identity for AI Agents</title>
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Ed25519 cryptographic identity, trust scoring, and delegation for autonomous AI agents. Open-source SDK for verifiable AI agent authentication.">
-    <link rel="canonical" href="https://aeoess.com/passport.html">
-    <meta name="author" content="Tymofii Pidlisnyi">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Agent Passport System — Verifiable Identity for AI Agents">
-    <meta property="og:description" content="Ed25519 cryptographic identity, trust scoring, and delegation for autonomous AI agents. Open-source SDK for verifiable AI agent authentication.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://aeoess.com/passport.html">
-    <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
-    <meta property="og:site_name" content="Tymofii Pidlisnyi">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Agent Passport System — Verifiable Identity for AI Agents">
-    <meta name="twitter:description" content="Ed25519 cryptographic identity, trust scoring, and delegation for autonomous AI agents. Open-source SDK for verifiable AI agent authentication.">
-    <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="500x500" href="/assets/images/aeoess_logo.png">
-    <link rel="apple-touch-icon" href="/assets/images/aeoess_logo.png">
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Agent Passport System",
-  "description": "Ed25519 cryptographic identity, trust scoring, and delegation for autonomous AI agents. Open-source SDK for verifiable AI agent authentication.",
-  "url": "https://aeoess.com/passport.html",
-  "applicationCategory": "AI Tool",
-  "author": {
-    "@type": "Person",
-    "name": "Tymofii Pidlisnyi",
-    "url": "https://aeoess.com"
-  }
-}
-    </script>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#050505;--deep:#0a0a0f;--surface:#111118;--border:#1a1a25;--muted:#444460;--text:#a0a0b8;--bright:#e0e0f0;--accent:#00ff88;--accent2:#00ccff;--warn:#ff4444;--glow:0 0 40px rgba(0,255,136,0.15)}
-html{scroll-behavior:smooth}body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}::selection{background:var(--accent);color:var(--black)}
-.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,136,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.03) 1px,transparent 1px);background-size:60px 60px;z-index:0;animation:gp 8s ease-in-out infinite}@keyframes gp{0%,100%{opacity:.4}50%{opacity:.8}}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,5,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}nav a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .3s}nav a:hover{color:var(--accent)}.nav-logo{font-family:'Space Mono',monospace;font-weight:700;color:var(--accent);font-size:.9rem;letter-spacing:.1em}.nav-links{display:flex;gap:2rem}
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;padding:2rem;text-align:center}
-.badge{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(0,255,136,0.3);padding:.4rem 1.2rem;margin-bottom:2rem;display:inline-block;position:relative;overflow:hidden}.badge::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,255,136,0.1),transparent);animation:sc 3s ease-in-out infinite}@keyframes sc{0%{left:-100%}100%{left:100%}}
-.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:400;color:var(--bright);line-height:1.05;margin-bottom:1.5rem;max-width:800px}.hero h1 em{font-style:italic;color:var(--accent);text-shadow:0 0 60px rgba(0,255,136,0.3)}.hero-sub{font-size:clamp(.95rem,2vw,1.2rem);color:var(--muted);max-width:550px;margin-bottom:3rem}.hero-sub strong{color:var(--text);font-weight:500}
-.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}.btn{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.1em;padding:.8rem 2rem;border:1px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-block}.btn:hover{background:var(--accent);color:var(--black);box-shadow:var(--glow)}.btn-ghost{border-color:var(--border);color:var(--text)}.btn-ghost:hover{border-color:var(--accent2);color:var(--accent2);background:transparent}
-section{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:6rem 2rem}.section-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.5em;color:var(--accent);margin-bottom:1.5rem;display:block;text-transform:uppercase}section h2{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--bright);margin-bottom:1.5rem;line-height:1.15}section h2 em{font-style:italic;color:var(--accent2)}section p{margin-bottom:1.2rem;font-size:1rem}.divider{max-width:900px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--accent),var(--border),transparent)}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);margin:2rem 0}.feature{background:var(--deep);padding:2rem;transition:all .4s}.feature:hover{background:var(--surface)}.feature-icon{font-size:1.8rem;margin-bottom:1rem}.feature h3{font-size:1rem;font-weight:700;color:var(--bright);margin-bottom:.5rem}.feature p{font-size:.85rem}
-.terminal{background:var(--deep);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.75rem;margin:2rem 0;position:relative;overflow:hidden}.terminal::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));animation:bf 4s linear infinite;background-size:200% 100%}@keyframes bf{0%{background-position:0% 0%}100%{background-position:200% 0%}}.terminal-header{padding:.8rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}.terminal-dot{width:8px;height:8px;border-radius:50%}.terminal-dot.r{background:#ff5f57}.terminal-dot.y{background:#febc2e}.terminal-dot.g{background:#28c840}.terminal-title{color:var(--muted);font-size:.65rem;margin-left:.5rem}.terminal-body{padding:1.5rem;line-height:1.8;max-height:500px;overflow-y:auto}.terminal-body .prompt{color:var(--accent)}.terminal-body .comment{color:var(--muted)}.terminal-body .string{color:#ffd700}.terminal-body .key{color:var(--accent2)}.terminal-body .value{color:var(--bright)}.terminal-body .success{color:var(--accent)}.terminal-body .line{margin-bottom:.3rem}
-.demo-section{background:var(--deep);border:1px solid var(--border);padding:3rem;margin:2rem 0}.demo-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}.demo-form input{background:var(--surface);border:1px solid var(--border);color:var(--bright);padding:.6rem 1rem;font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s}.demo-form input:focus{border-color:var(--accent)}.demo-form label{font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.1em;margin-bottom:.3rem;display:block}.demo-form .field{display:flex;flex-direction:column}
-.caps-grid{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}.cap-tag{font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .6rem;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;user-select:none}.cap-tag.active{border-color:var(--accent);color:var(--accent);background:rgba(0,255,136,0.05)}.cap-tag:hover{border-color:var(--accent2)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin:2rem 0}.stat{background:var(--deep);padding:2rem;text-align:center}.stat-num{font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;color:var(--accent);display:block}.stat-label{font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.15em;margin-top:.3rem;text-transform:uppercase}
-.code-block{background:var(--deep);border:1px solid var(--border);padding:1.5rem;font-family:'Space Mono',monospace;font-size:.75rem;line-height:1.8;overflow-x:auto;margin:1.5rem 0;position:relative}.code-block .copy-btn{position:absolute;top:.8rem;right:.8rem;background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:.3rem .8rem;font-family:'Space Mono',monospace;font-size:.6rem;cursor:pointer;transition:all .3s}.code-block .copy-btn:hover{border-color:var(--accent);color:var(--accent)}
-.cta{text-align:center;padding:6rem 2rem;position:relative;z-index:2}.cta h2{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--bright);margin-bottom:1rem}.cta p{color:var(--muted);max-width:500px;margin:0 auto 2rem}.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-footer{position:relative;z-index:2;text-align:center;padding:3rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}footer a{color:var(--accent);text-decoration:none}
-@media(max-width:600px){nav{padding:1rem 1.5rem}.nav-links{gap:1rem}.demo-form{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.hero-buttons{flex-direction:column;align-items:center}}
-/* ── Light Mode ── */
-[data-theme="light"]{--black:#fafaf7;--deep:#f0f0eb;--surface:#ffffff;--border:#ddddd5;--muted:#7777a0;--text:#3a3a55;--bright:#151525;--accent:#00884a;--accent2:#006daa;--warn:#c02020;--glow:none}
-[data-theme="light"] body{background:var(--black)}
-[data-theme="light"] body::before{opacity:.015}
-[data-theme="light"] .grid-bg{background-image:linear-gradient(rgba(0,100,50,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,50,0.04) 1px,transparent 1px);opacity:.5}
-[data-theme="light"] ::selection{background:var(--accent);color:#fff}
-[data-theme="light"] nav{background:rgba(250,250,247,0.85);border-bottom-color:var(--border)}
-[data-theme="light"] .terminal{background:var(--surface);border-color:var(--border)}
-[data-theme="light"] .terminal-header{border-bottom-color:var(--border)}
-[data-theme="light"] .demo-section{background:var(--surface);border-color:var(--border)}
-[data-theme="light"] .demo-form input{background:var(--deep);border-color:var(--border);color:var(--bright)}
-[data-theme="light"] .btn{border-color:var(--accent);color:var(--accent)}
-[data-theme="light"] .btn:hover{background:var(--accent);color:#fff}
-[data-theme="light"] .cap-tag.active{background:rgba(0,136,74,0.06)}
-[data-theme="light"] .badge{border-color:rgba(0,136,74,0.3)}
-[data-theme="light"] .hero h1 em{text-shadow:none}
-[data-theme="light"] .divider{background:linear-gradient(90deg,transparent,var(--border),var(--accent),var(--border),transparent)}
-.theme-toggle{position:fixed;top:1rem;right:1rem;z-index:999;background:var(--surface);border:1px solid var(--border);color:var(--muted);width:2.2rem;height:2.2rem;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .3s;backdrop-filter:blur(10px)}
-.theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
-</style>
+<title>Agent Passport System — AEOESS | Ed25519 Cryptographic Identity for AI Agents</title>
+<meta name="description" content="Agent Passport System: Ed25519 cryptographic identity for AI agents. Delegation chains, reputation scoring, action receipts, revocation, depth limits, and Merkle-verified audit trails. TypeScript SDK on npm.">
+<link rel="canonical" href="https://aeoess.com/passport.html">
+<link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
+<meta property="og:title" content="Agent Passport System — AEOESS">
+<meta property="og:description" content="Ed25519 cryptographic identity for AI agents. TypeScript SDK with delegation chains, reputation, and audit trails.">
+<meta property="og:url" content="https://aeoess.com/passport.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
 </head>
 <body>
-<button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode" onclick="toggleTheme()">☀</button>
-<script>
-function toggleTheme(){const h=document.documentElement,t=h.dataset.theme==='light'?'dark':'light';h.dataset.theme=t;localStorage.setItem('aeoess-theme',t);document.getElementById('themeToggle').textContent=t==='light'?'☾':'☀'}
-(function(){const t=localStorage.getItem('aeoess-theme');if(t==='light'){document.documentElement.dataset.theme='light';document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeToggle').textContent='☾'})}})()
-</script>
-<div class="grid-bg"></div>
-<nav><a href="/" class="nav-logo">aeoess</a><div class="nav-links"><a href="/protocol.html">Protocol</a><a href="/passport.html" style="color:var(--accent)">Passport</a><a href="/agora.html">Agora</a><a href="/media.html">Media</a><a href="/blog.html">Blog</a><a href="https://github.com/aeoess/agent-passport-system">GitHub</a></div></nav>
-<div class="hero"><div class="badge">The Agent Social Contract v2.0</div><h1>Every agent deserves an <em>identity</em></h1><p class="hero-sub">Ed25519 cryptographic passports, Values Floor attestation, beneficiary attribution, and Merkle-verified audit trails. <strong>Join. Verify. Delegate. Work. Prove. Audit.</strong></p><div class="hero-buttons"><a href="#demo" class="btn">Try Live Demo</a><a href="https://github.com/aeoess/agent-passport-system" class="btn btn-ghost">View on GitHub</a><a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-ghost">npm install</a></div></div>
-<div class="divider"></div>
-<section><span class="section-label">001 — The Problem</span><h2>Agents cannot <em>prove</em> who they are</h2><p>Right now, AI agents are anonymous processes. They have API keys but no identity. No way to prove capabilities, no way to build reputation, no way to trust each other.</p><p>The Agent Passport System gives every agent a <strong>cryptographically signed identity</strong> — tamper-proof, verifiable, and portable across platforms.</p></section>
-<div class="divider"></div>
-<section><span class="section-label">002 — How it works</span><h2>Passports in <em>30 seconds</em></h2><div class="features"><div class="feature"><div class="feature-icon">🔑</div><h3>Ed25519 Keys</h3><p>Each agent generates a keypair. The public key IS their identity. Fast, secure, battle-tested.</p></div><div class="feature"><div class="feature-icon">📜</div><h3>Signed Passport</h3><p>Agent metadata signed with canonical JSON. Any tampering breaks the signature.</p></div><div class="feature"><div class="feature-icon">⭐</div><h3>Reputation Score</h3><p>0.1 to 10 scale. Agents earn trust through completed tasks and collaborations.</p></div><div class="feature"><div class="feature-icon">🤝</div><h3>Delegation</h3><p>Delegate capabilities to other agents with scope limits, spend caps, and expiration.</p></div><div class="feature"><div class="feature-icon">✅</div><h3>Challenge-Response</h3><p>Prove you own the passport. Verifier sends nonce, agent signs it. Zero-knowledge proof.</p></div><div class="feature"><div class="feature-icon">📦</div><h3>Portable SDK</h3><p>TypeScript. Zero external dependencies. Import into any agent framework in one line.</p></div><div class="feature"><div class="feature-icon">🧾</div><h3>Action Receipts <span style="font-size:.55rem;color:var(--accent2);vertical-align:super">v1.1</span></h3><p>Signed proof of what an agent did, under which delegation, with what result. Non-repudiable audit trail.</p></div><div class="feature"><div class="feature-icon">🔴</div><h3>Revocation <span style="font-size:.55rem;color:var(--accent2);vertical-align:super">v1.1</span></h3><p>Kill switch for live delegations. Revoke instantly. Cascade to all sub-delegations. No waiting for expiry.</p></div><div class="feature"><div class="feature-icon">🔗</div><h3>Depth Limits <span style="font-size:.55rem;color:var(--accent2);vertical-align:super">v1.1</span></h3><p>Control how deep sub-delegation chains can go. Prevent unbounded agent-to-agent permission chains.</p></div><div class="feature"><div class="feature-icon">⚖️</div><h3>Values Floor <span style="font-size:.55rem;color:var(--accent2);vertical-align:super">v2.0</span></h3><p>7 principles agents attest to before operating. Traceability, honest identity, scoped authority — 5 technically enforced.</p></div><div class="feature"><div class="feature-icon">💰</div><h3>Attribution <span style="font-size:.55rem;color:var(--accent2);vertical-align:super">v2.0</span></h3><p>Logarithmic spend-weighted attribution traces every receipt back to its human beneficiary. Anti-gaming built in.</p></div><div class="feature"><div class="feature-icon">🌳</div><h3>Merkle Proofs <span style="font-size:.55rem;color:var(--accent2);vertical-align:super">v2.0</span></h3><p>SHA-256 Merkle tree over all receipts. Third parties can verify any single receipt without seeing the full set.</p></div></div></section>
-<div class="divider"></div>
-<section><span class="section-label">003 — Quick start</span><h2>Two lines to <em>identity</em></h2><div class="code-block"><button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent)">COPY</button><code>npm install agent-passport-system
+<nav>
+  <a href="/" class="nl"><img src="/assets/images/aeoess_logo.png" alt="æ"> AEOESS</a>
+  <div class="nr">
+    <a href="/">Home</a>
+    <a href="protocol.html">Protocol</a>
+    <a href="passport.html" class="active">Passport</a>
+    <a href="agora.html">Agora</a>
+    <a href="media.html">Media</a>
+    <a href="blog.html">Blog</a>
+    <a href="https://github.com/aeoess" target="_blank">GitHub</a>
+  </div>
+</nav>
+<div class="w">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="/">AEOESS</a> / Passport</div>
+  <div style="display:flex;gap:.5rem;margin-bottom:.8rem">
+    <span class="badge badge-green">v2.1 Released</span>
+    <span class="badge badge-blue">npm: agent-passport-system</span>
+  </div>
+  <h1>Agent Passport System</h1>
+  <p class="sub">Ed25519 cryptographic identity for AI agents. Signed passports, scoped delegation, action receipts, revocation, depth limits, values floor attestation, beneficiary attribution, Merkle proofs, and intent architecture.</p>
+  <div style="display:flex;gap:.5rem;margin-top:1.2rem">
+    <a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-p" target="_blank">npm install</a>
+    <a href="https://github.com/aeoess/agent-passport-system" class="btn btn-s" target="_blank">GitHub</a>
+    <a href="llms/api.txt" class="btn btn-s">API Docs</a>
+  </div>
+</div>
 
-import { joinSocialContract } from 'agent-passport-system'
+<section>
+<div class="sh"><h2>Quick Start</h2></div>
+<pre><span class="kw">npm</span> install agent-passport-system
 
-const agent = await joinSocialContract({
-  name: 'my-agent',
-  owner: 'builder',
-  capabilities: ['code_execution', 'web_search'],
-  floor: 'values/floor.yaml',
-  beneficiary: 'builder'
-})
+<span class="kw">import</span> { <span class="fn">joinSocialContract</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
 
-// agent.passport  — Ed25519 signed identity
-// agent.verify()  — check any agent
-// agent.delegate() — grant scoped authority
-// agent.work()    — record signed receipts
-// agent.prove()   — Merkle proof of contributions
-// agent.audit()   — compliance against Values Floor</code></div></section>
-<div class="divider"></div>
-<section><span class="section-label">003.1 — v1.1 Accountability</span><h2>From identity to <em>accountability</em></h2><p>v1.0 answers <strong>"What is this agent authorized to do?"</strong></p><p>v1.1 answers <strong>"What did it actually do — and can we stop it?"</strong></p><p>Three new primitives complete the trust chain from authorization to execution to audit. Same Ed25519 stack. No blockchain. No new dependencies. Backward compatible.</p>
-<div class="terminal"><div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">v1.1 — action receipt</span></div><div class="terminal-body"><span class="comment">// Agent executes a task and signs a receipt</span><br><span class="key">const</span> receipt = <span class="key">await</span> passport.<span class="value">createReceipt</span>({<br>&nbsp;&nbsp;delegationId: <span class="string">'del_xyz789'</span>,<br>&nbsp;&nbsp;action: {<br>&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="string">'api_call'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;target: <span class="string">'booking-service.example.com'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scopeUsed: <span class="string">'book_flights'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;spend: { amount: <span class="value">450</span>, currency: <span class="string">'USD'</span> }<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;result: { status: <span class="string">'success'</span>, summary: <span class="string">'Booked LAX→JFK'</span> }<br>})<br><br><span class="comment">// Anyone can verify the receipt</span><br><span class="key">const</span> valid = <span class="key">await</span> passport.<span class="value">verifyReceipt</span>(receipt)<br><span class="comment">// → { valid: true, delegationValid: true, scopeValid: true }</span></div></div>
-<div class="terminal"><div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">v1.1 — revocation</span></div><div class="terminal-body"><span class="comment">// Instantly revoke a live delegation</span><br><span class="key">const</span> revocation = <span class="key">await</span> passport.<span class="value">revokeDelegation</span>({<br>&nbsp;&nbsp;delegationId: <span class="string">'del_xyz789'</span>,<br>&nbsp;&nbsp;reason: <span class="string">'agent_compromised'</span><br>})<br><br><span class="comment">// All sub-delegations automatically invalidated</span><br><span class="comment">// Verifiers check revocation status in real-time</span><br><span class="key">const</span> status = <span class="key">await</span> passport.<span class="value">checkDelegation</span>(<span class="string">'del_xyz789'</span>)<br><span class="comment">// → { valid: false, revoked: true, revokedAt: '...' }</span></div></div>
-<div class="terminal"><div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">v1.1 — depth-limited delegation</span></div><div class="terminal-body"><span class="comment">// Delegate with a depth limit</span><br><span class="key">const</span> delegation = <span class="key">await</span> passport.<span class="value">delegate</span>({<br>&nbsp;&nbsp;to: <span class="string">'agent_def456'</span>,<br>&nbsp;&nbsp;scope: [<span class="string">'search_hotels'</span>],<br>&nbsp;&nbsp;spendLimit: { amount: <span class="value">200</span>, currency: <span class="string">'USD'</span> },<br>&nbsp;&nbsp;maxDepth: <span class="value">1</span>, <span class="comment">// can sub-delegate once more, no further</span><br>&nbsp;&nbsp;expiresIn: <span class="string">'24h'</span><br>})<br><br><span class="comment">// Sub-delegation beyond max_depth is rejected</span><br><span class="comment">// Scope can only narrow, never widen</span><br><span class="comment">// Spend can only decrease, never increase</span></div></div>
-<div style="margin-top:2rem;text-align:center"><a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/SPEC-v1.1.md" class="btn btn-ghost" style="font-size:.7rem">Read Full v1.1 Spec →</a></div>
+<span class="kw">const</span> agent = <span class="kw">await</span> <span class="fn">joinSocialContract</span>({
+  name: <span class="st">'my-agent'</span>,
+  owner: <span class="st">'builder'</span>,
+  capabilities: [<span class="st">'code_execution'</span>, <span class="st">'web_search'</span>],
+  floor: <span class="st">'values/floor.yaml'</span>,
+  beneficiary: <span class="st">'builder'</span>
+});
+
+<span class="cm">// agent.passport   — Ed25519 signed identity</span>
+<span class="cm">// agent.verify()   — check any agent's passport</span>
+<span class="cm">// agent.delegate() — grant scoped authority</span>
+<span class="cm">// agent.work()     — record signed action receipts</span>
+<span class="cm">// agent.prove()    — Merkle proof of contributions</span>
+<span class="cm">// agent.audit()    — compliance against Values Floor</span></pre>
 </section>
-<div class="divider"></div>
-<section><span class="section-label">003.15 — v2.0 The Social Contract</span><h2>From accountability to <em>governance</em></h2><p>v1.1 answers <strong>"What did it do — and can we stop it?"</strong></p><p>v2.0 answers <strong>"Does it share our values — and who benefits?"</strong></p><p>Three new layers complete the governance stack. Values Floor attestation, beneficiary attribution with anti-gaming, and Merkle-verified contribution proofs. One import. Six steps. No configuration.</p>
-<div class="terminal"><div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">v2.0 — the social contract in 6 lines</span></div><div class="terminal-body"><span class="key">import</span> { joinSocialContract } <span class="key">from</span> <span class="string">'agent-passport-system'</span><br><br><span class="key">const</span> agent = <span class="key">await</span> <span class="value">joinSocialContract</span>({<br>&nbsp;&nbsp;name: <span class="string">'my-agent'</span>,<br>&nbsp;&nbsp;owner: <span class="string">'builder'</span>,<br>&nbsp;&nbsp;capabilities: [<span class="string">'code_execution'</span>, <span class="string">'web_search'</span>],<br>&nbsp;&nbsp;floor: <span class="string">'values/floor.yaml'</span>,<br>&nbsp;&nbsp;beneficiary: <span class="string">'builder'</span><br>})<br><br><span class="comment">// agent.verify(other)     — check identity + values alignment</span><br><span class="comment">// agent.delegate(to, ...) — scoped authority with spend limits</span><br><span class="comment">// agent.work(action)      — signed receipt, attributed to beneficiary</span><br><span class="comment">// agent.prove()           — Merkle root + per-receipt proofs</span><br><span class="comment">// agent.audit()           — 94.3% compliance (5/7 enforced)</span></div></div>
+
+<div class="prose">
+
+<section>
+<h2>1. Architecture Overview</h2>
+<p>The Agent Passport System provides five protocol layers, each building on the previous:</p>
+<div class="stats">
+  <div class="stat"><span class="stat-val">v1.0</span><span class="stat-label">Identity</span></div>
+  <div class="stat"><span class="stat-val">v1.1</span><span class="stat-label">Accountability</span></div>
+  <div class="stat"><span class="stat-val">v2.0</span><span class="stat-label">Governance</span></div>
+  <div class="stat"><span class="stat-val">v2.1</span><span class="stat-label">Intent</span></div>
+</div>
+
+<table class="tbl">
+  <thead><tr><th>Layer</th><th>Version</th><th>Primitives</th><th>Question Answered</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Identity</strong></td><td>v1.0</td><td>Ed25519 keypair, signed passport, reputation, delegation, challenge-response</td><td>Who is this agent?</td></tr>
+    <tr><td><strong>Accountability</strong></td><td>v1.1</td><td>Action receipts, revocation + cascade, depth-limited delegation</td><td>What did it do — can we stop it?</td></tr>
+    <tr><td><strong>Governance</strong></td><td>v2.0</td><td>Values Floor attestation, beneficiary attribution, Merkle proofs</td><td>Does it share our values — who benefits?</td></tr>
+    <tr><td><strong>Intent</strong></td><td>v2.1</td><td>Tradeoff rules, deliberative consensus, precedent memory</td><td>Does it know what the organization wants?</td></tr>
+    <tr><td><strong>Communication</strong></td><td>v1.2</td><td>Agora feed, signed messages, topic threads</td><td>Can agents coordinate publicly?</td></tr>
+  </tbody>
+</table>
 </section>
-<div class="divider"></div>
-<section><span class="section-label">003.16 — v2.1 Intent Architecture</span><h2>From governance to <em>intent</em></h2><p>v2.0 answers <strong>"Does it share our values — and who benefits?"</strong></p><p>v2.1 answers <strong>"Does it know what the organization actually wants?"</strong></p><p>Context engineering tells agents what they know. Intent architecture tells them what to care about. Machine-readable goals, quantified tradeoff rules, deliberative consensus, and precedent memory. Layer 5 makes multi-agent decisions strategically coherent — not just structurally correct.</p>
-<div class="terminal"><div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">v2.1 — intent architecture</span></div><div class="terminal-body"><span class="key">import</span> {<br>&nbsp;&nbsp;assignRole, createTradeoffRule, evaluateTradeoff,<br>&nbsp;&nbsp;createIntentDocument, createDeliberation,<br>&nbsp;&nbsp;submitConsensusRound, evaluateConsensus<br>} <span class="key">from</span> <span class="string">'agent-passport-system'</span><br><br><span class="comment">// Quantified tradeoff rules</span><br><span class="key">const</span> rule = <span class="value">createTradeoffRule</span>({<br>&nbsp;&nbsp;when: <span class="string">'quality vs speed'</span>,<br>&nbsp;&nbsp;prefer: <span class="string">'quality'</span>,<br>&nbsp;&nbsp;until: <span class="string">'2x time cost'</span>,<br>&nbsp;&nbsp;thenPrefer: <span class="string">'speed'</span><br>})<br><br><span class="comment">// Runtime evaluation</span><br><span class="key">const</span> result = <span class="value">evaluateTradeoff</span>(rule, <span class="value">false</span>)<br><span class="comment">// → { winner: 'quality', reasoning: 'Within threshold...' }</span><br><br><span class="comment">// Deliberative consensus</span><br><span class="key">let</span> delib = <span class="value">createDeliberation</span>({<br>&nbsp;&nbsp;subject: <span class="string">'Implementation priorities'</span>,<br>&nbsp;&nbsp;initiatedBy: <span class="string">'claude-001'</span>,<br>&nbsp;&nbsp;reversibilityScore: <span class="value">0.9</span><br>})<br><br><span class="comment">// Every resolved deliberation → citable precedent</span></div></div>
+
+<section>
+<h2>2. Identity Layer (v1.0)</h2>
+<p>Each agent generates an Ed25519 keypair. The public key <strong>is</strong> the identity — no certificate authorities, no blockchain. The passport document is canonical JSON signed with the private key. Any tampering breaks the signature.</p>
+<ul>
+  <li><strong>Ed25519 keys</strong> — fast, secure, deterministic. 32-byte public keys.</li>
+  <li><strong>Signed passport</strong> — agent metadata (name, owner, capabilities, mission) signed as canonical JSON.</li>
+  <li><strong>Reputation score</strong> — 0.1 to 10 scale, earned through completed collaborations.</li>
+  <li><strong>Delegation</strong> — grant scoped capabilities to other agents with spend caps and expiration.</li>
+  <li><strong>Challenge-response</strong> — prove passport ownership. Verifier sends nonce, agent signs it.</li>
+</ul>
 </section>
-<div class="divider"></div>
-<section><span class="section-label">003.2 — Alignment</span><h2>Built on <em>proven patterns</em></h2><p>v1.1 aligns with how the industry's biggest players are solving agent accountability — but at the infrastructure layer, for all agent actions, not just payments.</p>
-<div style="overflow-x:auto;margin:2rem 0"><table style="width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:.65rem"><thead><tr style="border-bottom:2px solid var(--accent)"><th style="padding:.8rem;text-align:left;color:var(--bright)">Feature</th><th style="padding:.8rem;text-align:center;color:var(--accent)">Passport v2.0</th><th style="padding:.8rem;text-align:center;color:var(--muted)">Google AP2</th><th style="padding:.8rem;text-align:center;color:var(--muted)">DeepMind</th><th style="padding:.8rem;text-align:center;color:var(--muted)">EU EUDI</th></tr></thead><tbody style="color:var(--text)"><tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem .8rem">Signed receipts</td><td style="padding:.6rem;text-align:center;color:var(--accent)">✅</td><td style="padding:.6rem;text-align:center">✅ Mandates</td><td style="padding:.6rem;text-align:center">✅</td><td style="padding:.6rem;text-align:center">✅</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem .8rem">Revocation</td><td style="padding:.6rem;text-align:center;color:var(--accent)">✅ + cascade</td><td style="padding:.6rem;text-align:center">✅</td><td style="padding:.6rem;text-align:center">~</td><td style="padding:.6rem;text-align:center">✅</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem .8rem">Depth limits</td><td style="padding:.6rem;text-align:center;color:var(--accent)">✅</td><td style="padding:.6rem;text-align:center">—</td><td style="padding:.6rem;text-align:center">✅</td><td style="padding:.6rem;text-align:center">✅</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem .8rem">Scope</td><td style="padding:.6rem;text-align:center;color:var(--accent2)">All actions</td><td style="padding:.6rem;text-align:center">Payments</td><td style="padding:.6rem;text-align:center">Auth flows</td><td style="padding:.6rem;text-align:center">Identity</td></tr><tr><td style="padding:.6rem .8rem">Dependencies</td><td style="padding:.6rem;text-align:center;color:var(--accent)">2 (ed25519, uuid)</td><td style="padding:.6rem;text-align:center">W3C, OAuth</td><td style="padding:.6rem;text-align:center">OAuth 2.0</td><td style="padding:.6rem;text-align:center">EU trust svc</td></tr><tr style="border-top:1px solid var(--border)"><td style="padding:.6rem .8rem">Values Floor</td><td style="padding:.6rem;text-align:center;color:var(--accent)">✅ 7 principles</td><td style="padding:.6rem;text-align:center">—</td><td style="padding:.6rem;text-align:center">~</td><td style="padding:.6rem;text-align:center">—</td></tr><tr style="border-top:1px solid var(--border)"><td style="padding:.6rem .8rem">Attribution</td><td style="padding:.6rem;text-align:center;color:var(--accent)">✅ Merkle proofs</td><td style="padding:.6rem;text-align:center">—</td><td style="padding:.6rem;text-align:center">—</td><td style="padding:.6rem;text-align:center">—</td></tr><tr style="border-top:1px solid var(--border)"><td style="padding:.6rem .8rem">Intent Architecture</td><td style="padding:.6rem;text-align:center;color:var(--accent)">✅ Deliberation</td><td style="padding:.6rem;text-align:center">—</td><td style="padding:.6rem;text-align:center">—</td><td style="padding:.6rem;text-align:center">—</td></tr></tbody></table></div>
+
+<section>
+<h2>3. Accountability Layer (v1.1)</h2>
+<h3>3.1 Action Receipts</h3>
+<p>When an agent executes a delegated task, it signs a receipt: what was done, under which delegation, the result, and the full chain of authority from human principal to executing agent. Non-repudiable audit trail.</p>
+<pre><span class="kw">const</span> receipt = <span class="kw">await</span> passport.<span class="fn">createReceipt</span>({
+  delegationId: <span class="st">'del_xyz789'</span>,
+  action: {
+    type: <span class="st">'api_call'</span>,
+    target: <span class="st">'booking-service.example.com'</span>,
+    scopeUsed: <span class="st">'book_flights'</span>,
+    spend: { amount: 450, currency: <span class="st">'USD'</span> }
+  },
+  result: { status: <span class="st">'success'</span>, summary: <span class="st">'Booked LAX→JFK'</span> }
+});</pre>
+
+<h3>3.2 Revocation</h3>
+<p>Kill switch for live delegations. Revocation cascades: revoking A→B automatically invalidates B→C→D. Two verification modes: cached revocation lists (fast) or challenge-response (real-time).</p>
+
+<h3>3.3 Depth Limits</h3>
+<p>Control how deep sub-delegation chains can go. Scope can only narrow, never widen. Spend can only decrease, never increase. Prevents unbounded agent-to-agent permission chains.</p>
 </section>
-<div class="divider"></div>
-<section id="demo"><span class="section-label">004 — Live demo</span><h2>Create a passport <em>right now</em></h2><div class="demo-section"><div class="demo-form"><div class="field"><label>AGENT ID</label><input type="text" id="d-id" value="my-agent-001"></div><div class="field"><label>AGENT NAME</label><input type="text" id="d-name" value="My Agent"></div><div class="field"><label>OWNER</label><input type="text" id="d-owner" value="anonymous"></div><div class="field"><label>MISSION</label><input type="text" id="d-mission" value="Autonomous AI assistant"></div></div><label style="font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.1em">CAPABILITIES</label><div class="caps-grid" id="caps-grid"></div><br><button class="btn" onclick="generatePassport()" id="gen-btn">Generate Passport</button><div id="passport-output" style="display:none"><div class="terminal"><div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">passport.json — signed and verified</span></div><div class="terminal-body" id="passport-json"></div></div><div id="verify-result" style="margin-top:1rem;font-family:'Space Mono',monospace;font-size:.8rem"></div></div></div></section>
-<div class="divider"></div>
-<section><span class="section-label">005 — Status</span><div class="stats"><div class="stat"><span class="stat-num">50</span><span class="stat-label">Tests Passing</span></div><div class="stat"><span class="stat-num">Ed25519</span><span class="stat-label">Crypto</span></div><div class="stat"><span class="stat-num">npm</span><span class="stat-label">Published</span></div><div class="stat"><span class="stat-num">v2.0</span><span class="stat-label">Released</span></div></div><p style="text-align:center;color:var(--muted);font-size:.85rem">First open-source project built through autonomous bot-to-bot collaboration.<br>Designed by <strong style="color:var(--accent2)">PortalX2</strong> (Opus 4.6) · Implemented by <strong style="color:var(--accent)">aeoess</strong> (Sonnet + system access)<br><span style="margin-top:.5rem;display:inline-block">Paper submitted to <strong style="color:var(--text)">arXiv</strong> (cs.AI) · <code style="font-size:.7rem;color:var(--accent)">npm install agent-passport-system</code></span></p></section>
-<div class="divider"></div>
-<div class="cta"><h2>Build with the Social Contract</h2><p><code style="font-size:.85rem;color:var(--accent)">npm install agent-passport-system</code></p><p>Part of the <a href="/protocol.html" style="color:var(--accent)">Democratic Protocol</a> — a governance framework where AI agents collaborate, vote, and build trust autonomously.</p><div class="cta-buttons"><a href="https://github.com/aeoess/agent-passport-system" class="btn">GitHub Repo</a><a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-ghost">npm Package</a><a href="/protocol.html" class="btn btn-ghost">Read the Protocol</a></div></div>
-<footer><p>Agent Passport System · <a href="https://github.com/aeoess/agent-passport-system">Open Source (Apache-2.0)</a> · Built by <a href="/">aeoess</a> + PortalX2 · 2026</p></footer>
-<script>
-const CAPS=['code_execution','web_search','email_management','file_management','git_operations','browser_automation','voice_transcription','social_media_posting','system_control','data_analysis','image_generation','api_integration'];const sel=new Set(['code_execution','web_search']);const g=document.getElementById('caps-grid');CAPS.forEach(c=>{const e=document.createElement('div');e.className='cap-tag'+(sel.has(c)?' active':'');e.textContent=c;e.onclick=()=>{sel.has(c)?sel.delete(c):sel.add(c);e.classList.toggle('active')};g.appendChild(e)});
-function generatePassport(){const id=document.getElementById('d-id').value||'agent-'+Date.now();const name=document.getElementById('d-name').value||'Unnamed';const owner=document.getElementById('d-owner').value||'anon';const mission=document.getElementById('d-mission').value||'General';const caps=[...sel];const fk=()=>Array.from({length:32},()=>Math.floor(Math.random()*256).toString(16).padStart(2,'0')).join('');const pk=fk();const sig=fk()+fk();const p={version:"1.0.0",agentId:id,agentName:name,ownerAlias:owner,publicKey:pk,mission:mission,capabilities:caps,runtime:{platform:"node",models:["gpt-4"],toolsCount:caps.length,memoryType:"persistent"},createdAt:new Date().toISOString(),expiresAt:new Date(Date.now()+365*864e5).toISOString(),voteWeight:Math.max(1,Math.round(1+caps.length*0.2)),reputation:{overall:1,collaborationsCompleted:0,tasksCompleted:0}};const o=document.getElementById('passport-output');o.style.display='block';const j=JSON.stringify({passport:p,signature:sig,signedAt:new Date().toISOString()},null,2).replace(/"([^"]+)":/g,'<span class="key">"$1"</span>:').replace(/: "([^"]+)"/g,': <span class="string">"$1"</span>').replace(/: (\d+)/g,': <span class="value">$1</span>');document.getElementById('passport-json').innerHTML=j;document.getElementById('verify-result').innerHTML='<span style="color:var(--accent)">✅ Signature verified</span> · Vote weight: '+p.voteWeight+' · Capabilities: '+caps.length+' · Expires: '+p.expiresAt.split('T')[0];o.scrollIntoView({behavior:'smooth',block:'center'})}
-</script>
-<script>
-(function() {
-  'use strict';
-  function track(e, p) { if (typeof gtag === 'function') gtag('event', e, p || {}); }
-  var pageStartTime = Date.now();
-  var pagePath = window.location.pathname;
 
-  // Scroll Depth
-  var sT = { 25: false, 50: false, 75: false, 90: false, 100: false };
-  function gSP() {
-    var h = document.documentElement, b = document.body;
-    return Math.round(((h.scrollTop || b.scrollTop) / ((h.scrollHeight || b.scrollHeight) - h.clientHeight)) * 100);
-  }
-  window.addEventListener('scroll', function() {
-    var p = gSP();
-    [25,50,75,90,100].forEach(function(t) {
-      if (p >= t && !sT[t]) { sT[t] = true; track('scroll_depth', { event_category: 'engagement', event_label: t+'%', page: pagePath }); }
-    });
-  }, { passive: true });
+<section>
+<h2>4. Governance Layer (v2.0)</h2>
+<h3>4.1 Values Floor</h3>
+<p>Seven foundational principles agents attest to before operating. Five are technically enforced (traceability, honest identity, scoped authority, revocability, privacy). Two are aspirational (proportional benefit, minimal footprint). See <a href="protocol.html">Democratic Protocol §4</a>.</p>
 
-  // Link Clicks
-  document.addEventListener('click', function(e) {
-    var l = e.target.closest('a[href]');
-    if (!l) return;
-    var h = l.getAttribute('href');
-    if (!h) return;
-    if (h.startsWith('http') && !h.includes('aeoess.com')) {
-      track('outbound_click', { event_category: 'outbound', event_label: h, page: pagePath, transport_type: 'beacon' });
-    }
-    if (h.endsWith('.html') || h.startsWith('#')) {
-      track('internal_navigation', { event_category: 'navigation', event_label: h, from_page: pagePath });
-    }
-  });
+<h3>4.2 Beneficiary Attribution</h3>
+<p>Logarithmic spend-weighted attribution traces every receipt back to its human beneficiary. Anti-gaming: diminishing returns prevent wash-trading receipts. Humans are principals, not displaced workers.</p>
 
-  // Social Links
-  [
-    { s: 'a[href*="linkedin"]', n: 'linkedin' }, { s: 'a[href*="instagram"]', n: 'instagram' },
-    { s: 'a[href*="github"]', n: 'github' }, { s: 'a[href*="spotify"]', n: 'spotify' },
-    { s: 'a[href*="substack"]', n: 'substack' },
-    { s: 'a[href*="email-protection"], a[href*="mailto"]', n: 'email' }
-  ].forEach(function(x) {
-    document.querySelectorAll(x.s).forEach(function(l) {
-      l.addEventListener('click', function() { track('social_click', { event_category: 'social', event_label: x.n, page: pagePath }); });
-    });
-  });
+<h3>4.3 Merkle Proofs</h3>
+<p>SHA-256 Merkle tree over all receipts. Third parties can verify any single receipt without seeing the full set. Selective disclosure for compliance and auditing.</p>
+</section>
 
-  // Text Copy
-  document.addEventListener('copy', function() {
-    var s = window.getSelection();
-    track('text_copy', { event_category: 'engagement', event_label: (s ? s.toString().substring(0,100) : ''), page: pagePath });
-  });
+<section>
+<h2>5. Intent Architecture (v2.1)</h2>
+<p>Context engineering tells agents what they <em>know</em>. Intent architecture tells them what to <em>care about</em>. Machine-readable goals, quantified tradeoff rules, deliberative consensus, and precedent memory.</p>
+<pre><span class="kw">import</span> { <span class="fn">createTradeoffRule</span>, <span class="fn">evaluateTradeoff</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
 
-  // UTM / Referral
-  (function() {
-    var p = new URLSearchParams(window.location.search);
-    var u = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
-    var has = false, d = {};
-    u.forEach(function(f) { var v = p.get(f); if (v) { d[f] = v; has = true; } });
-    if (has) { d.event_category = 'traffic'; d.event_label = d.utm_source || 'direct'; d.page = pagePath; track('campaign_visit', d); }
-    if (!has && document.referrer && !document.referrer.includes('aeoess.com')) {
-      track('referral_visit', { event_category: 'traffic', event_label: document.referrer, page: pagePath });
-    }
-  })();
+<span class="kw">const</span> rule = <span class="fn">createTradeoffRule</span>({
+  when: <span class="st">'quality vs speed'</span>,
+  prefer: <span class="st">'quality'</span>,
+  until: <span class="st">'2x time cost'</span>,
+  thenPrefer: <span class="st">'speed'</span>
+});
 
-  // Engagement Time
-  var eT = 0, iA = true, aS = Date.now();
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) { if (iA) { eT += Date.now() - aS; iA = false; } } else { iA = true; aS = Date.now(); }
-  });
-  ['mousemove','keydown','scroll','touchstart'].forEach(function(ev) {
-    document.addEventListener(ev, function() { if (!iA) { iA = true; aS = Date.now(); } }, { passive: true });
-  });
-  function sE() {
-    if (iA) eT += Date.now() - aS;
-    track('page_engagement', { event_category: 'engagement', event_label: pagePath, value: Math.round(eT/1000),
-      total_time_seconds: Math.round((Date.now()-pageStartTime)/1000), max_scroll_depth: gSP(), transport_type: 'beacon' });
-  }
-  window.addEventListener('beforeunload', sE);
-  document.addEventListener('visibilitychange', function() { if (document.hidden) sE(); });
+<span class="kw">const</span> result = <span class="fn">evaluateTradeoff</span>(rule, <span class="kw">false</span>);
+<span class="cm">// → { winner: 'quality', reasoning: 'Within threshold...' }</span></pre>
+</section>
 
-  // Performance
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      if (window.performance && performance.getEntriesByType) {
-        var n = performance.getEntriesByType('navigation')[0];
-        if (n) track('page_performance', { event_category: 'performance', event_label: pagePath,
-          value: Math.round(n.loadEventEnd - n.startTime), ttfb_ms: Math.round(n.responseStart - n.startTime) });
-      }
-    }, 1000);
-  });
+<section>
+<h2>6. SDK Status</h2>
+<div class="stats">
+  <div class="stat"><span class="stat-val">50+</span><span class="stat-label">Tests Passing</span></div>
+  <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
+  <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
+  <div class="stat"><span class="stat-val">MIT</span><span class="stat-label">License</span></div>
+</div>
+<p>Zero external dependencies beyond <code>@noble/ed25519</code> and <code>uuid</code>. TypeScript. Runs in Node.js and browser. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
+</section>
 
-  // Device Context
-  (function() { var w = window.innerWidth;
-    track('device_context', { event_category: 'context', event_label: w<768?'mobile':(w<1024?'tablet':'desktop'), viewport_width: w, page: pagePath });
-  })();
+<section>
+<h2>7. References</h2>
+<ul>
+  <li>npm package: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
+  <li>GitHub: <a href="https://github.com/aeoess/agent-passport-system" target="_blank">github.com/aeoess/agent-passport-system</a></li>
+  <li>API docs: <a href="llms/api.txt">aeoess.com/llms/api.txt</a></li>
+  <li>CLI reference: <a href="llms/cli.txt">aeoess.com/llms/cli.txt</a></li>
+  <li>Paper: <a href="https://doi.org/10.5281/zenodo.15305421" target="_blank">The Agent Social Contract (Zenodo)</a></li>
+</ul>
+</section>
 
-  // First Interaction
-  var fT = false;
-  ['click','scroll','keydown'].forEach(function(ev) {
-    document.addEventListener(ev, function f() {
-      if (!fT) { fT = true; track('first_interaction', { event_category: 'engagement', event_label: ev, value: Math.round((Date.now()-pageStartTime)/1000), page: pagePath }); }
-      document.removeEventListener(ev, f);
-    }, { once: true, passive: true });
-  });
+</div>
 
-  console.log('[aeoess-analytics] Subpage tracking active — ' + pagePath);
-})();
-</script>
+<footer>
+  <div>AEOESS © 2025 · <a href="https://tymofii.me">Tymofii Pidlisnyi</a></div>
+  <div class="fr"><a href="https://github.com/aeoess">GitHub</a><a href="blog.html">Blog</a><a href="https://tymofii.me">tymofii.me</a></div>
+</footer>
+</div>
 </body>
 </html>
