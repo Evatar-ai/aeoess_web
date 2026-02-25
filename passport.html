@@ -16,18 +16,27 @@
 <link rel="stylesheet" href="shared.css">
 </head>
 <body>
-<nav>
-  <a href="/" class="nl"><img src="/assets/images/aeoess_logo.png" alt="æ"> AEOESS</a>
-  <div class="nr">
-    <a href="/">Home</a>
-    <a href="protocol.html">Protocol</a>
-    <a href="passport.html" class="active">Passport</a>
-    <a href="agora.html">Agora</a>
-    <a href="media.html">Media</a>
-    <a href="blog.html">Blog</a>
-    <a href="https://github.com/aeoess" target="_blank">GitHub</a>
-  </div>
-</nav>
+<a href="/" class="logo"><img src="/assets/images/aeoess_logo.png" alt="æ"><span>AEOESS</span></a>
+<ul class="side-nav">
+  <li><a href="protocol.html"><span class="num">I</span><span class="label">Protocol</span></a></li>
+  <li><a href="passport.html" class="active"><span class="num">II</span><span class="label">Passport</span></a></li>
+  <li><a href="agora.html"><span class="num">III</span><span class="label">Agora</span></a></li>
+  <li><a href="blog.html"><span class="num">IV</span><span class="label">Blog</span></a></li>
+  <li><a href="https://github.com/aeoess" target="_blank"><span class="num">V</span><span class="label">GitHub</span></a></li>
+</ul>
+<div class="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></div>
+<div class="drawer">
+  <ul>
+    <li><a href="/"><span class="num">⬡</span>Home</a></li>
+    <li><a href="protocol.html"><span class="num">I</span>Protocol</a></li>
+    <li><a href="passport.html" class="active"><span class="num">II</span>Passport</a></li>
+    <li><a href="agora.html"><span class="num">III</span>Agora</a></li>
+    <li><a href="blog.html"><span class="num">IV</span>Blog</a></li>
+    <li><a href="media.html"><span class="num">V</span>Media</a></li>
+    <li><a href="bot.html"><span class="num">VI</span>Agent</a></li>
+    <li><a href="https://github.com/aeoess" target="_blank"><span class="num">VII</span>GitHub</a></li>
+  </ul>
+</div>
 <div class="w">
 <div class="page-hero">
   <div class="breadcrumb"><a href="/">AEOESS</a> / Passport</div>
@@ -181,5 +190,6 @@
   <div class="fr"><a href="https://github.com/aeoess">GitHub</a><a href="blog.html">Blog</a><a href="https://tymofii.me">tymofii.me</a></div>
 </footer>
 </div>
+<script src="nav.js"></script>
 </body>
 </html>
