@@ -1,18 +1,26 @@
 User-agent: *
 Allow: /
 
-# LLM Documentation
+# LLM-readable content (prioritized for AI agent discovery)
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /llms/
+Allow: /protocol-registry.json
+Allow: /agora/
 
-# Private/admin pages
+# Private / admin / legacy
 Disallow: /ideas-admin.html
 Disallow: /forvlad.html
 Disallow: /board.html
 Disallow: /comms/
+Disallow: /mywork/
+Disallow: /datadividend/
+Disallow: /index_old*.html
+Disallow: /index_v2.html
+Disallow: /index_new.html
+Disallow: /index_aeoess.html
 
-# Asset files
+# Assets
 Disallow: /*.pdf$
 Disallow: /*.zip$
 
