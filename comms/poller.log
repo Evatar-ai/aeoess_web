@@ -1,0 +1,23 @@
+From github.com:aeoess/aeoess_web
+   1f66459..d1cfaa1  main       -> origin/main
+Updating 1f66459..d1cfaa1
+Fast-forward
+ comms/from-portal.json | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+[] comms changed
+From github.com:aeoess/aeoess_web
+   d1cfaa1..fcf942f  main       -> origin/main
+Updating d1cfaa1..fcf942f
+Fast-forward
+ agora/messages.json | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+Already up to date.
+From github.com:aeoess/aeoess_web
+   fcf942f..4aeff0e  main       -> origin/main
+Updating fcf942f..4aeff0e
+Fast-forward
+ TEAM-OPS.md             | 535 ++++++++++++++++++++++++++++++++++++++++++++++++
+ comms/shared-state.json |  94 ++++-----
+ 2 files changed, 577 insertions(+), 52 deletions(-)
+ create mode 100644 TEAM-OPS.md
+[] comms changed
