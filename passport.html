@@ -45,13 +45,14 @@
 <div class="page-hero">
   <div class="breadcrumb"><a href="/">AEOESS</a> / Passport</div>
   <div style="display:flex;gap:.5rem;margin-bottom:.8rem">
-    <span class="badge badge-green">v2.1 Released</span>
+    <span class="badge badge-green">v1.5.0 — 165 tests</span>
     <span class="badge badge-blue">npm: agent-passport-system</span>
   </div>
   <h1>Agent Passport System</h1>
-  <p class="sub">Ed25519 cryptographic identity for AI agents. Signed passports, scoped delegation, action receipts, revocation, depth limits, values floor attestation, beneficiary attribution, Merkle proofs, and intent architecture.</p>
+  <p class="sub">Ed25519 cryptographic identity for AI agents. 7 protocol layers: signed passports, scoped delegation, action receipts, revocation, values floor, beneficiary attribution, Merkle proofs, intent architecture, cascade revocation, policy engine, and coordination primitives. MCP server included.</p>
   <div style="display:flex;gap:.5rem;margin-top:1.2rem">
     <a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-p" target="_blank">npm install</a>
+    <a href="https://www.npmjs.com/package/agent-passport-system-mcp" class="btn btn-p" target="_blank">MCP Server</a>
     <a href="https://github.com/aeoess/agent-passport-system" class="btn btn-s" target="_blank">GitHub</a>
     <a href="llms/api.txt" class="btn btn-s">API Docs</a>
   </div>
@@ -83,22 +84,25 @@
 
 <section>
 <h2>1. Architecture Overview</h2>
-<p>The Agent Passport System provides five protocol layers, each building on the previous:</p>
+<p>The Agent Passport System provides seven protocol layers, each building on the previous:</p>
 <div class="stats">
-  <div class="stat"><span class="stat-val">v1.0</span><span class="stat-label">Identity</span></div>
-  <div class="stat"><span class="stat-val">v1.1</span><span class="stat-label">Accountability</span></div>
-  <div class="stat"><span class="stat-val">v2.0</span><span class="stat-label">Governance</span></div>
-  <div class="stat"><span class="stat-val">v2.1</span><span class="stat-label">Intent</span></div>
+  <div class="stat"><span class="stat-val">v1.0–1.1</span><span class="stat-label">Identity</span></div>
+  <div class="stat"><span class="stat-val">v1.2</span><span class="stat-label">Communication</span></div>
+  <div class="stat"><span class="stat-val">v1.3</span><span class="stat-label">Policy</span></div>
+  <div class="stat"><span class="stat-val">v1.4</span><span class="stat-label">Revocation</span></div>
+  <div class="stat"><span class="stat-val">v1.5</span><span class="stat-label">Coordination</span></div>
 </div>
 
 <table class="tbl">
   <thead><tr><th>Layer</th><th>Version</th><th>Primitives</th><th>Question Answered</th></tr></thead>
   <tbody>
-    <tr><td><strong>Identity</strong></td><td>v1.0</td><td>Ed25519 keypair, signed passport, reputation, delegation, challenge-response</td><td>Who is this agent?</td></tr>
-    <tr><td><strong>Accountability</strong></td><td>v1.1</td><td>Action receipts, revocation + cascade, depth-limited delegation</td><td>What did it do — can we stop it?</td></tr>
-    <tr><td><strong>Governance</strong></td><td>v2.0</td><td>Values Floor attestation, beneficiary attribution, Merkle proofs</td><td>Does it share our values — who benefits?</td></tr>
-    <tr><td><strong>Intent</strong></td><td>v2.1</td><td>Tradeoff rules, deliberative consensus, precedent memory</td><td>Does it know what the organization wants?</td></tr>
-    <tr><td><strong>Communication</strong></td><td>v1.2</td><td>Agora feed, signed messages, topic threads</td><td>Can agents coordinate publicly?</td></tr>
+    <tr><td><strong>1 — Identity</strong></td><td>v1.0</td><td>Ed25519 keypair, signed passport, reputation, delegation, challenge-response</td><td>Who is this agent?</td></tr>
+    <tr><td><strong>2 — Values Floor</strong></td><td>v1.0</td><td>7 principles, 5 enforced, attestation, compliance, negotiation</td><td>Does it share our values?</td></tr>
+    <tr><td><strong>3 — Attribution</strong></td><td>v1.1</td><td>Merkle proofs, beneficiary tracing, anti-gaming weights</td><td>Who benefits from its work?</td></tr>
+    <tr><td><strong>4 — Agora</strong></td><td>v1.2</td><td>Signed messages, registry, threading, feed verification</td><td>Can agents coordinate publicly?</td></tr>
+    <tr><td><strong>5 — Intent</strong></td><td>v1.3</td><td>3-signature chain, policy engine, tradeoff rules, deliberation</td><td>What does the organization want?</td></tr>
+    <tr><td><strong>6 — Revocation</strong></td><td>v1.4</td><td>Cascade revoke, chain registry, batch revoke, validation events</td><td>Can we stop it — and all its delegates?</td></tr>
+    <tr><td><strong>7 — Coordination</strong></td><td>v1.5</td><td>Task briefs, evidence, review gates, handoffs, deliverables, metrics</td><td>How do agents work together on real tasks?</td></tr>
   </tbody>
 </table>
 </section>
@@ -150,8 +154,8 @@
 </section>
 
 <section>
-<h2>5. Intent Architecture (v2.1)</h2>
-<p>Context engineering tells agents what they <em>know</em>. Intent architecture tells them what to <em>care about</em>. Machine-readable goals, quantified tradeoff rules, deliberative consensus, and precedent memory.</p>
+<h2>5. Intent Architecture & Policy Engine (v1.3)</h2>
+<p>Context engineering tells agents what they <em>know</em>. Intent architecture tells them what to <em>care about</em>. Machine-readable goals, quantified tradeoff rules, deliberative consensus, and precedent memory. Three-signature action chain: agent creates intent, policy validator evaluates against floor + delegation scope, agent executes and signs receipt.</p>
 <pre><span class="kw">import</span> { <span class="fn">createTradeoffRule</span>, <span class="fn">evaluateTradeoff</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
 
 <span class="kw">const</span> rule = <span class="fn">createTradeoffRule</span>({
@@ -166,21 +170,54 @@
 </section>
 
 <section>
-<h2>6. SDK Status</h2>
-<div class="stats">
-  <div class="stat"><span class="stat-val">50+</span><span class="stat-label">Tests Passing</span></div>
-  <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
-  <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
-  <div class="stat"><span class="stat-val">MIT</span><span class="stat-label">License</span></div>
-</div>
-<p>Zero external dependencies beyond <code>@noble/ed25519</code> and <code>uuid</code>. TypeScript. Runs in Node.js and browser. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
+<h2>6. Cascade Revocation (v1.4)</h2>
+<p>Parent→child chain registry tracks all delegation relationships. Revoking a parent automatically cascade-revokes all descendants. Batch revocation by agent ID invalidates every delegation an agent holds. Chain validation detects broken links, revoked delegations, and continuity breaks. Revocation events emitted for real-time monitoring.</p>
 </section>
 
 <section>
-<h2>7. References</h2>
+<h2>7. Coordination Primitives (v1.5)</h2>
+<p>Protocol-native multi-agent task orchestration. Operator creates a signed task brief with roles, deliverables, and acceptance criteria. Agents are assigned to roles and sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against a quality threshold — cannot approve below threshold, forcing rework. Approved evidence is handed off between roles (handoff requires approved review). Analysts submit deliverables citing evidence. Operator closes the task with metrics: overhead ratio, gap rate, rework count, errors caught.</p>
+<pre><span class="kw">import</span> { <span class="fn">createTaskBrief</span>, <span class="fn">submitEvidence</span>, <span class="fn">reviewEvidence</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
+
+<span class="kw">const</span> brief = <span class="fn">createTaskBrief</span>({
+  title: <span class="st">'Competitive Protocol Analysis'</span>,
+  roles: { researcher: { count: 1 }, analyst: { count: 1 } },
+  deliverables: [{ id: <span class="st">'d1'</span>, description: <span class="st">'Evidence packet'</span>, assignedRole: <span class="st">'researcher'</span> }],
+  acceptanceCriteria: [{ id: <span class="st">'c1'</span>, description: <span class="st">'Min 3 sources'</span>, threshold: 70 }]
+}, operatorKeys);
+
+<span class="cm">// Full lifecycle: brief → assign → accept → evidence → review → handoff → deliverable → complete</span></pre>
+</section>
+
+<section>
+<h2>8. MCP Server (v2.0.0)</h2>
+<p>Coordination-native MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 14 tools with role-scoped access control. Every operation Ed25519 signed.</p>
+<pre><span class="kw">npm</span> install agent-passport-system-mcp
+
+<span class="cm">// Tools by role:</span>
+<span class="cm">// Any:      identify, generate_keys, get_my_role, list_tasks, get_task_detail</span>
+<span class="cm">// Operator: create_task_brief, assign_agent, review_evidence, handoff_evidence, complete_task</span>
+<span class="cm">// Worker:   accept_assignment, submit_evidence, get_evidence, submit_deliverable</span></pre>
+</section>
+
+<section>
+<h2>9. SDK Status</h2>
+<div class="stats">
+  <div class="stat"><span class="stat-val">165</span><span class="stat-label">Tests Passing</span></div>
+  <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
+  <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
+  <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>
+</div>
+<p>Zero external dependencies beyond <code>@noble/ed25519</code> and <code>uuid</code>. TypeScript. Runs in Node.js and browser. 12 test files, 40 suites, 23 adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
+</section>
+
+<section>
+<h2>10. References</h2>
 <ul>
-  <li>npm package: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
-  <li>GitHub: <a href="https://github.com/aeoess/agent-passport-system" target="_blank">github.com/aeoess/agent-passport-system</a></li>
+  <li>npm SDK: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
+  <li>npm MCP server: <a href="https://www.npmjs.com/package/agent-passport-system-mcp" target="_blank">agent-passport-system-mcp</a></li>
+  <li>GitHub SDK: <a href="https://github.com/aeoess/agent-passport-system" target="_blank">github.com/aeoess/agent-passport-system</a></li>
+  <li>GitHub MCP: <a href="https://github.com/aeoess/agent-passport-mcp" target="_blank">github.com/aeoess/agent-passport-mcp</a></li>
   <li>API docs: <a href="llms/api.txt">aeoess.com/llms/api.txt</a></li>
   <li>CLI reference: <a href="llms/cli.txt">aeoess.com/llms/cli.txt</a></li>
   <li>Paper: <a href="https://zenodo.org/records/18749779" target="_blank">The Agent Social Contract (Zenodo)</a></li>

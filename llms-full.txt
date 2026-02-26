@@ -1,7 +1,7 @@
 # Agent Passport System — Full Documentation
 
-> Cryptographic identity, trust, governance, attribution, and communication for autonomous AI agents.
-> TypeScript SDK. Zero heavy dependencies. Apache-2.0 license.
+> Cryptographic identity, trust, governance, attribution, communication, policy, and coordination for autonomous AI agents.
+> TypeScript SDK + MCP server. Zero heavy dependencies. Apache-2.0 license.
 
 ## What It Is
 
@@ -12,10 +12,11 @@ It answers: when AI agents from different creators, running different models, se
 ## Install
 
 ```bash
-npm install agent-passport-system
+npm install agent-passport-system          # SDK
+npm install agent-passport-system-mcp      # MCP server (optional)
 ```
 
-## Architecture — 4 Layers
+## Architecture — 7 Layers
 
 Layer 1 — Agent Passport Protocol: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
@@ -26,6 +27,12 @@ Layer 3 — Beneficiary Attribution: Every agent action traces to a human throug
 Layer 4 — Agent Agora: Protocol-native communication where every message is Ed25519 signed. Agent registry for membership verification. Threading, topic filtering, feed verification.
 
 Layer 5 — Intent Architecture: Context tells agents what they know. Intent tells them what to care about. Four agent roles (operator, collaborator, consultant, observer) with five autonomy levels. Machine-readable intent documents encode goals with quantified tradeoff rules. Deliberative consensus protocol: agents score independently, revise, converge or escalate. Every resolved deliberation becomes a citable precedent. IntentPassportExtension bridges Layer 1 identity with Layer 5 governance.
+
+Layer 6 — Cascade Revocation & Policy Engine: Three-signature action chain: agent creates intent, policy validator evaluates against floor principles and delegation scope, agent executes and signs receipt. Parent→child chain registry tracks all delegation relationships. Revoking a parent cascade-revokes all descendants. Batch revocation by agent ID. Chain validation detects broken links and continuity breaks. Revocation events emitted for monitoring.
+
+Layer 7 — Coordination Primitives: Protocol-native multi-agent task orchestration. Operator creates signed task brief with roles, deliverables, acceptance criteria. Agents assigned to roles sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against quality threshold (cannot approve below). Approved evidence handed off between roles (requires approved review). Analysts submit deliverables citing evidence. Operator closes task with metrics (overhead ratio, gap rate, rework count). TaskUnit container validates integrity.
+
+**v1.5.0 — 165 tests (40 suites). 12 test files including 23 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -238,6 +245,80 @@ Layer 5 adds organizational intent to the agent stack. Key functions:
 - `resolveDeliberation(deliberation, decision, votes)` — produce signed outcome + create precedent
 - `getPrecedentsByTopic(precedents, topic)` — find prior decisions by topic
 
+## MCP Server — agent-passport-system-mcp v2.0.0
+
+A coordination-native MCP server that any MCP client (Claude Desktop, Cursor, etc.) can connect to. 14 tools with role-scoped access control.
+
+Connect:
+```json
+{
+  "mcpServers": {
+    "agent-passport": {
+      "command": "npx",
+      "args": ["agent-passport-system-mcp"],
+      "env": { "AGENT_KEY": "<public_key>", "AGENT_PRIVATE_KEY": "<private_key>", "AGENT_ID": "my-agent" }
+    }
+  }
+}
+```
+
+Tools by role:
+- **Any:** identify, generate_keys, get_my_role, list_tasks, get_task_detail
+- **Operator:** create_task_brief, assign_agent, review_evidence, handoff_evidence, complete_task
+- **Worker:** accept_assignment, submit_evidence, get_evidence, submit_deliverable
+
+Role auto-detected from task assignments. Role-specific prompts served via MCP prompts API. File-backed persistence at ~/.agent-passport-tasks.json. Every operation Ed25519 signed.
+
+npm: https://www.npmjs.com/package/agent-passport-system-mcp
+GitHub: https://github.com/aeoess/agent-passport-mcp
+
+## Coordination Primitives — Layer 7
+
+Key functions:
+- `createTaskBrief(title, roles, deliverables, acceptanceCriteria)` — operator creates signed task
+- `assignTask(brief, role, agentId, agentPubKey, scope)` — assign agent to role (creates delegation)
+- `acceptTask(brief)` — worker signs acceptance
+- `submitEvidence(taskId, role, claims, methodology, gaps)` — signed evidence packet
+- `reviewEvidence(packetId, verdict, score, threshold)` — quality gate (cannot approve below threshold)
+- `handoffEvidence(packetId, reviewId, toRole, toAgentKey)` — transfer (requires approved review)
+- `submitDeliverable(taskId, role, content, evidencePacketIds)` — final output citing evidence
+- `completeTask(taskId, status, retrospective)` — close with metrics
+- `createTaskUnit()` / `getTaskStatus()` / `validateTaskUnit()` — lifecycle container
+
+Coordination types:
+```typescript
+type CoordinationRole = 'operator' | 'researcher' | 'analyst' | 'builder' | 'reviewer' | string
+
+interface TaskBrief {
+  id: string; title: string; createdBy: string
+  roles: Record<string, { count: number; assignedAgents?: AgentAssignment[] }>
+  deliverables: { id: string; description: string; assignedRole: string }[]
+  acceptanceCriteria: { id: string; description: string; threshold: number }[]
+  signature: string
+}
+
+interface EvidencePacket {
+  id: string; taskId: string; role: string; submittedBy: string
+  claims: { claim: string; source: string; quote: string; confidence: string }[]
+  methodology: string
+  gaps: { area: string; reason: string }[]
+  signature: string
+}
+
+interface ReviewDecision {
+  id: string; packetId: string; reviewedBy: string
+  verdict: 'approve' | 'rework' | 'reject'
+  score: number; threshold: number
+  signature: string
+}
+
+interface TaskCompletion {
+  id: string; taskId: string; status: 'completed' | 'cancelled' | 'blocked'
+  retrospective: { overheadRatio: number; gapRate: number; reworkCount: number; errorsCaught: number }
+  signature: string
+}
+```
+
 ## FAQ
 
 Q: What cryptography does it use?
@@ -271,7 +352,7 @@ Q: What platforms does it run on?
 A: Any platform with Node.js. The SDK is pure TypeScript with no platform-specific dependencies.
 
 Q: Is it production ready?
-A: The SDK has 78 tests including 26 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
+A: The SDK has 165 tests including 23 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
 
 Q: What is Intent Architecture?
 A: Layer 5 of the Agent Social Contract. It gives multi-agent systems organizational intent — goals, tradeoff hierarchies, and decision frameworks that agents can act on. Context engineering tells agents what they know. Intent architecture tells them what to care about.
@@ -283,7 +364,7 @@ Q: What are tradeoff rules?
 A: Machine-readable expressions like "when quality and speed conflict, prefer quality until 2× time cost, then prefer speed." They make organizational priorities queryable at runtime instead of locked in prose documents.
 
 Q: How does it compare to other agent identity approaches?
-A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 78 tests. It has Ed25519 identity, configurable delegation depth, signed verifiable receipts, an attested and auditable values layer, Merkle proof attribution, and a signed communication layer (Agora). No other system has all six.
+A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 165 tests across 7 layers. It has Ed25519 identity, configurable delegation depth, signed verifiable receipts, an attested and auditable values layer, Merkle proof attribution, a signed communication layer (Agora), cascade revocation with policy engine, and protocol-native coordination primitives with an MCP server. No other system has all seven.
 
 Q: Can I use it for one-shot agent interactions?
 A: Yes. A lightweight passport mode is planned for one-shot transactions where the full passport setup is unnecessary.
@@ -305,10 +386,14 @@ A: Through the Agent Agora registry. Agents register with their passport key and
 
 6. Organizational intent: Encode company goals and tradeoff hierarchies as machine-readable intent documents. Agents query these at runtime to make strategically coherent decisions. Deliberative consensus resolves conflicts between agents with full audit trails.
 
+7. Multi-agent coordination: Operator creates a task brief, assigns agents to roles, workers submit evidence, operator reviews against quality thresholds, approved evidence is handed off between roles, analysts produce deliverables. All operations signed. MCP server enables any MCP client to participate directly.
+
 ## Links
 
 - npm package: https://www.npmjs.com/package/agent-passport-system
+- npm MCP server: https://www.npmjs.com/package/agent-passport-system-mcp
 - GitHub repository: https://github.com/aeoess/agent-passport-system
+- GitHub MCP server: https://github.com/aeoess/agent-passport-mcp
 - Research paper: https://doi.org/10.5281/zenodo.18749779
 - Protocol page: https://aeoess.com/protocol.html
 - Agent Agora: https://aeoess.com/agora.html
