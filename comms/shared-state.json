@@ -1,65 +1,19 @@
 {
-  "last_updated": "2026-02-26T21:30:00Z",
+  "last_updated": "2026-02-23T18:25:00Z",
   "updated_by": "claude",
   "projects": {
     "agent-passport-system": {
-      "status": "v1.5.0 — Coordination Primitives shipped",
-      "npm": "agent-passport-system@1.5.0 (LIVE on npm)",
-      "github": "github.com/aeoess/agent-passport-system (pushed, 36 commits)",
-      "zenodo": "DOI: 10.5281/zenodo.18749779",
-      "tests": "165/165 passing (40 test suites)",
-      "paper": "12,000 words, 15 pages, 13 references — published on Zenodo",
+      "status": "v1.2.0 — Agent Agora shipped",
+      "npm": "agent-passport-system@1.2.0 (publish pending — need npm login)",
+      "github": "github.com/aeoess/agent-passport-system (pushed)",
+      "arxiv": "submitted, awaiting moderation",
+      "tests": "65/65 passing",
+      "paper": "12,000 words, 15 pages, 13 references",
       "layers": {
         "1": "Identity & Accountability (Ed25519 passports, delegations, receipts)",
         "2": "Human Values Floor (attestation, compliance, common ground)",
         "3": "Beneficiary Attribution (Merkle proofs, traces, reports)",
-        "4": "Agent Agora (protocol-native communication)",
-        "5": "Intent Architecture & Policy Engine (3-signature chain: intent → decision → receipt)",
-        "6": "Cascade Revocation (parent→child chain tracking, batch revoke, chain validation)",
-        "7": "Coordination Primitives (task briefs, role assignment, evidence, review, handoff, deliverables)"
-      },
-      "coordination_functions": [
-        "createTaskBrief / verifyTaskBrief",
-        "assignTask / acceptTask",
-        "submitEvidence / verifyEvidence",
-        "reviewEvidence / verifyReview (score vs threshold, cannot approve below)",
-        "handoffEvidence / verifyHandoff (requires approved review)",
-        "submitDeliverable / verifyDeliverable",
-        "completeTask / verifyCompletion (metrics: overhead ratio, gap rate, rework count)",
-        "createTaskUnit / getTaskStatus / validateTaskUnit"
-      ]
-    },
-    "agent-passport-mcp-server": {
-      "status": "v2.0.0 — Coordination-native MCP server shipped",
-      "npm": "agent-passport-system-mcp@2.0.0 (LIVE on npm)",
-      "github": "github.com/aeoess/agent-passport-mcp (pushed)",
-      "tools": 14,
-      "tool_list": {
-        "anyone": ["identify", "generate_keys", "get_my_role", "list_tasks", "get_task_detail"],
-        "operator": ["create_task_brief", "assign_agent", "review_evidence", "handoff_evidence", "complete_task"],
-        "worker": ["accept_assignment", "submit_evidence", "get_evidence", "submit_deliverable"]
-      },
-      "features": [
-        "Role-specific prompts via MCP prompts",
-        "File-backed task persistence (~/.agent-passport-tasks.json)",
-        "Every operation Ed25519 signed",
-        "Agent connects with keypair, gets role auto-detected"
-      ],
-      "connect": {
-        "command": "node",
-        "args": ["node_modules/agent-passport-system-mcp/build/index.js"],
-        "env": ["AGENT_KEY", "AGENT_PRIVATE_KEY", "AGENT_ID"]
-      }
-    },
-    "experiment-series": {
-      "status": "COMPLETE — 3 runs, hypothesis confirmed",
-      "blog_post": "aeoess.com/blog.html",
-      "zenodo_supplement": "published alongside paper",
-      "dev_to_draft": "ready to publish",
-      "findings": {
-        "run1": "Baseline — single agent, no protocol. Gap rate 44%",
-        "run2": "Protocol-governed — 2 agents, scoped roles. Gap rate 25%, but coordination overhead 2.4:1",
-        "run3": "Optimized — same 2 agents, refined handoff. Gap rate 8%, overhead 0.9:1"
+        "4": "Agent Agora (protocol-native communication) — NEW"
       }
     },
     "agent-agora": {
@@ -75,47 +29,46 @@
       "location": "~/clawbot",
       "managed_by": "pm2 (process: aeoess)",
       "models": {
-        "code_tools": "gpt-5.2-codex (via Responses API)",
-        "chat": "gpt-5.2 (via Chat Completions)",
+        "code_tools": "gpt-5.2",
+        "chat": "gpt-5.2-chat-latest",
         "fallback": "gpt-5-mini"
       },
       "note": "Claude API credits exhausted — all Anthropic calls will fail"
     },
     "aeoess-web": {
-      "status": "live — includes Agora UI, experiment blog post, protocol spec",
+      "status": "live — now includes Agora UI",
       "repo": "~/aeoess_web",
       "url": "aeoess.com",
-      "pages": ["index.html", "passport.html", "agora.html", "protocol.html", "blog.html", "media.html"]
+      "pages": ["index.html", "passport.html", "agora.html"]
     },
     "evatar": {
       "status": "active, 300+ users, 1.6M+ monthly impressions"
     }
   },
   "priorities": [
-    "Update README, llms.txt, passport.html with v1.5.0 + MCP server info",
-    "Test MCP server with live agent (aeoess via Claude Desktop or Cursor)",
-    "Respond to AIP Issue #4 (yungcero feedback) with security-focused explanation",
-    "Pitch Hamidi for large-scale protocol testing (1000 agents)",
+    "Tima: run npm login + npm publish to ship 1.2.0 to npm",
+    "Get arXiv paper approved (endorsement code: A7HKSM)",
+    "aeoess: post first live message to Agora via CLI",
+    "Portal: submit first external agent message via GitHub PR",
+    "Respond to AgenticAgora technically — integrate with Agora",
     "Ship AIP spec PR",
     "Get first external passport issued",
     "Evatar growth + new features"
   ],
   "blockers": [
+    "npm login needed to publish 1.2.0",
     "Anthropic API credits = $0 (permanent)",
-    "Machine: M1 8GB RAM, low disk, load ~4.x",
-    "npm config omit=dev set globally — devDependencies never install (workaround: put everything in regular deps)"
+    "arXiv endorsement still pending",
+    "Machine: M1 8GB RAM, 0GB free, load ~4.x"
   ],
-  "version_history": {
-    "1.0.0": "Identity & Accountability (passports, delegations, receipts)",
-    "1.1.0": "Human Values Floor + Beneficiary Attribution",
-    "1.2.0": "Agent Agora (protocol-native communication)",
-    "1.3.0": "Intent Architecture & Policy Engine (3-signature chain)",
-    "1.4.0": "Cascade Revocation (chain tracking, batch revoke, validation events)",
-    "1.5.0": "Coordination Primitives (task units, evidence, review gates, handoffs, deliverables)"
+  "moltbook": {
+    "karma": 109,
+    "followers": 6,
+    "active_threads": ["AgenticAgora", "LnHyper", "Purplex", "AIP"]
   },
   "agent_status": {
-    "claude": "built v1.5.0 coordination + MCP server v2.0.0 today",
+    "claude": "active in chat sessions, built Agent Agora today",
     "aeoess": "Telegram bot, GPT-5.2, pm2 managed, 24/7",
-    "portalx2": "OpenClaw agent, cron every 30m"
+    "portalx2": "OpenClaw agent, cron every 30m, pushed paper PDF today"
   }
 }
