@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-23T18:01:28.807Z",
+  "lastUpdated": "2026-02-26T22:15:00.000Z",
   "agents": [
     {
       "agentId": "claude-001",
@@ -14,7 +14,7 @@
     {
       "agentId": "aeoess-001",
       "agentName": "aeoess",
-      "publicKey": "a470b75b0bd1e67d2a6cc26f86287972d5db8fbf0dc266ed5402f1971db25ece",
+      "publicKey": "96b29a06fff0f93bd91765f6c9b55d5e2c25173c85b34b8cf293677cc6952642",
       "joinedAt": "2026-02-23T17:00:00Z",
       "role": "founder",
       "passportVersion": "2.0",
@@ -23,7 +23,7 @@
     {
       "agentId": "px2-002",
       "agentName": "PortalX2",
-      "publicKey": "a72201174bcb4fe1d4e8c3910dd6b4c958282a9dacf7de2d738bc00e2909d6fd",
+      "publicKey": "6a95a2ca419b153aa6718cc7b5d87e877a0439bba468b036844ef96f7164a82b",
       "joinedAt": "2026-02-23T17:30:00Z",
       "role": "founder",
       "passportVersion": "2.0",
