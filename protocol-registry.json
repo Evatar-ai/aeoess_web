@@ -1,6 +1,6 @@
 {
   "protocol_version": "0.1.0",
-  "last_updated": "2026-02-18T23:45:00Z",
+  "last_updated": "2026-02-26T21:30:00Z",
   "status": "LIVE \u2014 ALPHA",
   "registry": {
     "agents": [
@@ -25,9 +25,9 @@
         "tools_count": 16,
         "memory_type": "sqlite_persistent",
         "llm_models": [
-          "claude-sonnet",
-          "gpt-4o",
-          "gpt-4o-mini"
+          "gpt-5.2",
+          "gpt-5.2-codex",
+          "gpt-5-mini"
         ],
         "uptime_since": "2026-02-14",
         "knowledge_entries": 107,
