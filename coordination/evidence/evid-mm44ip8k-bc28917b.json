@@ -1,0 +1,98 @@
+{
+  "packetId": "evid-mm44ip8k-bc28917b",
+  "taskId": "task-mm446e9v-980a2713",
+  "submittedBy": "96b29a06fff0f93bd91765f6c9b55d5e2c25173c85b34b8cf293677cc6952642",
+  "role": "researcher",
+  "submittedAt": "2026-02-26T23:57:57.188Z",
+  "claims": [
+    {
+      "dimension": "repo",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Repo URL is https://github.com/openagentidentityprotocol/agentidentityprotocol.",
+      "quote": "https://github.com/openagentidentityprotocol/agentidentityprotocol is the canonical repository.",
+      "sourceUrl": "https://github.com/openagentidentityprotocol/agentidentityprotocol",
+      "confidence": "high",
+      "claimId": "evid-mm44ip8k-bc28917b-c0"
+    },
+    {
+      "dimension": "repo",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Stars: 16; Forks: 2; Open issues: 3.",
+      "quote": "GitHub API repo metadata reports stargazers_count=16, forks_count=2, open_issues_count=3.",
+      "sourceUrl": "https://api.github.com/repos/openagentidentityprotocol/agentidentityprotocol",
+      "confidence": "high",
+      "claimId": "evid-mm44ip8k-bc28917b-c1"
+    },
+    {
+      "dimension": "license",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "GitHub-reported license: Apache-2.0.",
+      "quote": "GitHub API license field spdx_id=Apache-2.0.",
+      "sourceUrl": "https://api.github.com/repos/openagentidentityprotocol/agentidentityprotocol",
+      "confidence": "medium",
+      "claimId": "evid-mm44ip8k-bc28917b-c2"
+    },
+    {
+      "dimension": "license",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Repository includes a LICENSE file.",
+      "quote": "\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.",
+      "sourceUrl": "https://github.com/openagentidentityprotocol/agentidentityprotocol/blob/main/LICENSE",
+      "confidence": "high",
+      "claimId": "evid-mm44ip8k-bc28917b-c3"
+    },
+    {
+      "dimension": "tests",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Heuristic test inventory: 0 test files.",
+      "quote": "Found 0 files under test/tests/__tests__ directories; sample: none.",
+      "sourceUrl": "https://github.com/openagentidentityprotocol/agentidentityprotocol",
+      "confidence": "medium",
+      "claimId": "evid-mm44ip8k-bc28917b-c4"
+    },
+    {
+      "dimension": "architecture",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Architecture includes root registry signing agent certificates, MCP proxy with policy enforcement.",
+      "quote": "Root Registry (AIP Authority) Signs Agent Certificates. Policy enforcement proxy for MCP with Human-in-the-Loop approval, DLP scanning, and audit logging.",
+      "sourceUrl": "https://github.com/openagentidentityprotocol/agentidentityprotocol#readme",
+      "confidence": "medium",
+      "claimId": "evid-mm44ip8k-bc28917b-c5"
+    },
+    {
+      "dimension": "differentiators",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Explicit focus on MCP proxy + policy enforcement + HITL + DLP + audit logging.",
+      "quote": "Policy enforcement proxy for MCP with Human-in-the-Loop approval, DLP scanning, and audit logging.",
+      "sourceUrl": "https://github.com/openagentidentityprotocol/agentidentityprotocol#readme",
+      "confidence": "medium",
+      "claimId": "evid-mm44ip8k-bc28917b-c6"
+    },
+    {
+      "dimension": "builder",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Repo is under organization openagentidentityprotocol; zero-trust identity layer for MCP.",
+      "quote": "Agent Identity Protocol - Zero-trust security layer for AI agents.",
+      "sourceUrl": "https://github.com/openagentidentityprotocol/agentidentityprotocol",
+      "confidence": "medium",
+      "claimId": "evid-mm44ip8k-bc28917b-c7"
+    },
+    {
+      "dimension": "traction",
+      "subject": "openagentidentityprotocol/agentidentityprotocol",
+      "claim": "Stars/forks/open issues as measured via GitHub API.",
+      "quote": "stargazers_count and forks_count from GitHub API response.",
+      "sourceUrl": "https://api.github.com/repos/openagentidentityprotocol/agentidentityprotocol",
+      "confidence": "medium",
+      "claimId": "evid-mm44ip8k-bc28917b-c8"
+    }
+  ],
+  "metadata": {
+    "sourcesSearched": 4,
+    "totalClaims": 9,
+    "citedClaims": 9,
+    "gapCount": 0,
+    "methodology": "GitHub repo analysis (local clone), README + LICENSE review, GitHub API metadata (stars/forks/issues), heuristic test counting by scanning test directories."
+  },
+  "signature": "025edd391549e8f3803951c7bd789a5fd80bd5783bfcf832ff4b12de2281b1fb9cf001fd86557657e0069e0d93ec81644d712f34a43270b4f62d9239d01eba08"
+}
