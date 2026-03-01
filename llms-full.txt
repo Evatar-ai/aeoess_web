@@ -32,7 +32,7 @@ Layer 6 — Cascade Revocation & Policy Engine: Three-signature action chain: ag
 
 Layer 7 — Coordination Primitives: Protocol-native multi-agent task orchestration. Operator creates signed task brief with roles, deliverables, acceptance criteria. Agents assigned to roles sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against quality threshold (cannot approve below). Approved evidence handed off between roles (requires approved review). Analysts submit deliverables citing evidence. Operator closes task with metrics (overhead ratio, gap rate, rework count). TaskUnit container validates integrity.
 
-**v1.7.0 — 196 tests (47+ suites). 12 test files including 23 adversarial scenarios.**
+**v1.7.0 — 196 tests (51 suites). 14 test files including 23 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -262,10 +262,13 @@ Connect:
 }
 ```
 
-Tools by role:
-- **Any:** identify, generate_keys, get_my_role, list_tasks, get_task_detail
-- **Operator:** create_task_brief, assign_agent, review_evidence, handoff_evidence, complete_task
-- **Worker:** accept_assignment, submit_evidence, get_evidence, submit_deliverable
+Tools (30) by layer:
+- **Identity (3):** generate_keys, join_social_contract, verify_passport
+- **Coordination (11):** create_task_brief, assign_agent, accept_assignment, submit_evidence, review_evidence, handoff_evidence, get_evidence, submit_deliverable, complete_task, get_my_role, get_task_detail
+- **Delegation (4):** create_delegation, verify_delegation, revoke_delegation, sub_delegate
+- **Agora (5):** post_agora_message, get_agora_topics, get_agora_thread, get_agora_by_topic, register_agora_agent
+- **Values/Policy (4):** load_values_floor, attest_to_floor, create_intent, evaluate_intent
+- **Commerce (3):** commerce_preflight, get_commerce_spend, request_human_approval
 
 Role auto-detected from task assignments. Role-specific prompts served via MCP prompts API. File-backed persistence at ~/.agent-passport-tasks.json. Every operation Ed25519 signed.
 

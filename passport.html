@@ -209,10 +209,16 @@
 <p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 30 tools across all 8 layers with role-scoped access control. Every operation Ed25519 signed.</p>
 <pre><span class="kw">npm</span> install agent-passport-system-mcp
 
-<span class="cm">// Tools by role:</span>
-<span class="cm">// Any:      identify, generate_keys, get_my_role, list_tasks, get_task_detail</span>
-<span class="cm">// Operator: create_task_brief, assign_agent, review_evidence, handoff_evidence, complete_task</span>
-<span class="cm">// Worker:   accept_assignment, submit_evidence, get_evidence, submit_deliverable</span></pre>
+<span class="cm">// Tools (30) by layer:</span>
+<span class="cm">// Identity (3):      generate_keys, join_social_contract, verify_passport</span>
+<span class="cm">// Coordination (11): create_task_brief, assign_agent, accept_assignment, submit_evidence,</span>
+<span class="cm">//                    review_evidence, handoff_evidence, get_evidence, submit_deliverable,</span>
+<span class="cm">//                    complete_task, get_my_role, get_task_detail</span>
+<span class="cm">// Delegation (4):    create_delegation, verify_delegation, revoke_delegation, sub_delegate</span>
+<span class="cm">// Agora (5):         post_agora_message, get_agora_topics, get_agora_thread,</span>
+<span class="cm">//                    get_agora_by_topic, register_agora_agent</span>
+<span class="cm">// Values/Policy (4): load_values_floor, attest_to_floor, create_intent, evaluate_intent</span>
+<span class="cm">// Commerce (3):      commerce_preflight, get_commerce_spend, request_human_approval</span></pre>
 </section>
 
 <section>
@@ -223,7 +229,7 @@
   <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
   <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>
 </div>
-<p>Zero external dependencies beyond <code>@noble/ed25519</code> and <code>uuid</code>. TypeScript. Runs in Node.js and browser. 12 test files, 40 suites, 23 adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
+<p>Zero external dependencies beyond <code>@noble/ed25519</code> and <code>uuid</code>. TypeScript. Runs in Node.js and browser. 14 test files, 51 suites, 23 adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
 </section>
 
 <section>
