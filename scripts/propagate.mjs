@@ -105,13 +105,18 @@ function getTargetFiles() {
     // MCP repo
     { path: `${REPOS.mcp}/README.md`, repo: 'mcp' },
     { path: `${REPOS.mcp}/package.json`, repo: 'mcp' },
-    // Web repo
+    // Web repo — public pages
     { path: `${REPOS.web}/index.html`, repo: 'web' },
     { path: `${REPOS.web}/llms.txt`, repo: 'web' },
     { path: `${REPOS.web}/llms-full.txt`, repo: 'web' },
     { path: `${REPOS.web}/compare.html`, repo: 'web' },
     { path: `${REPOS.web}/media.html`, repo: 'web' },
     { path: `${REPOS.web}/passport.html`, repo: 'web' },
+    // Web repo — specs (agent-readable context)
+    { path: `${REPOS.web}/specs/PROJECT-INSTRUCTIONS.md`, repo: 'web' },
+    { path: `${REPOS.web}/specs/FILE-TREE.md`, repo: 'web' },
+    { path: `${REPOS.web}/specs/ARCHITECTURE.md`, repo: 'web' },
+    { path: `${REPOS.web}/UPDATE-PROPAGATION-SPEC.md`, repo: 'web' },
   ];
 }
 
