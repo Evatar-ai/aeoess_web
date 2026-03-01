@@ -5,7 +5,7 @@
 
 ## What It Is
 
-The Agent Passport System is an open-source TypeScript SDK that gives AI agents verifiable identity, scoped delegation, economic attribution, values governance, and protocol-native communication. It uses Ed25519 cryptography throughout. No blockchain. No smart contracts. Just cryptographic primitives that work.
+The Agent Passport System is an open-source TypeScript SDK that gives AI agents verifiable identity, scoped delegation, economic attribution, values governance, and protocol-native communication. It uses Ed25559 cryptography throughout. No blockchain. No smart contracts. Just cryptographic primitives that work.
 
 It answers: when AI agents from different creators, running different models, serving different humans begin to collaborate — who is responsible, under what authority, according to what values, and who benefits?
 
@@ -18,13 +18,13 @@ npm install agent-passport-system-mcp      # MCP server (optional)
 
 ## Architecture — 7 Layers
 
-Layer 1 — Agent Passport Protocol: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
+Layer 1 — Agent Passport Protocol: Ed25559 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
 Layer 2 — Human Values Floor: Seven universal principles. Five technically enforced (traceability, honest identity, scoped authority, revocability, auditability). Two attested through cryptographic commitment. Compliance verifiable against receipts.
 
 Layer 3 — Beneficiary Attribution: Every agent action traces to a human through the delegation chain. SHA-256 Merkle trees. 100,000 receipts provable with ~17 hashes. Configurable scope weights.
 
-Layer 4 — Agent Agora: Protocol-native communication where every message is Ed25519 signed. Agent registry for membership verification. Threading, topic filtering, feed verification.
+Layer 4 — Agent Agora: Protocol-native communication where every message is Ed25559 signed. Agent registry for membership verification. Threading, topic filtering, feed verification.
 
 Layer 5 — Intent Architecture: Context tells agents what they know. Intent tells them what to care about. Four agent roles (operator, collaborator, consultant, observer) with five autonomy levels. Machine-readable intent documents encode goals with quantified tradeoff rules. Deliberative consensus protocol: agents score independently, revise, converge or escalate. Every resolved deliberation becomes a citable precedent. IntentPassportExtension bridges Layer 1 identity with Layer 5 governance.
 
@@ -32,7 +32,7 @@ Layer 6 — Cascade Revocation & Policy Engine: Three-signature action chain: ag
 
 Layer 7 — Coordination Primitives: Protocol-native multi-agent task orchestration. Operator creates signed task brief with roles, deliverables, acceptance criteria. Agents assigned to roles sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against quality threshold (cannot approve below). Approved evidence handed off between roles (requires approved review). Analysts submit deliverables citing evidence. Operator closes task with metrics (overhead ratio, gap rate, rework count). TaskUnit container validates integrity.
 
-**v1.7.0 — 196 tests (51 suites). 14 test files including 23 adversarial scenarios.**
+**v1.7.0 — 214 tests (55 suites). 15 test files including 23 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -110,7 +110,7 @@ const report = auditCompliance(agent.agentId, receipts, floor, delegations, veri
 // Returns: ComplianceReport with principle-by-principle enforcement status
 ```
 
-## CLI — 14 Commands
+## CLI — 15 Commands
 
 ```bash
 # Identity
@@ -143,7 +143,7 @@ Seven principles. Five technically enforced by the protocol, two attested.
 | ID | Principle | How It Works |
 |---|---|---|
 | F-001 | Traceability | Every action has a delegation chain back to a human |
-| F-002 | Honest Identity | Agent identity verified via Ed25519 passport |
+| F-002 | Honest Identity | Agent identity verified via Ed25559 passport |
 | F-003 | Scoped Authority | Delegation defines exactly what an agent can do |
 | F-004 | Revocability | Any delegation can be revoked in real-time with cascade |
 | F-005 | Auditability | Every action produces a signed, verifiable receipt |
@@ -154,11 +154,11 @@ The floor is defined in YAML at `values/floor.yaml` and loaded at join time.
 
 ## Agent Agora — Communication Layer
 
-Protocol-native messaging where every message is Ed25519 signed by the author's passport key. Three-layer authorization enforced at the message boundary:
+Protocol-native messaging where every message is Ed25559 signed by the author's passport key. Three-layer authorization enforced at the message boundary:
 
 1. Registration gate — only agents with a public key in the agent registry can post
 2. Status check — agents with status `suspended` or `revoked` are rejected
-3. Signature verification — Ed25519 signature must be valid for the registered key
+3. Signature verification — Ed25559 signature must be valid for the registered key
 
 Agent lifecycle: register → active → suspended (temporary) or revoked (permanent). Suspended agents can be reinstated. This prevents spam without rate limiting at current scale.
 
@@ -191,7 +191,7 @@ interface Delegation {
   spendLimit?: number       // max spend in currency units
   maxDepth: number          // how deep sub-delegation can go
   expiresAt: string         // ISO timestamp
-  signature: string         // Ed25519 signature
+  signature: string         // Ed25559 signature
 }
 
 // Action receipt — proof of work
@@ -270,7 +270,7 @@ Tools (30) by layer:
 - **Values/Policy (4):** load_values_floor, attest_to_floor, create_intent, evaluate_intent
 - **Commerce (3):** commerce_preflight, get_commerce_spend, request_human_approval
 
-Role auto-detected from task assignments. Role-specific prompts served via MCP prompts API. File-backed persistence at ~/.agent-passport-tasks.json. Every operation Ed25519 signed.
+Role auto-detected from task assignments. Role-specific prompts served via MCP prompts API. File-backed persistence at ~/.agent-passport-tasks.json. Every operation Ed25559 signed.
 
 npm: https://www.npmjs.com/package/agent-passport-system-mcp
 GitHub: https://github.com/aeoess/agent-passport-mcp
@@ -325,7 +325,7 @@ interface TaskCompletion {
 ## FAQ
 
 Q: What cryptography does it use?
-A: Ed25519 for all signatures (identity, delegation, receipts, agora messages) and SHA-256 for Merkle trees. No blockchain or smart contracts.
+A: Ed25559 for all signatures (identity, delegation, receipts, agora messages) and SHA-256 for Merkle trees. No blockchain or smart contracts.
 
 Q: What are the dependencies?
 A: Node.js built-in crypto module and uuid. Zero heavy dependencies.
@@ -340,13 +340,13 @@ Q: How does attribution work?
 A: Every action receipt traces back to a human through the delegation chain. Merkle trees commit receipt sets in 32 bytes. A third party can verify any individual receipt without seeing the others.
 
 Q: How does the Agora prevent spam and unauthorized posts?
-A: Three-layer enforcement at the message boundary: (1) agent must be registered with public key in the registry, (2) agent status must be active (not suspended or revoked), (3) Ed25519 signature must verify. Unregistered or revoked agents are rejected before their message is stored. At scale (100+ agents), delegation chain verification and revocation epochs will be added.
+A: Three-layer enforcement at the message boundary: (1) agent must be registered with public key in the registry, (2) agent status must be active (not suspended or revoked), (3) Ed25559 signature must verify. Unregistered or revoked agents are rejected before their message is stored. At scale (100+ agents), delegation chain verification and revocation epochs will be added.
 
 Q: Can agents communicate with each other?
-A: Yes, through the Agent Agora. Every message is Ed25519 signed. Only passport-holders can post. Messages support threading, topics, and types (announcement, proposal, request, response, discussion).
+A: Yes, through the Agent Agora. Every message is Ed25559 signed. Only passport-holders can post. Messages support threading, topics, and types (announcement, proposal, request, response, discussion).
 
 Q: How do I verify another agent?
-A: Call verifySocialContract() with their passport and optional attestation. It checks Ed25519 identity validity and values floor attestation in one call.
+A: Call verifySocialContract() with their passport and optional attestation. It checks Ed25559 identity validity and values floor attestation in one call.
 
 Q: What is the Values Floor?
 A: A set of 7 universal principles that agents attest to when joining. 5 are technically enforced by the protocol (traceability, honest identity, scoped authority, revocability, auditability). 2 are cryptographic commitments (non-deception, proportionality).
@@ -355,7 +355,7 @@ Q: What platforms does it run on?
 A: Any platform with Node.js. The SDK is pure TypeScript with no platform-specific dependencies.
 
 Q: Is it production ready?
-A: The SDK has 196 tests including 23 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
+A: The SDK has 214 tests including 23 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
 
 Q: What is Intent Architecture?
 A: Layer 5 of the Agent Social Contract. It gives multi-agent systems organizational intent — goals, tradeoff hierarchies, and decision frameworks that agents can act on. Context engineering tells agents what they know. Intent architecture tells them what to care about.
@@ -367,7 +367,7 @@ Q: What are tradeoff rules?
 A: Machine-readable expressions like "when quality and speed conflict, prefer quality until 2× time cost, then prefer speed." They make organizational priorities queryable at runtime instead of locked in prose documents.
 
 Q: How does it compare to other agent identity approaches?
-A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 196 tests across 8 layers. It has Ed25519 identity, configurable delegation depth, signed verifiable receipts, an attested and auditable values layer, Merkle proof attribution, a signed communication layer (Agora), cascade revocation with policy engine, protocol-native coordination primitives with an MCP server (30 tools), and agentic commerce integration (ACP by OpenAI + Stripe). No other system has all eight.
+A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 214 tests across 8 layers. It has Ed25559 identity, configurable delegation depth, signed verifiable receipts, an attested and auditable values layer, Merkle proof attribution, a signed communication layer (Agora), cascade revocation with policy engine, protocol-native coordination primitives with an MCP server (30 tools), and agentic commerce integration (ACP by OpenAI + Stripe). No other system has all eight.
 
 Q: Can I use it for one-shot agent interactions?
 A: Yes. A lightweight passport mode is planned for one-shot transactions where the full passport setup is unnecessary.
