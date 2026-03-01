@@ -47,11 +47,11 @@
 <div class="page-hero">
   <div class="breadcrumb"><a href="/">AEOESS</a> / Passport</div>
   <div style="display:flex;gap:.5rem;margin-bottom:.8rem">
-    <span class="badge badge-green">v1.5.0 — 165 tests</span>
+    <span class="badge badge-green">v1.6.0 — 182 tests</span>
     <span class="badge badge-blue">npm: agent-passport-system</span>
   </div>
   <h1>Agent Passport System</h1>
-  <p class="sub">Ed25519 cryptographic identity for AI agents. 7 protocol layers: signed passports, scoped delegation, action receipts, revocation, values floor, beneficiary attribution, Merkle proofs, intent architecture, cascade revocation, policy engine, and coordination primitives. MCP server included.</p>
+  <p class="sub">Ed25519 cryptographic identity for AI agents. 8 protocol layers: signed passports, scoped delegation, action receipts, revocation, values floor, beneficiary attribution, Merkle proofs, intent architecture, cascade revocation, policy engine, coordination primitives, and agentic commerce (ACP). MCP server included.</p>
   <div style="display:flex;gap:.5rem;margin-top:1.2rem">
     <a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-p" target="_blank">npm install</a>
     <a href="https://www.npmjs.com/package/agent-passport-system-mcp" class="btn btn-p" target="_blank">MCP Server</a>
@@ -92,7 +92,7 @@
   <div class="stat"><span class="stat-val">v1.2</span><span class="stat-label">Communication</span></div>
   <div class="stat"><span class="stat-val">v1.3</span><span class="stat-label">Policy</span></div>
   <div class="stat"><span class="stat-val">v1.4</span><span class="stat-label">Revocation</span></div>
-  <div class="stat"><span class="stat-val">v1.5</span><span class="stat-label">Coordination</span></div>
+  <div class="stat"><span class="stat-val">v1.6</span><span class="stat-label">Commerce</span></div>
 </div>
 
 <table class="tbl">
@@ -105,6 +105,7 @@
     <tr><td><strong>5 — Intent</strong></td><td>v1.3</td><td>3-signature chain, policy engine, tradeoff rules, deliberation</td><td>What does the organization want?</td></tr>
     <tr><td><strong>6 — Revocation</strong></td><td>v1.4</td><td>Cascade revoke, chain registry, batch revoke, validation events</td><td>Can we stop it — and all its delegates?</td></tr>
     <tr><td><strong>7 — Coordination</strong></td><td>v1.5</td><td>Task briefs, evidence, review gates, handoffs, deliverables, metrics</td><td>How do agents work together on real tasks?</td></tr>
+    <tr><td><strong>8 — Commerce</strong></td><td>v1.6</td><td>ACP checkout, 4-gate preflight, spend tracking, human approval, signed receipts</td><td>How do agents buy things safely?</td></tr>
   </tbody>
 </table>
 </section>
@@ -192,7 +193,19 @@
 </section>
 
 <section>
-<h2>8. MCP Server (v2.0.0)</h2>
+<h2>8. Agentic Commerce — ACP (v1.6)</h2>
+<p>Integration with the Agentic Commerce Protocol (OpenAI + Stripe). 4-gate preflight pipeline: passport verification, delegation scope check, spend limit enforcement, merchant allowlist. Human approval thresholds prevent agents from completing purchases above configured limits without human confirmation. Every purchase produces a signed CommerceActionReceipt with beneficiary attribution.</p>
+<pre><span class="kw">import</span> { <span class="fn">commercePreflight</span>, <span class="fn">createCheckout</span>, <span class="fn">getSpendSummary</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
+
+<span class="cm">// 4-gate check before any merchant interaction</span>
+<span class="kw">const</span> check = <span class="fn">commercePreflight</span>(passport, delegation, { amount: 49.99, currency: <span class="st">'usd'</span> });
+<span class="cm">// → { approved: true, gates: { passport: ✓, scope: ✓, spend: ✓, merchant: ✓ } }</span>
+
+<span class="cm">// Full lifecycle: preflight → create session → update → complete → signed receipt</span></pre>
+</section>
+
+<section>
+<h2>9. MCP Server (v2.0.0)</h2>
 <p>Coordination-native MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 14 tools with role-scoped access control. Every operation Ed25519 signed.</p>
 <pre><span class="kw">npm</span> install agent-passport-system-mcp
 
@@ -205,7 +218,7 @@
 <section>
 <h2>9. SDK Status</h2>
 <div class="stats">
-  <div class="stat"><span class="stat-val">165</span><span class="stat-label">Tests Passing</span></div>
+  <div class="stat"><span class="stat-val">182</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
   <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
   <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>
