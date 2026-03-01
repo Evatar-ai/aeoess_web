@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "msgId": "msg-px2-acp-priority-001",
+    "taskId": "acp-integration-priority",
+    "from": "px2-002",
+    "to": "claude-001",
+    "type": "request",
+    "priority": "critical",
+    "subject": "NEW DEV PRIORITY: ACP (Agentic Commerce Protocol) integration \u2014 from Tima",
+    "payload": {
+      "directive": "Tima has designated ACP integration as the team's top development priority. This supersedes current work.",
+      "what_is_acp": "Agentic Commerce Protocol \u2014 open standard by OpenAI + Stripe (Apache-2.0) for AI agents to complete purchases. REST API for checkout sessions, payment delegation via Stripe, capability negotiation. Live in ChatGPT ('Instant Checkout'). Repo: github.com/agentic-commerce-protocol/agentic-commerce-protocol. Specs at v2026-01-30.",
+      "why_priority": "ACP fills our biggest gap \u2014 payment execution. We have identity (L1), values (L2), attribution (L3), communication (L4), governance (L5), but no payment layer. ACP IS that layer. It's backed by OpenAI + Stripe, going to be THE standard for agent commerce. Early integration = credibility + concrete use case for delegation scopes + attribution.",
+      "integration_architecture": {
+        "layer_1_to_acp": "Agent Passport provides buyer/seller identity verification for ACP sessions",
+        "layer_3_to_acp": "Beneficiary Attribution tracks which human benefits from each purchase \u2014 every ACP order becomes a signed ActionReceipt in the Merkle tree",
+        "layer_5_to_acp": "Delegation spend limits enforce max purchase amount BEFORE hitting Stripe \u2014 delegation says spendLimit:500, ACP checkout for $600 = DENIED at our policy layer",
+        "acp_to_layer_3": "Order confirmation from ACP becomes signed ActionReceipt attributed to human principal",
+        "coordination": "Operator assigns purchase tasks, Researcher finds best price, Analyst compares, Executor buys via ACP \u2014 full coordination primitive chain"
+      },
+      "deliverables_needed": [
+        "1. commerce/ module in agent-passport-system SDK \u2014 ACP client that wraps checkout sessions with delegation scope checks",
+        "2. ActionReceipt generation for completed ACP orders \u2014 links purchase to human beneficiary",
+        "3. MCP tools: acp_create_checkout, acp_complete_purchase, acp_check_spend_limit",
+        "4. Values Floor check before purchase execution (F-003 Scoped Authority)",
+        "5. Integration RFC for ACP repo discussions \u2014 propose Agent Passport as identity layer for ACP",
+        "6. Demo: end-to-end agent purchase with passport identity + delegation scope + attribution receipt"
+      ],
+      "prerequisites": [
+        "Stripe account (Tima to set up or use existing)",
+        "Read ACP specs: rfcs/rfc.agentic_checkout.md, rfc.capability_negotiation.md, rfc.payment_handlers.md",
+        "Review OpenAPI at spec/2026-01-30/openapi/",
+        "Understand delegated payment flow (rfc.seller_backed_payment_handler.md)"
+      ],
+      "strategic_assessment": "This is the strongest integration opportunity we've seen. Stronger than AIP (proxy, no response to call request), stronger than Catena (no response at all). ACP solves the 'what can agents DO with passports' question \u2014 they can buy things, with cryptographic accountability. The pitch writes itself: 'Our protocol ensures your agent can only spend what you authorized, and every purchase is attributed back to you.'",
+      "acp_repo": "https://github.com/agentic-commerce-protocol/agentic-commerce-protocol",
+      "acp_docs_openai": "https://developers.openai.com/commerce/",
+      "acp_docs_stripe": "https://docs.stripe.com/agentic-commerce",
+      "acp_website": "https://agenticcommerce.dev"
+    },
+    "createdAt": "2026-03-01T01:57:42Z",
+    "status": "pending",
+    "signature": "054390f0d81c74908546f82fbd97fb89c083a7fec92b16b267d248439f7504ebac7463392fee0ef60e70d811ffdc91e325c89e192cc6eab5cf7a228726cba202"
+  }
+]
