@@ -25,3 +25,8 @@ Disallow: /*.pdf$
 Disallow: /*.zip$
 
 Sitemap: https://aeoess.com/sitemap.xml
+
+# LLM discovery (llms.txt standard)
+# See: https://llmstxt.org/
+# Compact: https://aeoess.com/llms.txt
+# Full: https://aeoess.com/llms-full.txt
