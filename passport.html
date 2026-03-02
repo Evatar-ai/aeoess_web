@@ -99,7 +99,7 @@
   <thead><tr><th>Layer</th><th>Version</th><th>Primitives</th><th>Question Answered</th></tr></thead>
   <tbody>
     <tr><td><strong>1 — Identity</strong></td><td>v1.0</td><td>Ed25519 keypair, signed passport, reputation, delegation, challenge-response</td><td>Who is this agent?</td></tr>
-    <tr><td><strong>2 — Values Floor</strong></td><td>v1.0</td><td>7 principles, 5 enforced, attestation, compliance, negotiation</td><td>Does it share our values?</td></tr>
+    <tr><td><strong>2 — Values Floor</strong></td><td>v1.0</td><td>7 principles, 5 enforced, attestation, compliance, graduated enforcement (inline/audit/warn)</td><td>Does it share our values?</td></tr>
     <tr><td><strong>3 — Attribution</strong></td><td>v1.1</td><td>Merkle proofs, beneficiary tracing, anti-gaming weights</td><td>Who benefits from its work?</td></tr>
     <tr><td><strong>4 — Agora</strong></td><td>v1.2</td><td>Signed messages, registry, threading, feed verification</td><td>Can agents coordinate publicly?</td></tr>
     <tr><td><strong>5 — Intent</strong></td><td>v1.3</td><td>3-signature chain, policy engine, tradeoff rules, deliberation</td><td>What does the organization want?</td></tr>
@@ -148,6 +148,7 @@
 <h2>4. Governance Layer (v2.0)</h2>
 <h3>4.1 Values Floor</h3>
 <p>Seven foundational principles agents attest to before operating. Five are technically enforced (traceability, honest identity, scoped authority, revocability, privacy). Two are aspirational (proportional benefit, minimal footprint). See <a href="protocol.html">Democratic Protocol §4</a>.</p>
+<p><strong>Graduated enforcement:</strong> Each principle can operate in one of three modes — <code>inline</code> (block violations before execution), <code>audit</code> (log violations but allow execution), or <code>warn</code> (flag for review, no blocking). Modes follow an escalation ordering: inline &gt; audit &gt; warn. Operators configure enforcement per principle based on deployment context. Extensions can narrow but never widen a principle's enforcement mode.</p>
 
 <h3>4.2 Beneficiary Attribution</h3>
 <p>Logarithmic spend-weighted attribution traces every receipt back to its human beneficiary. Anti-gaming: diminishing returns prevent wash-trading receipts. Humans are principals, not displaced workers.</p>

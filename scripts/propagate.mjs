@@ -121,9 +121,80 @@ function getTargetFiles() {
 }
 
 // ── Pattern generation ──
-// For each variable, generate regex patterns that find old values.
-// We search for the variable's OLD value (whatever is currently in the file)
-// and offer to replace with the NEW value (from source of truth).
+// Context-anchored patterns prevent false positives.
+// Each variable has specific regex patterns that match ONLY the correct contexts.
+// E.g., TEST_COUNT only matches "{N} tests" not "~{N} lines".
+function getVariablePatterns(varName, oldValue, newValue) {
+  const o = String(oldValue).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const n = String(newValue);
+
+  switch (varName) {
+    case 'SDK_VERSION':
+      return [
+        // v1.7.0, (v1.7.0), "v1.7.0", v1.7.0—, v1.7.0)
+        { regex: new RegExp(`v${o}`, 'g'), replace: `v${n}` },
+        // "version": "1.7.0" in package.json
+        { regex: new RegExp(`"version":\\s*"${o}"`, 'g'), replace: `"version": "${n}"` },
+        // softwareVersion":"1.7.0"
+        { regex: new RegExp(`softwareVersion":"${o}"`, 'g'), replace: `softwareVersion":"${n}"` },
+      ];
+
+    case 'MCP_VERSION':
+      return [
+        // v2.1.0 in MCP-specific contexts
+        { regex: new RegExp(`v${o}`, 'g'), replace: `v${n}` },
+        { regex: new RegExp(`"version":\\s*"${o}"`, 'g'), replace: `"version": "${n}"` },
+      ];
+
+    case 'TEST_COUNT':
+      return [
+        // "214 tests" — the primary pattern
+        { regex: new RegExp(`${o} tests`, 'g'), replace: `${n} tests` },
+        // "214 test" (singular, less common)
+        { regex: new RegExp(`${o} test(?!s|_| file)`, 'g'), replace: `${n} test` },
+      ];
+
+    case 'TEST_SUITES':
+      return [
+        // "55 suites"
+        { regex: new RegExp(`${o} suites`, 'g'), replace: `${n} suites` },
+      ];
+
+    case 'TEST_FILES':
+      return [
+        // "15 test files"
+        { regex: new RegExp(`${o} test files`, 'g'), replace: `${n} test files` },
+      ];
+
+    case 'MCP_TOOL_COUNT':
+      return [
+        // "30 tools"
+        { regex: new RegExp(`${o} tools`, 'g'), replace: `${n} tools` },
+      ];
+
+    case 'LAYER_COUNT':
+      return [
+        // "8 protocol layers"
+        { regex: new RegExp(`${o} protocol layers`, 'g'), replace: `${n} protocol layers` },
+        // "8 layers"
+        { regex: new RegExp(`${o} layers`, 'g'), replace: `${n} layers` },
+        // "all 8 layers" / "across all 8 layers"
+        { regex: new RegExp(`all ${o}`, 'g'), replace: `all ${n}` },
+      ];
+
+    case 'ADVERSARIAL_COUNT':
+      return [
+        // "23 adversarial"
+        { regex: new RegExp(`${o} adversarial`, 'g'), replace: `${n} adversarial` },
+        // "23 attack scenarios"
+        { regex: new RegExp(`${o} attack`, 'g'), replace: `${n} attack` },
+      ];
+
+    default:
+      return [];
+  }
+}
+
 function findStaleRefs(files, currentValues, previousValues) {
   const results = [];
 
@@ -142,27 +213,27 @@ function findStaleRefs(files, currentValues, previousValues) {
       if (oldValue === undefined || oldValue === null) continue;
       if (String(oldValue) === String(newValue)) continue;
 
-      // Search for old value in context
-      const oldStr = String(oldValue);
-      const newStr = String(newValue);
+      const patterns = getVariablePatterns(varName, oldValue, newValue);
 
-      // Find all occurrences of old value
-      let idx = 0;
-      while ((idx = content.indexOf(oldStr, idx)) !== -1) {
-        // Get surrounding context (30 chars each side)
-        const start = Math.max(0, idx - 40);
-        const end = Math.min(content.length, idx + oldStr.length + 40);
-        const context = content.slice(start, end).replace(/\n/g, '↵');
-        const lineNum = content.slice(0, idx).split('\n').length;
+      for (const { regex } of patterns) {
+        let match;
+        const regexCopy = new RegExp(regex.source, regex.flags);
+        while ((match = regexCopy.exec(content)) !== null) {
+          const idx = match.index;
+          const start = Math.max(0, idx - 40);
+          const end = Math.min(content.length, idx + match[0].length + 40);
+          const context = content.slice(start, end).replace(/\n/g, '↵');
+          const lineNum = content.slice(0, idx).split('\n').length;
 
-        fileResults.push({
-          variable: varName,
-          line: lineNum,
-          oldValue: oldStr,
-          newValue: newStr,
-          context,
-        });
-        idx += oldStr.length;
+          fileResults.push({
+            variable: varName,
+            line: lineNum,
+            oldValue: match[0],
+            newValue: match[0].replace(regex, patterns.find(p => p.regex.source === regex.source).replace),
+            context,
+            pattern: regex.source,
+          });
+        }
       }
     }
 
@@ -177,24 +248,29 @@ function findStaleRefs(files, currentValues, previousValues) {
 }
 
 // ── Apply replacements ──
-function applyReplacements(results) {
+function applyReplacements(results, currentValues, previousValues) {
   let totalReplacements = 0;
 
   for (const result of results) {
     if (result.status !== 'stale') continue;
 
     let content = readFileSync(result.file, 'utf8');
-    const replacements = new Map(); // old→new, deduplicated
 
-    for (const ref of result.refs) {
-      replacements.set(ref.oldValue, ref.newValue);
-    }
+    // Get unique variables that need replacement in this file
+    const variables = [...new Set(result.refs.map(r => r.variable))];
 
-    for (const [oldVal, newVal] of replacements) {
-      const before = content;
-      content = content.split(oldVal).join(newVal);
-      const count = (before.length - content.length) / (oldVal.length - newVal.length);
-      if (count !== 0) totalReplacements += Math.abs(Math.round(count));
+    for (const varName of variables) {
+      const oldValue = previousValues[varName];
+      const newValue = currentValues[varName];
+      const patterns = getVariablePatterns(varName, oldValue, newValue);
+
+      for (const { regex, replace } of patterns) {
+        const before = content;
+        content = content.replace(regex, replace);
+        // Count replacements by comparing lengths or match count
+        const matches = before.match(regex);
+        if (matches) totalReplacements += matches.length;
+      }
     }
 
     writeFileSync(result.file, content, 'utf8');
@@ -279,7 +355,7 @@ if (staleCount === 0) {
   console.log(`Found ${staleCount} stale reference(s).`);
 
   if (applyMode) {
-    const replaced = applyReplacements(results);
+    const replaced = applyReplacements(results, current, previous);
     console.log(`✅ Applied ${replaced} replacement(s).`);
 
     // Update cache with new values

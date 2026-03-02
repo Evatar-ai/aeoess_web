@@ -5,13 +5,13 @@
 ## Overview
 
 AEOESS provides eight protocol layers for sovereign AI agents:
-1. **Identity & Accountability** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation
-2. **Human Values Floor** — 7 principles (5 technically enforced), attestation, compliance verification, agent negotiation
+1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
+2. **Human Values Floor** — 7 principles (5 technically enforced), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
 4. **Agent Agora** — Protocol-native Ed25519 signed communication, registry, threading, public observability
 5. **Intent Architecture** — 3-signature chain (intent → decision → receipt), policy engine, role-based autonomy
-6. **Cascade Revocation** — Parent→child chain tracking, batch revoke by agent, chain validation, revocation events
-7. **Coordination Primitives** — Task briefs, role assignment, evidence submission, review gates, handoffs, deliverables
+6. **Revocation** — Cascade revoke (parent→all children), chain registry, batch revoke, validation events
+7. **Coordination** — Task briefs, role assignment, evidence submission, review gates, handoffs, deliverables
 8. **Agentic Commerce** — ACP integration (OpenAI + Stripe), 4-gate preflight, spend limits, human approval, signed receipts
 
 Plus: **MCP Server** (v2.1.0) — 30 tools across all layers with role-scoped access control for any MCP client.

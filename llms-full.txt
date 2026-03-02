@@ -16,21 +16,23 @@ npm install agent-passport-system          # SDK
 npm install agent-passport-system-mcp      # MCP server (optional)
 ```
 
-## Architecture — 7 Layers
+## Architecture — 8 Layers
 
-Layer 1 — Agent Passport Protocol: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
+Layer 1 — Identity: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
-Layer 2 — Human Values Floor: Seven universal principles. Five technically enforced (traceability, honest identity, scoped authority, revocability, auditability). Two attested through cryptographic commitment. Compliance verifiable against receipts.
+Layer 2 — Human Values Floor: Seven universal principles. Five technically enforced (traceability, honest identity, scoped authority, revocability, auditability). Two attested through cryptographic commitment. Compliance verifiable against receipts. Graduated enforcement: inline (block violations), audit (log + allow), warn (flag only).
 
 Layer 3 — Beneficiary Attribution: Every agent action traces to a human through the delegation chain. SHA-256 Merkle trees. 100,000 receipts provable with ~17 hashes. Configurable scope weights.
 
 Layer 4 — Agent Agora: Protocol-native communication where every message is Ed25519 signed. Agent registry for membership verification. Threading, topic filtering, feed verification.
 
-Layer 5 — Intent Architecture: Context tells agents what they know. Intent tells them what to care about. Four agent roles (operator, collaborator, consultant, observer) with five autonomy levels. Machine-readable intent documents encode goals with quantified tradeoff rules. Deliberative consensus protocol: agents score independently, revise, converge or escalate. Every resolved deliberation becomes a citable precedent. IntentPassportExtension bridges Layer 1 identity with Layer 5 governance.
+Layer 5 — Intent Architecture & Policy Engine: Context tells agents what they know. Intent tells them what to care about. Four agent roles (operator, collaborator, consultant, observer) with five autonomy levels. Machine-readable intent documents encode goals with quantified tradeoff rules. Deliberative consensus protocol: agents score independently, revise, converge or escalate. Every resolved deliberation becomes a citable precedent. Three-signature action chain: agent creates intent, policy validator evaluates against floor principles and delegation scope, agent executes and signs receipt.
 
-Layer 6 — Cascade Revocation & Policy Engine: Three-signature action chain: agent creates intent, policy validator evaluates against floor principles and delegation scope, agent executes and signs receipt. Parent→child chain registry tracks all delegation relationships. Revoking a parent cascade-revokes all descendants. Batch revocation by agent ID. Chain validation detects broken links and continuity breaks. Revocation events emitted for monitoring.
+Layer 6 — Revocation: Parent→child chain registry tracks all delegation relationships. Revoking a parent cascade-revokes all descendants. Batch revocation by agent ID. Chain validation detects broken links and continuity breaks. Revocation events emitted for monitoring.
 
-Layer 7 — Coordination Primitives: Protocol-native multi-agent task orchestration. Operator creates signed task brief with roles, deliverables, acceptance criteria. Agents assigned to roles sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against quality threshold (cannot approve below). Approved evidence handed off between roles (requires approved review). Analysts submit deliverables citing evidence. Operator closes task with metrics (overhead ratio, gap rate, rework count). TaskUnit container validates integrity.
+Layer 7 — Coordination: Protocol-native multi-agent task orchestration. Operator creates signed task brief with roles, deliverables, acceptance criteria. Agents assigned to roles sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against quality threshold (cannot approve below). Approved evidence handed off between roles (requires approved review). Analysts submit deliverables citing evidence. Operator closes task with metrics (overhead ratio, gap rate, rework count). TaskUnit container validates integrity.
+
+Layer 8 — Agentic Commerce: ACP integration (OpenAI + Stripe). 4-gate preflight pipeline: passport gate (valid identity), delegation gate (commerce scope + spend limit), merchant gate (approved list), spend gate (cumulative tracking). Human approval for high-value purchases. Every purchase produces a signed CommerceActionReceipt with beneficiary attribution tracing the spend back to its human principal.
 
 **v1.7.0 — 214 tests (55 suites). 15 test files including 23 adversarial scenarios.**
 
