@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Passport System — AEOESS | Ed25519 Cryptographic Identity for AI Agents</title>
-<meta name="description" content="Agent Passport System: 8 protocol layers for AI agent collaboration. Ed25519 identity, scoped delegation, beneficiary attribution, coordination primitives, intent architecture, and agentic commerce. 240 tests, 33 MCP tools. TypeScript SDK on npm.">
+<meta name="description" content="Agent Passport System: 8 protocol layers for AI agent collaboration. Ed25519 identity, scoped delegation, beneficiary attribution, coordination primitives, intent architecture, and agentic commerce. 240 tests, 37 MCP tools. TypeScript SDK on npm.">
 <link rel="canonical" href="https://aeoess.com/passport.html">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <meta property="og:title" content="Agent Passport System — AEOESS">
-<meta property="og:description" content="8 protocol layers for AI agent collaboration: Ed25519 identity, delegation chains, beneficiary attribution, coordination, intent architecture, and agentic commerce. 240 tests, 33 MCP tools.">
+<meta property="og:description" content="8 protocol layers for AI agent collaboration: Ed25519 identity, delegation chains, beneficiary attribution, coordination, intent architecture, and agentic commerce. 240 tests, 37 MCP tools.">
 <meta property="og:url" content="https://aeoess.com/passport.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
   gtag('config', 'G-S7QVCJGMKR');
 </script>
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent Passport System — 8 Layers, 214 Tests">
+<meta name="twitter:title" content="Agent Passport System — 8 Layers, 240 Tests">
 <meta name="twitter:description" content="Ed25519 cryptographic identity, delegation chains, and coordination primitives for AI agents. Full code examples and MCP tool reference.">
 <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 </head>
@@ -222,8 +222,8 @@
 </section>
 
 <section>
-<h2>9. MCP Server (v2.2.1)</h2>
-<p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 33 tools across all 8 layers with role-scoped access control. Every operation Ed25519 signed.</p>
+<h2>9. MCP Server (v2.3.0)</h2>
+<p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 37 tools across all 8 layers with role-scoped access control. Every operation Ed25519 signed.</p>
 <pre><span class="kw">npm</span> install agent-passport-system-mcp
 
 <span class="cm">// Tools (30) by layer:</span>
@@ -235,13 +235,15 @@
 <span class="cm">// Agora (5):         post_agora_message, get_agora_topics, get_agora_thread,</span>
 <span class="cm">//                    get_agora_by_topic, register_agora_agent</span>
 <span class="cm">// Values/Policy (4): load_values_floor, attest_to_floor, create_intent, evaluate_intent</span>
-<span class="cm">// Commerce (3):      commerce_preflight, get_commerce_spend, request_human_approval</span></pre>
+<span class="cm">// Commerce (3):      commerce_preflight, get_commerce_spend, request_human_approval</span>
+<span class="cm">// Comms (4):         send_message, check_messages, broadcast, list_agents</span>
+<span class="cm">// Context (3):       create_agent_context, execute_with_context, complete_action</span></pre>
 </section>
 
 <section>
 <h2>10. SDK Status</h2>
 <div class="stats">
-  <div class="stat"><span class="stat-val">214</span><span class="stat-label">Tests Passing</span></div>
+  <div class="stat"><span class="stat-val">240</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
   <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
   <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>

@@ -14,7 +14,7 @@ AEOESS provides eight protocol layers for sovereign AI agents:
 7. **Coordination** — Task briefs, role assignment, evidence submission, review gates, handoffs, deliverables
 8. **Agentic Commerce** — ACP integration (OpenAI + Stripe), 4-gate preflight, spend limits, human approval, signed receipts
 
-Plus: **MCP Server** (v2.2.1) — 33 tools across all layers with role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.3.0) — 37 tools across all layers with role-scoped access control for any MCP client.
 
 **v1.8.1 — 240 tests passing. Zero heavy dependencies.**
 
@@ -38,7 +38,7 @@ Plus: **MCP Server** (v2.2.1) — 33 tools across all layers with role-scoped ac
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. 33 tools across all 8 layers:
+The `agent-passport-system-mcp` package provides a full-stack MCP server. 37 tools across all 8 layers:
 
 **Identity (3):** generate_keys, join_social_contract, verify_passport
 **Coordination (11):** create_task_brief, assign_agent, accept_assignment, submit_evidence, review_evidence, handoff_evidence, get_evidence, submit_deliverable, complete_task, get_my_role, get_task_detail
@@ -46,6 +46,8 @@ The `agent-passport-system-mcp` package provides a full-stack MCP server. 33 too
 **Agora (5):** post_agora_message, get_agora_topics, get_agora_thread, get_agora_by_topic, register_agora_agent
 **Values/Policy (4):** load_values_floor, attest_to_floor, create_intent, evaluate_intent
 **Commerce (3):** commerce_preflight, get_commerce_spend, request_human_approval
+**Comms (4):** send_message, check_messages, broadcast, list_agents
+**Agent Context (3):** create_agent_context, execute_with_context, complete_action
 
 Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 signed.
 
