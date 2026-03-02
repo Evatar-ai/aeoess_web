@@ -9,6 +9,7 @@
  * Usage:
  *   node scripts/propagate.mjs              # dry run (show what would change)
  *   node scripts/propagate.mjs --apply      # actually replace
+ *   node scripts/propagate.mjs --apply --commit  # replace + git commit + push all repos
  *   node scripts/propagate.mjs --read-only  # just show current values
  * 
  * Runs from: /Users/tima/aeoess_web
@@ -170,6 +171,8 @@ function getVariablePatterns(varName, oldValue, newValue) {
       return [
         // "30 tools"
         { regex: new RegExp(`${o} tools`, 'g'), replace: `${n} tools` },
+        // "30 MCP tools"
+        { regex: new RegExp(`${o} MCP tools`, 'g'), replace: `${n} MCP tools` },
       ];
 
     case 'LAYER_COUNT':
@@ -283,10 +286,11 @@ function applyReplacements(results, currentValues, previousValues) {
 const args = process.argv.slice(2);
 const applyMode = args.includes('--apply');
 const readOnlyMode = args.includes('--read-only');
+const commitMode = args.includes('--commit');
 
 console.log('╔══════════════════════════════════════════════╗');
 console.log('║  AEOESS Update Propagation                  ║');
-console.log(`║  Mode: ${readOnlyMode ? 'READ-ONLY' : applyMode ? 'APPLY' : 'DRY RUN'}                          ║`);
+console.log(`║  Mode: ${readOnlyMode ? 'READ-ONLY' : applyMode ? (commitMode ? 'APPLY + COMMIT' : 'APPLY') : 'DRY RUN'}                          ║`);
 console.log('╚══════════════════════════════════════════════╝');
 console.log('');
 
@@ -361,6 +365,28 @@ if (staleCount === 0) {
     // Update cache with new values
     writeFileSync(cacheFile, JSON.stringify(current, null, 2), 'utf8');
     console.log('Cache updated.');
+
+    // Auto-commit and push all repos if --commit flag is set
+    if (commitMode) {
+      console.log('');
+      console.log('Committing and pushing all repos...');
+      const msg = `propagate: SDK v${current.SDK_VERSION}, MCP v${current.MCP_VERSION}, ${current.TEST_COUNT} tests, ${current.MCP_TOOL_COUNT} tools`;
+      for (const [name, repoPath] of Object.entries(REPOS)) {
+        try {
+          // Check if there are staged or unstaged changes
+          const status = execSync('git status --porcelain', { cwd: repoPath, encoding: 'utf8' }).trim();
+          if (status) {
+            execSync(`git add -A && git commit -m "${msg}"`, { cwd: repoPath, encoding: 'utf8' });
+            execSync('git push', { cwd: repoPath, encoding: 'utf8', timeout: 30000 });
+            console.log(`  ✅ ${name}: committed and pushed`);
+          } else {
+            console.log(`  ⏭  ${name}: no changes`);
+          }
+        } catch (e) {
+          console.log(`  ❌ ${name}: ${e.message?.slice(0, 100)}`);
+        }
+      }
+    }
   } else {
     console.log('Run with --apply to fix them.');
   }
