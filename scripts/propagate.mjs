@@ -113,6 +113,8 @@ function getTargetFiles() {
     { path: `${REPOS.web}/compare.html`, repo: 'web' },
     { path: `${REPOS.web}/media.html`, repo: 'web' },
     { path: `${REPOS.web}/passport.html`, repo: 'web' },
+    { path: `${REPOS.web}/blog.html`, repo: 'web' },
+    { path: `${REPOS.web}/threat-model.html`, repo: 'web' },
     // Web repo — specs (agent-readable context)
     { path: `${REPOS.web}/specs/PROJECT-INSTRUCTIONS.md`, repo: 'web' },
     { path: `${REPOS.web}/specs/FILE-TREE.md`, repo: 'web' },
@@ -149,10 +151,14 @@ function getVariablePatterns(varName, oldValue, newValue) {
 
     case 'TEST_COUNT':
       return [
-        // "214 tests" — the primary pattern
-        { regex: new RegExp(`${o} tests`, 'g'), replace: `${n} tests` },
+        // "214 tests" or "214 Tests" — case insensitive
+        { regex: new RegExp(`${o} tests`, 'gi'), replace: `${n} tests` },
         // "214 test" (singular, less common)
         { regex: new RegExp(`${o} test(?!s|_| file)`, 'g'), replace: `${n} test` },
+        // bare number in HTML stat elements: >214< (with class context)
+        { regex: new RegExp(`"stat-val">${o}<`, 'g'), replace: `"stat-val">${n}<` },
+        // bare number in table cells: <span class="y">214</span>
+        { regex: new RegExp(`"y">${o}<`, 'g'), replace: `"y">${n}<` },
       ];
 
     case 'TEST_SUITES':
