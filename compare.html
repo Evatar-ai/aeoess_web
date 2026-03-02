@@ -94,7 +94,7 @@
 
 <section>
 <div class="sh"><h2>Feature Matrix</h2></div>
-<p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">Data collected Feb 26, 2026 by aeoess-001 (researcher) and px2-002 (analyst). All claims are Ed25559-signed evidence packets in the <a href="https://github.com/aeoess/aeoess_web/tree/main/coordination/evidence" target="_blank">coordination/evidence/</a> directory.</p>
+<p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">Data collected Feb 26, 2026 by aeoess-001 (researcher) and px2-002 (analyst). All claims are Ed25519-signed evidence packets in the <a href="https://github.com/aeoess/aeoess_web/tree/main/coordination/evidence" target="_blank">coordination/evidence/</a> directory.</p>
 
 <div class="matrix">
 <table>
@@ -112,8 +112,8 @@
 <tbody>
 <tr>
   <td>Cryptographic Identity</td>
-  <td class="aps"><span class="y">Ed25559 self-sovereign</span></td>
-  <td><span class="y">Ed25559 + JWT</span></td>
+  <td class="aps"><span class="y">Ed25519 self-sovereign</span></td>
+  <td><span class="y">Ed25519 + JWT</span></td>
   <td><span class="y">Crypto signatures</span></td>
   <td><span class="y">Per-agent keypair</span></td>
   <td><span class="p">CA-issued certs</span></td>
@@ -275,7 +275,7 @@
     <li><strong>Beneficiary attribution</strong> with SHA-256 Merkle proofs — no competitor traces value back to human principals</li>
     <li><strong>Values Floor</strong> with cryptographic attestation — no competitor has constitutional ethical principles baked into the protocol</li>
     <li><strong>7-layer architecture</strong> — competitors max out at 2</li>
-    <li><strong>Cross-agent Ed25559 verified live</strong> across 3 runtimes (Claude/Node, aeoess/Node, PortalX2/Python) and 2 LLM providers</li>
+    <li><strong>Cross-agent Ed25519 verified live</strong> across 3 runtimes (Claude/Node, aeoess/Node, PortalX2/Python) and 2 LLM providers</li>
     <li><strong>This page</strong> — produced by the protocol's own multi-agent coordination system. The evidence chain below is itself the proof.</li>
   </ul>
 </div>
@@ -302,7 +302,7 @@
 
 <section>
 <div class="sh"><h2>Live Evidence Chain</h2></div>
-<p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">This analysis was produced by a real multi-agent coordination task using the Agent Passport System. Every step below is Ed25559-signed and verifiable in the <a href="https://github.com/aeoess/aeoess_web/tree/main/coordination" target="_blank">coordination/</a> directory.</p>
+<p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">This analysis was produced by a real multi-agent coordination task using the Agent Passport System. Every step below is Ed25519-signed and verifiable in the <a href="https://github.com/aeoess/aeoess_web/tree/main/coordination" target="_blank">coordination/</a> directory.</p>
 
 <div class="chain">
 <div class="chain-step">
@@ -325,7 +325,7 @@
   <div class="num">3</div>
   <div class="detail">
     <div class="agent">px2-002 (Analyst)</div>
-    <div class="desc">Built 11-dimension feature matrix across all 6 protocols. Identified 7 unique differentiators and 6 gaps. Pure Python Ed25559 — cross-verified with Node.js SDK.</div>
+    <div class="desc">Built 11-dimension feature matrix across all 6 protocols. Identified 7 unique differentiators and 6 gaps. Pure Python Ed25519 — cross-verified with Node.js SDK.</div>
     <code>del_fecd4da4 · scopes: read:evidence, execute:analysis, execute:code</code>
   </div>
 </div>
@@ -344,7 +344,7 @@
 
 <section>
 <div class="sh"><h2>Protocol Finding</h2></div>
-<p style="font-size:.9rem;line-height:1.6">The coordination task exposed a real protocol bug: PortalX2's Python <code>json.dumps()</code> produces different bytes than Node.js <code>JSON.stringify()</code> for identical data. The Ed25559 signature verified in PortalX2's runtime but couldn't be re-verified from disk. This led to the <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/CANONICAL-SPEC.md" target="_blank">Canonical Serialization Spec</a> and a <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/canonical.py" target="_blank">Python reference implementation</a> — both shipped the same day the bug was found. That's what a real coordination test looks like: it breaks things, and the protocol gets better.</p>
+<p style="font-size:.9rem;line-height:1.6">The coordination task exposed a real protocol bug: PortalX2's Python <code>json.dumps()</code> produces different bytes than Node.js <code>JSON.stringify()</code> for identical data. The Ed25519 signature verified in PortalX2's runtime but couldn't be re-verified from disk. This led to the <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/CANONICAL-SPEC.md" target="_blank">Canonical Serialization Spec</a> and a <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/canonical.py" target="_blank">Python reference implementation</a> — both shipped the same day the bug was found. That's what a real coordination test looks like: it breaks things, and the protocol gets better.</p>
 </section>
 
 <section>
