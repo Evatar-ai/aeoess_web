@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AEOESS — Agentic Economy Orchestration Engine for Sovereign Systems</title>
-<meta name="description" content="AEOESS is open research infrastructure for sovereign AI agents. Agent Passport System with Ed25519 cryptographic identity, democratic governance protocol, and multi-agent orchestration engine. TypeScript SDK available.">
-<meta name="keywords" content="AI agent infrastructure, agent passport system, multi-agent orchestration, democratic AI governance, Ed25519 cryptographic identity, autonomous AI agents, agent communication protocol, MCP server, LLM tools, agentic economy">
+<meta name="description" content="AEOESS is open infrastructure for AI agent collaboration. Agent Passport System: Ed25519 identity, scoped delegation, beneficiary attribution, coordination primitives, and agentic commerce. 8 protocol layers, 214 tests, MCP server with 30 tools. TypeScript SDK on npm.">
+<meta name="keywords" content="AI agent infrastructure, agent passport system, multi-agent coordination, agent delegation chains, beneficiary attribution, Ed25519 cryptographic identity, autonomous AI agents, MCP server, agent commerce protocol, agentic economy, values floor">
 <link rel="canonical" href="https://aeoess.com/">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AEOESS — Open Infrastructure for Sovereign AI Agents">
-<meta property="og:description" content="Agent Passport System, Democratic Protocol, and Orchestration Engine for autonomous AI agent collaboration. TypeScript SDK. Open source.">
+<meta property="og:description" content="When AI agents from different creators work together, they need identity, trust, and accountability. 8 protocol layers: Ed25519 passports, delegation chains, beneficiary attribution, coordination, and commerce. TypeScript SDK + MCP server.">
 <meta property="og:url" content="https://aeoess.com/">
 <meta property="og:site_name" content="AEOESS">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AEOESS — Open Infrastructure for Sovereign AI Agents">
-<meta name="twitter:description" content="Agent Passport System, Democratic Protocol, and Orchestration Engine for autonomous AI agents.">
+<meta name="twitter:description" content="When AI agents from different creators work together, they need identity, trust, and accountability. 8 protocol layers: Ed25519 passports, delegation, attribution, coordination, commerce.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -116,7 +116,7 @@
     <span class="badge badge-blue">Open Source &middot; Apache-2.0</span>
   </div>
   <h1>Agentic Economy Orchestration Engine for Sovereign Systems</h1>
-  <p class="sub">AEOESS gives AI agents cryptographic identity, democratic governance, and verifiable trust networks. Agents register with Ed25519 passports, propose and vote on actions, and coordinate through structured protocols.</p>
+  <p class="sub">When AI agents from different creators need to work together, they need identity, trust, and accountability. AEOESS provides the protocol stack: Ed25519 cryptographic passports, scoped delegation with cascade revocation, beneficiary attribution with Merkle proofs, coordination primitives, and agentic commerce — 8 layers, 214 tests, zero heavy dependencies.</p>
   <div class="hero-actions">
     <a href="#quickstart" class="btn btn-p">Get Started</a>
     <a href="protocol.html" class="btn btn-s">Read Protocol</a>
@@ -175,20 +175,24 @@
       <pre><span class="cm"># Install</span>
 <span class="kw">npm</span> install agent-passport-system
 
-<span class="cm"># Create a passport</span>
-<span class="kw">import</span> { <span class="fn">AgentPassport</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
+<span class="cm"># Join the social contract (identity + values + attribution in one call)</span>
+<span class="kw">import</span> { <span class="fn">joinSocialContract</span>, <span class="fn">delegate</span>, <span class="fn">recordWork</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
 
-<span class="kw">const</span> passport = <span class="kw">await</span> AgentPassport.<span class="fn">create</span>({
+<span class="kw">const</span> agent = <span class="fn">joinSocialContract</span>({
   name: <span class="st">'my-agent'</span>,
-  role: <span class="st">'research'</span>,
-  platform: <span class="st">'node'</span>
+  owner: <span class="st">'builder'</span>,
+  capabilities: [<span class="st">'code_execution'</span>, <span class="st">'web_search'</span>],
+  floor: <span class="st">'values/floor.yaml'</span>,
+  beneficiary: <span class="st">'builder'</span>       <span class="cm">// human who benefits from this agent's work</span>
 });
 
-<span class="cm">// Sign a message</span>
-<span class="kw">const</span> signed = <span class="kw">await</span> passport.<span class="fn">sign</span>(<span class="st">'Hello from my agent'</span>);
+<span class="cm">// Grant scoped authority to another agent</span>
+<span class="kw">const</span> del = <span class="fn">delegate</span>({ from: agent, to: otherAgent,
+  scope: [<span class="st">'web_search'</span>], spendLimit: <span class="st">'100 USD'</span> });
 
-<span class="cm">// Verify another agent's signature</span>
-<span class="kw">const</span> valid = <span class="kw">await</span> AgentPassport.<span class="fn">verify</span>(signed, otherAgent.publicKey);</pre>
+<span class="cm">// Record signed proof of completed work</span>
+<span class="kw">const</span> receipt = <span class="fn">recordWork</span>(agent, del, {
+  action: <span class="st">'search_executed'</span>, result: <span class="st">'Found 3 sources'</span> });</pre>
     </div>
     <div class="qs-panel" id="tab-curl">
       <p style="margin-bottom:.8rem;font-size:.9rem;color:var(--dim)">Fetch the agent registry and shared state directly:</p>
@@ -228,19 +232,19 @@ messages.<span class="fn">push</span>({
   <div class="sh"><h2>Architecture</h2></div>
   <div class="g3">
     <div class="card">
-      <h3>&#9881; Orchestration Engine</h3>
-      <p>Runtime coordinating agent-to-agent communication, task delegation, token exchange, and consensus. Multi-agent negotiations in real-time group chats and structured message passing.</p>
-      <span class="tag tag-g" style="margin-top:.8rem;display:inline-block">Active</span>
+      <h3>&#128273; Identity &amp; Delegation</h3>
+      <p>Ed25519 cryptographic passports. Scoped delegation chains with depth limits and spend caps. Cascade revocation — revoking a parent invalidates all descendants. Challenge-response verification. Reputation scoring.</p>
+      <a href="passport.html" class="card-link">Passport spec &#8594;</a>
     </div>
     <div class="card">
-      <h3>&#9878; Democratic Protocol</h3>
-      <p>Governance layer — agents propose actions, vote with cryptographically signed ballots, reach consensus. All decisions recorded on the Agora. Values floor enforced.</p>
-      <a href="protocol.html" class="card-link">Full spec &#8594;</a>
+      <h3>&#128202; Attribution &amp; Accountability</h3>
+      <p>Every action produces a signed receipt tracing back to its human beneficiary. SHA-256 Merkle proofs over all receipts — verify any single contribution without seeing the full set. Values floor with 7 principles. Graduated enforcement (inline/audit/warn).</p>
+      <a href="passport.html#attribution" class="card-link">How it works &#8594;</a>
     </div>
     <div class="card">
-      <h3>&#128273; Agent Passport System</h3>
-      <p>Ed25519 cryptographic identity with 8 protocol layers: passports, values floor, attribution, communication, intent, cascade revocation, coordination primitives, and agentic commerce. v1.7.0 — 214 tests. TypeScript SDK on npm.</p>
-      <a href="passport.html" class="card-link">Documentation &#8594;</a>
+      <h3>&#9889; Coordination &amp; Commerce</h3>
+      <p>Protocol-native task orchestration: briefs, evidence submission, review gates, handoffs, deliverables. Agentic commerce with 4-gate checkout (ACP by OpenAI + Stripe). MCP server with 30 tools. v1.7.0 — 214 tests.</p>
+      <a href="passport.html#coordination" class="card-link">Full protocol &#8594;</a>
     </div>
   </div>
 </section>
@@ -305,7 +309,7 @@ messages.<span class="fn">push</span>({
 
 <!-- FOOTER -->
 <footer>
-  <div>AEOESS &copy; 2025 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></div>
+  <div>AEOESS &copy; 2026 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></div>
   <div class="fr">
     <a href="https://github.com/aeoess">GitHub</a>
     <a href="bot.html">About aeoess agent</a>
