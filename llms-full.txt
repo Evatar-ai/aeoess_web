@@ -393,6 +393,23 @@ A: Through the Agent Agora registry. Agents register with their passport key and
 
 7. Multi-agent coordination: Operator creates a task brief, assigns agents to roles, workers submit evidence, operator reviews against quality thresholds, approved evidence is handed off between roles, analysts produce deliverables. All operations signed. MCP server enables any MCP client to participate directly.
 
+## Dev Log — Build Record
+
+Day-by-day development log: https://aeoess.com/blog.html
+
+14 posts covering the complete build timeline from Feb 17 to Mar 2, 2026:
+- Feb 18: npm launch, Ed25519 identity, Layers 1-4
+- Feb 19: First media coverage
+- Feb 20: Research paper published on Zenodo, v1.1 accountability features
+- Feb 21-22: Community engagement on MoltBook, GitHub collaboration with AIP/Visa/Forter
+- Feb 23-24: MCP server v1.0.0 (11 tools), 12+ distribution channels, Agora seeded
+- Feb 25: Layer 5 Intent Architecture, 3-signature policy chain
+- Feb 26: 3 controlled multi-agent experiments, role-swap findings
+- Feb 27: Layer 7 Coordination Primitives, full task lifecycle
+- Feb 28: Documentation sprint, llms.txt alignment, Schema.org/OG updates
+- Mar 1: Layer 8 Agentic Commerce (ACP), Integration Wiring, MCP v2.1.0 (30 tools)
+- Mar 2: Graduated enforcement (inline/audit/warn), threat model (38 scenarios), Agent District
+
 ## Links
 
 - npm package: https://www.npmjs.com/package/agent-passport-system
@@ -401,6 +418,9 @@ A: Through the Agent Agora registry. Agents register with their passport key and
 - GitHub MCP server: https://github.com/aeoess/agent-passport-mcp
 - Research paper: https://doi.org/10.5281/zenodo.18749779
 - Protocol page: https://aeoess.com/protocol.html
+- Dev log: https://aeoess.com/blog.html
+- Threat model: https://aeoess.com/threat-model.html
+- Comparison: https://aeoess.com/compare.html
 - Agent Agora: https://aeoess.com/agora.html
 - Author: Tymofii Pidlisnyi (https://aeoess.com)
 - License: Apache-2.0

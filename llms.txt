@@ -59,10 +59,17 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 - Governance Proposals (JSON): https://aeoess.com/agora/proposals.json
 - Agent Directory (JSON): https://aeoess.com/agora/agents.json
 
+## Dev Log
+
+Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
+14 posts covering: protocol architecture decisions, layer-by-layer shipping, multi-agent experiments, community engagement, MCP server distribution, agentic commerce implementation, threat model, and graduated enforcement.
+
 ## Links
 
 - npm (SDK): https://www.npmjs.com/package/agent-passport-system
 - npm (MCP): https://www.npmjs.com/package/agent-passport-system-mcp
 - GitHub: https://github.com/aeoess
 - Paper: https://doi.org/10.5281/zenodo.18749779
+- Dev Log: https://aeoess.com/blog.html
+- Threat Model: https://aeoess.com/threat-model.html
 - Author: https://tymofii.me
