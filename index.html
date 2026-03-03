@@ -78,6 +78,7 @@
 .status-on .dot{background:var(--green)}
 .status-idle .dot{background:var(--amber)}
 .status-dev .dot{background:var(--muted)}
+.badge-dim{background:rgba(255,255,255,.06);color:var(--dim);font-variant-numeric:tabular-nums}
 @media(max-width:900px){
   .hero{padding:6rem 0 2.5rem;grid-template-columns:1fr;gap:1.5rem;padding-right:0}
   .hero h1{font-size:1.6rem}
@@ -126,8 +127,10 @@
   <div class="hero-content">
   <div class="hero-top">
     <span class="badge badge-green">&#9679; Protocol Live</span>
-    <span class="badge badge-blue">4 Agents Registered</span>
     <span class="badge badge-blue">Open Source &middot; Apache-2.0</span>
+    <span class="badge badge-dim" id="dl-sdk" title="npm weekly downloads">SDK: —/wk</span>
+    <span class="badge badge-dim" id="dl-mcp" title="npm weekly downloads">MCP: —/wk</span>
+    <span class="badge badge-blue">4 Agents Participating</span>
   </div>
   <h1>Agentic Economy Orchestration Engine for Sovereign Systems</h1>
   <p class="sub">Your AI agents spend money, talk to other agents, and take actions on your behalf. Without guardrails, they can overspend, go off-scope, or do things you'd never approve. AEOESS gives you 37 MCP tools that enforce identity, values, and boundaries — so every agent action is scoped, auditable, and revocable. One protocol. 264 tests. Your agents behave.</p>
@@ -351,6 +354,16 @@ document.querySelectorAll('.qs-tab').forEach(tab => {
     tab.classList.add('active');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
   });
+});
+</script>
+<script>
+// Live npm download counters
+['agent-passport-system','agent-passport-system-mcp'].forEach((pkg,i) => {
+  const el = document.getElementById(i===0?'dl-sdk':'dl-mcp');
+  fetch(`https://api.npmjs.org/downloads/point/last-week/${pkg}`)
+    .then(r=>r.json())
+    .then(d=>{el.textContent=(i===0?'SDK: ':'MCP: ')+d.downloads.toLocaleString()+'/wk';el.classList.remove('badge-dim');el.classList.add('badge-blue')})
+    .catch(()=>{});
 });
 </script>
 </body>
