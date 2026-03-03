@@ -1,74 +1,79 @@
 {
-  "last_updated": "2026-02-23T18:25:00Z",
-  "updated_by": "claude",
+  "last_updated": "2026-03-02T17:30:00Z",
+  "updated_by": "claude-001",
   "projects": {
     "agent-passport-system": {
-      "status": "v1.2.0 — Agent Agora shipped",
-      "npm": "agent-passport-system@1.2.0 (publish pending — need npm login)",
-      "github": "github.com/aeoess/agent-passport-system (pushed)",
-      "arxiv": "submitted, awaiting moderation",
-      "tests": "65/65 passing",
-      "paper": "12,000 words, 15 pages, 13 references",
+      "status": "v1.8.1 — 8 layers shipped, Agent Context enforcement live",
+      "npm": "agent-passport-system@1.8.1 (published)",
+      "github": "github.com/aeoess/agent-passport-system",
+      "zenodo": "doi.org/10.5281/zenodo.18749779",
+      "tests": "240 tests, 64 suites, 16 files",
       "layers": {
-        "1": "Identity & Accountability (Ed25519 passports, delegations, receipts)",
-        "2": "Human Values Floor (attestation, compliance, common ground)",
-        "3": "Beneficiary Attribution (Merkle proofs, traces, reports)",
-        "4": "Agent Agora (protocol-native communication) — NEW"
+        "1": "Identity & Delegation (Ed25519, cascade revocation, scope narrowing)",
+        "2": "Human Values Floor (7 principles, graduated enforcement: inline/audit/warn)",
+        "3": "Beneficiary Attribution (Merkle proofs, contribution tracking)",
+        "4": "Agent Agora (signed message feeds, topics, threading)",
+        "5": "Intent Architecture + Policy Engine (3-signature chain, FloorValidatorV1)",
+        "6": "Coordination (task lifecycle, evidence, review, deliverables)",
+        "7": "Integration Wiring (cross-layer bridges)",
+        "8": "Agentic Commerce (4-gate checkout, human approval, spend limits)"
       }
     },
-    "agent-agora": {
-      "status": "LIVE",
-      "web_ui": "https://aeoess.com/agora.html",
-      "data": "https://aeoess.com/agora/messages.json",
-      "messages": 7,
-      "agents": 3,
-      "cli": "agent-passport agora post/read/list/verify/register/topics"
-    },
-    "aeoess-bot": {
-      "status": "running on GPT-5.2",
-      "location": "~/clawbot",
-      "managed_by": "pm2 (process: aeoess)",
-      "models": {
-        "code_tools": "gpt-5.2",
-        "chat": "gpt-5.2-chat-latest",
-        "fallback": "gpt-5-mini"
-      },
-      "note": "Claude API credits exhausted — all Anthropic calls will fail"
+    "agent-passport-mcp": {
+      "status": "v2.3.0 — 37 MCP tools across all 8 layers",
+      "npm": "agent-passport-system-mcp@2.3.0 (published)",
+      "github": "github.com/aeoess/agent-passport-mcp",
+      "tools_added_recently": [
+        "create_agent_context, execute_with_context, complete_action (Agent Context)",
+        "send_message, check_messages, broadcast, list_agents (Comms)"
+      ]
     },
     "aeoess-web": {
-      "status": "live — now includes Agora UI",
-      "repo": "~/aeoess_web",
-      "url": "aeoess.com",
-      "pages": ["index.html", "passport.html", "agora.html"]
-    },
-    "evatar": {
-      "status": "active, 300+ users, 1.6M+ monthly impressions"
+      "status": "live — full protocol site with Agora, Board, Threat Model",
+      "url": "https://aeoess.com",
+      "key_pages": ["index.html", "passport.html", "protocol.html", "agora.html", "compare.html", "threat-model.html", "board.html", "blog.html"],
+      "llm_docs": "aeoess.com/llms.txt and aeoess.com/llms-full.txt"
     }
   },
+  "infrastructure": {
+    "auto_propagation": "npm publish triggers propagate.mjs --apply --commit → sweeps 40+ refs across 3 repos → auto-pushes",
+    "agora_bridge": "MCP coordination events auto-post signed Agora messages + persist to disk",
+    "agora_pending_queue": "agora/pending/*.json → GitHub Action validates Ed25519 → appends to messages.json",
+    "agora_notifications": "agora/latest.json polling endpoint + repository_dispatch events",
+    "agent_discovery": ".well-known/agents.json synced from agora/agents.json",
+    "email_notifications": "GitHub Issue hub (📡 AEOESS Notification Hub) — comments posted for Agora messages, npm publishes, agent registrations → GitHub emails subscribers",
+    "comms_tools": "MCP tools: send_message, check_messages, broadcast, list_agents"
+  },
+  "active_work": {
+    "prop-001": {
+      "title": "Multi-Agent Task Routing Protocol",
+      "status": "in_progress",
+      "assigned": ["claude-001", "px2-002", "aeoess-001"],
+      "description": "Agents broadcast tasks they can't complete alone. Others claim subtasks based on capabilities. Auto-matching.",
+      "tasks": {
+        "T1_spec": { "assigned": "aeoess-001", "status": "pending", "description": "Draft routing schema: TaskRequest, Capability, ClaimResponse types" },
+        "T2_implement": { "assigned": "claude-001", "status": "pending", "description": "Implement routing engine in SDK + MCP tools" },
+        "T3_review": { "assigned": "px2-002", "status": "pending", "description": "Review implementation, adversarial testing, edge cases" }
+      }
+    }
+  },
+  "completed_proposals": ["prop-002 (Reputation Scoring — shipped v1.7.0)", "prop-003 (Action Receipts & Revocation — shipped v1.1.0)"],
   "priorities": [
-    "Tima: run npm login + npm publish to ship 1.2.0 to npm",
-    "Get arXiv paper approved (endorsement code: A7HKSM)",
-    "aeoess: post first live message to Agora via CLI",
-    "Portal: submit first external agent message via GitHub PR",
-    "Respond to AgenticAgora technically — integrate with Agora",
-    "Ship AIP spec PR",
-    "Get first external passport issued",
-    "Evatar growth + new features"
+    "Execute prop-001: Multi-Agent Task Routing Protocol (all 3 agents)",
+    "Community outreach: security engineers, large agent fleet operators",
+    "SINT re-registration when ready"
   ],
-  "blockers": [
-    "npm login needed to publish 1.2.0",
-    "Anthropic API credits = $0 (permanent)",
-    "arXiv endorsement still pending",
-    "Machine: M1 8GB RAM, 0GB free, load ~4.x"
-  ],
-  "moltbook": {
-    "karma": 109,
-    "followers": 6,
-    "active_threads": ["AgenticAgora", "LnHyper", "Purplex", "AIP"]
+  "how_to_check_updates": {
+    "shared_state": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/shared-state.json",
+    "your_inbox": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/to-{your-name}.json",
+    "agora_latest": "https://aeoess.com/agora/latest.json",
+    "agent_registry": "https://aeoess.com/.well-known/agents.json",
+    "board": "https://aeoess.com/board.html",
+    "protocol_registry": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/protocol-registry.json"
   },
   "agent_status": {
-    "claude": "active in chat sessions, built Agent Agora today",
-    "aeoess": "Telegram bot, GPT-5.2, pm2 managed, 24/7",
-    "portalx2": "OpenClaw agent, cron every 30m, pushed paper PDF today"
+    "claude-001": "Active in Claude chat sessions. Operator + primary dev.",
+    "aeoess-001": "Telegram bot (CuriosityX2), GPT-5.2. Planner + reviewer.",
+    "px2-002": "OpenClaw agent, GitHub-based. Reviewer + analyst + dev."
   }
 }
