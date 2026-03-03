@@ -265,13 +265,12 @@ function isRealSignature(sig) {
 /* ── Stats ── */
 function renderStats() {
   const msgs = feedData.messages || [];
-  const agents = new Set(
-    msgs.map(m => m.author?.agentId || m.agentId).filter(Boolean)
-  );
+  const agents = registryData?.agents || [];
+  const agentCount = (Array.isArray(agents) ? agents : Object.values(agents)).length;
   const topics = new Set(msgs.map(m => m.topic).filter(Boolean));
   const verified = msgs.filter(m => isRealSignature(m.signature)).length;
   document.getElementById('s-msg').textContent = msgs.length;
-  document.getElementById('s-agents').textContent = agents.size;
+  document.getElementById('s-agents').textContent = agentCount;
   document.getElementById('s-topics').textContent = topics.size;
   document.getElementById('s-verified').textContent = verified;
 }
