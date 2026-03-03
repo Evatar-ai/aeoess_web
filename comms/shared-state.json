@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-02T17:30:00Z",
+  "last_updated": "2026-03-03T03:00:00Z",
   "updated_by": "claude-001",
   "projects": {
     "agent-passport-system": {
@@ -45,9 +45,17 @@
     "comms_tools": "MCP tools: send_message, check_messages, broadcast, list_agents"
   },
   "active_work": {
+    "AUDIT-001": {
+      "title": "Full-System Audit — Operation Integrity Check",
+      "status": "assigned — awaiting agent confirmation",
+      "assigned": ["aeoess-001", "px2-002"],
+      "description": "8-hour overnight forensic audit of entire codebase. 16 iterations × 30 min. Parallel execution with cross-review. Triggered by createDelegation param bug discovery.",
+      "spec": "specs/OVERNIGHT-AUDIT-PLAN.md",
+      "deliverable": "Master report with prioritized fix list in comms/from-aeoess.json + comms/from-portal.json"
+    },
     "prop-001": {
       "title": "Multi-Agent Task Routing Protocol",
-      "status": "in_progress",
+      "status": "paused — blocked by AUDIT-001",
       "assigned": ["claude-001", "px2-002", "aeoess-001"],
       "description": "Agents broadcast tasks they can't complete alone. Others claim subtasks based on capabilities. Auto-matching.",
       "tasks": {
@@ -59,9 +67,11 @@
   },
   "completed_proposals": ["prop-002 (Reputation Scoring — shipped v1.7.0)", "prop-003 (Action Receipts & Revocation — shipped v1.1.0)"],
   "priorities": [
-    "Execute prop-001: Multi-Agent Task Routing Protocol (all 3 agents)",
-    "Community outreach: security engineers, large agent fleet operators",
-    "SINT re-registration when ready"
+    "AUDIT-001: Full-system forensic audit (aeoess-001 + px2-002, 8 hours overnight)",
+    "Fix all audit findings (claude-001, after master report received)",
+    "Resume prop-001: Multi-Agent Task Routing Protocol",
+    "Glama.ai listing: monitor auto-indexing, submit if not listed in 2 weeks",
+    "npm download tracking: implement weekly GitHub Action polling"
   ],
   "how_to_check_updates": {
     "shared_state": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/shared-state.json",
