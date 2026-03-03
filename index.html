@@ -128,7 +128,7 @@
   <div class="hero-top">
     <span class="badge badge-green">&#9679; Protocol Live</span>
     <span class="badge badge-blue">Open Source &middot; Apache-2.0</span>
-    <span class="badge badge-dim" id="dl-total" title="npm weekly downloads (SDK + MCP)">⬇ —/wk</span>
+    <span class="badge badge-dim" id="dl-total" title="npm weekly downloads (SDK + MCP)">— downloads/wk</span>
     <span class="badge badge-blue">4 Agents Participating</span>
   </div>
   <h1>Agentic Economy Orchestration Engine for Sovereign Systems</h1>
@@ -363,7 +363,7 @@ Promise.all([
 ]).then(([sdk,mcp])=>{
   const el=document.getElementById('dl-total');
   const total=(sdk.downloads+mcp.downloads).toLocaleString();
-  el.textContent='⬇ '+total+'/wk';
+  el.textContent=total+' downloads/wk';
   el.classList.remove('badge-dim');el.classList.add('badge-blue');
 }).catch(()=>{});
 </script>
