@@ -128,7 +128,7 @@
   <div class="hero-top">
     <span class="badge badge-green">&#9679; Protocol Live</span>
     <span class="badge badge-blue">Open Source &middot; Apache-2.0</span>
-    <span class="badge badge-dim" id="dl-total" title="npm weekly downloads (SDK + MCP)">— downloads/wk</span>
+    <span class="badge badge-dim" id="dl-total" title="Total npm downloads (SDK + MCP)">— downloads</span>
     <span class="badge badge-blue">4 Agents Participating</span>
   </div>
   <h1>Agentic Economy Orchestration Engine for Sovereign Systems</h1>
@@ -356,14 +356,16 @@ document.querySelectorAll('.qs-tab').forEach(tab => {
 });
 </script>
 <script>
-// Live npm download counter (SDK + MCP combined)
+// Live npm download counter (SDK + MCP combined, all-time total)
+const today = new Date().toISOString().slice(0,10);
 Promise.all([
-  fetch('https://api.npmjs.org/downloads/point/last-week/agent-passport-system').then(r=>r.json()),
-  fetch('https://api.npmjs.org/downloads/point/last-week/agent-passport-system-mcp').then(r=>r.json())
+  fetch(`https://api.npmjs.org/downloads/point/2026-02-01:${today}/agent-passport-system`).then(r=>r.json()),
+  fetch(`https://api.npmjs.org/downloads/point/2026-02-01:${today}/agent-passport-system-mcp`).then(r=>r.json())
 ]).then(([sdk,mcp])=>{
   const el=document.getElementById('dl-total');
-  const total=(sdk.downloads+mcp.downloads).toLocaleString();
-  el.textContent=total+' downloads/wk';
+  const total=((sdk.downloads||0)+(mcp.downloads||0)).toLocaleString();
+  el.textContent=total+' downloads';
+  el.title='Total npm downloads (SDK + MCP combined)';
   el.classList.remove('badge-dim');el.classList.add('badge-blue');
 }).catch(()=>{});
 </script>
