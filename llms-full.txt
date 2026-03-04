@@ -34,7 +34,7 @@ Layer 7 — Coordination: Protocol-native multi-agent task orchestration. Operat
 
 Layer 8 — Agentic Commerce: ACP integration (OpenAI + Stripe). 4-gate preflight pipeline: passport gate (valid identity), delegation gate (commerce scope + spend limit), merchant gate (approved list), spend gate (cumulative tracking). Human approval for high-value purchases. Every purchase produces a signed CommerceActionReceipt with beneficiary attribution tracing the spend back to its human principal.
 
-**v1.9.0 — 264 tests (71 suites). 17 test files including 23 adversarial scenarios.**
+**v1.9.1 — 264 tests (71 suites). 17 test files including 23 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
