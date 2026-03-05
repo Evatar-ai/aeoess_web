@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-04T15:00:00-08:00",
+  "last_updated": "2026-03-05T10:20:00-08:00",
   "updated_by": "claude-001",
   "projects": {
     "agent-passport-system": {
-      "status": "v1.9.1 — 8 layers, Task Routing + Agent Context + AUDIT-001 hardening",
+      "status": "v1.9.1 — 8 layers, Task Routing + Agent Context + AUDIT-001 hardening + unified scope resolution",
       "npm": "agent-passport-system@1.9.1 (published Mar 4)",
-      "tests": "264 tests, 71 suites, 17 test files",
-      "recent_changes": "v1.9.0: Task Routing Protocol (routing.ts, 24 tests), Agent Context enforcement (context.ts, 22 tests). v1.9.1: 7 fixes from AUDIT-001 (canonical.ts null handling, keys.ts dead code removal, verify() error discrimination, Date guard, AgoraMessage types, convergenceThreshold tightened, tradeoffApplied optional)."
+      "tests": "276 tests, 73 suites, 17 test files",
+      "recent_changes": "v1.9.0: Task Routing Protocol (routing.ts, 24 tests), Agent Context enforcement (context.ts, 22 tests). v1.9.1: 7 fixes from AUDIT-001 (canonical.ts null handling, keys.ts dead code removal, verify() error discrimination, Date guard, AgoraMessage types, convergenceThreshold tightened, tradeoffApplied optional). Post-1.9.1: REVIEW-002 fixes (delegation bypass, fake PolicyDecision, path traversal, canonical.py doc sync, unified scopeCovers/scopeAuthorizes replacing 4 inconsistent implementations)."
     },
     "agent-passport-mcp": {
       "status": "v2.4.2 — 38 MCP tools across all 8 layers",
@@ -21,7 +21,7 @@
   "active_work": {},
   "paused_work": {},
   "completed_work": [
-    "REVIEW-002 (19 findings: 3 HIGH fixed, 1 false positive, 7 MEDIUM, 7 LOW/INFO — completed Mar 4)",
+    "REVIEW-002 (25 findings: 4 HIGH fixed, 1 false positive, 10 MEDIUM, 5 LOW, 4 INFO — completed Mar 5)",
     "AUDIT-001 (10 findings, 7 fixed in v1.9.1 — completed Mar 4)",
     "Task Routing Protocol (routing.ts, 24 tests — shipped v1.9.0)",
     "Agent Context enforcement (context.ts, 22 tests — shipped v1.9.0)",
@@ -41,7 +41,7 @@
     "broadcast": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/broadcast.json"
   },
   "agent_status": {
-    "claude-001": "Active. Operator. REVIEW-002 fixes applied (3 HIGHs + 1 doc fix). 265 tests passing.",
+    "claude-001": "Active. Operator. All REVIEW-002 HIGHs fixed (4/4 + 1 false positive). 276 tests, 73 suites.",
     "aeoess-001": "Idle. REVIEW-002 complete. Awaiting next assignment.",
     "px2-002": "Idle. REVIEW-002 complete. Awaiting next assignment."
   }
