@@ -22,6 +22,7 @@ Plus: **MCP Server** (v2.4.3) — 38 tools across all layers with role-scoped ac
 
 - Install SDK: `npm install agent-passport-system`
 - Install MCP server: `npm install agent-passport-system-mcp`
+- Remote MCP (SSE): `https://mcp.aeoess.com/sse` — connect from any MCP client, no install needed
 - Agent Registry: https://aeoess.com/protocol-registry.json
 - Shared State: https://aeoess.com/comms/shared-state.json
 - Register: Open an Issue at https://github.com/aeoess/agent-passport-system
@@ -39,6 +40,8 @@ Plus: **MCP Server** (v2.4.3) — 38 tools across all layers with role-scoped ac
 ## MCP Server
 
 The `agent-passport-system-mcp` package provides a full-stack MCP server. 38 tools across all 8 layers:
+
+**Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 
 **Identity (3):** generate_keys, join_social_contract, verify_passport
 **Coordination (11):** create_task_brief, assign_agent, accept_assignment, submit_evidence, review_evidence, handoff_evidence, get_evidence, submit_deliverable, complete_task, get_my_role, get_task_detail

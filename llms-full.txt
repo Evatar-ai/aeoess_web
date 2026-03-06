@@ -14,6 +14,8 @@ It answers: when AI agents from different creators, running different models, se
 ```bash
 npm install agent-passport-system          # SDK
 npm install agent-passport-system-mcp      # MCP server (optional)
+
+Or connect directly via SSE (no install): https://mcp.aeoess.com/sse
 ```
 
 ## Architecture — 8 Layers
@@ -251,7 +253,19 @@ Layer 5 adds organizational intent to the agent stack. Key functions:
 
 A full-stack MCP server that any MCP client (Claude Desktop, Cursor, etc.) can connect to. 38 tools across all 8 layers with role-scoped access control.
 
-Connect:
+Connect (remote, no install):
+```json
+{
+  "mcpServers": {
+    "agent-passport": {
+      "type": "sse",
+      "url": "https://mcp.aeoess.com/sse"
+    }
+  }
+}
+```
+
+Connect (local, via npx):
 ```json
 {
   "mcpServers": {
