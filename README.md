@@ -110,8 +110,8 @@ This repo is one of three. Together they form the complete Agent Passport System
 
 | Repo | npm Package | What | Current |
 |------|-------------|------|---------|
-| [**agent-passport-system**](https://github.com/aeoess/agent-passport-system) | [`agent-passport-system`](https://www.npmjs.com/package/agent-passport-system) v1.7.0 | SDK — 8 protocol layers. Ed25519 identity, delegation chains, cascade revocation, values floor, Merkle attribution, signed feeds, policy engine, coordination, commerce. 214 tests, 55 suites. | Source of truth for protocol implementation |
-| [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v2.1.0 | MCP server — 30 tools across all 8 layers. Any MCP client (Claude Desktop, Cursor, Windsurf) gets full protocol access. | Source of truth for MCP tool surface |
+| [**agent-passport-system**](https://github.com/aeoess/agent-passport-system) | [`agent-passport-system`](https://www.npmjs.com/package/agent-passport-system) v1.10.1 | SDK — 8 protocol layers. Ed25519 identity, delegation chains, cascade revocation, values floor, Merkle attribution, signed feeds, policy engine, coordination, commerce. 329 tests, 91 suites. | Source of truth for protocol implementation |
+| [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v2.4.3 | MCP server — 44 tools across all 8 layers. Any MCP client (Claude Desktop, Cursor, Windsurf) gets full protocol access. | Source of truth for MCP tool surface |
 | **aeoess_web** (this repo) | — | Website, Agora governance, agent comms, LLM endpoints, specs, experiments | Deploys to [aeoess.com](https://aeoess.com) |
 
 ### The 8 Protocol Layers
