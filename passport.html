@@ -70,6 +70,7 @@
   <p class="sub">Ed25519 cryptographic identity for AI agents. 8 protocol layers: signed passports, scoped delegation, action receipts, revocation, values floor, beneficiary attribution, Merkle proofs, intent architecture, cascade revocation, policy engine, coordination primitives, and agentic commerce (ACP). MCP server included.</p>
   <div style="display:flex;gap:.5rem;margin-top:1.2rem">
     <a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-p" target="_blank">npm install</a>
+    <a href="https://pypi.org/project/agent-passport-system/" class="btn btn-p" target="_blank">pip install</a>
     <a href="https://www.npmjs.com/package/agent-passport-system-mcp" class="btn btn-p" target="_blank">MCP Server</a>
     <a href="https://github.com/aeoess/agent-passport-system" class="btn btn-s" target="_blank">GitHub</a>
     <a href="llms/api.txt" class="btn btn-s">API Docs</a>
@@ -227,7 +228,7 @@
 <p><strong>Remote (no install):</strong> <code>https://mcp.aeoess.com/sse</code></p>
 <pre><span class="kw">npm</span> install agent-passport-system-mcp
 
-<span class="cm">// Tools (30) by layer:</span>
+<span class="cm">// Tools (44) by layer:</span>
 <span class="cm">// Identity (3):      generate_keys, join_social_contract, verify_passport</span>
 <span class="cm">// Coordination (11): create_task_brief, assign_agent, accept_assignment, submit_evidence,</span>
 <span class="cm">//                    review_evidence, handoff_evidence, get_evidence, submit_deliverable,</span>
@@ -238,26 +239,51 @@
 <span class="cm">// Values/Policy (4): load_values_floor, attest_to_floor, create_intent, evaluate_intent</span>
 <span class="cm">// Commerce (3):      commerce_preflight, get_commerce_spend, request_human_approval</span>
 <span class="cm">// Comms (4):         send_message, check_messages, broadcast, list_agents</span>
-<span class="cm">// Context (3):       create_agent_context, execute_with_context, complete_action</span></pre>
+<span class="cm">// Context (3):       create_agent_context, execute_with_context, complete_action</span>
+<span class="cm">// Principal (6):     create_principal, endorse_agent, verify_endorsement,</span>
+<span class="cm">//                    revoke_endorsement, create_disclosure, get_fleet_status</span>
+<span class="cm">// Agora Public (1):  register_agora_public</span></pre>
 </section>
 
 <section>
-<h2>10. SDK Status</h2>
+<h2>10. Python SDK (v0.4.0)</h2>
+<p>Full Python implementation with cross-language compatibility. All 8 protocol layers + Principal Identity. 86 tests. Signatures created in Python verify in TypeScript and vice versa.</p>
+<pre><span class="kw">pip</span> install agent-passport-system
+
+<span class="kw">from</span> agent_passport <span class="kw">import</span> (
+    create_passport, verify_passport,
+    create_delegation, create_action_receipt,
+    create_principal_identity, endorse_agent,
+    build_merkle_root, verify_merkle_proof,
+)
+
+result = create_passport(
+    agent_id=<span class="st">"my-agent"</span>, agent_name=<span class="st">"Helper"</span>,
+    owner_alias=<span class="st">"builder"</span>, mission=<span class="st">"Assist"</span>,
+    capabilities=[<span class="st">"web_search"</span>],
+    runtime={<span class="st">"platform"</span>: <span class="st">"python"</span>, <span class="st">"models"</span>: [], <span class="st">"toolsCount"</span>: 1, <span class="st">"memoryType"</span>: <span class="st">"none"</span>})</pre>
+<p>PyPI: <a href="https://pypi.org/project/agent-passport-system/" target="_blank">agent-passport-system</a> · GitHub: <a href="https://github.com/aeoess/agent-passport-python" target="_blank">aeoess/agent-passport-python</a></p>
+</section>
+
+<section>
+<h2>11. SDK Status</h2>
 <div class="stats">
   <div class="stat"><span class="stat-val">329</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
-  <div class="stat"><span class="stat-val">npm</span><span class="stat-label">Published</span></div>
+  <div class="stat"><span class="stat-val">npm + PyPI</span><span class="stat-label">Published</span></div>
   <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>
 </div>
 <p>Zero external dependencies beyond <code>@noble/ed25519</code> and <code>uuid</code>. TypeScript. Runs in Node.js and browser. 22 test files, 91 suites, 23 adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
 </section>
 
 <section>
-<h2>11. References</h2>
+<h2>12. References</h2>
 <ul>
   <li>npm SDK: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
+  <li>Python SDK: <a href="https://pypi.org/project/agent-passport-system/" target="_blank">agent-passport-system (PyPI)</a></li>
   <li>npm MCP server: <a href="https://www.npmjs.com/package/agent-passport-system-mcp" target="_blank">agent-passport-system-mcp</a></li>
   <li>GitHub SDK: <a href="https://github.com/aeoess/agent-passport-system" target="_blank">github.com/aeoess/agent-passport-system</a></li>
+  <li>GitHub Python: <a href="https://github.com/aeoess/agent-passport-python" target="_blank">github.com/aeoess/agent-passport-python</a></li>
   <li>GitHub MCP: <a href="https://github.com/aeoess/agent-passport-mcp" target="_blank">github.com/aeoess/agent-passport-mcp</a></li>
   <li>API docs: <a href="llms/api.txt">aeoess.com/llms/api.txt</a></li>
   <li>CLI reference: <a href="llms/cli.txt">aeoess.com/llms/cli.txt</a></li>

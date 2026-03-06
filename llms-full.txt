@@ -317,6 +317,7 @@ Tools (30) by layer:
 - **Commerce (3):** commerce_preflight, get_commerce_spend, request_human_approval
 - **Comms (4):** send_message, check_messages, broadcast, list_agents
 - **Agent Context (3):** create_agent_context, execute_with_context, complete_action
+- **Principal Identity (6):** create_principal, endorse_agent, verify_endorsement, revoke_endorsement, create_disclosure, get_fleet_status
 
 Role auto-detected from task assignments. Role-specific prompts served via MCP prompts API. File-backed persistence at ~/.agent-passport-tasks.json. Every operation Ed25519 signed.
 

@@ -199,6 +199,7 @@
   <div class="qs">
     <div class="qs-tabs">
       <div class="qs-tab active" data-tab="npm">npm / SDK</div>
+      <div class="qs-tab" data-tab="python">Python</div>
       <div class="qs-tab" data-tab="curl">cURL / Agent</div>
       <div class="qs-tab" data-tab="llm">LLM Context</div>
     </div>
@@ -225,6 +226,30 @@
 <span class="cm">// Record signed proof of completed work</span>
 <span class="kw">const</span> receipt = <span class="fn">recordWork</span>(agent, del, {
   action: <span class="st">'search_executed'</span>, result: <span class="st">'Found 3 sources'</span> });</pre>
+    </div>
+    <div class="qs-panel" id="tab-python">
+      <p style="margin-bottom:.8rem;font-size:.9rem;color:var(--dim)">Install the Python SDK. Full parity with TypeScript, cross-language compatible:</p>
+      <pre><span class="cm"># Install</span>
+<span class="kw">pip</span> install agent-passport-system
+
+<span class="kw">from</span> agent_passport <span class="kw">import</span> (
+    <span class="fn">create_passport</span>, <span class="fn">verify_passport</span>,
+    <span class="fn">create_delegation</span>, <span class="fn">create_action_receipt</span>,
+    <span class="fn">create_principal_identity</span>, <span class="fn">endorse_agent</span>,
+)
+
+<span class="cm"># Create agent identity (Ed25519)</span>
+result = <span class="fn">create_passport</span>(
+    agent_id=<span class="st">"my-agent"</span>, agent_name=<span class="st">"Helper"</span>,
+    owner_alias=<span class="st">"builder"</span>, mission=<span class="st">"Assist with tasks"</span>,
+    capabilities=[<span class="st">"web_search"</span>],
+    runtime={<span class="st">"platform"</span>: <span class="st">"python"</span>, <span class="st">"models"</span>: [], <span class="st">"toolsCount"</span>: 1, <span class="st">"memoryType"</span>: <span class="st">"none"</span>})
+
+<span class="cm"># Create principal identity (human behind the agent)</span>
+principal = <span class="fn">create_principal_identity</span>(
+    display_name=<span class="st">"Builder"</span>, domain=<span class="st">"example.com"</span>)
+
+<span class="cm"># Signatures created in Python verify in TypeScript and vice versa</span></pre>
     </div>
     <div class="qs-panel" id="tab-curl">
       <p style="margin-bottom:.8rem;font-size:.9rem;color:var(--dim)">Fetch the agent registry and shared state directly:</p>
