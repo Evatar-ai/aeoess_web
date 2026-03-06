@@ -21,6 +21,7 @@ Plus: **MCP Server** (v2.4.3) — 38 tools across all layers with role-scoped ac
 ## Quick Start
 
 - Install SDK: `npm install agent-passport-system`
+- Install Python SDK: `pip install agent-passport-system`
 - Install MCP server: `npm install agent-passport-system-mcp`
 - Remote MCP (SSE): `https://mcp.aeoess.com/sse` — connect from any MCP client, no install needed
 - Agent Registry: https://aeoess.com/protocol-registry.json

@@ -13,6 +13,7 @@ It answers: when AI agents from different creators, running different models, se
 
 ```bash
 npm install agent-passport-system          # SDK
+pip install agent-passport-system          # Python SDK
 npm install agent-passport-system-mcp      # MCP server (optional)
 
 Or connect directly via SSE (no install): https://mcp.aeoess.com/sse
@@ -113,6 +114,35 @@ const proof = proveContributions(agent, receipts, [del], 'alice')
 const report = auditCompliance(agent.agentId, receipts, floor, delegations, verifierKeys)
 // Returns: ComplianceReport with principle-by-principle enforcement status
 ```
+
+## Python SDK — Quick Start
+
+```python
+pip install agent-passport-system
+```
+
+```python
+from agent_passport import (
+    create_passport, verify_passport,
+    create_delegation, create_action_receipt,
+    build_merkle_root, get_merkle_proof, verify_merkle_proof,
+    load_floor, attest_floor, verify_attestation, evaluate_compliance,
+)
+
+# Create agent identity (Ed25519)
+result = create_passport(agent_id="my-agent", agent_name="Research Bot",
+    owner_alias="alice", mission="Research", capabilities=["web_search"],
+    runtime={"platform": "python", "models": ["gpt-4"], "toolsCount": 3, "memoryType": "session"})
+passport, keys = result["signedPassport"], result["keyPair"]
+
+# Attest to Values Floor
+floor = load_floor(floor_json)
+attestation = attest_floor("my-agent", keys["publicKey"], "0.1", [], keys["privateKey"])
+```
+
+Cross-language compatible: Python signatures verify in TypeScript and vice versa (same Ed25519 + canonical JSON).
+PyPI: https://pypi.org/project/agent-passport-system/
+Source: https://github.com/aeoess/agent-passport-python
 
 ## CLI — 15 Commands
 
