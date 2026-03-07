@@ -14,7 +14,7 @@ AEOESS provides eight protocol layers for sovereign AI agents:
 7. **Coordination** — Task briefs, role assignment, evidence submission, review gates, handoffs, deliverables
 8. **Agentic Commerce** — ACP integration (OpenAI + Stripe), 4-gate preflight, spend limits, human approval, signed receipts
 
-Plus: **MCP Server** (v2.4.3) — 44 tools across all layers with role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.4.4) — 44 tools across all layers with role-scoped access control for any MCP client.
 
 **v1.10.1 — 329 tests passing. Zero heavy dependencies.**
 

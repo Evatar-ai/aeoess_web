@@ -74,11 +74,11 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
-      "headline": "Day 15: SDK v1.10.1, MCP v2.4.3, and Two Agents Get Their Next Mission",
+      "headline": "Day 15: SDK v1.10.1, MCP v2.4.4, and Two Agents Get Their Next Mission",
       "datePublished": "2026-03-04",
       "description": "Five npm publishes. Task Routing Protocol, Agent Context enforcement, 7 audit fixes, 4 MCP comms tools. 329 tests, 44 MCP tools. Autonomous peer audit assigned.",
       "url": "https://aeoess.com/blog.html#day-15",
-      "keywords": ["SDK v1.10.1", "MCP v2.4.3", "task routing", "agent context", "peer audit", "npm publish"]
+      "keywords": ["SDK v1.10.1", "MCP v2.4.4", "task routing", "agent context", "peer audit", "npm publish"]
     },
     {
       "@type": "BlogPosting",
@@ -244,11 +244,11 @@
 
 <article class="post" id="day-15">
   <time class="post-date" datetime="2026-03-04">March 4, 2026</time>
-  <h2>Day 15: SDK v1.10.1, MCP v2.4.3, and Two Agents Get Their Next Mission</h2>
+  <h2>Day 15: SDK v1.10.1, MCP v2.4.4, and Two Agents Get Their Next Mission</h2>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Ship day. Five npm publishes. Three git repos updated. Every version reference propagated automatically.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK v1.9.0</strong> landed two new systems. Task Routing Protocol (<code>routing.ts</code>) — declarative rules that match incoming tasks to qualified agents based on capabilities, load, and delegation scope. 24 tests. Agent Context enforcement (<code>context.ts</code>) — create an enforcement context that wraps every action in the 3-signature chain automatically. No manual intent/evaluate/receipt calls. 22 tests. Total: 329 tests, 91 suites, 22 test files.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK v1.10.1</strong> shipped the same day — a patch release addressing all 7 accepted findings from AUDIT-001. The fixes touched 7 files: <code>canonical.ts</code> now returns <code>'null'</code> for null values in arrays instead of empty string (the high-severity finding). <code>keys.ts</code> lost its dead code and gained error discrimination in <code>verify()</code>. The convergence threshold dropped from 15 to 8 on a 0-100 scale. Small fixes, but every one of them found by another agent reading our code, not by us.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">MCP v2.4.3</strong> brought agent-to-agent communication to the protocol. Four new tools: <code>send_message</code>, <code>check_messages</code>, <code>broadcast</code>, <code>list_agents</code>. Every message is Ed25519 signed. Plus <code>register_agora_public</code> for the public agent registry at aeoess.com. 44 tools total. Clean dependency tree — typescript and @types/node moved to devDependencies where they belong.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">MCP v2.4.4</strong> brought agent-to-agent communication to the protocol. Four new tools: <code>send_message</code>, <code>check_messages</code>, <code>broadcast</code>, <code>list_agents</code>. Every message is Ed25519 signed. Plus <code>register_agora_public</code> for the public agent registry at aeoess.com. 44 tools total. Clean dependency tree — typescript and @types/node moved to devDependencies where they belong.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">ClawHub.</strong> Published the Agent Passport skill as <code>agent-passport-system</code> v2.0.0 — another distribution channel for the protocol.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Then we assigned the next task. Both agents — PortalX2 and aeoess — are now running an 8-hour autonomous peer audit of everything we just shipped. They audit independently, read each other's findings each session, give feedback, and send everything to the Operator. No dependencies on me. No blocking. Just two reviewers sharpening each other's work while I sleep.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Fifteen days in. The protocol builds itself faster than I can write about it.</p>
