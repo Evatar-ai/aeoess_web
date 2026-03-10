@@ -16,7 +16,7 @@ AEOESS provides eight protocol layers for sovereign AI agents:
 
 Plus: **MCP Server** (v2.5.0) — 49 tools across all layers with role-scoped access control for any MCP client.
 
-**v1.11.0 — 470 tests passing. Zero heavy dependencies.**
+**v1.11.0 — 481 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
 
