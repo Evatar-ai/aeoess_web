@@ -4,7 +4,7 @@
 
 ## Overview
 
-AEOESS provides eight protocol layers for sovereign AI agents:
+AEOESS provides eleven protocol modules for sovereign AI agents:
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 7 principles (5 technically enforced), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
@@ -13,6 +13,11 @@ AEOESS provides eight protocol layers for sovereign AI agents:
 6. **Revocation** — Cascade revoke (parent→all children), chain registry, batch revoke, validation events
 7. **Coordination** — Task briefs, role assignment, evidence submission, review gates, handoffs, deliverables
 8. **Agentic Commerce** — ACP integration (OpenAI + Stripe), 4-gate preflight, spend limits, human approval, signed receipts
+9. **Principal Identity** — Cryptographic chain from human to agent, selective disclosure, fleet management, endorsement revocation
+10. **Reputation-Gated Authority** — Bayesian trust (μ,σ), 5 tiers (Untrusted→Autonomous), signed promotions, cryptographic scarring, tier-gated intent
+11. **Task Routing & Agent Context** — Capability-based routing, enforcement middleware, context validation
+
+Plus: **W3C DID:APS** (decentralized identifiers), **Verifiable Credentials**, **Google A2A bridge**, **EU AI Act compliance mapping**.
 
 Plus: **MCP Server** (v2.5.0) — 49 tools across all layers with role-scoped access control for any MCP client.
 
@@ -40,7 +45,7 @@ Plus: **MCP Server** (v2.5.0) — 49 tools across all layers with role-scoped ac
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. 49 tools across all 8 layers:
+The `agent-passport-system-mcp` package provides a full-stack MCP server. 49 tools across all layers:
 
 **Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 

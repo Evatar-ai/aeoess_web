@@ -19,7 +19,7 @@ npm install agent-passport-system-mcp      # MCP server (optional)
 Or connect directly via SSE (no install): https://mcp.aeoess.com/sse
 ```
 
-## Architecture — 8 Layers
+## Architecture — 11 Protocol Modules
 
 Layer 1 — Identity: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
@@ -36,6 +36,14 @@ Layer 6 — Revocation: Parent→child chain registry tracks all delegation rela
 Layer 7 — Coordination: Protocol-native multi-agent task orchestration. Operator creates signed task brief with roles, deliverables, acceptance criteria. Agents assigned to roles sign acceptance. Researchers submit signed evidence packets with citations. Operator reviews evidence against quality threshold (cannot approve below). Approved evidence handed off between roles (requires approved review). Analysts submit deliverables citing evidence. Operator closes task with metrics (overhead ratio, gap rate, rework count). TaskUnit container validates integrity.
 
 Layer 8 — Agentic Commerce: ACP integration (OpenAI + Stripe). 4-gate preflight pipeline: passport gate (valid identity), delegation gate (commerce scope + spend limit), merchant gate (approved list), spend gate (cumulative tracking). Human approval for high-value purchases. Every purchase produces a signed CommerceActionReceipt with beneficiary attribution tracing the spend back to its human principal.
+
+Layer 9 — Principal Identity: Cryptographic chain from human principal to agent. Selective disclosure of principal attributes. Fleet management (endorse, revoke, list agents). Endorsement verification. Human principals create identities, agents are endorsed under them.
+
+Layer 10 — Reputation-Gated Authority: Bayesian trust scoring with mean (μ) and uncertainty (σ). Five tiers: Untrusted, Restricted, Standard, Trusted, Autonomous. Signed promotion reviews with reviewer validation. Cryptographic scarring on failure (permanently reduces trust recovery speed). Tier-gated intent checking. Authority = min(delegation scope, reputation tier).
+
+Layer 11 — Task Routing & Agent Context: Capability-based routing matches agents to tasks by scope, tier, and availability. Enforcement middleware creates agent contexts that validate every action against delegation, values floor, and reputation before execution.
+
+Standards: W3C DID:APS (decentralized identifiers), W3C Verifiable Credentials, Google A2A protocol bridge, EU AI Act article-by-article compliance mapping.
 
 **v1.11.0 — 481 tests (134 suites). 22 test files including 23 adversarial scenarios.**
 
@@ -281,7 +289,7 @@ Layer 5 adds organizational intent to the agent stack. Key functions:
 
 ## MCP Server — agent-passport-system-mcp v2.5.0
 
-A full-stack MCP server that any MCP client (Claude Desktop, Cursor, etc.) can connect to. 49 tools across all 8 layers with role-scoped access control.
+A full-stack MCP server that any MCP client (Claude Desktop, Cursor, etc.) can connect to. 49 tools across all 11 protocol modules with role-scoped access control.
 
 Connect (remote, no install):
 ```json
@@ -416,7 +424,7 @@ Q: What are tradeoff rules?
 A: Machine-readable expressions like "when quality and speed conflict, prefer quality until 2× time cost, then prefer speed." They make organizational priorities queryable at runtime instead of locked in prose documents.
 
 Q: How does it compare to other agent identity approaches?
-A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 481 tests across 8 layers. It has Ed25519 identity, configurable delegation depth, signed verifiable receipts, an attested and auditable values layer, Merkle proof attribution, a signed communication layer (Agora), cascade revocation with policy engine, protocol-native coordination primitives with an MCP server (49 tools), and agentic commerce integration (ACP by OpenAI + Stripe). No other system has all eight.
+A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 481 tests across 11 protocol modules. It has Ed25519 identity, configurable delegation depth, signed verifiable receipts, an attested and auditable values layer, Merkle proof attribution, a signed communication layer (Agora), cascade revocation with policy engine, protocol-native coordination primitives with an MCP server (49 tools), agentic commerce integration (ACP by OpenAI + Stripe), reputation-gated authority with Bayesian trust, principal identity with selective disclosure, W3C DID and Verifiable Credentials, Google A2A bridge, and EU AI Act compliance mapping.
 
 Q: Can I use it for one-shot agent interactions?
 A: Yes. A lightweight passport mode is planned for one-shot transactions where the full passport setup is unnecessary.

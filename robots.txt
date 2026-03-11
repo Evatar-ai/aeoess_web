@@ -19,6 +19,8 @@ Disallow: /index_old*.html
 Disallow: /index_v2.html
 Disallow: /index_new.html
 Disallow: /index_aeoess.html
+Disallow: /index-old-backup.html
+Disallow: /index-v2.html
 
 # Assets
 Disallow: /*.pdf$
