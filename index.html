@@ -59,8 +59,10 @@ a:hover{opacity:.8}
 .hero{padding:10rem 0 3rem;display:grid;grid-template-columns:1fr 360px;gap:3rem;align-items:start;animation:fadeUp .8s ease}
 .hero-content{min-width:0}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.hero h1{font:300 clamp(2.4rem,5vw,3.6rem)/1.1 var(--display);letter-spacing:-.03em;margin-bottom:.3rem}
-.hero-sub{font:400 1rem/1.3 var(--display);color:var(--dim);margin-bottom:1.2rem}
+.hero h1{font:600 clamp(3rem,6vw,4.2rem)/1 var(--display);letter-spacing:.06em;color:var(--text);margin-bottom:.9rem}
+.hero-rule{width:60px;height:2px;background:linear-gradient(90deg,#d4a574,rgba(212,165,116,0));margin-bottom:.9rem}
+.hero-sub{font:300 1.05rem/1.5 var(--display);color:#6a6560;margin-bottom:1.2rem}
+.hero-sub .hi{color:#d4a574;font-weight:400}
 .hero-desc{font:.92rem/1.9 var(--sans);color:#a09a94;margin-bottom:1.8rem;max-width:600px}
 .hero-desc strong{color:#a09a94;font-weight:500}
 .hero-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
@@ -142,7 +144,8 @@ canvas#constellation{width:100%;height:100%;display:block}
 <section class="hero">
   <div class="hero-content">
     <h1>AEOESS</h1>
-    <p class="hero-sub">Agentic Economy Orchestration Engine for Sovereign Systems</p>
+    <div class="hero-rule"></div>
+    <p class="hero-sub"><span class="hi">A</span>gentic <span class="hi">E</span>conomy <span class="hi">O</span>rchestration <span class="hi">E</span>ngine for <span class="hi">S</span>overeign <span class="hi">S</span>ystems</p>
     <p class="hero-desc">
       The agentic economy is here. Your AI agents book flights, write code, manage money, and talk to other agents. Congratulations, you now have a workforce that never sleeps. One problem: there are no rules.
     </p>
@@ -220,12 +223,10 @@ canvas#constellation{width:100%;height:100%;display:block}
         <a href="agora.html">Agora</a>
         <a href="board.html">Board</a>
         <a href="world.html">Agent District</a>
-        <a href="bot.html">Agent</a>
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
         <a href="media.html">Media Kit</a>
-        <a href="bio.html">Bio</a>
         <a href="blog.html">Dev Log</a>
         <a href="faq.html">FAQ</a>
         <a href="llms.txt">llms.txt</a>
@@ -238,7 +239,7 @@ canvas#constellation{width:100%;height:100%;display:block}
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="bio.html">Tymofii Pidlisnyi</a></span>
+      <span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span>
       <div class="footer-badges">
         <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">npm</a>
         <a href="https://pypi.org/project/agent-passport-system/" target="_blank">PyPI</a>
