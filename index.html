@@ -26,12 +26,12 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","name":"AEOESS","alternateName":"Agentic Economy Orchestration Engine for Sovereign Systems","url":"https://aeoess.com","logo":"https://aeoess.com/assets/images/aeoess_logo.png","description":"Protocol stack for autonomous AI agents: cryptographic identity, scoped delegation, values enforcement, dynamic trust. 11 protocol modules, 61 MCP tools, open source.","founder":{"@type":"Person","name":"Tymofii Pidlisnyi","url":"https://tymofii.me"},"sameAs":["https://github.com/aeoess"]},
-{"@type":"SoftwareApplication","name":"Agent Passport System","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","description":"TypeScript SDK: Ed25519 cryptographic identity, delegation chains, values floor, attribution, communication, intent architecture, coordination, agentic commerce, reputation-gated authority. 534 tests. MCP server included.","url":"https://aeoess.com/passport.html","downloadUrl":"https://www.npmjs.com/package/agent-passport-system","softwareVersion":"1.13.0","programmingLanguage":"TypeScript","author":{"@type":"Organization","name":"AEOESS"},"license":"https://opensource.org/licenses/Apache-2.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+{"@type":"SoftwareApplication","name":"Agent Passport System","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","description":"TypeScript SDK: Ed25519 cryptographic identity, delegation chains, values floor, attribution, communication, intent architecture, coordination, agentic commerce, reputation-gated authority, Intent Network (agent-mediated matching). 534 tests. MCP server included.","url":"https://aeoess.com/passport.html","downloadUrl":"https://www.npmjs.com/package/agent-passport-system","softwareVersion":"1.13.0","programmingLanguage":"TypeScript","author":{"@type":"Organization","name":"AEOESS"},"license":"https://opensource.org/licenses/Apache-2.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
 {"@type":"ScholarlyArticle","name":"The Agent Social Contract","author":{"@type":"Person","name":"Tymofii Pidlisnyi"},"url":"https://zenodo.org/records/18749779","publisher":{"@type":"Organization","name":"Zenodo"}},
 {"@type":"ScholarlyArticle","name":"Monotonic Narrowing for Agent Authority","author":{"@type":"Person","name":"Tymofii Pidlisnyi"},"url":"https://zenodo.org/records/18932404","publisher":{"@type":"Organization","name":"Zenodo"}},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What is AEOESS?","acceptedAnswer":{"@type":"Answer","text":"AEOESS (v1.13.0) gives you 61 MCP tools to make your AI agents accountable. 534 tests. Agents get Ed25519 identity, scoped delegation, values enforcement, and reputation-gated authority. Every action is scoped, auditable, and revocable. npm install agent-passport-system."}},
-{"@type":"Question","name":"What is the Agent Passport System?","acceptedAnswer":{"@type":"Answer","text":"The Agent Passport System (v1.13.0) is a TypeScript SDK with 16 protocol modules and 534 tests. MCP server (v2.7.0) provides 61 tools. Install via npm."}},
+{"@type":"Question","name":"What is the Agent Passport System?","acceptedAnswer":{"@type":"Answer","text":"The Agent Passport System (v1.13.0) is a TypeScript SDK with 17 protocol modules and 534 tests. MCP server (v2.8.0) provides 61 tools. Install via npm."}},
 {"@type":"Question","name":"Is AEOESS open source?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apache-2.0 licensed. SDK v1.13.0, 534 tests. Two papers on Zenodo. github.com/aeoess"}}
 ]}]}
 </script>
@@ -188,14 +188,14 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
   <div class="updates-box">
     <div class="ub-title">&#9889; Recent Updates</div>
-    <div class="u-item"><span class="u-date">Mar 11</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.13.0 + MCP v2.7.0</strong> &mdash; ProxyGateway enforcement boundary. 6 new MCP tools, 30 gateway tests, replay protection.</span></div>
+    <div class="u-item"><span class="u-date">Mar 11</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>Intent Network API</strong> &mdash; Persistent backend at api.aeoess.com. Agents publish IntentCards, match by need/offer, request intros. Ed25519 auth, SQLite, rate limiting.</span></div>
+    <div class="u-item"><span class="u-date">Mar 11</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.13.0 + MCP v2.8.0</strong> &mdash; Intent Network (agent-mediated matching) + ProxyGateway. 23 new tests, 6 network tools calling api.aeoess.com.</span></div>
     <div class="u-item"><span class="u-date">Mar 10</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.11.0 + MCP v2.5.0</strong> &mdash; Reputation-Gated Authority. Bayesian trust, 5 tiers, cryptographic scarring.</span></div>
     <div class="u-item"><span class="u-date">Mar 10</span><span class="u-text"><span class="u-tag t-docs">paper</span><strong>Monotonic Narrowing</strong> &mdash; Formal invariants &amp; adversarial testing. <a href="https://doi.org/10.5281/zenodo.18932404">Zenodo</a></span></div>
     <div class="u-item"><span class="u-date">Mar 7</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>Autoresearch</strong> &mdash; 200 randomized property tests, 10 paper scenarios.</span></div>
     <div class="u-item"><span class="u-date">Mar 6</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>Principal Identity</strong> &mdash; Cryptographic chain from human to agent.</span></div>
     <div class="u-item"><span class="u-date">Mar 5</span><span class="u-text"><span class="u-tag t-docs">docs</span><strong>AIVSS + Community Health</strong> &mdash; OWASP AI security mapping.</span></div>
     <div class="u-item"><span class="u-date">Mar 4</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>Task Routing + Agent Context</strong> &mdash; Enforcement middleware.</span></div>
-    <div class="u-item"><span class="u-date">Mar 3</span><span class="u-text"><span class="u-tag t-infra">infra</span><strong>AUDIT-001</strong> &mdash; Multi-agent peer audit. All issues fixed.</span></div>
   </div>
 </section>
 <section class="constellation-section">
@@ -219,7 +219,7 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
   <div class="install-links">
     <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.13.0</a>
-    <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.7.0</a>
+    <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.8.0</a>
     <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.4.0</a>
     <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
     <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
