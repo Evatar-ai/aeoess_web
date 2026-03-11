@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# LLM-readable content (prioritized for AI agent discovery)
+# LLM-readable content (for AI agent discovery)
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /llms/
