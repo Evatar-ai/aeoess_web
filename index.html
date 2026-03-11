@@ -85,7 +85,7 @@ a:hover{opacity:.8}
 .t-infra{background:rgba(129,140,248,.1);color:#818cf8}
 .constellation-section{margin:2rem 0 4rem;position:relative}
 .constellation-title{font:500 .65rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
-.constellation-wrap{position:relative;width:100%;height:520px;background:#0d0d10;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.constellation-wrap{position:relative;width:100%;height:600px;background:#0d0d10;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 canvas#constellation{width:100%;height:100%;display:block}
 .node-tooltip{position:absolute;pointer-events:none;opacity:0;transition:opacity .2s;background:rgba(8,8,10,.95);border:1px solid var(--accent);border-radius:6px;padding:.6rem .8rem;max-width:280px;z-index:10}
 .node-tooltip.show{opacity:1}
@@ -116,7 +116,7 @@ canvas#constellation{width:100%;height:100%;display:block}
 @media(max-width:900px){
   .topnav{padding:1rem 1.5rem}.topnav-links{gap:1.2rem}.page{padding:0 1.5rem}
   .hero{grid-template-columns:1fr;padding:8rem 0 2rem}
-  .constellation-wrap{height:400px}
+  .constellation-wrap{height:450px}
   .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:480px){
@@ -250,29 +250,34 @@ document.querySelector('.install-code')?.addEventListener('click',function(){thi
 
 // Constellation
 const NODES=[
-{id:'identity',label:'Ed25519\nIdentity',x:.12,y:.35,r:22,cat:'core',desc:'Every agent gets a cryptographic passport. Ed25519 keys. Signed, verifiable, expirable.',fns:'createPassport() · signPassport()'},
-{id:'delegation',label:'Delegation\nChains',x:.22,y:.18,r:20,cat:'core',desc:'Scoped authority with spend limits. Sub-delegation narrows scope. Never widens.',fns:'delegate() · subDelegate()'},
-{id:'revocation',label:'Cascade\nRevocation',x:.08,y:.55,r:18,cat:'core',desc:'Revoke one agent, everything downstream dies instantly. Batch revocation. Ed25519 signed.',fns:'cascadeRevoke() · onRevocation()'},
-{id:'canonical',label:'Canonical\nJSON',x:.22,y:.52,r:14,cat:'core',desc:'Deterministic serialization for cross-language signature compatibility.',fns:'canonicalSerialize()'},
-{id:'commerce',label:'Agentic\nCommerce',x:.15,y:.72,r:20,cat:'core',desc:'4-gate checkout: passport, delegation, merchant, spend. Human approval. 80% utilization warnings.',fns:'commercePreflight() · requestHumanApproval()'},
-{id:'values',label:'Values\nFloor',x:.42,y:.15,r:20,cat:'gov',desc:'7 non-negotiable principles (F-001→F-007). Graduated enforcement: inline blocks, audit logs, warnings.',fns:'loadFloor() · attestFloor()'},
-{id:'policy',label:'Policy\nEngine',x:.55,y:.28,r:19,cat:'gov',desc:'3-signature chain: agent declares intent → policy evaluates → signed receipt. Every action provable.',fns:'createActionIntent() · evaluateIntent()'},
-{id:'reputation',label:'Reputation-Gated\nAuthority',x:.42,y:.42,r:24,cat:'gov',desc:'Bayesian trust (μ,σ). 5 tiers: Untrusted→Autonomous. Signed promotions. Cryptographic scarring on failure.',fns:'checkTierForIntent() · createPromotionReview()'},
-{id:'principal',label:'Principal\nIdentity',x:.58,y:.12,r:17,cat:'gov',desc:'Cryptographic chain from human to agent. Selective disclosure. Fleet management.',fns:'createPrincipal() · endorseAgent()'},
-{id:'agora',label:'Agent\nAgora',x:.72,y:.2,r:18,cat:'ops',desc:'Signed message feeds. Topics, threading, agent registry. The public governance square.',fns:'createAgoraMessage() · getByTopic()'},
-{id:'coordination',label:'Coordination\nPrimitives',x:.78,y:.4,r:21,cat:'ops',desc:'Full task lifecycle: brief → assign → evidence → review → handoff → deliverable → complete.',fns:'createTaskBrief() · submitEvidence()'},
-{id:'attribution',label:'Merkle\nAttribution',x:.65,y:.55,r:17,cat:'ops',desc:'Every action traces to a human beneficiary. Merkle proofs. Multi-agent collaboration credit.',fns:'traceBeneficiary() · buildMerkleRoot()'},
-{id:'routing',label:'Task\nRouting',x:.88,y:.28,r:15,cat:'ops',desc:'Capability-based routing. Agents matched to tasks by scope, tier, and availability.',fns:'routeTask() · matchCapabilities()'},
-{id:'context',label:'Agent\nContext',x:.85,y:.52,r:16,cat:'ops',desc:'Enforcement middleware. Every action passes through context validator before execution.',fns:'createAgentContext() · executeWithContext()'},
-{id:'integration',label:'Integration\nWiring',x:.75,y:.65,r:15,cat:'ops',desc:'Cross-layer bridges. Commerce→Policy. Coordination→Agora. Receipts→Merkle. Pure composition.',fns:'commerceWithIntent() · coordinationToAgora()'},
-{id:'did',label:'DID:APS',x:.35,y:.7,r:15,cat:'std',desc:'Decentralized Identifiers for Agent Passport System. W3C DID method.',fns:'createDID() · resolveDID()'},
-{id:'vc',label:'Verifiable\nCredentials',x:.5,y:.75,r:15,cat:'std',desc:'W3C Verifiable Credentials. Provable attestations, delegations, receipts.',fns:'issueCredential() · verifyCredential()'},
-{id:'a2a',label:'A2A\nBridge',x:.52,y:.6,r:14,cat:'std',desc:'Google Agent-to-Agent protocol bridge. Interop with A2A ecosystem.',fns:'bridgeToA2A() · fromA2ACard()'},
-{id:'euai',label:'EU AI Act\nMapping',x:.38,y:.85,r:14,cat:'std',desc:'Article-by-article compliance mapping. Traceability, human oversight, risk management.',fns:'mapCompliance()'},
-{id:'autoresearch',label:'Autoresearch',x:.68,y:.82,r:16,cat:'research',desc:'200 randomized property tests. 10 paper attack scenarios. Automated protocol hardening.',fns:'propertyTest() · attackScenario()'},
-{id:'adversarial',label:'23 Adversarial\nScenarios',x:.82,y:.75,r:15,cat:'research',desc:'Replay attacks, impersonation, scope escalation, collusion, strategic failure. All tested.',fns:'tests/adversarial.ts'},
-{id:'paper1',label:'Agent Social\nContract',x:.55,y:.88,r:14,cat:'research',desc:'Published on Zenodo. Protocol theory: delegation, values floor, attribution.'},
-{id:'paper2',label:'Monotonic\nNarrowing',x:.78,y:.88,r:14,cat:'research',desc:'Published on Zenodo. Formal invariants for reputation-gated authority.'},
+// Foundation layer (bottom) → Governance (middle) → Operations (upper) → Standards & Research (edges)
+{id:'identity',label:'Ed25519\nIdentity',x:.08,y:.82,r:32,cat:'core',desc:'Every agent gets a cryptographic passport. Ed25519 keys. Signed, verifiable, expirable.',fns:'createPassport() · signPassport()'},
+{id:'delegation',label:'Delegation\nChains',x:.22,y:.85,r:30,cat:'core',desc:'Scoped authority with spend limits. Sub-delegation narrows scope. Never widens.',fns:'delegate() · subDelegate()'},
+{id:'revocation',label:'Cascade\nRevocation',x:.15,y:.68,r:26,cat:'core',desc:'Revoke one agent, everything downstream dies instantly. Batch revocation. Ed25519 signed.',fns:'cascadeRevoke() · onRevocation()'},
+{id:'canonical',label:'Canonical\nJSON',x:.35,y:.78,r:20,cat:'core',desc:'Deterministic serialization for cross-language signature compatibility.',fns:'canonicalSerialize()'},
+{id:'commerce',label:'Agentic\nCommerce',x:.36,y:.62,r:30,cat:'core',desc:'4-gate checkout: passport, delegation, merchant, spend. Human approval. 80% utilization warnings.',fns:'commercePreflight() · requestHumanApproval()'},
+// Governance layer (center)
+{id:'values',label:'Values\nFloor',x:.22,y:.48,r:30,cat:'gov',desc:'7 non-negotiable principles (F-001→F-007). Graduated enforcement: inline blocks, audit logs, warnings.',fns:'loadFloor() · attestFloor()'},
+{id:'policy',label:'Policy\nEngine',x:.42,y:.42,r:28,cat:'gov',desc:'3-signature chain: agent declares intent → policy evaluates → signed receipt. Every action provable.',fns:'createActionIntent() · evaluateIntent()'},
+{id:'reputation',label:'Reputation-Gated\nAuthority',x:.50,y:.26,r:38,cat:'gov',desc:'Bayesian trust (μ,σ). 5 tiers: Untrusted→Autonomous. Signed promotions. Cryptographic scarring on failure.',fns:'checkTierForIntent() · createPromotionReview()'},
+{id:'principal',label:'Principal\nIdentity',x:.30,y:.30,r:24,cat:'gov',desc:'Cryptographic chain from human to agent. Selective disclosure. Fleet management.',fns:'createPrincipal() · endorseAgent()'},
+// Operations layer (upper right)
+{id:'agora',label:'Agent\nAgora',x:.68,y:.14,r:26,cat:'ops',desc:'Signed message feeds. Topics, threading, agent registry. The public governance square.',fns:'createAgoraMessage() · getByTopic()'},
+{id:'coordination',label:'Coordination\nPrimitives',x:.72,y:.35,r:32,cat:'ops',desc:'Full task lifecycle: brief → assign → evidence → review → handoff → deliverable → complete.',fns:'createTaskBrief() · submitEvidence()'},
+{id:'attribution',label:'Merkle\nAttribution',x:.60,y:.50,r:26,cat:'ops',desc:'Every action traces to a human beneficiary. Merkle proofs. Multi-agent collaboration credit.',fns:'traceBeneficiary() · buildMerkleRoot()'},
+{id:'routing',label:'Task\nRouting',x:.88,y:.22,r:22,cat:'ops',desc:'Capability-based routing. Agents matched to tasks by scope, tier, and availability.',fns:'routeTask() · matchCapabilities()'},
+{id:'context',label:'Agent\nContext',x:.88,y:.42,r:22,cat:'ops',desc:'Enforcement middleware. Every action passes through context validator before execution.',fns:'createAgentContext() · executeWithContext()'},
+{id:'integration',label:'Integration\nWiring',x:.58,y:.65,r:22,cat:'ops',desc:'Cross-layer bridges. Commerce→Policy. Coordination→Agora. Receipts→Merkle. Pure composition.',fns:'commerceWithIntent() · coordinationToAgora()'},
+// Standards (right side)
+{id:'did',label:'DID:APS',x:.50,y:.82,r:20,cat:'std',desc:'Decentralized Identifiers for Agent Passport System. W3C DID method.',fns:'createDID() · resolveDID()'},
+{id:'vc',label:'Verifiable\nCredentials',x:.64,y:.78,r:22,cat:'std',desc:'W3C Verifiable Credentials. Provable attestations, delegations, receipts.',fns:'issueCredential() · verifyCredential()'},
+{id:'a2a',label:'A2A\nBridge',x:.78,y:.72,r:20,cat:'std',desc:'Google Agent-to-Agent protocol bridge. Interop with A2A ecosystem.',fns:'bridgeToA2A() · fromA2ACard()'},
+{id:'euai',label:'EU AI Act\nMapping',x:.08,y:.38,r:20,cat:'std',desc:'Article-by-article compliance mapping. Traceability, human oversight, risk management.',fns:'mapCompliance()'},
+// Research (top left)
+{id:'autoresearch',label:'Autoresearch',x:.12,y:.14,r:24,cat:'research',desc:'200 randomized property tests. 10 paper attack scenarios. Automated protocol hardening.',fns:'propertyTest() · attackScenario()'},
+{id:'adversarial',label:'23 Adversarial\nScenarios',x:.30,y:.10,r:22,cat:'research',desc:'Replay attacks, impersonation, scope escalation, collusion, strategic failure. All tested.',fns:'tests/adversarial.ts'},
+{id:'paper1',label:'Agent Social\nContract',x:.48,y:.10,r:20,cat:'research',desc:'Published on Zenodo. Protocol theory: delegation, values floor, attribution.'},
+{id:'paper2',label:'Monotonic\nNarrowing',x:.86,y:.60,r:20,cat:'research',desc:'Published on Zenodo. Formal invariants for reputation-gated authority.'},
 ];
 const EDGES=[
 ['identity','delegation'],['identity','revocation'],['identity','canonical'],
@@ -316,8 +321,8 @@ function draw(){
     const pa=getNodePos(na),pb=getNodePos(nb);
     const isH=hoveredNode&&(hoveredNode.id===a||hoveredNode.id===b);
     ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);
-    ctx.strokeStyle=isH?'rgba(212,165,116,.4)':'rgba(255,255,255,.04)';ctx.lineWidth=isH?1.5:.5;ctx.stroke();
-    if(isH){const t=(time*2)%1;ctx.beginPath();ctx.arc(pa.x+(pb.x-pa.x)*t,pa.y+(pb.y-pa.y)*t,2,0,Math.PI*2);ctx.fillStyle='rgba(212,165,116,.6)';ctx.fill()}
+    ctx.strokeStyle=isH?'rgba(212,165,116,.5)':'rgba(255,255,255,.06)';ctx.lineWidth=isH?2:.7;ctx.stroke();
+    if(isH){const t=(time*2)%1;ctx.beginPath();ctx.arc(pa.x+(pb.x-pa.x)*t,pa.y+(pb.y-pa.y)*t,3,0,Math.PI*2);ctx.fillStyle='rgba(212,165,116,.8)';ctx.fill()}
   });
   NODES.forEach(n=>{
     const p=getNodePos(n);const col=COLORS[n.cat];
@@ -326,17 +331,19 @@ function draw(){
     const pulse=Math.sin(time*2+n.x*10)*.15+1;
     const r=n.r*(isH?1.15:isC?1.05:pulse*.95+.05);
     const alpha=hoveredNode?(isH?1:isC?.8:.25):.7;
-    const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*2.5);
-    grd.addColorStop(0,hexRgba(col,alpha*.12));
+    const grd=ctx.createRadialGradient(p.x,p.y,r*.3,p.x,p.y,r*3);
+    grd.addColorStop(0,hexRgba(col,alpha*.25));
+    grd.addColorStop(.5,hexRgba(col,alpha*.08));
     grd.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(p.x,p.y,r*2.5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(p.x,p.y,r*3,0,Math.PI*2);ctx.fill();
     ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);
-    ctx.fillStyle='rgba(17,17,20,'+alpha+')';ctx.fill();
-    ctx.globalAlpha=alpha;ctx.strokeStyle=col;ctx.lineWidth=isH?2:1;ctx.stroke();ctx.globalAlpha=1;
+    ctx.fillStyle='rgba(13,13,16,'+alpha+')';ctx.fill();
+    ctx.globalAlpha=alpha;ctx.strokeStyle=col;ctx.lineWidth=isH?2.5:1.5;ctx.stroke();ctx.globalAlpha=1;
     ctx.fillStyle='rgba(232,228,222,'+alpha+')';
-    ctx.font=(isH?'600':'500')+' '+(n.r<16?9:10)+"px 'Outfit',sans-serif";
+    const fs=Math.max(10,Math.min(13,n.r*.38));
+    ctx.font=(isH?'600':'500')+' '+fs+"px 'Outfit',sans-serif";
     ctx.textAlign='center';
-    const lines=n.label.split('\n');const lH=n.r<16?11:12;const sY=p.y-(lines.length-1)*lH/2;
+    const lines=n.label.split('\n');const lH=fs+2;const sY=p.y-(lines.length-1)*lH/2;
     lines.forEach((l,i)=>ctx.fillText(l,p.x,sY+i*lH));
   });
   requestAnimationFrame(draw);
