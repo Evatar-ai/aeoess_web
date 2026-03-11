@@ -19,9 +19,9 @@ AEOESS provides eleven protocol modules for sovereign AI agents:
 
 Plus: **W3C DID:APS** (decentralized identifiers), **Verifiable Credentials**, **Google A2A bridge**, **EU AI Act compliance mapping**.
 
-Plus: **MCP Server** (v2.5.0) — 49 tools across all layers with role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.6.0) — 55 tools across all layers with role-scoped access control for any MCP client.
 
-**v1.11.0 — 481 tests passing. Zero heavy dependencies.**
+**v1.12.0 — 511 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
 
@@ -45,7 +45,7 @@ Plus: **MCP Server** (v2.5.0) — 49 tools across all layers with role-scoped ac
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. 49 tools across all layers:
+The `agent-passport-system-mcp` package provides a full-stack MCP server. 55 tools across all layers:
 
 **Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 
