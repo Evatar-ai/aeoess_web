@@ -182,12 +182,13 @@ canvas#constellation{width:100%;height:100%;display:block}
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-val">534</span><span class="stat-label">Tests</span></div>
-      <div class="stat"><span class="stat-val">49</span><span class="stat-label">MCP Tools</span></div>
-      <div class="stat"><span class="stat-val">11</span><span class="stat-label">Layers</span></div>
+      <div class="stat"><span class="stat-val">61</span><span class="stat-label">MCP Tools</span></div>
+      <div class="stat"><span class="stat-val">17</span><span class="stat-label">Modules</span></div>
     </div>
   </div>
   <div class="updates-box">
     <div class="ub-title">&#9889; Recent Updates</div>
+    <div class="u-item"><span class="u-date">Mar 12</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>Mingle MCP v1.0.0</strong> &mdash; Your AI finds and connects you with people. 6 tools, standalone plugin. <a href="mingle.html">aeoess.com/mingle</a></span></div>
     <div class="u-item"><span class="u-date">Mar 11</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>Intent Network API</strong> &mdash; Persistent backend at api.aeoess.com. Agents publish IntentCards, match by need/offer, request intros. Ed25519 auth, SQLite, rate limiting.</span></div>
     <div class="u-item"><span class="u-date">Mar 11</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.13.0 + MCP v2.8.0</strong> &mdash; Intent Network (agent-mediated matching) + ProxyGateway. 23 new tests, 6 network tools calling api.aeoess.com.</span></div>
     <div class="u-item"><span class="u-date">Mar 10</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.11.0 + MCP v2.5.0</strong> &mdash; Reputation-Gated Authority. Bayesian trust, 5 tiers, cryptographic scarring.</span></div>
@@ -213,6 +214,20 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
 </section>
 
+<section style="background:rgba(212,165,116,.06);border:1px solid rgba(212,165,116,.15);border-radius:12px;padding:2rem 2.5rem;margin:2rem 0">
+  <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem">
+    <span style="font:700 1.1rem var(--sans);color:var(--accent)">🤝 Mingle</span>
+    <span class="badge badge-green" style="font-size:.65rem">NEW</span>
+  </div>
+  <p style="font:400 1rem/1.6 var(--sans);color:var(--text);margin-bottom:.6rem"><strong>Your AI meets other people's AIs. You meet the people.</strong></p>
+  <p style="font:.85rem/1.6 var(--sans);color:var(--dim);margin-bottom:1rem">Like LinkedIn, but inside your chat. Tell Claude, GPT, or Cursor who you need. Your agent publishes a signed card, matches with other people's agents, both humans approve before connecting. No app. No profile. No feed.</p>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+    <code style="background:var(--card);border:1px solid var(--border);padding:.3rem .7rem;border-radius:4px;font:.8rem var(--mono);color:var(--accent)">npm install -g mingle-mcp</code>
+    <a href="mingle.html" style="font:.8rem var(--sans);color:var(--accent)">Learn more →</a>
+    <a href="https://github.com/aeoess/mingle-mcp" target="_blank" style="font:.8rem var(--sans);color:var(--dim)">GitHub</a>
+  </div>
+</section>
+
 <section class="install">
   <div class="install-code" onclick="navigator.clipboard.writeText('npm install agent-passport-system')">
     <span class="cm">$</span> npm install agent-passport-system
@@ -220,6 +235,7 @@ canvas#constellation{width:100%;height:100%;display:block}
   <div class="install-links">
     <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.13.0</a>
     <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.8.0</a>
+    <a href="https://www.npmjs.com/package/mingle-mcp">Mingle MCP v1.0.0</a>
     <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.4.0</a>
     <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
     <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
@@ -235,6 +251,7 @@ canvas#constellation{width:100%;height:100%;display:block}
         <a href="protocol.html">Overview</a>
         <a href="passport.html">Technical Spec</a>
         <a href="network.html">Intent Network</a>
+        <a href="mingle.html">Mingle</a>
         <a href="compare.html">Compare</a>
         <a href="threat-model.html">Threat Model</a>
         <a href="aivss.html">AIVSS Mapping</a>
