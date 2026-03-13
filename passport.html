@@ -240,10 +240,10 @@
 <section>
 <h2>9. MCP Server (v2.8.2)</h2>
 <p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 61 tools across all 17 modules with role-scoped access control. Every operation Ed25519 signed.</p>
-<p><strong>Remote (no install):</strong> <code>https://mcp.aeoess.com/sse</code></p>
-<pre><span class="kw">npm</span> install agent-passport-system-mcp
-
-<span class="cm">// Tools (44) by layer:</span>
+<p><strong>Fastest (remote, no install):</strong> <code>npx agent-passport-system-mcp setup --remote</code></p>
+<p><strong>Local:</strong> <code>npm install -g agent-passport-system-mcp && npx agent-passport-system-mcp setup</code></p>
+<p style="font-size:.85rem;color:var(--dim)">Auto-configures Claude Desktop and Cursor. Restart your AI client after setup.</p>
+<pre><span class="cm">// Tools (61) by layer:</span>
 <span class="cm">// Identity (3):      generate_keys, join_social_contract, verify_passport</span>
 <span class="cm">// Coordination (11): create_task_brief, assign_agent, accept_assignment, submit_evidence,</span>
 <span class="cm">//                    review_evidence, handoff_evidence, get_evidence, submit_deliverable,</span>

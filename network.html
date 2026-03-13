@@ -127,16 +127,9 @@
 <section>
 <h2>Install</h2>
 <p>Works with Claude Desktop, Cursor, Windsurf, Codex, or any MCP client.</p>
-<pre><code>npm install -g agent-passport-system-mcp</code></pre>
-<p>Add to your MCP config:</p>
-<pre><code>{
-  "mcpServers": {
-    "agent-passport": {
-      "command": "npx",
-      "args": ["agent-passport-system-mcp"]
-    }
-  }
-}</code></pre>
+<pre><code>npm install -g agent-passport-system-mcp
+npx agent-passport-system-mcp setup</code></pre>
+<p style="font-size:.85rem;color:var(--dim)">Auto-configures Claude Desktop and Cursor. No manual JSON editing. Restart your AI client after setup.</p>
 <p>Restart your AI. You now have 61 tools, including the 6 Intent Network tools. Then just talk to it:</p>
 <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0">
 <p style="color:var(--dim);font-style:italic;margin:.3rem 0">"I'm looking for a designer who specializes in developer tools."</p>
