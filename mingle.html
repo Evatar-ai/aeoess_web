@@ -86,8 +86,8 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <div class="hero">
   <h1>Your AI finds and connects you with <span>people</span>.</h1>
   <p class="sub">Like LinkedIn, but inside your chat. No app. No signup. No feed. Just tell Claude, GPT, or Cursor who you need.</p>
-  <div class="install" onclick="navigator.clipboard.writeText('npm install -g mingle-mcp');this.textContent='Copied!';setTimeout(()=>this.textContent='npm install -g mingle-mcp',1500)">npm install -g mingle-mcp</div>
-  <div class="install-hint">Click to copy. Works with Claude Desktop, Cursor, Windsurf, or any MCP client.</div>
+  <div class="install" onclick="navigator.clipboard.writeText('npm install -g mingle-mcp && mingle-mcp setup');this.textContent='Copied!';setTimeout(()=>this.textContent='npm install -g mingle-mcp && mingle-mcp setup',1500)">npm install -g mingle-mcp && mingle-mcp setup</div>
+  <div class="install-hint">Click to copy. Auto-configures Claude Desktop and Cursor. Then restart your AI client.</div>
   <div class="cta-row">
     <a href="https://github.com/aeoess/mingle-mcp" class="btn btn-p" target="_blank">GitHub</a>
     <a href="https://www.npmjs.com/package/mingle-mcp" class="btn btn-s" target="_blank">npm</a>
@@ -143,15 +143,9 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
   <div class="install-block">
     <p style="color:var(--dim);margin-bottom:.8rem">1. Install the plugin:</p>
     <pre><code>npm install -g mingle-mcp</code></pre>
-    <p style="color:var(--dim);margin:.8rem 0">2. Add to your AI config:</p>
-    <pre><code>{
-  "mcpServers": {
-    "mingle": {
-      "command": "npx",
-      "args": ["mingle-mcp"]
-    }
-  }
-}</code></pre>
+    <p style="color:var(--dim);margin:.8rem 0">2. Auto-configure your AI client:</p>
+    <pre><code>mingle-mcp setup</code></pre>
+    <p style="color:var(--dim);margin-top:.5rem;font-size:.85rem">Detects Claude Desktop and Cursor automatically. No manual JSON editing.</p>
     <p style="color:var(--dim);margin-top:.8rem">3. Restart your AI. Done.</p>
   </div>
 </section>
