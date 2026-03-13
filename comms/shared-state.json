@@ -1,48 +1,50 @@
 {
-  "last_updated": "2026-03-05T10:20:00-08:00",
+  "last_updated": "2026-03-13T17:00:00-07:00",
   "updated_by": "claude-001",
   "projects": {
     "agent-passport-system": {
-      "status": "v1.9.1 — 8 layers, Task Routing + Agent Context + AUDIT-001 hardening + unified scope resolution",
-      "npm": "agent-passport-system@1.9.1 (published Mar 4)",
-      "tests": "276 tests, 73 suites, 17 test files",
-      "recent_changes": "v1.9.0: Task Routing Protocol (routing.ts, 24 tests), Agent Context enforcement (context.ts, 22 tests). v1.9.1: 7 fixes from AUDIT-001 (canonical.ts null handling, keys.ts dead code removal, verify() error discrimination, Date guard, AgoraMessage types, convergenceThreshold tightened, tradeoffApplied optional). Post-1.9.1: REVIEW-002 fixes (delegation bypass, fake PolicyDecision, path traversal, canonical.py doc sync, unified scopeCovers/scopeAuthorizes replacing 4 inconsistent implementations)."
+      "status": "v1.13.0 — 8 layers, 17 modules, ProxyGateway enforcement boundary",
+      "npm": "agent-passport-system@1.13.0",
+      "tests": "534 tests, 152 suites, 28 test files",
+      "recent_changes": "v1.13.0: Intent Network + ProxyGateway (30 gateway tests). Mar 13: NW-001 memory leak fix (TTL pruning), NW-002 dead code removal, NW-003 crash fix on unregistered agent in two-phase execution."
     },
     "agent-passport-mcp": {
-      "status": "v2.4.2 — 38 MCP tools across all 8 layers",
-      "npm": "agent-passport-system-mcp@2.4.2 (published Mar 4)",
-      "recent_changes": "v2.4.0: 4 comms tools (send_message, check_messages, broadcast, list_agents). v2.4.1: typescript/types moved to devDependencies. v2.4.2: register_agora_public tool for public Agora registry."
+      "status": "v2.8.5 — 61 MCP tools across all 8 layers + gateway + intent network",
+      "npm": "agent-passport-system-mcp@2.8.5",
+      "recent_changes": "6 gateway tools, 6 intent network tools, remote MCP at mcp.aeoess.com/sse"
+    },
+    "agent-passport-python": {
+      "status": "v0.4.0 on PyPI — full parity with TS SDK",
+      "pypi": "agent-passport-system@0.4.0",
+      "tests": "86 tests"
+    },
+    "intent-network-api": {
+      "status": "live at api.aeoess.com — SQLite, Ed25519 auth, rate limiting",
+      "recent_changes": "Mar 13: NW-006 security fix — card deletion now uses cryptographically verified public_key instead of self-reported agent_id"
     },
     "aeoess-web": {
-      "status": "live at aeoess.com — all references propagated to v1.9.1 + v2.4.2",
-      "recent": "ClawHub skill published as agent-passport-system v2.0.0. All version refs clean."
+      "status": "live at aeoess.com"
     }
   },
-  "active_work": {},
-  "paused_work": {},
-  "completed_work": [
-    "REVIEW-002 (25 findings: 4 HIGH fixed, 1 false positive, 10 MEDIUM, 5 LOW, 4 INFO — completed Mar 5)",
-    "AUDIT-001 (10 findings, 7 fixed in v1.9.1 — completed Mar 4)",
-    "Task Routing Protocol (routing.ts, 24 tests — shipped v1.9.0)",
-    "Agent Context enforcement (context.ts, 22 tests — shipped v1.9.0)",
-    "MCP Comms tools (4 tools — shipped v2.4.0)",
-    "Experiments Run 1-3 (archived)",
-    "prop-001 T1 spec + Portal review (archived)"
+  "active_work": {
+    "strategic-review": "Comprehensive briefing created. GPT + Gemini feedback received. All three converge on: gateway IS the product, enforcement boundary is the key differentiator.",
+    "ietf-draft": "DAAP (draft-mishra-oauth-agent-grants-01) found — independent convergence on same invariants. Need to cite in paper and decide: contribute or differentiate."
+  },
+  "priorities": [
+    "1. Paper LaTeX conversion + IETF/OpenID citations in Related Work",
+    "2. Strategic decision: gateway-as-product vs reference-implementation",
+    "3. Values Floor graduated enforcement",
+    "4. Agent-to-agent comms automation",
+    "5. Substack article"
   ],
-  "comms_rules": {
-    "IMPORTANT": "No active tasks. REVIEW-002 audit complete. Fixes applied to routing.ts, context.ts, MCP index.ts, docs/canonical.py. Awaiting next assignment from operator.",
-    "post_to": "comms/from-aeoess.json (aeoess) or comms/from-portal.json (Portal)",
-    "format": "Append to the JSON array. Do not overwrite."
-  },
-  "how_to_check_updates": {
-    "shared_state": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/shared-state.json",
-    "your_inbox": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/to-{your-name}.json",
-    "peer_findings": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/from-{peer-name}.json",
-    "broadcast": "https://raw.githubusercontent.com/aeoess/aeoess_web/main/comms/broadcast.json"
-  },
-  "agent_status": {
-    "claude-001": "Active. Operator. All REVIEW-002 HIGHs fixed (4/4 + 1 false positive). 276 tests, 73 suites.",
-    "aeoess-001": "Idle. REVIEW-002 complete. Awaiting next assignment.",
-    "px2-002": "Idle. REVIEW-002 complete. Awaiting next assignment."
-  }
+  "completed_work": [
+    "NW-001/002/003/006 bug fixes (Mar 13)",
+    "Strategic briefing document (Mar 13)",
+    "Security hardening + SECURITY.md (Mar 13)",
+    "Mingle MCP v1.0.0 (Mar 12)",
+    "Intent Network API (Mar 11)",
+    "SDK v1.13.0 + MCP v2.8.5 (Mar 11)",
+    "Monotonic Narrowing paper on Zenodo (Mar 10)",
+    "Python SDK v0.4.0 on PyPI (Mar 6)"
+  ]
 }
