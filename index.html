@@ -55,7 +55,9 @@ a:hover{opacity:.8}
 ::selection{background:var(--accent);color:var(--bg)}
 .topnav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 3rem;background:transparent;transition:background .3s}
 .topnav.scrolled{background:rgba(18,18,20,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topnav.drawer-open{background:var(--bg)}
 [data-theme="light"] .topnav.scrolled{background:rgba(240,239,236,.9)}
+[data-theme="light"] .topnav.drawer-open{background:var(--bg)}
 .topnav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none}
 .topnav-logo img{height:32px;opacity:.9}
 .topnav-links{display:flex;align-items:center;gap:2rem}
@@ -104,6 +106,8 @@ a:hover{opacity:.8}
 .t-infra{background:rgba(129,140,248,.1);color:#818cf8}
 .constellation-section{margin:2rem 0 4rem;position:relative}
 .constellation-title{font:500 .65rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+.interact-hint-mobile{display:none}
+.interact-hint-desktop{display:inline}
 .constellation-wrap{position:relative;width:100%;height:600px;background:#141416;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 canvas#constellation{width:100%;height:100%;display:block}
 .node-tooltip{position:absolute;pointer-events:none;opacity:0;transition:opacity .2s;background:rgba(8,8,10,.95);border:1px solid var(--accent);border-radius:6px;padding:.6rem .8rem;max-width:280px;z-index:10}
@@ -132,16 +136,50 @@ canvas#constellation{width:100%;height:100%;display:block}
 .footer-badges{display:flex;gap:.8rem}
 .footer-badges a{font:.65rem var(--mono);color:var(--muted)}
 .footer-badges a:hover{color:var(--accent)}
+/* Burger menu */
+.topnav-burger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;cursor:pointer;z-index:101}
+.topnav-burger span{display:block;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.topnav-burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.topnav-burger.open span:nth-child(2){opacity:0}
+.topnav-burger.open span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+.topnav-drawer{display:none;position:fixed;inset:0;z-index:98;background:var(--bg);padding:5rem 2rem 2rem;flex-direction:column;gap:1.2rem}
+.topnav-drawer.open{display:flex}
+.topnav-drawer a,.topnav-drawer button{font:400 1.1rem var(--sans);color:var(--dim);text-decoration:none;padding:.4rem 0;text-align:left;background:none;border:none;cursor:pointer}
+.topnav-drawer a:hover,.topnav-drawer button:hover{color:var(--text)}
 @media(max-width:900px){
-  .topnav{padding:1rem 1.5rem}.topnav-links{gap:1.2rem}.page{padding:0 1.5rem}
-  .hero{grid-template-columns:1fr;padding:8rem 0 2rem}
-  .constellation-wrap{height:450px}
+  .topnav{padding:1rem 1.5rem}
+  .topnav-links{display:none}
+  .topnav-burger{display:flex}
+  .interact-hint-mobile{display:inline}
+  .interact-hint-desktop{display:none}
+  .page{padding:0 1.5rem}
+  .hero{grid-template-columns:1fr;padding:5.5rem 0 2rem}
+  .hero h1{font-size:clamp(2.2rem,8vw,3rem)}
+  .constellation-wrap{height:400px}
   .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:480px){
-  .hero-stats{flex-direction:column;gap:.8rem}
-  .constellation-wrap{height:320px}
+  .hero{padding:4.5rem 0 1.5rem}
+  .hero h1{font-size:2rem}
+  .hero-desc{font-size:.85rem}
+  .hero-sub{font-size:.9rem}
+  .hero-stats{gap:1rem}
+  .hero-badges{gap:.4rem}
+  .badge{font-size:.6rem;padding:.25rem .5rem}
+  .constellation-section{margin:1rem 0 2.5rem}
+  .constellation-wrap{height:280px}
+  .constellation-legend{gap:.8rem}
+  .legend-item{font-size:.65rem}
+  .updates-box{max-height:280px;padding:.8rem 1rem}
+  .install-code{font-size:.75rem;padding:.6rem .9rem}
+  .install-links{gap:1rem}
+  .install-links a{font-size:.75rem}
   .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
+  .mingle-promo{padding:1.2rem 1rem !important;margin:1rem 0 !important}
+  .node-tooltip{max-width:220px;font-size:.68rem}
+  .node-tooltip h4{font-size:.72rem}
+  .node-tooltip code{font-size:.58rem}
 }
 </style>
 <body>
@@ -157,7 +195,19 @@ canvas#constellation{width:100%;height:100%;display:block}
     <a href="mailto:signal@aeoess.com">Contact</a>
     <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">☀</button>
   </div>
+  <div class="topnav-burger" onclick="this.classList.toggle('open');document.querySelector('.topnav-drawer').classList.toggle('open');document.getElementById('topnav').classList.toggle('drawer-open')">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div class="topnav-drawer">
+  <a href="blog.html" onclick="closeDrawer()">Blog</a>
+  <a href="passport.html" onclick="closeDrawer()">Docs</a>
+  <a href="protocol.html" onclick="closeDrawer()">Protocol</a>
+  <a href="compare.html" onclick="closeDrawer()">Compare</a>
+  <a href="agora.html" onclick="closeDrawer()">Agora</a>
+  <a href="https://github.com/aeoess" target="_blank" onclick="closeDrawer()">GitHub</a>
+  <a href="mailto:signal@aeoess.com" onclick="closeDrawer()">Contact</a>
+</div>
 
 <main class="page">
 <section class="hero">
@@ -200,7 +250,7 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
 </section>
 <section class="constellation-section">
-  <div class="constellation-title">Protocol Architecture &mdash; hover to explore</div>
+  <div class="constellation-title">Protocol Architecture &mdash; <span class="interact-hint-desktop">hover</span><span class="interact-hint-mobile">tap</span> to explore</div>
   <div class="constellation-wrap">
     <canvas id="constellation"></canvas>
     <div class="node-tooltip" id="tooltip"></div>
@@ -214,7 +264,7 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
 </section>
 
-<section style="background:rgba(212,165,116,.06);border:1px solid rgba(212,165,116,.15);border-radius:12px;padding:2rem 2.5rem;margin:2rem 0">
+<section class="mingle-promo" style="background:rgba(212,165,116,.06);border:1px solid rgba(212,165,116,.15);border-radius:12px;padding:2rem 2.5rem;margin:2rem 0">
   <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem">
     <span style="font:700 1.1rem var(--sans);color:var(--accent)">🤝 Mingle</span>
     <span class="badge badge-green" style="font-size:.65rem">NEW</span>
@@ -293,6 +343,11 @@ function toggleTheme(){
   document.documentElement.setAttribute('data-theme',n);
   localStorage.setItem('aeoess-theme',n);
   document.querySelector('.theme-btn').textContent=n==='dark'?'☀':'☾';
+}
+function closeDrawer(){
+  document.querySelector('.topnav-burger')?.classList.remove('open');
+  document.querySelector('.topnav-drawer')?.classList.remove('open');
+  document.getElementById('topnav')?.classList.remove('drawer-open');
 }
 (function(){
   const s=localStorage.getItem('aeoess-theme');
@@ -426,6 +481,24 @@ wrap.addEventListener('mousemove',e=>{
   }else{canvas.style.cursor='default';tooltip.classList.remove('show')}
 });
 wrap.addEventListener('mouseleave',()=>{hoveredNode=null;tooltip.classList.remove('show')});
+// Touch support
+wrap.addEventListener('touchstart',e=>{
+  const touch=e.touches[0];const rect=canvas.getBoundingClientRect();
+  const mx=touch.clientX-rect.left,my=touch.clientY-rect.top;
+  let found=null;
+  NODES.forEach(n=>{const p=getNodePos(n);if(Math.hypot(mx-p.x,my-p.y)<n.r+16)found=n});
+  if(found){
+    e.preventDefault();hoveredNode=found;
+    tooltip.classList.add('show');
+    let h='<h4>'+found.label.replace('\n',' ')+'</h4><p>'+found.desc+'</p>';
+    if(found.fns)h+='<p style="margin-top:.3rem"><code>'+found.fns+'</code></p>';
+    tooltip.innerHTML=h;
+    const p=getNodePos(found);let tx=p.x+found.r+12,ty=p.y-20;
+    if(tx+260>W)tx=Math.max(8,p.x-260);if(ty<10)ty=10;if(ty+100>H)ty=H-110;
+    tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';
+  } else {hoveredNode=null;tooltip.classList.remove('show')}
+},{passive:false});
+wrap.addEventListener('touchend',()=>{setTimeout(()=>{hoveredNode=null;tooltip.classList.remove('show')},2000)});
 </script>
 </body>
 </html>
