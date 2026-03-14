@@ -74,6 +74,30 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 25: Substack Launch — Cross-Protocol Bridge + Tesla Social",
+      "datePublished": "2026-03-14",
+      "description": "Published two Substack articles: the first cross-protocol agent identity bridge (APS x AIP) and Tesla Social MVP. Social media launch across X and LinkedIn.",
+      "url": "https://aeoess.com/blog.html#day-25",
+      "keywords": ["cross-protocol", "AIP bridge", "Tesla Social", "Substack", "KYA", "social media launch"]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Day 24: Security Hardening — Gateway Bugs, Setup Commands, Cross-Protocol Resolve",
+      "datePublished": "2026-03-13",
+      "description": "Fixed 3 gateway bugs (memory leak, crash on unregistered agent, ownership bypass). SECURITY.md, prompt injection sanitization, npx setup command, cross-protocol resolve endpoint.",
+      "url": "https://aeoess.com/blog.html#day-24",
+      "keywords": ["security", "gateway", "bug fixes", "setup command", "cross-protocol resolve", "SECURITY.md"]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Day 23: Mingle Ships — Your AI Finds People for You",
+      "datePublished": "2026-03-12",
+      "description": "Mingle MCP v1.0.0 shipped. Standalone agent-to-agent networking plugin. 6 tools, landing page, live network stats. Published to ClawHub and npm.",
+      "url": "https://aeoess.com/blog.html#day-23",
+      "keywords": ["Mingle", "agent networking", "MCP plugin", "ClawHub", "npm", "agent matching"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 21: Reputation-Gated Authority — Agents Earn Trust, Not Just Receive It",
       "datePublished": "2026-03-10",
       "description": "Bayesian reputation model, signed promotion reviews, cryptographic scarring, tier checking. SDK 1.11.0, MCP 2.5.0, 534 tests, 61 tools.",
@@ -314,6 +338,32 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Five tiers: recruit (score 0), operator (30), specialist (60), captain (80), sovereign (95). Each tier unlocks higher autonomy levels, spend limits, and delegation depth. Promotion requires a signed review from an earned agent at a higher tier. No self-promotion. No fiat reviewers. Demotion leaves cryptographic scarring: each behavioral demotion permanently raises the threshold to re-reach that tier by 5 points.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Before writing a line of code, consulted GPT-4, Gemini, and PortalX2 on three design questions: complexity evaluation, model-change handling, and enforcement placement. All three converged on the same architecture: deterministic rule engine for classification, Bayesian sigma reset for model changes, soft precheck at intent creation plus hard enforcement in the policy engine. When three different AI architectures independently agree on the same answer, you're probably on the right path.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK 1.11.0: 17 exported functions, 76 tests across Phase 1 and Phase 2. MCP 2.5.0: 5 new tools (resolve_authority, check_tier, review_promotion, update_reputation, get_promotion_history). 61 tools total. Both published to npm.</p>
+</article>
+
+<article class="post" id="day-25">
+  <time class="post-date" datetime="2026-03-14">March 14, 2026</time>
+  <h2>Day 25: Substack Launch — Cross-Protocol Bridge + Tesla Social</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Content day. Two Substack articles published. Social media posts across X and LinkedIn.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Article 1: "For the First Time in History, AI Agents Bridged Two Independent Security Systems."</strong> The story of the APS x AIP cross-protocol identity bridge. My protocol and The Nexus Guard's protocol verified each other's agents. Two independent teams, two protocols, zero coordination. Their agents still proved who they are to each other. This is KYA — Know Your Agent. The DNS moment for AI agents.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Article 2: "I Came Up With the Best Social and Retention Strategy for Tesla. Then I Built It."</strong> Every airline has miles, every hotel has points, Tesla has nothing. Built a proximity chat + miles loyalty program MVP for Tesla owners in a weekend. React + Supabase + Vercel. Working app at tesla-social.vercel.app.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Also pitched Mingle on X ("DNS for AI agents") to an 81k-reach thread. The protocol is starting to get in front of people.</p>
+</article>
+
+<article class="post" id="day-24">
+  <time class="post-date" datetime="2026-03-13">March 13, 2026</time>
+  <h2>Day 24: Security Hardening — Gateway Bugs, Setup Commands, Cross-Protocol Resolve</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Three gateway bugs found and fixed. NW-001: memory leak in replay protection — the nonce store grew unbounded because expired entries never got pruned. Added TTL-based cleanup. NW-003: crash when an unregistered agent tried two-phase execution. Now returns a proper error instead of throwing. NW-006: card deletion in the Intent Network checked agent ID instead of cryptographic key. Anyone who knew an agent's ID could delete their card. Fixed to require signature verification.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">All 30 gateway tests pass. These are the kinds of bugs that don't show up in unit tests but would have been exploitable in production. Finding them before anyone else did is the point of security hardening.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SECURITY.md</strong> published with a proper threat model and responsible disclosure process. Prompt injection sanitization added to Mingle. <code>npx agent-passport-system-mcp setup</code> now auto-configures Claude Desktop and Cursor — zero JSON editing required. Cross-protocol resolve endpoint live at api.aeoess.com for external protocol bridges.</p>
+</article>
+
+<article class="post" id="day-23">
+  <time class="post-date" datetime="2026-03-12">March 12, 2026</time>
+  <h2>Day 23: Mingle Ships — Your AI Finds People for You</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The biggest product launch since the protocol itself. Mingle is a standalone MCP plugin that turns your AI into a networking agent. Tell Claude or GPT who you need. Your agent publishes a signed card, matches with other people's agents, both humans approve before connecting. No app. No profile. No feed.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Six tools: <code>publish_card</code>, <code>search_matches</code>, <code>get_digest</code>, <code>request_intro</code>, <code>respond_to_intro</code>, <code>remove_card</code>. Everything Ed25519 signed. The network is live at api.aeoess.com.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Landing page at <a href="mingle.html">aeoess.com/mingle</a> with live network stats. Published to ClawHub as mingle@1.0.0 and agent-passport-system@3.0.0. Product Hunt, LinkedIn, and X launch posts went out. The framing: "Like LinkedIn, but inside your chat."</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">This is the first piece of the protocol that non-technical people can actually use. You don't need to understand Ed25519 or delegation chains. You just tell your AI "I need a React developer in Berlin" and Mingle handles the rest.</p>
 </article>
 
 <article class="post" id="day-22">
