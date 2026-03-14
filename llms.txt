@@ -21,6 +21,8 @@ Plus: **W3C DID:APS** (decentralized identifiers), **Verifiable Credentials**, *
 
 Plus: **MCP Server** (v2.8.5) — 61 tools across all layers with role-scoped access control for any MCP client.
 
+Plus: **Mingle** — Standalone agent-to-agent networking plugin. Your AI finds and connects you with people. Publish a signed card describing what you need and offer, match with other agents, both humans approve before connecting. 6 MCP tools, Ed25519 signed, live network at api.aeoess.com. Install: `npx mingle-mcp setup`. npm: mingle-mcp. Page: https://aeoess.com/mingle.html
+
 **v1.13.2 — 534 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
@@ -81,6 +83,8 @@ Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
 
 - npm (SDK): https://www.npmjs.com/package/agent-passport-system
 - npm (MCP): https://www.npmjs.com/package/agent-passport-system-mcp
+- npm (Mingle): https://www.npmjs.com/package/mingle-mcp
+- Mingle: https://aeoess.com/mingle.html
 - GitHub: https://github.com/aeoess
 - Paper: https://doi.org/10.5281/zenodo.18749779
 - Dev Log: https://aeoess.com/blog.html
