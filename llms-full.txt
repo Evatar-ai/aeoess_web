@@ -46,7 +46,7 @@ Layer 11 — Task Routing & Agent Context: Capability-based routing matches agen
 
 Standards: W3C DID:APS (decentralized identifiers), W3C Verifiable Credentials, Google A2A protocol bridge, EU AI Act article-by-article compliance mapping.
 
-**v1.13.0 — 534 tests (152 suites). 22 test files including 23 adversarial scenarios.**
+**v1.13.1 — 534 tests (152 suites). 22 test files including 23 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
