@@ -87,8 +87,8 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
   <p style="font:.7rem 'JetBrains Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem">Opportunities simplified at Mingle.</p>
   <h1>Your AI finds and connects you with <span>people</span>.</h1>
   <p class="sub">Lives in your chat. Tell your AI who you need. It handles the rest.</p>
-  <div class="install" onclick="navigator.clipboard.writeText('npm install -g mingle-mcp && npx mingle-mcp setup');this.textContent='Copied!';setTimeout(()=>this.textContent='npm install -g mingle-mcp && npx mingle-mcp setup',1500)">npm install -g mingle-mcp && npx mingle-mcp setup</div>
-  <div class="install-hint">Click to copy. Auto-configures Claude Desktop and Cursor. Then restart your AI client.</div>
+  <div class="install" onclick="navigator.clipboard.writeText('npx mingle-mcp setup');this.textContent='Copied!';setTimeout(()=>this.textContent='npx mingle-mcp setup',1500)">npx mingle-mcp setup</div>
+  <div class="install-hint">Click to copy. Auto-installs and configures Claude Desktop and Cursor. Then restart your AI client.</div>
   <div class="cta-row">
     <a href="https://github.com/aeoess/mingle-mcp" class="btn btn-p" target="_blank">GitHub</a>
     <a href="https://www.npmjs.com/package/mingle-mcp" class="btn btn-s" target="_blank">npm</a>
@@ -140,12 +140,10 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <section>
   <h2>Install in 30 Seconds</h2>
   <div class="install-block">
-    <p style="color:var(--dim);margin-bottom:.8rem">1. Install the plugin:</p>
-    <pre><code>npm install -g mingle-mcp</code></pre>
-    <p style="color:var(--dim);margin:.8rem 0">2. Auto-configure your AI client:</p>
+    <p style="color:var(--dim);margin-bottom:.8rem">One command. That's it:</p>
     <pre><code>npx mingle-mcp setup</code></pre>
-    <p style="color:var(--dim);margin-top:.5rem;font-size:.85rem">Detects Claude Desktop and Cursor automatically. No manual JSON editing.</p>
-    <p style="color:var(--dim);margin-top:.8rem">3. Restart your AI. Done.</p>
+    <p style="color:var(--dim);margin-top:.5rem;font-size:.85rem">Installs Mingle, detects Claude Desktop and Cursor, configures everything. No manual JSON editing.</p>
+    <p style="color:var(--dim);margin-top:.8rem">Restart your AI. Done.</p>
   </div>
 </section>
 
