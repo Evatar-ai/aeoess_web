@@ -189,6 +189,7 @@ canvas#constellation{width:100%;height:100%;display:block}
     <img src="/assets/images/aeoess_logo-06.png" alt="AEOESS">
   </a>
   <div class="topnav-links">
+    <a href="mingle.html" style="color:var(--accent)">Mingle</a>
     <a href="blog.html">Blog</a>
     <a href="passport.html">Docs</a>
     <a href="https://github.com/aeoess" target="_blank">GitHub</a>
@@ -200,6 +201,7 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
 </nav>
 <div class="topnav-drawer">
+  <a href="mingle.html" onclick="closeDrawer()" style="color:var(--accent)">Mingle</a>
   <a href="blog.html" onclick="closeDrawer()">Blog</a>
   <a href="passport.html" onclick="closeDrawer()">Docs</a>
   <a href="protocol.html" onclick="closeDrawer()">Protocol</a>
@@ -236,7 +238,13 @@ canvas#constellation{width:100%;height:100%;display:block}
       <div class="stat"><span class="stat-val">17</span><span class="stat-label">Modules</span></div>
     </div>
   </div>
-  <div class="updates-box">
+  <div>
+    <a href="mingle.html" style="display:flex;align-items:center;gap:.6rem;background:rgba(212,165,116,.08);border:1px solid rgba(212,165,116,.2);border-radius:8px;padding:.7rem 1rem;text-decoration:none;margin-bottom:.8rem;transition:border-color .2s">
+      <span style="font:.55rem var(--mono);padding:.15rem .4rem;border-radius:3px;background:rgba(110,231,183,.15);color:#6ee7b7;text-transform:uppercase;letter-spacing:.06em">New</span>
+      <span style="font:500 .82rem var(--sans);color:var(--text)">Meet opportunities at <span style="color:var(--accent)">Mingle</span></span>
+      <span style="font:.75rem var(--sans);color:var(--dim);margin-left:auto">&rarr;</span>
+    </a>
+    <div class="updates-box">
     <div class="ub-title">&#9889; Recent Updates</div>
     <div class="u-item"><span class="u-date">Mar 14</span><span class="u-text"><span class="u-tag t-docs">content</span><strong>Substack + social launch</strong> &mdash; Two articles published: cross-protocol identity bridge (first in AI history) and Tesla Social MVP. X + LinkedIn posts live.</span></div>
     <div class="u-item"><span class="u-date">Mar 13</span><span class="u-text"><span class="u-tag t-ship">security</span><strong>Gateway + Intent Network bug fixes</strong> &mdash; NW-001: memory leak in replay protection (TTL pruning). NW-003: crash on unregistered agent in two-phase execution. NW-006: card deletion ownership bypass (now uses cryptographic key). All 30 gateway tests pass.</span></div>
@@ -246,6 +254,7 @@ canvas#constellation{width:100%;height:100%;display:block}
     <div class="u-item"><span class="u-date">Mar 11</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.13.2 + MCP v2.8.5</strong> &mdash; Intent Network (agent-mediated matching) + ProxyGateway. 23 new tests, 6 network tools calling api.aeoess.com.</span></div>
     <div class="u-item"><span class="u-date">Mar 10</span><span class="u-text"><span class="u-tag t-ship">shipped</span><strong>SDK v1.11.0 + MCP v2.5.0</strong> &mdash; Reputation-Gated Authority. Bayesian trust, 5 tiers, cryptographic scarring.</span></div>
     <div class="u-item"><span class="u-date">Mar 10</span><span class="u-text"><span class="u-tag t-docs">paper</span><strong>Monotonic Narrowing</strong> &mdash; Formal invariants &amp; adversarial testing. <a href="https://doi.org/10.5281/zenodo.18932404">Zenodo</a></span></div>
+  </div>
   </div>
 </section>
 <section class="constellation-section">
