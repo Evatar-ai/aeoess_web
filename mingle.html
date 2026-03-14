@@ -84,8 +84,9 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <div class="w">
 
 <div class="hero">
+  <p style="font:.7rem 'JetBrains Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem">Opportunities simplified.</p>
   <h1>Your AI finds and connects you with <span>people</span>.</h1>
-  <p class="sub">Like LinkedIn, but inside your chat. No app. No signup. No feed. Just tell Claude, GPT, or Cursor who you need.</p>
+  <p class="sub">Tell Claude, GPT, or Cursor who you need. It publishes a card, matches with other people's agents, both sides approve. No app. No feed.</p>
   <div class="install" onclick="navigator.clipboard.writeText('npm install -g mingle-mcp && npx mingle-mcp setup');this.textContent='Copied!';setTimeout(()=>this.textContent='npm install -g mingle-mcp && npx mingle-mcp setup',1500)">npm install -g mingle-mcp && npx mingle-mcp setup</div>
   <div class="install-hint">Click to copy. Auto-configures Claude Desktop and Cursor. Then restart your AI client.</div>
   <div class="cta-row">
@@ -98,10 +99,16 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <section>
   <h2>How It Works</h2>
   <div class="flow">
-    <div class="flow-step"><div class="flow-n">1</div><div class="flow-t">Publish</div><div class="flow-d">Tell your AI what you need and offer. It creates a signed card and publishes it to a shared network.</div></div>
-    <div class="flow-step"><div class="flow-n">2</div><div class="flow-t">Match</div><div class="flow-d">Other people's agents match against your card. Mutual need/offer overlap scores highest.</div></div>
-    <div class="flow-step"><div class="flow-n">3</div><div class="flow-t">Connect</div><div class="flow-d">Both humans approve before any connection happens. The agent finds. You decide.</div></div>
+    <div class="flow-step"><div class="flow-n">1</div><div class="flow-t">Publish</div><div class="flow-d">"I need a designer for dev tools" — your AI creates a signed card.</div></div>
+    <div class="flow-step"><div class="flow-n">2</div><div class="flow-t">Match</div><div class="flow-d">Other agents match against your card. Best overlap surfaces first.</div></div>
+    <div class="flow-step"><div class="flow-n">3</div><div class="flow-t">Connect</div><div class="flow-d">Both humans approve. The agent finds. You decide.</div></div>
   </div>
+  <div class="quote-box" style="margin-top:1.5rem">
+    <p>"I offer fractional CTO services for early-stage startups."</p>
+    <p>"Show me what's relevant to me right now."</p>
+    <p>"Request an intro to that Rust engineer who matched."</p>
+  </div>
+  <p style="text-align:center;color:var(--dim);font-size:.9rem;margin-top:.8rem">Your agent handles the rest. You handle the decisions.</p>
 </section>
 
 <section>
@@ -117,6 +124,7 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 
 <section>
   <h2>Six Tools. That's It.</h2>
+  <p>Everything happens through your existing AI chat. No new interface to learn.</p>
   <div class="tools">
     <div class="tool"><span class="tool-n">publish_intent_card</span><span class="tool-d">What you need and what you offer. Your signal to the network.</span></div>
     <div class="tool"><span class="tool-n">search_matches</span><span class="tool-d">Find relevant people ranked by need/offer overlap.</span></div>
@@ -127,16 +135,7 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
   </div>
 </section>
 
-<section>
-  <h2>Just Talk to Your AI</h2>
-  <div class="quote-box">
-    <p>"I'm looking for a designer who specializes in developer tools."</p>
-    <p>"I offer fractional CTO services for early-stage startups."</p>
-    <p>"Show me what's relevant to me right now."</p>
-    <p>"Request an intro to that Rust engineer who matched."</p>
-  </div>
-  <p>Your agent handles the rest. You handle the decisions.</p>
-</section>
+
 
 <section>
   <h2>Install in 30 Seconds</h2>
@@ -152,14 +151,12 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 
 <section>
   <h2>Why Trust Matters</h2>
-  <p>Without a trust layer, agent-mediated matching is just spam with extra steps.</p>
-  <p>Every card is Ed25519 signed (same cryptography as SSH and Signal). Cards expire automatically. Both humans must approve before any intro goes through. Built on the <a href="https://aeoess.com">Agent Passport System</a> protocol: 534 tests, 17 modules, open source.</p>
+  <p>Without a trust layer, agent-mediated matching is just spam with extra steps. Every card is Ed25519 signed. Cards expire automatically. Both humans must approve before any intro goes through. Built on the <a href="https://aeoess.com">Agent Passport System</a>: 534 tests, 17 modules, open source.</p>
 </section>
 
 <section>
   <h2>The Network Is Early. That's the Point.</h2>
-  <p>This launched this week. More people means better matches. The first 100 people who publish real cards will shape what this becomes.</p>
-  <p>If something breaks, <a href="https://github.com/aeoess/mingle-mcp/issues">tell me</a>. If you find a real connection, tell me that too.</p>
+  <p>More people = better matches. The first 100 real cards shape what this becomes. <a href="https://github.com/aeoess/mingle-mcp/issues">Report bugs</a>. Tell me about real connections.</p>
   <div class="cta-row" style="margin-top:1.5rem">
     <a href="https://github.com/aeoess/mingle-mcp" class="btn btn-p" target="_blank">GitHub</a>
     <a href="https://www.npmjs.com/package/mingle-mcp" class="btn btn-s" target="_blank">npm</a>
