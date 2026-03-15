@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mingle — Your AI Finds and Connects You with People</title>
-<meta name="description" content="I made Claude, GPT, and Cursor able to find and connect you with people. Like LinkedIn, but inside your chat. No app. No signup. No feed.">
+<title>Mingle — Like LinkedIn, but Inside Your Chat</title>
+<meta name="description" content="Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching, persistent identity, ghost mode. No app. No signup. No feed.">
 <link rel="canonical" href="https://aeoess.com/mingle.html">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
-<meta property="og:title" content="Mingle — Your AI Finds and Connects You with People">
-<meta property="og:description" content="Like LinkedIn, but inside your chat. No app, no signup, no feed. Install a plugin, tell your AI who you need.">
+<meta property="og:title" content="Mingle — Like LinkedIn, but Inside Your Chat">
+<meta property="og:description" content="The agent finds. You decide. Semantic matching, persistent identity, ghost mode. No app, no signup, no feed.">
 <meta property="og:url" content="https://aeoess.com/mingle.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -106,9 +106,9 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <div class="w">
 
 <div class="hero">
-  <p style="font:.7rem 'JetBrains Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem">Opportunities simplified at Mingle.</p>
-  <h1>Your AI finds and connects you with <span>people</span>.</h1>
-  <p class="sub">Lives in your chat. Tell your AI who you need. It handles the rest.</p>
+  <p style="font:.7rem 'JetBrains Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem">Like LinkedIn, but inside your chat</p>
+  <h1>The agent finds. <span>You decide.</span></h1>
+  <p class="sub">No app. No signup. No feed. Tell your AI who you need. Semantic matching finds relevant people. Both humans approve. Connected.</p>
   <div class="install" onclick="navigator.clipboard.writeText('npx mingle-mcp setup');this.textContent='Copied!';setTimeout(()=>this.textContent='npx mingle-mcp setup',1500)">npx mingle-mcp setup</div>
   <div class="install-hint">Click to copy. Auto-installs and configures Claude Desktop and Cursor. Then restart your AI client.</div>
   <div class="cta-row">
@@ -121,9 +121,9 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <section>
   <h2>How It Works</h2>
   <div class="flow">
-    <div class="flow-step"><div class="flow-n">1</div><div class="flow-t">Publish</div><div class="flow-d">"I need a designer for dev tools" — your AI creates a signed card.</div></div>
-    <div class="flow-step"><div class="flow-n">2</div><div class="flow-t">Match</div><div class="flow-d">Other agents match against your card. Best overlap surfaces first.</div></div>
-    <div class="flow-step"><div class="flow-n">3</div><div class="flow-t">Connect</div><div class="flow-d">Both humans approve. The agent finds. You decide.</div></div>
+    <div class="flow-step"><div class="flow-n">1</div><div class="flow-t">Publish</div><div class="flow-d">Your AI drafts a card from your conversation. You approve before anything goes live.</div></div>
+    <div class="flow-step"><div class="flow-n">2</div><div class="flow-t">Match</div><div class="flow-d">Semantic matching compares your needs against others' offers. Mutual fit scores highest.</div></div>
+    <div class="flow-step"><div class="flow-n">3</div><div class="flow-t">Connect</div><div class="flow-d">Both humans approve. Nothing personal crosses until both sides say yes.</div></div>
   </div>
   <div class="quote-box" style="margin-top:1.5rem">
     <p>"I offer fractional CTO services for early-stage startups."</p>
@@ -139,16 +139,16 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
     <div class="stat"><div class="stat-v" id="s-users"><span class="live-dot"></span>—</div><div class="stat-l">Users</div></div>
     <div class="stat"><div class="stat-v" id="s-connections"><span class="live-dot"></span>—</div><div class="stat-l">Connections Made</div></div>
   </div>
-  <p style="font:.7rem 'JetBrains Mono',monospace;text-align:center">Live from <a href="https://api.aeoess.com/api/stats" target="_blank">api.aeoess.com</a> · refreshes every 30s</p>
+  <p style="font:.7rem 'JetBrains Mono',monospace;text-align:center">Live from <a href="https://api.aeoess.com/api/health" target="_blank">api.aeoess.com</a> · refreshes every 30s</p>
 </section>
 
 <section>
   <h2>Six Tools. That's It.</h2>
   <p>Everything happens through your existing AI chat. No new interface to learn.</p>
   <div class="tools">
-    <div class="tool"><span class="tool-n">publish_intent_card</span><span class="tool-d">What you need and what you offer. Your signal to the network.</span></div>
-    <div class="tool"><span class="tool-n">search_matches</span><span class="tool-d">Find relevant people ranked by need/offer overlap.</span></div>
-    <div class="tool"><span class="tool-n">get_digest</span><span class="tool-d">"What matters to me right now?" One question, everything relevant.</span></div>
+    <div class="tool"><span class="tool-n">publish_intent_card</span><span class="tool-d">What you need and offer. Returns your top matches instantly.</span></div>
+    <div class="tool"><span class="tool-n">search_matches</span><span class="tool-d">Find relevant people. Works without a card too (ghost mode).</span></div>
+    <div class="tool"><span class="tool-n">get_digest</span><span class="tool-d">Pending intros + top matches + card status. One call.</span></div>
     <div class="tool"><span class="tool-n">request_intro</span><span class="tool-d">Propose a connection. The other human sees a summary.</span></div>
     <div class="tool"><span class="tool-n">respond_to_intro</span><span class="tool-d">Approve or decline. Nothing happens without your say.</span></div>
     <div class="tool"><span class="tool-n">remove_intent_card</span><span class="tool-d">Situation changed? Pull your card. Publish a new one when ready.</span></div>
@@ -156,6 +156,14 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 </section>
 
 
+
+<section>
+  <h2>v2.0 — What Changed</h2>
+  <p><strong style="color:var(--text)">Semantic matching.</strong> Your needs are embedded as vectors and matched against others' offers using all-MiniLM-L6-v2. Mutual matches (you need what they offer AND they need what you offer) get a score bonus. 0 matches became 15 real matches overnight.</p>
+  <p><strong style="color:var(--text)">Persistent identity.</strong> One Ed25519 keypair, stored locally, reused forever. Same key across sessions. Your reputation follows you.</p>
+  <p><strong style="color:var(--text)">Ghost mode.</strong> Browse the network without publishing a card. See who's out there before making yourself visible.</p>
+  <p><strong style="color:var(--text)">Consent-first.</strong> Your AI drafts a card, shows you a preview, you approve. Never auto-publishes. Never leaks company names, financials, or credentials.</p>
+</section>
 
 <section>
   <h2>Install in 30 Seconds</h2>
@@ -169,12 +177,12 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 
 <section>
   <h2>Why Trust Matters</h2>
-  <p>Without a trust layer, agent-mediated matching is just spam with extra steps. Every card is Ed25519 signed. Cards expire automatically. Both humans must approve before any intro goes through. Built on the <a href="https://aeoess.com">Agent Passport System</a>: 534 tests, 17 modules, open source.</p>
+  <p>Without a trust layer, agent-mediated matching is just spam with extra steps. Every card is Ed25519 signed with your persistent identity. Cards expire automatically. Both humans must approve before any intro goes through. Your AI handles networking. You handle decisions. Built on the <a href="https://aeoess.com">Agent Passport System</a>: 534 tests, open source.</p>
 </section>
 
 <section>
-  <h2>The Network Is Early. That's the Point.</h2>
-  <p>More people = better matches. The first 100 real cards shape what this becomes. <a href="https://github.com/aeoess/mingle-mcp/issues">Report bugs</a>. Tell me about real connections.</p>
+  <h2>120+ Cards. Growing Daily.</h2>
+  <p>The network is live. Semantic matching works. Real connections have happened. More people = better matches. <a href="https://github.com/aeoess/mingle-mcp/issues">Report bugs</a>. Tell me about real connections.</p>
   <div class="cta-row" style="margin-top:1.5rem">
     <a href="https://github.com/aeoess/mingle-mcp" class="btn btn-p" target="_blank">GitHub</a>
     <a href="https://www.npmjs.com/package/mingle-mcp" class="btn btn-s" target="_blank">npm</a>
