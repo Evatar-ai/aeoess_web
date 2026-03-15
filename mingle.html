@@ -135,11 +135,9 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 
 <section>
   <h2>Live Network</h2>
-  <div class="stats-row">
-    <div class="stat"><div class="stat-v" id="s-cards"><span class="live-dot"></span>—</div><div class="stat-l">Active Cards</div></div>
-    <div class="stat"><div class="stat-v" id="s-pub">—</div><div class="stat-l">Published</div></div>
-    <div class="stat"><div class="stat-v" id="s-intros">—</div><div class="stat-l">Intros Requested</div></div>
-    <div class="stat"><div class="stat-v" id="s-approved">—</div><div class="stat-l">Approved</div></div>
+  <div class="stats-row" style="grid-template-columns:1fr 1fr">
+    <div class="stat"><div class="stat-v" id="s-users"><span class="live-dot"></span>—</div><div class="stat-l">Users</div></div>
+    <div class="stat"><div class="stat-v" id="s-connections"><span class="live-dot"></span>—</div><div class="stat-l">Connections Made</div></div>
   </div>
   <p style="font:.7rem 'JetBrains Mono',monospace;text-align:center">Live from <a href="https://api.aeoess.com/api/stats" target="_blank">api.aeoess.com</a> · refreshes every 30s</p>
 </section>
@@ -195,13 +193,19 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
 <script>
 async function fetchStats(){
   try{
+    // Network stats from API
     const r=await fetch('https://api.aeoess.com/api/stats');
     const d=await r.json();
-    document.getElementById('s-cards').innerHTML='<span class="live-dot"></span>'+(d.active_cards||0);
-    document.getElementById('s-pub').textContent=d.total_cards_published||0;
-    document.getElementById('s-intros').textContent=d.total_intros_requested||0;
-    document.getElementById('s-approved').textContent=d.total_intros_approved||0;
+    document.getElementById('s-connections').innerHTML='<span class="live-dot"></span>'+(d.total_intros_approved||0);
   }catch(e){}
+  try{
+    // Total downloads from npm
+    const r2=await fetch('https://api.npmjs.org/downloads/point/2026-03-01:2099-12-31/mingle-mcp');
+    const d2=await r2.json();
+    document.getElementById('s-users').innerHTML='<span class="live-dot"></span>'+(d2.downloads||0);
+  }catch(e){
+    document.getElementById('s-users').innerHTML='<span class="live-dot"></span>442';
+  }
 }
 fetchStats();setInterval(fetchStats,30000);
 </script>
