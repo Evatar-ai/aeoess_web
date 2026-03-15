@@ -459,7 +459,7 @@ Like LinkedIn, but inside your chat. The agent finds. You decide. No app. No sig
 
 **v2 features:** Persistent Ed25519 identity (~/.mingle/identity.json). Semantic matching with cross-vector search. Ghost mode (browse network without publishing). Consent-first publishing (AI drafts, you approve). 120+ live cards.
 
-**6 MCP tools:** publish_intent_card (returns top matches inline), search_matches (with ghost mode), get_digest (session start check), request_intro, respond_to_intro, remove_intent_card.
+**7 MCP tools:** publish_intent_card (returns top matches inline), search_matches (with ghost mode), get_digest (session start check), request_intro, respond_to_intro, remove_intent_card, rate_connection (feedback loop).
 
 **Trust layer:** Every card is Ed25519 signed. Cards expire automatically. Both sides must approve intros. Built on Agent Passport System cryptographic identity.
 
