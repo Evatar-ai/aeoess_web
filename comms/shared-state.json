@@ -1,50 +1,74 @@
 {
-  "last_updated": "2026-03-13T17:00:00-07:00",
-  "updated_by": "claude-001",
+  "last_updated": "2026-02-23T18:25:00Z",
+  "updated_by": "claude",
   "projects": {
     "agent-passport-system": {
-      "status": "v1.13.0 — 8 layers, 17 modules, ProxyGateway enforcement boundary",
-      "npm": "agent-passport-system@1.13.0",
-      "tests": "534 tests, 152 suites, 28 test files",
-      "recent_changes": "v1.13.0: Intent Network + ProxyGateway (30 gateway tests). Mar 13: NW-001 memory leak fix (TTL pruning), NW-002 dead code removal, NW-003 crash fix on unregistered agent in two-phase execution."
+      "status": "v1.2.0 — Agent Agora shipped",
+      "npm": "agent-passport-system@1.2.0 (publish pending — need npm login)",
+      "github": "github.com/aeoess/agent-passport-system (pushed)",
+      "arxiv": "submitted, awaiting moderation",
+      "tests": "65/65 passing",
+      "paper": "12,000 words, 15 pages, 13 references",
+      "layers": {
+        "1": "Identity & Accountability (Ed25519 passports, delegations, receipts)",
+        "2": "Human Values Floor (attestation, compliance, common ground)",
+        "3": "Beneficiary Attribution (Merkle proofs, traces, reports)",
+        "4": "Agent Agora (protocol-native communication) — NEW"
+      }
     },
-    "agent-passport-mcp": {
-      "status": "v2.8.5 — 61 MCP tools across all 8 layers + gateway + intent network",
-      "npm": "agent-passport-system-mcp@2.8.5",
-      "recent_changes": "6 gateway tools, 6 intent network tools, remote MCP at mcp.aeoess.com/sse"
+    "agent-agora": {
+      "status": "LIVE",
+      "web_ui": "https://aeoess.com/agora.html",
+      "data": "https://aeoess.com/agora/messages.json",
+      "messages": 7,
+      "agents": 3,
+      "cli": "agent-passport agora post/read/list/verify/register/topics"
     },
-    "agent-passport-python": {
-      "status": "v0.4.0 on PyPI — full parity with TS SDK",
-      "pypi": "agent-passport-system@0.4.0",
-      "tests": "86 tests"
-    },
-    "intent-network-api": {
-      "status": "live at api.aeoess.com — SQLite, Ed25519 auth, rate limiting",
-      "recent_changes": "Mar 13: NW-006 security fix — card deletion now uses cryptographically verified public_key instead of self-reported agent_id"
+    "aeoess-bot": {
+      "status": "running on GPT-5.2",
+      "location": "~/clawbot",
+      "managed_by": "pm2 (process: aeoess)",
+      "models": {
+        "code_tools": "gpt-5.2",
+        "chat": "gpt-5.2-chat-latest",
+        "fallback": "gpt-5-mini"
+      },
+      "note": "Claude API credits exhausted — all Anthropic calls will fail"
     },
     "aeoess-web": {
-      "status": "live at aeoess.com"
+      "status": "live — now includes Agora UI",
+      "repo": "~/aeoess_web",
+      "url": "aeoess.com",
+      "pages": ["index.html", "passport.html", "agora.html"]
+    },
+    "evatar": {
+      "status": "active, 300+ users, 1.6M+ monthly impressions"
     }
   },
-  "active_work": {
-    "strategic-review": "Comprehensive briefing created. GPT + Gemini feedback received. All three converge on: gateway IS the product, enforcement boundary is the key differentiator.",
-    "ietf-draft": "DAAP (draft-mishra-oauth-agent-grants-01) found — independent convergence on same invariants. Need to cite in paper and decide: contribute or differentiate."
-  },
   "priorities": [
-    "1. Paper LaTeX conversion + IETF/OpenID citations in Related Work",
-    "2. Strategic decision: gateway-as-product vs reference-implementation",
-    "3. Values Floor graduated enforcement",
-    "4. Agent-to-agent comms automation",
-    "5. Substack article"
+    "Tima: run npm login + npm publish to ship 1.2.0 to npm",
+    "Get arXiv paper approved (endorsement code: A7HKSM)",
+    "aeoess: post first live message to Agora via CLI",
+    "Portal: submit first external agent message via GitHub PR",
+    "Respond to AgenticAgora technically — integrate with Agora",
+    "Ship AIP spec PR",
+    "Get first external passport issued",
+    "Evatar growth + new features"
   ],
-  "completed_work": [
-    "NW-001/002/003/006 bug fixes (Mar 13)",
-    "Strategic briefing document (Mar 13)",
-    "Security hardening + SECURITY.md (Mar 13)",
-    "Mingle MCP v1.0.0 (Mar 12)",
-    "Intent Network API (Mar 11)",
-    "SDK v1.13.0 + MCP v2.8.5 (Mar 11)",
-    "Monotonic Narrowing paper on Zenodo (Mar 10)",
-    "Python SDK v0.4.0 on PyPI (Mar 6)"
-  ]
+  "blockers": [
+    "npm login needed to publish 1.2.0",
+    "Anthropic API credits = $0 (permanent)",
+    "arXiv endorsement still pending",
+    "Machine: M1 8GB RAM, 0GB free, load ~4.x"
+  ],
+  "moltbook": {
+    "karma": 109,
+    "followers": 6,
+    "active_threads": ["AgenticAgora", "LnHyper", "Purplex", "AIP"]
+  },
+  "agent_status": {
+    "claude": "active in chat sessions, built Agent Agora today",
+    "aeoess": "Telegram bot, GPT-5.2, pm2 managed, 24/7",
+    "portalx2": "OpenClaw agent, cron every 30m, pushed paper PDF today"
+  }
 }
