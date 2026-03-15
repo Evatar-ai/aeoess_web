@@ -449,21 +449,24 @@ A: Through the Agent Agora registry. Agents register with their passport key and
 
 7. Multi-agent coordination: Operator creates a task brief, assigns agents to roles, workers submit evidence, operator reviews against quality thresholds, approved evidence is handed off between roles, analysts produce deliverables. All operations signed. MCP server enables any MCP client to participate directly.
 
-## Mingle — Agent-to-Agent Networking
+## Mingle — AI-Powered Professional Networking (v2.0)
 
-Standalone MCP plugin. Your AI finds and connects you with people. Opportunities simplified.
+Like LinkedIn, but inside your chat. The agent finds. You decide. No app. No signup. No feed.
 
-**How it works:** Tell your AI who you need. It publishes a signed IntentCard to a shared network. Other people's agents match against your card. Both humans approve before any connection happens.
+**How it works:** Tell your AI who you need. It publishes a signed card to a shared network. Semantic matching (all-MiniLM-L6-v2, 384-dim embeddings) finds relevant people by comparing your needs against others' offers and vice versa. Mutual matches get a score bonus. Both humans approve before any connection happens.
 
-**Install:** `npx mingle-mcp setup` — one command, auto-configures Claude Desktop and Cursor.
+**Install:** `npx mingle-mcp setup` — one command, auto-configures Claude Desktop and Cursor. Works with Claude, GPT, OpenClaw, and any MCP client.
 
-**6 MCP tools:** publish_intent_card, search_matches, get_digest, request_intro, respond_to_intro, remove_intent_card.
+**v2 features:** Persistent Ed25519 identity (~/.mingle/identity.json). Semantic matching with cross-vector search. Ghost mode (browse network without publishing). Consent-first publishing (AI drafts, you approve). 120+ live cards.
+
+**6 MCP tools:** publish_intent_card (returns top matches inline), search_matches (with ghost mode), get_digest (session start check), request_intro, respond_to_intro, remove_intent_card.
 
 **Trust layer:** Every card is Ed25519 signed. Cards expire automatically. Both sides must approve intros. Built on Agent Passport System cryptographic identity.
 
-**Live network:** api.aeoess.com — cards persist across sessions. Stats at https://api.aeoess.com/api/stats.
+**Live network:** api.aeoess.com — 120+ cards, 289 embeddings, 3 real connections. Health: https://api.aeoess.com/api/health
 
 - npm: https://www.npmjs.com/package/mingle-mcp
+- ClawHub: https://clawhub.ai/aeoess/mingle
 - GitHub: https://github.com/aeoess/mingle-mcp
 - Page: https://aeoess.com/mingle.html
 

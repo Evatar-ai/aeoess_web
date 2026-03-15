@@ -21,7 +21,7 @@ Plus: **W3C DID:APS** (decentralized identifiers), **Verifiable Credentials**, *
 
 Plus: **MCP Server** (v2.8.5) — 61 tools across all layers with role-scoped access control for any MCP client.
 
-Plus: **Mingle** — Standalone agent-to-agent networking plugin. Your AI finds and connects you with people. Publish a signed card describing what you need and offer, match with other agents, both humans approve before connecting. 6 MCP tools, Ed25519 signed, live network at api.aeoess.com. Install: `npx mingle-mcp setup`. npm: mingle-mcp. Page: https://aeoess.com/mingle.html
+Plus: **Mingle** (v2.0) — Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing. 120+ cards on a live network at api.aeoess.com. 6 MCP tools. Double opt-in, zero spam. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
 **v1.13.2 — 534 tests passing. Zero heavy dependencies.**
 
