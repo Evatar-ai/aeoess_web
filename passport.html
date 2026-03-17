@@ -238,7 +238,45 @@
 </section>
 
 <section>
-<h2>9. MCP Server (v2.8.5)</h2>
+<h2>9. Reputation-Gated Authority</h2>
+<p>Most identity systems treat all authenticated agents equally. A brand-new agent with one successful task has the same authority as a veteran with a thousand. Reputation-Gated Authority fixes this by separating two questions: <em>what is the agent allowed to do?</em> (delegation) and <em>what has the agent earned the right to do?</em> (reputation).</p>
+
+<h3>Bayesian Trust Scoring</h3>
+<p>Each agent's reputation is a pair: <strong>&mu;</strong> (mean performance) and <strong>&sigma;</strong> (uncertainty). A new agent starts at &mu;=25, &sigma;=25 &mdash; slight benefit of the doubt, maximum uncertainty. The effective score is <code>&mu; - 2&sigma;</code>. High uncertainty penalizes the score: an agent with &mu;=50, &sigma;=20 has an effective score of 10 (not trusted yet), while &mu;=50, &sigma;=3 gives 44 (same average, much more certainty).</p>
+<p>Each completed task adjusts both values. Success raises &mu; and lowers &sigma;. Failure drops &mu; and raises &sigma;. Harder tasks produce bigger updates:</p>
+<pre><span class="cm">// Update table (mu change on success / failure):</span>
+<span class="cm">// trivial:   +0.5 / -1.0</span>
+<span class="cm">// standard:  +1.0 / -2.0</span>
+<span class="cm">// complex:   +2.0 / -3.0</span>
+<span class="cm">// critical:  +3.0 / -5.0</span>
+<span class="cm">// Failure penalties are asymmetric — harder to build trust than to lose it.</span></pre>
+
+<h3>Five Tiers</h3>
+<p>Effective score maps to a tier. Each tier unlocks more autonomy, deeper delegation, and higher spend limits:</p>
+<pre><span class="cm">// Tier 0 — Recruit:    score ≥ 0   → autonomy 1, no delegation, no spend</span>
+<span class="cm">// Tier 1 — Operator:   score ≥ 30  → autonomy 2, depth 1, $100/action</span>
+<span class="cm">// Tier 2 — Specialist: score ≥ 60  → autonomy 3, depth 2, $500/action</span>
+<span class="cm">// Tier 3 — Captain:    score ≥ 80  → autonomy 4, depth 3, $2000/action</span>
+<span class="cm">// Tier 4 — Sovereign:  score ≥ 95  → autonomy 5, depth 5, $10000/action</span></pre>
+
+<h3>Cryptographic Scarring</h3>
+<p>Each demotion permanently adds +5 to the score threshold for future promotions. An agent demoted once needs 35 instead of 30 to reach Operator. Demoted twice: 40. Recovery is always possible, just progressively harder. This prevents oscillation and creates permanent accountability.</p>
+
+<h3>Runtime Change Detection</h3>
+<p>If an agent switches models (e.g., GPT-4 to Claude), &sigma; resets to maximum uncertainty. The agent keeps its &mu; (track record) but must re-earn confidence under the new runtime. Minor changes (toolset update) cause small &sigma; increases. Architecture changes (different provider) cause full &sigma; reset.</p>
+
+<h3>The Core Invariant</h3>
+<p><code>effectiveAuthority = min(delegation, tier)</code>. Delegation says "you're allowed up to X." Tier says "you've earned up to Y." Neither can independently expand authority. A generously delegated agent with poor reputation is limited by its tier. A high-reputation agent with narrow delegation is limited by its scope.</p>
+<pre><span class="kw">import</span> { <span class="fn">computeEffectiveScore</span>, <span class="fn">resolveAuthorityTier</span>, <span class="fn">effectiveAutonomy</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
+
+<span class="kw">const</span> score = <span class="fn">computeEffectiveScore</span>(mu, sigma);  <span class="cm">// μ - 2σ</span>
+<span class="kw">const</span> tier = <span class="fn">resolveAuthorityTier</span>(score, demotionCount);
+<span class="kw">const</span> autonomy = <span class="fn">effectiveAutonomy</span>(delegation.autonomy, tier.autonomyLevel);
+<span class="cm">// → min(what delegation grants, what reputation earned)</span></pre>
+</section>
+
+<section>
+<h2>10. MCP Server (v2.8.5)</h2>
 <p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 61 tools across all 17 modules with role-scoped access control. Every operation Ed25519 signed.</p>
 <p><strong>Fastest (remote, no install):</strong> <code>npx agent-passport-system-mcp setup --remote</code></p>
 <p><strong>Local:</strong> <code>npm install -g agent-passport-system-mcp && npx agent-passport-system-mcp setup</code></p>
@@ -261,7 +299,7 @@
 </section>
 
 <section>
-<h2>10. Python SDK (v0.4.0)</h2>
+<h2>11. Python SDK (v0.4.0)</h2>
 <p>Full Python implementation with cross-language compatibility. All 17 protocol modules + Principal Identity. 86 tests. Signatures created in Python verify in TypeScript and vice versa.</p>
 <pre><span class="kw">pip</span> install agent-passport-system
 
@@ -281,14 +319,14 @@ result = create_passport(
 </section>
 
 <section>
-<h2>11. Cross-Engine Interoperability</h2>
+<h2>12. Cross-Engine Interoperability</h2>
 <p>Three independent groups converged on the same idea: governance engines need a shared signed execution envelope for cross-framework audit. We formalized it as an <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md" target="_blank">RFC</a>.</p>
 <p>The envelope defines minimal fields any engine can emit and any verifier can check: agent identity, capability reference with revocation status, policy decision with evaluator signature, and an attestation chain. The critical innovation is the <code>evaluation_method</code> field (deterministic vs probabilistic), which tells a verifier whether the governance decision can be independently replayed or only signature-checked.</p>
 <p>The APS SDK already generates every field through its 3-signature chain (ActionIntent → PolicyDecision → PolicyReceipt). Mappings for CrewAI and Guardian are documented in the RFC.</p>
 </section>
 
 <section>
-<h2>12. SDK Status</h2>
+<h2>13. SDK Status</h2>
 <div class="stats">
   <div class="stat"><span class="stat-val">534</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
@@ -299,7 +337,7 @@ result = create_passport(
 </section>
 
 <section>
-<h2>13. References</h2>
+<h2>14. References</h2>
 <ul>
   <li>npm SDK: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
   <li>Python SDK: <a href="https://pypi.org/project/agent-passport-system/" target="_blank">agent-passport-system (PyPI)</a></li>
