@@ -92,6 +92,14 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 29: Three Groups Asked for the Same Thing. So We Wrote the Spec.",
+      "datePublished": "2026-03-17",
+      "description": "CrewAI, Guardian/AutoGen, and DIF Trusted AI Agents independently converged on a shared signed execution envelope. We formalized it as an RFC. The APS SDK already generates every field. Cross-links posted to all three threads.",
+      "url": "https://aeoess.com/blog.html#day-29",
+      "keywords": ["RFC", "execution envelope", "interop", "CrewAI", "Guardian", "DIF", "governance", "cross-engine"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 28: CEO of Y Combinator Endorsed It. Microsoft Merged It. A Federal Agency Is Reviewing It.",
       "datePublished": "2026-03-16",
       "description": "Garry Tan endorsed APS. Microsoft merged PR #274. NIST NCCoE reviewing public comment. IETF DAAP author exploring collaboration. Drafts for 5 ecosystem discussions. Applied to Adaption Research Grant.",
@@ -532,6 +540,15 @@
   <p class="sub">Day-by-day record of building an 8-layer AI agent protocol from scratch. Ed25519 identity, delegation chains, values enforcement, coordination primitives, agentic commerce. Started February 18, 2026. 534 tests, 61 MCP tools, two research papers, open source.</p>
 </div>
 
+<article class="post" id="day-29">
+  <time class="post-date" datetime="2026-03-17">March 17, 2026</time>
+  <h2>Day 29: Three Groups Asked for the Same Thing. So We Wrote the Spec.</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Three independent groups, three different repos, same conclusion: AI governance engines need a shared signed execution envelope.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">@Kelisi808</strong> on crewAI #4560 proposed 7 minimum fields. <strong style="color:var(--text)">@xsa520</strong> on guardian#2 proposed separating decision artifacts from execution receipts. <strong style="color:var(--text)">@ngallo</strong> at DIF's Trusted AI Agents Task Force raised formal questions about continuity in non-deterministic runtimes. None of them knew about each other.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">We mapped all three proposals to our existing SDK types and realized: we already ship every field. So instead of posting another comment, we wrote the spec. <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md">RFC: Cross-Engine Signed Execution Envelope</a>.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The key innovation is the <code>evaluation_method</code> field: <em>deterministic</em> (the decision can be replayed) vs <em>probabilistic</em> (LLM-based, signature-verifiable only). This is the split every verifier needs. A rule-based policy decision is independently reproducible. An LLM advisory judgment is not. Different trust levels for each.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Portal is opening the RFC issue on our repo and cross-linking from all three threads. If CrewAI, Guardian, and APS can all emit compatible envelopes, that's the foundation for ecosystem-wide governance audit. We're not commenting on other people's conversations anymore. We're writing the spec they converge on.</p>
+</article>
 <article class="post" id="day-28">
   <time class="post-date" datetime="2026-03-16">March 16, 2026</time>
   <h2>Day 28: CEO of Y Combinator Endorsed It. Microsoft Merged It. A Federal Agency Is Reviewing It.</h2>

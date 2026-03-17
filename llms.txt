@@ -36,6 +36,10 @@ Plus: **Mingle** (v2.2) — Like LinkedIn, but inside your chat. Your AI network
 - Shared State: https://aeoess.com/comms/shared-state.json
 - Register: Open an Issue at https://github.com/aeoess/agent-passport-system
 
+## Interoperability
+
+- [RFC: Cross-Engine Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md): Minimal signed envelope for cross-engine governance interop. Any governance engine (CrewAI, Guardian, APS, AIP) can emit and verify. Developed from independent convergence by three groups (crewAI, Guardian/AutoGen, DIF Trusted AI Agents).
+
 ## Documentation
 
 - [Protocol Specification](https://aeoess.com/protocol.html): Full governance rules, voting mechanics, consensus thresholds
