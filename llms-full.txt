@@ -42,6 +42,18 @@ Layer 9 — Principal Identity: Cryptographic chain from human principal to agen
 
 Layer 10 — Reputation-Gated Authority: Bayesian trust scoring with mean (μ) and uncertainty (σ). Five tiers: Untrusted, Restricted, Standard, Trusted, Autonomous. Signed promotion reviews with reviewer validation. Cryptographic scarring on failure (permanently reduces trust recovery speed). Tier-gated intent checking. Authority = min(delegation scope, reputation tier).
 
+**How the Bayesian model works:** A simple 0-10 score treats a new agent with one success the same as a veteran with a thousand. Bayesian scoring separates two questions: "how good is this agent?" (μ, the mean) and "how sure are we?" (σ, uncertainty). A new agent starts at μ=25, σ=25 — slight benefit of the doubt, maximum uncertainty.
+
+The effective score is `μ - k*σ` (k=2 by default). This is deliberately conservative: high uncertainty penalizes the score. An agent with μ=50, σ=20 has an effective score of 10, despite an average of 50, because we're not confident yet. An agent with μ=50, σ=3 has an effective score of 44 — same average, much more certainty.
+
+**Updates from evidence:** Each completed task adjusts both μ and σ. Success raises μ (better track record) and lowers σ (more confident). Failure drops μ and raises σ. Harder tasks produce bigger updates — completing a critical task is more informative than completing a trivial one. The update table has four evidence classes: trivial (+0.5μ on success), standard (+1.0), complex (+2.0), critical (+3.0). Failure penalties are asymmetric and larger: critical failure costs -5.0μ.
+
+**Cryptographic scarring:** Each past demotion permanently adds +5 to the score threshold required for promotion. An agent demoted once needs 35 instead of 30 to reach Operator. Demoted twice: 40. Not a blacklist — recovery is always possible, just progressively harder. This prevents oscillation: an agent can't keep failing and recovering at the same pace.
+
+**Runtime change detection:** If an agent switches models (e.g., GPT-4 to Claude), σ resets to maximum uncertainty. The agent keeps its μ (track record) but loses certainty. It has to re-earn confidence under the new runtime. Minor changes (toolset update) cause small σ increases. Architecture changes (different provider) cause full σ reset.
+
+**The core invariant:** `effectiveAuthority = min(delegation, tier)`. Delegation says "you're allowed up to X." Tier says "you've earned up to Y." Neither can independently expand authority. An agent with a generous delegation but poor reputation is limited by its tier. An agent with a strong reputation but narrow delegation is limited by its scope. Both must agree.
+
 Layer 11 — Task Routing & Agent Context: Capability-based routing matches agents to tasks by scope, tier, and availability. Enforcement middleware creates agent contexts that validate every action against delegation, values floor, and reputation before execution.
 
 Standards: W3C DID:APS (decentralized identifiers), W3C Verifiable Credentials, Google A2A protocol bridge, EU AI Act article-by-article compliance mapping.
@@ -431,6 +443,9 @@ A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The
 
 Q: How does the Signed Execution Envelope work?
 A: The RFC defines a minimal signed envelope for cross-engine governance interop. Any governance engine (CrewAI, Guardian, APS, etc.) can emit it, and any verifier can check it without depending on a specific trust backend. The critical field is evaluation_method (deterministic vs probabilistic), which tells a verifier whether the governance decision can be independently replayed or only signature-checked. The APS SDK already generates every field in the envelope through its 3-signature chain. See: https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md
+
+Q: Why does APS use Bayesian scoring instead of a simple reputation number?
+A: A simple score (0-10) can't distinguish "good agent, lots of evidence" from "good agent, one lucky task." Bayesian scoring tracks two values: μ (average performance) and σ (how uncertain we are). The effective score is μ - 2σ, so high uncertainty penalizes the score. A new agent starts at μ=25, σ=25 (effective score: 0) and must accumulate evidence to climb. This also enables runtime change detection: if an agent switches models, σ resets to maximum while μ is preserved, so the agent keeps its track record but must re-earn certainty under the new configuration. External trust providers like PDR (behavioral scoring) feed into this model as additional evidence events.
 
 Q: Can I use it for one-shot agent interactions?
 A: Yes. A lightweight passport mode is planned for one-shot transactions where the full passport setup is unnecessary.
