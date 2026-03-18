@@ -108,15 +108,16 @@ a:hover{opacity:.8}
 .t-infra{background:rgba(129,140,248,.1);color:#818cf8}
 .constellation-section{margin:2rem 0 4rem;position:relative}
 .constellation-title{font:500 .65rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
-.interact-hint-mobile{display:none}
-.interact-hint-desktop{display:inline}
-.constellation-wrap{position:relative;width:100%;height:600px;background:#141416;border:1px solid var(--border);border-radius:12px;overflow:hidden}
-canvas#constellation{width:100%;height:100%;display:block}
-.node-tooltip{position:absolute;pointer-events:none;opacity:0;transition:opacity .2s;background:rgba(8,8,10,.95);border:1px solid var(--accent);border-radius:6px;padding:.6rem .8rem;max-width:280px;z-index:10}
-.node-tooltip.show{opacity:1}
-.node-tooltip h4{font:500 .8rem var(--display);color:#d4a574;margin-bottom:.2rem}
-.node-tooltip p{font:.72rem/1.5 var(--sans);color:#8a857f;margin:0}
-.node-tooltip code{font:.65rem var(--mono);color:#7ba4c9;background:rgba(123,164,201,.1);padding:.1rem .25rem;border-radius:2px}
+.arch{position:relative;width:100%;height:620px;background:#141416;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.arch canvas{width:100%;height:100%;display:block}
+.arch-tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .15s;background:rgba(12,12,14,.92);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.65rem .85rem;max-width:220px;backdrop-filter:blur(12px);z-index:5}
+.arch-tip.show{opacity:1}
+.arch-tip h4{font:500 .85rem var(--sans);color:var(--text);margin-bottom:.25rem}
+.arch-tip p{font:.72rem/1.45 var(--sans);color:var(--dim)}
+.arch-tip code{display:block;font:.62rem var(--mono);color:var(--muted);margin-top:.35rem;word-break:break-all}
+.arch-legend{position:absolute;bottom:12px;left:14px;display:flex;gap:12px;flex-wrap:wrap}
+.arch-legend span{font:.6rem var(--sans);color:rgba(255,255,255,.3);display:flex;align-items:center;gap:4px}
+.arch-legend i{width:6px;height:6px;border-radius:50%;display:inline-block}
 .constellation-legend{display:flex;gap:1.5rem;margin-top:.8rem;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:.4rem;font:.7rem var(--sans);color:var(--dim)}
 .legend-dot{width:8px;height:8px;border-radius:50%}
@@ -157,7 +158,7 @@ canvas#constellation{width:100%;height:100%;display:block}
   .page{padding:0 1.5rem}
   .hero{grid-template-columns:1fr;padding:5.5rem 0 2rem}
   .hero h1{font-size:clamp(2.2rem,8vw,3rem)}
-  .constellation-wrap{height:400px}
+  .arch{height:520px}
   .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:480px){
@@ -169,7 +170,9 @@ canvas#constellation{width:100%;height:100%;display:block}
   .hero-badges{gap:.4rem}
   .badge{font-size:.6rem;padding:.25rem .5rem}
   .constellation-section{margin:1rem 0 2.5rem}
-  .constellation-wrap{height:350px}
+  .arch{height:440px}
+  .arch-legend{gap:6px}
+  .arch-legend span{font-size:.5rem}
   .constellation-legend{gap:.8rem}
   .legend-item{font-size:.65rem}
   .updates-box{max-height:280px;padding:.8rem 1rem}
@@ -265,17 +268,17 @@ canvas#constellation{width:100%;height:100%;display:block}
   </div>
 </section>
 <section class="constellation-section">
-  <div class="constellation-title">Protocol Architecture &mdash; <span class="interact-hint-desktop">hover</span><span class="interact-hint-mobile">tap</span> to explore</div>
-  <div class="constellation-wrap">
-    <canvas id="constellation"></canvas>
-    <div class="node-tooltip" id="tooltip"></div>
-  </div>
-  <div class="constellation-legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#d4a574"></div>Core Protocol</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#7ba4c9"></div>Governance</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#8bc9a0"></div>Operations</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#c9a07b"></div>Standards</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#b07bc9"></div>Research</div>
+  <div class="constellation-title">Protocol architecture &mdash; <span class="interact-hint-desktop">hover</span><span class="interact-hint-mobile">tap</span> to explore</div>
+  <div class="arch">
+    <canvas id="archCanvas"></canvas>
+    <div class="arch-tip" id="archTip"></div>
+    <div class="arch-legend">
+      <span><i style="background:#d4a574"></i>Core</span>
+      <span><i style="background:#7ba4c9"></i>Governance</span>
+      <span><i style="background:#8bc9a0"></i>Operations</span>
+      <span><i style="background:#c9a07b"></i>Standards</span>
+      <span><i style="background:#b07bc9"></i>Research</span>
+    </div>
   </div>
 </section>
 
@@ -375,158 +378,142 @@ window.addEventListener('scroll',()=>{document.getElementById('topnav').classLis
 document.querySelector('.install-code')?.addEventListener('click',function(){this.textContent='Copied!';setTimeout(()=>this.innerHTML='<span class="cm">$</span> npm install agent-passport-system',1200)});
 (async function(){try{const[s,m]=await Promise.all([fetch('https://api.npmjs.org/downloads/point/last-month/agent-passport-system').then(r=>r.json()),fetch('https://api.npmjs.org/downloads/point/last-month/agent-passport-system-mcp').then(r=>r.json())]);const t=s.downloads+m.downloads;const e=document.getElementById('dl-badge');if(e)e.textContent=t.toLocaleString()+' downloads'}catch(e){}})();
 
-// Constellation
-const NODES=[
-// Foundation layer (bottom) → Governance (middle) → Operations (upper) → Standards & Research (edges)
-{id:'identity',label:'Ed25519\nIdentity',x:.06,y:.88,r:30,cat:'core',desc:'Every agent gets a cryptographic passport. Ed25519 keys. Signed, verifiable, expirable.',fns:'createPassport() · signPassport()'},
-{id:'delegation',label:'Delegation\nChains',x:.22,y:.90,r:28,cat:'core',desc:'Scoped authority with spend limits. Sub-delegation narrows scope. Never widens.',fns:'delegate() · subDelegate()'},
-{id:'revocation',label:'Cascade\nRevocation',x:.10,y:.70,r:24,cat:'core',desc:'Revoke one agent, everything downstream dies instantly. Batch revocation. Ed25519 signed.',fns:'cascadeRevoke() · onRevocation()'},
-{id:'canonical',label:'Canonical\nJSON',x:.38,y:.84,r:18,cat:'core',desc:'Deterministic serialization for cross-language signature compatibility.',fns:'canonicalSerialize()'},
-{id:'commerce',label:'Agentic\nCommerce',x:.42,y:.62,r:26,cat:'core',desc:'4-gate checkout: passport, delegation, merchant, spend. Human approval. 80% utilization warnings.',fns:'commercePreflight() · requestHumanApproval()'},
-// Governance layer (center)
-{id:'values',label:'Values\nFloor',x:.18,y:.46,r:28,cat:'gov',desc:'7 non-negotiable principles (F-001→F-007). Graduated enforcement: inline blocks, audit logs, warnings.',fns:'loadFloor() · attestFloor()'},
-{id:'policy',label:'Policy\nEngine',x:.40,y:.40,r:26,cat:'gov',desc:'3-signature chain: agent declares intent → policy evaluates → signed receipt. Every action provable.',fns:'createActionIntent() · evaluateIntent()'},
-{id:'reputation',label:'Reputation-Gated\nAuthority',x:.52,y:.22,r:34,cat:'gov',desc:'Bayesian trust (μ,σ). 5 tiers: Untrusted→Autonomous. Signed promotions. Cryptographic scarring on failure.',fns:'checkTierForIntent() · createPromotionReview()'},
-{id:'principal',label:'Principal\nIdentity',x:.32,y:.26,r:22,cat:'gov',desc:'Cryptographic chain from human to agent. Selective disclosure. Fleet management.',fns:'createPrincipal() · endorseAgent()'},
-// Operations layer (upper right)
-{id:'agora',label:'Agent\nAgora',x:.72,y:.10,r:24,cat:'ops',desc:'Signed message feeds. Topics, threading, agent registry. The public governance square.',fns:'createAgoraMessage() · getByTopic()'},
-{id:'coordination',label:'Coordination\nPrimitives',x:.76,y:.32,r:28,cat:'ops',desc:'Full task lifecycle: brief → assign → evidence → review → handoff → deliverable → complete.',fns:'createTaskBrief() · submitEvidence()'},
-{id:'attribution',label:'Merkle\nAttribution',x:.64,y:.48,r:24,cat:'ops',desc:'Every action traces to a human beneficiary. Merkle proofs. Multi-agent collaboration credit.',fns:'traceBeneficiary() · buildMerkleRoot()'},
-{id:'routing',label:'Task\nRouting',x:.92,y:.18,r:20,cat:'ops',desc:'Capability-based routing. Agents matched to tasks by scope, tier, and availability.',fns:'routeTask() · matchCapabilities()'},
-{id:'context',label:'Agent\nContext',x:.92,y:.40,r:20,cat:'ops',desc:'Enforcement middleware. Every action passes through context validator before execution.',fns:'createAgentContext() · executeWithContext()'},
-{id:'integration',label:'Integration\nWiring',x:.60,y:.66,r:20,cat:'ops',desc:'Cross-layer bridges. Commerce→Policy. Coordination→Agora. Receipts→Merkle. Pure composition.',fns:'commerceWithIntent() · coordinationToAgora()'},
-// Standards (right side + bottom)
-{id:'did',label:'DID:APS',x:.54,y:.84,r:18,cat:'std',desc:'Decentralized Identifiers for Agent Passport System. W3C DID method.',fns:'createDID() · resolveDID()'},
-{id:'vc',label:'Verifiable\nCredentials',x:.70,y:.78,r:20,cat:'std',desc:'W3C Verifiable Credentials. Provable attestations, delegations, receipts.',fns:'issueCredential() · verifyCredential()'},
-{id:'a2a',label:'A2A\nBridge',x:.84,y:.68,r:18,cat:'std',desc:'Google Agent-to-Agent protocol bridge. Interop with A2A ecosystem.',fns:'bridgeToA2A() · fromA2ACard()'},
-{id:'euai',label:'EU AI Act\nMapping',x:.05,y:.32,r:18,cat:'std',desc:'Article-by-article compliance mapping. Traceability, human oversight, risk management.',fns:'mapCompliance()'},
-// Research (top)
-{id:'autoresearch',label:'Autoresearch',x:.12,y:.12,r:22,cat:'research',desc:'200 randomized property tests. 10 paper attack scenarios. Automated protocol hardening.',fns:'propertyTest() · attackScenario()'},
-{id:'adversarial',label:'23 Adversarial\nScenarios',x:.32,y:.08,r:20,cat:'research',desc:'Replay attacks, impersonation, scope escalation, collusion, strategic failure. All tested.',fns:'tests/adversarial.ts'},
-{id:'paper1',label:'Agent Social\nContract',x:.52,y:.06,r:18,cat:'research',desc:'Published on Zenodo. Protocol theory: delegation, values floor, attribution.'},
-{id:'paper2',label:'Monotonic\nNarrowing',x:.90,y:.58,r:18,cat:'research',desc:'Published on Zenodo. Formal invariants for reputation-gated authority.'},
-// Enforcement + New Modules
-{id:'gateway',label:'Proxy\nGateway',x:.30,y:.56,r:28,cat:'core',desc:'Enforcement boundary. Gateway is both judge and executor. 3-signature chain, replay protection, revocation recheck. 39 tests.',fns:'processToolCall() · approve() · executeApproval()'},
-{id:'crosschain',label:'Cross-Chain\nEnforcement',x:.24,y:.70,r:20,cat:'gov',desc:'Confused deputy prevention. Taint tracking per execution frame. Signed Authority Objects. Cross-chain permits.',fns:'checkDataFlow() · createSAO()'},
-{id:'encrypted',label:'E2E Encrypted\nMessaging',x:.06,y:.54,r:18,cat:'ops',desc:'End-to-end encryption on Agora. X25519 + XSalsa20-Poly1305. Double signature. Forward secrecy.',fns:'createEncryptedMessage() · decrypt()'},
-{id:'obligations',label:'Obligations\nModel',x:.38,y:.76,r:20,cat:'gov',desc:'Duties attached to delegations. Evidence matching. Penalty severity narrows monotonically. 25 tests.',fns:'createObligation() · checkFulfillment()'},
-{id:'envelope',label:'Execution\nEnvelope',x:.78,y:.62,r:18,cat:'std',desc:'Cross-engine signed governance artifact. Any engine emits, any verifier checks. Interop with Guardian, CrewAI.',fns:'createExecutionEnvelope() · verify()'},
+// Protocol architecture
+const C=document.getElementById('archCanvas'),X=C.getContext('2d'),tip=document.getElementById('archTip');
+let W,H,dpr,hov=null,autoHov=null,userActive=false,userTimer=0,t=0,autoT=0;
+const CAT={core:'#d4a574',gov:'#7ba4c9',ops:'#8bc9a0',std:'#c9a07b',research:'#b07bc9'};
+const N=[
+{id:'identity',l:'Ed25519\nidentity',x:.12,y:.86,cat:'core',ts:12,d:'Cryptographic passport. Ed25519 keys. Signed, verifiable, expirable.',fn:'createPassport() · signPassport()'},
+{id:'canonical',l:'Canonical\nJSON',x:.28,y:.92,cat:'core',ts:11,d:'Deterministic serialization for cross-language signature compat.',fn:'canonicalSerialize()'},
+{id:'delegation',l:'Delegation\nchains',x:.35,y:.78,cat:'core',ts:45,d:'Scoped authority with spend limits. Sub-delegation narrows. Never widens.',fn:'delegate() · subDelegate()'},
+{id:'revocation',l:'Cascade\nrevocation',x:.22,y:.72,cat:'core',ts:18,d:'Revoke one agent, everything downstream dies instantly.',fn:'cascadeRevoke() · onRevocation()'},
+{id:'gateway',l:'Proxy\ngateway',x:.42,y:.50,cat:'core',ts:39,d:'Enforcement boundary. Judge and executor. 3-sig chain, replay protection.',fn:'processToolCall() · approve()'},
+{id:'commerce',l:'Agentic\ncommerce',x:.65,y:.60,cat:'core',ts:17,d:'4-gate checkout: passport, delegation, merchant, spend.',fn:'commercePreflight()'},
+{id:'values',l:'Values\nfloor',x:.14,y:.54,cat:'gov',ts:15,d:'7 principles (F-001 to F-007). Graduated enforcement.',fn:'loadFloor() · attestFloor()'},
+{id:'principal',l:'Principal\nidentity',x:.18,y:.38,cat:'gov',ts:14,d:'Human-to-agent chain. Selective disclosure. Fleet management.',fn:'createPrincipal() · endorseAgent()'},
+{id:'policy',l:'Policy\nengine',x:.30,y:.44,cat:'gov',ts:22,d:'3-signature chain: intent → evaluation → receipt.',fn:'createActionIntent() · evaluateIntent()'},
+{id:'reputation',l:'Reputation-gated\nauthority',x:.38,y:.28,cat:'gov',ts:28,d:'Bayesian trust. 5 tiers. Signed promotions. Cryptographic scarring.',fn:'checkTierForIntent()'},
+{id:'crosschain',l:'Cross-chain\nenforcement',x:.52,y:.62,cat:'gov',ts:30,d:'Confused deputy prevention. Taint tracking per execution frame.',fn:'checkDataFlow() · createSAO()'},
+{id:'obligations',l:'Obligations\nmodel',x:.48,y:.76,cat:'gov',ts:25,d:'Duties on delegations. Evidence matching. Penalty severity narrows.',fn:'createObligation()'},
+{id:'agora',l:'Agent\nagora',x:.70,y:.16,cat:'ops',ts:14,d:'Signed message feeds. Topics, threading, agent registry.',fn:'createAgoraMessage()'},
+{id:'coordination',l:'Coordination\nprimitives',x:.64,y:.34,cat:'ops',ts:16,d:'Full task lifecycle: brief → assign → evidence → review → deliver.',fn:'createTaskBrief()'},
+{id:'attribution',l:'Merkle\nattribution',x:.56,y:.44,cat:'ops',ts:18,d:'Every action traces to human. Merkle proofs.',fn:'traceBeneficiary()'},
+{id:'routing',l:'Task\nrouting',x:.78,y:.28,cat:'ops',ts:20,d:'Capability matching. Agents matched by scope, tier, availability.',fn:'routeTask()'},
+{id:'context',l:'Agent\ncontext',x:.54,y:.32,cat:'ops',ts:16,d:'Enforcement middleware. Every action through validator.',fn:'createAgentContext()'},
+{id:'integration',l:'Integration\nwiring',x:.50,y:.40,cat:'ops',ts:14,d:'Cross-layer bridges. Commerce→Policy. Coordination→Agora.',fn:'commerceWithIntent()'},
+{id:'encrypted',l:'E2E encrypted\nmessaging',x:.26,y:.22,cat:'ops',ts:13,d:'X25519 + XSalsa20. Double signature. Forward secrecy.',fn:'createEncryptedMessage()'},
+{id:'did',l:'DID:APS',x:.05,y:.68,cat:'std',ts:8,d:'W3C Decentralized Identifiers for APS.',fn:'createDID() · resolveDID()'},
+{id:'vc',l:'Verifiable\ncredentials',x:.80,y:.50,cat:'std',ts:9,d:'W3C VCs. Provable attestations, delegations, receipts.',fn:'issueCredential()'},
+{id:'a2a',l:'A2A\nbridge',x:.88,y:.34,cat:'std',ts:8,d:'Google Agent-to-Agent protocol interop.',fn:'bridgeToA2A()'},
+{id:'envelope',l:'Execution\nenvelope',x:.76,y:.68,cat:'std',ts:5,d:'Cross-engine signed governance. Any engine emits, any verifies.',fn:'createExecutionEnvelope()'},
+{id:'euai',l:'EU AI Act\nmapping',x:.04,y:.40,cat:'std',ts:10,d:'Article-by-article compliance. Risk classification.',fn:'mapCompliance()'},
+{id:'adversarial',l:'23 adversarial\nscenarios',x:.12,y:.12,cat:'research',ts:23,d:'Replay, impersonation, escalation, collusion.',fn:'tests/adversarial.ts'},
+{id:'autoresearch',l:'Autoresearch',x:.30,y:.08,cat:'research',ts:0,d:'200 randomized property tests. Attack automation.',fn:'propertyTest()'},
+{id:'paper1',l:'Agent Social\nContract',x:.05,y:.22,cat:'research',ts:0,d:'Published on Zenodo. Protocol theory.',fn:''},
+{id:'paper2',l:'Monotonic\nNarrowing',x:.48,y:.14,cat:'research',ts:0,d:'Published on Zenodo. Formal invariants.',fn:''}
 ];
 const EDGES=[
-['identity','delegation'],['identity','revocation'],['identity','canonical'],
-['delegation','commerce'],['delegation','reputation'],['delegation','policy'],
-['revocation','delegation'],
-['values','policy'],['values','reputation'],
-['policy','reputation'],['policy','commerce'],['policy','context'],
-['reputation','principal'],['reputation','coordination'],
-['principal','identity'],['principal','did'],
-['agora','coordination'],['agora','integration'],
-['coordination','attribution'],['coordination','context'],['coordination','routing'],
-['attribution','integration'],['attribution','vc'],
-['routing','context'],
-['integration','commerce'],['integration','agora'],['integration','attribution'],
-['commerce','delegation'],['commerce','policy'],
-['did','vc'],['did','identity'],
-['vc','a2a'],['vc','attribution'],
-['a2a','agora'],
-['euai','values'],['euai','policy'],
-['autoresearch','adversarial'],
-['context','policy'],
-['paper1','values'],['paper2','reputation'],
-// New module edges
-['gateway','policy'],['gateway','delegation'],['gateway','crosschain'],['gateway','obligations'],['gateway','envelope'],
-['crosschain','delegation'],['crosschain','identity'],
-['encrypted','agora'],['encrypted','crosschain'],
-['obligations','delegation'],['obligations','gateway'],
-['envelope','vc'],['envelope','a2a'],['envelope','gateway'],
+['identity','delegation'],['identity','revocation'],['identity','canonical'],['delegation','commerce'],
+['delegation','reputation'],['delegation','policy'],['delegation','gateway'],['delegation','crosschain'],
+['delegation','obligations'],['revocation','delegation'],['values','policy'],['values','reputation'],
+['policy','reputation'],['policy','commerce'],['policy','context'],['policy','gateway'],
+['reputation','principal'],['reputation','coordination'],['principal','identity'],['principal','did'],
+['agora','coordination'],['agora','integration'],['coordination','attribution'],['coordination','context'],
+['coordination','routing'],['attribution','integration'],['attribution','vc'],['routing','context'],
+['integration','commerce'],['integration','agora'],['integration','attribution'],['commerce','delegation'],
+['commerce','policy'],['did','vc'],['did','identity'],['vc','a2a'],['vc','attribution'],
+['a2a','agora'],['euai','values'],['euai','policy'],['context','policy'],
+['paper1','values'],['paper2','reputation'],['gateway','crosschain'],['gateway','obligations'],
+['gateway','envelope'],['crosschain','identity'],['encrypted','agora'],['encrypted','crosschain'],
+['obligations','gateway'],['envelope','vc'],['envelope','a2a'],['envelope','gateway']
 ];
-const COLORS={core:'#d4a574',gov:'#7ba4c9',ops:'#8bc9a0',std:'#c9a07b',research:'#b07bc9'};
-const canvas=document.getElementById('constellation');
-const ctx=canvas.getContext('2d');
-const tooltip=document.getElementById('tooltip');
-let W,H,dpr,hoveredNode=null,time=0;
-function resize(){const r=canvas.parentElement.getBoundingClientRect();dpr=window.devicePixelRatio||1;W=r.width;H=r.height;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}
+const nodes=N.map(n=>{const r=n.ts>0?Math.max(22,Math.sqrt(n.ts)*4.5):16;return{...n,r,px:0,py:0}});
+const edges=EDGES.map(([a,b])=>({s:nodes.find(n=>n.id===a),t:nodes.find(n=>n.id===b)})).filter(e=>e.s&&e.t);
+function resize(){const r=C.parentElement.getBoundingClientRect();dpr=window.devicePixelRatio||1;W=r.width;H=r.height;C.width=W*dpr;C.height=H*dpr;C.style.width=W+'px';C.style.height=H+'px';X.setTransform(dpr,0,0,dpr,0,0);
+const mx=W*.05,my=H*.05;nodes.forEach(n=>{n.px=mx+n.x*(W-mx*2);n.py=my+n.y*(H-my*2)})}
 resize();window.addEventListener('resize',resize);
-function getNodePos(n){return{x:n.x*W,y:n.y*H}}
-function getNodeR(n){const s=Math.min(W/900,1);return Math.max(12,n.r*s)}
-function hexRgba(hex,a){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return'rgba('+r+','+g+','+b+','+a+')'}
-function draw(){
-  time+=.008;ctx.clearRect(0,0,W,H);
-  ctx.strokeStyle='rgba(255,255,255,.015)';ctx.lineWidth=1;
-  for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
-  for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-  EDGES.forEach(([a,b])=>{
-    const na=NODES.find(n=>n.id===a),nb=NODES.find(n=>n.id===b);
-    if(!na||!nb)return;
-    const pa=getNodePos(na),pb=getNodePos(nb);
-    const isH=hoveredNode&&(hoveredNode.id===a||hoveredNode.id===b);
-    ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);
-    ctx.strokeStyle=isH?'rgba(212,165,116,.5)':'rgba(255,255,255,.06)';ctx.lineWidth=isH?2:.7;ctx.stroke();
-    if(isH){const t=(time*2)%1;ctx.beginPath();ctx.arc(pa.x+(pb.x-pa.x)*t,pa.y+(pb.y-pa.y)*t,3,0,Math.PI*2);ctx.fillStyle='rgba(212,165,116,.8)';ctx.fill()}
-  });
-  NODES.forEach(n=>{
-    const p=getNodePos(n);const col=COLORS[n.cat];
-    const isH=hoveredNode&&hoveredNode.id===n.id;
-    const isC=hoveredNode&&EDGES.some(([a,b])=>(a===hoveredNode.id&&b===n.id)||(b===hoveredNode.id&&a===n.id));
-    const pulse=Math.sin(time*2+n.x*10)*.15+1;
-    const r=getNodeR(n)*(isH?1.15:isC?1.05:pulse*.95+.05);
-    const alpha=hoveredNode?(isH?1:isC?.8:.25):.7;
-    const grd=ctx.createRadialGradient(p.x,p.y,r*.3,p.x,p.y,r*3);
-    grd.addColorStop(0,hexRgba(col,alpha*.25));
-    grd.addColorStop(.5,hexRgba(col,alpha*.08));
-    grd.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(p.x,p.y,r*3,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);
-    ctx.fillStyle='rgba(20,20,22,'+alpha+')';ctx.fill();
-    ctx.globalAlpha=alpha;ctx.strokeStyle=col;ctx.lineWidth=isH?2.5:1.5;ctx.stroke();ctx.globalAlpha=1;
-    ctx.fillStyle='rgba(232,228,222,'+alpha+')';
-    const fs=Math.max(9,Math.min(12,getNodeR(n)*.38));
-    ctx.font=(isH?'600':'500')+' '+fs+"px 'Outfit',sans-serif";
-    ctx.textAlign='center';
-    const lines=n.label.split('\n');const lH=fs+2;const sY=p.y-(lines.length-1)*lH/2;
-    lines.forEach((l,i)=>ctx.fillText(l,p.x,sY+i*lH));
-  });
-  requestAnimationFrame(draw);
-}
-draw();
-const wrap=canvas.parentElement;
-wrap.addEventListener('mousemove',e=>{
-  const rect=canvas.getBoundingClientRect();
-  const mx=e.clientX-rect.left,my=e.clientY-rect.top;
-  let found=null;
-  NODES.forEach(n=>{const p=getNodePos(n);if(Math.hypot(mx-p.x,my-p.y)<getNodeR(n)+8)found=n});
-  hoveredNode=found;
-  if(found){
-    canvas.style.cursor='pointer';tooltip.classList.add('show');
-    let h='<h4>'+found.label.replace('\n',' ')+'</h4><p>'+found.desc+'</p>';
-    if(found.fns)h+='<p style="margin-top:.3rem"><code>'+found.fns+'</code></p>';
-    tooltip.innerHTML=h;
-    const p=getNodePos(found);
-    let tx=p.x+getNodeR(found)+12,ty=p.y-20;
-    if(tx+280>W)tx=p.x-getNodeR(found)-290;
-    if(ty<10)ty=10;if(ty+100>H)ty=H-110;
-    tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';
-  }else{canvas.style.cursor='default';tooltip.classList.remove('show')}
+function hx(hex,a){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`rgba(${r},${g},${b},${a})`}
+const autoOrder=[...nodes].sort((a,b)=>b.ts-a.ts);
+let autoIdx=0;
+function getActive(){return userActive?hov:autoHov}
+function draw(){t+=.004;autoT+=1;
+if(!userActive&&autoT%240===0){autoIdx=(autoIdx+1)%autoOrder.length;autoHov=autoOrder[autoIdx]}
+if(userActive){userTimer--;if(userTimer<=0)userActive=false}
+const act=getActive();
+X.clearRect(0,0,W,H);
+X.strokeStyle='rgba(255,255,255,.018)';X.lineWidth=.5;
+for(let y=0;y<H;y+=50){X.beginPath();X.moveTo(0,y);X.lineTo(W,y);X.stroke()}
+const gw=nodes.find(n=>n.id==='gateway');
+if(gw){for(let i=4;i>0;i--){X.beginPath();X.arc(gw.px,gw.py,i*55+Math.sin(t+i)*.5,0,Math.PI*2);X.strokeStyle=`rgba(212,165,116,${.006/i})`;X.lineWidth=35;X.stroke()}}
+edges.forEach(e=>{
+const isH=act&&(act.id===e.s.id||act.id===e.t.id);
+const dim=act&&!isH;
+const alpha=isH?.32:dim?.01:.03;
+const col=isH?CAT[act.cat]:'#ffffff';
+const dx=e.t.px-e.s.px,dy=e.t.py-e.s.py;
+const mx=(e.s.px+e.t.px)/2,my=(e.s.py+e.t.py)/2;
+const off=Math.min(Math.abs(dx),Math.abs(dy))*.3;
+const cpx=mx+(dy>0?off:-off)*.3,cpy=my;
+X.beginPath();X.moveTo(e.s.px,e.s.py);X.quadraticCurveTo(cpx,cpy,e.t.px,e.t.py);
+X.strokeStyle=hx(col,alpha);X.lineWidth=isH?1.2:.4;X.stroke();
+if(isH){for(let i=0;i<14;i++){
+const pt=((t*2+i/14)%1);const mt=1-pt;
+const px=mt*mt*e.s.px+2*mt*pt*cpx+pt*pt*e.t.px;
+const py=mt*mt*e.s.py+2*mt*pt*cpy+pt*pt*e.t.py;
+const a=Math.max(0,1-Math.abs(pt-.5)*4)*.45;
+X.beginPath();X.arc(px,py,1.5,0,Math.PI*2);X.fillStyle=hx(col,a);X.fill()}}
 });
-wrap.addEventListener('mouseleave',()=>{hoveredNode=null;tooltip.classList.remove('show')});
-// Touch support
+const sc=Math.min(1,W/600);
+nodes.forEach(n=>{
+const col=CAT[n.cat];const isH=act&&act.id===n.id;
+const isC=act&&edges.some(e=>(e.s.id===act.id&&e.t.id===n.id)||(e.t.id===act.id&&e.s.id===n.id));
+const dim=act&&!isH&&!isC;
+const alpha=dim?.1:isH?1:isC?.82:.6;
+const r=Math.max(15,n.r*sc);
+const breath=isH?1:(.97+Math.sin(t*1.2+n.x*15+n.y*10)*.03);
+const dr=r*breath;
+const grd=X.createRadialGradient(n.px,n.py,0,n.px,n.py,dr*2.8);
+grd.addColorStop(0,hx(col,alpha*.08));grd.addColorStop(.35,hx(col,alpha*.025));grd.addColorStop(1,'rgba(0,0,0,0)');
+X.fillStyle=grd;X.beginPath();X.arc(n.px,n.py,dr*2.8,0,Math.PI*2);X.fill();
+X.beginPath();X.arc(n.px,n.py,dr,0,Math.PI*2);
+X.fillStyle=isH?hx('#1a1a1c',1):hx('#141416',.92);X.fill();
+X.strokeStyle=hx(col,alpha*(isH?.95:.45));X.lineWidth=isH?2:.8;X.stroke();
+if(n.ts>0&&!dim){const bW=Math.min(dr*1.5,n.ts/45*dr*1.8);
+X.fillStyle=hx(col,alpha*.15);X.fillRect(n.px-dr*.75,n.py+dr+5,dr*1.5,2);
+X.fillStyle=hx(col,alpha*.45);X.fillRect(n.px-dr*.75,n.py+dr+5,bW,2)}
+X.fillStyle=hx('#e8e4de',alpha);
+const fs=Math.max(10.5,Math.min(14,r*.4));
+X.font=(isH?'500':'400')+` ${fs}px 'Outfit',system-ui,sans-serif`;X.textAlign='center';X.textBaseline='middle';
+const lines=n.l.split('\n');const lH=fs+2;const sY=n.py-(lines.length-1)*lH/2;
+lines.forEach((ln,i)=>X.fillText(ln,n.px,sY+i*lH));
+if(n.ts>0&&(isH||isC||!act)){X.font=`400 ${Math.max(8,fs*.55)}px 'JetBrains Mono',monospace`;
+X.fillStyle=hx(col,alpha*.4);X.fillText(n.ts+'t',n.px,n.py+dr+14)}
+});
+requestAnimationFrame(draw)}
+draw();
+const wrap=C.parentElement;
+function findNode(mx,my){let f=null,best=999;const sc=Math.min(1,W/600);
+nodes.forEach(n=>{const r=Math.max(12,n.r*sc);const d=Math.hypot(mx-n.px,my-n.py);
+if(d<r+10&&d<best){best=d;f=n}});return f}
+function showTip(node){
+tip.classList.add('show');
+tip.innerHTML=`<h4>${node.l.replace('\n',' ')}</h4><p>${node.d}</p>${node.fn?'<code>'+node.fn+'</code>':''}`;
+let tx=node.px+node.r+16,ty=node.py-30;
+if(tx+230>W)tx=node.px-node.r-240;if(ty<8)ty=8;if(ty+90>H)ty=H-100;
+tip.style.left=tx+'px';tip.style.top=ty+'px'}
+wrap.addEventListener('mousemove',e=>{
+const rect=C.getBoundingClientRect();const mx=e.clientX-rect.left,my=e.clientY-rect.top;
+const found=findNode(mx,my);
+if(found){hov=found;userActive=true;userTimer=300;C.style.cursor='pointer';showTip(found)}
+else{hov=null;C.style.cursor='default';tip.classList.remove('show');if(!userActive)autoHov=autoOrder[autoIdx]}});
+wrap.addEventListener('mouseleave',()=>{hov=null;tip.classList.remove('show')});
 wrap.addEventListener('touchstart',e=>{
-  const touch=e.touches[0];const rect=canvas.getBoundingClientRect();
-  const mx=touch.clientX-rect.left,my=touch.clientY-rect.top;
-  let found=null;
-  NODES.forEach(n=>{const p=getNodePos(n);if(Math.hypot(mx-p.x,my-p.y)<getNodeR(n)+16)found=n});
-  if(found){
-    e.preventDefault();hoveredNode=found;
-    tooltip.classList.add('show');
-    let h='<h4>'+found.label.replace('\n',' ')+'</h4><p>'+found.desc+'</p>';
-    if(found.fns)h+='<p style="margin-top:.3rem"><code>'+found.fns+'</code></p>';
-    tooltip.innerHTML=h;
-    const p=getNodePos(found);let tx=p.x+getNodeR(found)+12,ty=p.y-20;
-    if(tx+260>W)tx=Math.max(8,p.x-260);if(ty<10)ty=10;if(ty+100>H)ty=H-110;
-    tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';
-  } else {hoveredNode=null;tooltip.classList.remove('show')}
-},{passive:false});
-wrap.addEventListener('touchend',()=>{setTimeout(()=>{hoveredNode=null;tooltip.classList.remove('show')},2000)});
+const touch=e.touches[0];const rect=C.getBoundingClientRect();
+const mx=touch.clientX-rect.left,my=touch.clientY-rect.top;
+const f=findNode(mx,my);
+if(f){e.preventDefault();hov=f;userActive=true;userTimer=600;showTip(f)}
+else{hov=null;userActive=false;tip.classList.remove('show')}},{passive:false});
+wrap.addEventListener('touchend',()=>{setTimeout(()=>{if(!userActive){hov=null;tip.classList.remove('show')}},2500)});
 </script>
 </body>
 </html>
