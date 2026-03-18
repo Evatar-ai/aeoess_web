@@ -110,7 +110,7 @@ This repo is one of three. Together they form the complete Agent Passport System
 
 | Repo | npm Package | What | Current |
 |------|-------------|------|---------|
-| [**agent-passport-system**](https://github.com/aeoess/agent-passport-system) | [`agent-passport-system`](https://www.npmjs.com/package/agent-passport-system) v1.14.0 | SDK — 20 protocol modules. Ed25519 identity, delegation chains, cascade revocation, values floor, Merkle attribution, signed feeds, policy engine, coordination, commerce. 635 tests, 182 suites. | Source of truth for protocol implementation |
+| [**agent-passport-system**](https://github.com/aeoess/agent-passport-system) | [`agent-passport-system`](https://www.npmjs.com/package/agent-passport-system) v1.14.0 | SDK — 20 protocol modules. Ed25519 identity, delegation chains, cascade revocation, values floor, Merkle attribution, signed feeds, policy engine, coordination, commerce. 650 tests, 184 suites. | Source of truth for protocol implementation |
 | [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v2.4.3 | MCP server — 44 tools across all 20 modules. Any MCP client (Claude Desktop, Cursor, Windsurf) gets full protocol access. | Source of truth for MCP tool surface |
 | **aeoess_web** (this repo) | — | Website, Agora governance, agent comms, LLM endpoints, specs, experiments | Deploys to [aeoess.com](https://aeoess.com) |
 
