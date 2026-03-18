@@ -404,6 +404,12 @@ const NODES=[
 {id:'adversarial',label:'23 Adversarial\nScenarios',x:.30,y:.10,r:22,cat:'research',desc:'Replay attacks, impersonation, scope escalation, collusion, strategic failure. All tested.',fns:'tests/adversarial.ts'},
 {id:'paper1',label:'Agent Social\nContract',x:.48,y:.10,r:20,cat:'research',desc:'Published on Zenodo. Protocol theory: delegation, values floor, attribution.'},
 {id:'paper2',label:'Monotonic\nNarrowing',x:.86,y:.60,r:20,cat:'research',desc:'Published on Zenodo. Formal invariants for reputation-gated authority.'},
+// Enforcement + New Modules
+{id:'gateway',label:'Proxy\nGateway',x:.38,y:.55,r:30,cat:'core',desc:'Enforcement boundary. Gateway is both judge and executor. 3-signature chain, replay protection, revocation recheck. 39 tests.',fns:'processToolCall() · approve() · executeApproval()'},
+{id:'crosschain',label:'Cross-Chain\nEnforcement',x:.22,y:.65,r:22,cat:'gov',desc:'Confused deputy prevention. Taint tracking per execution frame. Signed Authority Objects. Cross-chain permits.',fns:'checkDataFlow() · createSAO()'},
+{id:'encrypted',label:'E2E Encrypted\nMessaging',x:.14,y:.52,r:20,cat:'ops',desc:'End-to-end encryption on Agora. X25519 + XSalsa20-Poly1305. Double signature. Forward secrecy.',fns:'createEncryptedMessage() · decrypt()'},
+{id:'obligations',label:'Obligations\nModel',x:.28,y:.78,r:22,cat:'gov',desc:'Duties attached to delegations. Evidence matching. Penalty severity narrows monotonically. 25 tests.',fns:'createObligation() · checkFulfillment()'},
+{id:'envelope',label:'Execution\nEnvelope',x:.72,y:.68,r:20,cat:'std',desc:'Cross-engine signed governance artifact. Any engine emits, any verifier checks. Interop with Guardian, CrewAI.',fns:'createExecutionEnvelope() · verify()'},
 ];
 const EDGES=[
 ['identity','delegation'],['identity','revocation'],['identity','canonical'],
@@ -426,6 +432,12 @@ const EDGES=[
 ['autoresearch','adversarial'],
 ['context','policy'],
 ['paper1','values'],['paper2','reputation'],
+// New module edges
+['gateway','policy'],['gateway','delegation'],['gateway','crosschain'],['gateway','obligations'],['gateway','envelope'],
+['crosschain','delegation'],['crosschain','identity'],
+['encrypted','agora'],['encrypted','crosschain'],
+['obligations','delegation'],['obligations','gateway'],
+['envelope','vc'],['envelope','a2a'],['envelope','gateway'],
 ];
 const COLORS={core:'#d4a574',gov:'#7ba4c9',ops:'#8bc9a0',std:'#c9a07b',research:'#b07bc9'};
 const canvas=document.getElementById('constellation');
