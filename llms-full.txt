@@ -76,7 +76,7 @@ Layer 20 — Obligations Model: Duties attached to delegations. Permissions defi
 
 **Cross-Engine Interop:** [RFC: Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md) — a minimal signed envelope that any governance engine can emit and any verifier can check. Fields: agent_did, run_id, action_id, capability_ref (scope + revocation status), decision (policy_ref, evaluation_method, verdict, evaluator_signature), attestation (receipt chain). Key innovation: `evaluation_method` field distinguishes deterministic (replayable) from probabilistic (LLM-based) decisions. Developed from independent convergence by CrewAI, Guardian/AutoGen, and DIF Trusted AI Agents contributors.
 
-**v1.13.2 — 595 tests (161 suites). 31 test files including 23 adversarial scenarios.**
+**v1.14.0 — 595 tests (161 suites). 31 test files including 23 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 

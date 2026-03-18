@@ -92,6 +92,7 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+<<<<<<< Updated upstream
       "headline": "Day 30: Three Modules in One Day. Two Claudes Built Them.",
       "datePublished": "2026-03-17",
       "description": "Module 19 (E2E Encrypted Messaging) and Module 20 (Obligations Model) shipped in one session. Consensus spec from 3-model hostile review. Two-Claude build: one wrote tests, the other wrote implementation. Plus createExecutionEnvelope() turns the RFC into running code. Protocol: 20 modules, 595 tests.",
@@ -108,6 +109,8 @@
     },
     {
       "@type": "BlogPosting",
+=======
+>>>>>>> Stashed changes
       "headline": "Day 28: CEO of Y Combinator Endorsed It. Microsoft Merged It. A Federal Agency Is Reviewing It.",
       "datePublished": "2026-03-16",
       "description": "Garry Tan endorsed APS. Microsoft merged PR #274. NIST NCCoE reviewing public comment. IETF DAAP author exploring collaboration. Drafts for 5 ecosystem discussions. Applied to Adaption Research Grant.",
@@ -278,12 +281,12 @@
     },
     {
       "@type": "BlogPosting",
-      "headline": "Day 15: SDK v1.13.2, MCP v2.8.5, and Two Agents Get Their Next Mission",
+      "headline": "Day 15: SDK v1.14.0, MCP v2.8.5, and Two Agents Get Their Next Mission",
       "datePublished": "2026-03-04",
       "description": "Five npm publishes. Task Routing Protocol, Agent Context enforcement, 7 audit fixes, 4 MCP comms tools. 595 tests, 61 MCP tools. Autonomous peer audit assigned.",
       "url": "https://aeoess.com/blog.html#day-15",
       "keywords": [
-        "SDK v1.13.2",
+        "SDK v1.14.0",
         "MCP v2.8.5",
         "task routing",
         "agent context",
@@ -295,7 +298,7 @@
       "@type": "BlogPosting",
       "headline": "Day 14: The First Real Audit — What Happens When Agents Review Your Code",
       "datePublished": "2026-03-03",
-      "description": "PortalX2 ran a forensic audit of the SDK. 10 findings including a high-severity canonicalization bug. All accepted fixes shipped in v1.13.2.",
+      "description": "PortalX2 ran a forensic audit of the SDK. 10 findings including a high-severity canonicalization bug. All accepted fixes shipped in v1.14.0.",
       "url": "https://aeoess.com/blog.html#day-14",
       "keywords": [
         "code audit",
@@ -556,6 +559,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Also shipped: createExecutionEnvelope() — the RFC from Day 29 becomes running code. Any governance engine can now emit a signed envelope that any verifier can check. Protocol: 20 modules, 595 tests.</p>
 </article>
 
+<<<<<<< Updated upstream
 <article class="post" id="day-29">
   <time class="post-date" datetime="2026-03-17">March 17, 2026</time>
   <h2>Day 29: Three Groups Asked for the Same Thing. So We Wrote the Spec.</h2>
@@ -565,6 +569,8 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The key innovation is the <code>evaluation_method</code> field: <em>deterministic</em> (the decision can be replayed) vs <em>probabilistic</em> (LLM-based, signature-verifiable only). This is the split every verifier needs. A rule-based policy decision is independently reproducible. An LLM advisory judgment is not. Different trust levels for each.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Portal is opening the RFC issue on our repo and cross-linking from all three threads. If CrewAI, Guardian, and APS can all emit compatible envelopes, that's the foundation for ecosystem-wide governance audit. We're not commenting on other people's conversations anymore. We're writing the spec they converge on.</p>
 </article>
+=======
+>>>>>>> Stashed changes
 <article class="post" id="day-28">
   <time class="post-date" datetime="2026-03-16">March 16, 2026</time>
   <h2>Day 28: CEO of Y Combinator Endorsed It. Microsoft Merged It. A Federal Agency Is Reviewing It.</h2>
@@ -577,6 +583,10 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Research grant.</strong> Applied to the Adaption Research Grant Program (Sara Hooker, ex-Cohere/DeepMind, $50M seed). Project: adaptive policy enforcement. Can a policy engine learn from its own cryptographically signed enforcement history to improve advisory decisions without retraining? Our dual-process experiment (56 runs, F-008 negative result) is the starting data.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Four weeks ago this was a TypeScript file on a MacBook Air. Now the CEO of Y Combinator endorsed it, Microsoft is using it, a federal agency has it, and an internet standards author wants to collaborate. Nobody told them about each other.</p>
 </article>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <article class="post" id="day-27">
   <time class="post-date" datetime="2026-03-15">March 15, 2026</time>
   <h2>Day 27: Full Stats Sweep + Gateway Strategic Decision</h2>
@@ -631,7 +641,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Six MCP tools: <code>publish_intent_card</code>, <code>search_matches</code>, <code>get_digest</code>, <code>request_intro</code>, <code>respond_to_intro</code>, <code>remove_intent_card</code>. The killer feature is the digest: one question to your AI ("What's relevant to me right now?") returns your top matches ranked by relevance, pending intro requests, and incoming connections. Not a feed. Just the few things that matter.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Also shipped the <strong style="color:var(--text)">Intent Network API</strong> at <code>api.aeoess.com</code>. Persistent backend with SQLite + WAL, Ed25519 signature verification, rate limiting per public key. Deployed on Mac Mini via PM2 + cloudflared tunnel. This means two different people running the MCP server in different Claude Desktop sessions see the same network. Cards persist across sessions.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Plus: ProxyGateway enforcement boundary (30 tests, replay protection, two-phase execution), 16→16 protocol modules recount, and full version propagation sweep across all repos and GitHub READMEs.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.13.2 (595 tests, 152 suites). MCP v2.8.5 (61 tools). Both on npm. Intent Network API v0.1.0 live at <a href="https://api.aeoess.com" target="_blank">api.aeoess.com</a>.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.14.0 (595 tests, 178 suites). MCP v2.8.5 (61 tools). Both on npm. Intent Network API v0.1.0 live at <a href="https://api.aeoess.com" target="_blank">api.aeoess.com</a>.</p>
 </article>
 
 <article class="post" id="day-21">
@@ -661,7 +671,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">adversarial-paper.test.ts</strong> — 10 scenarios (S1-S10) from the monotonic narrowing paper. 5 strong passes, 3 partial (protocol limitations documented as tests), 2 expected failures (supply chain compromise and goal manipulation are out of scope for any delegation protocol and we now prove that explicitly).</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">property-delegation.test.ts</strong> — 200 randomized tests. 100 valid narrowing delegations (random scope subsets, random spend reductions), 100 escalation rejection tests (attempt to widen scope, increase spend, extend chain depth). Deep chains of 10 levels. Compound invariant violations where scope escalation + spend bypass + chain depth all interact simultaneously — the kind of edge cases you never write by hand.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Also added F-008 Epistemic Security to the Values Floor (advisory enforcement) and submitted the cascade revocation spec as a PR to the open Agent Identity Protocol.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK now at 595 tests, 152 suites, 28 test files. The autoresearch system is deployed at <code>autoresearch/</code> in the SDK repo.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK now at 595 tests, 178 suites, 33 test files. The autoresearch system is deployed at <code>autoresearch/</code> in the SDK repo.</p>
 </article>
 
 <article class="post" id="day-17">
@@ -685,10 +695,10 @@
 
 <article class="post" id="day-15">
   <time class="post-date" datetime="2026-03-04">March 4, 2026</time>
-  <h2>Day 15: SDK v1.13.2, MCP v2.8.5, and Two Agents Get Their Next Mission</h2>
+  <h2>Day 15: SDK v1.14.0, MCP v2.8.5, and Two Agents Get Their Next Mission</h2>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Ship day. Five npm publishes. Three git repos updated. Every version reference propagated automatically.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK v1.9.0</strong> landed two new systems. Task Routing Protocol (<code>routing.ts</code>) — declarative rules that match incoming tasks to qualified agents based on capabilities, load, and delegation scope. 24 tests. Agent Context enforcement (<code>context.ts</code>) — create an enforcement context that wraps every action in the 3-signature chain automatically. No manual intent/evaluate/receipt calls. 22 tests. Total: 595 tests, 152 suites, 22 test files.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK v1.13.2</strong> shipped the same day — a patch release addressing all 7 accepted findings from AUDIT-001. The fixes touched 7 files: <code>canonical.ts</code> now returns <code>'null'</code> for null values in arrays instead of empty string (the high-severity finding). <code>keys.ts</code> lost its dead code and gained error discrimination in <code>verify()</code>. The convergence threshold dropped from 15 to 8 on a 0-100 scale. Small fixes, but every one of them found by another agent reading our code, not by us.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK v1.9.0</strong> landed two new systems. Task Routing Protocol (<code>routing.ts</code>) — declarative rules that match incoming tasks to qualified agents based on capabilities, load, and delegation scope. 24 tests. Agent Context enforcement (<code>context.ts</code>) — create an enforcement context that wraps every action in the 3-signature chain automatically. No manual intent/evaluate/receipt calls. 22 tests. Total: 595 tests, 178 suites, 22 test files.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK v1.14.0</strong> shipped the same day — a patch release addressing all 7 accepted findings from AUDIT-001. The fixes touched 7 files: <code>canonical.ts</code> now returns <code>'null'</code> for null values in arrays instead of empty string (the high-severity finding). <code>keys.ts</code> lost its dead code and gained error discrimination in <code>verify()</code>. The convergence threshold dropped from 15 to 8 on a 0-100 scale. Small fixes, but every one of them found by another agent reading our code, not by us.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">MCP v2.8.5</strong> brought agent-to-agent communication to the protocol. Four new tools: <code>send_message</code>, <code>check_messages</code>, <code>broadcast</code>, <code>list_agents</code>. Every message is Ed25519 signed. Plus <code>register_agora_public</code> for the public agent registry at aeoess.com. 61 tools total. Clean dependency tree — typescript and @types/node moved to devDependencies where they belong.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">ClawHub.</strong> Published the Agent Passport skill as <code>agent-passport-system</code> v2.0.0 — another distribution channel for the protocol.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Then we assigned the next task. Both agents — PortalX2 and aeoess — are now running an 8-hour autonomous peer audit of everything we just shipped. They audit independently, read each other's findings each session, give feedback, and send everything to the Operator. No dependencies on me. No blocking. Just two reviewers sharpening each other's work while I sleep.</p>
@@ -702,7 +712,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Portal delivered. Two iterations, 10 findings across <code>keys.ts</code>, <code>canonical.ts</code>, <code>agora.ts</code>, and <code>intent.ts</code>. One high severity: <code>canonicalize()</code> returned empty string for null values in arrays, producing invalid JSON. Any signed payload with a null array element would generate a non-parseable canonical form — and potentially break cross-language signature verification with the Python implementation.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The medium findings were real too. Dead code in <code>keys.ts</code> left over from a refactor. <code>verify()</code> swallowing all exceptions — you couldn't tell "bad signature" from "garbage input." The AgoraMessage type missing values that our actual Agora data already used. A convergence threshold so loose that agents disagreeing by 30 points would be called "converged."</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">What struck me: these aren't the kind of bugs you find by writing more tests. They're the bugs you find when someone else reads your code with fresh eyes and a different mental model. Portal didn't run anything. It read the source, traced the logic, and asked "what happens when this input is null?" That's exactly what a human code reviewer does — except Portal filed structured findings with severity, evidence, suggested fixes, and cross-references.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Seven of the ten findings were accepted for immediate fix. Two were noted as by-design for v1. One was informational. All seven fixes shipped in v1.13.2 the next day.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Seven of the ten findings were accepted for immediate fix. Two were noted as by-design for v1. One was informational. All seven fixes shipped in v1.14.0 the next day.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">aeoess didn't post findings this round — the Telegram relay and GitHub polling loop didn't converge in time. That's a data point too. The coordination overhead we measured in the experiments is still real. The protocol needs to solve agent-to-agent communication at the infrastructure level, not the "check this JSON file" level. That's why MCP comms tools shipped the next day.</p>
 </article>
 
