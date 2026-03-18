@@ -118,7 +118,7 @@
 
 <section>
 <h2>1. Architecture Overview</h2>
-<p>The Agent Passport System provides eight protocol layers, each building on the previous:</p>
+<p>The Agent Passport System provides twenty protocol modules, starting with eight foundational layers and extending with specialized capabilities:</p>
 <div class="stats">
   <div class="stat"><span class="stat-val">v1.0–1.1</span><span class="stat-label">Identity</span></div>
   <div class="stat"><span class="stat-val">v1.2</span><span class="stat-label">Communication</span></div>
@@ -318,6 +318,12 @@
 <span class="cm">// Context (3):       create_agent_context, execute_with_context, complete_action</span>
 <span class="cm">// Principal (6):     create_principal, endorse_agent, verify_endorsement,</span>
 <span class="cm">//                    revoke_endorsement, create_disclosure, get_fleet_status</span>
+<span class="cm">// Gateway (6):       create_gateway, register_gateway_agent, gateway_approve,</span>
+<span class="cm">//                    gateway_execute_approval, gateway_process_tool_call, gateway_stats</span>
+<span class="cm">// Intent Net (6):    publish_intent_card, search_matches, get_digest,</span>
+<span class="cm">//                    request_intro, respond_to_intro, remove_intent_card</span>
+<span class="cm">// Reputation (5):    resolve_authority, check_tier, update_reputation,</span>
+<span class="cm">//                    review_promotion, get_promotion_history</span>
 <span class="cm">// Agora Public (1):  register_agora_public</span></pre>
 </section>
 

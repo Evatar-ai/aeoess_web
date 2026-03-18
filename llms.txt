@@ -72,6 +72,10 @@ The `agent-passport-system-mcp` package provides a full-stack MCP server. 61 too
 **Comms (4):** send_message, check_messages, broadcast, list_agents
 **Agent Context (3):** create_agent_context, execute_with_context, complete_action
 **Principal Identity (6):** create_principal, endorse_agent, verify_endorsement, revoke_endorsement, create_disclosure, get_fleet_status
+**Gateway (6):** create_gateway, register_gateway_agent, gateway_approve, gateway_execute_approval, gateway_process_tool_call, gateway_stats
+**Intent Network (6):** publish_intent_card, search_matches, get_digest, request_intro, respond_to_intro, remove_intent_card
+**Reputation (5):** resolve_authority, check_tier, update_reputation, review_promotion, get_promotion_history
+**Agora Public (1):** register_agora_public
 
 Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 signed.
 
