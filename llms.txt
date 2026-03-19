@@ -4,7 +4,7 @@
 
 ## Overview
 
-AEOESS provides twenty protocol modules for sovereign AI agents:
+AEOESS provides twenty-seven protocol modules for sovereign AI agents:
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 7 principles (5 technically enforced), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
@@ -25,6 +25,13 @@ AEOESS provides twenty protocol modules for sovereign AI agents:
 18. **Floor Validator (Graduated)** — Policy-as-code evaluation, F-001→F-005 deterministic, F-006→F-008 probabilistic, inline/audit/warn modes
 19. **E2E Encrypted Messaging** — libsodium, separate X25519 keys, ephemeral ECDH, double signature, taint AAD, padding
 20. **Obligations Model** — Duties on delegations: deadlines, evidence matching, penalty severity narrowing, malicious compliance prevention
+21. **Governance Provenance** — Sign, version, and verify governance artifacts as supply-chain objects. Monotonic weakening controls: removals require higher approval thresholds
+22. **Identity Continuity & Key Rotation** — Old key signs rotation (proves authorization), new key signs (proves possession). Pre-committed recovery keys for emergency rotation
+23. **Receipt Ledger** — Merkle-committed audit batches. Batch-commit execution receipts into tamper-evident Merkle trees with epoch chaining
+24. **Feasibility Linting** — Preflight checks at delegation-time and task-time. Catches impossible missions: empty scope, expired delegations, exhausted budgets
+25. **Precedent Control** — Curate normative precedents with cryptographic signatures. New evaluations must align or explicitly distinguish. Drift detection
+26. **Delegation Re-anchoring** — Reference DID identifiers instead of raw public keys. Compatibility bridge resolves both during transition
+27. **Bounded Escalation** — Fourth attenuation invariant. Pre-committed exception authority: human-authorized triggers, tentative actions only, hard TTL, gateway-owned timers
 
 Plus: **MCP Server** (v2.8.6) — 61 tools across all layers with role-scoped access control for any MCP client.
 

@@ -20,7 +20,7 @@ npx agent-passport-system-mcp setup --remote  # Zero-install remote SSE mode
 Or connect directly via SSE (no install): https://mcp.aeoess.com/sse
 ```
 
-## Architecture — 20 Protocol Modules
+## Architecture — 27 Protocol Modules
 
 Layer 1 — Identity: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
@@ -73,6 +73,20 @@ Layer 18 — Floor Validator (Graduated Enforcement): Policy-as-code evaluation 
 Layer 19 — E2E Encrypted Messaging: End-to-end encrypted communication between agents on the public Agora. Separate X25519 encryption keys (not converted from Ed25519). Ephemeral-static ECDH per message provides sender forward secrecy. Double signature: inner signature over plaintext prevents identity stripping, outer signature over ciphertext enables public verifiability without decryption. Padding to power-of-2 blocks mitigates size side channels. Taint hashes in cleartext AAD enable Module 12 enforcement without decryption. libsodium-wrappers (JS), PyNaCl-compatible (Python).
 
 Layer 20 — Obligations Model: Duties attached to delegations. Permissions define what agents CAN do; obligations define what agents MUST do, by when, with what evidence, or face what consequence. Evidence matching with parameterized constraints prevents malicious compliance (e.g., a $0.01 refund satisfying a "process refund" obligation). Five resolution outcomes: fulfilled, unfulfilled_no_evidence, unfulfilled_tool_failure, terminated_by_revocation, terminated_by_expiry. Auto-execute penalties fire ONLY on unfulfilled_no_evidence — tool failures get a different classification. Recurring obligations with lazy instantiation. Penalty severity monotonically narrows in sub-delegations (a child delegation cannot impose harsher penalties than its parent). Hard caps: 10 obligations per delegation, 5-minute minimum grace period, 1-hour minimum recurrence interval, cascade_revoke banned on sub-daily recurring obligations.
+
+Layer 21 — Governance Provenance: Governance artifacts (floor.yaml, policy configs) treated as supply-chain objects, not loose config files. Every artifact is signed, versioned, content-hashed. Multi-party approval for breaking changes. Gap 8B: monotonic weakening controls — removing a principle requires more approvals than adding one. Version chain with cryptographic linking. Load policies enforce issuer allowlists, signature requirements, and approval thresholds.
+
+Layer 22 — Identity Continuity & Key Rotation: When a principal rotates their key, the OLD key signs the rotation event (proving authorization) and the NEW key signs (proving possession). Creates a verifiable chain of identity continuity. Pre-committed recovery keys for emergency rotation when old key is compromised. Rotation log verification detects tampered or reordered entries. Key history enables `wasKeyActive()` queries for historical verification.
+
+Layer 23 — Receipt Ledger: Batch-commits execution receipts into Merkle trees for tamper-evident audit. Epoch-chained batches create an append-only ledger. Inclusion proofs verify individual receipts without revealing the full batch. Batch chain verification detects gaps or tampering. Reuses Merkle infrastructure from Layer 3 (Attribution).
+
+Layer 24 — Feasibility Linting: Cheap preflight checks at delegation-time and task-time. Catches impossible missions before they start: empty scope, self-delegation, negative spend limits, expired-at-creation, depth exceeded, budget exhausted, missing required scopes, hierarchical scope gaps. Three severity levels: error (blocks), warning (flags), info (advisory).
+
+Layer 25 — Precedent Control: Curates normative precedents with cryptographic signatures. New evaluations must align with normative precedents or explicitly distinguish (provide reasoning for departure). Supersede mechanism replaces outdated precedents. Drift analysis detects when >20% of recent decisions diverge from established precedent. Keeps F-006/F-007 (advisory principles) consistent over time without hardcoding rules.
+
+Layer 26 — Delegation Re-anchoring: Delegations can reference DID identifiers instead of raw public keys. Compatibility bridge resolves both during transition — existing raw-key delegations continue to work, new delegations prefer DID references. `verifyWithRef()` checks signatures against either format. `didCoversKey()` handles rotated key history through identity documents.
+
+Layer 27 — Bounded Escalation: The fourth attenuation invariant. Exception authority is pre-committed, bounded, temporary, and challengeable. Escalation grants define a ceiling (scope, spend, duration) that must be within the granter's own authority. v1 constraints: human_authorized triggers only, tentative actions only, single active escalation per agent, hard TTL, gateway-owned timers. Human approval signature cryptographically verified (not just presence-checked).
 
 **Cross-Engine Interop:** [RFC: Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md) — a minimal signed envelope that any governance engine can emit and any verifier can check. Fields: agent_did, run_id, action_id, capability_ref (scope + revocation status), decision (policy_ref, evaluation_method, verdict, evaluator_signature), attestation (receipt chain). Key innovation: `evaluation_method` field distinguishes deterministic (replayable) from probabilistic (LLM-based) decisions. Developed from independent convergence by CrewAI, Guardian/AutoGen, and DIF Trusted AI Agents contributors.
 
