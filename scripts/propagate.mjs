@@ -16,7 +16,7 @@
  * Requires: Node 18+
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { execSync } from 'child_process';
 import { resolve, relative } from 'path';
 
@@ -47,12 +47,17 @@ function readSourceOfTruth() {
   // LAYER_COUNT from src/index.ts comments
   values.LAYER_COUNT = 27; // Updated — 8 core layers + 18 extension modules (governance, feasibility, identity, receipts, precedent, reanchor, etc.)
 
-  // ADVERSARIAL_COUNT — parse from adversarial test file
+  // ADVERSARIAL_COUNT — count across ALL adversarial test files
   try {
-    const advContent = readFileSync(`${REPOS.sdk}/tests/adversarial.ts`, 'utf8');
-    const advMatches = advContent.match(/test\(/g) || [];
-    values.ADVERSARIAL_COUNT = advMatches.length;
-  } catch { values.ADVERSARIAL_COUNT = 23; }
+    const advFiles = readdirSync(`${REPOS.sdk}/tests`).filter(f => f.startsWith('adversarial'));
+    let total = 0;
+    for (const f of advFiles) {
+      const content = readFileSync(`${REPOS.sdk}/tests/${f}`, 'utf8');
+      const matches = content.match(/it\(/g) || [];
+      total += matches.length;
+    }
+    values.ADVERSARIAL_COUNT = total || 73;
+  } catch { values.ADVERSARIAL_COUNT = 73; }
 
   // MCP_TOOL_COUNT — count server.tool( calls in MCP source
   try {
