@@ -76,7 +76,7 @@ Layer 20 — Obligations Model: Duties attached to delegations. Permissions defi
 
 **Cross-Engine Interop:** [RFC: Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md) — a minimal signed envelope that any governance engine can emit and any verifier can check. Fields: agent_did, run_id, action_id, capability_ref (scope + revocation status), decision (policy_ref, evaluation_method, verdict, evaluator_signature), attestation (receipt chain). Key innovation: `evaluation_method` field distinguishes deterministic (replayable) from probabilistic (LLM-based) decisions. Developed from independent convergence by CrewAI, Guardian/AutoGen, and DIF Trusted AI Agents contributors.
 
-**v1.15.0 — 785 tests (220 suites). 43 test files including 45 adversarial scenarios.**
+**v1.15.0 — 785 tests (220 suites). 43 test files including 73 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -447,7 +447,7 @@ Q: What platforms does it run on?
 A: Any platform with Node.js. The SDK is pure TypeScript with no platform-specific dependencies.
 
 Q: Is it production ready?
-A: The SDK has 785 tests including 45 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
+A: The SDK has 785 tests including 73 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
 
 Q: What is Intent Architecture?
 A: Layer 5 of the Agent Social Contract. It gives multi-agent systems organizational intent — goals, tradeoff hierarchies, and decision frameworks that agents can act on. Context engineering tells agents what they know. Intent architecture tells them what to care about.
