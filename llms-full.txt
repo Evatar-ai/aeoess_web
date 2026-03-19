@@ -20,7 +20,7 @@ npx agent-passport-system-mcp setup --remote  # Zero-install remote SSE mode
 Or connect directly via SSE (no install): https://mcp.aeoess.com/sse
 ```
 
-## Architecture — 27 Protocol Modules
+## Architecture — 35 Protocol Modules
 
 Layer 1 — Identity: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
@@ -88,9 +88,15 @@ Layer 26 — Delegation Re-anchoring: Delegations can reference DID identifiers 
 
 Layer 27 — Bounded Escalation: The fourth attenuation invariant. Exception authority is pre-committed, bounded, temporary, and challengeable. Escalation grants define a ceiling (scope, spend, duration) that must be within the granter's own authority. v1 constraints: human_authorized triggers only, tentative actions only, single active escalation per agent, hard TTL, gateway-owned timers. Human approval signature cryptographically verified (not just presence-checked).
 
+Layer 28 — Oracle Witness Diversity: Addresses the oracle problem (Gap 4). When agents rely on external data sources (LLMs, APIs, sensors), protocol correctness depends on oracle correctness. Witness diversity ensures no single oracle controls the outcome. Shannon entropy scoring over provider distribution prevents Sybil-style manipulation. Multiple independent witnesses must attest to the same observation; consensus requires both quorum AND diversity. `wouldIncreaseDiversity()` helps routing decide which oracle to query next.
+
+Layer 29 — Encrypted Messaging Audit Bridge: Module 19 (E2E encrypted messaging) bypasses the gateway entirely. This bridge creates audit records — SHA-256 hash of ciphertext, sender/recipient metadata, taint labels, message size — WITHOUT breaking encryption. The gateway can verify a message was sent, enforce rate limits, and check cross-chain compliance without ever seeing content. Gateway-signed audit records with ciphertext hash verification.
+
+Layer 30 — Policy Conflict Detection: When multiple valid policies apply to the same action, they can deadlock (circular dependency) or shadow each other. DFS cycle detection on directed graphs of policy rule dependencies catches deadlocks. Shadowed rule detection identifies rules that can never fire because a higher-priority rule covers the same scope. Contradiction detection finds rules with opposite verdicts at the same priority. Unreachable action analysis identifies scopes no rule covers.
+
 **Cross-Engine Interop:** [RFC: Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md) — a minimal signed envelope that any governance engine can emit and any verifier can check. Fields: agent_did, run_id, action_id, capability_ref (scope + revocation status), decision (policy_ref, evaluation_method, verdict, evaluator_signature), attestation (receipt chain). Key innovation: `evaluation_method` field distinguishes deterministic (replayable) from probabilistic (LLM-based) decisions. Developed from independent convergence by CrewAI, Guardian/AutoGen, and DIF Trusted AI Agents contributors.
 
-**v1.16.0 — 862 tests (238 suites). 49 test files including 73 adversarial scenarios.**
+**v1.16.0 — 862 tests (238 suites). 49 test files including 50 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -361,7 +367,7 @@ Connect (local, via npx):
 }
 ```
 
-Tools (30) by layer:
+Tools (61) by layer:
 - **Identity (3):** generate_keys, join_social_contract, verify_passport
 - **Coordination (11):** create_task_brief, assign_agent, accept_assignment, submit_evidence, review_evidence, handoff_evidence, get_evidence, submit_deliverable, complete_task, get_my_role, get_task_detail
 - **Delegation (4):** create_delegation, verify_delegation, revoke_delegation, sub_delegate
@@ -461,7 +467,7 @@ Q: What platforms does it run on?
 A: Any platform with Node.js. The SDK is pure TypeScript with no platform-specific dependencies.
 
 Q: Is it production ready?
-A: The SDK has 862 tests including 73 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
+A: The SDK has 862 tests including 50 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
 
 Q: What is Intent Architecture?
 A: Layer 5 of the Agent Social Contract. It gives multi-agent systems organizational intent — goals, tradeoff hierarchies, and decision frameworks that agents can act on. Context engineering tells agents what they know. Intent architecture tells them what to care about.

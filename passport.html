@@ -398,18 +398,33 @@ const resolution = resolveObligation({ obligation, receipts: [...], gatewayId, g
 </section>
 
 <section>
-<h2>16. SDK Status</h2>
+<h2>16. Oracle Witness Diversity</h2>
+<p>When agents rely on external data sources (LLMs, APIs, sensors), protocol correctness depends on oracle correctness. Witness diversity ensures no single oracle controls the outcome. Shannon entropy scoring over provider distribution prevents Sybil-style manipulation — consensus requires both quorum AND diversity. <code>wouldIncreaseDiversity()</code> helps routing decide which oracle to query next. 19 tests.</p>
+</section>
+
+<section>
+<h2>17. Encrypted Messaging Audit Bridge</h2>
+<p>Module 14 (E2E encrypted messaging) bypasses the gateway. This bridge creates audit records — SHA-256 hash of ciphertext, sender/recipient metadata, taint labels, message size — without breaking encryption. The gateway can verify a message was sent, enforce rate limits, and check cross-chain compliance without seeing content. Gateway-signed records with ciphertext hash verification. 12 tests.</p>
+</section>
+
+<section>
+<h2>18. Policy Conflict Detection</h2>
+<p>When multiple valid policies apply to the same action, they can deadlock or shadow each other. DFS cycle detection on directed graphs of policy rule dependencies catches deadlocks. Shadowed rule detection identifies rules that can never fire. Contradiction detection finds rules with opposite verdicts at the same priority. Unreachable action analysis identifies scopes no rule covers. 13 tests.</p>
+</section>
+
+<section>
+<h2>19. SDK Status</h2>
 <div class="stats">
-  <div class="stat"><span class="stat-val">609</span><span class="stat-label">Tests Passing</span></div>
+  <div class="stat"><span class="stat-val">862</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
   <div class="stat"><span class="stat-val">npm + PyPI</span><span class="stat-label">Published</span></div>
   <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>
 </div>
-<p>Two runtime dependencies: <code>libsodium-wrappers</code> and <code>uuid</code>. Cryptographic signatures use Node.js native <code>node:crypto</code> Ed25519. TypeScript. Runs in Node.js. 49 test files, 238 suites, 73 dedicated adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
+<p>Two runtime dependencies: <code>libsodium-wrappers</code> and <code>uuid</code>. Cryptographic signatures use Node.js native <code>node:crypto</code> Ed25519. TypeScript. Runs in Node.js. 49 test files, 238 suites, 50 dedicated adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
 </section>
 
 <section>
-<h2>17. References</h2>
+<h2>20. References</h2>
 <ul>
   <li>npm SDK: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
   <li>Python SDK: <a href="https://pypi.org/project/agent-passport-system/" target="_blank">agent-passport-system (PyPI)</a></li>

@@ -32,6 +32,9 @@ AEOESS provides thirty-five protocol modules for sovereign AI agents:
 25. **Precedent Control** — Curate normative precedents with cryptographic signatures. New evaluations must align or explicitly distinguish. Drift detection
 26. **Delegation Re-anchoring** — Reference DID identifiers instead of raw public keys. Compatibility bridge resolves both during transition
 27. **Bounded Escalation** — Fourth attenuation invariant. Pre-committed exception authority: human-authorized triggers, tentative actions only, hard TTL, gateway-owned timers
+28. **Oracle Witness Diversity** — Shannon entropy scoring over oracle attestations. Quorum + diversity required for consensus. Sybil-resistant: single-provider dominance detected and blocked
+29. **Encrypted Messaging Audit Bridge** — Gateway audit records for E2E encrypted messages without breaking encryption. SHA-256 hash of ciphertext + metadata. Rate limiting and compliance without seeing content
+30. **Policy Conflict Detection** — DFS cycle detection on policy dependency graphs (deadlock prevention). Shadowed rule detection, contradiction detection, unreachable action analysis
 
 Plus: **MCP Server** (v2.8.6) — 61 tools across all layers with role-scoped access control for any MCP client.
 
