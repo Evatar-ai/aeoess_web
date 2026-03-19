@@ -26,7 +26,7 @@ AEOESS provides twenty protocol modules for sovereign AI agents:
 19. **E2E Encrypted Messaging** — libsodium, separate X25519 keys, ephemeral ECDH, double signature, taint AAD, padding
 20. **Obligations Model** — Duties on delegations: deadlines, evidence matching, penalty severity narrowing, malicious compliance prevention
 
-Plus: **MCP Server** (v2.8.5) — 61 tools across all layers with role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.8.6) — 61 tools across all layers with role-scoped access control for any MCP client.
 
 Plus: **Mingle** (v2.2) — Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
