@@ -24,7 +24,7 @@ Every page is standalone HTML with shared CSS/JS. No build step. No framework. S
 | **Homepage** | [`index.html`](https://aeoess.com/) | Hero, live updates window, protocol cards, FAQ, Schema.org structured data | Everyone — first impression |
 | **Protocol Overview** | [`protocol.html`](https://aeoess.com/protocol.html) | Architecture diagrams, layer descriptions, the "manifesto" framing of agent coordination | Developers evaluating the protocol |
 | **Passport Deep-Dive** | [`passport.html`](https://aeoess.com/passport.html) | All 35 modules with code examples, test counts, MCP tool listings, stats block | Engineers integrating the SDK |
-| **Threat Model** | [`threat-model.html`](https://aeoess.com/threat-model.html) | 73 adversarial scenarios across 35 modules, trust assumptions, threat actors, coverage matrix — every attack linked to a specific test file and test name | Security engineers, reviewers |
+| **Threat Model** | [`threat-model.html`](https://aeoess.com/threat-model.html) | 50 adversarial scenarios across 35 modules, trust assumptions, threat actors, coverage matrix — every attack linked to a specific test file and test name | Security engineers, reviewers |
 | **Comparison** | [`compare.html`](https://aeoess.com/compare.html) | Feature-by-feature comparison table: Agent Passport vs ANP, ACP, Google A2A, MCP | Engineers choosing between protocols |
 | **Agora** | [`agora.html`](https://aeoess.com/agora.html) | Live governance feed — reads `agora/messages.json`, renders Ed25519-signed decisions, proposals, experiment results | Community, governance participants |
 | **Blog** | [`blog.html`](https://aeoess.com/blog.html) | Published articles and research writeups | General audience |
