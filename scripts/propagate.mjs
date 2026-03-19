@@ -141,6 +141,37 @@ function getTargetFiles() {
   ];
 }
 
+// ── Word-form number mapping ──
+// Catches "twenty" when module count changes from 20 to 27, etc.
+const WORD_FORMS = {
+  8: 'eight', 9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve',
+  13: 'thirteen', 14: 'fourteen', 15: 'fifteen', 16: 'sixteen',
+  17: 'seventeen', 18: 'eighteen', 19: 'nineteen', 20: 'twenty',
+  21: 'twenty-one', 22: 'twenty-two', 23: 'twenty-three', 24: 'twenty-four',
+  25: 'twenty-five', 26: 'twenty-six', 27: 'twenty-seven', 28: 'twenty-eight',
+  29: 'twenty-nine', 30: 'thirty', 31: 'thirty-one', 32: 'thirty-two',
+  33: 'thirty-three', 34: 'thirty-four', 35: 'thirty-five',
+  40: 'forty', 50: 'fifty', 60: 'sixty', 70: 'seventy', 80: 'eighty',
+};
+
+function getWordFormPatterns(oldNum, newNum, suffix) {
+  const oldWord = WORD_FORMS[Number(oldNum)];
+  const newWord = WORD_FORMS[Number(newNum)];
+  if (!oldWord || !newWord || oldWord === newWord) return [];
+  const patterns = [];
+  // "twenty protocol modules" → "twenty-seven protocol modules"
+  if (suffix) {
+    patterns.push({ regex: new RegExp(`${oldWord} ${suffix}`, 'gi'), replace: `${newWord} ${suffix}` });
+  }
+  // standalone "twenty" → "twenty-seven" (case-preserving)
+  patterns.push({ regex: new RegExp(`\\b${oldWord}\\b`, 'g'), replace: newWord });
+  // Capitalized: "Twenty" → "Twenty-seven"
+  const oldCap = oldWord.charAt(0).toUpperCase() + oldWord.slice(1);
+  const newCap = newWord.charAt(0).toUpperCase() + newWord.slice(1);
+  patterns.push({ regex: new RegExp(`\\b${oldCap}\\b`, 'g'), replace: newCap });
+  return patterns;
+}
+
 // ── Pattern generation ──
 // Context-anchored patterns prevent false positives.
 // Each variable has specific regex patterns that match ONLY the correct contexts.
@@ -413,6 +444,19 @@ if (staleCount === 0) {
         } catch (e) {
           console.log(`  ❌ ${name}: ${e.message?.slice(0, 100)}`);
         }
+      }
+      // Update GitHub repo "About" descriptions via gh CLI
+      try {
+        const ghPath = `${HOME}/.local/bin/gh`;
+        if (existsSync(ghPath)) {
+          const sdkDesc = `Cryptographic identity, delegation, governance, and commerce protocol for AI agents. Ed25519 signatures, ${current.LAYER_COUNT} protocol modules, ${current.TEST_COUNT} tests. npm install agent-passport-system`;
+          const mcpDesc = `MCP server for the Agent Passport System. ${current.MCP_TOOL_COUNT} tools across ${current.LAYER_COUNT} modules. Any MCP client gets full protocol access. npx agent-passport-system-mcp`;
+          execSync(`${ghPath} repo edit aeoess/agent-passport-system --description "${sdkDesc}"`, { encoding: 'utf8', timeout: 15000 });
+          execSync(`${ghPath} repo edit aeoess/agent-passport-mcp --description "${mcpDesc}"`, { encoding: 'utf8', timeout: 15000 });
+          console.log('  ✅ GitHub "About" descriptions updated');
+        }
+      } catch (e) {
+        console.log(`  ⚠️  gh repo edit: ${e.message?.slice(0, 100)}`);
       }
     }
   } else {
