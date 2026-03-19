@@ -20,11 +20,13 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { execSync } from 'child_process';
 import { resolve, relative } from 'path';
 
-// ── Repo paths ──
+// ── Repo paths (portable — works on Air or Mini) ──
+const HOME = process.env.HOME || '/Users/tima';
 const REPOS = {
-  sdk: resolve('/Users/tima/agent-passport-system'),
-  mcp: resolve('/Users/tima/agent-passport-mcp'),
-  web: resolve('/Users/tima/aeoess_web'),
+  sdk: resolve(`${HOME}/agent-passport-system`),
+  mcp: resolve(`${HOME}/agent-passport-mcp`),
+  web: resolve(`${HOME}/aeoess_web`),
+  org: resolve(`${HOME}/aeoess-dot-github`), // GitHub org profile README
 };
 
 // ── Read source-of-truth values ──
@@ -44,8 +46,11 @@ function readSourceOfTruth() {
   const testFiles = testScript.match(/tests\/[\w.-]+\.ts/g) || [];
   values.TEST_FILES = testFiles.length;
 
-  // LAYER_COUNT from src/index.ts comments
-  values.LAYER_COUNT = 27; // Updated — 8 core layers + 18 extension modules (governance, feasibility, identity, receipts, precedent, reanchor, etc.)
+  // LAYER_COUNT from actual source module count (src/core/*.ts minus index.ts)
+  try {
+    const coreFiles = readdirSync(`${REPOS.sdk}/src/core`).filter(f => f.endsWith('.ts') && f !== 'index.ts');
+    values.LAYER_COUNT = coreFiles.length;
+  } catch { values.LAYER_COUNT = 27; }
 
   // ADVERSARIAL_COUNT — count across ALL adversarial test files
   try {
@@ -120,6 +125,14 @@ function getTargetFiles() {
     { path: `${REPOS.web}/passport.html`, repo: 'web' },
     { path: `${REPOS.web}/blog.html`, repo: 'web' },
     { path: `${REPOS.web}/threat-model.html`, repo: 'web' },
+    { path: `${REPOS.web}/faq.html`, repo: 'web' },
+    { path: `${REPOS.web}/overview.html`, repo: 'web' },
+    { path: `${REPOS.web}/mingle.html`, repo: 'web' },
+    { path: `${REPOS.web}/network.html`, repo: 'web' },
+    { path: `${REPOS.web}/world.html`, repo: 'web' },
+    { path: `${REPOS.web}/README.md`, repo: 'web' },
+    // Org profile README (if repo exists)
+    ...(existsSync(`${REPOS.org}/profile/README.md`) ? [{ path: `${REPOS.org}/profile/README.md`, repo: 'org' }] : []),
     // Web repo — specs (agent-readable context)
     { path: `${REPOS.web}/specs/PROJECT-INSTRUCTIONS.md`, repo: 'web' },
     { path: `${REPOS.web}/specs/FILE-TREE.md`, repo: 'web' },
@@ -188,12 +201,16 @@ function getVariablePatterns(varName, oldValue, newValue) {
 
     case 'LAYER_COUNT':
       return [
-        // "8 protocol layers"
-        { regex: new RegExp(`${o} protocol layers`, 'g'), replace: `${n} protocol layers` },
-        // "8 layers"
+        // "27 protocol modules" / "27 protocol layers"
+        { regex: new RegExp(`${o} protocol (modules|layers)`, 'g'), replace: `${n} protocol modules` },
+        // "27 modules"
+        { regex: new RegExp(`${o} modules`, 'g'), replace: `${n} modules` },
+        // "27 layers" (legacy)
         { regex: new RegExp(`${o} layers`, 'g'), replace: `${n} layers` },
-        // "all 8 layers" / "across all 8 layers"
+        // "all 27 modules" / "all 27 layers"
         { regex: new RegExp(`all ${o}`, 'g'), replace: `all ${n}` },
+        // Word-form: "twenty-seven protocol modules" → uses word-form map
+        ...getWordFormPatterns(o, n, 'protocol modules'),
       ];
 
     case 'ADVERSARIAL_COUNT':
