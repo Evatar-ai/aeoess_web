@@ -45,7 +45,7 @@ function readSourceOfTruth() {
   values.TEST_FILES = testFiles.length;
 
   // LAYER_COUNT from src/index.ts comments
-  values.LAYER_COUNT = 24; // Updated — 8 core layers + 16 extension modules (governance, feasibility, identity, receipts, etc.)
+  values.LAYER_COUNT = 26; // Updated — 8 core layers + 18 extension modules (governance, feasibility, identity, receipts, precedent, reanchor, etc.)
 
   // ADVERSARIAL_COUNT — parse from adversarial test file
   try {
