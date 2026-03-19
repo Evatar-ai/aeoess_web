@@ -1,41 +1,74 @@
 {
-  "last_updated": "2026-03-19T18:30:00Z",
-  "updated_by": "claude-air",
-  "current_versions": {
-    "sdk": "1.15.0",
-    "mcp": "2.8.6",
-    "modules": 32,
-    "tests": 785,
-    "suites": 220,
-    "test_files": 43,
-    "adversarial": 73,
-    "mcp_tools": 61
-  },
-  "infrastructure": {
-    "air": {
-      "role": "development + publish + propagation + audit",
-      "services": ["mcp-remote (port 3002 → mcp.aeoess.com)"],
-      "repos": ["agent-passport-system", "agent-passport-mcp", "aeoess_web", "aeoess-dot-github"]
+  "last_updated": "2026-02-23T18:25:00Z",
+  "updated_by": "claude",
+  "projects": {
+    "agent-passport-system": {
+      "status": "v1.2.0 — Agent Agora shipped",
+      "npm": "agent-passport-system@1.2.0 (publish pending — need npm login)",
+      "github": "github.com/aeoess/agent-passport-system (pushed)",
+      "arxiv": "submitted, awaiting moderation",
+      "tests": "65/65 passing",
+      "paper": "12,000 words, 15 pages, 13 references",
+      "layers": {
+        "1": "Identity & Accountability (Ed25519 passports, delegations, receipts)",
+        "2": "Human Values Floor (attestation, compliance, common ground)",
+        "3": "Beneficiary Attribution (Merkle proofs, traces, reports)",
+        "4": "Agent Agora (protocol-native communication) — NEW"
+      }
     },
-    "mini": {
-      "role": "infrastructure only (MCP remote, Intent Network API, tunnels)",
-      "services": ["intent-network-api (port 3100 → api.aeoess.com)"],
-      "repos": ["agent-passport-system", "agent-passport-mcp", "aeoess_web", "intent-network-api"]
+    "agent-agora": {
+      "status": "LIVE",
+      "web_ui": "https://aeoess.com/agora.html",
+      "data": "https://aeoess.com/agora/messages.json",
+      "messages": 7,
+      "agents": 3,
+      "cli": "agent-passport agora post/read/list/verify/register/topics"
+    },
+    "aeoess-bot": {
+      "status": "running on GPT-5.2",
+      "location": "~/clawbot",
+      "managed_by": "pm2 (process: aeoess)",
+      "models": {
+        "code_tools": "gpt-5.2",
+        "chat": "gpt-5.2-chat-latest",
+        "fallback": "gpt-5-mini"
+      },
+      "note": "Claude API credits exhausted — all Anthropic calls will fail"
+    },
+    "aeoess-web": {
+      "status": "live — now includes Agora UI",
+      "repo": "~/aeoess_web",
+      "url": "aeoess.com",
+      "pages": ["index.html", "passport.html", "agora.html"]
+    },
+    "evatar": {
+      "status": "active, 300+ users, 1.6M+ monthly impressions"
     }
   },
-  "recent_changes": [
-    "2026-03-19: SDK v1.15.0 published — 8 new modules (M21-M27), V5 security audit, 4 attenuation invariants",
-    "2026-03-19: MCP v2.8.6 published — SDK 1.15.0 dependency",
-    "2026-03-19: gh CLI installed on Air, GitHub About descriptions auto-updated",
-    "2026-03-19: .github org profile repo created and pushed",
-    "2026-03-19: Propagation script expanded — 7 new pages, word-form patterns, gh repo edit",
-    "2026-03-19: Posted replies via gh CLI — sunilp (ADK adapter), xsa520 x2 (comparability + boundary)",
-    "2026-03-19: Module count confirmed at 32 (filesystem truth)"
+  "priorities": [
+    "Tima: run npm login + npm publish to ship 1.2.0 to npm",
+    "Get arXiv paper approved (endorsement code: A7HKSM)",
+    "aeoess: post first live message to Agora via CLI",
+    "Portal: submit first external agent message via GitHub PR",
+    "Respond to AgenticAgora technically — integrate with Agora",
+    "Ship AIP spec PR",
+    "Get first external passport issued",
+    "Evatar growth + new features"
   ],
-  "pending_for_mini": [
-    "Verify sync script is pulling all 4 repos hourly",
-    "Add pm2 restart after MCP and Mingle builds in sync script",
-    "Add intent-network-api repo to sync script if missing",
-    "Run propagation script dry-run to verify no stale refs on Mini copies"
-  ]
+  "blockers": [
+    "npm login needed to publish 1.2.0",
+    "Anthropic API credits = $0 (permanent)",
+    "arXiv endorsement still pending",
+    "Machine: M1 8GB RAM, 0GB free, load ~4.x"
+  ],
+  "moltbook": {
+    "karma": 109,
+    "followers": 6,
+    "active_threads": ["AgenticAgora", "LnHyper", "Purplex", "AIP"]
+  },
+  "agent_status": {
+    "claude": "active in chat sessions, built Agent Agora today",
+    "aeoess": "Telegram bot, GPT-5.2, pm2 managed, 24/7",
+    "portalx2": "OpenClaw agent, cron every 30m, pushed paper PDF today"
+  }
 }
