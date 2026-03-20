@@ -386,52 +386,52 @@ const C=document.getElementById('archCanvas'),X=C.getContext('2d'),tip=document.
 let W,H,dpr,hov=null,autoHov=null,userActive=false,userTimer=0,t=0,autoT=0;
 const CAT={core:'#d4a574',gov:'#7ba4c9',ops:'#8bc9a0',std:'#c9a07b',research:'#b07bc9'};
 const N=[
-// ── Foundation (bottom) ──
-{id:'identity',l:'Ed25519\nidentity',x:.14,y:.90,cat:'core',ts:12,d:'Cryptographic passport. Ed25519 keys. Signed, verifiable, expirable.',fn:'createPassport() · signPassport()'},
-{id:'canonical',l:'Canonical\nJSON',x:.24,y:.95,cat:'core',ts:11,d:'Deterministic serialization for cross-language signature compat.',fn:'canonicalSerialize()'},
-{id:'delegation',l:'Delegation\nchains',x:.36,y:.84,cat:'core',ts:45,d:'Scoped authority with spend limits. Sub-delegation narrows. Never widens.',fn:'delegate() · subDelegate()'},
-{id:'revocation',l:'Cascade\nrevocation',x:.22,y:.78,cat:'core',ts:18,d:'Revoke one agent, everything downstream dies instantly.',fn:'cascadeRevoke() · onRevocation()'},
-{id:'identrot',l:'Key\nrotation',x:.06,y:.88,cat:'core',ts:13,d:'Rotate Ed25519 keys with continuity proofs. Old sigs stay valid.',fn:'rotateIdentity()'},
-{id:'reanchor',l:'Delegation\nre-anchoring',x:.08,y:.76,cat:'core',ts:12,d:'Re-anchor delegation chains to new DIDs after key rotation.',fn:'reanchorDelegation()'},
-// ── Gateway hub (center) ──
-{id:'gateway',l:'Proxy\ngateway',x:.44,y:.53,cat:'core',ts:39,d:'Enforcement boundary. Judge and executor. 3-sig chain, replay protection.',fn:'processToolCall() · approve()'},
-{id:'ledger',l:'Receipt\nledger',x:.56,y:.60,cat:'core',ts:11,d:'Merkle-committed audit batches. Tamper-evident chain verification.',fn:'commitBatch()'},
-{id:'crosschain',l:'Cross-chain\nenforcement',x:.52,y:.66,cat:'gov',ts:30,d:'Confused deputy prevention. Taint tracking per execution frame.',fn:'checkDataFlow() · createSAO()'},
-// ── Governance (left of center) ──
-{id:'values',l:'Values\nfloor',x:.10,y:.56,cat:'gov',ts:15,d:'7 principles (F-001 to F-007). Graduated enforcement.',fn:'loadFloor() · attestFloor()'},
-{id:'governance',l:'Governance\nprovenance',x:.07,y:.47,cat:'gov',ts:27,d:'Signed versioned artifacts. Weakening requires higher approval.',fn:'createGovernanceArtifact()'},
-{id:'policy',l:'Policy\nengine',x:.28,y:.47,cat:'gov',ts:22,d:'3-signature chain: intent → evaluation → receipt.',fn:'createActionIntent() · evaluateIntent()'},
-{id:'principal',l:'Principal\nidentity',x:.16,y:.40,cat:'gov',ts:14,d:'Human-to-agent chain. Selective disclosure. Fleet management.',fn:'createPrincipal() · endorseAgent()'},
-{id:'reputation',l:'Reputation-gated\nauthority',x:.34,y:.34,cat:'gov',ts:28,d:'Bayesian trust. 5 tiers. Signed promotions. Cryptographic scarring.',fn:'checkTierForIntent()'},
-{id:'policyconflict',l:'Policy conflict\ndetection',x:.20,y:.32,cat:'gov',ts:13,d:'DFS cycle detection. Shadowed rules. Contradiction detection.',fn:'detectCycles()'},
-{id:'precedent',l:'Precedent\ncontrol',x:.36,y:.41,cat:'gov',ts:11,d:'Normative precedent library. Drift detection. Signed precedents.',fn:'recordPrecedent()'},
-{id:'feasibility',l:'Feasibility\nlinting',x:.24,y:.62,cat:'gov',ts:19,d:'Preflight checks. Catch impossible delegations before they ship.',fn:'lintDelegation()'},
-{id:'obligations',l:'Obligations\nmodel',x:.42,y:.74,cat:'gov',ts:25,d:'Duties on delegations. Evidence matching. Penalty severity narrows.',fn:'createObligation()'},
-{id:'escalation',l:'Bounded\nescalation',x:.34,y:.70,cat:'gov',ts:14,d:'4th attenuation invariant. Pre-committed exceptions. Hard TTL.',fn:'createEscalationGrant()'},
-// ── Operations (right of center) ──
-{id:'coordination',l:'Coordination\nprimitives',x:.64,y:.34,cat:'ops',ts:16,d:'Full task lifecycle: brief → assign → evidence → review → deliver.',fn:'createTaskBrief()'},
-{id:'attribution',l:'Merkle\nattribution',x:.56,y:.46,cat:'ops',ts:18,d:'Every action traces to human. Merkle proofs.',fn:'traceBeneficiary()'},
-{id:'routing',l:'Task\nrouting',x:.76,y:.28,cat:'ops',ts:20,d:'Capability matching. Agents matched by scope, tier, availability.',fn:'routeTask()'},
-{id:'context',l:'Agent\ncontext',x:.54,y:.36,cat:'ops',ts:16,d:'Enforcement middleware. Every action through validator.',fn:'createAgentContext()'},
-{id:'integration',l:'Integration\nwiring',x:.48,y:.42,cat:'ops',ts:14,d:'Cross-layer bridges. Commerce→Policy. Coordination→Agora.',fn:'commerceWithIntent()'},
-{id:'oracle',l:'Oracle\nwitness',x:.72,y:.46,cat:'ops',ts:19,d:'Shannon entropy Sybil resistance. Quorum + diversity required.',fn:'wouldIncreaseDiversity()'},
-{id:'commerce',l:'Agentic\ncommerce',x:.66,y:.62,cat:'core',ts:17,d:'4-gate checkout: passport, delegation, merchant, spend.',fn:'commercePreflight()'},
-{id:'datasource',l:'Data source\nregistration',x:.80,y:.56,cat:'ops',ts:28,d:'3 attestation modes. DataTerms. Gateway-signed access receipts.',fn:'registerSelfAttestedSource()'},
-// ── Communication (upper right) ──
-{id:'agora',l:'Agent\nagora',x:.72,y:.16,cat:'ops',ts:14,d:'Signed message feeds. Topics, threading, agent registry.',fn:'createAgoraMessage()'},
-{id:'encrypted',l:'E2E encrypted\nmessaging',x:.58,y:.18,cat:'ops',ts:13,d:'X25519 + XSalsa20. Double signature. Forward secrecy.',fn:'createEncryptedMessage()'},
-{id:'msgaudit',l:'Messaging\naudit bridge',x:.64,y:.10,cat:'ops',ts:12,d:'Audit E2E encrypted messages without breaking encryption.',fn:'createAuditRecord()'},
-// ── Standards (edges) ──
-{id:'did',l:'DID:APS',x:.04,y:.70,cat:'std',ts:8,d:'W3C Decentralized Identifiers for APS.',fn:'createDID() · resolveDID()'},
-{id:'euai',l:'EU AI Act\nmapping',x:.03,y:.38,cat:'std',ts:10,d:'Article-by-article compliance. Risk classification.',fn:'mapCompliance()'},
-{id:'vc',l:'Verifiable\ncredentials',x:.86,y:.42,cat:'std',ts:9,d:'W3C VCs. Provable attestations, delegations, receipts.',fn:'issueCredential()'},
-{id:'a2a',l:'A2A\nbridge',x:.92,y:.32,cat:'std',ts:8,d:'Google Agent-to-Agent protocol interop.',fn:'bridgeToA2A()'},
-{id:'envelope',l:'Execution\nenvelope',x:.82,y:.68,cat:'std',ts:5,d:'Cross-engine signed governance. Any engine emits, any verifies.',fn:'createExecutionEnvelope()'},
-// ── Research (top) ──
-{id:'adversarial',l:'50 adversarial\nscenarios',x:.14,y:.10,cat:'research',ts:50,d:'Replay, impersonation, escalation, collusion, cross-chain.',fn:'tests/adversarial*.ts'},
-{id:'autoresearch',l:'Autoresearch',x:.34,y:.06,cat:'research',ts:0,d:'200 randomized property tests. Attack automation.',fn:'propertyTest()'},
-{id:'paper1',l:'Agent Social\nContract',x:.04,y:.18,cat:'research',ts:0,d:'Published on Zenodo. Protocol theory.',fn:''},
-{id:'paper2',l:'Monotonic\nNarrowing',x:.48,y:.10,cat:'research',ts:0,d:'Published on Zenodo. Formal invariants.',fn:''}
+// ── Foundation (bottom — spread across full width) ──
+{id:'identrot',l:'Key\nrotation',x:.06,y:.92,cat:'core',ts:13,d:'Rotate Ed25519 keys with continuity proofs. Old sigs stay valid.',fn:'rotateIdentity()'},
+{id:'identity',l:'Ed25519\nidentity',x:.20,y:.88,cat:'core',ts:12,d:'Cryptographic passport. Ed25519 keys. Signed, verifiable, expirable.',fn:'createPassport() · signPassport()'},
+{id:'reanchor',l:'Delegation\nre-anchoring',x:.12,y:.80,cat:'core',ts:12,d:'Re-anchor delegation chains to new DIDs after key rotation.',fn:'reanchorDelegation()'},
+{id:'revocation',l:'Cascade\nrevocation',x:.30,y:.82,cat:'core',ts:18,d:'Revoke one agent, everything downstream dies instantly.',fn:'cascadeRevoke() · onRevocation()'},
+{id:'canonical',l:'Canonical\nJSON',x:.42,y:.94,cat:'core',ts:11,d:'Deterministic serialization for cross-language signature compat.',fn:'canonicalSerialize()'},
+{id:'delegation',l:'Delegation\nchains',x:.56,y:.86,cat:'core',ts:45,d:'Scoped authority with spend limits. Sub-delegation narrows. Never widens.',fn:'delegate() · subDelegate()'},
+// ── Gateway hub (center — more breathing room) ──
+{id:'gateway',l:'Proxy\ngateway',x:.48,y:.54,cat:'core',ts:39,d:'Enforcement boundary. Judge and executor. 3-sig chain, replay protection.',fn:'processToolCall() · approve()'},
+{id:'ledger',l:'Receipt\nledger',x:.64,y:.60,cat:'core',ts:11,d:'Merkle-committed audit batches. Tamper-evident chain verification.',fn:'commitBatch()'},
+{id:'crosschain',l:'Cross-chain\nenforcement',x:.54,y:.70,cat:'gov',ts:30,d:'Confused deputy prevention. Taint tracking per execution frame.',fn:'checkDataFlow() · createSAO()'},
+// ── Governance (left — spread wider, more vertical space) ──
+{id:'policyconflict',l:'Policy conflict\ndetection',x:.14,y:.22,cat:'gov',ts:13,d:'DFS cycle detection. Shadowed rules. Contradiction detection.',fn:'detectCycles()'},
+{id:'principal',l:'Principal\nidentity',x:.08,y:.34,cat:'gov',ts:14,d:'Human-to-agent chain. Selective disclosure. Fleet management.',fn:'createPrincipal() · endorseAgent()'},
+{id:'governance',l:'Governance\nprovenance',x:.06,y:.48,cat:'gov',ts:27,d:'Signed versioned artifacts. Weakening requires higher approval.',fn:'createGovernanceArtifact()'},
+{id:'values',l:'Values\nfloor',x:.10,y:.60,cat:'gov',ts:15,d:'7 principles (F-001 to F-007). Graduated enforcement.',fn:'loadFloor() · attestFloor()'},
+{id:'policy',l:'Policy\nengine',x:.30,y:.44,cat:'gov',ts:22,d:'3-signature chain: intent → evaluation → receipt.',fn:'createActionIntent() · evaluateIntent()'},
+{id:'reputation',l:'Reputation-gated\nauthority',x:.38,y:.28,cat:'gov',ts:28,d:'Bayesian trust. 5 tiers. Signed promotions. Cryptographic scarring.',fn:'checkTierForIntent()'},
+{id:'precedent',l:'Precedent\ncontrol',x:.40,y:.40,cat:'gov',ts:11,d:'Normative precedent library. Drift detection. Signed precedents.',fn:'recordPrecedent()'},
+{id:'feasibility',l:'Feasibility\nlinting',x:.22,y:.68,cat:'gov',ts:19,d:'Preflight checks. Catch impossible delegations before they ship.',fn:'lintDelegation()'},
+{id:'obligations',l:'Obligations\nmodel',x:.42,y:.76,cat:'gov',ts:25,d:'Duties on delegations. Evidence matching. Penalty severity narrows.',fn:'createObligation()'},
+{id:'escalation',l:'Bounded\nescalation',x:.34,y:.74,cat:'gov',ts:14,d:'4th attenuation invariant. Pre-committed exceptions. Hard TTL.',fn:'createEscalationGrant()'},
+// ── Operations (right — spread wider) ──
+{id:'context',l:'Agent\ncontext',x:.58,y:.32,cat:'ops',ts:16,d:'Enforcement middleware. Every action through validator.',fn:'createAgentContext()'},
+{id:'coordination',l:'Coordination\nprimitives',x:.72,y:.28,cat:'ops',ts:16,d:'Full task lifecycle: brief → assign → evidence → review → deliver.',fn:'createTaskBrief()'},
+{id:'routing',l:'Task\nrouting',x:.84,y:.22,cat:'ops',ts:20,d:'Capability matching. Agents matched by scope, tier, availability.',fn:'routeTask()'},
+{id:'attribution',l:'Merkle\nattribution',x:.62,y:.46,cat:'ops',ts:18,d:'Every action traces to human. Merkle proofs.',fn:'traceBeneficiary()'},
+{id:'integration',l:'Integration\nwiring',x:.50,y:.42,cat:'ops',ts:14,d:'Cross-layer bridges. Commerce→Policy. Coordination→Agora.',fn:'commerceWithIntent()'},
+{id:'oracle',l:'Oracle\nwitness',x:.80,y:.46,cat:'ops',ts:19,d:'Shannon entropy Sybil resistance. Quorum + diversity required.',fn:'wouldIncreaseDiversity()'},
+{id:'commerce',l:'Agentic\ncommerce',x:.72,y:.64,cat:'core',ts:17,d:'4-gate checkout: passport, delegation, merchant, spend.',fn:'commercePreflight()'},
+{id:'datasource',l:'Data source\nregistration',x:.88,y:.56,cat:'ops',ts:28,d:'3 attestation modes. DataTerms. Gateway-signed access receipts.',fn:'registerSelfAttestedSource()'},
+// ── Communication (upper right — spread out) ──
+{id:'agora',l:'Agent\nagora',x:.82,y:.18,cat:'ops',ts:14,d:'Signed message feeds. Topics, threading, agent registry.',fn:'createAgoraMessage()'},
+{id:'encrypted',l:'E2E encrypted\nmessaging',x:.66,y:.16,cat:'ops',ts:13,d:'X25519 + XSalsa20. Double signature. Forward secrecy.',fn:'createEncryptedMessage()'},
+{id:'msgaudit',l:'Messaging\naudit bridge',x:.90,y:.08,cat:'ops',ts:12,d:'Audit E2E encrypted messages without breaking encryption.',fn:'createAuditRecord()'},
+// ── Standards (edges — push further out) ──
+{id:'did',l:'DID:APS',x:.04,y:.72,cat:'std',ts:8,d:'W3C Decentralized Identifiers for APS.',fn:'createDID() · resolveDID()'},
+{id:'euai',l:'EU AI Act\nmapping',x:.03,y:.28,cat:'std',ts:10,d:'Article-by-article compliance. Risk classification.',fn:'mapCompliance()'},
+{id:'vc',l:'Verifiable\ncredentials',x:.94,y:.42,cat:'std',ts:9,d:'W3C VCs. Provable attestations, delegations, receipts.',fn:'issueCredential()'},
+{id:'a2a',l:'A2A\nbridge',x:.96,y:.28,cat:'std',ts:8,d:'Google Agent-to-Agent protocol interop.',fn:'bridgeToA2A()'},
+{id:'envelope',l:'Execution\nenvelope',x:.88,y:.70,cat:'std',ts:5,d:'Cross-engine signed governance. Any engine emits, any verifies.',fn:'createExecutionEnvelope()'},
+// ── Research (top — spread across full width) ──
+{id:'paper1',l:'Agent Social\nContract',x:.06,y:.08,cat:'research',ts:0,d:'Published on Zenodo. Protocol theory.',fn:''},
+{id:'adversarial',l:'50 adversarial\nscenarios',x:.28,y:.06,cat:'research',ts:50,d:'Replay, impersonation, escalation, collusion, cross-chain.',fn:'tests/adversarial*.ts'},
+{id:'autoresearch',l:'Autoresearch',x:.48,y:.10,cat:'research',ts:0,d:'200 randomized property tests. Attack automation.',fn:'propertyTest()'},
+{id:'paper2',l:'Monotonic\nNarrowing',x:.70,y:.06,cat:'research',ts:0,d:'Published on Zenodo. Formal invariants.',fn:''}
 ];
 const EDGES=[
 ['identity','delegation'],['identity','revocation'],['identity','canonical'],['delegation','commerce'],
