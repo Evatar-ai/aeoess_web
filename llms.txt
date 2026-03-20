@@ -37,11 +37,11 @@ AEOESS provides thirty-five protocol modules for sovereign AI agents:
 30. **Policy Conflict Detection** — DFS cycle detection on policy dependency graphs (deadlock prevention). Shadowed rule detection, contradiction detection, unreachable action analysis
 31. **Data Source Registration & Access Receipts** — Foundation for data attribution. Three attestation modes (self/custodian/gateway-observed), machine-readable DataTerms, gateway-signed access receipts as pure evidence, hard vs advisory compliance, Merkle commitment for independent verification
 
-Plus: **MCP Server** (v2.8.6) — 61 tools across all layers with role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.8.7) — 61 tools across all layers with role-scoped access control for any MCP client.
 
 Plus: **Mingle** (v2.2) — Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v1.16.1 — 894 tests passing. Zero heavy dependencies.**
+**v1.17.0 — 894 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
 
