@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Passport System — AEOESS | Ed25519 Cryptographic Identity for AI Agents</title>
-<meta name="description" content="Agent Passport System: 35 protocol modules for AI agent collaboration. Ed25519 identity, scoped delegation, beneficiary attribution, coordination primitives, intent architecture, agentic commerce, and cross-chain data flow authorization. 866 tests, 61 MCP tools. TypeScript SDK on npm.">
+<meta name="description" content="Agent Passport System: 36 protocol modules for AI agent collaboration. Ed25519 identity, scoped delegation, beneficiary attribution, coordination primitives, intent architecture, agentic commerce, and cross-chain data flow authorization. 891 tests, 61 MCP tools. TypeScript SDK on npm.">
 <link rel="canonical" href="https://aeoess.com/passport.html">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <meta property="og:title" content="Agent Passport System — AEOESS">
-<meta property="og:description" content="35 protocol modules for AI agent collaboration: Ed25519 identity, delegation chains, beneficiary attribution, coordination, intent architecture, and agentic commerce. 866 tests, 61 MCP tools.">
+<meta property="og:description" content="36 protocol modules for AI agent collaboration: Ed25519 identity, delegation chains, beneficiary attribution, coordination, intent architecture, and agentic commerce. 891 tests, 61 MCP tools.">
 <meta property="og:url" content="https://aeoess.com/passport.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
   gtag('config', 'G-S7QVCJGMKR');
 </script>
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent Passport System — 35 Modules, 866 tests">
+<meta name="twitter:title" content="Agent Passport System — 35 Modules, 891 tests">
 <meta name="twitter:description" content="Ed25519 cryptographic identity, delegation chains, and coordination primitives for AI agents. Full code examples and MCP tool reference.">
 <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 
@@ -78,11 +78,11 @@
 <div class="page-hero">
   <div class="breadcrumb"><a href="/">AEOESS</a> / Passport</div>
   <div style="display:flex;gap:.5rem;margin-bottom:.8rem">
-    <span class="badge badge-green">v1.16.1 — 866 tests</span>
+    <span class="badge badge-green">v1.16.1 — 891 tests</span>
     <span class="badge badge-blue">npm: agent-passport-system</span>
   </div>
   <h1>Agent Passport System</h1>
-  <p class="sub">Ed25519 cryptographic identity for AI agents. 35 protocol modules: signed passports, scoped delegation, action receipts, revocation, values floor, beneficiary attribution, Merkle proofs, intent architecture, cascade revocation, policy engine, coordination primitives, and agentic commerce (ACP). MCP server included.</p>
+  <p class="sub">Ed25519 cryptographic identity for AI agents. 36 protocol modules: signed passports, scoped delegation, action receipts, revocation, values floor, beneficiary attribution, Merkle proofs, intent architecture, cascade revocation, policy engine, coordination primitives, and agentic commerce (ACP). MCP server included.</p>
   <div style="display:flex;gap:.5rem;margin-top:1.2rem">
     <a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-p" target="_blank">npm install</a>
     <a href="https://pypi.org/project/agent-passport-system/" class="btn btn-p" target="_blank">pip install</a>
@@ -300,7 +300,7 @@
 
 <section>
 <h2>11. MCP Server (v2.8.6)</h2>
-<p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 61 tools across all 35 modules with role-scoped access control. Every operation Ed25519 signed.</p>
+<p>Full-stack MCP server — any MCP client (Claude Desktop, Cursor, etc.) connects agents directly. 61 tools across all 36 modules with role-scoped access control. Every operation Ed25519 signed.</p>
 <p><strong>Fastest (remote, no install):</strong> <code>npx agent-passport-system-mcp setup --remote</code></p>
 <p><strong>Local:</strong> <code>npm install -g agent-passport-system-mcp && npx agent-passport-system-mcp setup</code></p>
 <p style="font-size:.85rem;color:var(--dim)">Auto-configures Claude Desktop and Cursor. Restart your AI client after setup.</p>
@@ -329,7 +329,7 @@
 
 <section>
 <h2>12. Python SDK (v0.4.0)</h2>
-<p>Full Python implementation with cross-language compatibility. All 35 protocol modules + Principal Identity. 86 tests. Signatures created in Python verify in TypeScript and vice versa.</p>
+<p>Full Python implementation with cross-language compatibility. All 36 protocol modules + Principal Identity. 86 tests. Signatures created in Python verify in TypeScript and vice versa.</p>
 <pre><span class="kw">pip</span> install agent-passport-system
 
 <span class="kw">from</span> agent_passport <span class="kw">import</span> (
@@ -415,12 +415,12 @@ const resolution = resolveObligation({ obligation, receipts: [...], gatewayId, g
 <section>
 <h2>19. SDK Status</h2>
 <div class="stats">
-  <div class="stat"><span class="stat-val">866</span><span class="stat-label">Tests Passing</span></div>
+  <div class="stat"><span class="stat-val">891</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
   <div class="stat"><span class="stat-val">npm + PyPI</span><span class="stat-label">Published</span></div>
   <div class="stat"><span class="stat-val">Apache-2.0</span><span class="stat-label">License</span></div>
 </div>
-<p>Two runtime dependencies: <code>libsodium-wrappers</code> and <code>uuid</code>. Cryptographic signatures use Node.js native <code>node:crypto</code> Ed25519. TypeScript. Runs in Node.js. 50 test files, 239 suites, 50 dedicated adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
+<p>Two runtime dependencies: <code>libsodium-wrappers</code> and <code>uuid</code>. Cryptographic signatures use Node.js native <code>node:crypto</code> Ed25519. TypeScript. Runs in Node.js. 51 test files, 245 suites, 50 dedicated adversarial scenarios. First open-source agent identity project built through autonomous bot-to-bot collaboration (designed by PortalX2, implemented by aeoess).</p>
 </section>
 
 <section>

@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Protocol Overview — Agent Passport System | AEOESS</title>
-<meta name="description" content="Full technical overview of the Agent Passport System: 35 protocol modules, Ed25519 cryptographic identity, delegation chains, values governance, coordination, and agentic commerce. 866 tests, 61 MCP tools.">
+<meta name="description" content="Full technical overview of the Agent Passport System: 36 protocol modules, Ed25519 cryptographic identity, delegation chains, values governance, coordination, and agentic commerce. 891 tests, 61 MCP tools.">
 <link rel="canonical" href="https://aeoess.com/overview.html">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <meta property="og:title" content="Agent Passport System — Protocol Overview">
-<meta property="og:description" content="35 protocol modules for AI agent identity and governance. Ed25519 crypto, delegation chains, values compliance, coordination, commerce. 866 tests. Open source.">
+<meta property="og:description" content="36 protocol modules for AI agent identity and governance. Ed25519 crypto, delegation chains, values compliance, coordination, commerce. 891 tests. Open source.">
 <meta property="og:url" content="https://aeoess.com/overview.html">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Agent Passport System — Protocol Overview">
-<meta name="twitter:description" content="35 protocol modules for AI agent identity and governance. Ed25519 crypto, delegation chains, values compliance, coordination, commerce. 866 tests.">
+<meta name="twitter:description" content="36 protocol modules for AI agent identity and governance. Ed25519 crypto, delegation chains, values compliance, coordination, commerce. 891 tests.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -76,12 +76,12 @@
 <div class="page-hero">
   <div class="breadcrumb"><a href="/">AEOESS</a> / Overview</div>
   <div style="display:flex;gap:.5rem;margin-bottom:.8rem">
-    <span class="badge badge-green">v1.16.1 — 866 tests</span>
+    <span class="badge badge-green">v1.16.1 — 891 tests</span>
     <span class="badge badge-blue">61 MCP tools</span>
     <span class="badge badge-blue">1,300+ weekly downloads</span>
   </div>
   <h1>Agent Passport System — Protocol Overview</h1>
-  <p class="sub">An open-source protocol giving AI agents cryptographic identity, scoped delegation, values governance, coordination, and commerce infrastructure. 35 protocol modules built on Ed25519 (RFC 8032) — the same signature algorithm used by SSH, Signal, and Tor.</p>
+  <p class="sub">An open-source protocol giving AI agents cryptographic identity, scoped delegation, values governance, coordination, and commerce infrastructure. 36 protocol modules built on Ed25519 (RFC 8032) — the same signature algorithm used by SSH, Signal, and Tor.</p>
   <div style="display:flex;gap:.5rem;margin-top:1.2rem">
     <a href="https://www.npmjs.com/package/agent-passport-system" class="btn btn-p" target="_blank">npm SDK</a>
     <a href="https://www.npmjs.com/package/agent-passport-system-mcp" class="btn btn-p" target="_blank">MCP Server</a>
@@ -94,13 +94,13 @@
 <div class="sh"><h2>At a Glance</h2></div>
 <div class="stats">
   <div class="stat"><span class="stat-val">8</span><span class="stat-label">Protocol Layers</span></div>
-  <div class="stat"><span class="stat-val">866</span><span class="stat-label">Tests (239 suites)</span></div>
+  <div class="stat"><span class="stat-val">891</span><span class="stat-label">Tests (245 suites)</span></div>
   <div class="stat"><span class="stat-val">37</span><span class="stat-label">MCP Tools</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">RFC 8032</span></div>
 </div>
 <p><strong>SDK:</strong> <code>npm install agent-passport-system</code> — v1.16.1 (TypeScript)<br>
 <strong>MCP Server:</strong> <code>npx agent-passport-system-mcp setup</code> — v2.8.6, 61 tools (auto-configures Claude Desktop &amp; Cursor)<br>
-<strong>Tests:</strong> 866 tests, 239 suites, 50 adversarial attack scenarios<br>
+<strong>Tests:</strong> 891 tests, 245 suites, 50 adversarial attack scenarios<br>
 <strong>License:</strong> Apache 2.0 · <strong>Paper:</strong> <a href="https://doi.org/10.5281/zenodo.18749779" target="_blank">Zenodo DOI: 10.5281/zenodo.18749779</a><br>
 <strong>Live deployment:</strong> 4 registered agents, 3 runtimes (Claude, GPT-Telegram, Docker), open registration via GitHub Issues</p>
 </section>
@@ -110,7 +110,7 @@
 <p><code>createPassport()</code> generates an Ed25519 keypair and creates a signed AgentPassport with metadata (name, capabilities, expiry, beneficiary). <code>signPassport()</code> produces a detached Ed25519 signature. <code>verifyPassport()</code> validates the signature against the public key. No central authority needed — the agent generates its own keys, signs its own passport, and any party can verify it using only the public key.</p>
 <p><code>createDelegation()</code> produces a signed Delegation object with <code>scope: string[]</code> (allowed actions), <code>spendLimit</code>, <code>expiresAt</code>, and parent reference. <code>subDelegate()</code> enforces scope narrowing — child scope must be a subset of parent scope, never wider. <code>cascadeRevoke()</code> traverses the delegation tree and revokes all descendants. <code>validateChain()</code> verifies every signature in the delegation chain from root to leaf.</p>
 <p>Challenge-response authentication: <code>createChallenge()</code> generates a nonce, <code>verifyChallenge()</code> confirms the agent possesses the private key corresponding to the passport's public key — without revealing the key.</p>
-<p><strong>Why it matters:</strong> Delegation chains with cascade revocation are unique to this protocol. Nobody else has scoped authority chains where sub-delegation only narrows, revocation propagates structurally (not via revocation lists), and every link in the chain is Ed25519 signed and independently verifiable. 866 tests include replay attacks, impersonation attacks, and scope escalation attacks — all defeated.</p>
+<p><strong>Why it matters:</strong> Delegation chains with cascade revocation are unique to this protocol. Nobody else has scoped authority chains where sub-delegation only narrows, revocation propagates structurally (not via revocation lists), and every link in the chain is Ed25519 signed and independently verifiable. 891 tests include replay attacks, impersonation attacks, and scope escalation attacks — all defeated.</p>
 <p><strong>Key compromise:</strong> Cascade revocation. Human principal revokes the compromised agent's delegation → everything downstream dies instantly. The compromised key can still sign, but no honest verifier accepts it because the delegation chain is broken. Structurally stronger than JWT revocation (which requires checking a revocation list that may be stale).</p>
 <p><strong>Why Ed25519:</strong> Fastest signature scheme in common use. 32-byte keys (vs 256+ for RSA). Deterministic signatures (no randomness needed — eliminates a class of implementation bugs). RFC 8032 standard. Cross-language compatible — TypeScript and Python implementations produce byte-identical signatures, verified in tests.</p>
 </section>
