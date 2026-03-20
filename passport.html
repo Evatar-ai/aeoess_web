@@ -413,7 +413,12 @@ const resolution = resolveObligation({ obligation, receipts: [...], gatewayId, g
 </section>
 
 <section>
-<h2>19. SDK Status</h2>
+<h2>19. Data Source Registration &amp; Access Receipts</h2>
+<p>Foundation layer for data attribution. Three attestation modes: <code>self_attested</code> (owner signs, high trust), <code>custodian_attested</code> (platform signs on behalf, medium trust), <code>gateway_observed</code> (no upstream signature, low trust). Machine-readable <code>DataTerms</code> with 9 purpose types, 6 compensation models, derivative policies, and audit visibility controls. Gateway-signed <code>DataAccessReceipt</code> is pure evidence: "this agent read this data at this time." No interpretation, no contribution score. Hard vs advisory compliance split: deterministic checks (revocation, expiry, excluded agents) block access; purpose compliance is advisory and creates an audit trail. Terms snapshot freezes terms at access time. Merkle commitment for independent verification. 25 tests.</p>
+</section>
+
+<section>
+<h2>20. SDK Status</h2>
 <div class="stats">
   <div class="stat"><span class="stat-val">891</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>
@@ -424,7 +429,7 @@ const resolution = resolveObligation({ obligation, receipts: [...], gatewayId, g
 </section>
 
 <section>
-<h2>20. References</h2>
+<h2>21. References</h2>
 <ul>
   <li>npm SDK: <a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">agent-passport-system</a></li>
   <li>Python SDK: <a href="https://pypi.org/project/agent-passport-system/" target="_blank">agent-passport-system (PyPI)</a></li>

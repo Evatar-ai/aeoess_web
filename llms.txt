@@ -35,6 +35,7 @@ AEOESS provides thirty-five protocol modules for sovereign AI agents:
 28. **Oracle Witness Diversity** — Shannon entropy scoring over oracle attestations. Quorum + diversity required for consensus. Sybil-resistant: single-provider dominance detected and blocked
 29. **Encrypted Messaging Audit Bridge** — Gateway audit records for E2E encrypted messages without breaking encryption. SHA-256 hash of ciphertext + metadata. Rate limiting and compliance without seeing content
 30. **Policy Conflict Detection** — DFS cycle detection on policy dependency graphs (deadlock prevention). Shadowed rule detection, contradiction detection, unreachable action analysis
+31. **Data Source Registration & Access Receipts** — Foundation for data attribution. Three attestation modes (self/custodian/gateway-observed), machine-readable DataTerms, gateway-signed access receipts as pure evidence, hard vs advisory compliance, Merkle commitment for independent verification
 
 Plus: **MCP Server** (v2.8.6) — 61 tools across all layers with role-scoped access control for any MCP client.
 
