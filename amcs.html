@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMCS — AI-Native Media Credentialing Standard | AEOESS</title>
+<meta name="description" content="Open standard for credentialing AI-native publications. 6 requirements across cryptographic infrastructure and editorial accountability. The SSL certificate for AI journalism.">
+<link rel="canonical" href="https://aeoess.com/amcs.html">
+<link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
+<meta property="og:title" content="AMCS — AI-Native Media Credentialing Standard">
+<meta property="og:description" content="Open standard for credentialing AI-native publications. Ed25519 provenance, confidence labels, public ethics verification. Any publication can apply.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.amcs-hero{padding:8rem 0 3rem;max-width:800px;margin:0 auto}
+.amcs-hero h1{font:600 2.8rem/1.1 var(--display);margin-bottom:.5rem}
+.amcs-hero .subtitle{font:300 1.05rem/1.5 var(--display);color:var(--dim);margin-bottom:1.5rem}
+.amcs-body{max-width:800px;margin:0 auto;padding:0 2rem 4rem}
+.amcs-body h2{font:600 1.4rem/1.3 var(--display);margin:2.5rem 0 .8rem;color:var(--text)}
+.amcs-body h3{font:500 1.05rem/1.3 var(--display);margin:1.8rem 0 .6rem;color:var(--text)}
+.amcs-body p{font:.92rem/1.8 var(--sans);color:var(--dim);margin-bottom:1rem}
+.amcs-body strong{color:var(--text);font-weight:500}
+.amcs-body code{font:.82rem var(--mono);background:var(--surface);padding:.15rem .4rem;border-radius:3px}
+.req-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.5rem 0}
+@media(max-width:700px){.req-grid{grid-template-columns:1fr}}
+.req-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.2rem}
+.req-card h4{font:500 .9rem var(--sans);color:var(--text);margin-bottom:.4rem}
+.req-card p{font:.82rem/1.6 var(--sans);color:var(--dim);margin:0}
+.req-card .tag{font:.6rem var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:.2rem .5rem;border-radius:3px;display:inline-block;margin-bottom:.5rem}
+.tag-crypto{background:rgba(212,165,116,.1);color:#d4a574}
+.tag-editorial{background:rgba(123,164,201,.1);color:#7ba4c9}
+.disclosure{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:8px;padding:1.2rem 1.5rem;margin:1.5rem 0}
+.disclosure p{color:var(--dim);margin:0}
+.disclosure strong{color:#fbbf24}
+.ref-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem}
+.ref-table th,.ref-table td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid var(--border)}
+.ref-table th{font-weight:500;color:var(--text)}
+.ref-table .status-live{color:#6ee7b7}
+.ref-table .status-pending{color:#fbbf24}
+</style>
+</head>
+<body>
+<div class="page">
+<section class="amcs-hero">
+  <p style="font:.65rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem">Open Standard · v0.1.0 Draft</p>
+  <h1>AMCS</h1>
+  <p class="subtitle">AI-Native Media Credentialing Standard. The SSL certificate for AI journalism.</p>
+  <p style="font:.85rem/1.7 var(--sans);color:var(--dim)">Six requirements. Two layers. Any publication can apply. Verified by math and public evidence, not editorial judgment.</p>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md" target="_blank" style="font:.78rem var(--mono);color:var(--accent);border:1px solid var(--accent);padding:.45rem .9rem;border-radius:6px;text-decoration:none">Full Spec on GitHub</a>
+    <a href="https://github.com/aeoess/agent-passport-system/issues" target="_blank" style="font:.78rem var(--mono);color:var(--dim);border:1px solid var(--border);padding:.45rem .9rem;border-radius:6px;text-decoration:none">Submit Feedback</a>
+  </div>
+</section>
+</div>
+
+<div class="amcs-body">
+
+<div class="disclosure">
+  <p><strong>Disclosure:</strong> The lead author of this specification, Tymofii Pidlisnyi, is the founder of AEOESS and serves as Editor-in-Chief of The Agent Times (the reference implementation). This dual role is disclosed throughout all AMCS materials. The criteria are public, technically auditable, and designed to be met by any publication. We invite scrutiny.</p>
+</div>
+
+<h2>Why This Exists</h2>
+<p>AI agents consume news to make autonomous decisions. Unlike human readers, they cannot evaluate trustworthiness through reputation or editorial voice. They need machine-verifiable signals. No standard currently exists for what makes a news source trustworthy to an agent. AMCS fills that gap.</p>
+
+<h2>Six Requirements, Two Layers</h2>
+<p><strong>Layer A</strong> is cryptographic — binary pass/fail, verified by math. <strong>Layer B</strong> is editorial accountability — verified by publicly auditable evidence. No subjective judgment is applied anywhere.</p>
+
+<div class="req-grid">
+  <div class="req-card"><span class="tag tag-crypto">A1 · Crypto</span><h4>Cryptographic Article Provenance</h4><p>Every article carries an Ed25519 signature. Full chain from human editor to journalist agent to signed receipt. Independently verifiable by anyone.</p></div>
+  <div class="req-card"><span class="tag tag-crypto">A2 · Crypto</span><h4>Journalist Agent Passports</h4><p>Every agent producing content has a unique Ed25519 passport with scoped delegation from a human principal. Authority narrows monotonically.</p></div>
+  <div class="req-card"><span class="tag tag-crypto">A3 · Crypto</span><h4>MCP Server</h4><p>Publicly accessible MCP endpoint exposing article retrieval, provenance verification, and editorial standards query. No auth required for reads.</p></div>
+  <div class="req-card"><span class="tag tag-editorial">B1 · Editorial</span><h4>Confidence Labels</h4><p>Every article carries CONFIRMED, REPORTED, or ESTIMATED. Present in both human-readable display and machine-readable API/MCP responses.</p></div>
+  <div class="req-card"><span class="tag tag-editorial">B2 · Editorial</span><h4>Published Code of Conduct</h4><p>Public ethics framework addressing sourcing, corrections, independence, conflicts, and accountability. Cites established frameworks (SPJ, NPC, Scripps).</p></div>
+  <div class="req-card"><span class="tag tag-editorial">B3 · Editorial</span><h4>Automated Ethics Verification</h4><p>Public scoring system evaluating every article against stated standards. Results visible on each article. Tool available for any URL.</p></div>
+</div>
+
+<h2>How Certification Works</h2>
+<p>A publication submits a self-attestation with evidence for each requirement. Layer A is verified programmatically — a script checks signatures, passports, and MCP responses. Layer B is verified by public evidence — the Code of Conduct, confidence labels, and ethics scores are at stable URLs anyone can audit. No editorial board. No subjective review. Pass/fail on evidence.</p>
+
+<h2>Reference Implementation</h2>
+<table class="ref-table">
+  <tr><th>Requirement</th><th>Implementation</th><th>Status</th></tr>
+  <tr><td>A1. Provenance</td><td>Ed25519 receipts via Agent Passport System</td><td class="status-pending">PR #38</td></tr>
+  <tr><td>A2. Passports</td><td>5 journalist agents with delegated authority</td><td class="status-pending">PR #38</td></tr>
+  <tr><td>A3. MCP Server</td><td>8 tools at theagenttimes.com/mcp</td><td class="status-live">Live</td></tr>
+  <tr><td>B1. Confidence</td><td>CONFIRMED / REPORTED / ESTIMATED</td><td class="status-live">Live</td></tr>
+  <tr><td>B2. Code of Conduct</td><td>7-section framework, SPJ/NPC/Scripps</td><td class="status-live">Live</td></tr>
+  <tr><td>B3. Ethics Engine</td><td>10-check scoring, public tool</td><td class="status-live">Live</td></tr>
+</table>
+
+<h2>Built On</h2>
+<p>AMCS adapts three established journalism ethics frameworks for the agent economy: the <strong>Society of Professional Journalists Code of Ethics</strong> (seek truth, minimize harm, act independently, be accountable), the <strong>National Press Club Constitution</strong> (membership tiers, credentialing governance), and the <strong>E.W. Scripps Journalism Ethics Guidelines</strong> (sourcing, verification, corrections, independence). The editorial principles are inherited. The cryptographic verification machinery is new.</p>
+
+<h2>What AMCS Does Not Do</h2>
+<p>AMCS does not certify editorial quality or journalistic talent. It does not evaluate whether articles are well-written or analysis is insightful. It does not integrate with trust scoring or authorization systems — a certified publication's content is not weighted higher in any protocol. The badge tells agents "this source meets the AMCS infrastructure bar." What agents do with that is up to them.</p>
+
+<h2>Apply</h2>
+<p>Review the <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md">full specification</a>. Prepare evidence for each requirement. <a href="https://github.com/aeoess/agent-passport-system/issues">Submit a GitHub issue</a>. Layer A is verified by script. Layer B is verified by public audit.</p>
+
+<div style="margin:3rem 0 2rem;padding:1.5rem;border:1px solid var(--border);border-radius:8px;text-align:center">
+  <p style="font:.75rem var(--mono);color:var(--muted);margin:0">AMCS v0.1.0 · Draft · Open for public comment</p>
+  <p style="font:.75rem var(--mono);color:var(--muted);margin:.3rem 0 0">Crypto layer: <a href="https://github.com/aeoess/agent-passport-system">AEOESS</a> · Editorial frameworks: SPJ, NPC, Scripps · Ref impl: <a href="https://theagenttimes.com">The Agent Times</a></p>
+</div>
+
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>
