@@ -147,3 +147,39 @@ delib = r1.deliberation
 const eval = evaluateConsensus(delib)
 // → { converged: true, standardDeviation: 4.2, recommendation: 'converged' }
 ```
+
+## 8. V2 Constitutional Framework
+
+```typescript
+import {
+  separationOfPowers, circuitBreakers, constitutionalAmendment,
+  approvalFatigueDetection, effectEnforcement, emergenceDetection,
+  affectedPartyStanding
+} from 'agent-passport-system'
+
+// Enforce branch separation — agents can't hold conflicting roles
+const sop = separationOfPowers.create()
+separationOfPowers.assignToBranch(sop, 'agent-alpha', 'executive')
+separationOfPowers.detectConflict(sop, 'agent-alpha', 'legislative')
+// → true (blocked: same agent can't be executive AND legislative)
+
+// Circuit breaker — auto-suspend category on threshold breach
+const cb = circuitBreakers.defineBreaker({
+  category: 'commerce', threshold: 5, window_seconds: 3600
+})
+circuitBreakers.recordFailure(cb, 'commerce')
+// After 5 failures in 1 hour → category auto-suspended
+
+// Detect approval rubber-stamping
+const fatigue = approvalFatigueDetection.analyzeBatch(approvalRecords)
+// Flags: impossible_latency, rubber_stamp_pattern, complexity_masking
+
+// File a complaint as affected party
+const complaint = affectedPartyStanding.fileComplaint(registry, {
+  filedBy: 'party-001', againstAgent: 'agent-bad', description: 'Unauthorized data use'
+})
+// → complaint with resolution + appeal lifecycle
+```
+
+30 v2 modules total. 9 attack defenses, 14 structural safeguards, 7 core governance primitives.
+Full reference: https://aeoess.com/llms-full.txt

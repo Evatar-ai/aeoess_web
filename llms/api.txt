@@ -227,3 +227,61 @@ Parameters:
 - tradeoffHierarchyHash: string
 
 Returns IntentPassportExtension with role, autonomy, deliberation/precedent counters.
+
+---
+
+## V2 Constitutional Framework API (30 modules)
+
+Source: `src/v2/` | All exports via `import { ... } from 'agent-passport-system'`
+
+### Separation of Powers
+- `separationOfPowers.create()` → SoPState
+- `separationOfPowers.assignToBranch(state, agentId, branch)` → assignment
+- `separationOfPowers.detectConflict(state, agentId, branch)` → boolean
+- `separationOfPowers.preventBranchConflict(state, agentId, branch)` → throws if conflict
+
+### Circuit Breakers
+- `circuitBreakers.defineBreaker({ category, threshold, window_seconds })` → Breaker
+- `circuitBreakers.recordFailure(breaker, category)` → updated breaker
+- `circuitBreakers.isTripped(breaker, category)` → boolean
+- `circuitBreakers.manualReset(breaker, category)` → reset breaker
+
+### Constitutional Amendment
+- `constitutionalAmendment.propose({ title, type, proposedBy })` → Amendment
+- `constitutionalAmendment.vote(amendment, agentId, vote)` → updated
+- `constitutionalAmendment.ratify(amendment, humanSignature)` → ratified (structural changes only)
+
+### Approval Fatigue Detection
+- `approvalFatigueDetection.analyzeBatch(records)` → { impossible_latency, rubber_stamp, complexity_masking, composite }
+
+### Effect Enforcement
+- `effectEnforcement.declareEffects(actionId, expected)` → declaration
+- `effectEnforcement.verifyEffects(actionId, actual)` → { status, divergence }
+- `effectEnforcement.checkAgent(agentId)` → { blocked, cumulative_divergence }
+
+### Emergence Detection
+- `emergenceDetection.analyze(systemSnapshot)` → { diversity_index, flags[] }
+- Flags: epistemic_monoculture, market_concentration, provider_dominance
+
+### Affected-Party Standing
+- `affectedPartyStanding.register(partyId)` → registration
+- `affectedPartyStanding.fileComplaint(registry, { filedBy, againstAgent, description })` → complaint
+- `affectedPartyStanding.resolve(complaint, resolution)` → resolved
+- `affectedPartyStanding.appeal(complaint, reason)` → appeal
+
+### Additional V2 Modules
+- **Semantic Drift Detection**: `detectDrift(intent, action)` → aligned | drifted | subverted
+- **Composite Workflow Audit**: `auditWorkflow(actions)` → detects authority laundering
+- **Governance Drift Tracking**: `trackGovernanceDrift(changes)` → cumulative weakening detection
+- **Policy Profiles**: `createProfile()`, `attachProfile()`, `evaluateAction()` — per-target rules
+- **Epistemic Isolation**: `createBarrier()`, `submit()`, `reveal()` — independent evaluation
+- **Root Authority Transition**: founding → operational → transitional → democratic (phase-only-forward)
+- **Values Override**: `invokeOverride()` with mandatory justification, independent review
+- **Blind Evaluation**: `hideIdentities()`, `evaluate()`, `reveal()` — bias prevention
+- **Intent Binding**: `createChain()`, `extend()`, `detectDrift()` — intent continuity
+- **Output Proportionality**: `checkOutput()` — flags buried findings, missing summaries
+- **Externality Accounting**: `recordExternality()`, `checkBudget()` — shared resource tracking
+- **Inaction Auditing**: `recordInaction()`, `detectPattern()` — systematic inaction flagging
+- **Cascade Correlation**: `detectLoop()` — delegation cycle detection
+- **Cross-Chain Audit**: `auditFlows()` — authorized vs unauthorized data flows
+- **Effect Sampling**: `shouldSample()`, `recordAudit()` — statistical audit of actions
