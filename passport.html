@@ -423,15 +423,14 @@ const resolution = resolveObligation({ obligation, receipts: [...], gatewayId, g
 </section>
 
 <section>
-<h2>21. V2 Constitutional Governance</h2>
-<p>Seven sub-modules extending the v1 protocol with constitutional governance primitives:</p>
-<p><strong>Bridge:</strong> Connects v1 SDK primitives (Ed25519 crypto, canonical serialization) to v2 extensions. PolicyContext with versioning and grace periods. Signed object utilities for all v2 artifacts.</p>
-<p><strong>Delegation Versioning:</strong> Supersession (new delegation replaces old with audit trail), renewal hardening (renewal cannot expand scope without independent review), scope expansion requires higher-order approval.</p>
-<p><strong>Outcome Registration:</strong> Three-way reporting &mdash; agent reports what it thinks happened, principal reports what they observed, adjudicator resolves disputes. Semantic uncertainty tracking on every outcome.</p>
-<p><strong>Anomaly Detection:</strong> First-max-authority trigger (automatic audit when an agent first uses its maximum earned authority), semantic uncertainty enforcement, delegation concentration detection (Monolith pattern &mdash; single agent accumulating disproportionate authority).</p>
-<p><strong>Emergency Pathways:</strong> Pre-authorized by the delegator at delegation time, not decided by the agent. Condition-based activation, tentative actions only, hard TTL, gateway-owned timers. Agent cannot declare its own emergencies.</p>
-<p><strong>Fork-and-Sunset Migration:</strong> Controlled agent evolution: state freeze &rarr; fork &rarr; handover &rarr; reputation inheritance &rarr; sunset old identity. No agent ever expands its own permissions. System evolves through reincarnation.</p>
-<p><strong>Contextual Attestation:</strong> Pre-action reasoning records required for medium+ risk actions. Documents alternatives considered and rejected, uncertainty assessment, and policy context.</p>
+<h2>21. V2 Constitutional Framework (30 modules)</h2>
+<p>Full constitutional governance for AI agent systems. Designed through cross-model adversarial review (Claude, GPT, Gemini simultaneously attacking the protocol). Every gap identified was implemented and tested.</p>
+
+<p><strong>Core governance (7):</strong> v1&harr;v2 Bridge (PolicyContext with versioning and grace periods), Delegation Versioning (supersession, renewal hardening, scope expansion requires independent review), Outcome Registration (three-way: agent/principal/adjudicated), Anomaly Detection (first-max-authority trigger, Monolith detection), Emergency Pathways (pre-authorized by delegator, hard TTL), Fork-and-Sunset Migration (state freeze, fork, reputation inheritance), Contextual Attestation (pre-action reasoning, required for medium+ risk).</p>
+
+<p><strong>Attack defenses (9):</strong> Approval Fatigue (rubber-stamping detection, impossible latency, complexity masking before critical actions), Effect Enforcement (declared vs actual outcomes, cumulative divergence tracking, side-effect pattern detection), Semantic Drift Detection (intent vs action analysis), Composite Workflow Audit (authority laundering across multi-agent pipelines), Cascade Correlation (delegation loop detection), Inaction Auditing (systematic inaction flagging), Values Override (substantive justification required, independent review, penalty for unjustified), Governance Drift Tracking (cumulative weakening trend detection), Emergence Detection (epistemic monoculture, market concentration, diversity index).</p>
+
+<p><strong>Structural safeguards (14):</strong> Separation of Powers (legislative/executive/judicial branches), Constitutional Amendment (supermajority + human ratification), Policy Profiles (per-target rules with prohibited actions), Affected-Party Standing (complaint, resolution, appeal), Circuit Breakers (automatic category suspension), Epistemic Isolation (independent evaluation barriers), Root Authority Transition (founding&rarr;operational&rarr;transitional&rarr;democratic), Intent Binding (drift detection in intent chains), Effect Sampling (statistical audit), Output Proportionality (executive summary requirements), Blind Evaluation (identity hidden during evaluation), Externality Accounting (shared resource tracking), Semantic Scoping (must-include/must-exclude constraints), Cross-Chain Audit (flow authorization tracking).</p>
 </section>
 
 <section>
