@@ -47,7 +47,7 @@ Plus: **MCP Server** (v2.9.0) — 72 tools across all layers with role-scoped ac
 
 Plus: **Mingle** (v2.2) — Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v1.18.1 — 1010 tests passing. Zero heavy dependencies.**
+**v1.18.1 — 1073 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
 
