@@ -349,7 +349,7 @@ Layer 5 adds organizational intent to the agent stack. Key functions:
 - `resolveDeliberation(deliberation, decision, votes)` — produce signed outcome + create precedent
 - `getPrecedentsByTopic(precedents, topic)` — find prior decisions by topic
 
-## MCP Server — agent-passport-system-mcp v2.9.1
+## MCP Server — agent-passport-system-mcp v2.9.2
 
 A full-stack MCP server that any MCP client (Claude Desktop, Cursor, etc.) can connect to. 72 tools across 37 core + 30 v2 constitutional modules with role-scoped access control.
 
@@ -555,7 +555,7 @@ Day-by-day development log: https://aeoess.com/blog.html
 - Feb 26: 3 controlled multi-agent experiments, role-swap findings
 - Feb 27: Layer 7 Coordination Primitives, full task lifecycle
 - Feb 28: Documentation sprint, llms.txt alignment, Schema.org/OG updates
-- Mar 1: Layer 8 Agentic Commerce (ACP), Integration Wiring, MCP v2.9.1 (72 tools)
+- Mar 1: Layer 8 Agentic Commerce (ACP), Integration Wiring, MCP v2.9.2 (72 tools)
 - Mar 2: Graduated enforcement (inline/audit/warn), threat model (38 scenarios), Agent District
 
 ## Links
