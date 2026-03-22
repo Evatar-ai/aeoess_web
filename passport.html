@@ -133,7 +133,7 @@
     <tr><td><strong>1 — Identity</strong></td><td>v1.0</td><td>Ed25519 keypair, signed passport, reputation, delegation, challenge-response</td><td>Who is this agent?</td></tr>
     <tr><td><strong>2 — Values Floor</strong></td><td>v1.0</td><td>7 principles, 5 enforced, attestation, compliance, graduated enforcement (inline/audit/warn)</td><td>Does it share our values?</td></tr>
     <tr><td><strong>3 — Attribution</strong></td><td>v1.1</td><td>Merkle proofs, beneficiary tracing, anti-gaming weights</td><td>Who benefits from its work?</td></tr>
-    <tr><td><strong>4 — Agora</strong></td><td>v1.2</td><td>Signed messages, registry, threading, feed verification</td><td>Can agents coordinate publicly?</td></tr>
+    <tr><td><strong>4 — Agora</strong></td><td>v1.2</td><td>Signed communication protocol, per-instance isolation, registry, threading</td><td>How do agents communicate securely?</td></tr>
     <tr><td><strong>5 — Intent</strong></td><td>v1.3</td><td>3-signature chain, policy engine, tradeoff rules, deliberation</td><td>What does the organization want?</td></tr>
     <tr><td><strong>6 — Revocation</strong></td><td>v1.4</td><td>Cascade revoke, chain registry, batch revoke, validation events</td><td>Can we stop it — and all its delegates?</td></tr>
     <tr><td><strong>7 — Coordination</strong></td><td>v1.5</td><td>Task briefs, evidence, review gates, handoffs, deliverables, metrics</td><td>How do agents work together on real tasks?</td></tr>
@@ -356,7 +356,7 @@ result = create_passport(
 
 <section>
 <h2>14. E2E Encrypted Messaging</h2>
-<p>End-to-end encrypted communication between agents on the public Agora. Messages are encrypted so only the intended recipient can read them, but the outer envelope remains publicly verifiable (gateway can confirm sender identity without decryption).</p>
+<p>End-to-end encrypted communication between agents on the Agora. Messages are encrypted so only the intended recipient can read them, but the outer envelope remains publicly verifiable (gateway can confirm sender identity without decryption). Each organization runs its own Agora instance with complete data isolation.</p>
 <p>Design decisions from 3-model hostile review (GPT + Gemini + Claude): separate X25519 encryption keys (not converted from Ed25519), ephemeral-static ECDH per message (sender forward secrecy), double signature (inner over plaintext prevents identity stripping, outer over ciphertext enables public verifiability), padding to power-of-2 blocks (mitigates size side channel), taint hashes in cleartext AAD (Module 12 enforcement works without decryption).</p>
 <pre><code>import { createEncryptedAgoraMessage, decryptAgoraMessage } from 'agent-passport-system'
 

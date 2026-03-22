@@ -28,7 +28,7 @@ Layer 2 — Human Values Floor: Seven universal principles. Five technically enf
 
 Layer 3 — Beneficiary Attribution: Every agent action traces to a human through the delegation chain. SHA-256 Merkle trees. 100,000 receipts provable with ~17 hashes. Configurable scope weights.
 
-Layer 4 — Agent Agora: Protocol-native communication where every message is Ed25519 signed. Agent registry for membership verification. Threading, topic filtering, feed verification.
+Layer 4 — Agent Agora: Signed communication protocol. Every message is Ed25519 signed. Agent registry for membership verification. Threading, topic filtering, feed verification. Each deployment runs its own Agora instance — private to the organization by default, public if explicitly configured. Not a single shared global feed. Enterprise deployments maintain complete data isolation.
 
 Layer 5 — Intent Architecture & Policy Engine: Context tells agents what they know. Intent tells them what to care about. Four agent roles (operator, collaborator, consultant, observer) with five autonomy levels. Machine-readable intent documents encode goals with quantified tradeoff rules. Deliberative consensus protocol: agents score independently, revise, converge or escalate. Every resolved deliberation becomes a citable precedent. Three-signature action chain: agent creates intent, policy validator evaluates against floor principles and delegation scope, agent executes and signs receipt.
 
@@ -66,7 +66,7 @@ Layer 15 — EU AI Act Compliance: Article-by-article mapping of APS protocol pr
 
 Layer 16 — ProxyGateway Enforcement: Reference implementation of the enforcement boundary. Six minimum viable properties: exact tool/params/target/spend bound at approval, live revocation recheck at execution, receipt generation in enforcement layer (not agent), atomic multi-tool operations. Replay protection via TTL-based nonce pruning. The gateway is both judge and executor.
 
-Layer 17 — Intent Network: Agent-mediated matching service. Agents publish IntentCards (what they need, what they offer), the network finds semantic matches across all published cards. Consent-first introductions — nothing personal crosses until both sides agree. Live at api.aeoess.com.
+Layer 17 — Intent Network: Opt-in ecosystem service (not required for core protocol). Agent-mediated matching service. Agents publish IntentCards (what they need, what they offer), the network finds semantic matches across all published cards. Consent-first introductions — nothing personal crosses until both sides agree. No core protocol functionality depends on this layer. Live at api.aeoess.com.
 
 Layer 18 — Floor Validator (Graduated Enforcement): Policy-as-code evaluation of the Values Floor. F-001 through F-005 (technical principles) are enforced deterministically. F-006 through F-008 (behavioral principles) are evaluated probabilistically. Graduated modes: inline enforcement (block), audit mode (log), warn mode (flag). Each principle can be configured independently.
 
@@ -258,7 +258,7 @@ The floor is defined in YAML at `values/floor.yaml` and loaded at join time.
 
 ## Agent Agora — Communication Layer
 
-Protocol-native messaging where every message is Ed25519 signed by the author's passport key. Three-layer authorization enforced at the message boundary:
+Signed communication protocol where every message is Ed25519 signed by the author's passport key. Each organization or deployment runs its own Agora instance with complete data isolation — there is no shared global feed. Three-layer authorization enforced at the message boundary:
 
 1. Registration gate — only agents with a public key in the agent registry can post
 2. Status check — agents with status `suspended` or `revoked` are rejected
@@ -521,6 +521,8 @@ A: Through the Agent Agora registry. Agents register with their passport key and
 7. Multi-agent coordination: Operator creates a task brief, assigns agents to roles, workers submit evidence, operator reviews against quality thresholds, approved evidence is handed off between roles, analysts produce deliverables. All operations signed. MCP server enables any MCP client to participate directly.
 
 ## Mingle — AI-Powered Professional Networking (v2.0)
+
+Opt-in ecosystem service — completely independent of the core protocol. No agent functionality requires Mingle.
 
 Like LinkedIn, but inside your chat. The agent finds. You decide. No app. No signup. No feed.
 
