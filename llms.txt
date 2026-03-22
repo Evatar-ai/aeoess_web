@@ -4,7 +4,7 @@
 
 ## Overview
 
-AEOESS provides thirty-five protocol modules for sovereign AI agents:
+AEOESS provides thirty-seven protocol modules for sovereign AI agents:
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 7 principles (5 technically enforced), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
@@ -36,6 +36,8 @@ AEOESS provides thirty-five protocol modules for sovereign AI agents:
 29. **Encrypted Messaging Audit Bridge** — Gateway audit records for E2E encrypted messages without breaking encryption. SHA-256 hash of ciphertext + metadata. Rate limiting and compliance without seeing content
 30. **Policy Conflict Detection** — DFS cycle detection on policy dependency graphs (deadlock prevention). Shadowed rule detection, contradiction detection, unreachable action analysis
 31. **Data Source Registration & Access Receipts** — Foundation for data attribution. Three attestation modes (self/custodian/gateway-observed), machine-readable DataTerms, gateway-signed access receipts as pure evidence, hard vs advisory compliance, Merkle commitment for independent verification
+32. **Decision Semantics & Cross-Engine Interop** — Content-addressable decisions (SHA-256 of canonical JSON), evaluation method classification (deterministic/heuristic/LLM/hybrid/human), scope interpretation declarations, cross-engine decision artifacts with provenance. Enables multi-engine verdict comparison
+33. **V2 Constitutional Governance** — Seven sub-modules: v2 bridge (connects v1 primitives to v2 extensions), delegation versioning (supersession, renewal hardening, scope expansion with independent review), outcome registration (three-way: agent/principal/adjudicated), anomaly detection (first-max-authority trigger, semantic uncertainty, delegation concentration), emergency pathways (pre-authorized by delegator, not agent-decided), fork-and-sunset migration (state freeze, fork, handover, reputation inheritance), contextual attestation (pre-action reasoning records, required for medium+ risk)
 
 ## Standards
 

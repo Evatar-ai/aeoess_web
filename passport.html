@@ -118,7 +118,7 @@
 
 <section>
 <h2>1. Architecture Overview</h2>
-<p>The Agent Passport System provides thirty-five protocol modules, starting with eight foundational layers and extending with specialized capabilities:</p>
+<p>The Agent Passport System provides thirty-seven protocol modules, starting with eight foundational layers and extending with specialized capabilities:</p>
 <div class="stats">
   <div class="stat"><span class="stat-val">v1.0–1.1</span><span class="stat-label">Identity</span></div>
   <div class="stat"><span class="stat-val">v1.2</span><span class="stat-label">Communication</span></div>
@@ -418,7 +418,24 @@ const resolution = resolveObligation({ obligation, receipts: [...], gatewayId, g
 </section>
 
 <section>
-<h2>20. SDK Status</h2>
+<h2>20. Decision Semantics &amp; Cross-Engine Interop</h2>
+<p>Content-addressable decisions: SHA-256 of canonical JSON makes every intent and policy decision referenceable by hash, not just signature. Evaluation method classification (deterministic, heuristic, LLM-based, hybrid, human) declares how a verdict was reached. Scope interpretation declarations make implicit assumptions explicit. Cross-engine decision artifacts carry full provenance: which engine, which method, which version of the policy. Enables four different governance engines to compare verdicts on shared structural decisions while tracking where trust assessments diverge.</p>
+</section>
+
+<section>
+<h2>21. V2 Constitutional Governance</h2>
+<p>Seven sub-modules extending the v1 protocol with constitutional governance primitives:</p>
+<p><strong>Bridge:</strong> Connects v1 SDK primitives (Ed25519 crypto, canonical serialization) to v2 extensions. PolicyContext with versioning and grace periods. Signed object utilities for all v2 artifacts.</p>
+<p><strong>Delegation Versioning:</strong> Supersession (new delegation replaces old with audit trail), renewal hardening (renewal cannot expand scope without independent review), scope expansion requires higher-order approval.</p>
+<p><strong>Outcome Registration:</strong> Three-way reporting &mdash; agent reports what it thinks happened, principal reports what they observed, adjudicator resolves disputes. Semantic uncertainty tracking on every outcome.</p>
+<p><strong>Anomaly Detection:</strong> First-max-authority trigger (automatic audit when an agent first uses its maximum earned authority), semantic uncertainty enforcement, delegation concentration detection (Monolith pattern &mdash; single agent accumulating disproportionate authority).</p>
+<p><strong>Emergency Pathways:</strong> Pre-authorized by the delegator at delegation time, not decided by the agent. Condition-based activation, tentative actions only, hard TTL, gateway-owned timers. Agent cannot declare its own emergencies.</p>
+<p><strong>Fork-and-Sunset Migration:</strong> Controlled agent evolution: state freeze &rarr; fork &rarr; handover &rarr; reputation inheritance &rarr; sunset old identity. No agent ever expands its own permissions. System evolves through reincarnation.</p>
+<p><strong>Contextual Attestation:</strong> Pre-action reasoning records required for medium+ risk actions. Documents alternatives considered and rejected, uncertainty assessment, and policy context.</p>
+</section>
+
+<section>
+<h2>22. SDK Status</h2>
 <div class="stats">
   <div class="stat"><span class="stat-val">969</span><span class="stat-label">Tests Passing</span></div>
   <div class="stat"><span class="stat-val">Ed25519</span><span class="stat-label">Crypto</span></div>

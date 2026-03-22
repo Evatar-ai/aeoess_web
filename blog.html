@@ -108,6 +108,14 @@
     },
     {
       "@type": "BlogPosting",
+      "headline": "Day 33: Constitutional Governance Is Running Code",
+      "datePublished": "2026-03-21",
+      "description": "V2 Constitutional Governance: 7 sub-modules shipped. Delegation versioning, outcome registration, anomaly detection, emergency pathways, fork-and-sunset migration, contextual attestation. Module 37: Decision Semantics. Full codebase audit: 20,490 lines source, 18,397 lines tests. SDK v1.18.1 on npm. 969 tests, 37 modules.",
+      "url": "https://aeoess.com/blog.html#day-33",
+      "keywords": ["V2", "constitutional governance", "delegation versioning", "anomaly detection", "decision semantics", "codebase audit", "npm publish"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 32: Data Attribution Starts Here",
       "datePublished": "2026-03-20",
       "description": "Module 36A: Data Source Registration & Access Receipts. Foundation for data attribution layer. Three attestation modes, machine-readable DataTerms, gateway-signed access receipts, hard vs advisory compliance. 10-round multi-model hostile review before code. 969 tests, 37 modules.",
@@ -563,6 +571,15 @@
   <h1>Dev Log: Building Agent Passport System</h1>
   <p class="sub">Day-by-day record of building a 36-module AI agent protocol from scratch. Ed25519 identity, delegation chains, values enforcement, coordination primitives, agentic commerce, encrypted messaging, data attribution. Started February 18, 2026. 969 tests, 72 MCP tools, two research papers, open source.</p>
 </div>
+
+<article class="post" id="day-33">
+  <time class="post-date" datetime="2026-03-21">March 21, 2026</time>
+  <h2>Day 33: Constitutional Governance Is Running Code</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Two things shipped today. Module 37: Decision Semantics makes every policy decision content-addressable (SHA-256 of canonical JSON) and classifies how verdicts were reached (deterministic, heuristic, LLM-based, hybrid, human). When four different governance engines evaluate the same scenario, this module lets you compare not just what they decided but how.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">V2 Constitutional Governance.</strong> Seven sub-modules that address the interview question: what happens when honest agents comply perfectly and the system still fails? Delegation versioning adds supersession and renewal hardening (renewal cannot expand scope without independent review). Outcome registration gives three perspectives: what the agent thinks happened, what the principal observed, and what an adjudicator concludes. Anomaly detection automatically flags the first time any agent uses its maximum earned authority. Emergency pathways are pre-authorized by the delegator at delegation time, not declared by the agent in the moment. Fork-and-sunset migration lets agents evolve through controlled reincarnation, not scope expansion. Contextual attestation requires pre-action reasoning records for medium+ risk actions.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Full codebase audit.</strong> Read every source file (20,490 lines across 77 files) and every test file (18,397 lines across 54 files). Verified all six protocol invariants in code. Found one cosmetic inconsistency (import style). No bugs. The audit confirmed that npm v1.18.0 was published before the V2 commits landed, so V2 was missing from npm. Bumped to v1.18.1, published with Touch ID auth. All 332 dist files confirmed present including dist/src/v2/.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">969 tests. 37 modules. 72 MCP tools. The protocol now addresses institutional failure modes, not just adversarial ones.</p>
+</article>
 
 <article class="post" id="day-32">
   <time class="post-date" datetime="2026-03-20">March 20, 2026</time>
