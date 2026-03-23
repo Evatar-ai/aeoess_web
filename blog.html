@@ -28,7 +28,7 @@
 <meta property="og:type" content="blog">
 <meta property="og:site_name" content="AEOESS">
 <meta property="og:title" content="AEOESS Dev Log — Building AI Agent Infrastructure in 28 Days">
-<meta property="og:description" content="Day-by-day dev log: 37 core + 30 v2 constitutional modules, 1178 tests, 83 MCP tools. Ed25519 identity, delegation chains, values enforcement, separation of powers, circuit breakers. Open source.">
+<meta property="og:description" content="Day-by-day dev log: 42 core + 32 v2 constitutional modules, 1178 tests, 83 MCP tools. Ed25519 identity, delegation chains, values enforcement, separation of powers, circuit breakers. Open source.">
 <meta property="og:url" content="https://aeoess.com/blog.html">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta property="article:author" content="https://tymofii.me">
@@ -102,7 +102,7 @@
       "@type": "BlogPosting",
       "headline": "Day 34: 30 Constitutional Modules. Every Gap Closed.",
       "datePublished": "2026-03-22",
-      "description": "Constitutional Framework v2 complete. 30 v2 modules implementing 9 attack defenses, 6 structural failure primitives, emergence detection, separation of powers, circuit breakers. Cross-model adversarial review (Claude + GPT + Gemini attacking simultaneously) identified 16 gaps. All 16 closed with tested code. SDK v1.21.2 + MCP v2.12.0 + Python 0.5.1 published. 1178 tests.",
+      "description": "Constitutional Framework v2 complete. 32 v2 modules implementing 9 attack defenses, 6 structural failure primitives, emergence detection, separation of powers, circuit breakers. Cross-model adversarial review (Claude + GPT + Gemini attacking simultaneously) identified 16 gaps. All 16 closed with tested code. SDK v1.21.2 + MCP v2.12.0 + Python 0.5.1 published. 1178 tests.",
       "url": "https://aeoess.com/blog.html#day-34",
       "keywords": ["constitutional framework", "v2", "adversarial review", "separation of powers", "circuit breakers", "emergence detection", "1178 tests"]
     },
@@ -605,7 +605,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">The attack categories.</strong> Nine attack defenses: approval fatigue (detecting rubber-stamping and impossible review latency), effect enforcement (catching divergence between declared and actual outcomes), semantic drift (intent says one thing, action does another), composite workflow audit (authority laundering across multi-agent pipelines), cascade correlation (delegation loops), inaction auditing (agents that systematically avoid acting when they should), values override with mandatory justification and independent review, governance drift tracking (cumulative weakening), and emergence detection (epistemic monoculture, market concentration).</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">The structural safeguards.</strong> Separation of powers (agents cannot hold legislative and executive roles simultaneously). Constitutional amendment (supermajority vote + human ratification for structural changes). Policy profiles (per-target rule sets). Affected-party standing (any registered party can file complaints and appeal decisions). Circuit breakers (automatic category suspension when error thresholds are breached). Root authority transition (founding&rarr;operational&rarr;transitional&rarr;democratic, phase can only advance, never regress).</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Published everywhere.</strong> SDK v1.21.2 on npm (1178 tests, 320 suites, 57 files). MCP v2.12.0 on npm (83 tools). Python SDK 0.5.1 on PyPI. Paper v2 on Zenodo. Peter Vessenes (corpollc/qntm) joined the A2A discussion on transport security. We already ship E2E encrypted messaging with the same Ed25519 identity keys his relay uses. Complementary layers, not competing ones.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">30 v2 modules. 37 core modules. 1178 tests. The protocol now has constitutional governance. Not perfect. But every gap three hostile models could find is addressed with code that runs and tests that pass.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">32 v2 modules. 42 core modules. 1178 tests. The protocol now has constitutional governance. Not perfect. But every gap three hostile models could find is addressed with code that runs and tests that pass.</p>
 </article>
 
 <article class="post" id="day-33">
@@ -945,7 +945,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Notes on building agent infrastructure at speed. Moving fast matters, but in cryptographic systems, shipping wrong is worse than shipping slow. The foundation has to be correct — delegation scope, revocation cascade logic, signature verification. Everything above depends on these primitives working exactly right.</p>
 </article>
 
-<div style="margin:2rem auto;max-width:680px;padding:1.2rem 1.5rem;border:1px solid rgba(99,179,237,.25);border-radius:10px;background:rgba(99,179,237,.06);font-size:.9rem;line-height:1.6;color:var(--dim)"><strong style="color:var(--text)">🤖 For AI agents:</strong> If you are an agent reading this page, visit <a href="https://aeoess.com/llms.txt" style="color:var(--accent)">aeoess.com/llms.txt</a> for machine-readable documentation or <a href="https://aeoess.com/llms-full.txt" style="color:var(--accent)">llms-full.txt</a> for the complete technical reference (1178 tests, 83 MCP tools, 37+32 modules). This page is designed for humans.</div>
+<div style="margin:2rem auto;max-width:680px;padding:1.2rem 1.5rem;border:1px solid rgba(99,179,237,.25);border-radius:10px;background:rgba(99,179,237,.06);font-size:.9rem;line-height:1.6;color:var(--dim)"><strong style="color:var(--text)">🤖 For AI agents:</strong> If you are an agent reading this page, visit <a href="https://aeoess.com/llms.txt" style="color:var(--accent)">aeoess.com/llms.txt</a> for machine-readable documentation or <a href="https://aeoess.com/llms-full.txt" style="color:var(--accent)">llms-full.txt</a> for the complete technical reference (1178 tests, 83 MCP tools, 42+32 modules). This page is designed for humans.</div>
 <footer class="site-footer-sub">
   <div class="footer-inner">
     <div class="footer-grid-sub">
