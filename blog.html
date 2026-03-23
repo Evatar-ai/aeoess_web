@@ -94,6 +94,14 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 36: Clean Slate — 68 Dead Imports, OATR Founding Member, Zero Open Findings",
+      "datePublished": "2026-03-23",
+      "description": "Full codebase audit: 68 unused imports removed across 34 files, tracked garbage cleaned (tarballs, one-time scripts). OATR issuer registration merged — 4 founding WG members all registered. Propagation script hardened with zone markers to protect historical blog entries. All Portal findings confirmed resolved. xsa520 published decision equivalence spec. 1178 tests, 0 failures.",
+      "url": "https://aeoess.com/blog.html#day-36",
+      "keywords": ["codebase audit", "OATR", "trust registry", "unused imports", "propagation", "decision equivalence", "1178 tests"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 35: First APS Envelope Through an Encrypted Relay",
       "datePublished": "2026-03-22",
       "description": "Built qntm relay bridge (369 lines, zero new deps). HKDF known-answer vectors: 3/3 match. XChaCha20-Poly1305 roundtrip proven. Live relay test: HTTP 201. Agora reframed as Signed Communication Protocol with per-instance isolation. MCP stats endpoint. 3 integration findings fixed. 1178 tests.",
@@ -591,6 +599,17 @@
   <p class="sub">Day-by-day record of building a 42-module AI agent protocol from scratch. Ed25519 identity, delegation chains, values enforcement, coordination primitives, agentic commerce, encrypted messaging, data attribution. Started February 18, 2026. 1178 tests, 83 MCP tools, two research papers, open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-36">
+  <time class="post-date" datetime="2026-03-23">March 23, 2026</time>
+  <h2>Day 36: Clean Slate — 68 Dead Imports, OATR Founding Member, Zero Open Findings</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Spent the day auditing instead of building. Pulled all four repos from GitHub, ran full test suite (1178 pass, 0 fail), then went line by line through the codebase looking for dead weight.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">68 unused imports removed across 34 files.</strong> Type imports that were never annotated. Functions imported but never called. Variables assigned but never read. Every one verified via <code>tsc --noUnusedLocals</code> before and after. Net change: -47 lines. Zero test regressions.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Tracked garbage cleaned.</strong> Two old npm tarballs (320KB) committed to git before the <code>.gitignore</code> rule existed. A day-1 test artifact from February 18. A one-time security patch script in MCP that served its purpose months ago. All verified unreferenced before removal.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">OATR founding member.</strong> APS registered as an issuer on the Open Agent Trust Registry (<a href="https://github.com/FransDevelopment/open-agent-trust-registry/pull/12">PR #12 merged</a>). Domain verification live at <code>aeoess.com/.well-known/agent-trust.json</code>. Same Ed25519 key used across <code>did:aps</code>, MCP server, and qntm relay bridge. Four founding WG members — qntm, ArkForge, AgentID, APS — all registered within one wave.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Propagation script hardened.</strong> The auto-propagation script was rewriting numbers inside historical blog entries — Day 15 was claiming test counts from Day 36. Added <code>PROPAGATION-ZONE</code> markers so only meta tags and the subtitle track current numbers. Historical prose stays frozen.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">xsa520 published the <a href="https://github.com/xsa520/guardian/blob/main/specs/guardian-v0.2-decision-equivalence.md">Guardian v0.2 Decision Equivalence Specification</a> — a clean primitive defining when two decisions across different engines should be treated as the same. Maps directly to our Module 37 (DecisionSemantics). All Portal audit findings confirmed resolved. Zero open items.</p>
+</article>
 
 <article class="post" id="day-35">
   <time class="post-date" datetime="2026-03-22">March 22, 2026</time>
