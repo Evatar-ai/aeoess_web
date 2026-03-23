@@ -310,6 +310,48 @@ function findStaleRefs(files, currentValues, previousValues) {
 }
 
 // ── Apply replacements ──
+// If a file contains PROPAGATION-ZONE-START/END markers, only replace within zones.
+// This protects historical blog entries from being overwritten with current numbers.
+function applyReplacementsToContent(content, patterns) {
+  const ZONE_START = '<!-- PROPAGATION-ZONE-START -->';
+  const ZONE_END = '<!-- PROPAGATION-ZONE-END -->';
+
+  if (!content.includes(ZONE_START)) {
+    // No zones — process entire file (default behavior)
+    for (const { regex, replace } of patterns) {
+      content = content.replace(regex, replace);
+    }
+    return content;
+  }
+
+  // Zone-aware: only replace within PROPAGATION-ZONE markers
+  const parts = [];
+  let cursor = 0;
+  let replacements = 0;
+  while (true) {
+    const zoneStart = content.indexOf(ZONE_START, cursor);
+    if (zoneStart === -1) {
+      parts.push(content.slice(cursor)); // remainder is protected
+      break;
+    }
+    const zoneEnd = content.indexOf(ZONE_END, zoneStart);
+    if (zoneEnd === -1) {
+      parts.push(content.slice(cursor)); // unclosed zone, protect everything
+      break;
+    }
+    // Protected content before zone
+    parts.push(content.slice(cursor, zoneStart + ZONE_START.length));
+    // Zone content — apply replacements
+    let zone = content.slice(zoneStart + ZONE_START.length, zoneEnd);
+    for (const { regex, replace } of patterns) {
+      zone = zone.replace(regex, replace);
+    }
+    parts.push(zone);
+    cursor = zoneEnd;
+  }
+  return parts.join('');
+}
+
 function applyReplacements(results, currentValues, previousValues) {
   let totalReplacements = 0;
 
@@ -321,17 +363,24 @@ function applyReplacements(results, currentValues, previousValues) {
     // Get unique variables that need replacement in this file
     const variables = [...new Set(result.refs.map(r => r.variable))];
 
+    // Collect all patterns for this file
+    const allPatterns = [];
     for (const varName of variables) {
       const oldValue = previousValues[varName];
       const newValue = currentValues[varName];
       const patterns = getVariablePatterns(varName, oldValue, newValue);
+      allPatterns.push(...patterns);
+    }
 
-      for (const { regex, replace } of patterns) {
-        const before = content;
-        content = content.replace(regex, replace);
-        // Count replacements by comparing lengths or match count
-        const matches = before.match(regex);
-        if (matches) totalReplacements += matches.length;
+    // Apply with zone awareness (protects historical blog entries)
+    const before = content;
+    content = applyReplacementsToContent(content, allPatterns);
+    // Count replacements by diffing
+    for (const { regex } of allPatterns) {
+      const matches = before.match(regex);
+      if (matches) {
+        const afterMatches = content.match(regex);
+        totalReplacements += matches.length - (afterMatches?.length || 0);
       }
     }
 
