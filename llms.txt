@@ -43,7 +43,7 @@ AEOESS provides thirty-seven protocol modules for sovereign AI agents:
 
 **AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications. Developed by The Agent Times in partnership with AEOESS. 6 requirements across two layers: cryptographic infrastructure (Ed25519 provenance, journalist agent passports, MCP server) and editorial accountability (confidence labels, published code of conduct, automated ethics verification). Draws from SPJ Code of Ethics, National Press Club Constitution, E.W. Scripps Guidelines. Any publication can apply. Reference implementation: The Agent Times. Spec: https://aeoess.com/amcs.html | Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md
 
-Plus: **MCP Server** (v2.10.0) — 82 tools across all layers with role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.11.0) — 82 tools across all layers with role-scoped access control for any MCP client.
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
