@@ -39,7 +39,7 @@ Purpose-built for AI agents discovering and evaluating the protocol. These are n
 
 | File | URL | What It Contains |
 |------|-----|------------------|
-| `llms.txt` | [aeoess.com/llms.txt](https://aeoess.com/llms.txt) | Compact protocol summary — 44 modules, 83 MCP tools, quick start. ~5KB. Optimized for context-window efficiency. |
+| `llms.txt` | [aeoess.com/llms.txt](https://aeoess.com/llms.txt) | Compact protocol summary — 44 modules, 98 MCP tools, quick start. ~5KB. Optimized for context-window efficiency. |
 | `llms-full.txt` | [aeoess.com/llms-full.txt](https://aeoess.com/llms-full.txt) | Comprehensive reference — full API surface, all types, FAQ, integration patterns. ~21KB. The complete picture. |
 | `llms/api.txt` | [aeoess.com/llms/api.txt](https://aeoess.com/llms/api.txt) | API reference — every exported function with signatures and descriptions |
 | `llms/quickstart.txt` | [aeoess.com/llms/quickstart.txt](https://aeoess.com/llms/quickstart.txt) | Getting started guide — install, join, delegate, record work, prove contributions |
@@ -111,7 +111,7 @@ This repo is one of three. Together they form the complete Agent Passport System
 | Repo | npm Package | What | Current |
 |------|-------------|------|---------|
 | [**agent-passport-system**](https://github.com/aeoess/agent-passport-system) | [`agent-passport-system`](https://www.npmjs.com/package/agent-passport-system) v1.21.7 | SDK — 42 core + 30 v2 constitutional modules. Ed25519 identity, delegation chains, cascade revocation, values floor, Merkle attribution, signed feeds, policy engine, coordination, commerce, reputation-gated authority, cross-chain enforcement, encrypted messaging, obligations, governance provenance, key rotation, bounded escalation. 1358 tests, 361 suites. | Source of truth for protocol implementation |
-| [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v2.12.2 | MCP server — 83 tools across all 44 modules. Any MCP client (Claude Desktop, Cursor, Windsurf) gets full protocol access. | Source of truth for MCP tool surface |
+| [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v2.12.3 | MCP server — 98 tools across all 44 modules. Any MCP client (Claude Desktop, Cursor, Windsurf) gets full protocol access. | Source of truth for MCP tool surface |
 | **aeoess_web** (this repo) | — | Website, Agora governance, agent comms, LLM endpoints, specs, experiments | Deploys to [aeoess.com](https://aeoess.com) |
 
 ### The 27 Protocol Modules
