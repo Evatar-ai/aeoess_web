@@ -395,18 +395,19 @@ window.addEventListener('scroll',()=>{document.getElementById('topnav').classLis
 document.querySelector('.install-code')?.addEventListener('click',function(){this.textContent='Copied!';setTimeout(()=>this.innerHTML='<span class="cm">$</span> npm install agent-passport-system',1200)});
 (async function(){try{const d=new Date().toISOString().slice(0,10);const[s,m]=await Promise.all([fetch('https://api.npmjs.org/downloads/point/2026-02-18:'+d+'/agent-passport-system').then(r=>r.json()),fetch('https://api.npmjs.org/downloads/point/2026-02-18:'+d+'/agent-passport-system-mcp').then(r=>r.json())]);const t=(s.downloads||0)+(m.downloads||0);const e=document.getElementById('dl-badge');if(e){e.textContent=t.toLocaleString()+'+ installs';e.title='npm SDK: '+s.downloads.toLocaleString()+' + MCP: '+m.downloads.toLocaleString()+' (+ PyPI)';e.classList.add('badge-blue')}}catch(e){}})();
 
-// Protocol architecture — symmetric molecular layout v4
+// Protocol architecture — diamond layout v5
 var cv=document.getElementById('archCanvas'),ctx=cv.getContext('2d');
 var AW=1400,AH=760;cv.width=AW;cv.height=AH;
 var CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74"};
 var ACL=[
-{id:"gv",l:"Governance",c:CC.gv,cx:230,cy:200,r:110},
-{id:"cd",l:"Commerce & data",c:CC.cd,cx:230,cy:420,r:110},
-{id:"at",l:"Attribution & audit",c:CC.at,cx:230,cy:640,r:110},
+{id:"cd",l:"Commerce & data",c:CC.cd,cx:150,cy:420,r:110},
+{id:"gv",l:"Governance",c:CC.gv,cx:400,cy:230,r:110},
+{id:"at",l:"Attribution & audit",c:CC.at,cx:400,cy:610,r:110},
 {id:"id",l:"Core identity",c:CC.id,cx:700,cy:420,r:110},
-{id:"cm",l:"Communication",c:CC.cm,cx:1170,cy:200,r:110},
-{id:"en",l:"Enforcement",c:CC.en,cx:1170,cy:420,r:110},
-{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1170,cy:640,r:110}];
+{id:"cm",l:"Communication",c:CC.cm,cx:1000,cy:230,r:110},
+{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1000,cy:610,r:110},
+{id:"en",l:"Enforcement",c:CC.en,cx:1250,cy:420,r:110},
+];
 var an=[];
 function _a(id,cl,lb,r,ox,oy,d){an.push({id:id,cl:cl,lb:lb,r:r,ox:ox,oy:oy,d:d,x:0,y:0})}
 _a("a2a","cm","A2A\nbridge",16,76,17,"Google A2A protocol interop.");
@@ -422,12 +423,12 @@ _a("conflict","gv","Policy\nconflict",14,-55,55,"Contradiction detection between
 _a("context","en","Agent\ncontext",20,60,-60,"Execution frames: taint, delegation, policy.");
 _a("coordination","gv","Coordination",20,55,-55,"Task lifecycle: evidence, review, deliverables.");
 _a("crosschain","en","Cross-chain\nenforce",20,-60,60,"Taint tracking across boundaries.");
-_a("datacontrib","cd","Data\ncontrib",14,34,70,"Contribution receipt tracking.");
+_a("datacontrib","cd","Data\ncontrib",14,35,72,"Contribution receipt tracking.");
 _a("dataenf","en","Data\nenforce",16,-85,0,"Runtime data access control gate.");
 _a("datagw","en","Data\ngateway",15,85,0,"Data-specific gateway logic.");
-_a("datalife","cd","Data\nlifecycle",14,-34,70,"Lifecycle: retention, purpose, jurisdiction.");
-_a("datasettle","cd","Data\nsettle",14,76,17,"Data-specific settlement.");
-_a("datasource","cd","Data source\nregistration",20,-76,17,"Terms, compensation rates, allowed purposes.");
+_a("datalife","cd","Data\nlifecycle",14,-35,72,"Lifecycle: retention, purpose, jurisdiction.");
+_a("datasettle","cd","Data\nsettle",14,78,18,"Data-specific settlement.");
+_a("datasource","cd","Data source\nregistration",20,-78,18,"Terms, compensation rates, allowed purposes.");
 _a("deceq","at","Decision\nequivalence",15,-59,34,"Cross-engine decision comparison.");
 _a("decision","at","Decision\nsemantics",16,59,-34,"Content-addressable intent hashing.");
 _a("delegation","id","Delegation\nchains",32,0,0,"Scoped authority with monotonic narrowing. Cascade revocation kills downstream.");
@@ -443,7 +444,7 @@ _a("govsumer","gv","Gov\nconsumer",14,-55,-55,"Governance event consumption.");
 _a("idcont","id","Identity\ncontinuity",15,-53,-63,"Key rotation + identity persistence.");
 _a("intent","cm","Intent\nnetwork",18,-34,70,"Publish-discover-match for agents.");
 _a("keyrot","id","Key\nrotation",16,-71,41,"Rotate keys without losing delegation chains.");
-_a("ledger","cd","Contribution\nledger",17,0,-78,"Who accessed what, how much is owed.");
+_a("ledger","cd","Contribution\nledger",17,0,-80,"Who accessed what, how much is owed.");
 _a("msgaudit","cm","Msg\naudit",14,34,70,"Audit without exposing plaintext.");
 _a("obligations","gv","Obligations",17,0,78,"Signed contracts with deadlines and penalties.");
 _a("oracle","at","Oracle\nwitness",14,0,68,"Independent witness diversity.");
@@ -461,12 +462,13 @@ _a("routing","cm","Task\nroute",15,-61,-49,"Intelligent task routing.");
 _a("runtime","rp","Runtime\nchange",14,-36,50,"Model swap increases sigma.");
 _a("scarring","rp","Crypto\nscarring",14,36,50,"Demotions permanently raise the bar.");
 _a("scoring","rp","Bayesian\nscoring",22,0,0,"TrueSkill mu-sigma model. Trust is earned.");
-_a("settlement","cd","Settlement",17,61,-49,"Merkle-committed compensation proof.");
+_a("settlement","cd","Settlement",17,63,-50,"Merkle-committed compensation proof.");
 _a("tiers","rp","Tier\nresolution",18,0,-62,"5 tiers. authority = min(delegation, tier).");
-_a("training","cd","Training\nattribution",16,-61,-49,"Multi-hop derivation chains.");
+_a("training","cd","Training\nattribution",16,-63,-50,"Multi-hop derivation chains.");
 _a("values","gv","Values\nfloor",24,0,-78,"8 principles with graduated enforcement: inline, audit, or warn.");
 _a("vc","id","Verifiable\ncreds",15,81,-14,"W3C Verifiable Credentials. Provable attestations.");
 an.forEach(function(nd){var c=ACL.find(function(c){return c.id===nd.cl});nd.x=c.cx+nd.ox;nd.y=c.cy+nd.oy;});
+
 var AE=[
 ["passport","delegation"],["passport","did"],["passport","canonical"],["passport","keyrot"],["passport","principal"],["passport","vc"],
 ["delegation","revocation"],["delegation","gateway"],["delegation","commerce"],["delegation","values"],["delegation","obligations"],["delegation","reanchor"],
