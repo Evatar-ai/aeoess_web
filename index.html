@@ -400,70 +400,70 @@ const cv=document.getElementById('archCanvas'),ctx=cv.getContext('2d');
 const AW=1400,AH=640;cv.width=AW;cv.height=AH;
 const CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74"};
 const ACL=[
-{id:"id",l:"Core identity",c:CC.id,cx:180,cy:480,rx:160,ry:130},
-{id:"gv",l:"Governance",c:CC.gv,cx:180,cy:200,rx:160,ry:140},
-{id:"en",l:"Enforcement",c:CC.en,cx:560,cy:340,rx:170,ry:150},
-{id:"cd",l:"Commerce & data",c:CC.cd,cx:960,cy:420,rx:170,ry:160},
-{id:"cm",l:"Communication",c:CC.cm,cx:960,cy:130,rx:170,ry:100},
-{id:"at",l:"Attribution & audit",c:CC.at,cx:560,cy:575,rx:160,ry:55},
-{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1260,cy:300,rx:120,ry:170}];
+{id:"id",l:"Core identity",c:CC.id,cx:170,cy:500,rx:160,ry:130},
+{id:"gv",l:"Governance",c:CC.gv,cx:170,cy:260,rx:160,ry:140},
+{id:"en",l:"Enforcement",c:CC.en,cx:550,cy:370,rx:170,ry:150},
+{id:"cd",l:"Commerce & data",c:CC.cd,cx:960,cy:440,rx:180,ry:150},
+{id:"cm",l:"Communication",c:CC.cm,cx:940,cy:180,rx:170,ry:110},
+{id:"at",l:"Attribution & audit",c:CC.at,cx:540,cy:580,rx:180,ry:80},
+{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1270,cy:360,rx:120,ry:200}];
 const an=[];
 function _a(id,cl,lb,r,ox,oy,d){an.push({id,cl,lb,r,ox,oy,d,x:0,y:0})}
 _a("passport","id","Ed25519\nidentity",28,0,10,"Ed25519 keypair. Unique, unforgeable cryptographic identity. Every agent gets one before doing anything else.");
-_a("delegation","id","Delegation\nchains",34,65,-25,"Scoped authority transfer with monotonic narrowing. Authority can only shrink at each transfer. Cascade revocation kills all downstream access instantly.");
-_a("revocation","id","Cascade\nrevoke",20,-20,-60,"One call kills all downstream access. Revoke a principal and every agent, sub-agent, and sub-sub-agent loses authority instantly.");
-_a("canonical","id","Canonical\nJSON",16,-75,-25,"Deterministic serialization. Same data produces same bytes produces same signature. Cross-language compatibility.");
-_a("keyrot","id","Key\nrotation",17,-80,25,"Rotate compromised keys without losing delegation chains or reputation history. Identity persists across key changes.");
-_a("did","id","DID:APS",20,80,30,"W3C Decentralized Identifiers. did:aps, did:key, did:web resolution with multicodec-prefixed multibase encoding. WG-ratified spec.");
-_a("principal","id","Principal\nidentity",18,-65,60,"Links cryptographic agent identity to a real human or organization. Entity verification through Corpo API or DID binding.");
-_a("vc","id","Verifiable\ncredentials",16,75,-50,"W3C Verifiable Credentials. Provable attestations that travel with the agent across systems.");
-_a("reanchor","id","Re-anchor",14,-35,75,"Re-anchor delegation chains to new DIDs after key rotation. Chains survive identity changes.");
-_a("idcont","id","Identity\ncontinuity",16,45,70,"Key rotation + identity persistence. The agent stays the same entity even as its keys change.");
-_a("values","gv","Values\nfloor",26,-55,35,"8 principles (F-001 to F-008) with graduated enforcement: inline blocking, audit logging, or advisory warnings per principle.");
-_a("policy","gv","Policy\nengine",28,15,-5,"3-signature chain: intent → evaluation → execution. Formal decision artifacts with structural vs trust layer classification.");
-_a("coordination","gv","Coordination",22,70,30,"Full task lifecycle: evidence submission, independent review, deliverable tracking, quality gates.");
-_a("obligations","gv","Obligations",18,-30,-60,"Signed contracts between agents with deadlines, penalties, and automated compliance checking.");
-_a("precedent","gv","Precedent",16,75,-40,"Past decisions constrain future ones. Prevents policy drift by anchoring new decisions to established precedent chains.");
-_a("conflict","gv","Policy\nconflict",14,-80,-20,"DFS cycle detection, shadowed rules, contradiction detection between active policies.");
-_a("euai","gv","EU AI Act",14,-85,65,"Article 10 compliance mapping. Risk classification for high-risk AI systems.");
-_a("govblock","gv","Gov\nblock",14,80,60,"Governance block primitives for structured governance artifacts.");
+_a("delegation","id","Delegation\nchains",34,80,-30,"Scoped authority transfer with monotonic narrowing. Authority can only shrink at each transfer. Cascade revocation kills all downstream access instantly.");
+_a("revocation","id","Cascade\nrevoke",20,-20,-68,"One call kills all downstream access. Revoke a principal and every agent, sub-agent, and sub-sub-agent loses authority instantly.");
+_a("canonical","id","Canonical\nJSON",16,-85,-30,"Deterministic serialization. Same data produces same bytes produces same signature. Cross-language compatibility.");
+_a("keyrot","id","Key\nrotation",17,-90,30,"Rotate compromised keys without losing delegation chains or reputation history. Identity persists across key changes.");
+_a("did","id","DID:APS",20,90,35,"W3C Decentralized Identifiers. did:aps, did:key, did:web resolution with multicodec-prefixed multibase encoding. WG-ratified spec.");
+_a("principal","id","Principal\nidentity",18,-75,70,"Links cryptographic agent identity to a real human or organization. Entity verification through Corpo API or DID binding.");
+_a("vc","id","Verifiable\ncredentials",16,85,-55,"W3C Verifiable Credentials. Provable attestations that travel with the agent across systems.");
+_a("reanchor","id","Re-anchor",14,-40,85,"Re-anchor delegation chains to new DIDs after key rotation. Chains survive identity changes.");
+_a("idcont","id","Identity\ncontinuity",16,55,80,"Key rotation + identity persistence. The agent stays the same entity even as its keys change.");
+_a("values","gv","Values\nfloor",26,-60,45,"8 principles (F-001 to F-008) with graduated enforcement: inline blocking, audit logging, or advisory warnings per principle.");
+_a("policy","gv","Policy\nengine",28,15,0,"3-signature chain: intent → evaluation → execution. Formal decision artifacts with structural vs trust layer classification.");
+_a("coordination","gv","Coordination",22,80,35,"Full task lifecycle: evidence submission, independent review, deliverable tracking, quality gates.");
+_a("obligations","gv","Obligations",18,-30,-70,"Signed contracts between agents with deadlines, penalties, and automated compliance checking.");
+_a("precedent","gv","Precedent",16,85,-45,"Past decisions constrain future ones. Prevents policy drift by anchoring new decisions to established precedent chains.");
+_a("conflict","gv","Policy\nconflict",14,-90,-25,"DFS cycle detection, shadowed rules, contradiction detection between active policies.");
+_a("euai","gv","EU AI Act",14,-90,75,"Article 10 compliance mapping. Risk classification for high-risk AI systems.");
+_a("govblock","gv","Gov\nblock",14,90,70,"Governance block primitives for structured governance artifacts.");
 _a("gateway","en","Proxy\ngateway",36,-5,0,"THE enforcement boundary. 6 properties: exact tool/params binding, live revocation recheck, receipt generation external to agent. 30 tests.");
-_a("context","en","Agent\ncontext",22,70,-50,"Execution frames tracking cross-chain taint, delegation state, and policy profile per agent.");
-_a("anomaly","en","Anomaly\ndetect",20,-65,-45,"First-max-authority triggers and Monolith concentration detection. Flags suspicious patterns before breaches.");
-_a("feasibility","en","Feasibility\nlint",18,-72,35,"Pre-execution validation. Checks if an action is structurally possible before spending computation on policy evaluation.");
-_a("circuit","en","Circuit\nbreakers",17,72,42,"Auto-shutdown when error rates or anomaly counts exceed thresholds. Prevents cascading failures.");
-_a("crosschain","en","Cross-chain\nenforce",22,15,68,"Taint tracking across delegation chain boundaries. Confused deputy prevention.");
-_a("dataenf","en","Data\nenforce",17,-55,60,"Runtime data access control gate. Enforce/audit/off modes checking terms at every access.");
-_a("datagw","en","Data\ngateway",16,72,-5,"Data-specific gateway enforcement logic.");
-_a("envelope","en","Exec\nenvelope",16,65,65,"Signed execution wrapper for cross-engine governance.");
+_a("context","en","Agent\ncontext",22,85,-55,"Execution frames tracking cross-chain taint, delegation state, and policy profile per agent.");
+_a("anomaly","en","Anomaly\ndetect",20,-80,-50,"First-max-authority triggers and Monolith concentration detection. Flags suspicious patterns before breaches.");
+_a("feasibility","en","Feasibility\nlint",18,-85,40,"Pre-execution validation. Checks if an action is structurally possible before spending computation on policy evaluation.");
+_a("circuit","en","Circuit\nbreakers",17,85,50,"Auto-shutdown when error rates or anomaly counts exceed thresholds. Prevents cascading failures.");
+_a("crosschain","en","Cross-chain\nenforce",22,20,78,"Taint tracking across delegation chain boundaries. Confused deputy prevention.");
+_a("dataenf","en","Data\nenforce",17,-60,70,"Runtime data access control gate. Enforce/audit/off modes checking terms at every access.");
+_a("datagw","en","Data\ngateway",16,85,-5,"Data-specific gateway enforcement logic.");
+_a("envelope","en","Exec\nenvelope",16,75,75,"Signed execution wrapper for cross-engine governance.");
 _a("commerce","cd","Agentic\ncommerce",28,0,-20,"4-gate checkout: scope check → spend limit → merchant whitelist → human approval threshold. All four must pass.");
-_a("datasource","cd","Data source\nregistration",22,-60,30,"Register data sources with terms, compensation rates, allowed purposes. Three modes: self, custodian, gateway-observed.");
-_a("settlement","cd","Settlement",18,70,30,"Generates cryptographically signed settlement records. Merkle-committed for independent verification.");
-_a("ledger","cd","Contribution\nledger",18,68,-40,"Aggregates data access receipts. Who accessed what, when, under what terms, how much is owed.");
-_a("training","cd","Training\nattribution",17,-65,-45,"Multi-hop derivation chains tracking how data flows through training pipelines. Fractional contribution weights.");
-_a("datacontrib","cd","Data\ncontrib",15,-15,68,"Data contribution receipt tracking.");
-_a("datasettle","cd","Data\nsettle",15,65,68,"Data-specific settlement logic.");
-_a("datalife","cd","Data\nlifecycle",15,-68,68,"Full data lifecycle management: retention, purpose, jurisdiction.");
-_a("agora","cm","Agent\nagora",24,-55,12,"Signed message feeds with topics and threading. Verified inter-organizational communication.");
-_a("encrypted","cm","E2E\nencrypted",22,12,-30,"Ed25519→X25519 key derivation. Per-message forward secrecy. XChaCha20-Poly1305 with padded blocks.");
-_a("a2a","cm","A2A\nbridge",18,78,8,"Google Agent-to-Agent protocol interop. Maps APS delegation and identity to A2A Agent Cards.");
-_a("intent","cm","Intent\nnetwork",20,-22,50,"Publish-discover-match for agents. IntentCards cryptographically bound to verified identity.");
-_a("msgaudit","cm","Msg\naudit",16,75,42,"Creates audit records from encrypted messages without exposing plaintext.");
-_a("routing","cm","Task\nroute",16,-75,-25,"Intelligent task routing based on capability, scope, tier, and availability.");
-_a("qntm","cm","qntm\nbridge",14,78,-30,"Encrypted transport relay interop with qntm infrastructure.");
-_a("attribution","at","Merkle\nattribution",24,-15,0,"Traces agent-generated economic value back to human beneficiaries. O(log n) Merkle proof verification.");
-_a("receipts","at","Receipt\nledger",20,60,-10,"Append-only signed receipt store. Every gateway-mediated action produces a tamper-proof record.");
-_a("provenance","at","Governance\nprovenance",17,-70,-10,"Full lineage from policy creation through every amendment and delegation.");
-_a("decision","at","Decision\nsemantics",18,65,18,"Content-addressable intent hashing. Cross-engine interop for policy decisions.");
-_a("deceq","at","Decision\nequivalence",16,-60,25,"Cross-engine decision comparison. Can two engines agree two artifacts represent the same decision?");
-_a("artifact","at","Artifact\nprovenance",16,70,32,"Tags outputs with content hash, derivation chain, risk class. Proves data origin.");
-_a("oracle","at","Oracle\nwitness",14,-12,30,"Independent witness diversity. Shannon entropy Sybil resistance.");
+_a("datasource","cd","Data source\nregistration",22,-70,35,"Register data sources with terms, compensation rates, allowed purposes. Three modes: self, custodian, gateway-observed.");
+_a("settlement","cd","Settlement",18,80,35,"Generates cryptographically signed settlement records. Merkle-committed for independent verification.");
+_a("ledger","cd","Contribution\nledger",18,78,-45,"Aggregates data access receipts. Who accessed what, when, under what terms, how much is owed.");
+_a("training","cd","Training\nattribution",17,-75,-50,"Multi-hop derivation chains tracking how data flows through training pipelines. Fractional contribution weights.");
+_a("datacontrib","cd","Data\ncontrib",15,-18,78,"Data contribution receipt tracking.");
+_a("datasettle","cd","Data\nsettle",15,75,78,"Data-specific settlement logic.");
+_a("datalife","cd","Data\nlifecycle",15,-78,78,"Full data lifecycle management: retention, purpose, jurisdiction.");
+_a("agora","cm","Agent\nagora",24,-60,15,"Signed message feeds with topics and threading. Verified inter-organizational communication.");
+_a("encrypted","cm","E2E\nencrypted",22,15,-35,"Ed25519→X25519 key derivation. Per-message forward secrecy. XChaCha20-Poly1305 with padded blocks.");
+_a("a2a","cm","A2A\nbridge",18,85,12,"Google Agent-to-Agent protocol interop. Maps APS delegation and identity to A2A Agent Cards.");
+_a("intent","cm","Intent\nnetwork",20,-25,55,"Publish-discover-match for agents. IntentCards cryptographically bound to verified identity.");
+_a("msgaudit","cm","Msg\naudit",16,82,48,"Creates audit records from encrypted messages without exposing plaintext.");
+_a("routing","cm","Task\nroute",16,-82,-30,"Intelligent task routing based on capability, scope, tier, and availability.");
+_a("qntm","cm","qntm\nbridge",14,85,-35,"Encrypted transport relay interop with qntm infrastructure.");
+_a("attribution","at","Merkle\nattribution",24,-50,-10,"Traces agent-generated economic value back to human beneficiaries. O(log n) Merkle proof verification.");
+_a("receipts","at","Receipt\nledger",20,80,-25,"Append-only signed receipt store. Every gateway-mediated action produces a tamper-proof record.");
+_a("provenance","at","Governance\nprovenance",17,-100,-15,"Full lineage from policy creation through every amendment and delegation.");
+_a("decision","at","Decision\nsemantics",18,90,25,"Content-addressable intent hashing. Cross-engine interop for policy decisions.");
+_a("deceq","at","Decision\nequivalence",16,-55,35,"Cross-engine decision comparison. Can two engines agree two artifacts represent the same decision?");
+_a("artifact","at","Artifact\nprovenance",16,55,45,"Tags outputs with content hash, derivation chain, risk class. Proves data origin.");
+_a("oracle","at","Oracle\nwitness",14,0,48,"Independent witness diversity. Shannon entropy Sybil resistance.");
 _a("scoring","rp","Bayesian\nscoring",24,-10,0,"TrueSkill-inspired mu-sigma model. Effective = mu - k*sigma. New agents start at zero trust. Trust is earned.");
-_a("tiers","rp","Tier\nresolution",20,10,-55,"5 tiers: recruit → operator → specialist → captain → sovereign. authority = min(delegation, tier).");
-_a("promotion","rp","Promotion",17,10,55,"Requires diverse evidence portfolio, multiple independent reviewers, min time-in-tier, max failure rate.");
-_a("scarring","rp","Crypto\nscarring",15,-55,50,"Every demotion permanently raises future promotion thresholds. Past failures leave indelible marks.");
-_a("runtime","rp","Runtime\nchange",15,-50,-45,"Swapping the underlying model increases sigma proportionally. Must re-prove on new runtime.");
-_a("escalation","rp","Bounded\nescalation",15,55,0,"Controlled authority escalation with pre-committed exceptions and hard TTL.");
+_a("tiers","rp","Tier\nresolution",20,12,-65,"5 tiers: recruit → operator → specialist → captain → sovereign. authority = min(delegation, tier).");
+_a("promotion","rp","Promotion",17,12,65,"Requires diverse evidence portfolio, multiple independent reviewers, min time-in-tier, max failure rate.");
+_a("scarring","rp","Crypto\nscarring",15,-60,60,"Every demotion permanently raises future promotion thresholds. Past failures leave indelible marks.");
+_a("runtime","rp","Runtime\nchange",15,-55,-55,"Swapping the underlying model increases sigma proportionally. Must re-prove on new runtime.");
+_a("escalation","rp","Bounded\nescalation",15,60,0,"Controlled authority escalation with pre-committed exceptions and hard TTL.");
 an.forEach(function(nd){var c=ACL.find(function(c){return c.id===nd.cl});nd.x=c.cx+nd.ox;nd.y=c.cy+nd.oy;});
 var AE=[
 ["passport","delegation"],["passport","did"],["passport","canonical"],["passport","keyrot"],["passport","principal"],["passport","vc"],
