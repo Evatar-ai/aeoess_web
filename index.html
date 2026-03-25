@@ -111,15 +111,15 @@ a:hover{opacity:.8}
 .arch-map canvas{display:block;width:100%;height:auto}
 .arch-ui{position:absolute;top:10px;left:14px;right:14px;z-index:10;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
 .arch-ui-row{display:flex;align-items:center;gap:8px}
-.arch-label{font:500 .6rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#5a5954}
-.arch-status{font:.6rem var(--mono);color:#555}
-.arch-btns{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.arch-cloud{position:absolute;display:none;pointer-events:none;z-index:25;background:rgba(8,8,13,.95);border:1px solid rgba(255,255,255,.12);border-radius:10px 10px 10px 3px;padding:8px 14px;max-width:240px}
-.arch-cloud-step{font:500 .55rem var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
-.arch-cloud-text{font:.68rem/1.45 var(--sans);color:#bbb}
-.arch-bub{position:absolute;display:none;pointer-events:none;z-index:20;background:rgba(8,8,13,.95);border:1px solid #2a2a2a;border-radius:8px;padding:8px 12px;max-width:230px}
-.arch-bub-name{font:500 .75rem var(--sans);color:#ddd;margin-bottom:2px}
-.arch-bub-desc{font:.65rem/1.4 var(--sans);color:#666}
+.arch-label{font:500 .65rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#7a7872}
+.arch-status{font:.65rem var(--mono);color:#888}
+.arch-btns{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.arch-cloud{position:absolute;display:none;pointer-events:none;z-index:25;background:rgba(8,8,13,.96);border:1px solid rgba(255,255,255,.15);border-radius:10px 10px 10px 3px;padding:10px 16px;max-width:280px;backdrop-filter:blur(8px)}
+.arch-cloud-step{font:500 .6rem var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.arch-cloud-text{font:.75rem/1.5 var(--sans);color:#ccc}
+.arch-bub{position:absolute;display:none;pointer-events:none;z-index:20;background:rgba(8,8,13,.96);border:1px solid #333;border-radius:10px;padding:12px 16px;max-width:300px;backdrop-filter:blur(8px)}
+.arch-bub-name{font:500 .85rem var(--sans);color:#eee;margin-bottom:4px;line-height:1.4}
+.arch-bub-desc{font:.75rem/1.5 var(--sans);color:#999}
 .constellation-legend{display:flex;gap:1.5rem;margin-top:.8rem;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:.4rem;font:.7rem var(--sans);color:var(--dim)}
 .legend-dot{width:8px;height:8px;border-radius:50%}
@@ -281,7 +281,7 @@ a:hover{opacity:.8}
     <canvas id="archCanvas"></canvas>
     <div class="arch-ui" id="archUI">
       <div class="arch-ui-row">
-        <span class="arch-label">Protocol architecture &mdash; 69 modules, 1399 tests</span>
+        <span class="arch-label">Protocol architecture &mdash; 39 core modules + 30 v2 constitutional &mdash; 1399 tests</span>
         <span class="arch-status" id="archStatus"></span>
       </div>
       <div class="arch-btns" id="archBtns"></div>
@@ -395,189 +395,192 @@ window.addEventListener('scroll',()=>{document.getElementById('topnav').classLis
 document.querySelector('.install-code')?.addEventListener('click',function(){this.textContent='Copied!';setTimeout(()=>this.innerHTML='<span class="cm">$</span> npm install agent-passport-system',1200)});
 (async function(){try{const d=new Date().toISOString().slice(0,10);const[s,m]=await Promise.all([fetch('https://api.npmjs.org/downloads/point/2026-02-18:'+d+'/agent-passport-system').then(r=>r.json()),fetch('https://api.npmjs.org/downloads/point/2026-02-18:'+d+'/agent-passport-system-mcp').then(r=>r.json())]);const t=(s.downloads||0)+(m.downloads||0);const e=document.getElementById('dl-badge');if(e){e.textContent=t.toLocaleString()+'+ installs';e.title='npm SDK: '+s.downloads.toLocaleString()+' + MCP: '+m.downloads.toLocaleString()+' (+ PyPI)';e.classList.add('badge-blue')}}catch(e){}})();
 
-// Protocol architecture — interactive agent journey map
+// Protocol architecture — interactive agent journey map v2
 const cv=document.getElementById('archCanvas'),ctx=cv.getContext('2d');
-const AW=1400,AH=620;cv.width=AW;cv.height=AH;
-const CC={id:"#c9a55a",gv:"#5a8fc9",en:"#c95a5a",cd:"#c9965a",cm:"#5ac9c9",at:"#c95a95",rp:"#c97a5a",v2:"#6a6a62"};
+const AW=1400,AH=640;cv.width=AW;cv.height=AH;
+const CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74"};
 const ACL=[
-{id:"id",l:"Core identity",c:CC.id,cx:130,cy:455,rx:115,ry:105},
-{id:"gv",l:"Governance",c:CC.gv,cx:130,cy:225,rx:115,ry:100},
-{id:"en",l:"Enforcement",c:CC.en,cx:430,cy:340,rx:120,ry:115},
-{id:"cd",l:"Commerce & data",c:CC.cd,cx:720,cy:400,rx:120,ry:115},
-{id:"cm",l:"Communication",c:CC.cm,cx:700,cy:145,rx:120,ry:95},
-{id:"at",l:"Attribution",c:CC.at,cx:430,cy:545,rx:115,ry:52},
-{id:"rp",l:"Reputation",c:CC.rp,cx:350,cy:120,rx:100,ry:60},
-{id:"v2",l:"Constitutional v2",c:CC.v2,cx:1100,cy:340,rx:260,ry:250}];
+{id:"id",l:"Core identity",c:CC.id,cx:180,cy:480,rx:160,ry:130},
+{id:"gv",l:"Governance",c:CC.gv,cx:180,cy:200,rx:160,ry:140},
+{id:"en",l:"Enforcement",c:CC.en,cx:560,cy:340,rx:170,ry:150},
+{id:"cd",l:"Commerce & data",c:CC.cd,cx:960,cy:420,rx:170,ry:160},
+{id:"cm",l:"Communication",c:CC.cm,cx:960,cy:130,rx:170,ry:100},
+{id:"at",l:"Attribution & audit",c:CC.at,cx:560,cy:575,rx:160,ry:55},
+{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1260,cy:300,rx:120,ry:170}];
 const an=[];
 function _a(id,cl,lb,r,ox,oy,d){an.push({id,cl,lb,r,ox,oy,d,x:0,y:0})}
-_a("passport","id","Ed25519\nidentity",24,0,12,"Ed25519 keypair — unique unforgeable identity");
-_a("delegation","id","Delegation\nchains",30,50,-18,"Scoped authority. Monotonic narrowing — can only shrink");
-_a("revocation","id","Cascade\nrevoke",16,-10,-48,"One call kills all downstream access instantly");
-_a("canonical","id","Canonical\nJSON",13,-58,-22,"Deterministic serialization");
-_a("keyrot","id","Key rotation",14,-62,20,"Rotate keys without losing chains");
-_a("did","id","DID:APS",17,62,28,"did:aps, did:key, did:web");
-_a("principal","id","Principal",15,-52,48,"Human identity binding");
-_a("vc","id","Verifiable\ncreds",13,58,-38,"W3C Verifiable Credentials");
-_a("reanchor","id","Re-anchor",12,-28,58,"Chain re-anchoring");
-_a("idcont","id","Identity\ncontinuity",13,35,55,"Key rotation + persistence");
-_a("values","gv","Values\nfloor",22,-42,28,"8 principles, graduated enforcement");
-_a("policy","gv","Policy\nengine",24,12,-4,"3-sig chain: intent→eval→exec");
-_a("coordination","gv","Coordination",18,55,25,"Task lifecycle, evidence, review");
-_a("obligations","gv","Obligations",15,-22,-48,"Signed contracts w/ deadlines");
-_a("precedent","gv","Precedent",13,58,-32,"Past decisions constrain future");
-_a("conflict","gv","Policy\nconflict",12,-62,-16,"Contradiction detection");
-_a("euai","gv","EU AI Act",12,-68,52,"Article 10 compliance");
-_a("govblock","gv","Gov block",12,62,50,"Block primitives");
-_a("govsumer","gv","Gov\nconsumer",12,-48,58,"Event consumption");
-_a("gateway","en","Proxy\ngateway",30,-4,0,"Enforcement boundary — 6 properties, 30 tests");
-_a("context","en","Agent\ncontext",18,55,-42,"Execution frames, taint tracking");
-_a("anomaly","en","Anomaly\ndetect",16,-52,-35,"First-max-authority, Monolith");
-_a("feasibility","en","Feasibility\nlint",14,-58,30,"Pre-validation, fail fast");
-_a("circuit","en","Circuit\nbreakers",13,58,35,"Auto-shutdown on spikes");
-_a("crosschain","en","Cross-chain",17,12,55,"Taint across boundaries");
-_a("dataenf","en","Data\nenforce",14,-42,52,"Runtime access control");
-_a("datagw","en","Data\ngateway",13,58,-6,"Data gateway logic");
-_a("envelope","en","Exec\nenvelope",13,52,55,"Signed wrapper");
-_a("commerce","cd","Agentic\ncommerce",24,0,-18,"4-gate: scope→spend→whitelist→approval");
-_a("datasource","cd","Data source\nregistration",18,-48,25,"Terms, compensation, purposes");
-_a("settlement","cd","Settlement",15,55,25,"Merkle-committed proof");
-_a("ledger","cd","Contribution\nledger",15,52,-32,"Who owes what");
-_a("training","cd","Training\nattribution",14,-52,-32,"Derivation chains");
-_a("datacontrib","cd","Data\ncontrib",13,-12,55,"Contribution tracking");
-_a("datasettle","cd","Data\nsettle",13,52,55,"Data settlement");
-_a("datalife","cd","Data\nlifecycle",13,-55,55,"Lifecycle mgmt");
-_a("agora","cm","Agent\nagora",20,-42,10,"Signed feeds, threading");
-_a("encrypted","cm","E2E\nencrypted",18,10,-28,"Ed25519→X25519, fwd secrecy");
-_a("a2a","cm","A2A bridge",15,62,6,"Google A2A interop");
-_a("intent","cm","Intent\nnetwork",16,-18,42,"Discover-match-introduce");
-_a("msgaudit","cm","Msg audit",13,60,38,"Audit w/o plaintext");
-_a("routing","cm","Task route",13,-60,-22,"Task routing");
-_a("qntm","cm","qntm bridge",12,62,-28,"Relay interop");
-_a("apstxt","cm","aps.txt",11,-58,42,"Protocol declaration");
-_a("attribution","at","Merkle\nattribution",20,-12,0,"Trace value to humans via proofs");
-_a("receipts","at","Receipt\nledger",17,50,-8,"Append-only signed receipts");
-_a("provenance","at","Governance\nprovenance",14,-58,-8,"Full lineage");
-_a("decision","at","Decision\nsemantics",15,55,15,"Content-addressable hashing");
-_a("deceq","at","Decision\nequivalence",13,-48,22,"Cross-engine comparison");
-_a("artifact","at","Artifact\nprovenance",13,58,28,"Hash + derivation");
-_a("oracle","at","Oracle\nwitness",12,-10,28,"Witness diversity");
-_a("scoring","rp","Bayesian\nscoring",20,-8,6,"mu-sigma TrueSkill model");
-_a("tiers","rp","Tier\nresolution",17,48,-2,"min(delegation, tier)");
-_a("promotion","rp","Promotion",14,45,28,"Diverse evidence required");
-_a("scarring","rp","Crypto scar",12,-38,30,"Demotions raise the bar");
-_a("runtime","rp","Runtime\nchange",12,-42,-16,"Model swap increases sigma");
-_a("escalation","rp","Bounded\nescalation",12,4,-30,"Controlled escalation");
-an.forEach(nd=>{const c=ACL.find(c=>c.id===nd.cl);nd.x=c.cx+nd.ox;nd.y=c.cy+nd.oy;});
-const v2m=["PolicyContext","Delegation v2","Outcome reg","Anomaly v2","Emergency","Migration",
-"Attestation v2","Approval fatigue","Effect enforce","Emergence","Root transition","Semantic drift",
-"Composite audit","Gov drift","Separation powers","Amendment","Policy profiles","Circuit v2",
-"Affected party","Epistemic isolate","Values override","Inaction audit","Intent binding","Effect sample",
-"Output proportion","Blind eval","Cascade correlate","Cross-chain audit","Externality","Semantic scope"];
-const v2n=[];const v2c=5,v2sx=895,v2sy=120,v2gx=82,v2gy=72;
-v2m.forEach((lb,i)=>{const col=i%v2c,row=Math.floor(i/v2c);v2n.push({id:"v2_"+i,lb,x:v2sx+col*v2gx,y:v2sy+row*v2gy,r:14});});
-const AE=[
+_a("passport","id","Ed25519\nidentity",28,0,10,"Ed25519 keypair. Unique, unforgeable cryptographic identity. Every agent gets one before doing anything else.");
+_a("delegation","id","Delegation\nchains",34,65,-25,"Scoped authority transfer with monotonic narrowing. Authority can only shrink at each transfer. Cascade revocation kills all downstream access instantly.");
+_a("revocation","id","Cascade\nrevoke",20,-20,-60,"One call kills all downstream access. Revoke a principal and every agent, sub-agent, and sub-sub-agent loses authority instantly.");
+_a("canonical","id","Canonical\nJSON",16,-75,-25,"Deterministic serialization. Same data produces same bytes produces same signature. Cross-language compatibility.");
+_a("keyrot","id","Key\nrotation",17,-80,25,"Rotate compromised keys without losing delegation chains or reputation history. Identity persists across key changes.");
+_a("did","id","DID:APS",20,80,30,"W3C Decentralized Identifiers. did:aps, did:key, did:web resolution with multicodec-prefixed multibase encoding. WG-ratified spec.");
+_a("principal","id","Principal\nidentity",18,-65,60,"Links cryptographic agent identity to a real human or organization. Entity verification through Corpo API or DID binding.");
+_a("vc","id","Verifiable\ncredentials",16,75,-50,"W3C Verifiable Credentials. Provable attestations that travel with the agent across systems.");
+_a("reanchor","id","Re-anchor",14,-35,75,"Re-anchor delegation chains to new DIDs after key rotation. Chains survive identity changes.");
+_a("idcont","id","Identity\ncontinuity",16,45,70,"Key rotation + identity persistence. The agent stays the same entity even as its keys change.");
+_a("values","gv","Values\nfloor",26,-55,35,"8 principles (F-001 to F-008) with graduated enforcement: inline blocking, audit logging, or advisory warnings per principle.");
+_a("policy","gv","Policy\nengine",28,15,-5,"3-signature chain: intent → evaluation → execution. Formal decision artifacts with structural vs trust layer classification.");
+_a("coordination","gv","Coordination",22,70,30,"Full task lifecycle: evidence submission, independent review, deliverable tracking, quality gates.");
+_a("obligations","gv","Obligations",18,-30,-60,"Signed contracts between agents with deadlines, penalties, and automated compliance checking.");
+_a("precedent","gv","Precedent",16,75,-40,"Past decisions constrain future ones. Prevents policy drift by anchoring new decisions to established precedent chains.");
+_a("conflict","gv","Policy\nconflict",14,-80,-20,"DFS cycle detection, shadowed rules, contradiction detection between active policies.");
+_a("euai","gv","EU AI Act",14,-85,65,"Article 10 compliance mapping. Risk classification for high-risk AI systems.");
+_a("govblock","gv","Gov\nblock",14,80,60,"Governance block primitives for structured governance artifacts.");
+_a("gateway","en","Proxy\ngateway",36,-5,0,"THE enforcement boundary. 6 properties: exact tool/params binding, live revocation recheck, receipt generation external to agent. 30 tests.");
+_a("context","en","Agent\ncontext",22,70,-50,"Execution frames tracking cross-chain taint, delegation state, and policy profile per agent.");
+_a("anomaly","en","Anomaly\ndetect",20,-65,-45,"First-max-authority triggers and Monolith concentration detection. Flags suspicious patterns before breaches.");
+_a("feasibility","en","Feasibility\nlint",18,-72,35,"Pre-execution validation. Checks if an action is structurally possible before spending computation on policy evaluation.");
+_a("circuit","en","Circuit\nbreakers",17,72,42,"Auto-shutdown when error rates or anomaly counts exceed thresholds. Prevents cascading failures.");
+_a("crosschain","en","Cross-chain\nenforce",22,15,68,"Taint tracking across delegation chain boundaries. Confused deputy prevention.");
+_a("dataenf","en","Data\nenforce",17,-55,60,"Runtime data access control gate. Enforce/audit/off modes checking terms at every access.");
+_a("datagw","en","Data\ngateway",16,72,-5,"Data-specific gateway enforcement logic.");
+_a("envelope","en","Exec\nenvelope",16,65,65,"Signed execution wrapper for cross-engine governance.");
+_a("commerce","cd","Agentic\ncommerce",28,0,-20,"4-gate checkout: scope check → spend limit → merchant whitelist → human approval threshold. All four must pass.");
+_a("datasource","cd","Data source\nregistration",22,-60,30,"Register data sources with terms, compensation rates, allowed purposes. Three modes: self, custodian, gateway-observed.");
+_a("settlement","cd","Settlement",18,70,30,"Generates cryptographically signed settlement records. Merkle-committed for independent verification.");
+_a("ledger","cd","Contribution\nledger",18,68,-40,"Aggregates data access receipts. Who accessed what, when, under what terms, how much is owed.");
+_a("training","cd","Training\nattribution",17,-65,-45,"Multi-hop derivation chains tracking how data flows through training pipelines. Fractional contribution weights.");
+_a("datacontrib","cd","Data\ncontrib",15,-15,68,"Data contribution receipt tracking.");
+_a("datasettle","cd","Data\nsettle",15,65,68,"Data-specific settlement logic.");
+_a("datalife","cd","Data\nlifecycle",15,-68,68,"Full data lifecycle management: retention, purpose, jurisdiction.");
+_a("agora","cm","Agent\nagora",24,-55,12,"Signed message feeds with topics and threading. Verified inter-organizational communication.");
+_a("encrypted","cm","E2E\nencrypted",22,12,-30,"Ed25519→X25519 key derivation. Per-message forward secrecy. XChaCha20-Poly1305 with padded blocks.");
+_a("a2a","cm","A2A\nbridge",18,78,8,"Google Agent-to-Agent protocol interop. Maps APS delegation and identity to A2A Agent Cards.");
+_a("intent","cm","Intent\nnetwork",20,-22,50,"Publish-discover-match for agents. IntentCards cryptographically bound to verified identity.");
+_a("msgaudit","cm","Msg\naudit",16,75,42,"Creates audit records from encrypted messages without exposing plaintext.");
+_a("routing","cm","Task\nroute",16,-75,-25,"Intelligent task routing based on capability, scope, tier, and availability.");
+_a("qntm","cm","qntm\nbridge",14,78,-30,"Encrypted transport relay interop with qntm infrastructure.");
+_a("attribution","at","Merkle\nattribution",24,-15,0,"Traces agent-generated economic value back to human beneficiaries. O(log n) Merkle proof verification.");
+_a("receipts","at","Receipt\nledger",20,60,-10,"Append-only signed receipt store. Every gateway-mediated action produces a tamper-proof record.");
+_a("provenance","at","Governance\nprovenance",17,-70,-10,"Full lineage from policy creation through every amendment and delegation.");
+_a("decision","at","Decision\nsemantics",18,65,18,"Content-addressable intent hashing. Cross-engine interop for policy decisions.");
+_a("deceq","at","Decision\nequivalence",16,-60,25,"Cross-engine decision comparison. Can two engines agree two artifacts represent the same decision?");
+_a("artifact","at","Artifact\nprovenance",16,70,32,"Tags outputs with content hash, derivation chain, risk class. Proves data origin.");
+_a("oracle","at","Oracle\nwitness",14,-12,30,"Independent witness diversity. Shannon entropy Sybil resistance.");
+_a("scoring","rp","Bayesian\nscoring",24,-10,0,"TrueSkill-inspired mu-sigma model. Effective = mu - k*sigma. New agents start at zero trust. Trust is earned.");
+_a("tiers","rp","Tier\nresolution",20,10,-55,"5 tiers: recruit → operator → specialist → captain → sovereign. authority = min(delegation, tier).");
+_a("promotion","rp","Promotion",17,10,55,"Requires diverse evidence portfolio, multiple independent reviewers, min time-in-tier, max failure rate.");
+_a("scarring","rp","Crypto\nscarring",15,-55,50,"Every demotion permanently raises future promotion thresholds. Past failures leave indelible marks.");
+_a("runtime","rp","Runtime\nchange",15,-50,-45,"Swapping the underlying model increases sigma proportionally. Must re-prove on new runtime.");
+_a("escalation","rp","Bounded\nescalation",15,55,0,"Controlled authority escalation with pre-committed exceptions and hard TTL.");
+an.forEach(function(nd){var c=ACL.find(function(c){return c.id===nd.cl});nd.x=c.cx+nd.ox;nd.y=c.cy+nd.oy;});
+var AE=[
 ["passport","delegation"],["passport","did"],["passport","canonical"],["passport","keyrot"],["passport","principal"],["passport","vc"],
 ["delegation","revocation"],["delegation","gateway"],["delegation","commerce"],["delegation","values"],["delegation","obligations"],["delegation","reanchor"],
 ["idcont","keyrot"],["idcont","did"],
 ["values","policy"],["values","gateway"],["policy","coordination"],["policy","precedent"],["policy","conflict"],["policy","gateway"],["policy","decision"],
-["coordination","obligations"],["euai","values"],["govblock","coordination"],["govsumer","policy"],
+["coordination","obligations"],["euai","values"],["govblock","coordination"],
 ["gateway","context"],["gateway","anomaly"],["gateway","feasibility"],["gateway","circuit"],["gateway","crosschain"],
 ["gateway","commerce"],["gateway","receipts"],["gateway","scoring"],["gateway","dataenf"],["gateway","datagw"],["gateway","envelope"],
 ["commerce","settlement"],["commerce","ledger"],["datasource","ledger"],["datasource","gateway"],["ledger","settlement"],["datasource","training"],
 ["datacontrib","ledger"],["datasettle","settlement"],["datalife","datasource"],
 ["passport","agora"],["passport","encrypted"],["encrypted","msgaudit"],["encrypted","a2a"],["encrypted","qntm"],
-["agora","intent"],["agora","coordination"],["routing","coordination"],["apstxt","agora"],
+["agora","intent"],["agora","coordination"],["routing","coordination"],
 ["receipts","attribution"],["attribution","provenance"],["provenance","artifact"],["decision","precedent"],["decision","deceq"],
-["oracle","attribution"],
-["scoring","tiers"],["tiers","promotion"],["promotion","scarring"],["scoring","runtime"],["escalation","tiers"],
+["oracle","attribution"],["scoring","tiers"],["tiers","promotion"],["promotion","scarring"],["scoring","runtime"],["escalation","tiers"],
 ["crosschain","datasource"],["principal","euai"]];
-const AM=[
-{name:"New agent session",c:"#c9a55a",path:["passport","canonical","delegation","principal","values","policy","gateway","context"],
-d:["Generate Ed25519 keypair — unique identity","Canonical JSON — deterministic signatures","Human signs scoped delegation","Link to human principal","Attest to values floor","Policy: chain satisfies requirements?","Gateway frame — all actions go here","Context: taint, delegation, policy"]},
-{name:"Purchase with budget",c:"#c9965a",path:["passport","delegation","values","gateway","commerce","settlement","receipts","attribution"],
-d:["Identity verified","Scope, limit $200, merchant 'aws'","Values attested","Gateway: scope? spend? whitelist?","4-gate preflight — all clear","$187.50 Merkle-committed","Receipt gateway-signed","Value traced to beneficiary"]},
-{name:"Access licensed data",c:"#5a8fc9",path:["passport","delegation","values","gateway","dataenf","datasource","ledger","settlement","provenance"],
-d:["Identity verified","Scope: data:read:medical-corpus","Values + data handling principles","Gateway checks scope + terms","Enforcement gate: compliance","$0.003/access, purpose 'research'","Who, when, how much owed","Compensation Merkle-committed","Full governance lineage"]},
-{name:"Encrypted agent chat",c:"#5ac9c9",path:["passport","did","encrypted","agora","coordination","policy","gateway","receipts","msgaudit"],
-d:["Both verify identities","DID via WG spec","E2E forward secrecy","Signed feed, threaded","Evidence + quality gates","Both authorized?","Gateway, receipts generated","Receipt-backed trail","Proves comms, hides content"]},
-{name:"Trust promotion",c:"#c97a5a",path:["passport","delegation","gateway","scoring","tiers","promotion","scarring","anomaly","receipts"],
-d:["Identity verified","Chain validated","Execution history pulled","Bayesian: effective=74","Captain needs ≥80","50 tasks, 8 reviewers — PROMOTED","0 demotions, bar unmodified","No flags — clean","Signed auditable receipt"]}];
-let curM=-1,aStep=-1,autoAll=false,aT=null,aMI=0,hovId=null,afr=0;
-let aax=-99,aay=-99,atx=-99,aty=-99;
-function anf(id){return an.find(x=>x.id===id)}
+var AM=[
+{name:"New agent session",c:"#d4a574",path:["passport","canonical","delegation","principal","values","policy","gateway","context"],
+d:["Generate Ed25519 keypair — unique unforgeable identity","Canonical JSON — deterministic signatures, same data same bytes","Human signs scoped delegation — specific permissions, never blanket authority","Link to human principal — cryptographic proof of who authorized this agent","Attest to 8-principle values floor — sign the operating rules","Policy engine evaluates: does this chain satisfy all requirements?","Gateway creates enforcement frame — every future action passes through here","Execution context initialized — tracks taint, delegation state, policy profile"]},
+{name:"Purchase with budget",c:"#d4b074",path:["passport","delegation","values","gateway","commerce","settlement","receipts","attribution"],
+d:["Identity verified via Ed25519 signature","Delegation checked: scope 'commerce:cloud', spend limit $200, merchant 'aws'","Values floor attested — operating within behavioral bounds","Gateway intercepts: scope match? spend under limit? merchant whitelisted?","4-gate preflight passes — scope, spend, whitelist, approval all clear","Settlement: $187.50 to AWS, Merkle-committed for independent verification","Tamper-proof execution receipt — gateway-signed, not self-reported","Economic value traced back to human beneficiary via Merkle proof"]},
+{name:"Access licensed data",c:"#7ba4c9",path:["passport","delegation","values","gateway","dataenf","datasource","ledger","settlement","provenance"],
+d:["Identity verified","Delegation scope covers 'data:read:medical-corpus'","Values attested including data handling principles","Gateway checks delegation scope and data source terms alignment","Data enforcement gate: terms compliance, purpose alignment, access count","Source terms: $0.003/access, purpose 'research', max 10k accesses","Receipt aggregated — who accessed, when, under what terms, how much owed","Compensation obligation calculated and Merkle-committed","Full governance lineage for this access chain"]},
+{name:"Encrypted agent chat",c:"#74c9c9",path:["passport","did","encrypted","agora","coordination","policy","gateway","receipts","msgaudit"],
+d:["Both agents verify each other's Ed25519 identities","DID resolved to public keys via WG-ratified DID Resolution v1.0","E2E encrypted channel: Ed25519→X25519, per-message forward secrecy","Task posted to signed message feed — verified, structured, threaded","Evidence submission, quality gates, deliverable tracking","Policy evaluates: do both agents have authority for this interaction?","Gateway mediates the execution — receipts for every coordinated action","Audit trail: every action in the coordination is receipt-backed","Message audit: proves communication happened without revealing content"]},
+{name:"Trust promotion",c:"#d49a74",path:["passport","delegation","gateway","scoring","tiers","promotion","scarring","anomaly","receipts"],
+d:["Identity verified","Delegation chain validated — confirms principal relationship","Gateway pulls full execution history for this scope","Bayesian score: mu=82, sigma=4, effective=74. Uncertainty is low — proven agent","Current tier: specialist. Captain requires effective score ≥ 80","Portfolio: 50 tasks, 8 reviewers, 3% failure rate — PROMOTED to captain","Scarring check: 0 prior demotions, promotion threshold unmodified","Anomaly scan: no first-max-authority flags, no concentration patterns — clean","Promotion recorded as signed receipt — tier change is permanent and auditable"]}];
+var curM=-1,aStep=-1,autoAll=false,aT=null,aMI=0,hovId=null,selId=null,afr=0;
+var aax=-99,aay=-99,atx=-99,aty=-99;
+function anf(id){return an.find(function(x){return x.id===id})}
 function archRender(){
 afr++;ctx.clearRect(0,0,AW,AH);
-for(const c of ACL){ctx.beginPath();ctx.ellipse(c.cx,c.cy,c.rx,c.ry,0,0,Math.PI*2);ctx.fillStyle=c.c+'06';ctx.fill();ctx.strokeStyle=c.c+'0e';ctx.lineWidth=.5;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);ctx.font='500 9px sans-serif';ctx.fillStyle=c.c+'35';ctx.textAlign='center';ctx.fillText(c.l.toUpperCase(),c.cx,c.cy-c.ry-5);}
-const mc=curM>=0?AM[curM].c:null;
-for(const[a,b]of AE){const na=anf(a),nb=anf(b);if(!na||!nb)continue;const lit=archIsLit(a,b);const dx=nb.x-na.x,dy=nb.y-na.y,dist=Math.sqrt(dx*dx+dy*dy)||1;const bd=Math.min(22,dist*.12);ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.quadraticCurveTo((na.x+nb.x)/2+(-dy/dist)*bd,(na.y+nb.y)/2+(dx/dist)*bd,nb.x,nb.y);if(lit){ctx.strokeStyle=mc;ctx.lineWidth=2;ctx.globalAlpha=.5;}else{ctx.strokeStyle='#fff';ctx.lineWidth=.4;ctx.globalAlpha=.035;}ctx.stroke();ctx.globalAlpha=1;}
-for(const nd of an)archDrawN(nd);
-for(const nd of v2n)archDrawV2(nd);
-if(aax>0){aax+=(atx-aax)*.12;aay+=(aty-aay)*.12;}
-if(aax>0){const col=curM>=0?AM[curM].c:'#fff';const p=Math.sin(afr*.07)*1.5;ctx.beginPath();ctx.arc(aax,aay-14,8+p*.3,0,Math.PI*2);ctx.fillStyle=col;ctx.globalAlpha=.9;ctx.fill();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(aax,aay-14,13+p,0,Math.PI*2);ctx.strokeStyle=col+'33';ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(aax,aay-14,18+p*1.3,0,Math.PI*2);ctx.strokeStyle=col+'12';ctx.lineWidth=.8;ctx.stroke();}
+ACL.forEach(function(c){ctx.beginPath();ctx.ellipse(c.cx,c.cy,c.rx,c.ry,0,0,Math.PI*2);ctx.fillStyle=c.c+'0a';ctx.fill();ctx.strokeStyle=c.c+'18';ctx.lineWidth=0.7;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);ctx.font='600 11px sans-serif';ctx.fillStyle=c.c+'55';ctx.textAlign='center';ctx.fillText(c.l.toUpperCase(),c.cx,c.cy-c.ry-8);});
+var mc=curM>=0?AM[curM].c:null;
+AE.forEach(function(pair){var na=anf(pair[0]),nb=anf(pair[1]);if(!na||!nb)return;var lit=archIsLit(pair[0],pair[1]);var selLit=selId&&(pair[0]===selId||pair[1]===selId);var dx=nb.x-na.x,dy=nb.y-na.y,dist=Math.sqrt(dx*dx+dy*dy)||1;var bd=Math.min(25,dist*0.12);ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.quadraticCurveTo((na.x+nb.x)/2+(-dy/dist)*bd,(na.y+nb.y)/2+(dx/dist)*bd,nb.x,nb.y);if(lit){ctx.strokeStyle=mc;ctx.lineWidth=2.5;ctx.globalAlpha=0.6;}else if(selLit){ctx.strokeStyle=CC[na.cl];ctx.lineWidth=1.5;ctx.globalAlpha=0.4;}else{ctx.strokeStyle='#fff';ctx.lineWidth=0.5;ctx.globalAlpha=0.06;}ctx.stroke();ctx.globalAlpha=1;});
+an.forEach(function(nd){archDrawN(nd)});
+if(aax>0){aax+=(atx-aax)*0.12;aay+=(aty-aay)*0.12;}
+if(aax>0){var col=curM>=0?AM[curM].c:'#fff';var p=Math.sin(afr*0.07)*1.5;ctx.beginPath();ctx.arc(aax,aay-16,9+p*0.3,0,Math.PI*2);ctx.fillStyle=col;ctx.globalAlpha=0.95;ctx.fill();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(aax,aay-16,15+p,0,Math.PI*2);ctx.strokeStyle=col+'44';ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(aax,aay-16,21+p*1.3,0,Math.PI*2);ctx.strokeStyle=col+'1a';ctx.lineWidth=1;ctx.stroke();}
 requestAnimationFrame(archRender);}
 function archDrawN(nd){
-const col=CC[nd.cl];const st=archGetS(nd);ctx.beginPath();ctx.arc(nd.x,nd.y,nd.r,0,Math.PI*2);
-if(st==='active'){ctx.fillStyle=col+'30';ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(nd.x,nd.y,nd.r+5,0,Math.PI*2);ctx.strokeStyle=col+'22';ctx.lineWidth=.7;ctx.stroke();}
-else if(st==='lit'){ctx.fillStyle=col+'18';ctx.fill();ctx.strokeStyle=col+'60';ctx.lineWidth=1.5;ctx.stroke();}
-else if(st==='hover'){ctx.fillStyle=col+'10';ctx.fill();ctx.strokeStyle=col+'40';ctx.lineWidth=1;ctx.stroke();}
-else{ctx.fillStyle='#ffffff04';ctx.fill();ctx.strokeStyle='#ffffff0c';ctx.lineWidth=.5;ctx.stroke();}
-const ls=nd.lb.split('\n');const fs=nd.r>=28?12:nd.r>=20?11:nd.r>=15?10:9;
-ctx.font=(st==='active'?'500 ':'400 ')+fs+'px sans-serif';ctx.fillStyle=st==='active'||st==='lit'?'#ddd':st==='hover'?'#aaa':'#505050';ctx.textAlign='center';
-const lh=fs+1.5;const ly=nd.y-((ls.length-1)*lh)/2;ls.forEach((l,i)=>ctx.fillText(l,nd.x,ly+i*lh));}
-function archDrawV2(nd){
-const hov=hovId===nd.id;ctx.beginPath();ctx.arc(nd.x,nd.y,nd.r,0,Math.PI*2);
-ctx.fillStyle=hov?'#6a6a6218':'#ffffff04';ctx.fill();ctx.strokeStyle=hov?'#6a6a6240':'#ffffff0a';ctx.lineWidth=.5;ctx.stroke();
-const ls=nd.lb.split('\n')||[nd.lb];ctx.font=(hov?'500 ':'400 ')+'9px sans-serif';ctx.fillStyle=hov?'#999':'#3a3a3a';ctx.textAlign='center';
-const ly=nd.y-((ls.length-1)*4.5);ls.forEach((l,i)=>ctx.fillText(l,nd.x,ly+i*10));}
-function archGetS(nd){if(curM<0)return hovId===nd.id?'hover':'idle';const p=AM[curM].path,i=p.indexOf(nd.id);if(i<0)return hovId===nd.id?'hover':'idle';if(i===aStep)return'active';if(i<aStep)return'lit';return'idle';}
-function archIsLit(a,b){if(curM<0)return false;const p=AM[curM].path;for(let i=1;i<=aStep;i++){if((p[i-1]===a&&p[i]===b)||(p[i-1]===b&&p[i]===a))return true;}return false;}
-function archSetStep(i){const m=AM[curM];aStep=Math.max(0,Math.min(i,m.path.length-1));const nd=anf(m.path[aStep]);if(aax<0){aax=nd.x;aay=nd.y;}atx=nd.x;aty=nd.y;archUpdCloud();archUpdUI();}
+var col=CC[nd.cl];var st=archGetS(nd);var isSel=selId===nd.id;
+ctx.beginPath();ctx.arc(nd.x,nd.y,nd.r,0,Math.PI*2);
+if(st==='active'){ctx.fillStyle=col+'40';ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.stroke();ctx.beginPath();ctx.arc(nd.x,nd.y,nd.r+6,0,Math.PI*2);ctx.strokeStyle=col+'30';ctx.lineWidth=1;ctx.stroke();}
+else if(st==='lit'){ctx.fillStyle=col+'25';ctx.fill();ctx.strokeStyle=col+'88';ctx.lineWidth=2;ctx.stroke();}
+else if(isSel){ctx.fillStyle=col+'20';ctx.fill();ctx.strokeStyle=col+'aa';ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(nd.x,nd.y,nd.r+5,0,Math.PI*2);ctx.strokeStyle=col+'22';ctx.lineWidth=0.8;ctx.stroke();}
+else if(hovId===nd.id){ctx.fillStyle=col+'15';ctx.fill();ctx.strokeStyle=col+'66';ctx.lineWidth=1.5;ctx.stroke();}
+else{ctx.fillStyle=col+'08';ctx.fill();ctx.strokeStyle=col+'25';ctx.lineWidth=0.8;ctx.stroke();}
+var ls=nd.lb.split('\n');
+var fs=nd.r>=32?14:nd.r>=24?13:nd.r>=18?12:11;
+var bright=st==='active'||st==='lit'||isSel;
+ctx.font=(bright?'500 ':'400 ')+fs+'px sans-serif';
+ctx.fillStyle=bright?'#eee':hovId===nd.id?'#ccc':'#888';
+ctx.textAlign='center';var lh=fs+2;var ly=nd.y-((ls.length-1)*lh)/2;
+ls.forEach(function(l,i){ctx.fillText(l,nd.x,ly+i*lh)});}
+function archGetS(nd){if(curM<0)return'idle';var p=AM[curM].path,i=p.indexOf(nd.id);if(i<0)return'idle';if(i===aStep)return'active';if(i<aStep)return'lit';return'idle';}
+function archIsLit(a,b){if(curM<0)return false;var p=AM[curM].path;for(var i=1;i<=aStep;i++){if((p[i-1]===a&&p[i]===b)||(p[i-1]===b&&p[i]===a))return true;}return false;}
+function archSetStep(i){var m=AM[curM];aStep=Math.max(0,Math.min(i,m.path.length-1));var nd=anf(m.path[aStep]);if(aax<0){aax=nd.x;aay=nd.y;}atx=nd.x;aty=nd.y;archUpdCloud();archUpdUI();}
 function archUpdCloud(){
-const el=document.getElementById('archCloud');if(curM<0||aStep<0){el.style.display='none';return;}
-const m=AM[curM],nd=anf(m.path[aStep]),r=cv.getBoundingClientRect(),sx=r.width/AW,sy=r.height/AH;
+var el=document.getElementById('archCloud');if(curM<0||aStep<0){el.style.display='none';return;}
+var m=AM[curM],nd=anf(m.path[aStep]),r=cv.getBoundingClientRect(),sx=r.width/AW,sy=r.height/AH;
 el.style.display='block';document.getElementById('archCloudStep').style.color=m.c;
 document.getElementById('archCloudStep').textContent=(aStep+1)+'/'+m.path.length+' — '+m.name;
 document.getElementById('archCloudText').textContent=m.d[aStep];
-const lx=nd.x*sx+16,ly=(nd.y-nd.r-28)*sy;
-el.style.left=Math.max(8,Math.min(lx,r.width-250))+'px';el.style.top=Math.max(8,Math.min(ly,r.height-80))+'px';}
+var lx=nd.x*sx+16,ly=(nd.y-nd.r-32)*sy;
+el.style.left=Math.max(8,Math.min(lx,r.width-260))+'px';el.style.top=Math.max(8,Math.min(ly,r.height-90))+'px';}
+function archShowDetail(nd){
+selId=nd.id;var b=document.getElementById('archBub');var col=CC[nd.cl];var clName=ACL.find(function(c){return c.id===nd.cl}).l;
+b.style.display='block';b.style.borderColor=col+'66';
+document.getElementById('archBubName').innerHTML='<span style="color:'+col+';font-size:10px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:2px">'+clName+'</span>'+nd.lb.replace('\n',' ');
+document.getElementById('archBubDesc').textContent=nd.d;
+var r=cv.getBoundingClientRect(),sx=r.width/AW;
+var bx=nd.x*sx+16+nd.r;
+if(bx+250>r.width)bx=nd.x*sx+16-nd.r-250;
+b.style.left=Math.max(8,Math.min(bx,r.width-260))+'px';b.style.top=Math.max(8,Math.min((nd.y-20)*(r.height/AH),r.height-120))+'px';}
 function archUpdUI(){
-const s=document.getElementById('archStatus'),el=document.getElementById('archBtns');let h='';
-AM.forEach((m,i)=>{const on=curM===i;h+='<button onclick="archPick('+i+')" style="font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid '+(on?m.c+'55':'#1a1a1a')+';background:'+(on?m.c+'12':'transparent')+';color:'+(on?m.c:'#444')+';cursor:pointer;white-space:nowrap;transition:all .2s">'+m.name+'</button>';});
-h+='<span style="width:1px;height:14px;background:#1a1a1a;display:inline-block;margin:0 2px"></span>';
-if(curM>=0){const m=AM[curM];
-h+='<button onclick="archSP()" style="font-size:10px;padding:4px 7px;border-radius:12px;border:1px solid #1a1a1a;background:transparent;color:#555;cursor:pointer"'+(aStep<=0?' disabled':'')+'>&#8592;</button>';
-h+='<button onclick="archSN()" style="font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid '+m.c+'44;background:'+m.c+'0e;color:'+m.c+';cursor:pointer">'+(aStep>=m.path.length-1?'&#x21bb;':'&#8594;')+'</button>';}
-h+='<button onclick="archTogA()" style="font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid '+(autoAll?'#c9a55a44':'#1a1a1a')+';background:'+(autoAll?'#c9a55a0e':'transparent')+';color:'+(autoAll?'#c9a55a':'#444')+';cursor:pointer">'+(autoAll?'&#9646;&#9646; Stop':'&#9654; Demo all')+'</button>';
+var s=document.getElementById('archStatus'),el=document.getElementById('archBtns');var h='';
+AM.forEach(function(m,i){var on=curM===i;h+='<button onclick="archPick('+i+')" style="font-size:11px;padding:5px 12px;border-radius:14px;border:1px solid '+(on?m.c+'66':'#2a2a2a')+';background:'+(on?m.c+'18':'transparent')+';color:'+(on?m.c:'#666')+';cursor:pointer;white-space:nowrap;transition:all .2s">'+m.name+'</button>';});
+h+='<span style="width:1px;height:16px;background:#2a2a2a;display:inline-block;margin:0 3px"></span>';
+if(curM>=0){var m=AM[curM];
+h+='<button onclick="archSP()" style="font-size:11px;padding:5px 8px;border-radius:14px;border:1px solid #2a2a2a;background:transparent;color:#888;cursor:pointer"'+(aStep<=0?' disabled':'')+'>&#8592;</button>';
+h+='<button onclick="archSN()" style="font-size:11px;padding:5px 12px;border-radius:14px;border:1px solid '+m.c+'55;background:'+m.c+'15;color:'+m.c+';cursor:pointer">'+(aStep>=m.path.length-1?'&#x21bb;':'&#8594; Next')+'</button>';}
+h+='<button onclick="archTogA()" style="font-size:11px;padding:5px 12px;border-radius:14px;border:1px solid '+(autoAll?'#d4a57455':'#2a2a2a')+';background:'+(autoAll?'#d4a57415':'transparent')+';color:'+(autoAll?'#d4a574':'#666')+';cursor:pointer">'+(autoAll?'&#9646;&#9646; Stop':'&#9654; Demo all')+'</button>';
 el.innerHTML=h;
-if(curM>=0){s.textContent=AM[curM].name+' — '+(aStep+1)+'/'+AM[curM].path.length;s.style.color=AM[curM].c;}else{s.textContent='Hover to explore';s.style.color='#555';}}
-function archPick(i){archStopA();curM=i;aax=-99;archSetStep(0);}
+if(curM>=0){s.textContent=AM[curM].name+' — step '+(aStep+1)+'/'+AM[curM].path.length;s.style.color=AM[curM].c;}else{s.textContent='Click any module to explore';s.style.color='#888';}}
+function archPick(i){archStopA();curM=i;selId=null;document.getElementById('archBub').style.display='none';aax=-99;archSetStep(0);}
 function archSN(){if(curM<0)return;if(aStep>=AM[curM].path.length-1){archPick(curM);return;}archSetStep(aStep+1);}
 function archSP(){if(aStep>0)archSetStep(aStep-1);}
-function archTogA(){if(autoAll){archStopA();archUpdUI();return;}autoAll=true;aMI=0;curM=0;aax=-99;archSetStep(0);archRunA();}
-function archRunA(){if(!autoAll)return;const m=AM[aMI];
-if(aStep<m.path.length-1){archSetStep(aStep+1);aT=setTimeout(archRunA,1400);}
-else{aT=setTimeout(function(){aMI=(aMI+1)%AM.length;curM=aMI;aax=-99;archSetStep(0);aT=setTimeout(archRunA,1400);},2000);}}
+function archTogA(){if(autoAll){archStopA();archUpdUI();return;}autoAll=true;aMI=0;curM=0;selId=null;document.getElementById('archBub').style.display='none';aax=-99;archSetStep(0);archRunA();archUpdUI();}
+function archRunA(){if(!autoAll)return;var m=AM[aMI];if(aStep<m.path.length-1){archSetStep(aStep+1);aT=setTimeout(archRunA,1500);}else{aT=setTimeout(function(){aMI=(aMI+1)%AM.length;curM=aMI;aax=-99;archSetStep(0);aT=setTimeout(archRunA,1500);},2200);}}
 function archStopA(){autoAll=false;if(aT){clearTimeout(aT);aT=null;}}
-const archWrap=document.getElementById('archMap');
+var archWrap=document.getElementById('archMap');
+function archFindNode(mx,my){
+for(var i=0;i<an.length;i++){var nd=an[i];var dx=mx-nd.x,dy=my-nd.y;if(dx*dx+dy*dy<(nd.r+6)*(nd.r+6))return nd;}
+return null;}
 archWrap.addEventListener('mousemove',function(e){
-const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*(AW/r.width),my=(e.clientY-r.top)*(AH/r.height);
-var found=null;
-for(var i=0;i<an.length;i++){var nd=an[i];var dx=mx-nd.x,dy=my-nd.y;if(dx*dx+dy*dy<(nd.r+5)*(nd.r+5)){found=nd;break;}}
-if(!found)for(var j=0;j<v2n.length;j++){var nd2=v2n[j];var dx2=mx-nd2.x,dy2=my-nd2.y;if(dx2*dx2+dy2*dy2<(nd2.r+5)*(nd2.r+5)){found=nd2;break;}}
+var r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*(AW/r.width),my=(e.clientY-r.top)*(AH/r.height);
+var found=archFindNode(mx,my);
 hovId=found?found.id:null;
-var b=document.getElementById('archBub');
-if(found&&curM<0){b.style.display='block';document.getElementById('archBubName').textContent=(found.lb||'').replace(/\n/g,' ');document.getElementById('archBubDesc').textContent=found.d||'v2 Constitutional governance module';b.style.left=Math.min(e.clientX-r.left+12,r.width-240)+'px';b.style.top=Math.max(e.clientY-r.top-50,8)+'px';}
-else{b.style.display='none';}
 cv.style.cursor=found?'pointer':'default';});
-archWrap.addEventListener('mouseleave',function(){hovId=null;document.getElementById('archBub').style.display='none';});
+archWrap.addEventListener('click',function(e){
+var r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*(AW/r.width),my=(e.clientY-r.top)*(AH/r.height);
+var found=archFindNode(mx,my);
+if(found){
+archStopA();curM=-1;aStep=-1;aax=-99;
+document.getElementById('archCloud').style.display='none';
+archShowDetail(found);archUpdUI();}
+else{selId=null;document.getElementById('archBub').style.display='none';}});
+archWrap.addEventListener('mouseleave',function(){hovId=null;});
 archWrap.addEventListener('touchstart',function(e){
-var touch=e.touches[0];var r=cv.getBoundingClientRect();var mx=(touch.clientX-r.left)*(AW/r.width),my=(touch.clientY-r.top)*(AH/r.height);
-var found=null;for(var i=0;i<an.length;i++){var nd=an[i];var dx=mx-nd.x,dy=my-nd.y;if(dx*dx+dy*dy<(nd.r+6)*(nd.r+6)){found=nd;break;}}
-if(found){hovId=found.id;var b=document.getElementById('archBub');b.style.display='block';document.getElementById('archBubName').textContent=(found.lb||'').replace(/\n/g,' ');document.getElementById('archBubDesc').textContent=found.d||'';b.style.left=Math.min(touch.clientX-r.left+12,r.width-240)+'px';b.style.top=Math.max(touch.clientY-r.top-50,8)+'px';}
-},{passive:true});
+var touch=e.touches[0];var r=cv.getBoundingClientRect();
+var mx=(touch.clientX-r.left)*(AW/r.width),my=(touch.clientY-r.top)*(AH/r.height);
+var found=archFindNode(mx,my);
+if(found){e.preventDefault();archStopA();curM=-1;aStep=-1;aax=-99;document.getElementById('archCloud').style.display='none';archShowDetail(found);archUpdUI();}
+},{passive:false});
 archRender();archUpdUI();
-// Auto-start demo after 2 seconds
-setTimeout(function(){if(curM<0){autoAll=true;aMI=0;curM=0;aax=-99;archSetStep(0);archRunA();archUpdUI();}},2000);
+setTimeout(function(){if(curM<0&&!selId){autoAll=true;aMI=0;curM=0;aax=-99;archSetStep(0);archRunA();archUpdUI();}},2500);
+
 
 </script>
 </body>
