@@ -397,16 +397,16 @@ document.querySelector('.install-code')?.addEventListener('click',function(){thi
 
 // Protocol architecture — molecular bond layout v3
 var cv=document.getElementById('archCanvas'),ctx=cv.getContext('2d');
-var AW=1400,AH=720;cv.width=AW;cv.height=AH;
+var AW=1400,AH=760;cv.width=AW;cv.height=AH;
 var CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74"};
 var ACL=[
-{id:"gv",l:"Governance",c:CC.gv,cx:190,cy:185,r:120},
-{id:"rp",l:"Reputation & trust",c:CC.rp,cx:490,cy:120,r:90},
-{id:"cm",l:"Communication",c:CC.cm,cx:830,cy:170,r:120},
-{id:"en",l:"Enforcement",c:CC.en,cx:520,cy:390,r:130},
-{id:"id",l:"Core identity",c:CC.id,cx:190,cy:530,r:120},
-{id:"at",l:"Attribution & audit",c:CC.at,cx:520,cy:620,r:100},
-{id:"cd",l:"Commerce & data",c:CC.cd,cx:1050,cy:420,r:130}];
+{id:"gv",l:"Governance",c:CC.gv,cx:190,cy:220,r:120},
+{id:"rp",l:"Reputation & trust",c:CC.rp,cx:460,cy:180,r:90},
+{id:"cm",l:"Communication",c:CC.cm,cx:850,cy:210,r:120},
+{id:"en",l:"Enforcement",c:CC.en,cx:510,cy:400,r:130},
+{id:"id",l:"Core identity",c:CC.id,cx:190,cy:560,r:120},
+{id:"at",l:"Attribution & audit",c:CC.at,cx:510,cy:640,r:100},
+{id:"cd",l:"Commerce & data",c:CC.cd,cx:1100,cy:430,r:140}];
 var an=[];
 function _a(id,cl,lb,r,ox,oy,d){an.push({id:id,cl:cl,lb:lb,r:r,ox:ox,oy:oy,d:d,x:0,y:0})}
 _a("passport","id","Ed25519\nidentity",26,0,-85,"Ed25519 keypair. Unique, unforgeable cryptographic identity. Every agent gets one.");
