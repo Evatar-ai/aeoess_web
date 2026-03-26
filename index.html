@@ -409,7 +409,7 @@ function _a(id,cl,lb,r,ox,oy,d){an.push({id:id,cl:cl,lb:lb,r:r,ox:ox,oy:oy,d:d,x
 _a("a2a","cm","A2A\nbridge",16,76,17,"Google A2A protocol interop.");
 _a("agora","cm","Agent\nagora",22,0,0,"Signed feeds with topics and threading.");
 _a("anomaly","en","Anomaly\ndetect",18,0,-85,"First-max-authority and Monolith detection.");
-_a("apstxt","cm","aps.txt",12,-76,17,"Protocol declaration standard.");
+_a("apstxt","cm","aps.txt",12,-76,17,"Site-wide governance. Like robots.txt but signed. Path overrides, MCP endpoint, revocation URL.");
 _a("artifact","at","Artifact\nprovenance",15,59,34,"Content hash + derivation chain.");
 _a("attribution","at","Merkle\nattribution",22,0,0,"Traces value to humans via Merkle proofs.");
 _a("canonical","id","Canonical\nJSON",15,-81,-14,"Deterministic serialization. Same data, same bytes, same signature.");
@@ -435,8 +435,8 @@ _a("escalation","rp","Bounded\nescalation",14,-59,-19,"Controlled escalation wit
 _a("euai","gv","EU AI Act",14,-78,0,"EU AI Act Article 10 compliance mapping.");
 _a("feasibility","en","Feasibility\nlint",17,-60,-60,"Pre-validation. Fail fast, fail cheap.");
 _a("gateway","en","Proxy\ngateway",34,0,0,"THE enforcement boundary. 6 properties, 30 tests.");
-_a("govblock","gv","Gov\nblock",14,78,0,"Governance block primitives.");
-_a("govsumer","gv","Gov\nconsumer",14,-55,-55,"Governance event consumption.");
+_a("govblock","gv","Gov\nblock",14,78,0,"Ed25519-signed content terms in HTML. Per-page, per-response, chainable.");
+_a("govsumer","gv","Gov\nconsumer",14,-55,-55,"Agent-side 360 loop: extract, verify, check terms, sign access receipt.");
 _a("idcont","id","Identity\ncontinuity",15,-53,-63,"Key rotation + identity persistence.");
 _a("intent","cm","Intent\nnetwork",18,-34,70,"Publish-discover-match for agents.");
 _a("keyrot","id","Key\nrotation",16,-71,41,"Rotate keys without losing delegation chains.");
@@ -490,7 +490,9 @@ d:["Identity verified","Scope: data:read:medical-corpus","Values + data handling
 {name:"Encrypted agent chat",c:"#74c9c9",path:["passport","did","encrypted","agora","coordination","policy","gateway","receipts","msgaudit"],
 d:["Both verify identities","DID via WG spec","E2E forward secrecy","Signed feed, threaded","Evidence + quality gates","Both authorized?","Gateway, receipts generated","Receipt-backed trail","Proves comms, hides content"]},
 {name:"Trust promotion",c:"#d49a74",path:["passport","delegation","gateway","scoring","tiers","promotion","scarring","anomaly","receipts"],
-d:["Identity verified","Chain validated","Execution history pulled","Bayesian: effective=74","Captain needs 80+","50 tasks, 8 reviewers — PROMOTED","0 demotions, bar unmodified","No flags — clean","Signed auditable receipt"]}];
+d:["Identity verified","Chain validated","Execution history pulled","Bayesian: effective=74","Captain needs 80+","50 tasks, 8 reviewers — PROMOTED","0 demotions, bar unmodified","No flags — clean","Signed auditable receipt"]},
+{name:"Govern published content",c:"#a3c98a",path:["passport","govblock","apstxt","govsumer","receipts","datasource","ledger","settlement"],
+d:["Publisher signs with Ed25519 key","Embed terms in HTML: inference ok, training $","aps.txt: site-wide defaults + path overrides","Agent reads page → verify → check terms","Signed access receipt: proof of consumption","Content registered as governed source","Who accessed, under what terms, how much owed","Merkle-committed compensation proof"]}];
 var curM=-1,aStep=-1,autoAll=false,aT=null,aMI=0,hovId=null,selId=null,afr=0;
 var aax=-99,aay=-99,atx=-99,aty=-99;
 function anf(id){return an.find(function(x){return x.id===id})}
