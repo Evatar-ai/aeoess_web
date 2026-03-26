@@ -94,6 +94,14 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 37: Governance Distribution Stack — Every Article on The Agent Times Is Now Cryptographically Governed",
+      "datePublished": "2026-03-25",
+      "description": "Shipped the full governance distribution stack: governance blocks (per-page signed terms), aps.txt (site-wide like robots.txt), HTTP headers, chained blocks for derivatives, and a 360 consumer loop with access receipts. The Agent Times is the first publication embedding Ed25519-signed content governance in every article. Framework adapters (CrewAI, ADK, LangChain, A2A), 21-invariant conformance suite, and hosted enforcement gateway. SDK v1.25.0 (1480 tests), MCP v2.15.1 (108 tools), Python v0.7.0.",
+      "url": "https://aeoess.com/blog.html#day-37",
+      "keywords": ["governance blocks", "aps.txt", "content governance", "The Agent Times", "access receipts", "360 loop", "framework adapters", "conformance suite", "1480 tests", "108 tools"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 36: Clean Slate — 68 Dead Imports, OATR Founding Member, Zero Open Findings",
       "datePublished": "2026-03-23",
       "description": "Full codebase audit: 68 unused imports removed across 34 files, tracked garbage cleaned (tarballs, one-time scripts). OATR issuer registration merged — 4 founding WG members all registered. Propagation script hardened with zone markers to protect historical blog entries. All Portal findings confirmed resolved. xsa520 published decision equivalence spec. 1178 tests, 0 failures.",
@@ -599,6 +607,20 @@
   <p class="sub">Day-by-day record of building a 42-module AI agent protocol from scratch. Ed25519 identity, delegation chains, values enforcement, coordination primitives, agentic commerce, encrypted messaging, data attribution. Started February 18, 2026. 1480 tests, 108 MCP tools, two research papers, open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-37">
+  <time class="post-date" datetime="2026-03-25">March 25, 2026</time>
+  <h2>Day 37: Governance Distribution Stack — Every Article on The Agent Times Is Now Cryptographically Governed</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The protocol could sign content. It could verify signatures. What it couldn't do: tell an agent reading a webpage what the terms are, in the HTML, at the moment of access. Today that's running code.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Five delivery mechanisms, one primitive.</strong> A governance block is Ed25519-signed JSON declaring: who published this content (DID), what the content hash is (SHA-256), what the terms are (inference, training, redistribution, caching), and what happens if terms are revoked. Five ways to deliver it: <code>&lt;script type="application/aps-governance+json"&gt;</code> in HTML, <code>aps.txt</code> at <code>/.well-known/aps.txt</code> for site-wide coverage, <code>X-APS-Governance</code> HTTP headers on any response, <code>&lt;meta&gt;</code> tags for lightweight embedding, and chained governance blocks where derivatives reference the parent's hash. All signed. All verifiable. All shipping in SDK v1.25.0.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">The 360 loop.</strong> Publisher calls <code>embedGovernance()</code> — signed block goes into the HTML. Agent calls <code>governanceLoop360()</code> — extracts the block, verifies the signature, checks if its intended usage is permitted, and creates a signed <code>AccessReceipt</code>. The receipt captures the terms and revocation policy at access time. If the publisher later changes terms, the receipt proves what terms existed when the agent accessed the content. Both sides have cryptographic proof. Publisher signed the terms. Agent signed the receipt. No trust required.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">The Agent Times integration.</strong> PR #58 merged. Every article page on theagenttimes.com now includes a governance block in its HTML <code>&lt;head&gt;</code> and governance headers on every HTTP response. Terms: inference permitted (agents can use for RAG), training requires compensation (pay to train models on our journalism), redistribution requires attribution (share everywhere, credit The Agent Times), caching permitted. Signed with the tat-editor Ed25519 key. The first publication on the internet with cryptographically signed content governance embedded in every article.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Framework adapters.</strong> Governance hooks for CrewAI, Google ADK, LangChain, and A2A — each one maps the protocol's delegation verification and policy evaluation to the framework's native concepts. A CrewAI agent verifies its delegation chain before executing a task. An ADK agent checks policy before tool calls. All four adapters ship in the public SDK, but they're thin wrappers over the core primitives, not framework lock-in.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Conformance suite.</strong> 21 invariants across 4 categories: delegation invariants (authority never increases, revoked chains stay dead), identity invariants (DID determinism, signature verification), policy invariants (intent-evaluation-receipt chain completeness), and commerce invariants (spend bounds, human approval gates). Any implementation claiming APS conformance can run the suite.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Hosted enforcement gateway.</strong> Private repo at aeoess-gateway. Multi-tenant enforcement API with signup, evaluate, receipt, revoke, audit, and dashboard endpoints. Three plan tiers (Free/Pro $99/Enterprise $999). Cascade revocation. Alert system. E2E tested. The protocol is open and free. The hosted gateway that makes it easy is the business. Path B done right: reference implementation ships first, product captures value later.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">MCP remote passport tracking.</strong> The hosted server at mcp.aeoess.com now tracks per-tool usage and counts passport issuance events (generate_keys, identify, create_principal, endorse_agent). Public at <code>/stats</code>. 61 sessions, 48 tool calls since launch. The counter starts from zero — honest numbers, not inflated ones.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.25.0 (1480 tests, 384 suites, 78 files). MCP v2.15.1 (108 tools). Python v0.7.0 (141 tests). ~9,000 npm downloads in the first month. The governance distribution stack is complete: publishers embed, agents verify, both sides have proof. What's left is adoption.</p>
+</article>
 
 <article class="post" id="day-36">
   <time class="post-date" datetime="2026-03-23">March 23, 2026</time>
