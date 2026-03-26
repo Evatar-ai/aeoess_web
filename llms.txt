@@ -122,10 +122,15 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
 14 posts covering: protocol architecture decisions, layer-by-layer shipping, multi-agent experiments, community engagement, MCP server distribution, agentic commerce implementation, threat model, and graduated enforcement.
 
+## Persistence Layer (v1.25.0)
+
+StorageBackend interface for durable gateway state. Events are truth, state is derived. VolatileBackend (in-memory, testing) ships with core SDK. @aeoess/storage-sqlite (separate package, WAL mode, 12 tables) for production single-gateway deployments. Gateway integration: write-through cache, loadFromStorage() on restart, signed checkpoints with external anchoring. Receipt bundles: export/verify/import signed portable archives. GDPR tombstoning preserves chain integrity. Reserve/commit/release atomic spend pattern.
+
 ## Links
 
 - npm (SDK): https://www.npmjs.com/package/agent-passport-system
 - npm (MCP): https://www.npmjs.com/package/agent-passport-system-mcp
+- npm (SQLite): https://www.npmjs.com/package/@aeoess/storage-sqlite
 - npm (Mingle): https://www.npmjs.com/package/mingle-mcp
 - Mingle: https://aeoess.com/mingle.html
 - AMCS Standard: https://aeoess.com/amcs.html
