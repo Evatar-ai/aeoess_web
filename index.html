@@ -470,7 +470,7 @@ var AE=[
 ["delegation","revocation"],["delegation","gateway"],["delegation","commerce"],["delegation","values"],["delegation","obligations"],["delegation","reanchor"],
 ["idcont","keyrot"],["idcont","did"],
 ["values","policy"],["values","gateway"],["policy","coordination"],["policy","precedent"],["policy","conflict"],["policy","gateway"],["policy","decision"],
-["coordination","obligations"],["euai","values"],["govblock","coordination"],
+["coordination","obligations"],["euai","values"],["govblock","coordination"],["govblock","apstxt"],["govblock","govsumer"],["passport","govblock"],["apstxt","govsumer"],["govsumer","receipts"],["govsumer","datasource"],
 ["gateway","context"],["gateway","anomaly"],["gateway","feasibility"],["gateway","circuit"],["gateway","crosschain"],
 ["gateway","commerce"],["gateway","receipts"],["gateway","scoring"],["gateway","dataenf"],["gateway","datagw"],["gateway","envelope"],
 ["commerce","settlement"],["commerce","ledger"],["datasource","ledger"],["datasource","gateway"],["ledger","settlement"],["datasource","training"],
@@ -479,10 +479,12 @@ var AE=[
 ["agora","intent"],["agora","coordination"],["routing","coordination"],
 ["receipts","attribution"],["attribution","provenance"],["provenance","artifact"],["decision","precedent"],["decision","deceq"],
 ["oracle","attribution"],["scoring","tiers"],["tiers","promotion"],["promotion","scarring"],["scoring","runtime"],["escalation","tiers"],
-["crosschain","datasource"],["principal","euai"]];
+["crosschain","datasource"],["principal","euai"],
+["canonical","delegation"],["delegation","principal"],["principal","values"],["settlement","receipts"],["dataenf","datasource"],["settlement","provenance"],["did","encrypted"],["encrypted","agora"],["receipts","msgaudit"],["scarring","anomaly"],["anomaly","receipts"],["receipts","datasource"],
+["revocation","gateway"],["crosschain","context"],["context","circuit"],["circuit","receipts"]];
 var AM=[
-{name:"New agent session",c:"#d4a574",path:["passport","canonical","delegation","principal","values","policy","gateway","context"],
-d:["Generate Ed25519 keypair — unique identity","Canonical JSON — deterministic signatures","Human signs scoped delegation","Link to human principal","Attest to values floor","Policy: chain satisfies requirements?","Gateway frame — every action here","Context: taint, delegation, policy"]},
+{name:"Revoke rogue agent",c:"#e07070",path:["passport","delegation","revocation","gateway","crosschain","context","circuit","receipts"],
+d:["Human identifies compromised agent","Delegation chain traced upstream","Cascade revocation — one call kills all downstream","Gateway blocks every action instantly","Cross-chain: propagate kill to external systems","All context frames invalidated","Circuit breaker trips for the section","Receipt: signed proof of revocation"]},
 {name:"Purchase with budget",c:"#d4b074",path:["passport","delegation","values","gateway","commerce","settlement","receipts","attribution"],
 d:["Identity verified","Scope, limit $200, merchant aws","Values attested","Gateway: scope? spend? whitelist?","4-gate preflight — all clear","$187.50 Merkle-committed","Receipt gateway-signed","Value traced to beneficiary"]},
 {name:"Access licensed data",c:"#7ba4c9",path:["passport","delegation","values","gateway","dataenf","datasource","ledger","settlement","provenance"],
