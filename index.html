@@ -241,8 +241,8 @@ a:hover{opacity:.8}
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-val">1634</span><span class="stat-label">Tests</span></div>
-      <div class="stat"><span class="stat-val">108</span><span class="stat-label">MCP Tools</span></div>
-      <div class="stat"><span class="stat-val">48</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-val">120</span><span class="stat-label">MCP Tools</span></div>
+      <div class="stat"><span class="stat-val">85</span><span class="stat-label">Modules</span></div>
     </div>
   </div>
   <div>
@@ -253,6 +253,7 @@ a:hover{opacity:.8}
     </a>
     <div class="updates-box">
     <div class="ub-title">&#9889; Recent Updates</div>
+    <div class="u-item"><span class="u-date">Mar 26</span><span class="u-text"><span class="u-tag t-ship">ship</span><strong>Rome-Complete institutional layer</strong> &mdash; Charter, office registry, approval policy, federation, reserves, succession, HLC time. 53 core + 32 v2 modules. SDK v1.27.0. <a href="blog.html">Blog &rarr;</a></span></div>
     <div class="u-item"><span class="u-date">Mar 25</span><span class="u-text"><span class="u-tag t-ship">ship</span><strong>Governance distribution stack</strong> &mdash; Governance blocks in HTML, aps.txt, HTTP headers, chained blocks, 360 consumer loop. TAT is first publication with signed content governance. 120 MCP tools. <a href="blog.html#day-37">Blog &rarr;</a></span></div>
     <div class="u-item"><span class="u-date">Mar 25</span><span class="u-text"><span class="u-tag t-ship">ship</span><strong>Interactive protocol map</strong> &mdash; 57-module molecular layout, 5 mission demos. <a href="blog.html">Blog &rarr;</a></span></div>
     <div class="u-item"><span class="u-date">Mar 24</span><span class="u-text"><span class="u-tag t-ship">ship</span><strong>Data lifecycle governance + 3 WG specs ratified</strong> &mdash; QSP-1, DID Resolution, Entity Verification unanimous. SDK v1.27.0. <a href="blog.html">Details &rarr;</a></span></div>
@@ -277,7 +278,7 @@ a:hover{opacity:.8}
     <canvas id="archCanvas"></canvas>
     <div class="arch-ui" id="archUI">
       <div class="arch-ui-row">
-        <span class="arch-label">Protocol architecture &mdash; 53 core modules + 32 v2 constitutional &mdash; 1634 tests</span>
+        <span class="arch-label">Protocol architecture &mdash; 53 core + 32 v2 constitutional = 85 modules &mdash; 1634 tests</span>
         <span class="arch-status" id="archStatus"></span>
       </div>
       <div class="arch-btns" id="archBtns"></div>
@@ -315,7 +316,7 @@ a:hover{opacity:.8}
     <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.27.0</a>
     <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.16.0</a>
     <a href="https://www.npmjs.com/package/mingle-mcp">Mingle MCP v2.2.1</a>
-    <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.4.0</a>
+    <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.7.0</a>
     <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
     <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
   </div>
@@ -393,16 +394,17 @@ document.querySelector('.install-code')?.addEventListener('click',function(){thi
 
 // Protocol architecture — diamond layout v5
 var cv=document.getElementById('archCanvas'),ctx=cv.getContext('2d');
-var AW=1400,AH=760;cv.width=AW;cv.height=AH;
-var CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74"};
+var AW=1400,AH=820;cv.width=AW;cv.height=AH;
+var CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74","in":"#c9a854"};
 var ACL=[
-{id:"cd",l:"Commerce & data",c:CC.cd,cx:150,cy:420,r:110},
-{id:"gv",l:"Governance",c:CC.gv,cx:400,cy:230,r:110},
-{id:"at",l:"Attribution & audit",c:CC.at,cx:400,cy:610,r:110},
-{id:"id",l:"Core identity",c:CC.id,cx:700,cy:420,r:110},
-{id:"cm",l:"Communication",c:CC.cm,cx:1000,cy:230,r:110},
-{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1000,cy:610,r:110},
-{id:"en",l:"Enforcement",c:CC.en,cx:1250,cy:420,r:110},
+{id:"in",l:"Institutional",c:CC["in"],cx:700,cy:105,r:115},
+{id:"cd",l:"Commerce & data",c:CC.cd,cx:150,cy:460,r:110},
+{id:"gv",l:"Governance",c:CC.gv,cx:400,cy:270,r:110},
+{id:"at",l:"Attribution & audit",c:CC.at,cx:400,cy:650,r:110},
+{id:"id",l:"Core identity",c:CC.id,cx:700,cy:460,r:110},
+{id:"cm",l:"Communication",c:CC.cm,cx:1000,cy:270,r:110},
+{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1000,cy:650,r:110},
+{id:"en",l:"Enforcement",c:CC.en,cx:1250,cy:460,r:110},
 ];
 var an=[];
 function _a(id,cl,lb,r,ox,oy,d){an.push({id:id,cl:cl,lb:lb,r:r,ox:ox,oy:oy,d:d,x:0,y:0})}
@@ -463,6 +465,14 @@ _a("tiers","rp","Tier\nresolution",18,0,-62,"5 tiers. authority = min(delegation
 _a("training","cd","Training\nattribution",16,-63,-50,"Multi-hop derivation chains.");
 _a("values","gv","Values\nfloor",24,0,-78,"8 principles with graduated enforcement: inline, audit, or warn.");
 _a("vc","id","Verifiable\ncreds",15,81,-14,"W3C Verifiable Credentials. Provable attestations.");
+_a("charter","in","Institutional\ncharter",22,0,0,"Root governance document. Creates offices, defines powers, amendment rules.");
+_a("office","in","Office\nregistry",15,-62,-42,"Named roles with succession. Holders appointed or elected.");
+_a("approval","in","Approval\npolicy",14,62,-42,"M-of-N multi-class approval gates. Threshold crypto without key sharing.");
+_a("federation","in","Federation",16,-68,35,"Inter-sovereign treaties. Scoped workstreams between chartered institutions.");
+_a("reserve","in","Reserve\nattest",14,68,35,"Escrow-aware reserves. Bond-weighted dispute resolution.");
+_a("hlc","in","Hybrid\nclock",13,0,68,"Hybrid Logical Clocks. Causal ordering across distributed agents.");
+_a("entityver","id","Entity\nverify",14,0,95,"WG-ratified conformance. Cross-implementation identity verification.");
+_a("transact","cd","Escrow &\ndispute",15,80,55,"Transactional lifecycle: escrow, dispute, finality, evidence.");
 an.forEach(function(nd){var c=ACL.find(function(c){return c.id===nd.cl});nd.x=c.cx+nd.ox;nd.y=c.cy+nd.oy;});
 
 var AE=[
@@ -481,7 +491,12 @@ var AE=[
 ["oracle","attribution"],["scoring","tiers"],["tiers","promotion"],["promotion","scarring"],["scoring","runtime"],["escalation","tiers"],
 ["crosschain","datasource"],["principal","euai"],
 ["canonical","delegation"],["delegation","principal"],["principal","values"],["settlement","receipts"],["dataenf","datasource"],["settlement","provenance"],["did","encrypted"],["encrypted","agora"],["receipts","msgaudit"],["scarring","anomaly"],["anomaly","receipts"],["receipts","datasource"],
-["revocation","gateway"],["crosschain","context"],["context","circuit"],["circuit","receipts"]];
+["revocation","gateway"],["crosschain","context"],["context","circuit"],["circuit","receipts"],
+["charter","delegation"],["charter","office"],["charter","values"],["charter","approval"],["charter","federation"],
+["office","delegation"],["office","principal"],["approval","policy"],["approval","gateway"],
+["federation","a2a"],["reserve","commerce"],["reserve","settlement"],["reserve","transact"],
+["hlc","receipts"],["hlc","coordination"],["entityver","did"],["entityver","passport"],
+["transact","commerce"],["transact","gateway"]];
 var AM=[
 {name:"Revoke rogue agent",c:"#e07070",path:["passport","delegation","revocation","gateway","crosschain","context","circuit","receipts"],
 d:["Human identifies compromised agent","Delegation chain traced upstream","Cascade revocation — one call kills all downstream","Gateway blocks every action instantly","Cross-chain: propagate kill to external systems","All context frames invalidated","Circuit breaker trips for the section","Receipt: signed proof of revocation"]},
@@ -494,7 +509,9 @@ d:["Both verify identities","DID via WG spec","E2E forward secrecy","Signed feed
 {name:"Trust promotion",c:"#d49a74",path:["passport","delegation","gateway","scoring","tiers","promotion","scarring","anomaly","receipts"],
 d:["Identity verified","Chain validated","Execution history pulled","Bayesian: effective=74","Captain needs 80+","50 tasks, 8 reviewers — PROMOTED","0 demotions, bar unmodified","No flags — clean","Signed auditable receipt"]},
 {name:"Govern published content",c:"#a3c98a",path:["passport","govblock","apstxt","govsumer","receipts","datasource","ledger","settlement"],
-d:["Publisher signs with Ed25519 key","Embed terms in HTML: inference ok, training $","aps.txt: site-wide defaults + path overrides","Agent reads page → verify → check terms","Signed access receipt: proof of consumption","Content registered as governed source","Who accessed, under what terms, how much owed","Merkle-committed compensation proof"]}];
+d:["Publisher signs with Ed25519 key","Embed terms in HTML: inference ok, training $","aps.txt: site-wide defaults + path overrides","Agent reads page → verify → check terms","Signed access receipt: proof of consumption","Content registered as governed source","Who accessed, under what terms, how much owed","Merkle-committed compensation proof"]},
+{name:"Found an institution",c:"#c9a854",path:["passport","charter","office","approval","delegation","values","gateway","hlc","receipts"],
+d:["Founder identity verified","Charter ratified — powers, offices, amendment rules","CTO office created — succession policy defined","2-of-3 board approval required for spending","Office delegates: scope tools:deploy, $5000","Values floor attested by all participants","Gateway enforces charter scope + approval gates","HLC orders every action causally","Receipt: immutable institutional action proof"]}];
 var curM=-1,aStep=-1,autoAll=false,aT=null,aMI=0,hovId=null,selId=null,afr=0;
 var aax=-99,aay=-99,atx=-99,aty=-99;
 function anf(id){return an.find(function(x){return x.id===id})}
