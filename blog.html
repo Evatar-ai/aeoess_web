@@ -94,6 +94,14 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 38: Rome-Complete — Institutional Governance in One Session",
+      "datePublished": "2026-03-26",
+      "description": "Built the full Rome-Complete institutional layer in one session. Charter with 19 types, multi-class approval, Petri net (10 invariants), hybrid logical clocks, foreign counterparty envelopes, escrow-aware revocation, gateway identity, reserve attestations, federation receipt/reputation portability. 12 new MCP tools (120 total). 77 new tests. SDK v1.27.0 (1634 tests), MCP v2.16.0.",
+      "url": "https://aeoess.com/blog.html#day-38",
+      "keywords": ["charter", "institutional governance", "multi-class approval", "Petri net", "hybrid logical clock", "federation", "reserve attestation", "1634 tests", "120 tools"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 37: Governance Distribution Stack — Every Article on The Agent Times Is Now Cryptographically Governed",
       "datePublished": "2026-03-25",
       "description": "Shipped the full governance distribution stack: governance blocks (per-page signed terms), aps.txt (site-wide like robots.txt), HTTP headers, chained blocks for derivatives, and a 360 consumer loop with access receipts. The Agent Times is the first publication embedding Ed25519-signed content governance in every article. Framework adapters (CrewAI, ADK, LangChain, A2A), 21-invariant conformance suite, and hosted enforcement gateway. SDK v1.25.0 (1480 tests), MCP v2.15.1 (108 tools), Python v0.7.0.",
@@ -607,6 +615,18 @@
   <p class="sub">Day-by-day record of building a 42-module AI agent protocol from scratch. Ed25519 identity, delegation chains, values enforcement, coordination primitives, agentic commerce, encrypted messaging, data attribution. Started February 18, 2026. 1634 tests, 120 MCP tools, two research papers, open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-38">
+  <time class="post-date" datetime="2026-03-26">March 26, 2026</time>
+  <h2>Day 38: Rome-Complete &mdash; Institutional Governance in One Session</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The spec estimated 12 sessions. It shipped in one. Three phases of institutional governance &mdash; charter, approval, time, reserve, federation &mdash; went from zero lines to 1634 passing tests, 120 MCP tools, and two npm packages published before midnight.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Phase 1: Charter and Approval.</strong> A charter is the founding document of a multi-agent institution. 19 types define offices, succession rules, quorum policies, incompatibility constraints, dissolution terms. 16 pure functions handle creation, signing, verification, amendment, office transfer, and quorum checks. Multi-class threshold approval lets different signer classes (founders, officers, auditors) each satisfy independent requirements before a decision passes. 31 tests, including the INV-5 guard: suspended or dissolved charters cannot be amended. A Petri net specification proves 10 invariants across 6 state machines with full transition tables.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Phase 2: Time, Foreign, Escrow, Gateway Identity.</strong> Hybrid Logical Clocks handle the fundamental problem of distributed time: wall clocks disagree, so every timestamp carries uncertainty bounds. Temporal ordering is three-valued &mdash; definitely_before, concurrent, or incomparable &mdash; because honest uncertainty beats false precision. Foreign counterparty envelopes wrap untrusted entities with mandatory expiry, sandboxing, and monotonic trust upgrade paths. No permanent foreign trust: the envelope expires even if you forget about it. Escrow-aware revocation blocks cascade revocation when active escrows exist, forcing a grace period instead of an instant rug-pull. Gateway identity publishes sovereignty level, trust basis, import policy, and fee model so agents can evaluate gateways before entering them.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Phase 3: Reserve and Federation.</strong> Reserve attestations let gateways declare their backing with liability semantics and assurance classes ordered by strength (self_attested &lt; peer_audited &lt; third_party_verified &lt; regulatory_certified). False attestation penalties are declared upfront. Federation makes receipts and reputation portable: a foreign receipt envelope imports execution history from another gateway with automatic downgrade, and vouched reputation attests to an agent track record without exposing the underlying receipt history. 46 tests cover all three phases.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">12 new MCP tools.</strong> create_charter, verify_charter, sign_charter, evaluate_threshold, create_approval_request, add_approval_signature, create_hybrid_timestamp, compare_timestamps, validate_temporal_rights, create_reserve_attestation, vouch_reputation, apply_reputation_downgrade. 108 tools became 120.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Naming conflicts and the cost of scale.</strong> Two type collisions surfaced at 53 modules: JurisdictionEnvelope (data-lifecycle vs gateway) became GatewayJurisdiction. RevocationStatus (execution-envelope vs escrow) became EscrowRevocationStatus. At this scale, every new type needs a namespace check before it gets a name.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.27.0 (1634 tests, 421 suites, 86 files). MCP v2.16.0 (120 tools). Both published. 53 core modules + 32 v2 constitutional modules. ~9,000 npm downloads. The protocol can now model institutions, not just individual agents. Charters define governance. Approval policies enforce it. Time is honest about its uncertainty. Reserves are backed or they say they are not. Federation means agents carry their history with them. Rome is complete.</p>
+</article>
 
 <article class="post" id="day-37">
   <time class="post-date" datetime="2026-03-25">March 25, 2026</time>
