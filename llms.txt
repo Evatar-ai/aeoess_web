@@ -135,7 +135,8 @@ StorageBackend interface for durable gateway state. Events are truth, state is d
 - Mingle: https://aeoess.com/mingle.html
 - AMCS Standard: https://aeoess.com/amcs.html
 - GitHub: https://github.com/aeoess
-- Paper: https://doi.org/10.5281/zenodo.18749779
+- Paper (Protocol): https://doi.org/10.5281/zenodo.18749779
+- Paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
 - Dev Log: https://aeoess.com/blog.html
 - Threat Model: https://aeoess.com/threat-model.html
 - Author: https://tymofii.me

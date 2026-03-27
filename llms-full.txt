@@ -596,6 +596,7 @@ Day-by-day development log: https://aeoess.com/blog.html
 14 posts covering the complete build timeline from Feb 17 to Mar 2, 2026:
 - Feb 18: npm launch, Ed25519 identity, Layers 1-4
 - Feb 19: First media coverage
+- Mar 27: Faceted Authority Attenuation paper published on Zenodo (DOI:10.5281/zenodo.19260073)
 - Feb 20: Research paper published on Zenodo, v1.1 accountability features
 - Feb 21-22: Community engagement on MoltBook, GitHub collaboration with AIP/Visa/Forter
 - Feb 23-24: MCP server v1.0.0 (11 tools), 12+ distribution channels, Agora seeded
@@ -637,6 +638,7 @@ StorageBackend — interface for persistent gateway state. Events are truth (rec
 - GitHub Mingle: https://github.com/aeoess/mingle-mcp
 - Mingle page: https://aeoess.com/mingle.html
 - Research paper: https://doi.org/10.5281/zenodo.18749779
+- Research paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
 - Protocol page: https://aeoess.com/protocol.html
 - Dev log: https://aeoess.com/blog.html
 - Threat model: https://aeoess.com/threat-model.html
