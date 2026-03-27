@@ -394,17 +394,17 @@ document.querySelector('.install-code')?.addEventListener('click',function(){thi
 
 // Protocol architecture — diamond layout v5
 var cv=document.getElementById('archCanvas'),ctx=cv.getContext('2d');
-var AW=1400,AH=860;cv.width=AW;cv.height=AH;
+var AW=1400,AH=760;cv.width=AW;cv.height=AH;
 var CC={id:"#d4a574",gv:"#7ba4c9",en:"#d47474",cd:"#d4b074",cm:"#74c9c9",at:"#c974a5",rp:"#d49a74","in":"#c9a854"};
 var ACL=[
-{id:"in",l:"Institutional",c:CC["in"],cx:700,cy:190,r:115},
-{id:"cd",l:"Commerce & data",c:CC.cd,cx:150,cy:440,r:110},
-{id:"gv",l:"Governance",c:CC.gv,cx:400,cy:250,r:110},
-{id:"at",l:"Attribution & audit",c:CC.at,cx:400,cy:630,r:110},
-{id:"id",l:"Core identity",c:CC.id,cx:700,cy:440,r:110},
-{id:"cm",l:"Communication",c:CC.cm,cx:1000,cy:250,r:110},
-{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1000,cy:630,r:110},
-{id:"en",l:"Enforcement",c:CC.en,cx:1250,cy:440,r:110},
+{id:"id",l:"Core identity",c:CC.id,cx:700,cy:230,r:110},
+{id:"cd",l:"Commerce & data",c:CC.cd,cx:150,cy:420,r:110},
+{id:"gv",l:"Governance",c:CC.gv,cx:400,cy:230,r:110},
+{id:"in",l:"Institutional",c:CC["in"],cx:700,cy:420,r:115},
+{id:"cm",l:"Communication",c:CC.cm,cx:1000,cy:230,r:110},
+{id:"at",l:"Attribution & audit",c:CC.at,cx:400,cy:610,r:110},
+{id:"rp",l:"Reputation & trust",c:CC.rp,cx:1000,cy:610,r:110},
+{id:"en",l:"Enforcement",c:CC.en,cx:1250,cy:420,r:110},
 ];
 var an=[];
 function _a(id,cl,lb,r,ox,oy,d){an.push({id:id,cl:cl,lb:lb,r:r,ox:ox,oy:oy,d:d,x:0,y:0})}
