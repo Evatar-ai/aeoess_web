@@ -83,17 +83,17 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .up-t{font:400 .68rem/1.45 var(--sans);color:var(--ink-3)}.up-t strong{color:var(--ink);font-weight:600}.up-t a{color:var(--link);font-size:.62rem}
 .up-tag{display:inline-block;font:600 .42rem var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:.06rem .2rem;margin-right:.12rem;border:1px solid}.t-s{border-color:var(--green);color:var(--green)}.t-d{border-color:#92400e;color:#92400e}[data-theme="dark"] .t-d{border-color:#fbbf24;color:#fbbf24}
 .arch-h{font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);margin-bottom:.4rem;padding:1.5rem 0 .35rem;border-bottom:1px solid var(--rule)}
-.arch-map{position:relative;width:100%;background:var(--paper);border:1px solid var(--rule);overflow:hidden;padding:10px;margin-bottom:2rem}
-.arch-map canvas{display:block;width:100%;height:auto}
+.arch-map{position:relative;width:100%;background:var(--paper);border:1px solid var(--rule);overflow-x:auto;overflow-y:hidden;padding:10px;margin-bottom:2rem}
+.arch-map canvas{display:block;width:100%;min-width:900px;height:auto}
 .arch-ui{position:absolute;top:10px;left:14px;right:14px;z-index:10;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
 .arch-ui-row{display:flex;align-items:center;gap:8px}
 .arch-label{font:500 .55rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-5)}
 .arch-status{font:.6rem var(--mono);color:var(--ink-5)}
 .arch-btns{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.arch-cloud{position:absolute;display:none;pointer-events:none;z-index:25;background:var(--bg);border:1px solid var(--rule);box-shadow:0 4px 20px rgba(0,0,0,.08);padding:10px 16px;max-width:280px}
+.arch-cloud{position:absolute;display:none;pointer-events:none;z-index:25;background:var(--bg);border:1px solid var(--rule);box-shadow:0 4px 20px rgba(0,0,0,.08);padding:10px 16px;max-width:250px}
 .arch-cloud-step{font:600 .55rem var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
 .arch-cloud-text{font:.72rem/1.5 var(--sans);color:var(--ink-3)}
-.arch-bub{position:absolute;display:none;pointer-events:none;z-index:20;background:var(--bg);border:1px solid var(--rule);box-shadow:0 4px 20px rgba(0,0,0,.08);padding:12px 16px;max-width:300px}
+.arch-bub{position:absolute;display:none;pointer-events:none;z-index:20;background:var(--bg);border:1px solid var(--rule);box-shadow:0 4px 20px rgba(0,0,0,.08);padding:10px 14px;max-width:240px}
 .arch-bub-name{font:600 .88rem var(--serif);color:var(--ink);margin-bottom:4px;line-height:1.4}
 .arch-bub-desc{font:.72rem/1.5 var(--sans);color:var(--ink-3)}
 .mingle-box{border:1px solid var(--rule);background:var(--paper);padding:1.2rem 1.5rem;margin-bottom:2rem}
@@ -112,7 +112,9 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .footer-ext{display:flex;gap:.6rem}.footer-ext a{font:.52rem var(--mono);color:var(--ink-5)}.footer-ext a:hover{color:var(--ink)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .paper h1{animation:fadeUp .5s ease both}.paper-sub{animation:fadeUp .5s ease .03s both}.paper-badges{animation:fadeUp .5s ease .06s both}.paper-body{animation:fadeUp .5s ease .09s both}.updates{animation:fadeUp .5s ease .15s both}
-@media(max-width:900px){.nav{padding:.8rem 1.5rem}.nav-links{display:none}.nav-burger{display:flex}.page{padding:0 1.5rem}.hero{grid-template-columns:1fr;padding:5.5rem 0 2rem;gap:2rem}.paper h1{font-size:clamp(1.8rem,6vw,2.3rem)}.capabilities{grid-template-columns:1fr}.cmp-row{grid-template-columns:1fr}.cmp:first-child{border-right:none;border-bottom:1px solid var(--rule)}.footer-grid{grid-template-columns:repeat(2,1fr)}.pkg-links{flex-wrap:wrap;gap:.6rem}}
+.scroll-hint{display:none}
+@media(max-width:900px){.scroll-hint{display:inline;color:var(--ink-5)}
+.nav{padding:.8rem 1.5rem}.nav-links{display:none}.nav-burger{display:flex}.page{padding:0 1.5rem}.hero{grid-template-columns:1fr;padding:5.5rem 0 2rem;gap:2rem}.paper h1{font-size:clamp(1.8rem,6vw,2.3rem)}.capabilities{grid-template-columns:1fr}.cmp-row{grid-template-columns:1fr}.cmp:first-child{border-right:none;border-bottom:1px solid var(--rule)}.footer-grid{grid-template-columns:repeat(2,1fr)}.pkg-links{flex-wrap:wrap;gap:.6rem}}
 @media(max-width:480px){.hero{padding:4.5rem 0 1.5rem}.paper h1{font-size:1.8rem}.paper-stats{gap:1.2rem;flex-wrap:wrap}.capabilities{gap:.05rem .3rem}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:.3rem;text-align:center}}
 </style>
 <body>
@@ -189,7 +191,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 <div class="arch-h">Protocol Architecture — 54 core + 32 v2 constitutional = 86 modules</div>
 <div class="arch-map" id="archMap">
   <canvas id="archCanvas"></canvas>
-  <div class="arch-ui" id="archUI"><div class="arch-ui-row"><span class="arch-label">Click any module to explore</span><span class="arch-status" id="archStatus"></span></div><div class="arch-btns" id="archBtns"></div></div>
+  <div class="arch-ui" id="archUI"><div class="arch-ui-row"><span class="arch-label">Click any module to explore <span class="scroll-hint">&middot; scroll to explore on mobile</span></span><span class="arch-status" id="archStatus"></span></div><div class="arch-btns" id="archBtns"></div></div>
   <div class="arch-cloud" id="archCloud"><div class="arch-cloud-step" id="archCloudStep"></div><div class="arch-cloud-text" id="archCloudText"></div></div>
   <div class="arch-bub" id="archBub"><div class="arch-bub-name" id="archBubName"></div><div class="arch-bub-desc" id="archBubDesc"></div></div>
 </div>
