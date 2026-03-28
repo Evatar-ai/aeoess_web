@@ -127,7 +127,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .mingle-card-desc{font:400 .85rem/1.6 var(--sans);color:var(--ink-muted);margin-bottom:.8rem}
 .mingle-card-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
 .mingle-card-actions code{background:var(--code-bg);border:1px solid var(--rule);padding:.25rem .6rem;font:.78rem var(--mono);color:var(--ink)}
-.install-section{margin:2rem 0 3rem;padding-top:2rem;border-top:1px solid var(--rule)}
+.install-section{margin:2rem 0 3rem;padding-top:2rem}
 .install-label{font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin-bottom:.6rem}
 .install-code{font:500 .85rem var(--mono);color:var(--ink);background:var(--code-bg);border:1px solid var(--rule);padding:.65rem 1.1rem;display:inline-block;cursor:pointer;transition:background .15s,border-color .15s}
 .install-code:hover{border-color:var(--ink-muted)}
@@ -220,6 +220,19 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <div class="stat-cell"><span class="stat-num">85</span><span class="stat-label">Modules</span></div>
       <div class="stat-cell"><span class="stat-num">3</span><span class="stat-label">Papers</span></div>
     </div>
+    <div class="install-code" onclick="navigator.clipboard.writeText('npm install agent-passport-system')" style="margin-bottom:.6rem">
+      <span class="cm">$</span> npm install agent-passport-system
+    </div>
+    <div class="install-links" style="margin-bottom:0">
+      <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.27.0</a>
+      <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.16.2</a>
+      <a href="https://www.npmjs.com/package/mingle-mcp">Mingle MCP v2.2.1</a>
+      <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.7.0</a>
+      <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
+      <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
+      <span style="color:var(--rule)">&middot;</span>
+      <a href="https://doi.org/10.5281/zenodo.19260073">Paper 3</a>
+    </div>
   </div>
   <div>
     <div class="updates-panel">
@@ -276,22 +289,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
     <a href="https://github.com/aeoess/mingle-mcp" target="_blank" style="font:.78rem var(--sans);color:var(--ink-faint)">GitHub</a>
   </div>
 </section>
-<section class="install-section">
-  <div class="install-label">Install</div>
-  <div class="install-code" onclick="navigator.clipboard.writeText('npm install agent-passport-system')">
-    <span class="cm">$</span> npm install agent-passport-system
-  </div>
-  <div class="install-links">
-    <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.27.0</a>
-    <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.16.2</a>
-    <a href="https://www.npmjs.com/package/mingle-mcp">Mingle MCP v2.2.1</a>
-    <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.7.0</a>
-    <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
-    <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
-    <span style="color:var(--rule)">&middot;</span>
-    <a href="https://doi.org/10.5281/zenodo.19260073">Paper 3</a>
-  </div>
-</section>
+
 <div class="agent-notice">
   <strong>For AI agents:</strong> Visit <a href="https://aeoess.com/llms.txt">aeoess.com/llms.txt</a> for machine-readable documentation or <a href="https://aeoess.com/llms-full.txt">llms-full.txt</a> for the complete technical reference (1634 tests, 121 MCP tools, 53+32 modules). This page is designed for humans.
 </div>
@@ -378,7 +376,7 @@ function isDark(){return document.documentElement.getAttribute('data-theme')==='
 function getCC(){return isDark()?
   {id:"#7baadb",gv:"#d4a574",en:"#e07070",cd:"#6ee7b7",cm:"#93c5fd",at:"#c084fc",rp:"#fb923c","in":"#fbbf24"}:
   {id:"#2c5282",gv:"#744210",en:"#9b2c2c",cd:"#276749",cm:"#2b6cb0",at:"#6b46c1",rp:"#c05621","in":"#7b341e"};}
-function getTxtC(){return isDark()?{bright:'#eee',normal:'#ccc',dim:'#666'}:{bright:'#111',normal:'#444',dim:'#888'};}
+function getTxtC(){return isDark()?{bright:'#eee',normal:'#ccc',dim:'#666'}:{bright:'#111',normal:'#333',dim:'#555'};}
 function getBgC(){return isDark()?'#000':'#fff';}
 function getLineC(){return isDark()?'#fff':'#000';}
 var ACL=[
@@ -503,8 +501,8 @@ function archRender(){
 afr++;var CC=getCC();var tc=getTxtC();var lc=getLineC();
 ctx.clearRect(0,0,AW,AH);
 ACL.forEach(function(c){var col=CC[c.id];ctx.beginPath();ctx.arc(c.cx,c.cy,c.r,0,Math.PI*2);
-ctx.fillStyle=col+'0a';ctx.fill();ctx.strokeStyle=col+'18';ctx.lineWidth=0.7;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
-ctx.font='600 11px "Source Sans 3",sans-serif';ctx.fillStyle=col+'55';ctx.textAlign='center';ctx.fillText(c.l.toUpperCase(),c.cx,c.cy-c.r-8);});
+ctx.fillStyle=col+'0a';ctx.fill();ctx.strokeStyle=col+'28';ctx.lineWidth=0.8;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
+ctx.font='600 11px "Source Sans 3",sans-serif';ctx.fillStyle=col+'88';ctx.textAlign='center';ctx.fillText(c.l.toUpperCase(),c.cx,c.cy-c.r-8);});
 var mc=curM>=0?getMC(AM[curM].ci):null;
 AE.forEach(function(pair){var na=anf(pair[0]),nb=anf(pair[1]);if(!na||!nb)return;
 var lit=archIsLit(pair[0],pair[1]);var sl=selId&&(pair[0]===selId||pair[1]===selId);
@@ -529,7 +527,7 @@ if(st==='active'){ctx.fillStyle=col+'30';ctx.fill();ctx.strokeStyle=col;ctx.line
 else if(st==='lit'){ctx.fillStyle=col+'1a';ctx.fill();ctx.strokeStyle=col+'77';ctx.lineWidth=2;ctx.stroke();}
 else if(isSel){ctx.fillStyle=col+'18';ctx.fill();ctx.strokeStyle=col+'88';ctx.lineWidth=2;ctx.stroke();}
 else if(isHov){ctx.fillStyle=col+'0e';ctx.fill();ctx.strokeStyle=col+'44';ctx.lineWidth=1.5;ctx.stroke();}
-else{ctx.fillStyle=col+'06';ctx.fill();ctx.strokeStyle=col+'1a';ctx.lineWidth=0.7;ctx.stroke();}
+else{ctx.fillStyle=col+'0c';ctx.fill();ctx.strokeStyle=col+'30';ctx.lineWidth=0.9;ctx.stroke();}
 var ls=nd.lb.split('\n');var fs=nd.r>=30?14:nd.r>=22?13:nd.r>=16?12:11;
 var bright=st==='active'||st==='lit'||isSel;
 ctx.font=(bright?'600 ':'400 ')+fs+'px "Source Sans 3",sans-serif';
