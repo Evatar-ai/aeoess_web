@@ -200,16 +200,6 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
   <div class="hero-content">
     <h1>AEOESS</h1>
     <p class="hero-sub">Agentic Economy Orchestration Engine for Sovereign Systems</p>
-    <div class="stats-big">
-      <div><span class="sb-num">1,634</span><span class="sb-label">Tests</span></div>
-      <div><span class="sb-num">121</span><span class="sb-label">MCP Tools</span></div>
-      <div><span class="sb-num">85</span><span class="sb-label">Modules</span></div>
-    </div>
-    <div class="badges-row">
-      <span class="badge badge-live">&#9679; Protocol Live</span>
-      <span class="badge badge-oss">Open Source &middot; Apache-2.0</span>
-      <span class="badge" id="dl-badge">&mdash; downloads</span>
-    </div>
     <p class="hero-abstract">
       The agentic economy is here. Your AI agents book flights, write code, manage money, and talk to other agents. <strong>There are no rules.</strong>
     </p>
@@ -220,6 +210,16 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       Ed25519 identity. Scoped delegation chains with monotonic narrowing. Bayesian reputation. Values floor enforcement. 4-gate agentic commerce. Merkle-proven attribution. W3C DID &amp; Verifiable Credentials. One npm install.
     </p>
 
+    <div class="stats-big">
+      <div><span class="sb-num">1,634</span><span class="sb-label">Tests</span></div>
+      <div><span class="sb-num">121</span><span class="sb-label">MCP Tools</span></div>
+      <div><span class="sb-num">85</span><span class="sb-label">Modules</span></div>
+    </div>
+    <div class="badges-row">
+      <span class="badge badge-live">&#9679; Protocol Live</span>
+      <span class="badge badge-oss">Open Source &middot; Apache-2.0</span>
+      <span class="badge" id="dl-badge">&mdash; downloads</span>
+    </div>
     <div class="install-code" onclick="navigator.clipboard.writeText('npm install agent-passport-system')" style="margin-bottom:.6rem">
       <span class="cm">$</span> npm install agent-passport-system
     </div>
@@ -374,8 +374,8 @@ var AW=1400,AH=810;cv.width=AW;cv.height=AH;
 function isDark(){return document.documentElement.getAttribute('data-theme')==='dark'}
 function getCC(){return isDark()?
   {id:"#7baadb",gv:"#d4a574",en:"#e07070",cd:"#6ee7b7",cm:"#93c5fd",at:"#c084fc",rp:"#fb923c","in":"#fbbf24"}:
-  {id:"#2c5282",gv:"#744210",en:"#9b2c2c",cd:"#276749",cm:"#2b6cb0",at:"#6b46c1",rp:"#c05621","in":"#7b341e"};}
-function getTxtC(){return isDark()?{bright:'#eee',normal:'#ccc',dim:'#666'}:{bright:'#111',normal:'#333',dim:'#555'};}
+  {id:"#1a56db",gv:"#92400e",en:"#dc2626",cd:"#15803d",cm:"#2563eb",at:"#7c3aed",rp:"#ea580c","in":"#b45309"};}
+function getTxtC(){return isDark()?{bright:'#eee',normal:'#ccc',dim:'#666'}:{bright:'#000',normal:'#222',dim:'#444'};}
 function getBgC(){return isDark()?'#000':'#fff';}
 function getLineC(){return isDark()?'#fff':'#000';}
 var ACL=[
@@ -501,7 +501,7 @@ afr++;var CC=getCC();var tc=getTxtC();var lc=getLineC();
 ctx.clearRect(0,0,AW,AH);
 ACL.forEach(function(c){var col=CC[c.id];ctx.beginPath();ctx.arc(c.cx,c.cy,c.r,0,Math.PI*2);
 ctx.fillStyle=col+'0a';ctx.fill();ctx.strokeStyle=col+'28';ctx.lineWidth=0.8;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
-ctx.font='600 11px "Source Sans 3",sans-serif';ctx.fillStyle=col+'88';ctx.textAlign='center';ctx.fillText(c.l.toUpperCase(),c.cx,c.cy-c.r-8);});
+ctx.font='600 11px "Source Sans 3",sans-serif';ctx.fillStyle=col+'bb';ctx.textAlign='center';ctx.fillText(c.l.toUpperCase(),c.cx,c.cy-c.r-8);});
 var mc=curM>=0?getMC(AM[curM].ci):null;
 AE.forEach(function(pair){var na=anf(pair[0]),nb=anf(pair[1]);if(!na||!nb)return;
 var lit=archIsLit(pair[0],pair[1]);var sl=selId&&(pair[0]===selId||pair[1]===selId);
@@ -509,7 +509,7 @@ var dx=nb.x-na.x,dy=nb.y-na.y,dist=Math.sqrt(dx*dx+dy*dy)||1;var bd=Math.min(20,
 ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.quadraticCurveTo((na.x+nb.x)/2+(-dy/dist)*bd,(na.y+nb.y)/2+(dx/dist)*bd,nb.x,nb.y);
 if(lit){ctx.strokeStyle=mc;ctx.lineWidth=2.5;ctx.globalAlpha=0.65;}
 else if(sl){ctx.strokeStyle=CC[na.cl];ctx.lineWidth=1.5;ctx.globalAlpha=0.35;}
-else{ctx.strokeStyle=lc;ctx.lineWidth=0.4;ctx.globalAlpha=0.08;}
+else{ctx.strokeStyle=lc;ctx.lineWidth=0.5;ctx.globalAlpha=0.14;}
 ctx.stroke();ctx.globalAlpha=1;});
 an.forEach(function(nd){archDrawN(nd,CC,tc)});
 if(aax>0){aax+=(atx-aax)*0.12;aay+=(aty-aay)*0.12;}
@@ -526,7 +526,7 @@ if(st==='active'){ctx.fillStyle=col+'30';ctx.fill();ctx.strokeStyle=col;ctx.line
 else if(st==='lit'){ctx.fillStyle=col+'1a';ctx.fill();ctx.strokeStyle=col+'77';ctx.lineWidth=2;ctx.stroke();}
 else if(isSel){ctx.fillStyle=col+'18';ctx.fill();ctx.strokeStyle=col+'88';ctx.lineWidth=2;ctx.stroke();}
 else if(isHov){ctx.fillStyle=col+'0e';ctx.fill();ctx.strokeStyle=col+'44';ctx.lineWidth=1.5;ctx.stroke();}
-else{ctx.fillStyle=col+'0c';ctx.fill();ctx.strokeStyle=col+'30';ctx.lineWidth=0.9;ctx.stroke();}
+else{ctx.fillStyle=col+'12';ctx.fill();ctx.strokeStyle=col+'44';ctx.lineWidth=1;ctx.stroke();}
 var ls=nd.lb.split('\n');var fs=nd.r>=30?14:nd.r>=22?13:nd.r>=16?12:11;
 var bright=st==='active'||st==='lit'||isSel;
 ctx.font=(bright?'600 ':'400 ')+fs+'px "Source Sans 3",sans-serif';
