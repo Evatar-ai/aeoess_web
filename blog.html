@@ -29,7 +29,7 @@
 <meta property="og:type" content="blog">
 <meta property="og:site_name" content="AEOESS">
 <meta property="og:title" content="AEOESS Dev Log — Building AI Agent Infrastructure in 28 Days">
-<meta property="og:description" content="Day-by-day dev log: 48 core + 32 v2 constitutional modules, 1656 tests, 121 MCP tools. Ed25519 identity, delegation chains, values enforcement, separation of powers, circuit breakers. Open source.">
+<meta property="og:description" content="Day-by-day dev log: 54 core + 32 v2 constitutional modules, 1656 tests, 121 MCP tools. Ed25519 identity, delegation chains, values enforcement, separation of powers, circuit breakers. Open source.">
 <meta property="og:url" content="https://aeoess.com/blog.html">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta property="article:author" content="https://tymofii.me">
@@ -96,9 +96,9 @@
       "@type": "BlogPosting",
       "headline": "Day 38: Rome-Complete — Institutional Governance in One Session",
       "datePublished": "2026-03-26",
-      "description": "Built the full Rome-Complete institutional layer in one session. Charter with 19 types, multi-class approval, Petri net (10 invariants), hybrid logical clocks, foreign counterparty envelopes, escrow-aware revocation, gateway identity, reserve attestations, federation receipt/reputation portability. 12 new MCP tools (120 total). 77 new tests. SDK v1.27.0 (1634 tests), MCP v2.16.0.",
+      "description": "Built the full Rome-Complete institutional layer in one session. Charter with 19 types, multi-class approval, Petri net (10 invariants), hybrid logical clocks, foreign counterparty envelopes, escrow-aware revocation, gateway identity, reserve attestations, federation receipt/reputation portability. 12 new MCP tools (120 total). 77 new tests. SDK v1.27.0 (1656 tests), MCP v2.16.0.",
       "url": "https://aeoess.com/blog.html#day-38",
-      "keywords": ["charter", "institutional governance", "multi-class approval", "Petri net", "hybrid logical clock", "federation", "reserve attestation", "1634 tests", "120 tools"]
+      "keywords": ["charter", "institutional governance", "multi-class approval", "Petri net", "hybrid logical clock", "federation", "reserve attestation", "1656 tests", "120 tools"]
     },
     {
       "@type": "BlogPosting",
@@ -626,7 +626,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Phase 3: Reserve and Federation.</strong> Reserve attestations let gateways declare their backing with liability semantics and assurance classes ordered by strength (self_attested &lt; peer_audited &lt; third_party_verified &lt; regulatory_certified). False attestation penalties are declared upfront. Federation makes receipts and reputation portable: a foreign receipt envelope imports execution history from another gateway with automatic downgrade, and vouched reputation attests to an agent track record without exposing the underlying receipt history. 46 tests cover all three phases.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">12 new MCP tools.</strong> create_charter, verify_charter, sign_charter, evaluate_threshold, create_approval_request, add_approval_signature, create_hybrid_timestamp, compare_timestamps, validate_temporal_rights, create_reserve_attestation, vouch_reputation, apply_reputation_downgrade. 108 tools became 120.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Naming conflicts and the cost of scale.</strong> Two type collisions surfaced at 53 modules: JurisdictionEnvelope (data-lifecycle vs gateway) became GatewayJurisdiction. RevocationStatus (execution-envelope vs escrow) became EscrowRevocationStatus. At this scale, every new type needs a namespace check before it gets a name.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.27.0 (1634 tests, 421 suites, 86 files). MCP v2.16.0 (120 tools). Both published. 53 core modules + 32 v2 constitutional modules. ~9,000 npm downloads. The protocol can now model institutions, not just individual agents. Charters define governance. Approval policies enforce it. Time is honest about its uncertainty. Reserves are backed or they say they are not. Federation means agents carry their history with them. Rome is complete.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.27.0 (1656 tests, 421 suites, 86 files). MCP v2.16.0 (120 tools). Both published. 54 core modules + 32 v2 constitutional modules. ~9,000 npm downloads. The protocol can now model institutions, not just individual agents. Charters define governance. Approval policies enforce it. Time is honest about its uncertainty. Reserves are backed or they say they are not. Federation means agents carry their history with them. Rome is complete.</p>
 </article>
 
 <article class="post" id="day-37">
