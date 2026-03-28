@@ -80,11 +80,10 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .hero-sub{font:300 1.15rem/1.4 var(--serif);color:var(--ink-muted);letter-spacing:.04em;margin-bottom:1.6rem}
 .hero-abstract{font:400 .95rem/1.85 var(--sans);color:var(--ink-light);margin-bottom:1.6rem;max-width:620px}
 .hero-abstract strong{font-weight:600;color:var(--ink)}
-.stats-row{display:flex;gap:0;margin-bottom:1.5rem;border:1px solid var(--rule)}
-.stat-cell{flex:1;padding:.8rem 1rem;text-align:center;border-right:1px solid var(--rule)}
-.stat-cell:last-child{border-right:none}
-.stat-num{font:600 1.6rem var(--serif);color:var(--ink);display:block;letter-spacing:-.02em;line-height:1.2}
-.stat-label{font:400 .65rem var(--mono);color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em}
+.stats-inline{font:400 .82rem var(--sans);color:var(--ink-muted);margin-bottom:1rem;letter-spacing:.01em}
+.stats-inline strong{font:600 .82rem var(--sans);color:var(--ink)}
+.stats-inline .sep{color:var(--rule);margin:0 .4rem}
+
 .badges-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .badge{font:400 .65rem var(--mono);padding:.25rem .6rem;border:1px solid var(--rule);color:var(--ink-muted);letter-spacing:.02em}
 .badge-live{border-color:#2a7d2a;color:#2a7d2a}
@@ -162,8 +161,6 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 @media(max-width:480px){
   .hero{padding:4.5rem 0 1.5rem}
   .hero h1{font-size:2.2rem}
-  .stats-row{flex-wrap:wrap}
-  .stat-cell{min-width:45%;border-bottom:1px solid var(--rule)}
   .arch-section{margin:1rem 0 2rem}
   .footer-grid{grid-template-columns:1fr}
   .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
@@ -209,16 +206,16 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
     <p class="hero-abstract" style="margin-top:-.6rem">
       Ed25519 identity. Scoped delegation chains with monotonic narrowing. Bayesian reputation. Values floor enforcement. 4-gate agentic commerce. Merkle-proven attribution. W3C DID &amp; Verifiable Credentials. One npm install.
     </p>
+    <div class="stats-inline">
+      <strong>1,634</strong> tests <span class="sep">&middot;</span>
+      <strong>121</strong> MCP tools <span class="sep">&middot;</span>
+      <strong>85</strong> modules <span class="sep">&middot;</span>
+      <strong id="dl-badge2"></strong>
+    </div>
     <div class="badges-row">
       <span class="badge badge-live">&#9679; Protocol Live</span>
       <span class="badge badge-oss">Open Source &middot; Apache-2.0</span>
       <span class="badge" id="dl-badge">&mdash; downloads</span>
-    </div>
-    <div class="stats-row">
-      <div class="stat-cell"><span class="stat-num">1634</span><span class="stat-label">Tests</span></div>
-      <div class="stat-cell"><span class="stat-num">121</span><span class="stat-label">MCP Tools</span></div>
-      <div class="stat-cell"><span class="stat-num">85</span><span class="stat-label">Modules</span></div>
-      <div class="stat-cell"><span class="stat-num">3</span><span class="stat-label">Papers</span></div>
     </div>
     <div class="install-code" onclick="navigator.clipboard.writeText('npm install agent-passport-system')" style="margin-bottom:.6rem">
       <span class="cm">$</span> npm install agent-passport-system
