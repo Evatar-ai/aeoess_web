@@ -58,7 +58,9 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .topnav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
 .topnav.scrolled{border-bottom-color:var(--rule)}
 [data-theme="dark"] .topnav{background:rgba(17,17,17,.92)}
-.topnav-logo{font:500 1.1rem var(--mono);letter-spacing:.08em;color:var(--ink);text-decoration:none}
+.topnav-logo{text-decoration:none;display:flex;align-items:center}
+.topnav-logo img{height:28px;opacity:.7;transition:opacity .15s}
+.topnav-logo:hover img{opacity:1}
 .topnav-links{display:flex;align-items:center;gap:2.2rem}
 .topnav-links a{font:400 .82rem var(--sans);color:var(--ink-muted);text-decoration:none;letter-spacing:.02em;transition:color .15s}
 .topnav-links a:hover{color:var(--ink)}
@@ -172,7 +174,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 </style>
 <body>
 <nav class="topnav" id="topnav">
-  <a href="/" class="topnav-logo">AEOESS</a>
+  <a href="/" class="topnav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
   <div class="topnav-links">
     <a href="mingle.html">Mingle</a>
     <a href="blog.html">Blog</a>
