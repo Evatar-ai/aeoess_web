@@ -41,8 +41,8 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#ffffff;--paper:#fafaf8;--ink:#111111;--ink-light:#333333;--ink-muted:#666666;--ink-faint:#999999;
-  --rule:#d4d4d4;--rule-light:#e8e8e6;--link:#2255aa;--link-hover:#1144aa;
+  --bg:#ffffff;--paper:#fafaf8;--ink:#111111;--ink-light:#333333;--ink-muted:#444444;--ink-faint:#777777;
+  --rule:#bbbbbb;--rule-light:#e8e8e6;--link:#2255aa;--link-hover:#1144aa;
   --code-bg:#f4f4f2;--surface:#f0f0ee;
   --serif:'Crimson Pro',Georgia,serif;--sans:'Source Sans 3','Helvetica Neue',sans-serif;--mono:'JetBrains Mono','Menlo',monospace;
 }
@@ -84,10 +84,10 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .hero-abstract strong{font-weight:600;color:var(--ink)}
 .stats-big{display:flex;gap:2.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
 .stats-big .sb-num{font:700 2rem var(--serif);color:var(--ink);letter-spacing:-.02em;line-height:1}
-.stats-big .sb-label{font:400 .6rem var(--mono);color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.15rem}
+.stats-big .sb-label{font:400 .6rem var(--mono);color:var(--ink-muted);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.15rem}
 
 .badges-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
-.badge{font:400 .65rem var(--mono);padding:.25rem .6rem;border:1px solid var(--rule);color:var(--ink-muted);letter-spacing:.02em}
+.badge{font:500 .65rem var(--mono);padding:.25rem .6rem;border:1px solid var(--rule);color:var(--ink-muted);letter-spacing:.02em}
 .badge-live{border-color:#166534;color:#166534;font-weight:500}
 [data-theme="dark"] .badge-live{border-color:#4ade80;color:#4ade80;font-weight:500}
 .badge-oss{border-color:#1e40af;color:#1e40af;font-weight:500}
@@ -99,7 +99,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .up-item{display:flex;gap:.6rem;padding:.5rem .9rem;border-bottom:1px solid var(--rule-light);align-items:baseline}
 .up-item:last-child{border-bottom:none}
 .up-date{font:400 .6rem var(--mono);color:var(--ink-faint);min-width:2.5rem;flex-shrink:0}
-.up-text{font:400 .76rem/1.45 var(--sans);color:var(--ink-muted)}
+.up-text{font:400 .76rem/1.45 var(--sans);color:var(--ink-light)}
 .up-text strong{color:var(--ink);font-weight:600}
 .up-text a{color:var(--link);font-size:.72rem}
 .up-tag{display:inline-block;font:500 .5rem var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:.1rem .3rem;margin-right:.2rem;border:1px solid}
@@ -110,7 +110,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 [data-theme="dark"] .t-docs{border-color:#fbbf24;color:#fbbf24}
 [data-theme="dark"] .t-infra{border-color:#818cf8;color:#818cf8}
 .arch-section{margin:2rem 0 3rem}
-.arch-section-header{font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule)}
+.arch-section-header{font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-muted);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule)}
 .arch-map{position:relative;width:100%;background:var(--paper);border:1px solid var(--rule);overflow:hidden;padding:10px}
 .arch-map canvas{display:block;width:100%;height:auto}
 .arch-ui{position:absolute;top:10px;left:14px;right:14px;z-index:10;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
@@ -135,7 +135,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .install-code:hover{border-color:var(--ink-muted)}
 .install-code .cm{color:var(--ink-faint)}
 .install-links{margin-top:.7rem;display:flex;gap:.9rem;flex-wrap:nowrap;overflow-x:auto}
-.install-links a{font:400 .72rem var(--sans);color:var(--ink-muted);white-space:nowrap}
+.install-links a{font:500 .72rem var(--sans);color:var(--link);white-space:nowrap}
 .install-links a:hover{color:var(--link)}
 .agent-notice{margin:2rem 0 3rem;padding:1rem 1.4rem;border:1px solid var(--rule);font:.82rem/1.6 var(--sans);color:var(--ink-muted);background:var(--paper)}
 .agent-notice strong{color:var(--ink);font-weight:600}
