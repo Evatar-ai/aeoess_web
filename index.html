@@ -80,9 +80,9 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .hero-sub{font:300 1.15rem/1.4 var(--serif);color:var(--ink-muted);letter-spacing:.04em;margin-bottom:1.6rem}
 .hero-abstract{font:400 .95rem/1.85 var(--sans);color:var(--ink-light);margin-bottom:1.6rem;max-width:620px}
 .hero-abstract strong{font-weight:600;color:var(--ink)}
-.stats-inline{font:400 .82rem var(--sans);color:var(--ink-muted);margin-bottom:1rem;letter-spacing:.01em}
-.stats-inline strong{font:600 .82rem var(--sans);color:var(--ink)}
-.stats-inline .sep{color:var(--rule);margin:0 .4rem}
+.stats-big{display:flex;gap:2.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.stats-big .sb-num{font:700 2rem var(--serif);color:var(--ink);letter-spacing:-.02em;line-height:1}
+.stats-big .sb-label{font:400 .6rem var(--mono);color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.15rem}
 
 .badges-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .badge{font:400 .65rem var(--mono);padding:.25rem .6rem;border:1px solid var(--rule);color:var(--ink-muted);letter-spacing:.02em}
@@ -154,6 +154,8 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
   .page{padding:0 1.5rem}
   .hero{grid-template-columns:1fr;padding:5.5rem 0 2rem;gap:2rem}
   .install-links{flex-wrap:wrap;gap:.8rem}
+  .stats-big{gap:1.5rem}
+  .stats-big .sb-num{font-size:1.6rem}
   .hero h1{font-size:clamp(2.4rem,7vw,3.2rem)}
   .arch-map{padding:6px}
   .footer-grid{grid-template-columns:repeat(2,1fr)}
@@ -198,6 +200,16 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
   <div class="hero-content">
     <h1>AEOESS</h1>
     <p class="hero-sub">Agentic Economy Orchestration Engine for Sovereign Systems</p>
+    <div class="stats-big">
+      <div><span class="sb-num">1,634</span><span class="sb-label">Tests</span></div>
+      <div><span class="sb-num">121</span><span class="sb-label">MCP Tools</span></div>
+      <div><span class="sb-num">85</span><span class="sb-label">Modules</span></div>
+    </div>
+    <div class="badges-row">
+      <span class="badge badge-live">&#9679; Protocol Live</span>
+      <span class="badge badge-oss">Open Source &middot; Apache-2.0</span>
+      <span class="badge" id="dl-badge">&mdash; downloads</span>
+    </div>
     <p class="hero-abstract">
       The agentic economy is here. Your AI agents book flights, write code, manage money, and talk to other agents. <strong>There are no rules.</strong>
     </p>
@@ -207,17 +219,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
     <p class="hero-abstract" style="margin-top:-.6rem">
       Ed25519 identity. Scoped delegation chains with monotonic narrowing. Bayesian reputation. Values floor enforcement. 4-gate agentic commerce. Merkle-proven attribution. W3C DID &amp; Verifiable Credentials. One npm install.
     </p>
-    <div class="stats-inline">
-      <strong>1,634</strong> tests <span class="sep">&middot;</span>
-      <strong>121</strong> MCP tools <span class="sep">&middot;</span>
-      <strong>85</strong> modules <span class="sep">&middot;</span>
-      <strong id="dl-badge2"></strong>
-    </div>
-    <div class="badges-row">
-      <span class="badge badge-live">&#9679; Protocol Live</span>
-      <span class="badge badge-oss">Open Source &middot; Apache-2.0</span>
-      <span class="badge" id="dl-badge">&mdash; downloads</span>
-    </div>
+
     <div class="install-code" onclick="navigator.clipboard.writeText('npm install agent-passport-system')" style="margin-bottom:.6rem">
       <span class="cm">$</span> npm install agent-passport-system
     </div>
