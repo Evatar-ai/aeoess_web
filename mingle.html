@@ -101,6 +101,7 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
   .tool-n{min-width:auto}
 }
 </style>
+<script>(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-toggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})()</script>
 </head>
 <body>
 
@@ -220,5 +221,6 @@ async function fetchStats(){
 }
 fetchStats();setInterval(fetchStats,30000);
 </script>
+<script>function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-toggle');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}</script>
 </body>
 </html>
