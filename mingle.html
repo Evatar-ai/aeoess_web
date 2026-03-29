@@ -45,7 +45,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#ffffff;--text:#111111;--dim:#333333;--accent:#2255aa;--green:#2a7d2a;--card:#fafaf8;--border:rgba(0,0,0,.1)}
-[data-theme="dark"]{--bg:#0f0e0d;--text:#e8e4de;--dim:#8a857f;--accent:#7baadb;--green:#6ee7b7;--card:#1a1918;--border:rgba(255,255,255,.06)}
+[data-theme="dark"]{--bg:#1c1c1e;--text:#e8e4de;--dim:#8a857f;--accent:#7baadb;--green:#6ee7b7;--card:#1a1918;--border:rgba(255,255,255,.06)}
 body{font:400 1rem/1.7 'Source Sans 3','Helvetica Neue',sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .w{max-width:720px;margin:0 auto;padding:0 2rem}
@@ -102,7 +102,6 @@ footer a{color:var(--dim)}footer a:hover{color:var(--accent)}
   .tool-n{min-width:auto}
 }
 </style>
-<script>(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-toggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})()</script>
 </head>
 <body>
 <nav class="nav" id="nav">
@@ -233,7 +232,6 @@ async function fetchStats(){
 }
 fetchStats();setInterval(fetchStats,30000);
 </script>
-<script>function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-toggle');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}</script>
 <div class="footer-wrap">
 <div class="footer-inner">
   <div class="footer-grid">
@@ -245,5 +243,11 @@ fetchStats();setInterval(fetchStats,30000);
   <div class="footer-bottom"><span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span><div class="footer-ext"><a href="https://www.npmjs.com/package/agent-passport-system">npm</a><a href="https://pypi.org/project/agent-passport-system/">PyPI</a><a href="https://github.com/aeoess">GitHub</a></div></div>
 </div>
 </div>
+<script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
+function closeDrawer(){document.querySelector('.nav-burger')?.classList.remove('open');document.querySelector('.nav-drawer')?.classList.remove('open');}
+(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});
+</script>
 </body>
 </html>

@@ -37,7 +37,6 @@
 @media(max-width:768px){.footer-grid-sub{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.footer-grid-sub{grid-template-columns:1fr}}
 </style>
-<script>(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-toggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})()</script>
 </head><body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
@@ -50,8 +49,7 @@
   <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
   <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
 </div>
-<div id="nav-placeholder"></div><script src="nav.js"></script>
-<main style="max-width:960px;margin:0 auto;padding-bottom:4rem">
+<div id="nav-placeholder"></div><main style="max-width:960px;margin:0 auto;padding-bottom:4rem">
 <div class="aivss-hero"><h1>AIVSS Risk Mapping</h1><p class="subtitle">How the Agent Passport System maps against the OWASP AI Vulnerability Scoring System. 10 risks assessed. Honest coverage. No inflated claims.</p></div>
 <div class="coverage-summary"><div class="coverage-badge badge-strong"><span class="count">5</span><span class="label">Strong</span></div><div class="coverage-badge badge-partial"><span class="count">3</span><span class="label">Partial</span></div><div class="coverage-badge badge-weak"><span class="count">2</span><span class="label">Weak</span></div></div>
 <div class="disclaimer-box"><strong>What these ratings mean.</strong> <strong>Strong:</strong> cryptographic or deterministic enforcement, tested with adversarial scenarios. <strong>Partial:</strong> detection, reputation consequences, or structural mitigation, but not hard prevention. <strong>Weak:</strong> the protocol acknowledges the risk but provides minimal mitigation. All adversarial tests are developer-authored internal evaluation, not independent red-team validation.</div>
@@ -86,5 +84,10 @@
   <div class="footer-bottom"><span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span><div class="footer-ext"><a href="https://www.npmjs.com/package/agent-passport-system">npm</a><a href="https://pypi.org/project/agent-passport-system/">PyPI</a><a href="https://github.com/aeoess">GitHub</a></div></div>
 </div>
 </div>
-<script>function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-toggle');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}</script>
+<script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
+function closeDrawer(){document.querySelector('.nav-burger')?.classList.remove('open');document.querySelector('.nav-drawer')?.classList.remove('open');}
+(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});
+</script>
 </body></html>
