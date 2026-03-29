@@ -1,19 +1,14 @@
-# OS files
-.DS_Store
-Thumbs.db
+# Private keys — NEVER commit
+.keys/
 
-# Agent poller artifacts (written locally, not for git)
-comms/.last_hash
-comms/poller.log
+# macOS
+.DS_Store
+*.swp
+*~
 
 # Node
 node_modules/
-
-# Python
-__pycache__/
-*.pyc
-
-# IDE
-.vscode/
-.idea/
+*.tgz
+comms/.last_hash
+comms/poller.log
 scripts/.propagate-cache.json
