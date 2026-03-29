@@ -106,3 +106,11 @@ pre code{background:none;padding:0}
   .footer-grid{grid-template-columns:1fr}
   .footer-bottom{flex-direction:column;gap:.3rem;text-align:center}
 }
+
+/* Stat grid — used by network.html, agora.html, gateway.html */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0}
+.stat{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.2rem;background:var(--paper);text-align:center}
+.stat-val{display:block;font:700 1.8rem var(--serif);color:var(--ink);line-height:1.1}
+.stat-label{display:block;font:400 .65rem var(--mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.stats{grid-template-columns:1fr}}
