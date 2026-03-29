@@ -83,6 +83,8 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .up-d{font:400 .52rem var(--mono);color:var(--ink-5);min-width:2rem;flex-shrink:0}
 .up-t{font:400 .68rem/1.45 var(--sans);color:var(--ink-3)}.up-t strong{color:var(--ink);font-weight:600}.up-t a{color:var(--link);font-size:.62rem}
 .up-tag{display:inline-block;font:600 .42rem var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:.06rem .2rem;margin-right:.12rem;border:1px solid}.t-s{border-color:var(--green);color:var(--green)}.t-d{border-color:#92400e;color:#92400e}[data-theme="dark"] .t-d{border-color:#fbbf24;color:#fbbf24}
+.t-t{border-color:#7c3aed;color:#7c3aed}[data-theme="dark"] .t-t{border-color:#c084fc;color:#c084fc}
+.t-p{border-color:#1e40af;color:#1e40af}[data-theme="dark"] .t-p{border-color:#60a5fa;color:#60a5fa}
 .arch-h{font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);margin-bottom:.4rem;padding:1.5rem 0 .35rem;border-bottom:1px solid var(--rule)}
 .arch-map{position:relative;width:100%;background:var(--paper);border:1px solid var(--rule);overflow-x:auto;overflow-y:hidden;padding:10px;margin-bottom:2rem;border-radius:12px}
 .arch-map canvas{display:block;width:100%;min-width:900px;height:auto}
@@ -175,19 +177,45 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
   </div>
   <div>
     <div class="updates">
-      <div class="up-h">Recent Updates</div>
-      <div class="up-i"><span class="up-d">Mar 28</span><span class="up-t"><span class="up-tag t-s">rebrand</span><strong>Governance for the Agent Economy</strong> — Academic redesign. Enterprise positioning. 10-question FAQ. Dark/light mode. New logo. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 27</span><span class="up-t"><span class="up-tag t-d">paper</span><strong>Faceted Authority Attenuation</strong> — Product lattice model. <a href="https://doi.org/10.5281/zenodo.19260073">Zenodo</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 26</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Rome-Complete institutional layer</strong> — Charter, offices, federation. <a href="blog.html#day-38">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Governance distribution</strong> — aps.txt, 360 loop, 121 tools. <a href="blog.html#day-37">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Interactive protocol map</strong> — 57-module layout. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 24</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>3 WG specs ratified</strong> — QSP-1, DID, Entity. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 23</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>OATR + data governance</strong> — Ledger, settlement. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 22</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Constitutional v2</strong> — 32 modules. 1,656 tests. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 20</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>AMCS v0.1.0</strong> — Media credentialing. <a href="amcs.html">Spec</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 18</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Gateway enforcement</strong> — 9 findings fixed. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 16</span><span class="up-t"><span class="up-tag t-s">milestone</span><strong>Ecosystem convergence</strong> — YC CEO. Microsoft. <a href="blog.html">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 15</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Mingle v2.0</strong> — Semantic matching. <a href="mingle.html">More</a></span></div>
+      <div class="up-h">Ship Log</div>
+      <div class="up-i"><span class="up-d">Mar 28</span><span class="up-t"><span class="up-tag t-s">rebrand</span><strong>Governance for the Agent Economy</strong> — Academic redesign. Enterprise positioning. 10-question FAQ. <a href="blog.html">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 27</span><span class="up-t"><span class="up-tag t-d">paper</span><strong>Faceted Authority Attenuation</strong> — Product lattice model. Seven dimensions. <a href="https://doi.org/10.5281/zenodo.19260073">Zenodo</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 27</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>IETF Internet-Draft submitted</strong> — draft-pidlisnyi-aps-00. Zero idnits errors.</span></div>
+      <div class="up-i"><span class="up-d">Mar 26</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Rome-Complete institutional layer</strong> — Charter, offices, approval, federation, reserves. <a href="blog.html#day-38">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-p">deploy</span><strong>The Agent Times deploys APS</strong> — Every article cryptographically governed. <a href="https://theagenttimes.com">TAT</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Governance distribution</strong> — aps.txt, 360 consumer loop, 121 MCP tools. <a href="blog.html#day-37">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Interactive protocol map</strong> — 57-module molecular layout. <a href="blog.html">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 24</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>3 WG specs ratified</strong> — QSP-1, DID Resolution, Entity Verification. <a href="blog.html">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 23</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>OATR founding member + data governance</strong> — Ledger, settlement, attribution. <a href="blog.html">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 22</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Constitutional v2 complete</strong> — 32 modules. 1,656 tests. <a href="blog.html#day-34">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 22</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>First encrypted relay envelope</strong> — E2E through qntm bridge. <a href="blog.html#day-35">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 21</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Decision semantics</strong> — Content-addressable decisions. <a href="blog.html#day-33">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 20</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>AMCS v0.1.0</strong> — AI-native media credentialing spec. <a href="amcs.html">Spec</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 20</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Data attribution layer</strong> — Contribution receipts, Merkle proofs. <a href="blog.html#day-32">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 19</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>8 modules in one session</strong> — Oracle witness, audit bridge, policy conflict, key rotation. <a href="blog.html#day-31">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 18</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Gateway enforcement engine</strong> — 9 audit findings fixed. <a href="blog.html">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 17</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>3 modules in one day</strong> — Two Claudes built them. <a href="blog.html#day-30">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 17</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>WG spec demand</strong> — Three groups asked for the same thing. <a href="blog.html#day-29">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 16</span><span class="up-t"><span class="up-tag t-t">traction</span><strong>YC CEO endorsed</strong> — Garry Tan repost. Microsoft merged APS code. Federal agency reviewing. <a href="blog.html#day-28">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 15</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Mingle v2.0</strong> — Semantic matching, persistent identity, ghost mode. <a href="mingle.html">More</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 14</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Substack launch</strong> — Cross-protocol bridge article. <a href="blog.html#day-25">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 13</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Security hardening</strong> — Gateway bugs, setup commands, cross-protocol resolve. <a href="blog.html#day-24">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 12</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Mingle v1 ships</strong> — Your AI finds people for you. <a href="blog.html#day-23">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 11</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Intent Network</strong> — Publish-discover-match for agents. <a href="blog.html#day-22">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 10</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Reputation-gated authority</strong> — Agents earn trust, not just receive it. <a href="blog.html#day-21">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 9</span><span class="up-t"><span class="up-tag t-d">paper</span><strong>Paper 2: Monotonic Narrowing</strong> — Authority attenuation formalized. <a href="https://doi.org/10.5281/zenodo.18932404">Zenodo</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 7</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Autoresearch</strong> — AI finds bugs AI wrote. <a href="blog.html#day-18">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 6</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Principal identity + Python SDK</strong> — Three new protocol extensions. <a href="blog.html#day-17">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 5</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>OWASP AI Security mapping</strong> — Community health baseline. <a href="blog.html#day-16">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 4</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>SDK v1.21.2 + MCP v2.12.0</strong> — Two agents get their next mission. <a href="blog.html#day-15">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 3</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>First real audit</strong> — Agents review the code. <a href="blog.html#day-14">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 2</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Graduated enforcement + threat model</strong> — Agent District RPG. <a href="blog.html#day-13">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 1</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Agentic commerce</strong> — Layer 8. 4-gate checkout. MCP v2.1.0. <a href="blog.html#day-12">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Feb 28</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Documentation sprint</strong> — llms.txt, passport spec. <a href="blog.html#day-11">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Feb 27</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Coordination primitives</strong> — Task lifecycle, evidence, review. <a href="blog.html#day-10">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Feb 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Intent architecture</strong> — Layer 5 foundations. <a href="blog.html#day-8">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Feb 21</span><span class="up-t"><span class="up-tag t-d">paper</span><strong>Paper 1: The Agent Social Contract</strong> — First formalization. <a href="https://doi.org/10.5281/zenodo.18749779">Zenodo</a></span></div>
+      <div class="up-i"><span class="up-d">Feb 18</span><span class="up-t"><span class="up-tag t-s">start</span><strong>Project begins</strong> — Ed25519 identity, delegation chains, first tests.</span></div>
     </div>
   </div>
 </section>
