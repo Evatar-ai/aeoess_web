@@ -59,7 +59,7 @@ pre code{background:none;padding:0}
 .nav-drawer a:hover{color:var(--ink)}
 
 /* ═══ PAGE LAYOUT ═══ */
-.page-wrap{max-width:900px;margin:0 auto;padding:5.5rem 2.5rem 2rem}
+.page-wrap,.w{max-width:900px;margin:0 auto;padding:5.5rem 2.5rem 2rem}
 
 /* ═══ FOOTER — matches index.html ═══ */
 .footer-wrap{max-width:1260px;margin:0 auto;padding:0 3rem}
