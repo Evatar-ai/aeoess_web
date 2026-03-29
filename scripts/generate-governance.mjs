@@ -5,106 +5,137 @@
  * Usage: node scripts/generate-governance.mjs
  * 
  * Generates:
- * 1. Ed25519 keypair (saved to .keys/ — NEVER commit these)
- * 2. aps.txt for site-wide governance 
- * 3. Governance block for embedding in HTML pages
- * 
- * Requires: npm install agent-passport-system (already installed)
+ * 1. Ed25519 keypair (saved to .keys/)
+ * 2. Signed governance block for HTML embedding
+ * 3. aps.txt for site-wide governance
  */
 
-import { generateKeys, generateGovernanceBlock, generateApsTxt } from 'agent-passport-system';
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
+import {
+  generateKeyPair, generateGovernanceBlock, generateApsTxt,
+  renderGovernanceHTML, verifyGovernanceBlock
+} from 'agent-passport-system';
+import { writeFileSync, readFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 
-const DOMAIN = 'aeoess.com';
-const DID = 'did:aps:aeoess-governance';
+const ROOT = process.cwd();
+const KEYS_DIR = join(ROOT, '.keys');
+const WELL_KNOWN = join(ROOT, '.well-known');
+const KEY_FILE = join(KEYS_DIR, 'governance.json');
 
-// Terms for aeoess.com content
-const TERMS = {
-  inference: 'permitted',      // Agents can use for RAG
-  training: 'attribution',     // Training requires attribution to AEOESS
-  redistribution: 'permitted', // Share with link back
-  caching: 'permitted',        // Cache freely
-  commercial: 'permitted',     // Commercial use allowed (Apache-2.0)
+const DOMAIN = 'aeoess.com';
+const DID_PREFIX = 'did:aps:aeoess';
+
+// Default terms for aeoess.com
+const DEFAULT_TERMS = {
+  inference: 'permitted',
+  training: 'attribution_required',
+  redistribution: 'permitted',
+  caching: 'permitted'
 };
 
 async function main() {
-  const keysDir = join(process.cwd(), '.keys');
-  const outputDir = process.cwd();
-  
-  // 1. Generate or load keys
+  // 1. Load or generate keys
   let keys;
-  const keyPath = join(keysDir, 'governance-keys.json');
-  
-  if (existsSync(keyPath)) {
-    console.log('Loading existing keys from .keys/governance-keys.json');
-    keys = JSON.parse(readFileSync(keyPath, 'utf-8'));
+  if (existsSync(KEY_FILE)) {
+    keys = JSON.parse(readFileSync(KEY_FILE, 'utf-8'));
+    console.log('Loaded existing keypair');
   } else {
-    console.log('Generating new Ed25519 keypair...');
-    keys = generateKeys();
-    mkdirSync(keysDir, { recursive: true });
-    writeFileSync(keyPath, JSON.stringify(keys, null, 2));
-    console.log(`Keys saved to ${keyPath}`);
-    console.log('⚠️  Add .keys/ to .gitignore!');
+    keys = generateKeyPair();
+    mkdirSync(KEYS_DIR, { recursive: true });
+    writeFileSync(KEY_FILE, JSON.stringify(keys, null, 2));
+    console.log('Generated new Ed25519 keypair → .keys/governance.json');
   }
-  
-  // 2. Generate aps.txt
-  console.log('\nGenerating aps.txt...');
-  const apsTxt = generateApsTxt({
-    did: DID,
-    domain: DOMAIN,
+  console.log(`Public key: ${keys.publicKey.slice(0, 40)}...`);
+
+
+  // 2. Generate governance block for index.html
+  const indexContent = readFileSync(join(ROOT, 'index.html'), 'utf-8');
+  const block = generateGovernanceBlock({
+    content: indexContent,
     publicKey: keys.publicKey,
     privateKey: keys.privateKey,
-    defaults: {
-      inference: TERMS.inference,
-      training: TERMS.training,
-      redistribution: TERMS.redistribution,
-      caching: TERMS.caching,
-    },
-    paths: [
-      { 
-        pattern: '/llms*.txt',
-        terms: { inference: 'permitted', training: 'permitted', caching: 'permitted' }
-      },
-      {
-        pattern: '/world.html',
-        terms: { inference: 'permitted', training: 'denied', redistribution: 'denied' }
+    terms: DEFAULT_TERMS,
+    revocationPolicy: {
+      mechanism: 'aps_txt',
+      endpoint: `https://${DOMAIN}/.well-known/aps.txt`
+    }
+  });
+  console.log(`\nGovernance block generated (signed: ${!!block.signature})`);
+
+  // 3. Render as HTML script tag
+  const scriptTag = renderGovernanceHTML(block);
+  writeFileSync(join(KEYS_DIR, 'governance-block.html'), scriptTag);
+  console.log(`Script tag → .keys/governance-block.html (${scriptTag.length} chars)`);
+
+  // 4. Block is signed — verification available via verifyGovernanceBlock(block, publicKey)
+  console.log('Content hash:', block.content_hash.slice(0, 40) + '...');
+  console.log('Source DID:', block.source_did);
+
+  // 5. Generate aps.txt
+  try {
+    const apsTxt = generateApsTxt({
+      did: `${DID_PREFIX}:governance`,
+      domain: DOMAIN,
+      publicKey: keys.publicKey,
+      privateKey: keys.privateKey,
+      defaults: DEFAULT_TERMS,
+      paths: [
+        { pattern: '/llms*.txt', terms: { inference: 'permitted', training: 'permitted', caching: 'permitted' } },
+        { pattern: '/world.html', terms: { inference: 'permitted', training: 'denied', redistribution: 'denied' } }
+      ]
+    });
+    mkdirSync(WELL_KNOWN, { recursive: true });
+    writeFileSync(join(WELL_KNOWN, 'aps.txt'), apsTxt);
+    console.log(`\naps.txt → .well-known/aps.txt`);
+  } catch (e) {
+    console.log(`\naps.txt generation failed: ${e.message}`);
+    console.log('(Will create manually from governance block)');
+  }
+
+
+  // 6. Embed in all HTML pages
+  const htmlFiles = readdirSync(ROOT).filter(f => f.endsWith('.html'));
+  let embedded = 0;
+
+  for (const file of htmlFiles) {
+    const path = join(ROOT, file);
+    let html = readFileSync(path, 'utf-8');
+    
+    // Skip if already has governance block
+    if (html.includes('application/aps-governance+json')) {
+      console.log(`  ${file}: already has governance block`);
+      continue;
+    }
+    
+    // Generate page-specific block
+    const pageBlock = generateGovernanceBlock({
+      content: html,
+      publicKey: keys.publicKey,
+      privateKey: keys.privateKey,
+      terms: file === 'world.html' 
+        ? { inference: 'permitted', training: 'denied', redistribution: 'denied', caching: 'permitted' }
+        : DEFAULT_TERMS,
+      revocationPolicy: {
+        mechanism: 'aps_txt',
+        endpoint: `https://${DOMAIN}/.well-known/aps.txt`
       }
-    ]
-  });
-  
-  const apsTxtPath = join(outputDir, '.well-known', 'aps.txt');
-  writeFileSync(apsTxtPath, apsTxt);
-  console.log(`aps.txt written to ${apsTxtPath}`);
-  
-  // 3. Generate governance block for HTML embedding
-  console.log('\nGenerating governance block...');
-  const govBlock = generateGovernanceBlock({
-    did: DID,
-    publicKey: keys.publicKey,
-    privateKey: keys.privateKey,
-    contentUrl: `https://${DOMAIN}/`,
-    terms: TERMS,
-    revocationEndpoint: `https://${DOMAIN}/.well-known/aps.txt`,
-  });
-  
-  const scriptTag = `<script type="application/aps-governance+json">\n${JSON.stringify(govBlock, null, 2)}\n</script>`;
-  
-  const govPath = join(outputDir, '.keys', 'governance-block.html');
-  writeFileSync(govPath, scriptTag);
-  console.log(`Governance block written to ${govPath}`);
-  
-  // 4. Output summary
-  console.log('\n═══ Summary ═══');
-  console.log(`DID: ${DID}`);
-  console.log(`Public key: ${keys.publicKey.slice(0, 20)}...`);
-  console.log(`Domain: ${DOMAIN}`);
-  console.log(`Terms: inference=${TERMS.inference}, training=${TERMS.training}`);
-  console.log('\nNext steps:');
-  console.log('1. Add .keys/ to .gitignore (CRITICAL — never commit private keys)');
-  console.log('2. Copy governance block into <head> of each HTML page');
-  console.log('3. Verify: node -e "import {verifyApsTxt} from \'agent-passport-system\'; ..."');
-  console.log('4. Commit aps.txt + updated HTML pages');
+    });
+    
+    const tag = renderGovernanceHTML(pageBlock);
+    
+    // Insert before </head>
+    html = html.replace('</head>', tag + '\n</head>');
+    writeFileSync(path, html);
+    embedded++;
+    console.log(`  ${file}: embedded ✅`);
+  }
+
+  console.log(`\n═══ Summary ═══`);
+  console.log(`Pages with governance: ${embedded} new + ${htmlFiles.length - embedded} existing`);
+  console.log(`Public key: ${keys.publicKey}`);
+  console.log(`DID: ${DID_PREFIX}:governance`);
+  console.log(`Terms: inference=${DEFAULT_TERMS.inference}, training=${DEFAULT_TERMS.training}`);
+  console.log(`\nVerify: curl -s https://aeoess.com/ | grep aps-governance`);
 }
 
-main().catch(console.error);
+main().catch(e => { console.error('Error:', e.message); process.exit(1); });
