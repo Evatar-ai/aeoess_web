@@ -39,7 +39,7 @@ pre code{background:none;padding:0}
 .nav.scrolled{background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,.08)}
 [data-theme="dark"] .nav.scrolled{background:rgba(28,28,30,.78);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav-logo{display:flex;align-items:center;text-decoration:none}
-.nav-logo img{height:26px;opacity:.65;transition:opacity .15s}
+.nav-logo img{height:26px;max-width:200px;opacity:.65;transition:opacity .15s}
 .nav-logo:hover img{opacity:1}
 .nav-links{display:flex;align-items:center;gap:2rem}
 .nav-links a{font:400 .84rem var(--sans);color:var(--ink-4);letter-spacing:.02em;text-decoration:none}

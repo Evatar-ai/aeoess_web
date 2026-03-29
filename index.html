@@ -145,11 +145,11 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 </style>
 <body>
 <nav class="nav" id="nav">
-  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
   <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
   <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
-<div class="nav-drawer">
+<div class="nav-drawer" style="display:none">
   <a href="mingle.html" onclick="closeDrawer()">Mingle</a><a href="blog.html" onclick="closeDrawer()">Blog</a><a href="passport.html" onclick="closeDrawer()">Docs</a>
   <a href="protocol.html" onclick="closeDrawer()">Protocol</a><a href="compare.html" onclick="closeDrawer()">Compare</a><a href="agora.html" onclick="closeDrawer()">Agora</a>
   <a href="https://github.com/aeoess" onclick="closeDrawer()">GitHub</a><a href="mailto:signal@aeoess.com" onclick="closeDrawer()">Contact</a>

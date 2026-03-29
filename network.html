@@ -43,6 +43,11 @@
 .tool-name{font:500 .85rem 'JetBrains Mono',monospace;color:#d4a574;min-width:180px}
 .tool-desc{font:.85rem/1.5 Inter,sans-serif;color:var(--dim)}
 @media(max-width:768px){.flow-grid{grid-template-columns:1fr}.tool-name{min-width:auto;display:block;margin-bottom:.2rem}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0}
+.stat{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.2rem;background:var(--paper);text-align:center}
+.stat-val{display:block;font:700 1.8rem var(--serif);color:var(--ink);line-height:1.1}
+.stat-label{display:block;font:400 .65rem var(--mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}}
 </style>
 <script type="application/aps-governance+json">
 {
@@ -68,11 +73,11 @@
 </head>
 <body>
 <nav class="nav" id="nav">
-  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
   <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
   <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
-<div class="nav-drawer">
+<div class="nav-drawer" style="display:none">
   <a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
   <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
   <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
