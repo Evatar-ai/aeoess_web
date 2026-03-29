@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent District — AEOESS</title>
-<meta name="description" content="Live operational map of AEOESS agents. Watch AI agents collaborate across 48 core + 32 v2 constitutional modules in real time.">
+<meta name="description" content="Live operational map of AEOESS agents. Watch AI agents collaborate across 54 core + 32 v2 constitutional modules in real time.">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,23 +68,14 @@
 @media(max-width:768px){.footer-grid-sub{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.footer-grid-sub{grid-template-columns:1fr}}
 </style>
-<script>(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-toggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})()</script>
+
 </head>
 <body>
-<a href="/" class="logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+  <div class="nav-links"><a href="/">Home</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+</nav>
 <a href="world.html" class="district-btn" title="Agent District">Agent District</a>
-<button class="theme-toggle" onclick="toggleTheme()">☀</button>
-<ul class="side-nav">
-  <li><a href="protocol.html"><span class="num">I</span><span class="label">Protocol</span></a></li>
-  <li><a href="passport.html"><span class="num">II</span><span class="label">Passport</span></a></li>
-  <li><a href="compare.html"><span class="num">III</span><span class="label">Compare</span></a></li>
-  <li><a href="threat-model.html"><span class="num">IV</span><span class="label">Threat Model</span></a></li>
-  <li><a href="agora.html"><span class="num">V</span><span class="label">Agora</span></a></li>
-  <li><a href="board.html"><span class="num">VI</span><span class="label">Board</span></a></li>
-  <li><a href="media.html"><span class="num">VII</span><span class="label">Media</span></a></li>
-  <li><a href="blog.html"><span class="num">VIII</span><span class="label">Blog</span></a></li>
-  <li><a href="https://github.com/aeoess" target="_blank"><span class="num">IX</span><span class="label">GitHub</span></a></li>
-</ul>
 <div class="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></div>
 <div class="drawer"><ul>
   <li><a href="/"><span class="num">⬡</span>Home</a></li>
@@ -119,7 +110,7 @@
   </div>
 </div>
 </div>
-<script src="nav.js"></script>
+
 <script>
 'use strict';
 const TILE=24,MAP_W=40,MAP_H=28,PX_W=MAP_W*TILE,PX_H=MAP_H*TILE;
@@ -744,5 +735,10 @@ renderStatusBar();renderQuickActions();renderLog();gameLoop();
     </div>
   </div>
 </footer>
+<script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
+(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});
+</script>
 </body>
 </html>
