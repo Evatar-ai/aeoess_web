@@ -140,6 +140,23 @@
     <div class="gw-section-title">Audit Trail (last 20)</div>
     <div id="audit-list"></div>
   </div>
+
+  <!-- Data Attribution (The Pixel) -->
+  <div class="gw-section">
+    <div class="gw-section-title">Data Attribution</div>
+    <div class="stat-grid" id="attr-stats">
+      <div class="stat-card"><div class="stat-val" id="a-sources">-</div><div class="stat-label">Data Sources</div></div>
+      <div class="stat-card"><div class="stat-val" id="a-accesses">-</div><div class="stat-label">Total Accesses</div></div>
+      <div class="stat-card"><div class="stat-val" id="a-agents">-</div><div class="stat-label">Unique Agents</div></div>
+      <div class="stat-card"><div class="stat-val" id="a-owed">-</div><div class="stat-label">Total Owed</div></div>
+    </div>
+    <div class="gw-section-title" style="margin-top:1rem">Top Sources</div>
+    <div id="top-sources-list"></div>
+    <div class="gw-section-title" style="margin-top:1rem">Top Consumers</div>
+    <div id="top-agents-list"></div>
+    <div class="gw-section-title" style="margin-top:1rem">Recent Access Receipts</div>
+    <div id="recent-access-list"></div>
+  </div>
 </div>
 
 </div><!-- .page-wrap -->
@@ -195,7 +212,7 @@ async function login() {
     document.getElementById('dashboard').style.display = 'block';
     document.getElementById('tenant-info').textContent = d.plan + ' plan';
     renderDashboard(d);
-    loadAgents(); loadDelegations(); loadAudit();
+    loadAgents(); loadDelegations(); loadAudit(); loadAttribution();
   } catch(e) {
     document.getElementById('login-error').style.display = 'block';
     document.getElementById('login-error').textContent = 'Connection failed: ' + e.message;
@@ -213,7 +230,7 @@ async function refresh() {
   try {
     const d = await gw('/api/v1/dashboard');
     renderDashboard(d);
-    loadAgents(); loadDelegations(); loadAudit();
+    loadAgents(); loadDelegations(); loadAudit(); loadAttribution();
   } catch(e) { console.error(e); }
 }
 
@@ -279,6 +296,37 @@ async function loadAudit() {
       d.entries.map(e => '<tr><td><span class="badge ' + e.verdict + '">' + e.verdict + '</span></td><td><code>' + esc(e.agent_id) + '</code></td><td>' + esc(e.action_type) + '</td><td style="font:.7rem var(--mono)">' + esc(e.scope_required) + '</td><td style="white-space:nowrap">' + ago(e.created_at) + '</td><td>' + (e.duration_ms||0) + 'ms</td></tr>').join('') +
       '</tbody></table>';
   } catch(e) { console.error(e); }
+}
+
+async function loadAttribution() {
+  try {
+    const d = await gw('/api/v1/attribution');
+    document.getElementById('a-sources').textContent = d.summary.data_sources;
+    document.getElementById('a-accesses').textContent = d.summary.total_accesses;
+    document.getElementById('a-agents').textContent = d.summary.unique_agents;
+    document.getElementById('a-owed').textContent = '$' + d.summary.total_owed.toFixed(4);
+
+    const tsl = document.getElementById('top-sources-list');
+    if (d.top_sources.length > 0) {
+      tsl.innerHTML = '<table class="gw-table"><thead><tr><th>Source</th><th>ID</th><th>Accesses</th><th>Owed</th></tr></thead><tbody>' +
+        d.top_sources.map(s => '<tr><td>' + esc(s.source_name) + '</td><td style="font:.7rem var(--mono)">' + esc(s.source_id) + '</td><td>' + s.accesses + '</td><td>$' + (s.owed||0).toFixed(4) + '</td></tr>').join('') +
+        '</tbody></table>';
+    } else { tsl.innerHTML = '<div class="empty-state">No data sources registered</div>'; }
+
+    const tal = document.getElementById('top-agents-list');
+    if (d.top_agents.length > 0) {
+      tal.innerHTML = '<table class="gw-table"><thead><tr><th>Agent</th><th>Accesses</th><th>Total Owed</th></tr></thead><tbody>' +
+        d.top_agents.map(a => '<tr><td><code>' + esc(a.agent_id) + '</code></td><td>' + a.accesses + '</td><td>$' + (a.total_owed||0).toFixed(4) + '</td></tr>').join('') +
+        '</tbody></table>';
+    } else { tal.innerHTML = '<div class="empty-state">No agent access recorded</div>'; }
+
+    const ral = document.getElementById('recent-access-list');
+    if (d.recent_access.length > 0) {
+      ral.innerHTML = '<table class="gw-table"><thead><tr><th>Agent</th><th>Source</th><th>Purpose</th><th>Time</th></tr></thead><tbody>' +
+        d.recent_access.map(r => '<tr><td><code>' + esc(r.agent_id) + '</code></td><td style="font:.7rem var(--mono)">' + esc(r.source_id) + '</td><td>' + esc(r.purpose) + '</td><td style="white-space:nowrap">' + ago(r.created_at) + '</td></tr>').join('') +
+        '</tbody></table>';
+    } else { ral.innerHTML = '<div class="empty-state">No access receipts yet</div>'; }
+  } catch(e) { console.error('Attribution load failed (expected if no Pixel endpoints):', e); }
 }
 
 function esc(s) { if(!s)return''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
