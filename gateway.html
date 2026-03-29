@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gateway Dashboard — AEOESS</title>
+<meta name="description" content="AEOESS Gateway enforcement dashboard. Monitor agents, delegations, policy evaluations, and audit trail.">
+<link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<style>
+.gw-login{max-width:480px;margin:2rem auto;padding:2rem;border:1px solid var(--rule);border-radius:12px;background:var(--paper)}
+.gw-login h2{font:600 1.3rem var(--serif);color:var(--ink);margin-bottom:.5rem}
+.gw-login p{font:400 .85rem/1.6 var(--sans);color:var(--ink-3);margin-bottom:1rem}
+.gw-input{width:100%;padding:.6rem .8rem;font:.8rem var(--mono);border:1px solid var(--rule);border-radius:6px;background:var(--bg);color:var(--ink);margin-bottom:.8rem;box-sizing:border-box}
+.gw-input:focus{outline:none;border-color:var(--link)}
+.gw-btn{padding:.5rem 1.2rem;font:500 .8rem var(--sans);color:#fff;background:var(--link);border:none;border-radius:6px;cursor:pointer;transition:opacity .15s}
+.gw-btn:hover{opacity:.85}
+.gw-btn.secondary{background:transparent;color:var(--ink-3);border:1px solid var(--rule)}
+.gw-error{font:.75rem var(--sans);color:#dc2626;margin-top:.5rem}
+
+.gw-dash{display:none}
+.gw-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:.5rem}
+.gw-header h2{font:600 1.3rem var(--serif);color:var(--ink);margin:0}
+.gw-header-actions{display:flex;gap:.5rem;align-items:center}
+.gw-tenant{font:.65rem var(--mono);color:var(--ink-4);padding:.2rem .5rem;background:var(--paper);border:1px solid var(--rule);border-radius:4px}
+.gw-refresh{font:.7rem var(--sans);color:var(--link);cursor:pointer;background:none;border:none;text-decoration:underline}
+
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-card{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.2rem;background:var(--paper)}
+.stat-val{font:700 1.8rem var(--serif);color:var(--ink);line-height:1.1}
+.stat-label{font:400 .65rem var(--mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem}
+.stat-sub{font:400 .7rem var(--sans);color:var(--ink-5);margin-top:.15rem}
+
+.gw-section{margin-bottom:1.5rem}
+.gw-section-title{font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);padding-bottom:.35rem;border-bottom:1px solid var(--rule);margin-bottom:.8rem}
+
+.gw-table{width:100%;border-collapse:collapse;font:.8rem var(--sans)}
+.gw-table th{font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-4);text-align:left;padding:.4rem .6rem;border-bottom:1px solid var(--rule)}
+.gw-table td{padding:.5rem .6rem;border-bottom:1px solid var(--rule-light);color:var(--ink-2);vertical-align:top}
+.gw-table tr:last-child td{border-bottom:none}
+
+.badge{font:.55rem var(--mono);padding:.1rem .35rem;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}
+.badge.permit{background:rgba(22,101,52,.08);color:var(--green)}
+.badge.deny{background:rgba(220,38,38,.08);color:#dc2626}
+.badge.active{background:rgba(22,101,52,.08);color:var(--green)}
+.badge.revoked{background:rgba(220,38,38,.08);color:#dc2626}
+[data-theme="dark"] .badge.permit,[data-theme="dark"] .badge.active{background:rgba(74,222,128,.1);color:#4ade80}
+[data-theme="dark"] .badge.deny,[data-theme="dark"] .badge.revoked{background:rgba(248,113,113,.1);color:#f87171}
+
+.alert-item{display:flex;gap:.5rem;padding:.5rem .6rem;border-bottom:1px solid var(--rule-light);align-items:baseline}
+.alert-sev{font:.5rem var(--mono);padding:.1rem .3rem;border-radius:3px;text-transform:uppercase}
+.alert-sev.critical{background:rgba(220,38,38,.08);color:#dc2626}
+.alert-sev.warning{background:rgba(234,179,8,.08);color:#ca8a04}
+.alert-sev.info{background:rgba(59,130,246,.08);color:#3b82f6}
+.alert-msg{font:.8rem var(--sans);color:var(--ink-2)}
+.alert-time{font:.6rem var(--mono);color:var(--ink-5);margin-left:auto;white-space:nowrap}
+
+.empty-state{font:400 .85rem var(--sans);color:var(--ink-4);padding:1rem;text-align:center;border:1px dashed var(--rule);border-radius:8px}
+
+@media(max-width:768px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.stat-grid{grid-template-columns:1fr}}
+</style>
+<body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-drawer">
+  <a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
+  <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
+  <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
+  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+</div>
+
+<div class="page-wrap">
+
+<!-- Login -->
+<div class="gw-login" id="login-panel">
+  <h2>Gateway Dashboard</h2>
+  <p>Enter your API key to view your enforcement dashboard. Keys start with <code>aps_live_</code>.</p>
+  <input type="password" class="gw-input" id="api-key-input" placeholder="aps_live_..." autocomplete="off">
+  <select class="gw-input" id="gateway-url" style="font-family:var(--sans)">
+    <option value="https://gateway.aeoess.com">gateway.aeoess.com (production)</option>
+    <option value="http://localhost:3200">localhost:3200 (local)</option>
+  </select>
+  <button class="gw-btn" onclick="login()">Connect</button>
+  <div class="gw-error" id="login-error" style="display:none"></div>
+</div>
+
+<!-- Dashboard (hidden until login) -->
+<div class="gw-dash" id="dashboard">
+  <div class="gw-header">
+    <h2>Enforcement Dashboard</h2>
+    <div class="gw-header-actions">
+      <span class="gw-tenant" id="tenant-info"></span>
+      <button class="gw-refresh" onclick="refresh()">Refresh</button>
+      <button class="gw-btn secondary" onclick="logout()">Disconnect</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stat-grid" id="stats">
+    <div class="stat-card"><div class="stat-val" id="s-agents">-</div><div class="stat-label">Agents</div><div class="stat-sub" id="s-agents-sub"></div></div>
+    <div class="stat-card"><div class="stat-val" id="s-evals">-</div><div class="stat-label">Evaluations</div><div class="stat-sub" id="s-evals-sub"></div></div>
+    <div class="stat-card"><div class="stat-val" id="s-delegations">-</div><div class="stat-label">Delegations</div><div class="stat-sub" id="s-delegations-sub">active</div></div>
+    <div class="stat-card"><div class="stat-val" id="s-receipts">-</div><div class="stat-label">Receipts</div><div class="stat-sub" id="s-receipts-sub">total stored</div></div>
+  </div>
+
+  <!-- Alerts -->
+  <div class="gw-section" id="alerts-section" style="display:none">
+    <div class="gw-section-title">Unacknowledged Alerts</div>
+    <div id="alerts-list"></div>
+  </div>
+
+  <!-- Recent Denials -->
+  <div class="gw-section">
+    <div class="gw-section-title">Recent Denials</div>
+    <div id="denials-list"></div>
+  </div>
+
+  <!-- Agents -->
+  <div class="gw-section">
+    <div class="gw-section-title">Registered Agents</div>
+    <div id="agents-list"></div>
+  </div>
+
+  <!-- Delegations -->
+  <div class="gw-section">
+    <div class="gw-section-title">Active Delegations</div>
+    <div id="delegations-list"></div>
+  </div>
+
+  <!-- Audit Trail -->
+  <div class="gw-section">
+    <div class="gw-section-title">Audit Trail (last 20)</div>
+    <div id="audit-list"></div>
+  </div>
+</div>
+
+</div><!-- .page-wrap -->
+
+<div class="footer-wrap">
+<div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Protocol</h4><a href="protocol.html">Overview</a><a href="passport.html">Technical Spec</a><a href="network.html">Intent Network</a><a href="compare.html">Compare</a><a href="threat-model.html">Threat Model</a><a href="amcs.html">AMCS</a></div>
+    <div class="footer-col"><h4>Community</h4><a href="agora.html">Agora</a><a href="board.html">Board</a><a href="world.html">Agent District</a><a href="mingle.html">Mingle</a><a href="working-group.html">Working Group</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="blog.html">Dev Log</a><a href="faq.html">FAQ</a><a href="media.html">Media Kit</a><a href="https://theagenttimes.com">The Agent Times</a><a href="llms.txt">llms.txt</a></div>
+    <div class="footer-col"><h4>Papers</h4><a href="https://doi.org/10.5281/zenodo.18749779">Agent Social Contract</a><a href="https://doi.org/10.5281/zenodo.18932404">Monotonic Narrowing</a><a href="https://doi.org/10.5281/zenodo.19260073">Faceted Authority Attenuation</a></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span><div class="footer-ext"><a href="https://www.npmjs.com/package/agent-passport-system">npm</a><a href="https://pypi.org/project/agent-passport-system/">PyPI</a><a href="https://github.com/aeoess">GitHub</a></div></div>
+</div>
+</div>
+
+<script>
+// Theme
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
+(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});
+
+let GW_URL = '';
+let API_KEY = '';
+
+// Auto-fill from localStorage
+(function(){
+  const saved = localStorage.getItem('gw-api-key');
+  const savedUrl = localStorage.getItem('gw-url');
+  if(saved){
+    document.getElementById('api-key-input').value = saved;
+    if(savedUrl) document.getElementById('gateway-url').value = savedUrl;
+    login();
+  }
+})();
+
+async function gw(path) {
+  const r = await fetch(GW_URL + path, { headers: { 'Authorization': 'Bearer ' + API_KEY } });
+  if (!r.ok) throw new Error(r.status + ' ' + (await r.text()));
+  return r.json();
+}
+
+async function login() {
+  const key = document.getElementById('api-key-input').value.trim();
+  const url = document.getElementById('gateway-url').value;
+  if (!key) return;
+  GW_URL = url; API_KEY = key;
+  try {
+    const d = await gw('/api/v1/dashboard');
+    localStorage.setItem('gw-api-key', key);
+    localStorage.setItem('gw-url', url);
+    document.getElementById('login-panel').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('tenant-info').textContent = d.plan + ' plan';
+    renderDashboard(d);
+    loadAgents(); loadDelegations(); loadAudit();
+  } catch(e) {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-error').textContent = 'Connection failed: ' + e.message;
+  }
+}
+
+function logout() {
+  localStorage.removeItem('gw-api-key');
+  localStorage.removeItem('gw-url');
+  document.getElementById('login-panel').style.display = 'block';
+  document.getElementById('dashboard').style.display = 'none';
+}
+
+async function refresh() { 
+  try {
+    const d = await gw('/api/v1/dashboard');
+    renderDashboard(d);
+    loadAgents(); loadDelegations(); loadAudit();
+  } catch(e) { console.error(e); }
+}
+
+function renderDashboard(d) {
+  document.getElementById('s-agents').textContent = d.agents.active;
+  document.getElementById('s-agents-sub').textContent = d.agents.limit > 0 ? 'of ' + d.agents.limit + ' limit' : 'unlimited';
+  document.getElementById('s-evals').textContent = d.usage.evaluations_this_month;
+  document.getElementById('s-evals-sub').textContent = d.usage.utilization !== 'unlimited' ? d.usage.utilization + ' used' : 'unlimited';
+  document.getElementById('s-delegations').textContent = d.delegations.active;
+  document.getElementById('s-receipts').textContent = d.receipts.total;
+
+  // Alerts
+  const as = document.getElementById('alerts-section');
+  const al = document.getElementById('alerts-list');
+  if (d.alerts.items.length > 0) {
+    as.style.display = 'block';
+    al.innerHTML = d.alerts.items.map(a => 
+      '<div class="alert-item"><span class="alert-sev ' + a.severity + '">' + a.severity + '</span><span class="alert-msg">' + esc(a.message) + '</span><span class="alert-time">' + ago(a.created_at) + '</span></div>'
+    ).join('');
+  } else { as.style.display = 'none'; }
+
+  // Recent denials
+  const dl = document.getElementById('denials-list');
+  if (d.recent_denials.length > 0) {
+    dl.innerHTML = '<table class="gw-table"><thead><tr><th>Agent</th><th>Action</th><th>Reason</th><th>Time</th></tr></thead><tbody>' +
+      d.recent_denials.map(r => '<tr><td><code>' + esc(r.agent_id) + '</code></td><td>' + esc(r.action_type) + '</td><td style="font-size:.75rem">' + esc(r.reason) + '</td><td style="white-space:nowrap">' + ago(r.created_at) + '</td></tr>').join('') +
+      '</tbody></table>';
+  } else { dl.innerHTML = '<div class="empty-state">No denials recorded</div>'; }
+}
+
+async function loadAgents() {
+  try {
+    const d = await gw('/api/v1/agents');
+    const el = document.getElementById('agents-list');
+    if (d.agents.length === 0) { el.innerHTML = '<div class="empty-state">No agents registered</div>'; return; }
+    el.innerHTML = '<table class="gw-table"><thead><tr><th>Agent ID</th><th>Name</th><th>Status</th><th>Public Key</th><th>Created</th></tr></thead><tbody>' +
+      d.agents.map(a => '<tr><td><code>' + esc(a.agent_id) + '</code></td><td>' + (esc(a.name)||'—') + '</td><td><span class="badge ' + a.status + '">' + a.status + '</span></td><td style="font:.6rem var(--mono);max-width:120px;overflow:hidden;text-overflow:ellipsis">' + (a.public_key||'').slice(0,16) + '…</td><td style="white-space:nowrap">' + ago(a.created_at) + '</td></tr>').join('') +
+      '</tbody></table>';
+  } catch(e) { console.error(e); }
+}
+
+async function loadDelegations() {
+  try {
+    const d = await gw('/api/v1/delegations');
+    const el = document.getElementById('delegations-list');
+    if (d.delegations.length === 0) { el.innerHTML = '<div class="empty-state">No delegations</div>'; return; }
+    el.innerHTML = '<table class="gw-table"><thead><tr><th>From</th><th>To</th><th>Scope</th><th>Spend</th><th>Status</th></tr></thead><tbody>' +
+      d.delegations.map(dl => {
+        const spent = dl.spend_used || 0;
+        const limit = dl.spend_limit;
+        const spendStr = limit ? '$' + spent.toFixed(2) + ' / $' + limit.toFixed(2) : 'unlimited';
+        return '<tr><td><code>' + esc(dl.parent_agent_id) + '</code></td><td><code>' + esc(dl.child_agent_id) + '</code></td><td style="font:.7rem var(--mono);max-width:200px;word-break:break-all">' + esc(dl.scope) + '</td><td>' + spendStr + '</td><td><span class="badge ' + dl.status + '">' + dl.status + '</span></td></tr>';
+      }).join('') + '</tbody></table>';
+  } catch(e) { console.error(e); }
+}
+
+async function loadAudit() {
+  try {
+    const d = await gw('/api/v1/audit?limit=20');
+    const el = document.getElementById('audit-list');
+    if (d.entries.length === 0) { el.innerHTML = '<div class="empty-state">No evaluations yet</div>'; return; }
+    el.innerHTML = '<table class="gw-table"><thead><tr><th>Verdict</th><th>Agent</th><th>Action</th><th>Scope</th><th>Time</th><th>Duration</th></tr></thead><tbody>' +
+      d.entries.map(e => '<tr><td><span class="badge ' + e.verdict + '">' + e.verdict + '</span></td><td><code>' + esc(e.agent_id) + '</code></td><td>' + esc(e.action_type) + '</td><td style="font:.7rem var(--mono)">' + esc(e.scope_required) + '</td><td style="white-space:nowrap">' + ago(e.created_at) + '</td><td>' + (e.duration_ms||0) + 'ms</td></tr>').join('') +
+      '</tbody></table>';
+  } catch(e) { console.error(e); }
+}
+
+function esc(s) { if(!s)return''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+function ago(ts) {
+  if(!ts)return'';
+  const d = new Date(ts.includes('T') ? ts : ts + 'Z');
+  const s = Math.floor((Date.now() - d.getTime()) / 1000);
+  if(s<60) return s+'s ago';
+  if(s<3600) return Math.floor(s/60)+'m ago';
+  if(s<86400) return Math.floor(s/3600)+'h ago';
+  return Math.floor(s/86400)+'d ago';
+}
+
+// Auto-refresh every 30 seconds
+setInterval(function(){ if(document.getElementById('dashboard').style.display==='block') refresh(); }, 30000);
+</script>
+</body>
+</html>
