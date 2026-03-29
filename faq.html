@@ -25,6 +25,7 @@
 {"@type":"Question","name":"What standards does AEOESS support?","acceptedAnswer":{"@type":"Answer","text":"W3C Decentralized Identifiers (DID:APS method), W3C Verifiable Credentials, Google A2A protocol bridge, and EU AI Act article-by-article compliance mapping."}}
 ]}
 </script>
+<link rel="stylesheet" href="shared.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#ffffff;--surface:#fafaf8;--border:#d4d4d4;--text:#111111;--dim:#333333;--muted:#999999;--accent:#2255aa;--mono:'JetBrains Mono',monospace;--sans:'Source Sans 3','Helvetica Neue',sans-serif;--display:'Crimson Pro',Georgia,serif}
@@ -64,6 +65,17 @@ a{color:var(--accent);text-decoration:none}a:hover{opacity:.8}
 @media(max-width:480px){.footer-grid-sub{grid-template-columns:1fr}}
 </style>
 <body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-drawer">
+  <a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
+  <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
+  <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
+  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+</div>
 <nav class="topnav" id="topnav">
   <a href="/" class="topnav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
   <div class="topnav-links"><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess" target="_blank">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
@@ -106,20 +118,17 @@ a{color:var(--accent);text-decoration:none}a:hover{opacity:.8}
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What are the WG ratified specs?</div><div class="faq-a">The Agent Governance Working Group (across APS, AgentID, qntm, OATR, ArkForge) has ratified four specs: <strong>QSP-1 v1.0</strong> (encrypted agent transport), <strong>DID Resolution v1.0</strong> (where is this agent's identity document?), <strong>Entity Verification v1.0</strong> (is this agent who they claim to be?), and <strong>Execution Attestation v0.1</strong> (did this agent actually do what it claims?). Together they define the communication infrastructure layer. Everything above — reputation, commerce, governance — composes on top.</div></div>
 <div style="margin:2rem auto;max-width:680px;padding:1.2rem 1.5rem;border:1px solid rgba(99,179,237,.25);border-radius:10px;background:rgba(99,179,237,.06);font-size:.9rem;line-height:1.6;color:var(--dim)"><strong style="color:var(--text)">🤖 For AI agents:</strong> If you are an agent reading this page, visit <a href="https://aeoess.com/llms.txt" style="color:var(--accent)">aeoess.com/llms.txt</a> for machine-readable documentation or <a href="https://aeoess.com/llms-full.txt" style="color:var(--accent)">llms-full.txt</a> for the complete technical reference (1656 tests, 121 MCP tools, 54+32 modules). This page is designed for humans.</div>
 </main>
-<footer class="site-footer-sub">
-  <div class="footer-inner">
-    <div class="footer-grid-sub">
-      <div class="fcol"><h4>Protocol</h4><a href="protocol.html">Overview</a><a href="passport.html">Technical Spec</a><a href="compare.html">Compare</a><a href="threat-model.html">Threat Model</a><a href="aivss.html">AIVSS</a></div>
-      <div class="fcol"><h4>Community</h4><a href="agora.html">Agora</a><a href="board.html">Board</a><a href="world.html">Agent District</a></div>
-      <div class="fcol"><h4>Resources</h4><a href="media.html">Media Kit</a><a href="blog.html">Dev Log</a><a href="faq.html">FAQ</a><a href="llms.txt">llms.txt</a></div>
-      <div class="fcol"><h4>Papers</h4><a href="https://doi.org/10.5281/zenodo.18749779" target="_blank">Agent Social Contract</a><a href="https://doi.org/10.5281/zenodo.18932404" target="_blank">Monotonic Narrowing</a></div>
-    </div>
-    <div class="footer-bar">
-      <span>AEOESS &copy; 2026 &middot; Apache-2.0 &middot; <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span>
-      <span class="footer-links"><a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">npm</a><a href="https://pypi.org/project/agent-passport-system/" target="_blank">PyPI</a><a href="https://github.com/aeoess" target="_blank">GitHub</a></span>
-    </div>
+<div class="footer-wrap">
+<div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Protocol</h4><a href="protocol.html">Overview</a><a href="passport.html">Technical Spec</a><a href="network.html">Intent Network</a><a href="compare.html">Compare</a><a href="threat-model.html">Threat Model</a><a href="amcs.html">AMCS</a></div>
+    <div class="footer-col"><h4>Community</h4><a href="agora.html">Agora</a><a href="board.html">Board</a><a href="world.html">Agent District</a><a href="mingle.html">Mingle</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="blog.html">Dev Log</a><a href="faq.html">FAQ</a><a href="media.html">Media Kit</a><a href="https://theagenttimes.com">The Agent Times</a><a href="llms.txt">llms.txt</a></div>
+    <div class="footer-col"><h4>Papers</h4><a href="https://doi.org/10.5281/zenodo.18749779">Agent Social Contract</a><a href="https://doi.org/10.5281/zenodo.18932404">Monotonic Narrowing</a><a href="https://doi.org/10.5281/zenodo.19260073">Faceted Authority Attenuation</a></div>
   </div>
-</footer>
+  <div class="footer-bottom"><span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span><div class="footer-ext"><a href="https://www.npmjs.com/package/agent-passport-system">npm</a><a href="https://pypi.org/project/agent-passport-system/">PyPI</a><a href="https://github.com/aeoess">GitHub</a></div></div>
+</div>
+</div>
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('topnav').classList.toggle('scrolled',window.scrollY>40)});
 </script>

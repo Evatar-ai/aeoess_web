@@ -6,6 +6,9 @@
 <meta name="description" content="Honest mapping of the Agent Passport System against the OWASP AIVSS risk taxonomy. 5 strong, 3 partial, 2 weak.">
 <meta property="og:title" content="AIVSS Risk Mapping — AEOESS"><meta property="og:description" content="How the Agent Passport System maps against 10 AIVSS risks. 5 strong, 3 partial, 2 weak. Honest assessment."><meta property="og:type" content="website"><meta property="og:url" content="https://aeoess.com/aivss.html">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,300&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
 .aivss-hero{text-align:center;padding:3rem 1rem 2rem}.aivss-hero h1{font-size:2rem;margin-bottom:.5rem}.aivss-hero .subtitle{color:var(--dim);font-size:1.05rem;max-width:640px;margin:0 auto;line-height:1.6}
@@ -36,6 +39,17 @@
 </style>
 <script>(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-toggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})()</script>
 </head><body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS"></a>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-drawer">
+  <a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
+  <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
+  <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
+  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+</div>
 <div id="nav-placeholder"></div><script src="nav.js"></script>
 <main style="max-width:960px;margin:0 auto;padding-bottom:4rem">
 <div class="aivss-hero"><h1>AIVSS Risk Mapping</h1><p class="subtitle">How the Agent Passport System maps against the OWASP AI Vulnerability Scoring System. 10 risks assessed. Honest coverage. No inflated claims.</p></div>
@@ -61,19 +75,16 @@
 </main>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7QVCJGMKR');</script>
-<footer class="site-footer-sub">
-  <div class="footer-inner">
-    <div class="footer-grid-sub">
-      <div class="fcol"><h4>Protocol</h4><a href="protocol.html">Overview</a><a href="passport.html">Technical Spec</a><a href="compare.html">Compare</a><a href="threat-model.html">Threat Model</a><a href="aivss.html">AIVSS</a></div>
-      <div class="fcol"><h4>Community</h4><a href="agora.html">Agora</a><a href="board.html">Board</a><a href="world.html">Agent District</a></div>
-      <div class="fcol"><h4>Resources</h4><a href="media.html">Media Kit</a><a href="blog.html">Dev Log</a><a href="faq.html">FAQ</a><a href="llms.txt">llms.txt</a></div>
-      <div class="fcol"><h4>Papers</h4><a href="https://doi.org/10.5281/zenodo.18749779" target="_blank">Agent Social Contract</a><a href="https://doi.org/10.5281/zenodo.18932404" target="_blank">Monotonic Narrowing</a></div>
-    </div>
-    <div class="footer-bar">
-      <span>AEOESS &copy; 2026 &middot; Apache-2.0 &middot; <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span>
-      <span class="footer-links"><a href="https://www.npmjs.com/package/agent-passport-system" target="_blank">npm</a><a href="https://pypi.org/project/agent-passport-system/" target="_blank">PyPI</a><a href="https://github.com/aeoess" target="_blank">GitHub</a></span>
-    </div>
+<div class="footer-wrap">
+<div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Protocol</h4><a href="protocol.html">Overview</a><a href="passport.html">Technical Spec</a><a href="network.html">Intent Network</a><a href="compare.html">Compare</a><a href="threat-model.html">Threat Model</a><a href="amcs.html">AMCS</a></div>
+    <div class="footer-col"><h4>Community</h4><a href="agora.html">Agora</a><a href="board.html">Board</a><a href="world.html">Agent District</a><a href="mingle.html">Mingle</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="blog.html">Dev Log</a><a href="faq.html">FAQ</a><a href="media.html">Media Kit</a><a href="https://theagenttimes.com">The Agent Times</a><a href="llms.txt">llms.txt</a></div>
+    <div class="footer-col"><h4>Papers</h4><a href="https://doi.org/10.5281/zenodo.18749779">Agent Social Contract</a><a href="https://doi.org/10.5281/zenodo.18932404">Monotonic Narrowing</a><a href="https://doi.org/10.5281/zenodo.19260073">Faceted Authority Attenuation</a></div>
   </div>
-</footer>
+  <div class="footer-bottom"><span class="footer-copy">AEOESS &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span><div class="footer-ext"><a href="https://www.npmjs.com/package/agent-passport-system">npm</a><a href="https://pypi.org/project/agent-passport-system/">PyPI</a><a href="https://github.com/aeoess">GitHub</a></div></div>
+</div>
+</div>
 <script>function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-toggle');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}</script>
 </body></html>
