@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <style>
 .gw-login{max-width:480px;margin:2rem auto;padding:2rem;border:1px solid var(--rule);border-radius:12px;background:var(--paper)}
@@ -149,6 +150,9 @@
       <div class="stat-card"><div class="stat-val" id="a-accesses">-</div><div class="stat-label">Total Accesses</div></div>
       <div class="stat-card"><div class="stat-val" id="a-agents">-</div><div class="stat-label">Unique Agents</div></div>
       <div class="stat-card"><div class="stat-val" id="a-owed">-</div><div class="stat-label">Total Owed</div></div>
+    </div>
+    <div style="margin:1.5rem 0;padding:1rem;border:1px solid var(--rule);border-radius:10px;background:var(--paper)">
+      <canvas id="access-chart" height="180"></canvas>
     </div>
     <div class="gw-section-title" style="margin-top:1rem">Top Sources</div>
     <div id="top-sources-list"></div>
@@ -305,6 +309,47 @@ async function loadAttribution() {
     document.getElementById('a-accesses').textContent = d.summary.total_accesses;
     document.getElementById('a-agents').textContent = d.summary.unique_agents;
     document.getElementById('a-owed').textContent = '$' + d.summary.total_owed.toFixed(4);
+
+    // Time series chart
+    if (d.time_series && d.time_series.length > 0 && typeof Chart !== 'undefined') {
+      const ctx = document.getElementById('access-chart');
+      if (window._attrChart) window._attrChart.destroy();
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const gridColor = isDark ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.06)';
+      const textColor = isDark ? '#8a8a8e' : '#555';
+      window._attrChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: d.time_series.map(t => t.day.slice(5)),
+          datasets: [{
+            label: 'Accesses',
+            data: d.time_series.map(t => t.accesses),
+            backgroundColor: isDark ? 'rgba(96,165,250,.5)' : 'rgba(30,64,175,.35)',
+            borderRadius: 4,
+            yAxisID: 'y',
+          },{
+            label: 'Unique Agents',
+            data: d.time_series.map(t => t.agents),
+            type: 'line',
+            borderColor: isDark ? '#4ade80' : '#166534',
+            backgroundColor: 'transparent',
+            tension: .3,
+            pointRadius: 3,
+            yAxisID: 'y1',
+          }]
+        },
+        options: {
+          responsive: true,
+          interaction: { intersect: false, mode: 'index' },
+          plugins: { legend: { labels: { color: textColor, font: { size: 11 } } } },
+          scales: {
+            x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 10 } } },
+            y: { position: 'left', grid: { color: gridColor }, ticks: { color: textColor, font: { size: 10 } }, title: { display: true, text: 'Accesses', color: textColor, font: { size: 10 } } },
+            y1: { position: 'right', grid: { display: false }, ticks: { color: textColor, font: { size: 10 } }, title: { display: true, text: 'Agents', color: textColor, font: { size: 10 } } },
+          }
+        }
+      });
+    }
 
     const tsl = document.getElementById('top-sources-list');
     if (d.top_sources.length > 0) {
