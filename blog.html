@@ -94,6 +94,20 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 41: Agent Wallets — Feeless Crypto for AI Agents",
+      "datePublished": "2026-03-29",
+      "description": "Built Nano payment rail adapter and agent wallet system. 1,430 new lines. Gateway went from 18 to 33 API routes. HD key derivation, 3-gate delegation pipeline, freeze/revoke cascade. Wallet page live at aeoess.com/wallet.html.",
+      "url": "https://aeoess.com/blog.html#day-41",
+      "keywords": ["nano", "agent wallet", "payment rail", "feeless", "delegation pipeline", "HD key derivation"]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Day 40: Gateway Wiring — 79% Module Interconnection",
+      "datePublished": "2026-03-29",
+      "description": "Connected 13 remaining modules into gateway enforcement pipeline. Fidelity probe measurement protocol. Data cluster wiring. Gateway identity layer. 12 GitHub replies across ecosystem. SDK v1.28.0, 1715 tests, 89 modules.",
+      "url": "https://aeoess.com/blog.html#day-40",
+      "keywords": ["gateway wiring", "fidelity probe", "module interconnection", "1715 tests", "89 modules", "ecosystem engagement"]
+    },
     {
       "@type": "BlogPosting",
       "headline": "Day 39: Governance for the Agent Economy — The Rebrand",
@@ -609,11 +623,11 @@
 <body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
   <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
 <div class="nav-drawer" style="display:none">
-  <a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
+  <a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
   <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
   <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
   <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
@@ -626,6 +640,24 @@
   <p class="sub">Day-by-day record of building an 89-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, data attribution. Started February 18, 2026. 1,715 tests, 121 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-41">
+  <time class="post-date" datetime="2026-03-29">March 29, 2026</time>
+  <h2>Day 41: Agent Wallets</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Agents need to spend money. Coinbase charges gas. ChainHop takes 0.75%. We charge nothing. Three commits, 1,430 new lines, gateway went from 18 to 33 API routes.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Nano payment rail.</strong> Generic <code>PaymentRail</code> interface with Nano as the first adapter. Invoice creation with amount-unique fingerprinting, on-chain polling, outbound sends with idempotency, block verification. Six endpoints: invoice, status, settle, balance, history, verify. 28 unit tests plus 12 live tests against the real Nano network.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Agent wallets.</strong> Every agent with a passport gets a Nano wallet via HD key derivation. Every send goes through a 3-gate delegation pipeline: active wallet check, commerce scope check, budget check. Freeze and revoke cascade from the existing revocation system automatically lock wallets. Nine new REST endpoints. Private keys never leave the gateway process. <a href="wallet.html">aeoess.com/wallet.html</a></p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Local crypto.</strong> <code>wallet-crypto.ts</code> (323 lines): master seed auto-generates on first run, HD key derivation gives one deterministic address per agent, local block signing with Ed25519, public RPC for work generation. No Docker. No Nano node. Just one seed file and a public RPC endpoint.</p>
+</article>
+
+<article class="post" id="day-40">
+  <time class="post-date" datetime="2026-03-29">March 29, 2026</time>
+  <h2>Day 40: Gateway Wiring</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Import graph analysis showed only 20% of modules were connected to the gateway enforcement hub. Built four rounds of wiring. Final interconnection rate: 79%.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Fidelity probe.</strong> New measurement protocol based on the Hold/Bend/Break model. Tests whether agents actually follow their delegation constraints by measuring behavioral responses to boundary conditions. Wired into gateway scheduling.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Module wiring.</strong> Gateway identity layer connects DID, principal endorsement, and entity verification into agent registration. Data cluster wires data-source, data-contribution, data-enforcement, and data-gateway into the processToolCall pipeline. Gateway-wiring adapter connects 13 more modules: commerce, charter, coordination, routing, precedent, oracle-witness, reserve, context, governance-consumer, encrypted-messaging, messaging-audit, federation, EU AI Act.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Ecosystem.</strong> 12 substantive GitHub replies across 10 threads. Accepted lowkey-divine's fidelity probe collaboration on crewAI. Gave honest answers about Merkle anchoring gaps on A2A. Pinged four dormant contacts with specific collaboration offers. SDK v1.28.0. 1715 tests, 446 suites, 89 modules.</p>
+</article>
 
 <article class="post" id="day-39">
   <time class="post-date" datetime="2026-03-28">March 28, 2026</time>

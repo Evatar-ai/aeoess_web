@@ -146,11 +146,11 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 <body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
   <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
 <div class="nav-drawer" style="display:none">
-  <a href="mingle.html" onclick="closeDrawer()">Mingle</a><a href="blog.html" onclick="closeDrawer()">Blog</a><a href="passport.html" onclick="closeDrawer()">Docs</a>
+  <a href="mingle.html" onclick="closeDrawer()">Mingle</a><a href="wallet.html" onclick="closeDrawer()">Wallet</a><a href="blog.html" onclick="closeDrawer()">Blog</a><a href="passport.html" onclick="closeDrawer()">Docs</a>
   <a href="protocol.html" onclick="closeDrawer()">Protocol</a><a href="compare.html" onclick="closeDrawer()">Compare</a><a href="agora.html" onclick="closeDrawer()">Agora</a>
   <a href="https://github.com/aeoess" onclick="closeDrawer()">GitHub</a><a href="mailto:signal@aeoess.com" onclick="closeDrawer()">Contact</a>
   <button onclick="toggleTheme();closeDrawer()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
@@ -198,6 +198,8 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
   </div>
   <div>
     <div class="updates">
+      <div class="up-i"><span class="up-d">Mar 29</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Agent Wallets</strong> — Nano payment rail + wallet system. 33 gateway routes. Feeless, delegation-scoped. <a href="wallet.html">Wallet</a> · <a href="blog.html#day-41">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 29</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Pixel attribution live</strong> — Data source tracking, access receipts, derivation chains, settlement. <a href="gateway.html">Dashboard</a></span></div>
       <div class="up-h">Ship Log</div>
       <div class="up-i"><span class="up-d">Mar 29</span><span class="up-t"><span class="up-tag t-t">traction</span><strong>Cited in production paper</strong> — PDR in Production (Nanook &amp; Gerundium) validates APS Bayesian model with UBC data. <a href="https://doi.org/10.5281/zenodo.19323172">Zenodo</a></span></div>
       <div class="up-i"><span class="up-d">Mar 29</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Module interconnection sprint</strong> — 9 orphaned modules wired into gateway. 20%→79% connected. 1,715 tests.</span></div>
