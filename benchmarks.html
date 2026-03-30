@@ -119,7 +119,7 @@
     <p>The gateway is both judge and executor. The agent requests an action. The gateway evaluates all constraints, executes the action if permitted, and generates the receipt. Agents never touch tools directly. This is why enforcement can't be bypassed.</p>
     <table class="b-table">
       <tr><th>Component</th><th class="num">Count</th><th>Notes</th></tr>
-      <tr><td>Protocol modules</td><td class="num">94</td><td>62 core + 32 v2 constitutional</td></tr>
+      <tr><td>Protocol modules</td><td class="num">94</td><td>63 core + 32 v2 constitutional</td></tr>
       <tr><td>MCP tools</td><td class="num">122</td><td>Full protocol surface via MCP</td></tr>
       <tr><td>Tests</td><td class="num">1,852</td><td>Including adversarial + invariant suites</td></tr>
       <tr><td>Gateway routes</td><td class="num">33</td><td>REST API for enforcement + admin</td></tr>
@@ -149,7 +149,7 @@
   </div>
   <div class="b-section">
     <h2>Test Coverage</h2>
-    <p>1,852 tests across 94 modules. The test suite includes unit tests, integration tests, adversarial scenarios (replay attacks, confused deputies, scope escalation), invariant checks (monotonic narrowing, cascade completeness), and stress tests (concurrent gateway load).</p>
+    <p>1,919 tests across 95 modules. The test suite includes unit tests, integration tests, adversarial scenarios (replay attacks, confused deputies, scope escalation), invariant checks (monotonic narrowing, cascade completeness), and stress tests (concurrent gateway load).</p>
     <table class="b-table">
       <tr><th>Suite Type</th><th class="num">Count</th><th>What It Tests</th></tr>
       <tr><td>Unit tests</td><td class="num">~1,200</td><td>Individual module correctness</td></tr>
