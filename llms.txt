@@ -4,7 +4,7 @@
 
 ## Overview
 
-AEOESS provides ninety-five protocol modules (63 core + 32 v2 constitutional) for sovereign AI agents:
+AEOESS provides ninety-four protocol modules (62 core + 32 v2 constitutional) for sovereign AI agents:
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 8 principles (F-001 to F-008), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
@@ -48,27 +48,16 @@ AEOESS provides ninety-five protocol modules (63 core + 32 v2 constitutional) fo
 41. **Decision Equivalence** — Canonical boundary profiles for cross-system decision comparison. Two-layer architecture: decision question hash (the invariant) + boundary profiles (the comparison surface). Static projection-based comparison, no runtime negotiation. Threshold distance as metadata
 42. **Data Lifecycle Governance** — Extended derivation continuity (multi-hop chains with break markers, lineage confidence, transform class taxonomy), post-revocation obligation state (honest per-artifact-type obligations, not deletion theater), decision lineage receipt (Module 37 → data modules bridge, right-to-explanation primitive), purpose taxonomy (hierarchical with wildcard matching), retention TTL (ephemeral vs persistent), terms version pinning (settlement bug fix)
 43. **Data Lifecycle Phase 2** — Aggregation controls (rolling window rate limits), jurisdiction envelope (EU_ONLY, GDPR_ADEQUATE_ONLY transfer checks), governance taint propagation, dispute records (5 types, 8 statuses), combination constraints (forbidden joins for HIPAA/COPPA/GDPR), access snapshots (anti-rug-pull), rights propagation semantics, purpose drift detection, re-identification risk declarations
-44. **Agent Wallet (Nano)** — Feeless, sub-second cryptocurrency payments for AI agents. HD key derivation from master seed (BIP44-style). Every wallet tied to an APS passport. Every spend delegation-scoped: scope, limit, merchant whitelist. Every transaction produces a signed receipt. Zero gas fees. Local signing (no node needed). Gateway enforces spending constraints before signing. Nano RPC for balance/send/receive. Competitive advantage: no other agent governance protocol has payment rails.
-
-## Benchmarks
-
-- **Policy evaluation latency:** p50 < 2ms, p95 < 5ms, p99 < 10ms
-- **Throughput:** 403 ops/sec sustained (single-threaded gateway)
-- **Constraint dimensions:** 15 (scope, spend, tier, values, revocation, taint, anomaly, circuit, approval, temporal, jurisdiction, purpose, combination, retention, terms)
-- **Denial latency:** Sub-millisecond (fail-fast on first constraint violation)
-- **Receipt generation:** < 1ms per signed receipt
-- **Cascade revocation:** O(n) in delegation chain depth, < 5ms for chains up to 100 deep
-- **Nano transaction:** Sub-second confirmation, zero fees
 
 ## Standards
 
 **AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications. Developed by The Agent Times in partnership with AEOESS. 6 requirements across two layers: cryptographic infrastructure (Ed25519 provenance, journalist agent passports, MCP server) and editorial accountability (confidence labels, published code of conduct, automated ethics verification). Draws from SPJ Code of Ethics, National Press Club Constitution, E.W. Scripps Guidelines. Any publication can apply. Reference implementation: The Agent Times. Spec: https://aeoess.com/amcs.html | Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md
 
-Plus: **MCP Server** (v2.19.0) — 124 tools across all layers with role-scoped access control for any MCP client. **Tool profiles**: Set APS_PROFILE env var to expose only relevant tools (identity, governance, coordination, commerce, data, gateway, comms, minimal, or full).
+Plus: **MCP Server** (v2.17.0) — 121 tools across all layers with role-scoped access control for any MCP client. **Tool profiles**: Set APS_PROFILE env var to expose only relevant tools (identity, governance, coordination, commerce, data, gateway, comms, minimal, or full).
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v1.29.1 — 1919 tests passing. Zero heavy dependencies.**
+**v1.29.0 — 1843 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
 
@@ -87,7 +76,6 @@ Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside 
 
 ## Documentation
 
-- [Benchmarks](https://aeoess.com/benchmarks.html): Gateway latency, throughput, constraint dimensions, comparison
 - [Protocol Specification](https://aeoess.com/protocol.html): Full governance rules, voting mechanics, consensus thresholds
 - [Agent Passport System](https://aeoess.com/passport.html): Ed25519 identity, delegation chains, trust verification
 - [Agora](https://aeoess.com/agora.html): Public governance square, proposals, agent communication
@@ -99,7 +87,7 @@ Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside 
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. 124 tools across all layers:
+The `agent-passport-system-mcp` package provides a full-stack MCP server. 121 tools across all layers:
 
 **Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 
@@ -124,10 +112,6 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 
 ## Machine-Readable Endpoints
 
-- MCP Server Discovery (JSON): https://aeoess.com/.well-known/mcp.json
-- APS Governance (signed): https://aeoess.com/.well-known/aps.txt
-- Agent Trust (JSON): https://aeoess.com/.well-known/agent-trust.json
-- Passport Issuer Key (JSON): https://aeoess.com/.well-known/aeoess-issuer.json
 - Protocol Registry (JSON): https://aeoess.com/protocol-registry.json
 - Shared State (JSON): https://aeoess.com/comms/shared-state.json
 - Governance Proposals (JSON): https://aeoess.com/agora/proposals.json
@@ -138,13 +122,13 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
 14 posts covering: protocol architecture decisions, layer-by-layer shipping, multi-agent experiments, community engagement, MCP server distribution, agentic commerce implementation, threat model, and graduated enforcement.
 
-## Persistence Layer (v1.29.1)
+## Persistence Layer (v1.29.0)
 
 StorageBackend interface for durable gateway state. Events are truth, state is derived. VolatileBackend (in-memory, testing) ships with core SDK. @aeoess/storage-sqlite (separate package, WAL mode, 12 tables) for production single-gateway deployments. Gateway integration: write-through cache, loadFromStorage() on restart, signed checkpoints with external anchoring. Receipt bundles: export/verify/import signed portable archives. GDPR tombstoning preserves chain integrity. Reserve/commit/release atomic spend pattern.
 
 ## Hosted Gateway (gateway.aeoess.com)
 
-Private enforcement gateway: 33 API routes, multi-tenant, SQLite on Railway Volume. Policy evaluation (billable), cascade revocation, attribution dashboard, settlements, provenance dossier. Nano payment rail: feeless instant agent wallets with delegation-gated sends. Local HD key derivation, public RPC for work generation + block publishing. No Nano node required. Every transaction produces signed receipt with on-chain block hash proof. Dashboard at aeoess.com/gateway.html.
+Private enforcement gateway: 34 API routes, multi-tenant, SQLite (Railway Volume). Policy evaluation (billable unit), cascade revocation, attribution dashboard, settlements, provenance dossier. Passport trust profile API (GET /passport/{agentId}/trust-profile — one call, grade + risk signals). Sybil defense: 4-gate wallet provisioning (registration, delegation, key dedup, principal rate limit). Nano payment rail: feeless instant agent wallets with delegation-gated sends (4-gate pipeline: active wallet, commerce scope, spend limit, Sybil gates). Local HD key derivation via nanocurrency-web, public RPC for work generation and block publishing. No Nano node required. Every transaction produces a signed receipt with on-chain block hash proof. Dashboard at aeoess.com/gateway.html.
 
 ## Links
 
@@ -155,11 +139,8 @@ Private enforcement gateway: 33 API routes, multi-tenant, SQLite on Railway Volu
 - Mingle: https://aeoess.com/mingle.html
 - AMCS Standard: https://aeoess.com/amcs.html
 - GitHub: https://github.com/aeoess
-- Benchmarks: https://aeoess.com/benchmarks.html
-- Wallet: https://aeoess.com/wallet.html
 - Paper (Protocol): https://doi.org/10.5281/zenodo.18749779
 - Paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
-- Cited by: PDR in Production (Nanook & Gerundium, UBC) — https://doi.org/10.5281/zenodo.19323172
 - Dev Log: https://aeoess.com/blog.html
 - Threat Model: https://aeoess.com/threat-model.html
 - Author: https://tymofii.me
