@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — AEOESS | Building AI Agent Infrastructure in Public</title>
 <!-- PROPAGATION-ZONE-START -->
-<meta name="description" content="Day-by-day dev log of building the Agent Passport System — 94-module enforcement infrastructure for AI agents. Policy eval under 2ms. Ed25519 identity, delegation, reputation, commerce, feeless Nano wallet, institutional governance, data attribution. 1,919 tests, 124 MCP tools, three research papers, IETF Internet-Draft. Started February 18, 2026.">
+<meta name="description" content="Day-by-day dev log of building the Agent Passport System — 94-module enforcement infrastructure for AI agents. Policy eval under 2ms. Ed25519 identity, delegation, reputation, commerce, feeless Nano wallet, institutional governance, data attribution. 1,919 tests, 125 MCP tools, three research papers, IETF Internet-Draft. Started February 18, 2026.">
 <meta name="keywords" content="AI agent identity, agent passport, Ed25519, MCP server, multi-agent coordination, agentic commerce, AI governance, delegation chains, values floor, cryptographic identity, agent protocol, open source AI infrastructure, build in public">
 <meta name="author" content="Tymofii Pidlisnyi">
 <meta name="robots" content="index, follow">
@@ -31,7 +31,7 @@
 <meta property="og:type" content="blog">
 <meta property="og:site_name" content="AEOESS">
 <meta property="og:title" content="AEOESS Dev Log — Building AI Agent Infrastructure in 28 Days">
-<meta property="og:description" content="Day-by-day dev log: 57 core + 32 v2 constitutional modules, 1715 tests, 124 MCP tools. Ed25519 identity, delegation chains, values enforcement, separation of powers, circuit breakers. Open source.">
+<meta property="og:description" content="Day-by-day dev log: 57 core + 32 v2 constitutional modules, 1715 tests, 125 MCP tools. Ed25519 identity, delegation chains, values enforcement, separation of powers, circuit breakers. Open source.">
 <meta property="og:url" content="https://aeoess.com/blog.html">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta property="article:author" content="https://tymofii.me">
@@ -44,7 +44,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AEOESS Dev Log — Governance for the Agent Economy">
-<meta name="twitter:description" content="63 modules, 1715 tests, 124 MCP tools, two research papers. Ed25519 identity, values enforcement, agentic commerce. Open source, build in public.">
+<meta name="twitter:description" content="63 modules, 1715 tests, 125 MCP tools, two research papers. Ed25519 identity, values enforcement, agentic commerce. Open source, build in public.">
 <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <!-- PROPAGATION-ZONE-END -->
 
@@ -98,7 +98,7 @@
       "@type": "BlogPosting",
       "headline": "Day 41: Agent Wallets — Feeless Crypto for AI Agents",
       "datePublished": "2026-03-29",
-      "description": "Built Nano payment rail adapter and agent wallet system. 1,430 new lines. Gateway went from 18 to 33 API routes. HD key derivation, 3-gate delegation pipeline, freeze/revoke cascade. Wallet page live at aeoess.com/wallet.html.",
+      "description": "Built Nano payment rail adapter and agent wallet system. 1,430 new lines. Gateway went from 18 to 36 API routes. HD key derivation, 3-gate delegation pipeline, freeze/revoke cascade. Wallet page live at aeoess.com/wallet.html.",
       "url": "https://aeoess.com/blog.html#day-41",
       "keywords": ["nano", "agent wallet", "payment rail", "feeless", "delegation pipeline", "HD key derivation"]
     },
@@ -639,14 +639,14 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building an 89-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, data attribution. Started February 18, 2026. 1,715 tests, 124 MCP tools, three papers, IETF draft. Open source.</p>
+  <p class="sub">Day-by-day record of building an 89-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, data attribution. Started February 18, 2026. 1,715 tests, 125 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
 
 <article class="post" id="day-41">
   <time class="post-date" datetime="2026-03-29">March 29, 2026</time>
   <h2>Day 41: Agent Wallets</h2>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Agents need to spend money. Coinbase charges gas. ChainHop takes 0.75%. We charge nothing. Three commits, 1,430 new lines, gateway went from 18 to 33 API routes.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Agents need to spend money. Coinbase charges gas. ChainHop takes 0.75%. We charge nothing. Three commits, 1,430 new lines, gateway went from 18 to 36 API routes.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Nano payment rail.</strong> Generic <code>PaymentRail</code> interface with Nano as the first adapter. Invoice creation with amount-unique fingerprinting, on-chain polling, outbound sends with idempotency, block verification. Six endpoints: invoice, status, settle, balance, history, verify. 28 unit tests plus 12 live tests against the real Nano network.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Agent wallets.</strong> Every agent with a passport gets a Nano wallet via HD key derivation. Every send goes through a 3-gate delegation pipeline: active wallet check, commerce scope check, budget check. Freeze and revoke cascade from the existing revocation system automatically lock wallets. Nine new REST endpoints. Private keys never leave the gateway process. <a href="wallet.html">aeoess.com/wallet.html</a></p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Local crypto.</strong> <code>wallet-crypto.ts</code> (323 lines): master seed auto-generates on first run, HD key derivation gives one deterministic address per agent, local block signing with Ed25519, public RPC for work generation. No Docker. No Nano node. Just one seed file and a public RPC endpoint.</p>
