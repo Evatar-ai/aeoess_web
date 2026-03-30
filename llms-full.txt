@@ -1,11 +1,13 @@
 # Agent Passport System — Full Documentation
 
-> Cryptographic identity, trust, governance, attribution, communication, policy, and coordination for autonomous AI agents.
-> TypeScript SDK + MCP server. Zero heavy dependencies. Apache-2.0 license.
+> Enforcement infrastructure for AI agents. Policy evaluation in under 2ms. 15 constraint dimensions. 403 ops/sec.
+> Cryptographic identity, delegation, reputation, gateway enforcement, feeless Nano payments, Merkle attribution.
+> TypeScript SDK + MCP server + Python SDK. Zero heavy dependencies. Apache-2.0 license.
+> Independently cited: PDR in Production (Nanook & Gerundium, UBC). DOI: 10.5281/zenodo.19323172
 
 ## What It Is
 
-The Agent Passport System is an open-source TypeScript SDK that gives AI agents verifiable identity, scoped delegation, economic attribution, values governance, and protocol-native communication. It uses Ed25519 cryptography throughout. No blockchain. No smart contracts. Just cryptographic primitives that work.
+The Agent Passport System is enforcement infrastructure for the agent economy. A TypeScript SDK that gives AI agents verifiable identity, scoped delegation, Bayesian reputation, gateway enforcement, feeless Nano wallet, economic attribution, values governance, and protocol-native communication. Ed25519 cryptography throughout. No blockchain required. Feeless Nano payments for agent-to-agent commerce.
 
 It answers: when AI agents from different creators, running different models, serving different humans begin to collaborate — who is responsible, under what authority, according to what values, and who benefits?
 

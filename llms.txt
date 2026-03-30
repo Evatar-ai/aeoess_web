@@ -48,6 +48,17 @@ AEOESS provides ninety-four protocol modules (62 core + 32 v2 constitutional) fo
 41. **Decision Equivalence** — Canonical boundary profiles for cross-system decision comparison. Two-layer architecture: decision question hash (the invariant) + boundary profiles (the comparison surface). Static projection-based comparison, no runtime negotiation. Threshold distance as metadata
 42. **Data Lifecycle Governance** — Extended derivation continuity (multi-hop chains with break markers, lineage confidence, transform class taxonomy), post-revocation obligation state (honest per-artifact-type obligations, not deletion theater), decision lineage receipt (Module 37 → data modules bridge, right-to-explanation primitive), purpose taxonomy (hierarchical with wildcard matching), retention TTL (ephemeral vs persistent), terms version pinning (settlement bug fix)
 43. **Data Lifecycle Phase 2** — Aggregation controls (rolling window rate limits), jurisdiction envelope (EU_ONLY, GDPR_ADEQUATE_ONLY transfer checks), governance taint propagation, dispute records (5 types, 8 statuses), combination constraints (forbidden joins for HIPAA/COPPA/GDPR), access snapshots (anti-rug-pull), rights propagation semantics, purpose drift detection, re-identification risk declarations
+44. **Agent Wallet (Nano)** — Feeless, sub-second cryptocurrency payments for AI agents. HD key derivation from master seed (BIP44-style). Every wallet tied to an APS passport. Every spend delegation-scoped: scope, limit, merchant whitelist. Every transaction produces a signed receipt. Zero gas fees. Local signing (no node needed). Gateway enforces spending constraints before signing. Nano RPC for balance/send/receive. Competitive advantage: no other agent governance protocol has payment rails.
+
+## Benchmarks
+
+- **Policy evaluation latency:** p50 < 2ms, p95 < 5ms, p99 < 10ms
+- **Throughput:** 403 ops/sec sustained (single-threaded gateway)
+- **Constraint dimensions:** 15 (scope, spend, tier, values, revocation, taint, anomaly, circuit, approval, temporal, jurisdiction, purpose, combination, retention, terms)
+- **Denial latency:** Sub-millisecond (fail-fast on first constraint violation)
+- **Receipt generation:** < 1ms per signed receipt
+- **Cascade revocation:** O(n) in delegation chain depth, < 5ms for chains up to 100 deep
+- **Nano transaction:** Sub-second confirmation, zero fees
 
 ## Standards
 
@@ -112,6 +123,9 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 
 ## Machine-Readable Endpoints
 
+- MCP Server Discovery (JSON): https://aeoess.com/.well-known/mcp.json
+- APS Governance (signed): https://aeoess.com/.well-known/aps.txt
+- Agent Trust (JSON): https://aeoess.com/.well-known/agent-trust.json
 - Protocol Registry (JSON): https://aeoess.com/protocol-registry.json
 - Shared State (JSON): https://aeoess.com/comms/shared-state.json
 - Governance Proposals (JSON): https://aeoess.com/agora/proposals.json

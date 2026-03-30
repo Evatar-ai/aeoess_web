@@ -7,6 +7,10 @@ Allow: /llms-full.txt
 Allow: /llms/
 Allow: /protocol-registry.json
 Allow: /agora/
+Allow: /.well-known/mcp.json
+Allow: /.well-known/aps.txt
+Allow: /.well-known/agent-trust.json
+Allow: /.well-known/agents.json
 
 # Private / admin / legacy
 Disallow: /ideas-admin.html
@@ -28,7 +32,34 @@ Disallow: /*.zip$
 
 Sitemap: https://aeoess.com/sitemap.xml
 
-# LLM discovery (llms.txt standard)
-# See: https://llmstxt.org/
+# LLM discovery (llmstxt.org standard)
 # Compact: https://aeoess.com/llms.txt
 # Full: https://aeoess.com/llms-full.txt
+
+# MCP server discovery
+# https://aeoess.com/.well-known/mcp.json
+
+# Agent governance
+# https://aeoess.com/.well-known/aps.txt
+
+# AI crawlers welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-AI
+Allow: /
