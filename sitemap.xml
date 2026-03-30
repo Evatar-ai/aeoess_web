@@ -43,6 +43,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aeoess.com/benchmarks.html</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aeoess.com/gateway.html</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>weekly</changefreq>
