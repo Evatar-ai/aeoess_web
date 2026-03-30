@@ -163,45 +163,6 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
     <h1>Governance for the Agent Economy</h1>
     <p class="paper-sub">Open-source enforcement infrastructure for AI agents</p>
     <div class="paper-badges"><span class="badge b-g">&#9679; Protocol Live</span><span class="badge b-b">Apache-2.0</span><span class="badge b-b" id="dl-badge">&mdash; installs</span></div>
-    <div class="paper-body">
-      The agent economy is here. AI agents represent companies and people. They spend real money, access sensitive data, negotiate contracts, close deals, and talk to other agents on behalf of their principals. <strong>No one can verify who they are. No one controls what they do. No one can shut them down when things go wrong.</strong>
-      <div class="cmp-row">
-        <div class="cmp"><span class="cmp-label r">Today</span><div class="cmp-text">Agents act anonymously. No audit trail. No spending controls. Revocation means shutting everything down. You find out after the damage.</div></div>
-        <div class="cmp"><span class="cmp-label g">With AEOESS</span><div class="cmp-text">Every agent carries a signed identity. Authority can only narrow, never expand. One call revokes downstream. Full cryptographic audit trail.</div></div>
-      </div>
-      <span class="aside">There are no rules. We wrote them.</span>
-      <div class="capabilities">
-        <div class="cap"><span class="cap-name">Identity</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Ed25519 cryptographic</span></div>
-        <div class="cap"><span class="cap-name">Delegation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Scoped, revocable chains</span></div>
-        <div class="cap"><span class="cap-name">Reputation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Bayesian, earned trust</span></div>
-        <div class="cap"><span class="cap-name">Governance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Values floor enforcement</span></div>
-        <div class="cap"><span class="cap-name">Commerce</span><span class="cap-dash">&mdash;</span><span class="cap-desc">4-gate spending controls</span></div>
-        <div class="cap"><span class="cap-name">Attribution</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Merkle-proven audit trail</span></div>
-        <div class="cap"><span class="cap-name">Communication</span><span class="cap-dash">&mdash;</span><span class="cap-desc">E2E encrypted, signed</span></div>
-        <div class="cap"><span class="cap-name">Enforcement</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Gateway boundary, &lt;2ms</span></div>
-        <div class="cap"><span class="cap-name">Wallet</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Feeless Nano, delegation-scoped</span></div>
-        <div class="cap"><span class="cap-name">Institutional</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Charters, offices, succession</span></div>
-        <div class="cap"><span class="cap-name">Revocation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Cascade, one call kills all</span></div>
-      </div>
-    </div>
-    <div class="paper-stats">
-      <div><span class="ps-n">&lt;2ms</span><span class="ps-l">Policy eval</span></div>
-      <div><span class="ps-n">15</span><span class="ps-l">Constraint dims</span></div>
-      <div><span class="ps-n">403</span><span class="ps-l">Ops/sec</span></div>
-      <div><span class="ps-n">1,919</span><span class="ps-l">Tests</span></div>
-    </div>
-    <div style="font:400 .72rem/1.5 var(--sans);color:var(--ink-4);margin-bottom:.6rem;padding:.4rem .6rem;border-left:2px solid var(--green);background:var(--code-bg);border-radius:0 6px 6px 0"><strong style="color:var(--ink-3)">Independently cited</strong> — PDR in Production (Nanook &amp; Gerundium, UBC) validates APS Bayesian model. <a href="https://doi.org/10.5281/zenodo.19323172" style="font-size:.68rem">Zenodo</a></div>
-    <div class="install-cmd" onclick="navigator.clipboard.writeText('npm install agent-passport-system')"><span class="cm">$</span> npm install agent-passport-system</div>
-    <div class="pkg-links">
-      <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.29.1</a>
-      <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.19.0</a>
-      <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.7.0</a>
-      <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
-      <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
-      <a href="https://doi.org/10.5281/zenodo.19260073">Paper 3</a>
-    </div>
-  </div>
-  <div>
     <div class="updates">
       <div class="up-i"><span class="up-d">Mar 30</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Agent Attestation Architecture</strong> — 3-round consilium (Claude+GPT+Gemini+Portal). 4-tier evidence model, passport grades 0-3, Sybil 4-gate pipeline, trust profile API, behavioral sequence tracking. Microsoft AGT adapter PR. <a href="blog.html#day-42">Blog</a></span></div>
       <div class="up-i"><span class="up-d">Mar 29</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Agent Wallets</strong> — Nano payment rail + wallet system. 36 gateway routes. Feeless, delegation-scoped. <a href="wallet.html">Wallet</a> · <a href="blog.html#day-41">Blog</a></span></div>
@@ -249,7 +210,45 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <div class="up-i"><span class="up-d">Feb 21</span><span class="up-t"><span class="up-tag t-d">paper</span><strong>Paper 1: The Agent Social Contract</strong> — First formalization. <a href="https://doi.org/10.5281/zenodo.18749779">Zenodo</a></span></div>
       <div class="up-i"><span class="up-d">Feb 18</span><span class="up-t"><span class="up-tag t-s">start</span><strong>Project begins</strong> — Ed25519 identity, delegation chains, first tests.</span></div>
     </div>
+    <div class="paper-body">
+      The agent economy is here. AI agents represent companies and people. They spend real money, access sensitive data, negotiate contracts, close deals, and talk to other agents on behalf of their principals. <strong>No one can verify who they are. No one controls what they do. No one can shut them down when things go wrong.</strong>
+      <div class="cmp-row">
+        <div class="cmp"><span class="cmp-label r">Today</span><div class="cmp-text">Agents act anonymously. No audit trail. No spending controls. Revocation means shutting everything down. You find out after the damage.</div></div>
+        <div class="cmp"><span class="cmp-label g">With AEOESS</span><div class="cmp-text">Every agent carries a signed identity. Authority can only narrow, never expand. One call revokes downstream. Full cryptographic audit trail.</div></div>
+      </div>
+      <span class="aside">There are no rules. We wrote them.</span>
+      <div class="capabilities">
+        <div class="cap"><span class="cap-name">Identity</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Ed25519 cryptographic</span></div>
+        <div class="cap"><span class="cap-name">Delegation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Scoped, revocable chains</span></div>
+        <div class="cap"><span class="cap-name">Reputation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Bayesian, earned trust</span></div>
+        <div class="cap"><span class="cap-name">Governance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Values floor enforcement</span></div>
+        <div class="cap"><span class="cap-name">Commerce</span><span class="cap-dash">&mdash;</span><span class="cap-desc">4-gate spending controls</span></div>
+        <div class="cap"><span class="cap-name">Attribution</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Merkle-proven audit trail</span></div>
+        <div class="cap"><span class="cap-name">Communication</span><span class="cap-dash">&mdash;</span><span class="cap-desc">E2E encrypted, signed</span></div>
+        <div class="cap"><span class="cap-name">Enforcement</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Gateway boundary, &lt;2ms</span></div>
+        <div class="cap"><span class="cap-name">Wallet</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Feeless Nano, delegation-scoped</span></div>
+        <div class="cap"><span class="cap-name">Institutional</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Charters, offices, succession</span></div>
+        <div class="cap"><span class="cap-name">Revocation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Cascade, one call kills all</span></div>
+      </div>
+    </div>
+    <div class="paper-stats">
+      <div><span class="ps-n">&lt;2ms</span><span class="ps-l">Policy eval</span></div>
+      <div><span class="ps-n">15</span><span class="ps-l">Constraint dims</span></div>
+      <div><span class="ps-n">403</span><span class="ps-l">Ops/sec</span></div>
+      <div><span class="ps-n">1,919</span><span class="ps-l">Tests</span></div>
+    </div>
+    <div style="font:400 .72rem/1.5 var(--sans);color:var(--ink-4);margin-bottom:.6rem;padding:.4rem .6rem;border-left:2px solid var(--green);background:var(--code-bg);border-radius:0 6px 6px 0"><strong style="color:var(--ink-3)">Independently cited</strong> — PDR in Production (Nanook &amp; Gerundium, UBC) validates APS Bayesian model. <a href="https://doi.org/10.5281/zenodo.19323172" style="font-size:.68rem">Zenodo</a></div>
+    <div class="install-cmd" onclick="navigator.clipboard.writeText('npm install agent-passport-system')"><span class="cm">$</span> npm install agent-passport-system</div>
+    <div class="pkg-links">
+      <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v1.29.1</a>
+      <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.19.0</a>
+      <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.7.0</a>
+      <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
+      <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
+      <a href="https://doi.org/10.5281/zenodo.19260073">Paper 3</a>
+    </div>
   </div>
+
 </section>
 <div class="arch-h">Protocol Architecture — 63 core + 32 v2 constitutional = 95 modules · <span style="color:var(--green)">79% connected through gateway enforcement hub</span></div>
 <div class="arch-map" id="archMap">
