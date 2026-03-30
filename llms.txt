@@ -4,7 +4,7 @@
 
 ## Overview
 
-AEOESS provides ninety-two protocol modules (60 core + 32 v2 constitutional) for sovereign AI agents:
+AEOESS provides ninety-four protocol modules (62 core + 32 v2 constitutional) for sovereign AI agents:
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 8 principles (F-001 to F-008), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
