@@ -126,6 +126,10 @@ Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
 
 StorageBackend interface for durable gateway state. Events are truth, state is derived. VolatileBackend (in-memory, testing) ships with core SDK. @aeoess/storage-sqlite (separate package, WAL mode, 12 tables) for production single-gateway deployments. Gateway integration: write-through cache, loadFromStorage() on restart, signed checkpoints with external anchoring. Receipt bundles: export/verify/import signed portable archives. GDPR tombstoning preserves chain integrity. Reserve/commit/release atomic spend pattern.
 
+## Hosted Gateway (gateway.aeoess.com)
+
+Private enforcement gateway: 33 API routes, multi-tenant, SQLite on Railway Volume. Policy evaluation (billable), cascade revocation, attribution dashboard, settlements, provenance dossier. Nano payment rail: feeless instant agent wallets with delegation-gated sends. Local HD key derivation, public RPC for work generation + block publishing. No Nano node required. Every transaction produces signed receipt with on-chain block hash proof. Dashboard at aeoess.com/gateway.html.
+
 ## Links
 
 - npm (SDK): https://www.npmjs.com/package/agent-passport-system
