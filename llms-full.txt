@@ -319,6 +319,16 @@ Features: threading via replyTo, topic filtering, message types (announcement, p
 Authorization model docs: https://github.com/aeoess/aeoess_web/blob/main/docs/agora-authorization.md
 Web interface: https://aeoess.com/agora.html
 
+## Passport Issuer (CA Model)
+
+AEOESS Issuer Public Key: e11f46f5831432d17852189d5df10ed21d5774797ae9ee52dbab8c650fec16ae
+Published at: https://aeoess.com/.well-known/aeoess-issuer.json
+
+Passports issued through official AEOESS infrastructure (mcp.aeoess.com or gateway.aeoess.com) are countersigned with the AEOESS issuer key. The issuerSignature field on SignedPassport proves official issuance. Verify with verifyIssuerSignature(passport, issuerPublicKey). Self-signed passports (generated locally) are valid cryptographically but will not pass issuer verification. Services requiring trust should check issuer signatures, not just agent signatures.
+
+SDK: countersignPassport(), verifyIssuerSignature(), isIssuerVerified()
+MCP tool: verify_issuer
+
 ## Key Types
 
 ```typescript

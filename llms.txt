@@ -127,6 +127,7 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 - MCP Server Discovery (JSON): https://aeoess.com/.well-known/mcp.json
 - APS Governance (signed): https://aeoess.com/.well-known/aps.txt
 - Agent Trust (JSON): https://aeoess.com/.well-known/agent-trust.json
+- Passport Issuer Key (JSON): https://aeoess.com/.well-known/aeoess-issuer.json
 - Protocol Registry (JSON): https://aeoess.com/protocol-registry.json
 - Shared State (JSON): https://aeoess.com/comms/shared-state.json
 - Governance Proposals (JSON): https://aeoess.com/agora/proposals.json

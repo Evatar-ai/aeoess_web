@@ -145,6 +145,18 @@ One deterministic address per agent via HD derivation.</pre></div>
   </div>
 </div>
 
+<div class="w-section">
+  <h2>Sybil Resistance</h2>
+  <p>Passport generation is free and open source. Anyone can create a valid Ed25519 keypair. The protocol is designed this way. The Sybil boundary is the <strong>issuer countersignature</strong>: passports issued through official AEOESS infrastructure are countersigned with the AEOESS issuer key. A self-signed passport is just a keypair. A countersigned passport is a verified identity.</p>
+  <div class="w-code"><pre>AEOESS Issuer Public Key:
+e11f46f5831432d17852189d5df10ed21d5774797ae9ee52dbab8c650fec16ae
+
+Verify: verifyIssuerSignature(passport, issuerPublicKey)
+MCP tool: verify_issuer
+Published: aeoess.com/.well-known/aeoess-issuer.json</pre></div>
+  <p>Wallet provisioning requires a countersigned passport. Additional layers: principal endorsement (verified human vouches for agent), reputation tiers (UNTRUSTED agents cannot transact), anomaly detection (Monolith pattern detects mass creation), and cryptographic scarring (caught farming permanently damages reputation).</p>
+</div>
+
 <div class="w-section" style="padding-bottom:3rem">
   <h2>Get Started</h2>
   <p>The Agent Wallet is part of the AEOESS Gateway. Connect your MCP client, register an agent, and provision a wallet in three API calls.</p>
