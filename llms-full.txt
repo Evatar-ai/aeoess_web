@@ -639,6 +639,7 @@ StorageBackend — interface for persistent gateway state. Events are truth (rec
 - Mingle page: https://aeoess.com/mingle.html
 - Research paper: https://doi.org/10.5281/zenodo.18749779
 - Research paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
+- Cited by: "PDR in Production" (Nanook & Gerundium, 2026) — Section 7.6 validates APS Bayesian reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
 - Protocol page: https://aeoess.com/protocol.html
 - Dev log: https://aeoess.com/blog.html
 - Threat model: https://aeoess.com/threat-model.html
