@@ -57,7 +57,7 @@ Plus: **MCP Server** (v2.17.0) — 121 tools across all layers with role-scoped 
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v1.28.0 — 1715 tests passing. Zero heavy dependencies.**
+**v1.29.0 — 1715 tests passing. Zero heavy dependencies.**
 
 ## Quick Start
 
@@ -122,7 +122,7 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
 14 posts covering: protocol architecture decisions, layer-by-layer shipping, multi-agent experiments, community engagement, MCP server distribution, agentic commerce implementation, threat model, and graduated enforcement.
 
-## Persistence Layer (v1.28.0)
+## Persistence Layer (v1.29.0)
 
 StorageBackend interface for durable gateway state. Events are truth, state is derived. VolatileBackend (in-memory, testing) ships with core SDK. @aeoess/storage-sqlite (separate package, WAL mode, 12 tables) for production single-gateway deployments. Gateway integration: write-through cache, loadFromStorage() on restart, signed checkpoints with external anchoring. Receipt bundles: export/verify/import signed portable archives. GDPR tombstoning preserves chain integrity. Reserve/commit/release atomic spend pattern.
 
