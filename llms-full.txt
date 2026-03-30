@@ -627,6 +627,18 @@ StorageBackend — interface for persistent gateway state. Events are truth (rec
 
 **Single trust domain model** — one gateway, one authoritative revocation view, one authoritative spend ledger, one authoritative receipt chain. Multi-gateway coordination is private gateway product territory.
 
+## Hosted Gateway (gateway.aeoess.com)
+
+Private enforcement gateway with 33 API routes, multi-tenant with API key auth (SHA-256 hashed, displayed once). SQLite on Railway Volume. Three tiers: free (1K evals/month, 3 agents), pro (50K evals, 25 agents), enterprise (unlimited).
+
+**Core endpoints:** policy evaluation (billable unit), cascade revocation (agents + delegations + wallets frozen), agent registration, delegation management, audit trail, dashboard summary, usage metering.
+
+**Data attribution (Pixel):** data source registration with purpose-weighted pricing (read 1x, training 10x, fine-tune 10x), access receipts, contribution ledger, attribution dashboard with time series, settlements with line items, agent self-service consumption view, derivation declarations, verified self-declaration with TF-IDF plausibility scoring, provenance dossier with longitudinal patterns and negative evidence, lexical forensic scoring (ngram Jaccard). Every response includes coverage scope and evidence limits disclaimers.
+
+**Nano payment rail:** feeless instant agent-to-agent payments on Nano Layer 1. Agent wallets with delegation-gated sends (3-gate pipeline: active wallet check, commerce scope via SDK scopeAuthorizes(), spend limit with 1e6 rounding). Local HD key derivation via nanocurrency-web from master seed. Public RPC (rpc.nano.to) for work generation and block publishing. No Nano node required. Every transaction produces signed receipt with on-chain block hash proof. Rate limiting: 10 provisions/min, 30 sends/min per tenant. Revocation cascade automatically freezes agent wallets.
+
+**Dashboard:** aeoess.com/gateway.html — API key login, stats grid, alerts, recent denials, agents, delegations with spend tracking, audit trail with auto-refresh.
+
 ## Links
 
 - npm package: https://www.npmjs.com/package/agent-passport-system
