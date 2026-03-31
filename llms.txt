@@ -128,7 +128,7 @@ StorageBackend interface for durable gateway state. Events are truth, state is d
 
 ## Hosted Gateway (gateway.aeoess.com)
 
-Private enforcement gateway: 36 API routes, multi-tenant, SQLite (Railway Volume). Policy evaluation (billable unit), cascade revocation, attribution dashboard, settlements, provenance dossier. Passport trust profile API (GET /passport/{agentId}/trust-profile — one call, grade + risk signals). Sybil defense: 4-gate wallet provisioning (registration, delegation, key dedup, principal rate limit). Nano payment rail: feeless instant agent wallets with delegation-gated sends (4-gate pipeline: active wallet, commerce scope, spend limit, Sybil gates). Local HD key derivation via nanocurrency-web, public RPC for work generation and block publishing. No Nano node required. Every transaction produces a signed receipt with on-chain block hash proof. Dashboard at aeoess.com/gateway.html.
+Private enforcement gateway: 37 API routes, multi-tenant, SQLite (Railway Volume). Policy evaluation (billable unit), cascade revocation, attribution dashboard, settlements, provenance dossier. Passport trust profile API (GET /passport/{agentId}/trust-profile — one call, grade + risk signals). Sybil defense: 4-gate wallet provisioning (registration, delegation, key dedup, principal rate limit). Nano payment rail: feeless instant agent wallets with delegation-gated sends (4-gate pipeline: active wallet, commerce scope, spend limit, Sybil gates). Local HD key derivation via nanocurrency-web, public RPC for work generation and block publishing. No Nano node required. Every transaction produces a signed receipt with on-chain block hash proof. Dashboard at aeoess.com/gateway.html.
 
 ## Links
 
