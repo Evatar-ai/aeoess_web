@@ -96,6 +96,14 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 43: Multi-Attestation Verification",
+      "datePublished": "2026-03-31",
+      "description": "Gateway Ed25519 identity + JWKS. APS verified as 5th issuer in multi-attestation spec. Policy hash chaining. Routing divergence detection. 9 new SDK functions from ecosystem conversations. 1956 tests, 38 gateway routes.",
+      "url": "https://aeoess.com/blog.html#day-43",
+      "keywords": ["multi-attestation", "JWKS", "policy hash chaining", "routing divergence", "insumer", "cross-protocol"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 42: Agent Attestation Architecture",
       "datePublished": "2026-03-30",
       "description": "3-round consilium (Claude + GPT + Gemini + Portal). Four-tier attestation model. Passport grades 0-3. Sybil 4-gate pipeline. Presentation trust profile API. Behavioral sequence tracking. 1956 tests, 95 modules, 125 MCP tools, 36 gateway routes.",
@@ -650,6 +658,17 @@
   <p class="sub">Day-by-day record of building a 95-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 1,956 tests, 125 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-43">
+  <time class="post-date" datetime="2026-03-31">March 31, 2026</time>
+  <h2>Day 43: Multi-Attestation Verification</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">douglasborthwick-crypto ran a 5-issuer live verification pass. InsumerAPI, ThoughtProof, RNWY, Maiat, and APS. Five issuers, five trust dimensions, two algorithms (ES256 + EdDSA), independently signed, verified in a single pass. APS slotted in with zero code changes to the reference verifier. Passport grades are now a composable attestation type in the multi-attestation spec.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Gateway identity.</strong> The gateway needed its own cryptographic identity to sign trust attestations that external verifiers can check. Ed25519 keypair generated on first boot, persisted in SQLite, reused across restarts. <code>/.well-known/jwks.json</code> exposes the public key in standard JWK format. <code>/api/v1/public/trust/:agentId/attestation</code> returns a JWS-signed trust profile. Any relying party fetches the JWKS, selects by <code>kid: "gateway-v1"</code>, and verifies the signature without contacting us.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Policy hash chaining.</strong> From haroldmalikfrimpong-ops, who shipped compound digests, contextEpoch, and Merkle trees on AgentID while we were spec'ing. His insight: <code>SHA-256(constraints_at_N + previous_policy_hash)</code> creates a tamper-evident history of an agent's constraint state. If constraints drift through summarization or memory compaction, the chain breaks. <code>verifyPolicyChain()</code> recomputes every hash. <code>detectConstraintDrift()</code> classifies each change as narrowed (safe), widened (violation), or changed.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Routing divergence detection.</strong> From desiorac on OATR and A2A. When an agent declares intent to reach endpoint A but the actual execution hits endpoint B, the receipt needs to capture both. Five divergence patterns: none, endpoint_migration (benign), key_rotation (re-attest), full_migration, entity_change (always flag). Each carries a risk level. <code>captureRoutingContext()</code> snapshots DID + document hash + endpoint hash at a point in time. <code>detectRoutingDivergence()</code> compares two snapshots and classifies the pattern.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Ecosystem.</strong> 15+ GitHub replies across 8 threads. Every SDK function built today came from a conversation: <code>importProviderAttestation()</code> from msaleme, <code>addIdentityBoundary()</code> from xsa520, <code>computeCompoundDigest()</code> from desiorac, routing divergence from desiorac, policy hash chaining from haroldmalikfrimpong-ops. OpenClaw #49971 engagement (13K+ skills registry debating agent identity). Working Group referenced in 4 high-traffic threads. ClawHub skill rewritten agent-first (v4.4.0). All stale GitHub surfaces fixed (repo descriptions, glama.json, README headings).</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.29.4 (1,956 tests, 492 suites, 95 modules). MCP v2.19.1 (125 tools). Gateway v0.3.0 (38 routes). 37 new tests today. 9 new exported functions. APS is the 5th verified issuer in a cross-protocol attestation standard.</p>
+</article>
 
 <article class="post" id="day-42">
   <time class="post-date" datetime="2026-03-30">March 30, 2026</time>
