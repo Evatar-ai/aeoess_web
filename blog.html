@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — AEOESS | Building AI Agent Infrastructure in Public</title>
 <!-- PROPAGATION-ZONE-START -->
-<meta name="description" content="Day-by-day dev log of building the Agent Passport System — 94-module enforcement infrastructure for AI agents. Policy eval under 2ms. Ed25519 identity, delegation, reputation, commerce, feeless Nano wallet, institutional governance, data attribution. 1,956 tests, 125 MCP tools, three research papers, IETF Internet-Draft. Started February 18, 2026.">
+<meta name="description" content="Day-by-day dev log of building the Agent Passport System — 94-module enforcement infrastructure for AI agents. Policy eval under 2ms. Ed25519 identity, delegation, reputation, commerce, feeless Nano wallet, institutional governance, data attribution. 1,987 tests, 125 MCP tools, three research papers, IETF Internet-Draft. Started February 18, 2026.">
 <meta name="keywords" content="AI agent identity, agent passport, Ed25519, MCP server, multi-agent coordination, agentic commerce, AI governance, delegation chains, values floor, cryptographic identity, agent protocol, open source AI infrastructure, build in public">
 <meta name="author" content="Tymofii Pidlisnyi">
 <meta name="robots" content="index, follow">
@@ -96,9 +96,17 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 44: Execution Attestation (Checkpoint 3)",
+      "datePublished": "2026-04-01",
+      "description": "Shipped infrastructure-signed execution attestation. Three-checkpoint authorization chain complete. Drift classification with pluggable rules. v2 test vectors for cross-protocol edge cases. Four GitHub replies across OWASP, qntm WG, A2A. 1987 tests, 503 suites, 96 modules.",
+      "url": "https://aeoess.com/blog.html#day-44",
+      "keywords": ["execution attestation", "checkpoint 3", "drift classification", "test vectors", "cross-protocol", "OWASP"]
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 43: Multi-Attestation Verification",
       "datePublished": "2026-03-31",
-      "description": "Gateway Ed25519 identity + JWKS. APS verified as 5th issuer in multi-attestation spec. Policy hash chaining. Routing divergence detection. 9 new SDK functions from ecosystem conversations. 1956 tests, 38 gateway routes.",
+      "description": "Gateway Ed25519 identity + JWKS. APS verified as 5th issuer in multi-attestation spec. Policy hash chaining. Routing divergence detection. 9 new SDK functions from ecosystem conversations. 1987 tests, 38 gateway routes.",
       "url": "https://aeoess.com/blog.html#day-43",
       "keywords": ["multi-attestation", "JWKS", "policy hash chaining", "routing divergence", "insumer", "cross-protocol"]
     },
@@ -106,7 +114,7 @@
       "@type": "BlogPosting",
       "headline": "Day 42: Agent Attestation Architecture",
       "datePublished": "2026-03-30",
-      "description": "3-round consilium (Claude + GPT + Gemini + Portal). Four-tier attestation model. Passport grades 0-3. Sybil 4-gate pipeline. Presentation trust profile API. Behavioral sequence tracking. 1956 tests, 95 modules, 125 MCP tools, 36 gateway routes.",
+      "description": "3-round consilium (Claude + GPT + Gemini + Portal). Four-tier attestation model. Passport grades 0-3. Sybil 4-gate pipeline. Presentation trust profile API. Behavioral sequence tracking. 1987 tests, 96 modules, 125 MCP tools, 36 gateway routes.",
       "url": "https://aeoess.com/blog.html#day-42",
       "keywords": ["attestation", "sybil defense", "passport grade", "consilium", "trust profile", "behavioral sequence"]
     },
@@ -122,9 +130,9 @@
       "@type": "BlogPosting",
       "headline": "Day 40: Gateway Wiring — 79% Module Interconnection",
       "datePublished": "2026-03-29",
-      "description": "Connected 13 remaining modules into gateway enforcement pipeline. Fidelity probe measurement protocol. Data cluster wiring. Gateway identity layer. 12 GitHub replies across ecosystem. SDK v1.29.1, 1956 tests, 95 modules.",
+      "description": "Connected 13 remaining modules into gateway enforcement pipeline. Fidelity probe measurement protocol. Data cluster wiring. Gateway identity layer. 12 GitHub replies across ecosystem. SDK v1.29.1, 1987 tests, 96 modules.",
       "url": "https://aeoess.com/blog.html#day-40",
-      "keywords": ["gateway wiring", "fidelity probe", "module interconnection", "1956 tests", "95 modules", "ecosystem engagement"]
+      "keywords": ["gateway wiring", "fidelity probe", "module interconnection", "1987 tests", "96 modules", "ecosystem engagement"]
     },
     {
       "@type": "BlogPosting",
@@ -136,9 +144,9 @@
     },
       "headline": "Day 38: Rome-Complete — Institutional Governance in One Session",
       "datePublished": "2026-03-26",
-      "description": "Built the full Rome-Complete institutional layer in one session. Charter with 19 types, multi-class approval, Petri net (10 invariants), hybrid logical clocks, foreign counterparty envelopes, escrow-aware revocation, gateway identity, reserve attestations, federation receipt/reputation portability. 12 new MCP tools (125 total). 77 new tests. SDK v1.27.0 (1956 tests), MCP v2.19.0.",
+      "description": "Built the full Rome-Complete institutional layer in one session. Charter with 19 types, multi-class approval, Petri net (10 invariants), hybrid logical clocks, foreign counterparty envelopes, escrow-aware revocation, gateway identity, reserve attestations, federation receipt/reputation portability. 12 new MCP tools (125 total). 77 new tests. SDK v1.27.0 (1987 tests), MCP v2.19.0.",
       "url": "https://aeoess.com/blog.html#day-38",
-      "keywords": ["charter", "institutional governance", "multi-class approval", "Petri net", "hybrid logical clock", "federation", "reserve attestation", "1956 tests", "125 tools"]
+      "keywords": ["charter", "institutional governance", "multi-class approval", "Petri net", "hybrid logical clock", "federation", "reserve attestation", "1987 tests", "125 tools"]
     },
     {
       "@type": "BlogPosting",
@@ -655,9 +663,20 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building a 95-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 1,956 tests, 125 MCP tools, three papers, IETF draft. Open source.</p>
+  <p class="sub">Day-by-day record of building a 96-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 1,987 tests, 125 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-44">
+  <time class="post-date" datetime="2026-04-01">April 1, 2026</time>
+  <h2>Day 44: Execution Attestation (Checkpoint 3)</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">QueBallSharken and desiorac on OWASP#802 identified the gap: APS proves what was AUTHORIZED (PolicyReceipt, checkpoint 1) but not what was EXECUTED. The receipt is signed before execution. A lying agent can do something different. The fix: the sandbox signs what actually ran.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Execution attestation.</strong> <code>createExecutionAttestation()</code> — the sandbox/container/runtime calls this AFTER tool execution, signing with its own Ed25519 key. Not the agent's key. Infrastructure testimony the agent can't fabricate. Binds to the PolicyReceipt via <code>policyReceiptId</code> + <code>executionFrameId</code>. <code>verifyExecutionAttestation()</code> checks attestor signature, receipt binding, parameter match, and timing sanity. The three-checkpoint chain: authorization (checkpoint 1), binding (checkpoint 2, compoundDigest), execution (checkpoint 3, this).</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Drift classification.</strong> When intent parameters don't match execution parameters, classify the drift. <code>DEFAULT_DRIFT_RULES</code> ships with severity tiers: <code>critical</code> for target/recipient/amount changes (possible hijacking or theft), <code>suspicious</code> for query modification, <code>benign</code> for timestamp/nonce variance. Rules are pluggable — each deployment defines domain-specific drift policies. Highest severity wins when multiple fields drift.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Test vectors v2.</strong> Eight edge-case vectors for cross-protocol canonicalization: empty string vs null vs absent (three distinct JCS canonical forms), Unicode NFC vs NFD (same visual, different bytes, different SHA-256), nested object key ordering (JCS recursive sort), empty scopes array, unknown extension keys. These are the silent-drift vectors that only surface in cross-implementation testing.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Ecosystem.</strong> Four GitHub replies. OWASP#802: answered desiorac's TOCTOU question with the shipped checkpoint 3. qntm#6: showed implementation mapping to desiorac's execution attestation spec v0.1, offered sv-sig-01 conformance runner. A2A#1672: published v2 vectors for the canonicalization edge cases. qntm#7: updated cross-test scope with execution attestation, proposed 8th cross-test with haroldmalikfrimpong-ops.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.29.5 (1,987 tests, 503 suites, 96 modules). MCP v2.19.1 (125 tools). Gateway v0.3.0 (38 routes). 31 new tests. 3 new exported functions. Checkpoint 3 closes the authorization-execution gap.</p>
+</article>
 
 <article class="post" id="day-43">
   <time class="post-date" datetime="2026-03-31">March 31, 2026</time>
@@ -667,7 +686,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Policy hash chaining.</strong> From haroldmalikfrimpong-ops, who shipped compound digests, contextEpoch, and Merkle trees on AgentID while we were spec'ing. His insight: <code>SHA-256(constraints_at_N + previous_policy_hash)</code> creates a tamper-evident history of an agent's constraint state. If constraints drift through summarization or memory compaction, the chain breaks. <code>verifyPolicyChain()</code> recomputes every hash. <code>detectConstraintDrift()</code> classifies each change as narrowed (safe), widened (violation), or changed.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Routing divergence detection.</strong> From desiorac on OATR and A2A. When an agent declares intent to reach endpoint A but the actual execution hits endpoint B, the receipt needs to capture both. Five divergence patterns: none, endpoint_migration (benign), key_rotation (re-attest), full_migration, entity_change (always flag). Each carries a risk level. <code>captureRoutingContext()</code> snapshots DID + document hash + endpoint hash at a point in time. <code>detectRoutingDivergence()</code> compares two snapshots and classifies the pattern.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Ecosystem.</strong> 15+ GitHub replies across 8 threads. Every SDK function built today came from a conversation: <code>importProviderAttestation()</code> from msaleme, <code>addIdentityBoundary()</code> from xsa520, <code>computeCompoundDigest()</code> from desiorac, routing divergence from desiorac, policy hash chaining from haroldmalikfrimpong-ops. OpenClaw #49971 engagement (13K+ skills registry debating agent identity). Working Group referenced in 4 high-traffic threads. ClawHub skill rewritten agent-first (v4.4.0). All stale GitHub surfaces fixed (repo descriptions, glama.json, README headings).</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.29.4 (1,956 tests, 492 suites, 95 modules). MCP v2.19.1 (125 tools). Gateway v0.3.0 (38 routes). 37 new tests today. 9 new exported functions. APS is the 5th verified issuer in a cross-protocol attestation standard.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.29.4 (1,987 tests, 503 suites, 96 modules). MCP v2.19.1 (125 tools). Gateway v0.3.0 (38 routes). 37 new tests today. 9 new exported functions. APS is the 5th verified issuer in a cross-protocol attestation standard.</p>
 </article>
 
 <article class="post" id="day-42">
@@ -677,7 +696,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Attestation types.</strong> Four-tier evidence model: Observed (TLS fingerprint, timing, velocity), Infrastructure-attested (sandbox signs it), Provider-attested (OAuth, cloud tenant), Self-declared. Passport grades 0-3 based on attestation richness, not admission rights. Grade 0 agents still work. Evidence and assessment split into separate records. Workspace manifest hash for proof of history. Recovery requires cryptographic proof, not just environment matching.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Sybil hardening.</strong> Gateway v0.3.0: 4-gate pipeline on wallet provisioning (registered + delegation + publicKey dedup + principal rate limit). Presentation trust profile API: one call, one JSON, one decision. Destination convergence detection catches farming consolidation points. Issuance dossier storage for full forensic record. Public trust-profile endpoint for cross-org trust querying. 37 API routes.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Behavioral tracking.</strong> Post-issuance behavioral sequence recording: first 10 tool calls after passport issuance. Real agents do work. Farming agents extract. Pattern classified as productive, extractive, or neutral. MCP fires IssuanceContext to gateway on every passport issuance. End-to-end pipeline live.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.29.1 (1,956 tests, 95 modules). MCP v2.19.0 (125 tools). Gateway v0.3.0 (37 routes). Two machines, zero overlap, bridge wired. 8 ecosystem posts across OWASP, crewAI, NVIDIA, Microsoft, Worldcoin, DIF. 10 dead repos archived.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.29.1 (1,987 tests, 96 modules). MCP v2.19.0 (125 tools). Gateway v0.3.0 (37 routes). Two machines, zero overlap, bridge wired. 8 ecosystem posts across OWASP, crewAI, NVIDIA, Microsoft, Worldcoin, DIF. 10 dead repos archived.</p>
 </article>
 
 <article class="post" id="day-41">
@@ -695,7 +714,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Import graph analysis showed only 20% of modules were connected to the gateway enforcement hub. Built four rounds of wiring. Final interconnection rate: 79%.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Fidelity probe.</strong> New measurement protocol based on the Hold/Bend/Break model. Tests whether agents actually follow their delegation constraints by measuring behavioral responses to boundary conditions. Wired into gateway scheduling.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Module wiring.</strong> Gateway identity layer connects DID, principal endorsement, and entity verification into agent registration. Data cluster wires data-source, data-contribution, data-enforcement, and data-gateway into the processToolCall pipeline. Gateway-wiring adapter connects 13 more modules: commerce, charter, coordination, routing, precedent, oracle-witness, reserve, context, governance-consumer, encrypted-messaging, messaging-audit, federation, EU AI Act.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Ecosystem.</strong> 12 substantive GitHub replies across 10 threads. Accepted lowkey-divine's fidelity probe collaboration on crewAI. Gave honest answers about Merkle anchoring gaps on A2A. Pinged four dormant contacts with specific collaboration offers. SDK v1.29.1. 1956 tests, 492 suites, 95 modules.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Ecosystem.</strong> 12 substantive GitHub replies across 10 threads. Accepted lowkey-divine's fidelity probe collaboration on crewAI. Gave honest answers about Merkle anchoring gaps on A2A. Pinged four dormant contacts with specific collaboration offers. SDK v1.29.1. 1987 tests, 503 suites, 96 modules.</p>
 </article>
 
 <article class="post" id="day-39">
@@ -717,7 +736,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Phase 3: Reserve and Federation.</strong> Reserve attestations let gateways declare their backing with liability semantics and assurance classes ordered by strength (self_attested &lt; peer_audited &lt; third_party_verified &lt; regulatory_certified). False attestation penalties are declared upfront. Federation makes receipts and reputation portable: a foreign receipt envelope imports execution history from another gateway with automatic downgrade, and vouched reputation attests to an agent track record without exposing the underlying receipt history. 46 tests cover all three phases.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">12 new MCP tools.</strong> create_charter, verify_charter, sign_charter, evaluate_threshold, create_approval_request, add_approval_signature, create_hybrid_timestamp, compare_timestamps, validate_temporal_rights, create_reserve_attestation, vouch_reputation, apply_reputation_downgrade. 108 tools became 120.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Naming conflicts and the cost of scale.</strong> Two type collisions surfaced at 53 modules: JurisdictionEnvelope (data-lifecycle vs gateway) became GatewayJurisdiction. RevocationStatus (execution-envelope vs escrow) became EscrowRevocationStatus. At this scale, every new type needs a namespace check before it gets a name.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.27.0 (1956 tests, 492 suites, 86 files). MCP v2.19.0 (125 tools). Both published. 63 core modules + 32 v2 constitutional modules. ~9,000 npm downloads. The protocol can now model institutions, not just individual agents. Charters define governance. Approval policies enforce it. Time is honest about its uncertainty. Reserves are backed or they say they are not. Federation means agents carry their history with them. Rome is complete.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.27.0 (1987 tests, 503 suites, 86 files). MCP v2.19.0 (125 tools). Both published. 63 core modules + 32 v2 constitutional modules. ~9,000 npm downloads. The protocol can now model institutions, not just individual agents. Charters define governance. Approval policies enforce it. Time is honest about its uncertainty. Reserves are backed or they say they are not. Federation means agents carry their history with them. Rome is complete.</p>
 </article>
 
 <article class="post" id="day-37">
