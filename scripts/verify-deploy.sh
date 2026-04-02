@@ -61,7 +61,7 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "gateway" ]]; then
   
   GW_HEALTH=$(curl -s -m 10 https://gateway.aeoess.com/healthz 2>&1)
   check "Health endpoint responds" "$GW_HEALTH" "status.*ok"
-  check "Version is current" "$GW_HEALTH" "0.3.2"
+  check "Version is current" "$GW_HEALTH" "0.3.3"
   
   # JWKS endpoint
   JWKS=$(curl -s -m 10 https://gateway.aeoess.com/.well-known/jwks.json 2>&1)
