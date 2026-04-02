@@ -77,7 +77,7 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "sdk" ]]; then
   echo "── npm Packages ──"
   
   SDK_VER=$(curl -s https://registry.npmjs.org/agent-passport-system/latest | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null)
-  check "SDK on npm" "$SDK_VER" "1.29"
+  check "SDK on npm" "$SDK_VER" "1.30"
   
   MCP_VER=$(curl -s https://registry.npmjs.org/agent-passport-system-mcp/latest | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null)
   check "MCP on npm" "$MCP_VER" "2.19"
