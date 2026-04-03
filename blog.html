@@ -96,6 +96,13 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 45: SDK v1.31.0 — Governance Hardening + Gateway Bridge",
+      "datePublished": "2026-04-02",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-45"
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 44: First Code Integration + 5 Security Fixes",
       "datePublished": "2026-04-01",
       "description": "Shipped infrastructure-signed execution attestation. Three-checkpoint authorization chain complete. Drift classification with pluggable rules. v2 test vectors for cross-protocol edge cases. Four GitHub replies across OWASP, qntm WG, A2A. 1987 tests, 503 suites, 96 modules.",
@@ -663,9 +670,20 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building a 96-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 1,987 tests, 125 MCP tools, three papers, IETF draft. Open source.</p>
+  <p class="sub">Day-by-day record of building a 99-module AI agent governance protocol from scratch. Ed25519 identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 2,085 tests, 125 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-45">
+  <time class="post-date" datetime="2026-04-02">April 2, 2026</time>
+  <h2>Day 45: SDK v1.31.0 — Governance Hardening + Gateway Bridge</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.31.0 shipped. Governance hardening pass across the protocol: stricter validation on delegation chains, tighter scope authorization checks, 34 new tests covering edge cases from the MoltyCel security audit. 2,085 tests now, 533 suites, 99 modules.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Gateway bridge.</strong> The MCP remote server now auto-registers every issued passport on the hosted gateway. Issue a passport from any MCP client — Claude, OpenClaw, any SSE connection — and the agent appears on <code>gateway.aeoess.com</code> with a trust profile and public verification endpoint. No manual registration. The bridge reads the <code>issue_passport</code> response, extracts the DID and public key, and POSTs to the gateway's agent registration API. Every passport is now verifiable infrastructure, not just a local keypair.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Gateway v0.3.4.</strong> Context continuity scoring: activity regularity, behavioral consistency, and identity maturity combined into a 0-100 score on every trust profile query. Fixed evaluate endpoint (stale SDK v1.27→v1.31, <code>incrementUsage</code> manual upsert for Railway's SQLite without UNIQUE constraint). SSE heartbeat added to remote MCP server to prevent Railway/Fastly CDN from killing long-lived connections.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">0xbrainkid on NVIDIA/OpenShell#682.</strong> Deep technical exchange: sandbox-as-attestor model (the sandbox signs what it observed, the agent can't forge it), fidelity probe under constraint pressure (Hold/Bend/Break), <code>trust_context</code> now embedded in <code>ExecutionAttestation</code> — trust score at execution time is signed and tamper-detectable. Three independent threads (OpenShell, OWASP#802, W3C) converging on the same 3-layer architecture: authorization (APS), execution policy (Cedar/protect-mcp), output integrity (VeroQ/receipt chain).</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Infrastructure.</strong> README rewritten for infrastructure positioning — APS is not an identity solution, it's governance infrastructure. Integration guide published: "build on APS, don't rebuild underneath." CLAUDE.md added for Claude Code sessions — every Claude Code instance now has project context, repo paths, and build commands on first load. Propagation sweep across all surfaces with updated numbers.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.31.0 (2,085 tests, 533 suites, 99 modules). MCP v2.19.1 (125 tools). Gateway v0.3.4. 12,500+ installs across npm and PyPI. 35+ active GitHub threads across the ecosystem.</p>
+</article>
 
 <article class="post" id="day-44">
   <time class="post-date" datetime="2026-04-01">April 1, 2026</time>
