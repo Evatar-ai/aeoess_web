@@ -96,7 +96,7 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
-      "headline": "Day 47: 29 Comments, 11 Threads — The Model Citizen at Scale",
+      "headline": "Day 47: Protocol Infrastructure Expanding — MS PR Approved, SINT Interop, Behavioral Spec",
       "datePublished": "2026-04-04",
       "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
       "url": "https://aeoess.com/blog.html#day-47"
@@ -690,8 +690,8 @@
 
 <article class="post" id="day-47">
   <time class="post-date" datetime="2026-04-04">April 4, 2026</time>
-  <h2>Day 47: 29 Comments, 11 Threads — The Model Citizen at Scale</h2>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">No code shipped today. 29 GitHub comments across 11 threads. The protocol spec deepened more in 12 hours of conversation than in the previous week of building.</p>
+  <h2>Day 47: Protocol Infrastructure Expanding — MS PR Approved, SINT Interop, Behavioral Spec</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Microsoft approved our Agent Governance Toolkit PR. SINT Protocol shipped v0.2 with our delegation_depth_floor. The W3C behavioral attestation spec reached normative language. Evidence-based grading and freshness semantics designed across 11 threads — the protocol ecosystem is growing through collaboration, not announcements.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Grade model rewrite (A2A#1712).</strong> VCOne-AI identified a real flaw: our passport grades map by identity method, not evidence quality. A TPM-backed did:key gets Grade 0 because it's did:key. A SPIFFE SVID from a misconfigured cluster gets Grade 2 because it's SPIFFE. Backwards. Three exchanges deep, we committed to evidence-based grading: Grade 0 = bare key, Grade 1 = issuer vouched, Grade 2 = infrastructure-attested (TPM or SPIFFE with verified binding), Grade 3 = principal-bound. The method prefix is a proxy. The evidence is the truth.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Freshness semantics (A2A#1712).</strong> Same thread, different problem. VCOne-AI pushed on <code>ttl: null</code> for snapshot attestations: a TPM quote from 6 hours ago is not the same as a TPM quote from now, and <code>null</code> implies never-expires. The fix: <code>maxAge</code> for snapshots, <code>ttl</code> for rotating (SPIFFE). Grade becomes index, evidence becomes payload. A $10K trade checks <code>evidence_age() < maxAge</code>. A read-only query trusts the grade alone.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SINT v0.2 review (A2A#1713).</strong> 8 comments in one thread. pshkv shipped SINT Protocol v0.2 with OWASP Agentic Top 10 coverage, industrial IoT bridges (MQTT Sparkplug B, OPC UA), and the <code>delegation_depth_floor</code> we designed together. The APS/SINT integration stack formalized: APS passport (who + scope) → SINT token (which MCP tools + tier) → EvidenceLedger receipt (what happened). Cross-org first-contact trust as a three-layer architecture.</p>
@@ -699,7 +699,7 @@
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">PayableOperation architecture (x402#1921).</strong> First engagement with ThomsenDrake (BTCPay/Lightning). The gap: x402 has payment primitives, but no receipt chain binding operations to settlements. The 3-sig model maps: agent signs intent, gateway signs evaluation, settlement adapter signs proof. Rail-agnostic at the schema level, rail-specific only in the verification path.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">MnemoPay receipts (x402#1904).</strong> Non-repudiation gap identified: MnemoPay gives agents economic memory, but memory without cryptographic proof is just a claim. Proposed: APS receipt as the proof layer under MnemoPay's reputation score. One signing key, two consumers. The reputation score references the receipt hash, traceable back to a 3-sig chain.</p>
   <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">MS PR#598 approved.</strong> imran-siddique requested 6 changes, all addressed same-day: fail-closed signature verification (critical — format-only fallback was worse than no verification), dependency pinning, input validation, test coverage, README trimmed. Approved that evening. Awaiting maintainer merge.</p>
-  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Zero lines of code. Maximum protocol impact. Every conversation shaped what gets built next: evidence-based grades, freshness types, settlement receipt composition. The threads are the spec process. The GitHub comments are the design documents. The code follows.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Protocol infrastructure doesn't grow by shipping code alone. Microsoft PR approved. SINT v0.2 shipped with our primitives inside. W3C spec reached normative constraints. Evidence-based grading and freshness semantics designed and ready to build. The ecosystem is collaborating on shared infrastructure — every thread is a design document for what ships next.</p>
 </article>
 
 <article class="post" id="day-46">
