@@ -37,7 +37,7 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "mcp" ]]; then
   check "Health endpoint responds" "$HEALTH" "status.*ok"
   
   # Version check
-  check "Version is current" "$HEALTH" "2.19.1"
+  check "Version is current" "$HEALTH" "2.20.0"
   
   # SSE connects and gets endpoint
   SSE=$(curl -s -m 6 https://mcp.aeoess.com/sse 2>&1 || true)
