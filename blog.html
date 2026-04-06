@@ -96,6 +96,13 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 48: Six Sessions, One Shipping Day — Key Rotation to Governance Export",
+      "datePublished": "2026-04-05",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-48"
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 47: Protocol Infrastructure Expanding — MS PR Approved, SINT Interop, Behavioral Spec",
       "datePublished": "2026-04-04",
       "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
@@ -684,9 +691,23 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building a 103-module AI agent governance protocol from scratch. Enforcement and accountability layer: identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 2,180 tests, 131 MCP tools, three papers, IETF draft. Open source.</p>
+  <p class="sub">Day-by-day record of building a 103-module AI agent governance protocol from scratch. Enforcement and accountability layer: identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 2,306 tests, 131 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-48">
+  <time class="post-date" datetime="2026-04-05">April 5, 2026</time>
+  <h2>Day 48: Six Sessions, One Shipping Day</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Five consilium models attacked the specs before a single line shipped. Six build sessions, executed sequentially. Every session depends on what the previous one deployed. Gateway auto-deploys on push. No staging environment. The verification script is the only safety net.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Key rotation (Session 1).</strong> If a principal's Ed25519 key is compromised, the entire delegation tree dies. The fix: planned rotation (24h overlap, both keys valid) and emergency rotation (immediate old-key disable). DID Document with <code>retiredAt</code> metadata on old keys. State machine: <code>announced</code>, <code>revocation_in_progress</code>, <code>revocation_complete</code>, <code>activated</code>. Partial revocation failure is visible, not hidden. The consilium was unanimous: SDK computes, gateway MUST enforce. A compromised key controls the client. Server-side activation timing is the hard enforcement.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Auto-mint receipts (Session 2).</strong> Gateway had 202 evaluations. Zero receipts. Data lifecycle thesis unproven. The fix: every evaluation now mints a cryptographic receipt. <code>authorization_permit</code> and <code>authorization_deny</code>. The gateway proves what was AUTHORIZED, not what HAPPENED. Scope stored as sorted JSON array, not comma-joined string. Policy hash, not hardcoded version label. Backfilled all 202 historical evaluations on first deploy.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Audit packets (Session 3).</strong> One receipt, one exportable proof chain. <code>decision_record</code> is signed by the gateway (immutable, stable signature across calls). <code>current_context</code> is queried at request time (volatile, delegation chain may have changed). Completeness metadata tells the verifier if any sub-query failed. Markdown format option for human review. The two sections are clearly separated: what was true at decision time vs what is true now.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Agent posture overlay (Session 4).</strong> Binary revoke/not-revoke is too crude. Three states: active, restricted, suspended. The consilium killed the original design: DO NOT put degradation on the passport. The passport is an immutable signed credential. A rogue agent won't sign its own suspension. Posture lives in the gateway DB only. Gateway checks status before delegation scope. Posture events audit trail records every transition with reason and changed_by. Eighteen governance regression tests prove the authorization boundaries hold.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Governance evidence export (Session 5).</strong> Nine sections, single signed artifact. Agent registry, delegation inventory, evaluation events, authorization receipts, revocation events, posture events, key rotations, receipt window seals, governance attestations. Sections with zero data show <code>total: 0</code>. That's honest, not broken. Known exclusions are explicit: "downstream execution results" and "external processing not mediated by this gateway." Not a compliance report. A governance evidence export.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Trust bootstrap adapters (Session 5).</strong> <code>bootstrapFromAPIKey</code>, <code>bootstrapFromGitHub</code>, <code>bootstrapFromCIKey</code>. Every adapter creates a fresh Ed25519 keypair. The external credential is a trust input, not the identity. Raw credentials never touch the SDK (caller pre-hashes with HMAC-SHA256). Suggested grade is a suggestion. Actual grade computed by <code>computePassportGrade</code> when the passport enters the gateway. Upgrade path to full attested identity via <code>upgradeBootstrappedPassport</code>.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Delegation linting + receipt seals (Session 6).</strong> Two gateway-compatible feasibility checks: <code>SPEND_TOO_LOW</code> and <code>SCOPE_MISSING</code>. Three checks always skipped with reasons (gateway doesn't store <code>expiresAt</code>, <code>currentDepth</code> yet). No reputation emission from lint results. Infeasible delegations are admin mistakes, not agent misbehavior. Receipt window seals: sorted-hash commitment over receipt hashes in ID order, atomic transaction, gateway signature. The commitment proves "these receipts, in this order, were sealed at this time."</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.34.0 (2,306 tests, 581 suites, 103 modules). MCP v2.21.0 (131 tools). Python v0.9.0 (197 tests). Gateway v0.4.0. Governance canary: 5/5 pass. All published to <a href="https://www.npmjs.com/package/agent-passport-system">npm</a>, <a href="https://pypi.org/project/agent-passport-system/">PyPI</a>, <a href="https://clawhub.ai/aeoess/agent-passport-system">ClawHub</a>.</p>
+</article>
 
 <article class="post" id="day-47">
   <time class="post-date" datetime="2026-04-04">April 4, 2026</time>
