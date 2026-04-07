@@ -202,6 +202,7 @@ const result = await governMCPToolCall(
 
 <script>
 const GW = 'https://gateway.aeoess.com'
+function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=String(s);return d.innerHTML}
 
 async function doSignup() {
   const name = document.getElementById('signup-name').value.trim()
@@ -227,7 +228,7 @@ async function doSignup() {
     const data = await res.json()
 
     if (!res.ok) {
-      status.innerHTML = `<div class="status-msg error">${data.error || 'Signup failed'}</div>`
+      status.innerHTML = '<div class="status-msg error">' + esc(data.error || 'Signup failed') + '</div>'
       btn.disabled = false
       btn.textContent = 'Get API Key'
       return
@@ -287,13 +288,13 @@ async function checkAccount() {
 
     info.innerHTML = `
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.9rem;line-height:2">
-        <strong>${d.name}</strong> <span style="background:var(--text);color:var(--bg);padding:.1rem .5rem;border-radius:4px;font-size:.75rem;font-weight:600;text-transform:uppercase">${d.plan}</span><br>
+        <strong>${esc(d.name)}</strong> <span style="background:var(--text);color:var(--bg);padding:.1rem .5rem;border-radius:4px;font-size:.75rem;font-weight:600;text-transform:uppercase">${esc(d.plan)}</span><br>
         Agents: ${limitBar(d.usage.agents, d.limits.max_agents)}<br>
         Evaluations: ${limitBar(d.usage.evaluations_this_month, d.limits.evaluations_per_month)}<br>
-        Delegations: ${d.usage.delegations} &middot; Receipts: ${d.usage.receipts.toLocaleString()}<br>
+        Delegations: ${esc(String(d.usage.delegations))} &middot; Receipts: ${esc(String(d.usage.receipts))}<br>
         <div style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
-          <a href="/gateway.html" style="color:var(--link)">Dashboard →</a>
-          ${d.plan === 'free' ? '<a href="#" onclick="upgradePlan('pro');return false" style="color:var(--link)">Upgrade to Team →</a>' : ''}
+          <a href="/gateway.html" style="color:var(--link)">Dashboard &rarr;</a>
+          ${d.plan === 'free' ? '<a href="#" onclick="upgradePlan(&quot;pro&quot;);return false" style="color:var(--link)">Upgrade to Team &rarr;</a>' : ''}
         </div>
       </div>
     `

@@ -224,10 +224,10 @@ window.addEventListener('scroll',function(){var n=document.getElementById('nav')
 let GW_URL = '';
 let API_KEY = '';
 
-// Auto-fill from localStorage
+// Auto-fill from sessionStorage (not localStorage — prevents XSS key theft)
 (function(){
-  const saved = localStorage.getItem('gw-api-key');
-  const savedUrl = localStorage.getItem('gw-url');
+  const saved = sessionStorage.getItem('gw-api-key');
+  const savedUrl = sessionStorage.getItem('gw-url');
   if(saved){
     document.getElementById('api-key-input').value = saved;
     if(savedUrl) document.getElementById('gateway-url').value = savedUrl;
@@ -248,8 +248,8 @@ async function login() {
   GW_URL = url; API_KEY = key;
   try {
     const d = await gw('/api/v1/dashboard');
-    localStorage.setItem('gw-api-key', key);
-    localStorage.setItem('gw-url', url);
+    sessionStorage.setItem('gw-api-key', key);
+    sessionStorage.setItem('gw-url', url);
     document.getElementById('login-panel').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     document.getElementById('tenant-info').textContent = d.plan + ' plan';
@@ -262,8 +262,8 @@ async function login() {
 }
 
 function logout() {
-  localStorage.removeItem('gw-api-key');
-  localStorage.removeItem('gw-url');
+  sessionStorage.removeItem('gw-api-key');
+  sessionStorage.removeItem('gw-url');
   document.getElementById('login-panel').style.display = 'block';
   document.getElementById('dashboard').style.display = 'none';
 }
