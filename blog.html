@@ -96,6 +96,13 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 49: Twelve Primitives, One Day",
+      "datePublished": "2026-04-06",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-49"
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 48: Six Sessions, One Shipping Day — Key Rotation to Governance Export",
       "datePublished": "2026-04-05",
       "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
@@ -694,6 +701,21 @@
   <p class="sub">Day-by-day record of building a 103-module AI agent governance protocol from scratch. Enforcement and accountability layer: identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 2,497 tests, 132 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-49">
+  <time class="post-date" datetime="2026-04-06">April 6, 2026</time>
+  <h2>Day 49: Twelve Primitives, One Day</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Nate B Jones posted a video reverse-engineering Claude Code's internal architecture. Not the prompts. The orchestration layer. He identified 12 primitives that make agentic tool systems work: tool registry, permission tiers, session persistence, workflow state, token budgets, streaming events, system logging, verification, tool pool assembly, transcript compaction, permission audit trails, and agent type systems.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">We watched the video. Scored ourselves against each primitive. Some already existed in the protocol. Several were missing entirely. By the end of the day, all 12 were live in the gateway, verified with actual HTTP calls against production endpoints.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Session persistence (Primitive #3).</strong> When an agent crashes and reconnects, it needs its full enforcement state back. <code>PUT /sessions/:agentId</code> checkpoints everything: active delegations, workflow step, usage counters, framework metadata. <code>GET /sessions/:agentId</code> returns the stored checkpoint plus a live delta: evaluations since last checkpoint, alerts, current posture, delegation status changes, health metrics. The agent gets "here's where you were" and "here's what happened while you were gone" in one call.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Coordination API (Primitive #4).</strong> Full task lifecycle: <code>draft &rarr; assigned &rarr; in_progress &rarr; evidence_submitted &rarr; approved &rarr; completed</code>, with a revision loop and cancel from any non-terminal state. Nine endpoints. Every state transition validates the current status (409 on invalid), records a task event, and emits an SSE event. The gateway now orchestrates multi-agent work assignment, not just permission checks.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Agent type enforcement (Primitive #12).</strong> Six types: general, explorer, planner, executor, reviewer, monitor. Each type has blocked scopes and optional rate limits. An explorer agent with a delegation that includes <code>admin:delete</code> still gets denied. The type constraint fires after the delegation scope check but before the final permit. Behavioral boundaries that survive delegation.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Adapter pipeline.</strong> The SDK had 8 adapters producing receipts that vanished into the void. Now every adapter has an optional <code>gateway?</code> config. When set, <code>reportReceipt()</code> fires a POST to the gateway after every success and denial. Five adapters wired with 14 emission points. All fire-and-forget: the adapter never blocks on a gateway failure. Customer dashboards finally show what's happening across LangChain, CrewAI, MCP, IBAC, and Gonka pipelines.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Pagination and filtering.</strong> Eight list endpoints converted from unbounded queries to <code>?limit=20&amp;offset=0&amp;sort=created_at:desc</code> with total counts and <code>has_more</code> flags. The audit trail got five filter parameters: agent_id, verdict, action_type, from, to. Enterprise customers querying 10,000 evaluations no longer get the full table dumped at once.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Stripe billing.</strong> The gateway has payment plans. Free: 1,000 evaluations, 3 agents. Team ($99/mo): 50,000 evaluations, 25 agents, compliance reports. Enterprise ($499/mo): unlimited. Self-serve portal at <code>aeoess.com/portal.html</code> with signup, API key management, one-click upgrade via Stripe Checkout. The protocol is Apache 2.0 and always will be. The gateway sells operational intelligence: dashboards, audit trails, session persistence, coordination. Free to govern your agents. Pay to see how well it's working.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Someone asked if paid plans hurt the open source strategy. They are the open source strategy. Redis, Elastic, Grafana, Supabase, GitLab. The protocol defines what governance IS. The gateway defines how well it WORKS. Customers who want to self-host build their own enforcement boundary using the open SDK. Customers who want it to just work use the hosted gateway. Having a paid tier signals sustainability. Nobody builds on infrastructure whose creator can't maintain it.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">SDK v1.36.2 (2,497 tests, 626 suites). MCP v2.21.1 (132 tools, scope filtering across 12 scopes). Gateway v0.4.0 (30 tables, 100+ routes, 46 SSE emissions, 28 event types). Gonka adapter shipped (decentralized GPU compute governance). All 12 Nate B Jones primitives verified live against production. Published to <a href="https://www.npmjs.com/package/agent-passport-system">npm</a>, <a href="https://pypi.org/project/agent-passport-system/">PyPI</a>, <a href="https://clawhub.ai/aeoess/agent-passport-system">ClawHub</a>.</p>
+</article>
 
 <article class="post" id="day-48">
   <time class="post-date" datetime="2026-04-05">April 5, 2026</time>
