@@ -300,14 +300,14 @@ function renderDashboard(d) {
     dl.innerHTML = '<table class="gw-table"><thead><tr><th>Agent</th><th>Action</th><th>Reason</th><th>Time</th></tr></thead><tbody>' +
       d.recent_denials.map(r => '<tr><td><code>' + esc(r.agent_id) + '</code></td><td>' + esc(r.action_type) + '</td><td style="font-size:.75rem">' + esc(r.reason) + '</td><td style="white-space:nowrap">' + ago(r.created_at) + '</td></tr>').join('') +
       '</tbody></table>';
-  } else { dl.innerHTML = '<div class="empty-state">No denials recorded</div>'; }
+  } else { dl.innerHTML = '<div class="empty-state">No denials recorded. Denials appear when agents request actions outside their delegation scope.</div>'; }
 }
 
 async function loadAgents() {
   try {
     const d = await gw('/api/v1/agents');
     const el = document.getElementById('agents-list');
-    if (d.agents.length === 0) { el.innerHTML = '<div class="empty-state">No agents registered</div>'; return; }
+    if (d.agents.length === 0) { el.innerHTML = '<div class="empty-state">No agents registered. <a href="/passport.html#quickstart" style="color:var(--link)">Register your first agent &rarr;</a></div>'; return; }
     el.innerHTML = '<table class="gw-table"><thead><tr><th>Agent ID</th><th>Name</th><th>Status</th><th>Public Key</th><th>Created</th></tr></thead><tbody>' +
       d.agents.map(a => '<tr><td><code>' + esc(a.agent_id) + '</code></td><td>' + (esc(a.name)||'—') + '</td><td><span class="badge ' + a.status + '">' + a.status + '</span></td><td style="font:.6rem var(--mono);max-width:120px;overflow:hidden;text-overflow:ellipsis">' + (a.public_key||'').slice(0,16) + '…</td><td style="white-space:nowrap">' + ago(a.created_at) + '</td></tr>').join('') +
       '</tbody></table>';
@@ -318,7 +318,7 @@ async function loadDelegations() {
   try {
     const d = await gw('/api/v1/delegations');
     const el = document.getElementById('delegations-list');
-    if (d.delegations.length === 0) { el.innerHTML = '<div class="empty-state">No delegations</div>'; return; }
+    if (d.delegations.length === 0) { el.innerHTML = '<div class="empty-state">No delegations. Create a delegation to grant an agent scoped authority. <a href="/passport.html#delegation" style="color:var(--link)">Learn more &rarr;</a></div>'; return; }
     el.innerHTML = '<table class="gw-table"><thead><tr><th>From</th><th>To</th><th>Scope</th><th>Spend</th><th>Status</th></tr></thead><tbody>' +
       d.delegations.map(dl => {
         const spent = dl.spend_used || 0;
@@ -333,7 +333,7 @@ async function loadAudit() {
   try {
     const d = await gw('/api/v1/audit?limit=20');
     const el = document.getElementById('audit-list');
-    if (d.entries.length === 0) { el.innerHTML = '<div class="empty-state">No evaluations yet</div>'; return; }
+    if (d.entries.length === 0) { el.innerHTML = '<div class="empty-state">No evaluations yet. Evaluations appear when agents request actions via <code>POST /evaluate</code>.</div>'; return; }
     el.innerHTML = '<table class="gw-table"><thead><tr><th>Verdict</th><th>Agent</th><th>Action</th><th>Scope</th><th>Time</th><th>Duration</th></tr></thead><tbody>' +
       d.entries.map(e => '<tr><td><span class="badge ' + e.verdict + '">' + e.verdict + '</span></td><td><code>' + esc(e.agent_id) + '</code></td><td>' + esc(e.action_type) + '</td><td style="font:.7rem var(--mono)">' + esc(e.scope_required) + '</td><td style="white-space:nowrap">' + ago(e.created_at) + '</td><td>' + (e.duration_ms||0) + 'ms</td></tr>').join('') +
       '</tbody></table>';
@@ -387,6 +387,9 @@ async function loadAttribution() {
           }
         }
       });
+    } else {
+      var chartEl = document.getElementById('access-chart')
+      if (chartEl && chartEl.parentElement) chartEl.parentElement.innerHTML = '<div class="empty-state" style="padding:2rem">Data attribution chart will appear when data sources are registered and agents access them.</div>'
     }
 
     // Purpose breakdown pills
@@ -404,21 +407,21 @@ async function loadAttribution() {
       tsl.innerHTML = '<table class="gw-table"><thead><tr><th>Source</th><th>ID</th><th>Accesses</th><th>Owed</th></tr></thead><tbody>' +
         d.top_sources.map(s => '<tr><td>' + esc(s.source_name) + '</td><td style="font:.7rem var(--mono)">' + esc(s.source_id) + '</td><td>' + s.accesses + '</td><td>$' + (s.owed||0).toFixed(4) + '</td></tr>').join('') +
         '</tbody></table>';
-    } else { tsl.innerHTML = '<div class="empty-state">No data sources registered</div>'; }
+    } else { tsl.innerHTML = '<div class="empty-state">No data sources registered. <a href="/passport.html#data-lifecycle" style="color:var(--link)">Set up data governance &rarr;</a></div>'; }
 
     const tal = document.getElementById('top-agents-list');
     if (d.top_agents.length > 0) {
       tal.innerHTML = '<table class="gw-table"><thead><tr><th>Agent</th><th>Accesses</th><th>Total Owed</th></tr></thead><tbody>' +
         d.top_agents.map(a => '<tr><td><code>' + esc(a.agent_id) + '</code></td><td>' + a.accesses + '</td><td>$' + (a.total_owed||0).toFixed(4) + '</td></tr>').join('') +
         '</tbody></table>';
-    } else { tal.innerHTML = '<div class="empty-state">No agent access recorded</div>'; }
+    } else { tal.innerHTML = '<div class="empty-state">No data access recorded yet. Access receipts appear when agents query governed data sources.</div>'; }
 
     const ral = document.getElementById('recent-access-list');
     if (d.recent_access.length > 0) {
       ral.innerHTML = '<table class="gw-table"><thead><tr><th>Agent</th><th>Source</th><th>Purpose</th><th>Time</th></tr></thead><tbody>' +
         d.recent_access.map(r => '<tr><td><code>' + esc(r.agent_id) + '</code></td><td style="font:.7rem var(--mono)">' + esc(r.source_id) + '</td><td>' + esc(r.purpose) + '</td><td style="white-space:nowrap">' + ago(r.created_at) + '</td></tr>').join('') +
         '</tbody></table>';
-    } else { ral.innerHTML = '<div class="empty-state">No access receipts yet</div>'; }
+    } else { ral.innerHTML = '<div class="empty-state">Access receipts appear here when agents read governed data sources. <a href="/passport.html#data-lifecycle" style="color:var(--link)">Learn more &rarr;</a></div>'; }
   } catch(e) { console.error('Attribution load failed (expected if no Pixel endpoints):', e); }
 }
 
@@ -476,7 +479,7 @@ async function loadFinOps() {
         (bh.agentsAbove80Percent > 0 ? '<span style="font:.7rem var(--mono);padding:.25rem .6rem;border:1px solid #ca8a04;color:#ca8a04;border-radius:6px">Above 80%: ' + bh.agentsAbove80Percent + '</span>' : '') +
         (bh.agentsOverBudget > 0 ? '<span style="font:.7rem var(--mono);padding:.25rem .6rem;border:1px solid #dc2626;color:#dc2626;border-radius:6px">Over Budget: ' + bh.agentsOverBudget + '</span>' : '') +
         '</div>';
-    } else { bl.innerHTML = '<div class="empty-state">No budget data</div>'; }
+    } else { bl.innerHTML = '<div class="empty-state">No budget data. Budget health appears when agents have delegations with spend limits.</div>'; }
 
     // Top agents table
     const tal = document.getElementById('finops-top-agents');
@@ -485,7 +488,7 @@ async function loadFinOps() {
         dash.topAgents.map(function(a) {
           return '<tr><td><code>' + esc(a.agentId) + '</code></td><td>$' + ((a.spend||0)/100).toFixed(2) + '</td><td>' + (a.taskCount||0) + '</td></tr>';
         }).join('') + '</tbody></table>';
-    } else { tal.innerHTML = '<div class="empty-state">No spend data yet</div>'; }
+    } else { tal.innerHTML = '<div class="empty-state">No spend data yet. Agent spend appears when delegations have spend limits and evaluations incur costs.</div>'; }
   } catch(e) { console.error('FinOps load failed:', e); }
 }
 
