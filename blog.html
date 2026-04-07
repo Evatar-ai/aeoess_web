@@ -96,6 +96,13 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Day 50: The Audit That Ate the Day",
+      "datePublished": "2026-04-07",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-50"
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 49: Twelve Primitives, One Day",
       "datePublished": "2026-04-06",
       "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
@@ -701,6 +708,18 @@
   <p class="sub">Day-by-day record of building a 103-module AI agent governance protocol from scratch. Enforcement and accountability layer: identity, delegation, reputation, commerce, institutional governance, agent attestation, data attribution. Started February 18, 2026. 2,497 tests, 132 MCP tools, three papers, IETF draft. Open source.</p>
 <!-- PROPAGATION-ZONE-END -->
 </div>
+
+<article class="post" id="day-50">
+  <time class="post-date" datetime="2026-04-07">April 7, 2026</time>
+  <h2>Day 50: The Audit That Ate the Day</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Four audit passes. 30 findings. 4 critical, 9 high, 14 medium, 4 low. Every one fixed, verified, committed, and pushed to production. The protocol came out of it stronger than any test suite could have made it.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Pass 1: structural.</strong> Found the TOCTOU race condition in spend tracking. Two concurrent /evaluate requests both reading spentAmount, both passing the budget check, both writing their own update. On the wallet side, the same bug with irreversible on-chain Nano transfers. The fix: SQLite IMMEDIATE transactions wrapping read-check-write. Also found: MCP tools returning private keys over SSE transport, XSS in the portal through unsanitized error messages, and a canonicalization divergence between the gateway and SDK that would cause receipt verification to fail on objects containing null fields.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Pass 2: adversarial.</strong> Found that the pass 1 fixes were incomplete. The issuer countersignature verification was checking the wrong payload. The MCP remote spawner wasn't setting the env var that triggers key redaction. spendLimit: 0 (zero-budget delegation) was being treated as Infinity in createReceipt because of a || vs ?? operator bug. Delegation objects were mutable after creation, so scope could be widened with a .push() between creation and verification. Object.freeze on all delegations after creation. Spend tracking moved to a WeakMap keyed on delegationId to survive serialization round-trips.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Pass 3: protocol-level attack simulation.</strong> Delegation Laundering: revoke the root, children survive because verifyDelegation wasn't walking the ancestor chain. Ghost Delegation: forge receipts referencing fictional delegationIds. Clock Manipulation: set system time forward, create a delegation that appears to expire "tomorrow" but actually lasts a year. Tenant Escape: six endpoints were missing tenant_id filters in their SQL queries. A free-tier customer could read another tenant's receipt seals, Sybil velocity scores, and invoice status.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Pass 4: verification.</strong> Confirmed 18 of 30 fixes present in code. Found 12 missing because a parallel build session had reverted gateway files to resolve a merge conflict. All 12 re-applied from the audit notes. One regression found: the checkAncestors chain walk had no cycle guard. Fixed with a visited Set.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Beyond the audit.</strong> Shipped the CSV governance export for the PDR research collaboration. <code>GET /governance/export?format=csv</code> returns four tables in a single pandas-friendly file. Published three interop verification fixtures (happy-path, revoked-ancestor, stale-replay) for cross-implementation testing. Replied to 12 ecosystem threads. Posted the float canonicalization fix as a reference for A2A's cross-language hash consistency discussion.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The protocol is more secure today than it was yesterday. Not because we wrote more code, but because we tried to break what we had and fixed what broke. Four passes, different methodology each time, and each pass found things the previous ones missed. That's the value of adversarial review over linear testing.</p>
+</article>
 
 <article class="post" id="day-49">
   <time class="post-date" datetime="2026-04-06">April 6, 2026</time>
