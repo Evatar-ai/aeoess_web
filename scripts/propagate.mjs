@@ -130,6 +130,10 @@ function getTargetFiles() {
     { path: `${REPOS.web}/mingle.html`, repo: 'web' },
     { path: `${REPOS.web}/network.html`, repo: 'web' },
     { path: `${REPOS.web}/world.html`, repo: 'web' },
+    { path: `${REPOS.web}/agora.html`, repo: 'web' },
+    { path: `${REPOS.web}/aivss.html`, repo: 'web' },
+    { path: `${REPOS.web}/wallet.html`, repo: 'web' },
+    { path: `${REPOS.web}/benchmarks.html`, repo: 'web' },
     { path: `${REPOS.web}/README.md`, repo: 'web' },
     // Org profile README (if repo exists)
     ...(existsSync(`${REPOS.org}/profile/README.md`) ? [{ path: `${REPOS.org}/profile/README.md`, repo: 'org' }] : []),
