@@ -96,6 +96,7 @@
           <li>Compliance reports</li>
           <li>30-day retention</li>
         </ul>
+        <button class="portal-btn plan-upgrade hidden" data-plan="pro" onclick="upgradePlan('pro')" style="width:100%;margin-top:.5rem">Upgrade</button>
       </div>
       <div class="plan" id="plan-enterprise">
         <h3>Enterprise</h3>
@@ -106,6 +107,7 @@
           <li>SLA + priority support</li>
           <li>Data attribution</li>
         </ul>
+        <button class="portal-btn plan-upgrade hidden" data-plan="enterprise" onclick="upgradePlan('enterprise')" style="width:100%;margin-top:.5rem">Contact Us</button>
       </div>
     </div>
   </div>
@@ -192,6 +194,7 @@ const result = await governMCPToolCall(
       <input type="password" id="existing-key" placeholder="aps_live_...">
     </div>
     <button class="portal-btn portal-btn-outline" onclick="checkAccount()">View Account</button>
+    <button class="portal-btn portal-btn-outline hidden" id="manage-billing-btn" onclick="manageBilling()" style="margin-left:.5rem">Manage Billing</button>
     <div id="account-info" class="hidden" style="margin-top:1rem"></div>
   </div>
 
@@ -252,11 +255,14 @@ function copyKey() {
   })
 }
 
+let savedApiKey = null
+
 async function checkAccount() {
   const key = document.getElementById('existing-key').value.trim()
   const info = document.getElementById('account-info')
 
   if (!key) return
+  savedApiKey = key
 
   try {
     const res = await fetch(`${GW}/api/v1/account`, {
@@ -271,20 +277,92 @@ async function checkAccount() {
 
     const d = await res.json()
     info.classList.remove('hidden')
+
+    const limitBar = (current, limit) => {
+      if (limit === -1) return `${current} / ∞`
+      const pct = Math.min(100, Math.round(current / limit * 100))
+      const color = pct > 90 ? '#e74c3c' : pct > 70 ? '#f39c12' : 'var(--link)'
+      return `${current} / ${limit} <span style="display:inline-block;width:60px;height:6px;background:var(--border);border-radius:3px;vertical-align:middle;margin-left:4px"><span style="display:block;width:${pct}%;height:100%;background:${color};border-radius:3px"></span></span>`
+    }
+
     info.innerHTML = `
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.9rem;line-height:1.8">
-        <strong>${d.name}</strong> (${d.plan})<br>
-        Agents: ${d.usage.agents} / ${d.limits.max_agents === -1 ? '∞' : d.limits.max_agents}<br>
-        Evaluations this month: ${d.usage.evaluations_this_month.toLocaleString()} / ${d.limits.evaluations_per_month === -1 ? '∞' : d.limits.evaluations_per_month.toLocaleString()}<br>
-        Delegations: ${d.usage.delegations}<br>
-        Receipts: ${d.usage.receipts.toLocaleString()}<br>
-        <a href="/gateway.html" style="color:var(--link)">Open Dashboard →</a>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.9rem;line-height:2">
+        <strong>${d.name}</strong> <span style="background:var(--text);color:var(--bg);padding:.1rem .5rem;border-radius:4px;font-size:.75rem;font-weight:600;text-transform:uppercase">${d.plan}</span><br>
+        Agents: ${limitBar(d.usage.agents, d.limits.max_agents)}<br>
+        Evaluations: ${limitBar(d.usage.evaluations_this_month, d.limits.evaluations_per_month)}<br>
+        Delegations: ${d.usage.delegations} &middot; Receipts: ${d.usage.receipts.toLocaleString()}<br>
+        <div style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+          <a href="/gateway.html" style="color:var(--link)">Dashboard →</a>
+          ${d.plan === 'free' ? '<a href="#" onclick="upgradePlan('pro');return false" style="color:var(--link)">Upgrade to Team →</a>' : ''}
+        </div>
       </div>
     `
+
+    // Show upgrade buttons and manage billing
+    document.querySelectorAll('.plan-upgrade').forEach(b => b.classList.remove('hidden'))
+    if (d.plan !== 'free') {
+      document.getElementById('manage-billing-btn').classList.remove('hidden')
+    }
+
+    // Highlight current plan
+    document.querySelectorAll('.plan').forEach(p => p.classList.remove('active'))
+    const planEl = document.getElementById('plan-' + d.plan) || document.getElementById('plan-free')
+    if (planEl) planEl.classList.add('active')
+
   } catch (e) {
     info.classList.remove('hidden')
     info.innerHTML = '<div class="status-msg error">Network error</div>'
   }
+}
+
+async function upgradePlan(plan) {
+  if (!savedApiKey) {
+    alert('Enter your API key first in the "Already have an account?" section')
+    return
+  }
+  if (plan === 'enterprise') {
+    window.location.href = 'mailto:signal@aeoess.com?subject=Enterprise%20Plan%20Inquiry'
+    return
+  }
+  try {
+    const res = await fetch(`${GW}/api/v1/billing/checkout`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${savedApiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan })
+    })
+    const data = await res.json()
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      alert(data.error || 'Failed to start checkout')
+    }
+  } catch (e) {
+    alert('Network error. Try again.')
+  }
+}
+
+async function manageBilling() {
+  if (!savedApiKey) return
+  try {
+    const res = await fetch(`${GW}/api/v1/billing/portal`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${savedApiKey}` }
+    })
+    const data = await res.json()
+    if (data.url) window.location.href = data.url
+    else alert(data.error || 'Failed to open billing portal')
+  } catch (e) {
+    alert('Network error')
+  }
+}
+
+// Handle upgrade success/cancel from Stripe redirect
+const params = new URLSearchParams(window.location.search)
+if (params.get('upgrade') === 'success') {
+  document.getElementById('signup-status').innerHTML = '<div class="status-msg success">Plan upgraded successfully! Enter your API key below to see your new limits.</div>'
+}
+if (params.get('upgrade') === 'cancelled') {
+  document.getElementById('signup-status').innerHTML = '<div class="status-msg error">Upgrade cancelled. You can try again anytime.</div>'
 }
 </script>
 </body>
