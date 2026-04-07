@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AEOESS Gateway Portal — Get Your API Key</title>
+<meta name="description" content="Sign up for the AEOESS Gateway. Get an API key, govern your AI agents, prove every action.">
+<link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.portal-wrap{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
+.portal-hero{text-align:center;margin-bottom:3rem}
+.portal-hero h1{font-family:'Crimson Pro',serif;font-size:2.4rem;font-weight:700;margin-bottom:.5rem}
+.portal-hero p{color:var(--dim);font-size:1.1rem;line-height:1.6}
+.portal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;margin-bottom:2rem}
+.portal-card h2{font-family:'Crimson Pro',serif;font-size:1.5rem;margin-bottom:1rem;font-weight:600}
+.portal-field{display:block;margin-bottom:1rem}
+.portal-field label{display:block;font-size:.85rem;font-weight:500;margin-bottom:.3rem;color:var(--dim)}
+.portal-field input{width:100%;padding:.65rem .8rem;border:1px solid var(--border);border-radius:6px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;background:var(--bg);color:var(--text);box-sizing:border-box}
+.portal-field input:focus{outline:none;border-color:var(--link)}
+.portal-btn{display:inline-block;padding:.7rem 1.8rem;background:var(--text);color:var(--bg);border:none;border-radius:6px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.portal-btn:hover{opacity:.85}
+.portal-btn:disabled{opacity:.5;cursor:not-allowed}
+.portal-btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.portal-btn-outline:hover{border-color:var(--text)}
+.key-display{background:#1a1a2e;color:#0f0;font-family:'JetBrains Mono',monospace;padding:1rem;border-radius:8px;font-size:.85rem;word-break:break-all;margin:1rem 0;position:relative;user-select:all}
+.key-display .copy-btn{position:absolute;top:.5rem;right:.5rem;background:#333;color:#fff;border:none;border-radius:4px;padding:.3rem .6rem;font-size:.75rem;cursor:pointer}
+.key-display .copy-btn:hover{background:#555}
+.key-warning{color:#e74c3c;font-size:.85rem;font-weight:500;margin-top:.5rem}
+.step{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+.step-num{background:var(--text);color:var(--bg);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
+.step-body{flex:1}
+.step-body h3{font-size:1rem;font-weight:600;margin-bottom:.3rem}
+.step-body p{font-size:.9rem;color:var(--dim);line-height:1.5}
+.step-body code{background:var(--surface);border:1px solid var(--border);padding:.15rem .4rem;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.82rem}
+.step-body pre{background:#1a1a2e;color:#e0e0e0;padding:.8rem;border-radius:6px;font-size:.8rem;overflow-x:auto;margin:.5rem 0;font-family:'JetBrains Mono',monospace;line-height:1.5}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+.plan{border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center}
+.plan.active{border-color:var(--link);background:var(--surface)}
+.plan h3{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
+.plan .price{font-size:1.8rem;font-weight:700;font-family:'Crimson Pro',serif;margin:.3rem 0}
+.plan .price span{font-size:.9rem;font-weight:400;color:var(--dim)}
+.plan ul{list-style:none;padding:0;margin:.8rem 0;text-align:left;font-size:.85rem;line-height:1.8}
+.plan ul li::before{content:"✓ ";color:var(--link)}
+.status-msg{padding:.8rem;border-radius:6px;margin:1rem 0;font-size:.9rem}
+.status-msg.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.status-msg.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.hidden{display:none}
+.section-divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+@media(max-width:600px){.plans{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav style="padding:1rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border)">
+  <a href="/" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text)">
+    <img src="/assets/images/aeoess_logo.png" alt="AEOESS" width="28" height="28">
+    <span style="font-family:'Crimson Pro',serif;font-weight:700;font-size:1.2rem">AEOESS</span>
+  </a>
+  <span style="color:var(--dim);font-size:.9rem">Gateway Portal</span>
+  <span style="flex:1"></span>
+  <a href="/gateway.html" style="font-size:.85rem;color:var(--link)">Dashboard</a>
+  <a href="/" style="font-size:.85rem;color:var(--dim)">Home</a>
+</nav>
+
+<div class="portal-wrap">
+
+  <!-- HERO -->
+  <div class="portal-hero">
+    <h1>Your agents are doing things.<br>Can you prove it?</h1>
+    <p>Get an API key. Install one adapter. Every action your agents take gets a signed receipt, an audit trail, and a trust score.</p>
+  </div>
+
+  <!-- PLANS -->
+  <div class="portal-card">
+    <h2>Choose a plan</h2>
+    <div class="plans">
+      <div class="plan active" id="plan-free">
+        <h3>Free</h3>
+        <div class="price">$0<span>/mo</span></div>
+        <ul>
+          <li>3 agents</li>
+          <li>1,000 evaluations/mo</li>
+          <li>Trust endpoint</li>
+          <li>JWKS verification</li>
+        </ul>
+      </div>
+      <div class="plan" id="plan-pro">
+        <h3>Team</h3>
+        <div class="price">$99<span>/mo</span></div>
+        <ul>
+          <li>25 agents</li>
+          <li>50,000 evaluations/mo</li>
+          <li>Compliance reports</li>
+          <li>30-day retention</li>
+        </ul>
+      </div>
+      <div class="plan" id="plan-enterprise">
+        <h3>Enterprise</h3>
+        <div class="price">Custom</div>
+        <ul>
+          <li>Unlimited agents</li>
+          <li>Unlimited evaluations</li>
+          <li>SLA + priority support</li>
+          <li>Data attribution</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="portal-card" id="signup-section">
+    <h2>Create your account</h2>
+    <div id="signup-form">
+      <div class="portal-field">
+        <label for="signup-name">Organization name</label>
+        <input type="text" id="signup-name" placeholder="Acme AI Labs">
+      </div>
+      <div class="portal-field">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" placeholder="you@company.com">
+      </div>
+      <div id="signup-status"></div>
+      <button class="portal-btn" id="signup-btn" onclick="doSignup()">Get API Key</button>
+    </div>
+
+    <!-- Key reveal (shown after signup) -->
+    <div id="key-reveal" class="hidden">
+      <div class="status-msg success">Account created. Your API key is below.</div>
+      <div class="key-display">
+        <span id="api-key-value"></span>
+        <button class="copy-btn" onclick="copyKey()">Copy</button>
+      </div>
+      <p class="key-warning">Save this key now. It will not be shown again.</p>
+      <p style="margin-top:1rem;font-size:.9rem;color:var(--dim)">Tenant ID: <code id="tenant-id-value"></code></p>
+    </div>
+  </div>
+
+  <!-- QUICK START (shown after signup) -->
+  <div class="portal-card" id="quickstart-section">
+    <h2>Quick start</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Install the SDK</h3>
+        <pre>npm install agent-passport-system</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Set your API key</h3>
+        <pre>export AEOESS_API_KEY="aps_live_..."</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Govern a tool call (pick your framework)</h3>
+        <pre>import { governMCPToolCall } from 'agent-passport-system'
+
+const result = await governMCPToolCall(
+  { name: 'web_search', arguments: { q: 'test' } },
+  async (args) => searchWeb(args.q),
+  { passport, delegation, privateKey }
+)
+// result.receipt is Ed25519-signed proof</pre>
+        <p>Works with LangChain, CrewAI, MCP, A2A, Stripe, Composio, Gonka. See <a href="https://aeoess.com/llms-full.txt" style="color:var(--link)">full docs</a>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Check your dashboard</h3>
+        <p>Visit <a href="/gateway.html" style="color:var(--link)">gateway dashboard</a> to see evaluations, trust scores, and audit trails in real time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXISTING ACCOUNT -->
+  <hr class="section-divider">
+  <div class="portal-card">
+    <h2>Already have an account?</h2>
+    <div class="portal-field">
+      <label for="existing-key">API Key</label>
+      <input type="password" id="existing-key" placeholder="aps_live_...">
+    </div>
+    <button class="portal-btn portal-btn-outline" onclick="checkAccount()">View Account</button>
+    <div id="account-info" class="hidden" style="margin-top:1rem"></div>
+  </div>
+
+</div>
+
+<script>
+const GW = 'https://gateway.aeoess.com'
+
+async function doSignup() {
+  const name = document.getElementById('signup-name').value.trim()
+  const email = document.getElementById('signup-email').value.trim()
+  const btn = document.getElementById('signup-btn')
+  const status = document.getElementById('signup-status')
+
+  if (!name || !email) {
+    status.innerHTML = '<div class="status-msg error">Please fill in both fields.</div>'
+    return
+  }
+
+  btn.disabled = true
+  btn.textContent = 'Creating account...'
+  status.innerHTML = ''
+
+  try {
+    const res = await fetch(`${GW}/api/v1/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, plan: 'free' })
+    })
+    const data = await res.json()
+
+    if (!res.ok) {
+      status.innerHTML = `<div class="status-msg error">${data.error || 'Signup failed'}</div>`
+      btn.disabled = false
+      btn.textContent = 'Get API Key'
+      return
+    }
+
+    // Show key
+    document.getElementById('signup-form').classList.add('hidden')
+    document.getElementById('key-reveal').classList.remove('hidden')
+    document.getElementById('api-key-value').textContent = data.api_key
+    document.getElementById('tenant-id-value').textContent = data.tenant_id
+
+  } catch (e) {
+    status.innerHTML = `<div class="status-msg error">Network error. Try again.</div>`
+    btn.disabled = false
+    btn.textContent = 'Get API Key'
+  }
+}
+
+function copyKey() {
+  const key = document.getElementById('api-key-value').textContent
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = document.querySelector('.copy-btn')
+    btn.textContent = 'Copied!'
+    setTimeout(() => btn.textContent = 'Copy', 2000)
+  })
+}
+
+async function checkAccount() {
+  const key = document.getElementById('existing-key').value.trim()
+  const info = document.getElementById('account-info')
+
+  if (!key) return
+
+  try {
+    const res = await fetch(`${GW}/api/v1/account`, {
+      headers: { 'Authorization': `Bearer ${key}` }
+    })
+
+    if (!res.ok) {
+      info.classList.remove('hidden')
+      info.innerHTML = '<div class="status-msg error">Invalid API key</div>'
+      return
+    }
+
+    const d = await res.json()
+    info.classList.remove('hidden')
+    info.innerHTML = `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.9rem;line-height:1.8">
+        <strong>${d.name}</strong> (${d.plan})<br>
+        Agents: ${d.usage.agents} / ${d.limits.max_agents === -1 ? '∞' : d.limits.max_agents}<br>
+        Evaluations this month: ${d.usage.evaluations_this_month.toLocaleString()} / ${d.limits.evaluations_per_month === -1 ? '∞' : d.limits.evaluations_per_month.toLocaleString()}<br>
+        Delegations: ${d.usage.delegations}<br>
+        Receipts: ${d.usage.receipts.toLocaleString()}<br>
+        <a href="/gateway.html" style="color:var(--link)">Open Dashboard →</a>
+      </div>
+    `
+  } catch (e) {
+    info.classList.remove('hidden')
+    info.innerHTML = '<div class="status-msg error">Network error</div>'
+  }
+}
+</script>
+</body>
+</html>
