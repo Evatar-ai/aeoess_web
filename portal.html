@@ -4,63 +4,73 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AEOESS Gateway Portal — Get Your API Key</title>
-<meta name="description" content="Sign up for the AEOESS Gateway. Get an API key, govern your AI agents, prove every action.">
+<meta name="description" content="Governance infrastructure for AI agents. Get an API key, enforce delegation chains, prove every action with signed receipts.">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-.portal-wrap{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
-.portal-hero{text-align:center;margin-bottom:3rem}
-.portal-hero h1{font-family:'Crimson Pro',serif;font-size:2.4rem;font-weight:700;margin-bottom:.5rem}
-.portal-hero p{color:var(--dim);font-size:1.1rem;line-height:1.6}
+.portal-wrap{max-width:760px;margin:0 auto;padding:2rem 1.5rem}
+.portal-hero{text-align:center;margin-bottom:2.5rem;padding-top:1rem}
+.portal-hero h1{font:700 2.4rem/1.15 'Crimson Pro',serif;margin-bottom:.6rem;color:var(--text)}
+.portal-hero p{color:var(--dim);font:400 1.05rem/1.6 'Source Sans 3',sans-serif;max-width:520px;margin:0 auto}
 .portal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;margin-bottom:2rem}
-.portal-card h2{font-family:'Crimson Pro',serif;font-size:1.5rem;margin-bottom:1rem;font-weight:600}
+.portal-card h2{font:600 1.4rem 'Crimson Pro',serif;margin-bottom:1rem;color:var(--text)}
 .portal-field{display:block;margin-bottom:1rem}
 .portal-field label{display:block;font-size:.85rem;font-weight:500;margin-bottom:.3rem;color:var(--dim)}
-.portal-field input{width:100%;padding:.65rem .8rem;border:1px solid var(--border);border-radius:6px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;background:var(--bg);color:var(--text);box-sizing:border-box}
+.portal-field input{width:100%;padding:.65rem .8rem;border:1px solid var(--border);border-radius:6px;font:.95rem 'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);box-sizing:border-box}
 .portal-field input:focus{outline:none;border-color:var(--link)}
-.portal-btn{display:inline-block;padding:.7rem 1.8rem;background:var(--text);color:var(--bg);border:none;border-radius:6px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.portal-btn{display:inline-block;padding:.7rem 1.8rem;background:var(--text);color:var(--bg);border:none;border-radius:6px;font:600 .95rem 'Source Sans 3',sans-serif;cursor:pointer;transition:opacity .2s}
 .portal-btn:hover{opacity:.85}
 .portal-btn:disabled{opacity:.5;cursor:not-allowed}
 .portal-btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
 .portal-btn-outline:hover{border-color:var(--text)}
+.portal-btn-sm{padding:.5rem 1.2rem;font-size:.85rem}
 .key-display{background:#1a1a2e;color:#0f0;font-family:'JetBrains Mono',monospace;padding:1rem;border-radius:8px;font-size:.85rem;word-break:break-all;margin:1rem 0;position:relative;user-select:all}
 .key-display .copy-btn{position:absolute;top:.5rem;right:.5rem;background:#333;color:#fff;border:none;border-radius:4px;padding:.3rem .6rem;font-size:.75rem;cursor:pointer}
 .key-display .copy-btn:hover{background:#555}
 .key-warning{color:#e74c3c;font-size:.85rem;font-weight:500;margin-top:.5rem}
-.step{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
-.step-num{background:var(--text);color:var(--bg);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
-.step-body{flex:1}
-.step-body h3{font-size:1rem;font-weight:600;margin-bottom:.3rem}
-.step-body p{font-size:.9rem;color:var(--dim);line-height:1.5}
-.step-body code{background:var(--surface);border:1px solid var(--border);padding:.15rem .4rem;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.82rem}
-.step-body pre{background:#1a1a2e;color:#e0e0e0;padding:.8rem;border-radius:6px;font-size:.8rem;overflow-x:auto;margin:.5rem 0;font-family:'JetBrains Mono',monospace;line-height:1.5}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
-.plan{border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center}
+.plan{border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.plan:hover{border-color:var(--link);box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .plan.active{border-color:var(--link);background:var(--surface)}
-.plan h3{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
-.plan .price{font-size:1.8rem;font-weight:700;font-family:'Crimson Pro',serif;margin:.3rem 0}
-.plan .price span{font-size:.9rem;font-weight:400;color:var(--dim)}
+.plan h3{font:600 1.1rem 'Source Sans 3',sans-serif;margin-bottom:.3rem}
+.plan .price{font:700 1.8rem 'Crimson Pro',serif;margin:.3rem 0}
+.plan .price span{font:400 .9rem 'Source Sans 3',sans-serif;color:var(--dim)}
 .plan ul{list-style:none;padding:0;margin:.8rem 0;text-align:left;font-size:.85rem;line-height:1.8}
-.plan ul li::before{content:"✓ ";color:var(--link)}
+.plan ul li::before{content:"\2713 ";color:var(--link)}
+.plan .plan-cta{display:block;margin-top:.8rem;padding:.45rem 0;border:1px solid var(--border);border-radius:6px;font:500 .82rem 'Source Sans 3',sans-serif;color:var(--text);text-decoration:none;transition:background .15s,border-color .15s}
+.plan .plan-cta:hover{background:var(--surface);border-color:var(--link)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:1.5rem 0}
+.feature h3{font:600 1rem 'Source Sans 3',sans-serif;margin-bottom:.3rem}
+.feature p{font:.87rem/1.5 'Source Sans 3',sans-serif;color:var(--dim)}
+.step{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+.step-num{background:var(--text);color:var(--bg);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 .8rem 'Source Sans 3',sans-serif;flex-shrink:0;margin-top:.1rem}
+.step-body{flex:1}
+.step-body h3{font:600 1rem 'Source Sans 3',sans-serif;margin-bottom:.3rem}
+.step-body p{font:.9rem/1.5 'Source Sans 3',sans-serif;color:var(--dim)}
+.step-body pre{background:#1a1a2e;color:#e0e0e0;padding:.7rem .9rem;border-radius:6px;font:.78rem/1.5 'JetBrains Mono',monospace;overflow-x:auto;margin:.4rem 0}
 .status-msg{padding:.8rem;border-radius:6px;margin:1rem 0;font-size:.9rem}
 .status-msg.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
 .status-msg.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
 .hidden{display:none}
 .section-divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
-@media(max-width:600px){.plans{grid-template-columns:1fr}}
+.bottom-links{text-align:center;font:.85rem 'Source Sans 3',sans-serif;color:var(--dim);margin:2rem 0}
+.bottom-links a{color:var(--link);margin:0 .5rem}
+@media(max-width:600px){.plans,.features{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <nav style="padding:1rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border)">
   <a href="/" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text)">
     <img src="/assets/images/aeoess_logo.png" alt="AEOESS" width="28" height="28">
-    <span style="font-family:'Crimson Pro',serif;font-weight:700;font-size:1.2rem">AEOESS</span>
+    <span style="font:700 1.2rem 'Crimson Pro',serif">AEOESS</span>
   </a>
   <span style="color:var(--dim);font-size:.9rem">Gateway Portal</span>
   <span style="flex:1"></span>
+  <a href="/docs.html" style="font-size:.85rem;color:var(--link)">Docs</a>
+  <a href="/llms-full.txt" style="font-size:.85rem;color:var(--dim)">API Ref</a>
   <a href="/gateway.html" style="font-size:.85rem;color:var(--link)">Dashboard</a>
   <a href="/" style="font-size:.85rem;color:var(--dim)">Home</a>
 </nav>
@@ -69,15 +79,15 @@
 
   <!-- HERO -->
   <div class="portal-hero">
-    <h1>Your agents are doing things.<br>Can you prove it?</h1>
-    <p>Get an API key. Install one adapter. Every action your agents take gets a signed receipt, an audit trail, and a trust score.</p>
+    <h1>Governance infrastructure<br>for AI agents</h1>
+    <p>One API key. Signed receipts for every action. Trust scores that mean something.</p>
   </div>
 
   <!-- PLANS -->
   <div class="portal-card">
     <h2>Choose a plan</h2>
     <div class="plans">
-      <div class="plan active" id="plan-free">
+      <div class="plan active" id="plan-free" onclick="document.getElementById('signup-section').scrollIntoView({behavior:'smooth'})">
         <h3>Free</h3>
         <div class="price">$0<span>/mo</span></div>
         <ul>
@@ -86,8 +96,9 @@
           <li>Trust endpoint</li>
           <li>JWKS verification</li>
         </ul>
+        <span class="plan-cta">Get Started</span>
       </div>
-      <div class="plan" id="plan-pro">
+      <div class="plan" id="plan-pro" onclick="document.getElementById('signup-section').scrollIntoView({behavior:'smooth'})">
         <h3>Team</h3>
         <div class="price">$99<span>/mo</span></div>
         <ul>
@@ -96,9 +107,10 @@
           <li>Compliance reports</li>
           <li>30-day retention</li>
         </ul>
-        <button class="portal-btn plan-upgrade hidden" data-plan="pro" onclick="upgradePlan('pro')" style="width:100%;margin-top:.5rem">Upgrade</button>
+        <span class="plan-cta">Start Team Plan</span>
+        <button class="portal-btn portal-btn-sm plan-upgrade hidden" data-plan="pro" onclick="event.stopPropagation();upgradePlan('pro')" style="width:100%;margin-top:.5rem">Upgrade</button>
       </div>
-      <div class="plan" id="plan-enterprise">
+      <div class="plan" id="plan-enterprise" onclick="window.location.href='mailto:signal@aeoess.com?subject=Enterprise%20Plan%20Inquiry'">
         <h3>Enterprise</h3>
         <div class="price">Custom</div>
         <ul>
@@ -107,7 +119,27 @@
           <li>SLA + priority support</li>
           <li>Data attribution</li>
         </ul>
-        <button class="portal-btn plan-upgrade hidden" data-plan="enterprise" onclick="upgradePlan('enterprise')" style="width:100%;margin-top:.5rem">Contact Us</button>
+        <span class="plan-cta">Contact Us</span>
+        <button class="portal-btn portal-btn-sm plan-upgrade hidden" data-plan="enterprise" onclick="event.stopPropagation();upgradePlan('enterprise')" style="width:100%;margin-top:.5rem">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="portal-card">
+    <h2>What you get</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Signed Receipts</h3>
+        <p>Every agent action gets an Ed25519-signed receipt. Cryptographic proof of what was authorized and what happened.</p>
+      </div>
+      <div class="feature">
+        <h3>Trust Profiles</h3>
+        <p>Per-agent trust scores, per-task-class breakdowns, DID binding status. Publicly verifiable at <code style="font:.78rem 'JetBrains Mono',monospace">/public/trust/:agentId</code>.</p>
+      </div>
+      <div class="feature">
+        <h3>Audit Trail</h3>
+        <p>Full evaluation history, denial analysis, spend tracking, governance export. CSV and JSON formats.</p>
       </div>
     </div>
   </div>
@@ -140,47 +172,38 @@
     </div>
   </div>
 
-  <!-- QUICK START (shown after signup) -->
+  <!-- QUICK START (curl examples) -->
   <div class="portal-card" id="quickstart-section">
     <h2>Quick start</h2>
-
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>Install the SDK</h3>
-        <pre>npm install agent-passport-system</pre>
+        <h3>Register an agent</h3>
+        <pre>curl -X POST https://gateway.aeoess.com/api/v1/agents \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"agent_id":"my-agent","name":"My First Agent","public_key":"..."}'</pre>
       </div>
     </div>
-
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>Set your API key</h3>
-        <pre>export AEOESS_API_KEY="aps_live_..."</pre>
+        <h3>Create a delegation</h3>
+        <pre>curl -X POST https://gateway.aeoess.com/api/v1/delegations \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"parent_agent_id":"_root","child_agent_id":"my-agent","scope":"data:read,tool:web_search","spend_limit":100}'</pre>
       </div>
     </div>
-
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>Govern a tool call (pick your framework)</h3>
-        <pre>import { governMCPToolCall } from 'agent-passport-system'
-
-const result = await governMCPToolCall(
-  { name: 'web_search', arguments: { q: 'test' } },
-  async (args) => searchWeb(args.q),
-  { passport, delegation, privateKey }
-)
-// result.receipt is Ed25519-signed proof</pre>
-        <p>Works with LangChain, CrewAI, MCP, A2A, Stripe, Composio, Gonka. See <a href="https://aeoess.com/llms-full.txt" style="color:var(--link)">full docs</a>.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <h3>Check your dashboard</h3>
-        <p>Visit <a href="/gateway.html" style="color:var(--link)">gateway dashboard</a> to see evaluations, trust scores, and audit trails in real time.</p>
+        <h3>Run an evaluation</h3>
+        <pre>curl -X POST https://gateway.aeoess.com/api/v1/evaluate \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"agent_id":"my-agent","action_type":"tool:web_search","scope_required":"tool:web_search"}'</pre>
+        <p>Response includes <code>verdict</code>, <code>evaluation_id</code>, and a signed receipt in the audit trail.</p>
       </div>
     </div>
   </div>
@@ -196,6 +219,14 @@ const result = await governMCPToolCall(
     <button class="portal-btn portal-btn-outline" onclick="checkAccount()">View Account</button>
     <button class="portal-btn portal-btn-outline hidden" id="manage-billing-btn" onclick="manageBilling()" style="margin-left:.5rem">Manage Billing</button>
     <div id="account-info" class="hidden" style="margin-top:1rem"></div>
+  </div>
+
+  <!-- BOTTOM LINKS -->
+  <div class="bottom-links">
+    <a href="/docs.html">Full API Reference</a> &middot;
+    <a href="/gateway.html">Dashboard</a> &middot;
+    <a href="https://www.npmjs.com/package/agent-passport-system">SDK on npm</a> &middot;
+    <a href="/llms-full.txt">LLM docs</a>
   </div>
 
 </div>
@@ -241,7 +272,7 @@ async function doSignup() {
     document.getElementById('tenant-id-value').textContent = data.tenant_id
 
   } catch (e) {
-    status.innerHTML = `<div class="status-msg error">Network error. Try again.</div>`
+    status.innerHTML = '<div class="status-msg error">Network error. Try again.</div>'
     btn.disabled = false
     btn.textContent = 'Get API Key'
   }
@@ -280,7 +311,7 @@ async function checkAccount() {
     info.classList.remove('hidden')
 
     const limitBar = (current, limit) => {
-      if (limit === -1) return `${current} / ∞`
+      if (limit === -1) return `${current} / &infin;`
       const pct = Math.min(100, Math.round(current / limit * 100))
       const color = pct > 90 ? '#e74c3c' : pct > 70 ? '#f39c12' : 'var(--link)'
       return `${current} / ${limit} <span style="display:inline-block;width:60px;height:6px;background:var(--border);border-radius:3px;vertical-align:middle;margin-left:4px"><span style="display:block;width:${pct}%;height:100%;background:${color};border-radius:3px"></span></span>`
