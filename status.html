@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AEOESS — System Status</title>
+<meta name="description" content="Live status of AEOESS Gateway, MCP server, and website.">
+<link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.status-wrap{max-width:640px;margin:0 auto;padding:2rem 1.5rem}
+.status-hero{text-align:center;margin-bottom:2rem}
+.status-hero h1{font:700 2rem 'Crimson Pro',serif;margin-bottom:.3rem}
+.status-hero p{color:var(--dim);font:.95rem 'Source Sans 3',sans-serif}
+.check{display:flex;align-items:center;gap:.8rem;padding:1rem;border:1px solid var(--border);border-radius:8px;margin-bottom:.8rem;background:var(--surface)}
+.check .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.dot.ok{background:#22c55e}.dot.down{background:#ef4444}.dot.loading{background:#f59e0b;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.check .name{font:500 .95rem 'Source Sans 3',sans-serif;flex:1}
+.check .latency{font:.8rem 'JetBrains Mono',monospace;color:var(--dim)}
+.check .detail{font:.78rem 'Source Sans 3',sans-serif;color:var(--dim)}
+.overall{text-align:center;padding:1.5rem;border-radius:10px;margin-bottom:2rem;font:600 1.1rem 'Source Sans 3',sans-serif}
+.overall.allgood{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.overall.issues{background:#fef2f2;color:#991b1b;border:1px solid #fca5a5}
+.overall.checking{background:var(--surface);color:var(--dim);border:1px solid var(--border)}
+.ts{text-align:center;font:.8rem 'JetBrains Mono',monospace;color:var(--dim);margin-top:1.5rem}
+</style>
+</head>
+<body>
+<nav style="padding:1rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border)">
+  <a href="/" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text)">
+    <img src="/assets/images/aeoess_logo.png" alt="AEOESS" width="28" height="28">
+    <span style="font:700 1.2rem 'Crimson Pro',serif">AEOESS</span>
+  </a>
+  <span style="color:var(--dim);font-size:.9rem">System Status</span>
+  <span style="flex:1"></span>
+  <a href="/docs.html" style="font-size:.85rem;color:var(--link)">Docs</a>
+  <a href="/portal.html" style="font-size:.85rem;color:var(--link)">Portal</a>
+  <a href="/gateway.html" style="font-size:.85rem;color:var(--link)">Dashboard</a>
+  <a href="/" style="font-size:.85rem;color:var(--dim)">Home</a>
+</nav>
+<div class="status-wrap">
+  <div class="status-hero">
+    <h1>System Status</h1>
+    <p>Live health checks for all AEOESS services</p>
+  </div>
+  <div class="overall checking" id="overall">Checking services...</div>
+  <div id="checks">
+    <div class="check" id="c-gateway"><div class="dot loading"></div><div class="name">Gateway API</div><div class="latency">—</div></div>
+    <div class="check" id="c-trust"><div class="dot loading"></div><div class="name">Trust Profiles</div><div class="latency">—</div></div>
+    <div class="check" id="c-mcp"><div class="dot loading"></div><div class="name">MCP Remote Server</div><div class="latency">—</div></div>
+    <div class="check" id="c-website"><div class="dot loading"></div><div class="name">Website</div><div class="latency">—</div></div>
+    <div class="check" id="c-jwks"><div class="dot loading"></div><div class="name">JWKS Endpoint</div><div class="latency">—</div></div>
+  </div>
+  <div class="ts" id="ts">Last checked: —</div>
+</div>
+<script>
+async function check(id, url, validate) {
+  const el = document.getElementById(id)
+  const dot = el.querySelector('.dot')
+  const lat = el.querySelector('.latency')
+  const t0 = Date.now()
+  try {
+    const r = await fetch(url, { signal: AbortSignal.timeout(8000) })
+    const ms = Date.now() - t0
+    const ok = validate ? await validate(r) : r.ok
+    dot.className = 'dot ' + (ok ? 'ok' : 'down')
+    lat.textContent = ms + 'ms'
+    return ok
+  } catch {
+    dot.className = 'dot down'
+    lat.textContent = 'timeout'
+    return false
+  }
+}
+async function run() {
+  const results = await Promise.all([
+    check('c-gateway', 'https://gateway.aeoess.com/health'),
+    check('c-trust', 'https://gateway.aeoess.com/api/v1/public/trust/claude-operator', async r => {
+      if (!r.ok) return false
+      const d = await r.json(); return d.found !== undefined
+    }),
+    check('c-mcp', 'https://mcp.aeoess.com/health'),
+    check('c-website', 'https://aeoess.com/', r => Promise.resolve(r.ok)),
+    check('c-jwks', 'https://gateway.aeoess.com/.well-known/jwks.json', async r => {
+      if (!r.ok) return false
+      const d = await r.json(); return d.keys && d.keys.length > 0
+    }),
+  ])
+  const allOk = results.every(Boolean)
+  const ov = document.getElementById('overall')
+  ov.className = 'overall ' + (allOk ? 'allgood' : 'issues')
+  ov.textContent = allOk ? 'All systems operational' : 'Some services experiencing issues'
+  document.getElementById('ts').textContent = 'Last checked: ' + new Date().toLocaleTimeString()
+}
+run()
+setInterval(run, 60000)
+</script>
+</body>
+</html>
