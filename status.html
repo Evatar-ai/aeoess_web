@@ -30,18 +30,16 @@
 </style>
 </head>
 <body>
-<nav style="padding:1rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border)">
-  <a href="/" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text)">
-    <img src="/assets/images/aeoess_logo.png" alt="AEOESS" width="28" height="28">
-    <span style="font:700 1.2rem 'Crimson Pro',serif">AEOESS</span>
-  </a>
-  <span style="color:var(--dim);font-size:.9rem">System Status</span>
-  <span style="flex:1"></span>
-  <a href="/docs.html" style="font-size:.85rem;color:var(--link)">Docs</a>
-  <a href="/portal.html" style="font-size:.85rem;color:var(--link)">Portal</a>
-  <a href="/gateway.html" style="font-size:.85rem;color:var(--link)">Dashboard</a>
-  <a href="/" style="font-size:.85rem;color:var(--dim)">Home</a>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a><a href="portal.html">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
+  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
+<div class="nav-drawer" style="display:none">
+  <a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
+  <a href="portal.html">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
+  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+</div>
 <div class="status-wrap">
   <div class="status-hero">
     <h1>System Status</h1>
@@ -58,6 +56,11 @@
   <div class="ts" id="ts">Last checked: —</div>
 </div>
 <script>
+// Theme + nav
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
+(function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});
+
 async function check(id, url, validate) {
   const el = document.getElementById(id)
   const dot = el.querySelector('.dot')
