@@ -4,7 +4,7 @@
 > Policy evaluation in under 2ms. 15 constraint dimensions. 403 ops/sec.
 > Accepts did:key, did:web, SPIFFE SVIDs, OAuth tokens, native did:aps. Identity is the input. Enforcement is the product.
 > TypeScript SDK + MCP server + Python SDK. Zero heavy dependencies. Apache-2.0 license.
-> Independently cited: PDR in Production (Nanook & Gerundium, UBC). DOI: 10.5281/zenodo.19323172
+> Independently cited: PDR in Production (University of British Columbia). DOI: 10.5281/zenodo.19323172
 
 ## What It Is
 
@@ -665,7 +665,7 @@ Private enforcement gateway with 37 API routes, multi-tenant with API key auth (
 - Research paper: https://doi.org/10.5281/zenodo.18749779
 - Research paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
 - Research paper (Behavioral Derivation Rights): https://doi.org/10.5281/zenodo.19476002
-- Cited by: "PDR in Production" (Nanook & Gerundium, 2026) — Section 7.6 validates APS Bayesian reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
+- Cited by: "PDR in Production" (University of British Columbia, 2026) — Section 7.6 validates APS Bayesian reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
 - Protocol page: https://aeoess.com/protocol.html
 - Dev log: https://aeoess.com/blog.html
 - Threat model: https://aeoess.com/threat-model.html
