@@ -665,6 +665,7 @@ Private enforcement gateway with 37 API routes, multi-tenant with API key auth (
 - Research paper: https://doi.org/10.5281/zenodo.18749779
 - Research paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
 - Research paper (Behavioral Derivation Rights): https://doi.org/10.5281/zenodo.19476002
+- Research paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584
 - Cited by: "PDR in Production" (University of British Columbia, 2026) — Section 7.6 validates APS Bayesian reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
 - Protocol page: https://aeoess.com/protocol.html
 - Dev log: https://aeoess.com/blog.html
