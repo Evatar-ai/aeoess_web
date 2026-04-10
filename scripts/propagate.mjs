@@ -126,7 +126,6 @@ function getTargetFiles() {
     { path: `${REPOS.web}/blog.html`, repo: 'web' },
     { path: `${REPOS.web}/threat-model.html`, repo: 'web' },
     { path: `${REPOS.web}/faq.html`, repo: 'web' },
-    { path: `${REPOS.web}/overview.html`, repo: 'web' },
     { path: `${REPOS.web}/mingle.html`, repo: 'web' },
     { path: `${REPOS.web}/network.html`, repo: 'web' },
     { path: `${REPOS.web}/world.html`, repo: 'web' },
