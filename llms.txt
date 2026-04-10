@@ -112,7 +112,7 @@ import { /* anything from the full surface */ } from 'agent-passport-system'
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. 132 tools across all layers:
+The `agent-passport-system-mcp` package provides a full-stack MCP server. Default profile is `essential` (20 tools: identity, delegation, enforcement, commerce, reputation). Set `APS_PROFILE=full` for all 132 tools across all layers. Other profiles: identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
 
 **Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 
