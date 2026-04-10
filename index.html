@@ -58,7 +58,8 @@
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What is AEOESS?","acceptedAnswer":{"@type":"Answer","text":"AEOESS is the enforcement and accountability layer for AI agents. Bring your own identity (did:key, did:web, SPIFFE, OAuth, did:aps). Policy eval under 2ms. 2,552 tests. 20 essential MCP tools (132 total). npm install agent-passport-system."}},
 {"@type":"Question","name":"What does the protocol do?","acceptedAnswer":{"@type":"Answer","text":"Makes every AI agent accountable. Cryptographic identity (Ed25519), scoped delegation with monotonic narrowing, Bayesian reputation, values enforcement, 4-gate commerce with feeless Nano wallet, Merkle attribution, gateway enforcement boundary. Authority can only narrow, never expand."}},
-{"@type":"Question","name":"Is AEOESS open source?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apache-2.0 licensed. SDK v1.39.0. Independently cited by PDR in Production (University of British Columbia). github.com/aeoess"}}
+{"@type":"Question","name":"Is AEOESS open source?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apache-2.0 licensed. SDK v1.39.0. Independently cited by PDR in Production (University of British Columbia). github.com/aeoess"}},
+{"@type":"Question","name":"What is the fastest way to get started?","acceptedAnswer":{"@type":"Answer","text":"npm install agent-passport-system, then import from agent-passport-system/core for the curated 24-function surface: createPassport, createDelegation, evaluateIntent, commercePreflight, generateKeyPair, plus the essentials. The full 925-export API is still at agent-passport-system for advanced cases. The MCP server defaults to 20 essential tools (set APS_PROFILE=full for all 132)."}}
 ]}]}
 </script>
 <style>
@@ -190,7 +191,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <div><span class="ps-n">&lt;2ms</span><span class="ps-l">Policy eval</span></div>
       <div><span class="ps-n">103</span><span class="ps-l">Modules</span></div>
       <div><span class="ps-n">132</span><span class="ps-l">MCP tools</span></div>
-      <div><span class="ps-n">2,535</span><span class="ps-l">Tests</span></div>
+      <div><span class="ps-n">2,552</span><span class="ps-l">Tests</span></div>
     </div>
     <div style="font:400 .72rem/1.5 var(--sans);color:var(--ink-4);margin-bottom:.6rem;padding:.4rem .6rem;border-left:2px solid var(--green);background:var(--code-bg);border-radius:0 6px 6px 0"><strong style="color:var(--ink-3)">Independently cited</strong> — PDR in Production (University of British Columbia) validates APS Bayesian model. <a href="https://doi.org/10.5281/zenodo.19323172" style="font-size:.68rem">Zenodo</a></div>
     <div class="install-cmd" onclick="navigator.clipboard.writeText('npm install agent-passport-system')"><span class="cm">$</span> npm install agent-passport-system</div>
@@ -206,6 +207,14 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <a href="https://doi.org/10.5281/zenodo.19476002">Paper 4</a>
       <a href="https://doi.org/10.5281/zenodo.19478584">Paper 5</a>
     </div>
+    <div style="margin-top:1rem;font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);margin-bottom:.35rem">Quick Start <span style="text-transform:none;letter-spacing:0;color:var(--ink-5)">— Core subpath, 24 curated functions</span></div>
+    <pre style="font:500 .78rem/1.55 var(--mono);color:var(--ink-2);background:var(--code-bg);border:1px solid var(--rule);padding:.75rem 1rem;border-radius:8px;overflow-x:auto;margin-bottom:.6rem"><span style="color:var(--ink-5)">// import the curated essentials</span>
+import {
+  createPassport, createDelegation,
+  evaluateIntent, commercePreflight, generateKeyPair
+} from <span style="color:var(--green)">'agent-passport-system/core'</span>
+
+<span style="color:var(--ink-5)">// full 925-export API still available at 'agent-passport-system'</span></pre>
   </div>
   <div>
     <div class="updates">
@@ -268,7 +277,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
     </div>
   </div>
 </section>
-<div class="arch-h">Protocol Architecture — 71 core + 32 v2 constitutional = 103 modules · <span style="color:var(--green)">79% connected through gateway enforcement hub</span></div>
+<div class="arch-h">Protocol Architecture — Core (24 functions) + Extended (79 specialized modules) = 103 total · <span style="color:var(--green)">2,552 tests passing</span></div>
 <div class="arch-map" id="archMap">
   <canvas id="archCanvas"></canvas>
   <div class="arch-ui" id="archUI"><div class="arch-ui-row"><span class="arch-label">Click any module to explore <span class="scroll-hint">&middot; scroll to explore on mobile</span></span><span class="arch-status" id="archStatus"></span></div><div class="arch-btns" id="archBtns"></div></div>

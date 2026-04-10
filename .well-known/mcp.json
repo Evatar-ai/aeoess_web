@@ -16,9 +16,9 @@
   "sdk": {
     "npm": "agent-passport-system",
     "pypi": "agent-passport-system",
-    "version": "1.33.0",
+    "version": "1.39.0",
     "modules": 103,
-    "tests": 2230
+    "tests": 2552
   },
   "documentation": {
     "llms_txt": "https://aeoess.com/llms.txt",

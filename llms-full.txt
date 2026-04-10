@@ -23,6 +23,29 @@ npx agent-passport-system-mcp setup --remote  # Zero-install remote SSE mode
 Or connect directly via SSE (no install): https://mcp.aeoess.com/sse
 ```
 
+## Tiered Access — Recommended Onboarding for AI Agents
+
+The SDK is intentionally structured in two tiers so an agent reading this doc does not have to walk all 925 exports before doing anything useful.
+
+**Tier 1 — Core (24 curated functions).** Subpath import: `agent-passport-system/core`. This is the surface 90% of integrations need. It covers identity (createPassport, verifyPassport, generateKeyPair), delegation (createDelegation, subDelegate, revokeDelegation, cascadeRevoke, scopeAuthorizes, verifyDelegation), policy and enforcement (createActionIntent, evaluateIntent, createAgentContext), values floor (loadFloor, attestFloor), commerce (commercePreflight, createCommerceDelegation, getSpendSummary, requestHumanApproval), reputation (resolveAuthorityTier, checkTierForIntent), key management (rotateKey), content-addressed identity (computeActionRef, computeIdempotencyKey), and compliance (generateComplianceReport). Plus essential types: SignedPassport, AgentPassport, PassportGrade, ActionIntent, PolicyReceipt, CommercePreflightResult, CommerceDelegation, IdempotencyStore.
+
+```typescript
+import {
+  createPassport, createDelegation,
+  evaluateIntent, commercePreflight, generateKeyPair
+} from 'agent-passport-system/core'
+```
+
+**Tier 2 — Extended (full 925-export API).** Default import: `agent-passport-system`. Pull from this when Core does not cover your case. The 79 specialized modules behind Extended include coordination (9-state task lifecycle, evidence packets, role assignment), EU AI Act compliance (Article 10 mapping, risk classification), framework adapters (CrewAI, LangChain, Google ADK, A2A, MCP, Composio, IBAC, Gonka), bilateral receipts, execution attestation, DID resolution and interop (did:key, did:web, SPIFFE SVID, OAuth), data lifecycle governance (access receipts, derivation chains, consent revocation, jurisdiction envelopes), behavioral memory objects, telemetry scopes, governance blocks, aps.txt, intent network, qntm encrypted relay, and 32 v2 constitutional modules (separation of powers, circuit breakers, approval fatigue detection, blind evaluation, affected-party standing, constitutional amendment, etc.).
+
+```typescript
+import { /* anything from the full surface */ } from 'agent-passport-system'
+```
+
+**MCP server** mirrors the same tiering. Default profile is `essential` (20 core tools). Set `APS_PROFILE=full` for all 132. Other profiles: identity, governance, coordination, commerce, data, gateway, comms, minimal, full. The complete tool list is in the MCP Server section below.
+
+**Recommended path for an agent reading this doc:** start with the Core surface, evaluate against your use case, then opt into specific Extended modules by name. You do not need to walk the full 925 exports.
+
 ## Architecture — 35 Protocol Modules
 
 Layer 1 — Identity: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.

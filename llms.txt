@@ -6,6 +6,8 @@
 
 AEOESS is the enforcement layer that sits on top of whatever identity the agent already has. Accepts did:key, did:web, SPIFFE SVIDs, OAuth tokens, and native did:aps. Identity is the input. Enforcement is the product. The gateway is both judge and executor. Authority can only decrease at each transfer point.
 
+The SDK is structured in two tiers. **Core** is a curated 24-function surface (`agent-passport-system/core`) covering identity, delegation, enforcement, commerce, reputation. **Extended** is the full 925-export API (`agent-passport-system`) covering 79 specialized modules: coordination, EU AI Act compliance, framework adapters, bilateral receipts, execution attestation, DID resolution, data lifecycle, and 32 v2 constitutional modules. Start with Core; pull from Extended only when needed.
+
 One hundred and three protocol modules (71 core + 32 v2 constitutional):
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 8 principles (F-001 to F-008), attestation, compliance verification, graduated enforcement (inline/audit/warn)
@@ -55,11 +57,32 @@ One hundred and three protocol modules (71 core + 32 v2 constitutional):
 
 **AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications. Developed by The Agent Times in partnership with AEOESS. 6 requirements across two layers: cryptographic infrastructure (Ed25519 provenance, journalist agent passports, MCP server) and editorial accountability (confidence labels, published code of conduct, automated ethics verification). Draws from SPJ Code of Ethics, National Press Club Constitution, E.W. Scripps Guidelines. Any publication can apply. Reference implementation: The Agent Times. Spec: https://aeoess.com/amcs.html | Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md
 
-Plus: **MCP Server** (v2.22.2) — 132 tools across all layers with role-scoped access control for any MCP client. **Tool profiles**: Set APS_PROFILE env var to expose only relevant tools (identity, governance, coordination, commerce, data, gateway, comms, minimal, or full).
+Plus: **MCP Server** (v2.22.2) — 20 essential tools by default, 132 total. Set `APS_PROFILE=full` for the complete surface, or pick a profile: essential (recommended), identity, governance, coordination, commerce, data, gateway, comms, minimal, full. Role-scoped access control for any MCP client.
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
 **v1.39.0 — 2,552 tests passing. Zero heavy dependencies.**
+
+## Tiered Access (Recommended Onboarding)
+
+The SDK ships in two layers. **Start with Core. Pull from Extended only when you actually need it.**
+
+**Core (24 curated functions)** — what 90% of integrations need. Identity, delegation, enforcement, commerce, reputation, key management, content-addressed identity, compliance reports.
+
+```typescript
+import {
+  createPassport, createDelegation,
+  evaluateIntent, commercePreflight, generateKeyPair
+} from 'agent-passport-system/core'
+```
+
+**Extended (full 925-export API)** — coordination, EU AI Act compliance, framework adapters (CrewAI/LangChain/ADK/A2A/MCP), bilateral receipts, execution attestation, DID resolution, data lifecycle, 32 v2 constitutional modules, institutional governance.
+
+```typescript
+import { /* anything from the full surface */ } from 'agent-passport-system'
+```
+
+**MCP server** defaults to 20 essential tools. Set `APS_PROFILE=full` for all 132. Profiles: essential, identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
 
 ## Quick Start
 
