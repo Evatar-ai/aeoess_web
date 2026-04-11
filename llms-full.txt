@@ -1,7 +1,7 @@
 # Agent Passport System — Full Documentation
 
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
-> Policy evaluation in under 2ms. 15 constraint dimensions. 403 ops/sec.
+> Policy evaluation in under 2ms. 14 constraint dimensions. 403 ops/sec.
 > Accepts did:key, did:web, SPIFFE SVIDs, OAuth tokens, native did:aps. Identity is the input. Enforcement is the product.
 > TypeScript SDK + MCP server + Python SDK. Zero heavy dependencies. Apache-2.0 license.
 > Independently cited: PDR in Production (University of British Columbia). DOI: 10.5281/zenodo.19323172
@@ -572,7 +572,7 @@ Q: What are tradeoff rules?
 A: Machine-readable expressions like "when quality and speed conflict, prefer quality until 2× time cost, then prefer speed." They make organizational priorities queryable at runtime instead of locked in prose documents.
 
 Q: How does it compare to other agent identity approaches?
-A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 2,552 tests. It is the enforcement and accountability layer for AI agents — bring your own identity (did:key, did:web, SPIFFE SVID, OAuth, native did:aps) and the gateway enforces scoped delegation, monotonic narrowing, cascade revocation, 3-signature action chains, Merkle proof attribution, values floor, agentic commerce (ACP by OpenAI + Stripe), reputation-gated authority with Bayesian trust, principal identity with selective disclosure, W3C DID and Verifiable Credentials, Google A2A bridge, and EU AI Act compliance mapping. Full surface area: 103 modules and a coordination-native MCP server with 132 tools under `APS_PROFILE=full` (20 essential tools by default).
+A: Most alternatives (DeepMind, GaaS, OpenAI, LOKA) are papers or proposals. The Agent Passport System is running code with 2,763 tests. It is the enforcement and accountability layer for AI agents — bring your own identity (did:key, did:web, SPIFFE SVID, OAuth, native did:aps) and the gateway enforces scoped delegation, monotonic narrowing, cascade revocation, 3-signature action chains, Merkle proof attribution, values floor, agentic commerce (ACP by OpenAI + Stripe), reputation-gated authority with Bayesian trust, principal identity with selective disclosure, W3C DID and Verifiable Credentials, Google A2A bridge, and EU AI Act compliance mapping. Full surface area: 103 modules and a coordination-native MCP server with 132 tools under `APS_PROFILE=full` (20 essential tools by default).
 
 Q: How does the Signed Execution Envelope work?
 A: The RFC defines a minimal signed envelope for cross-engine governance interop. Any governance engine (CrewAI, Guardian, APS, etc.) can emit it, and any verifier can check it without depending on a specific trust backend. The critical field is evaluation_method (deterministic vs probabilistic), which tells a verifier whether the governance decision can be independently replayed or only signature-checked. The APS SDK already generates every field in the envelope through its 3-signature chain. See: https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md
