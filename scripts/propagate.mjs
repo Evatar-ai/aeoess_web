@@ -46,11 +46,22 @@ function readSourceOfTruth() {
   const testFiles = testScript.match(/tests\/[\w.-]+\.ts/g) || [];
   values.TEST_FILES = testFiles.length;
 
-  // LAYER_COUNT from actual source module count (src/core/*.ts minus index.ts)
+  // Module counts. Split per spec PROPAGATE-SCRIPT-BUGS-2026-04-11 Option B:
+  //   CORE_MODULE_COUNT = src/core/*.ts minus index.ts (84 at HEAD 2026-04-11)
+  //   V2_MODULE_COUNT   = src/v2/*.ts   minus index.ts (33 at HEAD 2026-04-11)
+  //   LAYER_COUNT       = CORE + V2, kept as computed for back-compat with
+  //                       existing getVariablePatterns rules that match
+  //                       "{N} modules" / "{N} protocol modules". No longer
+  //                       treated as a primary canonical — CORE/V2 are.
   try {
     const coreFiles = readdirSync(`${REPOS.sdk}/src/core`).filter(f => f.endsWith('.ts') && f !== 'index.ts');
-    values.LAYER_COUNT = coreFiles.length;
-  } catch { values.LAYER_COUNT = 27; }
+    values.CORE_MODULE_COUNT = coreFiles.length;
+  } catch { values.CORE_MODULE_COUNT = 71; }
+  try {
+    const v2Files = readdirSync(`${REPOS.sdk}/src/v2`).filter(f => f.endsWith('.ts') && f !== 'index.ts');
+    values.V2_MODULE_COUNT = v2Files.length;
+  } catch { values.V2_MODULE_COUNT = 32; }
+  values.LAYER_COUNT = values.CORE_MODULE_COUNT + values.V2_MODULE_COUNT;
 
   // ADVERSARIAL_COUNT — count across ALL adversarial test files
   try {
@@ -312,6 +323,148 @@ function findStaleRefs(files, currentValues, previousValues) {
   return results;
 }
 
+// ── Verify pass (cache-independent drift detection) ──
+// Fixes Bug 1 from spec PROPAGATE-SCRIPT-BUGS-2026-04-11: the cache-diff
+// pass short-circuits when previous === current, so drift that was never
+// rewritten stays invisible. This pass scans each target file with
+// context-anchored regexes capturing the number, compares against current
+// canonical, and reports any mismatch. Patterns are locked to the spec's
+// "Regex false-positive notes" section — hardened against the false
+// positives the first attempt produced (comma-formatted numbers,
+// compound phrases like "20-tool profile", bare "N modules").
+
+function getVerifyPatterns(varName) {
+  switch (varName) {
+    case 'TEST_COUNT':
+      // Spec-locked: (?<![\d,])(\d{1,3}(?:,\d{3})+|\d+)\s+tests\b
+      // Handles both comma-formatted ("2,764") and bare ("2764") numbers.
+      // Lookbehind prevents matching "764" inside "2,764".
+      return [
+        { regex: /(?<![\d,])(\d{1,3}(?:,\d{3})+|\d+)\s+tests\b/gi },
+      ];
+    case 'MCP_TOOL_COUNT':
+      // Spec-locked: (?<![\d-])(\d{2,4})(?!-)\s+tools\b
+      // Negative lookbehind/lookahead for digit or hyphen prevents matching
+      // "20-tool profile" (dash) or "120 tools" digit-preceded false cases.
+      return [
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+tools\b/gi },
+      ];
+    case 'LAYER_COUNT':
+      // Spec-locked: only match the full phrases "N protocol modules"
+      // and "N total modules". Bare "N modules" is intentionally NOT
+      // matched because it collides with "32 v2 modules" and similar.
+      return [
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+protocol\s+modules\b/gi },
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+total\s+modules\b/gi },
+      ];
+    default:
+      return [];
+  }
+}
+
+// Returns an array of {start, end} absolute offsets into `content` that
+// are safe to scan. If a file uses PROPAGATION-ZONE-START/END markers
+// (blog.html etc.), only zone interiors are scannable. Otherwise the
+// whole file is scannable. Mirrors applyReplacementsToContent zone logic.
+function getScannableRanges(content) {
+  const ZONE_START = '<!-- PROPAGATION-ZONE-START -->';
+  const ZONE_END = '<!-- PROPAGATION-ZONE-END -->';
+  if (!content.includes(ZONE_START)) return [{ start: 0, end: content.length }];
+  const ranges = [];
+  let cursor = 0;
+  while (true) {
+    const zs = content.indexOf(ZONE_START, cursor);
+    if (zs === -1) break;
+    const ze = content.indexOf(ZONE_END, zs);
+    if (ze === -1) break;
+    ranges.push({ start: zs + ZONE_START.length, end: ze });
+    cursor = ze + ZONE_END.length;
+  }
+  return ranges;
+}
+
+// Format a number with thousands-separator commas if `useCommas` is true.
+// Used to preserve comma-style when replacing a comma-formatted match.
+function formatNumber(n, useCommas) {
+  const s = String(n);
+  if (!useCommas || s.length <= 3) return s;
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function verifyConsistency(files, currentValues) {
+  const drifts = [];
+  const checkVars = ['TEST_COUNT', 'MCP_TOOL_COUNT', 'LAYER_COUNT'];
+
+  for (const { path: filePath, repo } of files) {
+    if (!existsSync(filePath)) continue;
+    const content = readFileSync(filePath, 'utf8');
+    const ranges = getScannableRanges(content);
+
+    for (const varName of checkVars) {
+      const currentVal = currentValues[varName];
+      if (currentVal === null || currentVal === undefined) continue;
+      const patterns = getVerifyPatterns(varName);
+
+      for (const { regex } of patterns) {
+        for (const { start, end } of ranges) {
+          const slice = content.slice(start, end);
+          const regexCopy = new RegExp(regex.source, regex.flags);
+          let match;
+          while ((match = regexCopy.exec(slice)) !== null) {
+            const foundStr = match[1];
+            // Strip commas for numeric comparison.
+            const foundNum = Number(foundStr.replace(/,/g, ''));
+            if (foundNum === Number(currentVal)) continue;
+            const absIdx = start + match.index;
+            const lineNum = content.slice(0, absIdx).split('\n').length;
+            drifts.push({
+              file: filePath,
+              repo,
+              variable: varName,
+              line: lineNum,
+              found: foundStr,
+              expected: currentVal,
+              matched: match[0],
+            });
+          }
+        }
+      }
+    }
+  }
+  return drifts;
+}
+
+function applyVerifyFixes(drifts) {
+  // Group by file so we rewrite each file once, building zone-aware
+  // replacement patterns that swap the exact matched substring with the
+  // correct value (preserving comma-format when present).
+  const byFile = new Map();
+  for (const d of drifts) {
+    if (!byFile.has(d.file)) byFile.set(d.file, []);
+    byFile.get(d.file).push(d);
+  }
+
+  let fixed = 0;
+  for (const [filePath, fileDrifts] of byFile) {
+    const patterns = [];
+    for (const d of fileDrifts) {
+      const hasComma = d.found.includes(',');
+      const newNumStr = formatNumber(d.expected, hasComma);
+      const newMatch = d.matched.replace(d.found, newNumStr);
+      const escaped = d.matched.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      patterns.push({ regex: new RegExp(escaped, 'g'), replace: newMatch });
+    }
+    let content = readFileSync(filePath, 'utf8');
+    const before = content;
+    content = applyReplacementsToContent(content, patterns);
+    if (content !== before) {
+      writeFileSync(filePath, content, 'utf8');
+      fixed += fileDrifts.length;
+    }
+  }
+  return fixed;
+}
+
 // ── Apply replacements ──
 // If a file contains PROPAGATION-ZONE-START/END markers, only replace within zones.
 // This protects historical blog entries from being overwritten with current numbers.
@@ -398,10 +551,16 @@ const args = process.argv.slice(2);
 const applyMode = args.includes('--apply');
 const readOnlyMode = args.includes('--read-only');
 const commitMode = args.includes('--commit');
+const verifyOnlyMode = args.includes('--verify-only');
+
+const modeLabel = readOnlyMode ? 'READ-ONLY'
+  : verifyOnlyMode ? 'VERIFY-ONLY'
+  : applyMode ? (commitMode ? 'APPLY + COMMIT' : 'APPLY')
+  : 'DRY RUN';
 
 console.log('╔══════════════════════════════════════════════╗');
 console.log('║  AEOESS Update Propagation                  ║');
-console.log(`║  Mode: ${readOnlyMode ? 'READ-ONLY' : applyMode ? (commitMode ? 'APPLY + COMMIT' : 'APPLY') : 'DRY RUN'}                          ║`);
+console.log(`║  Mode: ${modeLabel}                          ║`);
 console.log('╚══════════════════════════════════════════════╝');
 console.log('');
 
@@ -417,6 +576,24 @@ console.log('');
 
 if (readOnlyMode) {
   process.exit(0);
+}
+
+// --verify-only: skip cache-diff entirely, run verify pass and exit.
+// The verify pass is cache-independent so it works without loading cache.
+if (verifyOnlyMode) {
+  const files = getTargetFiles();
+  console.log('Verify pass (cache-independent)...');
+  const drifts = verifyConsistency(files, current);
+  if (drifts.length === 0) {
+    console.log('✅ Verify pass: all scanned surfaces match canonical values.');
+    process.exit(0);
+  }
+  console.log(`⚠ Verify pass: found ${drifts.length} drift(s).`);
+  for (const d of drifts) {
+    const relPath = relative(REPOS.web + '/..', d.file);
+    console.log(`   ${relPath}:${d.line}  ${d.variable} = ${d.found} (expected ${d.expected})  "${d.matched}"`);
+  }
+  process.exit(1);
 }
 
 // Step 2: Ask for previous values (what to search for)
@@ -514,4 +691,31 @@ if (staleCount === 0) {
   } else {
     console.log('Run with --apply to fix them.');
   }
+}
+
+// Step 5: Cache-independent verify pass — REPORT ONLY in normal/apply mode.
+// Catches drift the cache-diff pass misses (Bug 1 short-circuit described
+// in spec PROPAGATE-SCRIPT-BUGS-2026-04-11). The locked spec patterns
+// produce false positives on per-feature test counts ("13 tests" in a
+// section about a specific subsystem), per-test-file counts in code
+// comments, profile-size mentions ("the 20 tools 90% of integrations
+// need"), and historical update-box entries in index.html that have no
+// PROPAGATION-ZONE markers. Until those false positives are eliminated
+// (requires either pattern refinement or copy normalization), the auto
+// -fix path is intentionally NOT wired into normal/apply mode. Use
+// --verify-only to dry-run the report. applyVerifyFixes() exists in
+// the file for the day patterns are tight enough to safely auto-fix.
+console.log('');
+console.log('Verify pass (cache-independent, report-only)...');
+const drifts = verifyConsistency(files, current);
+if (drifts.length === 0) {
+  console.log('✅ Verify pass: all scanned surfaces match canonical values.');
+} else {
+  console.log(`⚠ Verify pass: found ${drifts.length} drift(s) the cache-diff missed.`);
+  console.log('   (mix of real drift and false positives — see spec PROPAGATE-SCRIPT-BUGS-2026-04-11)');
+  for (const d of drifts) {
+    const relPath = relative(REPOS.web + '/..', d.file);
+    console.log(`   ${relPath}:${d.line}  ${d.variable} = ${d.found} (expected ${d.expected})  "${d.matched}"`);
+  }
+  console.log('Auto-fix not wired — review drift list manually until pattern hardening lands.');
 }
