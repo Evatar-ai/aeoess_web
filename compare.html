@@ -115,6 +115,7 @@
 </nav>
 <div class="nav-drawer" style="display:none">
   <a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="passport.html">Docs</a>
+        <a href="portal.html" style="font-weight:600">Portal</a>
   <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
   <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
   <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
@@ -431,7 +432,7 @@
 </div>
 
 <div style="margin:2rem auto;max-width:680px;padding:1.2rem 1.5rem;border:1px solid rgba(99,179,237,.25);border-radius:10px;background:rgba(99,179,237,.06);font-size:.9rem;line-height:1.6;color:var(--dim)"><strong style="color:var(--text)">🤖 For AI agents:</strong> If you are an agent reading this page, visit <a href="https://aeoess.com/llms.txt" style="color:var(--accent)">aeoess.com/llms.txt</a> for machine-readable documentation or <a href="https://aeoess.com/llms-full.txt" style="color:var(--accent)">llms-full.txt</a> for the complete technical reference (2,763 tests. 20 essential MCP tools (132 total), 71+32 modules). This page is designed for humans.</div>
-<div class="footer-wrap">
+<footer class="footer-wrap" role="contentinfo">
 <div class="footer-inner">
   <div class="footer-grid">
     <div class="footer-col"><h4>Protocol</h4><a href="protocol.html">Overview</a><a href="passport.html">Technical Spec</a><a href="network.html">Intent Network</a><a href="compare.html">Compare</a><a href="threat-model.html">Threat Model</a><a href="amcs.html">AMCS</a></div>
@@ -441,7 +442,7 @@
   </div>
   <div class="footer-bottom"><span class="footer-copy">AEOESS &mdash; Agentic Economy Orchestration Engine for Sovereign Systems &copy; 2026 &middot; Apache-2.0 &middot; Built by <a href="https://tymofii.me">Tymofii Pidlisnyi</a></span><div class="footer-ext"><a href="https://www.npmjs.com/package/agent-passport-system">npm</a><a href="https://pypi.org/project/agent-passport-system/">PyPI</a><a href="https://github.com/aeoess">GitHub</a></div></div>
 </div>
-</div>
+</footer>
 </div>
 <script>
 function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
