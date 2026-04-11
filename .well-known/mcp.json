@@ -18,7 +18,7 @@
     "pypi": "agent-passport-system",
     "version": "1.41.0",
     "modules": 103,
-    "tests": 2552,
+    "tests": 2764,
     "python_version": "0.11.0"
   },
   "documentation": {
