@@ -2,6 +2,15 @@
 
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
+Updated: 2026-04-11
+SDK version: agent-passport-system@1.41.0
+MCP version: agent-passport-system-mcp@2.23.0 (132 tools)
+Python SDK: agent-passport-system==0.11.0
+Canonical: https://aeoess.com/llms.txt
+Full reference: https://aeoess.com/llms-full.txt
+License: Apache-2.0
+Copyright: 2024-2026 Tymofii Pidlisnyi
+
 ## Overview
 
 AEOESS is the enforcement layer that sits on top of whatever identity the agent already has. Accepts did:key, did:web, SPIFFE SVIDs, OAuth tokens, and native did:aps. Identity is the input. Enforcement is the product. The gateway is both judge and executor. Authority can only decrease at each transfer point.

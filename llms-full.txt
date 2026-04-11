@@ -1,6 +1,15 @@
 # Agent Passport System — Full Documentation
 
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
+
+Updated: 2026-04-11
+SDK version: agent-passport-system@1.41.0
+MCP version: agent-passport-system-mcp@2.23.0 (132 tools)
+Python SDK: agent-passport-system==0.11.0
+Compact: https://aeoess.com/llms.txt
+Canonical: https://aeoess.com/llms-full.txt
+License: Apache-2.0
+Copyright: 2024-2026 Tymofii Pidlisnyi
 > Policy evaluation in under 2ms. 14 constraint dimensions. 403 ops/sec.
 > Accepts did:key, did:web, SPIFFE SVIDs, OAuth tokens, native did:aps. Identity is the input. Enforcement is the product.
 > TypeScript SDK + MCP server + Python SDK. Zero heavy dependencies. Apache-2.0 license.

@@ -27,7 +27,7 @@ Disallow: /index-old-backup.html
 Disallow: /index-v2.html
 
 # Assets
-Disallow: /*.pdf$
+# Disallow: /*.pdf$  (removed 2026-04-11: was blocking Zenodo papers + IETF drafts from Google Scholar)
 Disallow: /*.zip$
 
 Sitemap: https://aeoess.com/sitemap.xml
