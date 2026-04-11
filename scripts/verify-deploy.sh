@@ -23,9 +23,18 @@ check() {
 
 SERVICE="${1:-all}"
 
+# Read canonical versions from local package.json files so checks can't rot.
+read_pkg_version() {
+  python3 -c "import json,sys; print(json.load(open('$1'))['version'])" 2>/dev/null || echo "unknown"
+}
+SDK_EXPECTED=$(read_pkg_version "$HOME/agent-passport-system/package.json")
+MCP_EXPECTED=$(read_pkg_version "$HOME/agent-passport-mcp/package.json")
+GATEWAY_EXPECTED=$(read_pkg_version "$HOME/aeoess-gateway/package.json")
+
 echo "═══════════════════════════════════════"
 echo "  AEOESS Deploy Verification"
 echo "  $(date)"
+echo "  Expected: SDK $SDK_EXPECTED, MCP $MCP_EXPECTED, Gateway $GATEWAY_EXPECTED"
 echo "═══════════════════════════════════════"
 
 if [[ "$SERVICE" == "all" || "$SERVICE" == "mcp" ]]; then
@@ -36,8 +45,9 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "mcp" ]]; then
   HEALTH=$(curl -s -m 10 https://mcp.aeoess.com/health 2>&1)
   check "Health endpoint responds" "$HEALTH" "status.*ok"
   
-  # Version check
-  check "Version is current" "$HEALTH" "2.20.0"
+  # Version check — reads live `version` field from /health
+  MCP_LIVE=$(echo "$HEALTH" | python3 -c "import json,sys; print(json.load(sys.stdin).get('version', ''))" 2>/dev/null || echo "")
+  check "Version is current ($MCP_EXPECTED)" "$MCP_LIVE" "^$MCP_EXPECTED\$"
   
   # SSE connects and gets endpoint
   SSE=$(curl -s -m 6 https://mcp.aeoess.com/sse 2>&1 || true)
@@ -61,7 +71,8 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "gateway" ]]; then
   
   GW_HEALTH=$(curl -s -m 10 https://gateway.aeoess.com/healthz 2>&1)
   check "Health endpoint responds" "$GW_HEALTH" "status.*ok"
-  check "Version is current" "$GW_HEALTH" "0.3.3"
+  GW_LIVE=$(echo "$GW_HEALTH" | python3 -c "import json,sys; print(json.load(sys.stdin).get('version', ''))" 2>/dev/null || echo "")
+  check "Version is current ($GATEWAY_EXPECTED)" "$GW_LIVE" "^$GATEWAY_EXPECTED\$"
   
   # JWKS endpoint
   JWKS=$(curl -s -m 10 https://gateway.aeoess.com/.well-known/jwks.json 2>&1)
@@ -77,10 +88,10 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "sdk" ]]; then
   echo "── npm Packages ──"
   
   SDK_VER=$(curl -s https://registry.npmjs.org/agent-passport-system/latest | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null)
-  check "SDK on npm" "$SDK_VER" "1.30"
-  
+  check "SDK on npm ($SDK_EXPECTED)" "$SDK_VER" "^$SDK_EXPECTED\$"
+
   MCP_VER=$(curl -s https://registry.npmjs.org/agent-passport-system-mcp/latest | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null)
-  check "MCP on npm" "$MCP_VER" "2.19"
+  check "MCP on npm ($MCP_EXPECTED)" "$MCP_VER" "^$MCP_EXPECTED\$"
   
   echo ""
   echo "── Website (aeoess.com) ──"
