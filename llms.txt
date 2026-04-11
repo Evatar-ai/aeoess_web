@@ -17,7 +17,7 @@ AEOESS is the enforcement layer that sits on top of whatever identity the agent 
 
 The SDK is structured in two tiers. **Core** is a curated 24-function surface (`agent-passport-system/core`) covering identity, delegation, enforcement, commerce, reputation. **Extended** is the full 925-export API (`agent-passport-system`) covering 79 specialized modules: coordination, EU AI Act compliance, framework adapters, bilateral receipts, execution attestation, DID resolution, data lifecycle, and 32 v2 constitutional modules. Start with Core; pull from Extended only when needed.
 
-One hundred and three protocol modules (71 core + 32 v2 constitutional):
+One hundred and three protocol modules (71 core + 32 v2 constitutional, SDK v1.41.0):
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 8 principles (F-001 to F-008), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
