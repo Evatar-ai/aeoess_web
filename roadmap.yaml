@@ -1,0 +1,645 @@
+# AEOESS Roadmap — source of truth for aeoess.com/roadmap
+# Edit this file and push. The page rebuilds automatically.
+# Last updated: 2026-04-12 (Day 55) — historical timeline corrected against blog.html ground truth
+# Day 1 = 2026-02-17 (project start)
+
+# ═══ HISTORIC — PROTOCOL ═══
+
+- id: project-begins
+  title: "Project Begins"
+  description: "Ed25519 identity, delegation chains, first tests. Day 1."
+  status: done
+  workstream: protocol
+  day_start: 2
+  day_end: 2
+  dependencies: []
+
+- id: mcp-server-ships
+  title: "MCP Server Ships + Agora Seeded"
+  description: "11 tools. Native in every major AI dev environment. npm SDK and MCP live. awesome-mcp-servers PR. Agora seeded with first signed messages from claude, aeoess, PortalX2."
+  status: done
+  workstream: protocol
+  day_start: 6
+  day_end: 7
+  dependencies:
+    - project-begins
+
+- id: core-protocol-layers
+  title: "Core Protocol Layers 5–8"
+  description: "Intent architecture (Day 8), coordination primitives (Day 10), documentation sprint (Day 11), agentic commerce 4-gate checkout (Day 12), graduated enforcement (Day 13). MCP v2.1.0."
+  status: done
+  workstream: protocol
+  day_start: 8
+  day_end: 13
+  dependencies:
+    - mcp-server-ships
+
+- id: enforcement-audit-research
+  title: "Enforcement + Autoresearch"
+  description: "Graduated enforcement, threat model, first audit, SDK v1.21.2, MCP v2.12.0, principal identity, Python SDK, autoresearch."
+  status: done
+  workstream: protocol
+  day_start: 14
+  day_end: 19
+  dependencies:
+    - core-protocol-layers
+
+- id: reputation-gates
+  title: "Reputation-Gated Authority"
+  description: "Agents earn trust, not just receive it. Reputation scoring wired into delegation decisions."
+  status: done
+  workstream: protocol
+  day_start: 21
+  day_end: 21
+  dependencies:
+    - enforcement-audit-research
+
+- id: gateway-enforcement-engine
+  title: "Gateway Enforcement Engine"
+  description: "9 audit findings fixed. Policy evaluation pipeline. 8 modules in one session."
+  status: done
+  workstream: protocol
+  day_start: 30
+  day_end: 31
+  dependencies:
+    - reputation-gates
+
+- id: constitutional-v2
+  title: "Constitutional v2"
+  description: "32 modules. 2,085 tests. Decision semantics."
+  status: done
+  workstream: protocol
+  day_start: 33
+  day_end: 34
+  dependencies:
+    - gateway-enforcement-engine
+
+- id: encrypted-relay
+  title: "First APS Envelope Through Encrypted Relay"
+  description: "Vessenes asked if APS could communicate through encrypted channels. Module 19 met qntm relay. Encrypted transport through an external relay, composable stack."
+  status: done
+  workstream: protocol
+  day_start: 35
+  day_end: 35
+  dependencies:
+    - constitutional-v2
+
+- id: institutional-layer
+  title: "Rome-Complete Institutional Layer"
+  description: "Charter, offices, approval, federation, reserves. The governance layer that makes organizations first-class protocol objects."
+  status: done
+  workstream: protocol
+  day_start: 38
+  day_end: 38
+  dependencies:
+    - encrypted-relay
+
+- id: integration-sprint
+  title: "Integration Sprint"
+  description: "Solana Agent Kit merge. BYOI (did:key, did:web, SPIFFE, OAuth). Microsoft AGT approved. SINT v0.2. Python SDK v0.8.0 on PyPI."
+  status: done
+  workstream: protocol
+  day_start: 44
+  day_end: 47
+  dependencies:
+    - institutional-layer
+
+- id: scale-sprint
+  title: "Scale Sprint"
+  description: "18 primitives in 2 days. Key rotation, auto-mint receipts, Stripe billing, 9-state coordination API. Customer-ready gateway."
+  status: done
+  workstream: protocol
+  day_start: 48
+  day_end: 50
+  dependencies:
+    - integration-sprint
+
+- id: quantum-governance
+  title: "Quantum Governance"
+  description: "7 experiments on IBM Quantum hardware. Bell 5.2pp + GHZ 7.7pp fidelity gaps. Physics facets on delegations."
+  status: done
+  workstream: protocol
+  day_start: 51
+  day_end: 51
+  dependencies:
+    - scale-sprint
+
+- id: repositioning
+  title: "Repositioning"
+  description: "SDK /core subpath (~25 curated functions). MCP essential profile (20 tools). Vocabulary repo launched. Nanook PDR adapter batch."
+  status: done
+  workstream: protocol
+  day_start: 52
+  day_end: 53
+  dependencies:
+    - scale-sprint
+
+# ═══ CURRENT + FUTURE — PROTOCOL ═══
+
+- id: build-f-vocabulary-validator
+  title: "Build F: Vocabulary Validator"
+  description: "CI validator checking descriptor enums, signal types, and required fields against vocabulary.yaml. 162 lines."
+  status: done
+  workstream: protocol
+  day_start: 54
+  day_end: 54
+  dependencies:
+    - repositioning
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary"
+      label: "Vocabulary repo"
+
+- id: build-g-oversight-harness
+  title: "Build G: Cross-Family Harness"
+  description: "15-config experiment harness (5 scenarios x 3 AI families). Measures complementarity-gain across Claude, GPT, Gemini."
+  status: done
+  workstream: protocol
+  day_start: 54
+  day_end: 54
+  dependencies:
+    - repositioning
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system"
+      label: "SDK repo"
+
+- id: build-d1-audit-export
+  title: "Build D1: Audit Log Export"
+  description: "Audit log export in JSONL, CSV, and PDF formats. Tenant isolation, rate limiting, delegation chain resolution."
+  status: done
+  workstream: protocol
+  day_start: 54
+  day_end: 54
+  dependencies:
+    - repositioning
+
+- id: build-d2-jws-fix
+  title: "Build D2: Public JWS Signing"
+  description: "Default /api/v1/public/trust/:agentId signs with gateway Ed25519 key. One-function-call fix on existing infrastructure."
+  status: next-up
+  workstream: protocol
+  day_start: 55
+  day_end: 57
+  dependencies: []
+
+- id: build-a-attribution-primitive
+  title: "Build A: Attribution Primitive"
+  description: "Single cryptographic primitive with three axis projections (data, protocol, governance). Merkle-committed, Ed25519 signed."
+  status: next-up
+  workstream: protocol
+  day_start: 56
+  day_end: 62
+  dependencies:
+    - attribution-primitive-spec
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system"
+      label: "SDK repo"
+
+- id: build-b-fractional-weights
+  title: "Build B: Fractional Weights"
+  description: "Role-based formula for DataContributionReceipt fractional weights. Merkle tree composition. Sum-to-one property tests."
+  status: next-up
+  workstream: protocol
+  day_start: 62
+  day_end: 65
+  dependencies:
+    - build-a-attribution-primitive
+
+- id: build-c-settlement-pipeline
+  title: "Build C: Settlement Pipeline"
+  description: "Merkle-committed signed settlement records from DataContributionReceipts. Contributor query endpoint."
+  status: next-up
+  workstream: protocol
+  day_start: 65
+  day_end: 70
+  dependencies:
+    - build-b-fractional-weights
+
+- id: build-h-post-quantum
+  title: "Build H: Post-Quantum Sigs"
+  description: "Signature interface for Ed25519 or CRYSTALS-Dilithium without breaking delegation chain semantics."
+  status: backlog
+  workstream: protocol
+  day_start: 80
+  day_end: 90
+  dependencies:
+    - build-a-attribution-primitive
+
+# ═══ HISTORIC — PRODUCT ═══
+
+- id: intent-network-mingle
+  title: "Intent Network + Mingle"
+  description: "Publish-discover-match for agents. Intent Network Day 22. Mingle v1 Day 23. Mingle v2 Day 26 with semantic matching and ghost mode."
+  status: done
+  workstream: product
+  day_start: 22
+  day_end: 26
+  dependencies:
+    - reputation-gates
+
+- id: governance-distribution
+  title: "Governance Distribution"
+  description: "aps.txt, 360 consumer loop, 132 MCP tools live. Interactive 57-module protocol map. TAT deploys APS."
+  status: done
+  workstream: product
+  day_start: 37
+  day_end: 37
+  dependencies:
+    - constitutional-v2
+
+- id: gateway-production
+  title: "Gateway on Railway"
+  description: "Production enforcement at gateway.aeoess.com. Multi-tenant. Policy evaluation <1ms. Agent Wallets. Pixel attribution live."
+  status: done
+  workstream: product
+  day_start: 40
+  day_end: 41
+  dependencies:
+    - institutional-layer
+
+- id: attestation-architecture
+  title: "Agent Attestation Architecture"
+  description: "Response to Sybil drain (Lev's agent farmed unlimited passports, drained Nik's promo wallet in 60s). 3-round consilium across Claude, GPT, Gemini. Day 43: douglasborthwick ran 5-issuer live verification pass (InsumerAPI, ThoughtProof, RNWY, Maiat, APS)."
+  status: done
+  workstream: product
+  day_start: 42
+  day_end: 43
+  dependencies:
+    - gateway-production
+
+- id: customer-ready-gateway
+  title: "Customer-Ready Gateway"
+  description: "4-pass audit (30 fixes). Email infrastructure. Portal redesign. Full API docs. Status page. Admin endpoints."
+  status: done
+  workstream: product
+  day_start: 50
+  day_end: 50
+  dependencies:
+    - gateway-production
+
+# ═══ CURRENT + FUTURE — PRODUCT ═══
+
+- id: marketplace-proposal
+  title: "Marketplace Proposal"
+  description: "Public articulation of the gateway-as-marketplace thesis. Attribution flows to contributors when their work is used."
+  status: active
+  workstream: product
+  day_start: 55
+  day_end: 55
+  dependencies:
+    - attribution-primitive-spec
+
+- id: collaborative-monetization-doc
+  title: "Monetization Working Doc"
+  description: "Formula specification, measurement infrastructure, dispute mechanism. Revenue attribution framework."
+  status: next-up
+  workstream: product
+  day_start: 56
+  day_end: 60
+  dependencies:
+    - attribution-primitive-spec
+
+- id: build-d-gateway-enterprise
+  title: "Build D: Gateway Enterprise"
+  description: "Multi-tenant isolation. Dashboard views. Compliance reports (EU AI Act, GDPR, SOC 2). The monetization layer."
+  status: backlog
+  workstream: product
+  day_start: 70
+  day_end: 85
+  dependencies:
+    - build-d1-audit-export
+    - build-d2-jws-fix
+
+- id: build-e-converged-models
+  title: "Build E: Converged Orchestrator"
+  description: "Routes queries to Claude, GPT, Gemini simultaneously. Attribution Receipt per model. Synthesized answer with receipt chain."
+  status: backlog
+  workstream: product
+  day_start: 75
+  day_end: 90
+  dependencies:
+    - build-a-attribution-primitive
+    - build-g-oversight-harness
+
+# ═══ HISTORIC — RESEARCH ═══
+
+- id: paper-1-social-contract
+  title: "Paper 1: Agent Social Contract"
+  description: "First formalization of agent governance as a social contract. Ed25519 identity, monotonic delegation."
+  status: done
+  workstream: research
+  day_start: 5
+  day_end: 5
+  dependencies:
+    - project-begins
+  links:
+    - url: "https://doi.org/10.5281/zenodo.18749779"
+      label: "Zenodo"
+
+- id: paper-2-monotonic-narrowing
+  title: "Paper 2: Monotonic Narrowing"
+  description: "Authority attenuation formalized. Mathematical proof that delegated authority can only decrease."
+  status: done
+  workstream: research
+  day_start: 20
+  day_end: 20
+  dependencies:
+    - paper-1-social-contract
+  links:
+    - url: "https://doi.org/10.5281/zenodo.18932404"
+      label: "Zenodo"
+
+- id: cross-protocol-envelope-spec
+  title: "Cross-Protocol Envelope Spec"
+  description: "Three independent groups (CrewAI, Guardian, APS) converged on the same signed execution envelope. Mapped all three proposals to APS SDK types, wrote the RFC."
+  status: done
+  workstream: research
+  day_start: 29
+  day_end: 29
+  dependencies:
+    - paper-2-monotonic-narrowing
+
+- id: paper-3-faceted-authority
+  title: "Paper 3: Faceted Authority"
+  description: "Product lattice model. Seven dimensions. IETF Internet-Draft submitted same day (draft-pidlisnyi-aps-00)."
+  status: done
+  workstream: research
+  day_start: 39
+  day_end: 39
+  dependencies:
+    - paper-2-monotonic-narrowing
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19260073"
+      label: "Zenodo"
+
+- id: paper-4-bdr
+  title: "Paper 4: Behavioral Derivation Rights"
+  description: "Governing what agents learn from authorized access. Telemetry scopes, BMOs, BYOM."
+  status: done
+  workstream: research
+  day_start: 51
+  day_end: 51
+  dependencies:
+    - paper-3-faceted-authority
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19476002"
+      label: "Zenodo"
+
+- id: paper-5-physics
+  title: "Paper 5: Physics-Enforced Delegation"
+  description: "Governing quantum hardware quality. Real IBM Quantum experiments. 5.2pp Bell + 7.7pp GHZ fidelity gaps."
+  status: done
+  workstream: research
+  day_start: 51
+  day_end: 51
+  dependencies:
+    - paper-3-faceted-authority
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19478584"
+      label: "Zenodo"
+
+# ═══ CURRENT + FUTURE — RESEARCH ═══
+
+- id: attribution-primitive-spec
+  title: "Attribution Primitive Spec"
+  description: "Formal spec for the unified cryptographic object. Sections 1-2 drafted, Section 3 in progress. Zenodo DOI target."
+  status: active
+  workstream: research
+  day_start: 54
+  day_end: 57
+  dependencies:
+    - paper-5-physics
+  links:
+    - url: "https://doi.org/10.5281/zenodo.18749779"
+      label: "Paper 1"
+    - url: "https://doi.org/10.5281/zenodo.19260073"
+      label: "Paper 2"
+
+- id: paper-5-attribution-primitive
+  title: "Paper 6: Attribution Primitive"
+  description: "Formal paper on the unified attribution object. Zenodo DOI publication."
+  status: active
+  workstream: research
+  day_start: 55
+  day_end: 57
+  dependencies:
+    - attribution-primitive-spec
+
+- id: consilium-framing
+  title: "Consilium: Framing Review"
+  description: "Three-model adversarial review (Claude, GPT-5, Gemini 2.5 Pro). Attack the unification claim."
+  status: active
+  workstream: research
+  day_start: 55
+  day_end: 55
+  dependencies:
+    - attribution-primitive-spec
+
+- id: paper-6-cross-family-oversight
+  title: "Paper 7: Cross-Family Oversight"
+  description: "Empirical paper using Build G data. Complementarity-gain metric across three AI families."
+  status: backlog
+  workstream: research
+  day_start: 70
+  day_end: 85
+  dependencies:
+    - build-g-oversight-harness
+    - build-e-converged-models
+
+- id: ietf-internet-draft
+  title: "IETF Internet-Draft v2"
+  description: "Updated draft-pidlisnyi-aps-00 with attribution primitive and constitutional modules."
+  status: backlog
+  workstream: research
+  day_start: 80
+  day_end: 90
+  dependencies:
+    - build-a-attribution-primitive
+    - paper-5-attribution-primitive
+
+# ═══ HISTORIC — COMMS ═══
+
+- id: substack-launch
+  title: "Substack Launch"
+  description: "Cross-protocol bridge article. First public writing on the protocol thesis."
+  status: done
+  workstream: comms
+  day_start: 25
+  day_end: 25
+  dependencies: []
+
+- id: yc-ceo-endorsed
+  title: "YC CEO Endorsed"
+  description: "Garry Tan repost. Microsoft merged APS code. Federal agency reviewing."
+  status: done
+  workstream: comms
+  day_start: 28
+  day_end: 28
+  dependencies: []
+  links:
+    - url: "blog.html#day-28"
+      label: "Blog"
+
+- id: wg-specs-ratified
+  title: "3 WG Specs Ratified"
+  description: "QSP-1, DID Resolution, Entity Verification. Working Group formalized."
+  status: done
+  workstream: comms
+  day_start: 36
+  day_end: 36
+  dependencies: []
+
+- id: w3c-normative
+  title: "W3C Behavioral Attestation Normative"
+  description: "Timing asymmetry became normative constraint. Evidence-based passport grading + freshness semantics."
+  status: done
+  workstream: comms
+  day_start: 47
+  day_end: 47
+  dependencies: []
+
+- id: ecosystem-28-threads
+  title: "28 Active Ecosystem Threads"
+  description: "A2A, crewAI, qntm, SINT, OWASP, x402, VoltAgent, langgraph-swarm, AgentID. APS in every layered-identity discussion."
+  status: done
+  workstream: comms
+  day_start: 53
+  day_end: 53
+  dependencies: []
+
+# ═══ CURRENT + FUTURE — COMMS ═══
+
+- id: agt-772-liveness-adr
+  title: "AGT #772: Liveness ADR"
+  description: "Three-property liveness decomposition ADR on microsoft/agent-governance-toolkit. PR #948 co-authored."
+  status: done
+  workstream: comms
+  day_start: 54
+  day_end: 55
+  dependencies: []
+  links:
+    - url: "https://github.com/microsoft/agent-governance-toolkit/pull/948"
+      label: "PR #948"
+
+- id: a2a-1717-cross-verify
+  title: "A2A #1717: Cross-Verify Demo"
+  description: "Three-namespace cross-verify: did:agentnexus subject, APS + MolTrust issuers. Test DID registered."
+  status: active
+  workstream: comms
+  day_start: 54
+  day_end: 57
+  dependencies: []
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1717"
+      label: "A2A #1717"
+
+- id: vocab-pr7-sint-crosswalk
+  title: "Vocab PR #7: SINT Crosswalk"
+  description: "pshkv's SINT crosswalk. Review complete. Waiting on validity_temporal fix."
+  status: active
+  workstream: comms
+  day_start: 54
+  day_end: 57
+  dependencies: []
+
+- id: vocab-pr9-agentnexus-crosswalk
+  title: "Vocab PR #9: AgentNexus"
+  description: "kevinkaylie's AgentNexus governance vocabulary crosswalk."
+  status: next-up
+  workstream: comms
+  day_start: 55
+  day_end: 57
+  dependencies:
+    - vocab-pr7-sint-crosswalk
+
+- id: sdk-pr14-sint-integration
+  title: "SDK PR #14: SINT Integration"
+  description: "pshkv's SINT integration into INTEGRATION.md."
+  status: next-up
+  workstream: comms
+  day_start: 55
+  day_end: 57
+  dependencies:
+    - vocab-pr7-sint-crosswalk
+
+- id: sdk-pr15-say5-vocab-module
+  title: "SDK PR #15: SAY-5 Redirect"
+  description: "First-time contributor. 534 additions. Thank-and-redirect to separate vocabulary repo."
+  status: next-up
+  workstream: comms
+  day_start: 55
+  day_end: 57
+  dependencies: []
+
+- id: qntm7-xsa520-response
+  title: "qntm #7: Decision Composition"
+  description: "xsa520's evaluation-point vs decision-point gap. Hard/state-volatile/contextual gates."
+  status: next-up
+  workstream: comms
+  day_start: 55
+  day_end: 58
+  dependencies: []
+
+- id: aeoess13-queball-acknowledgment
+  title: "#13: BBIS Boundary"
+  description: "QueBallSharken boundary statement. Three separate problems acknowledged."
+  status: next-up
+  workstream: comms
+  day_start: 55
+  day_end: 57
+  dependencies: []
+
+- id: a2a-1713-dual-signature
+  title: "A2A #1713: Dual-Signature"
+  description: "Envelope schema design. Chat Claude owns, Cowork renders."
+  status: backlog
+  workstream: comms
+  day_start: 56
+  day_end: 58
+  dependencies: []
+
+# ═══ OPS ═══
+
+- id: owasp-mapping
+  title: "OWASP AI Security Mapping"
+  description: "Community health baseline. APS scored 10/12 on BBIS later (Day 51)."
+  status: done
+  workstream: ops
+  day_start: 16
+  day_end: 16
+  dependencies: []
+
+- id: amcs-spec
+  title: "AMCS v0.1.0"
+  description: "AI-native media credentialing spec. The Agent Times editorial pipeline spec."
+  status: done
+  workstream: ops
+  day_start: 32
+  day_end: 32
+  dependencies: []
+
+- id: rebrand
+  title: "Rebrand: Governance for the Agent Economy"
+  description: "Academic redesign. Enterprise positioning. 10-question FAQ."
+  status: done
+  workstream: ops
+  day_start: 40
+  day_end: 40
+  dependencies: []
+
+- id: roadmap-interface
+  title: "Public Roadmap"
+  description: "aeoess.com/roadmap timeline with dependency graph. YAML-driven, static, matches site design."
+  status: active
+  workstream: ops
+  day_start: 55
+  day_end: 55
+  dependencies: []
+
+- id: yc-application
+  title: "YC Application"
+  description: "Commercial-irreversible lane. Tima's sole ownership."
+  status: active
+  workstream: ops
+  day_start: 55
+  day_end: 56
+  dependencies: []
