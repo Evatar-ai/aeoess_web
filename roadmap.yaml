@@ -1,22 +1,22 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-12 (Day 55) — historical timeline corrected against blog.html ground truth
+# Last updated: 2026-04-12 (Day 55) — historic timeline unrolled per-day against blog.html
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ HISTORIC — PROTOCOL ═══
 
 - id: project-begins
   title: "Project Begins"
-  description: "Ed25519 identity, delegation chains, first tests. Day 1."
+  description: "Ed25519 identity, delegation chains, first tests. The Speed of Wrong vs The Speed of Right."
   status: done
   workstream: protocol
-  day_start: 2
+  day_start: 1
   day_end: 2
   dependencies: []
 
 - id: mcp-server-ships
   title: "MCP Server Ships + Agora Seeded"
-  description: "11 tools. Native in every major AI dev environment. npm SDK and MCP live. awesome-mcp-servers PR. Agora seeded with first signed messages from claude, aeoess, PortalX2."
+  description: "11 tools. Native in every major AI dev environment. npm SDK and MCP both live. awesome-mcp-servers PR on the 81K-star repo. Agora seeded with first signed messages from claude, aeoess, PortalX2."
   status: done
   workstream: protocol
   day_start: 6
@@ -24,69 +24,169 @@
   dependencies:
     - project-begins
 
-- id: core-protocol-layers
-  title: "Core Protocol Layers 5–8"
-  description: "Intent architecture (Day 8), coordination primitives (Day 10), documentation sprint (Day 11), agentic commerce 4-gate checkout (Day 12), graduated enforcement (Day 13). MCP v2.1.0."
+- id: d8-intent-architecture
+  title: "Layer 5: Intent Architecture"
+  description: "Protocol stops being about identity and starts being about decision-making. Intents, proposals, verdicts."
   status: done
   workstream: protocol
   day_start: 8
-  day_end: 13
+  day_end: 8
   dependencies:
     - mcp-server-ships
 
-- id: enforcement-audit-research
-  title: "Enforcement + Autoresearch"
-  description: "Graduated enforcement, threat model, first audit, SDK v1.21.2, MCP v2.12.0, principal identity, Python SDK, autoresearch."
+- id: d10-coordination
+  title: "Layer 7: Coordination Primitives"
+  description: "Identity tells you who. Delegation tells you what. Coordination tells you how agents actually work together."
+  status: done
+  workstream: protocol
+  day_start: 10
+  day_end: 10
+  dependencies:
+    - d8-intent-architecture
+
+- id: d11-doc-sprint
+  title: "Documentation Sprint"
+  description: "No new layers. Making everything we've built findable and understandable."
+  status: done
+  workstream: protocol
+  day_start: 11
+  day_end: 11
+  dependencies:
+    - d10-coordination
+
+- id: d12-agentic-commerce
+  title: "Layer 8: Agentic Commerce + MCP v2.1.0"
+  description: "Three major ships in one day. 4-gate checkout. Integration wiring. MCP v2.1.0."
+  status: done
+  workstream: protocol
+  day_start: 12
+  day_end: 12
+  dependencies:
+    - d11-doc-sprint
+
+- id: d13-graduated-enforcement
+  title: "Graduated Enforcement + Threat Model"
+  description: "Four ships. Graduated enforcement tiers, threat model document, Agent District, push from 9am to midnight."
+  status: done
+  workstream: protocol
+  day_start: 13
+  day_end: 13
+  dependencies:
+    - d12-agentic-commerce
+
+- id: d14-first-audit
+  title: "First Real Audit"
+  description: "PortalX2 and aeoess ran a full-system audit in parallel with cross-review iterations. 16 iterations planned across source, tests, MCP server."
   status: done
   workstream: protocol
   day_start: 14
-  day_end: 19
+  day_end: 14
   dependencies:
-    - core-protocol-layers
+    - d13-graduated-enforcement
+
+- id: d15-ship-day
+  title: "SDK v1.21.2 + MCP v2.12.0"
+  description: "Ship day. Five npm publishes. Three git repos updated. Every version reference propagated automatically."
+  status: done
+  workstream: protocol
+  day_start: 15
+  day_end: 15
+  dependencies:
+    - d14-first-audit
+
+- id: d17-principal-identity
+  title: "Principal Identity + Python SDK"
+  description: "Big ship day. Five new modules landed. Principal identity, Python SDK v0.1, three new protocol extensions."
+  status: done
+  workstream: protocol
+  day_start: 17
+  day_end: 17
+  dependencies:
+    - d15-ship-day
+
+- id: d18-autoresearch
+  title: "Autoresearch: AI Finds Bugs AI Wrote"
+  description: "Adapted Karpathy's autoresearch for adversarial hardening. AI generates attacks, tests run, keep what breaks something new."
+  status: done
+  workstream: protocol
+  day_start: 18
+  day_end: 18
+  dependencies:
+    - d17-principal-identity
 
 - id: reputation-gates
   title: "Reputation-Gated Authority"
-  description: "Agents earn trust, not just receive it. Reputation scoring wired into delegation decisions."
+  description: "Agents earn trust, not just receive it. Reputation scoring wired into delegation decisions. Brand-new agent ≠ 200-task veteran."
   status: done
   workstream: protocol
   day_start: 21
   day_end: 21
   dependencies:
-    - enforcement-audit-research
+    - d18-autoresearch
 
-- id: gateway-enforcement-engine
-  title: "Gateway Enforcement Engine"
-  description: "9 audit findings fixed. Policy evaluation pipeline. 8 modules in one session."
+- id: d24-security-hardening
+  title: "Gateway Security Hardening"
+  description: "Three gateway bugs found and fixed. NW-001 memory leak in replay protection. NW-003 crash on unregistered agent. Setup commands, cross-protocol resolve."
   status: done
   workstream: protocol
-  day_start: 30
-  day_end: 31
+  day_start: 24
+  day_end: 24
   dependencies:
     - reputation-gates
 
-- id: constitutional-v2
-  title: "Constitutional v2"
-  description: "32 modules. 2,085 tests. Decision semantics."
+- id: d30-encrypted-messaging
+  title: "Module 19: E2E Encrypted Messaging"
+  description: "Separate X25519 keys, ephemeral ECDH per message, double signature — inner over plaintext prevents identity stripping, outer over ciphertext enables gateway verification without decrypt. Three modules in one day, two Claudes built them."
+  status: done
+  workstream: protocol
+  day_start: 30
+  day_end: 30
+  dependencies:
+    - reputation-gates
+
+- id: d31-five-engines
+  title: "Three Modules + Five-Engine Disagreement"
+  description: "Build sprint plus first real cross-engine disagreement in agent identity. Claude, GPT, Gemini, Grok, DeepSeek — all on one thread."
+  status: done
+  workstream: protocol
+  day_start: 31
+  day_end: 31
+  dependencies:
+    - d30-encrypted-messaging
+
+- id: d33-constitutional-running
+  title: "Constitutional Governance Is Running Code"
+  description: "Module 37 Decision Semantics. Every policy decision content-addressable (SHA-256 of canonical JSON). Verdict classification: deterministic, heuristic, LLM-based, hybrid, human."
   status: done
   workstream: protocol
   day_start: 33
+  day_end: 33
+  dependencies:
+    - d31-five-engines
+
+- id: d34-30-modules
+  title: "30 Constitutional Modules, Every Gap Closed"
+  description: "Claude, GPT, Gemini each attacked the full codebase. Identified 16 gaps in governance. All 16 running code by end of day. 2,085 tests."
+  status: done
+  workstream: protocol
+  day_start: 34
   day_end: 34
   dependencies:
-    - gateway-enforcement-engine
+    - d33-constitutional-running
 
 - id: encrypted-relay
   title: "First APS Envelope Through Encrypted Relay"
-  description: "Vessenes asked if APS could communicate through encrypted channels. Module 19 met qntm relay. Encrypted transport through an external relay, composable stack."
+  description: "Vessenes asked if APS could communicate through encrypted channels. Module 19 met qntm relay. 1178 tests, 320 suites, 63 test files."
   status: done
   workstream: protocol
   day_start: 35
   day_end: 35
   dependencies:
-    - constitutional-v2
+    - d34-30-modules
 
 - id: institutional-layer
   title: "Rome-Complete Institutional Layer"
-  description: "Charter, offices, approval, federation, reserves. The governance layer that makes organizations first-class protocol objects."
+  description: "Estimated 12 sessions. Shipped in one. Charter, approval, time, reserve, federation — zero lines to 1,634 passing tests and 120 MCP tools."
   status: done
   workstream: protocol
   day_start: 38
@@ -94,45 +194,135 @@
   dependencies:
     - encrypted-relay
 
-- id: integration-sprint
-  title: "Integration Sprint"
-  description: "Solana Agent Kit merge. BYOI (did:key, did:web, SPIFFE, OAuth). Microsoft AGT approved. SINT v0.2. Python SDK v0.8.0 on PyPI."
+- id: d40-gateway-wiring
+  title: "Gateway Wiring"
+  description: "Import graph showed only 20% of modules connected to gateway enforcement hub. Four rounds of wiring. Final interconnection: 79%."
   status: done
   workstream: protocol
-  day_start: 44
-  day_end: 47
+  day_start: 40
+  day_end: 40
   dependencies:
     - institutional-layer
 
-- id: scale-sprint
-  title: "Scale Sprint"
-  description: "18 primitives in 2 days. Key rotation, auto-mint receipts, Stripe billing, 9-state coordination API. Customer-ready gateway."
+- id: d41-agent-wallets
+  title: "Agent Wallets"
+  description: "Agents need to spend money. Coinbase charges gas. ChainHop takes 0.75%. We charge nothing. Three commits, 1,430 new lines, gateway 18→36 API routes."
+  status: done
+  workstream: protocol
+  day_start: 41
+  day_end: 41
+  dependencies:
+    - d40-gateway-wiring
+
+- id: d42-attestation-architecture
+  title: "Agent Attestation Architecture"
+  description: "Lev's agent farmed unlimited passports, drained Nik's promo wallet in 60 seconds. Identity Sybil unsolvable in open protocols. 3-round consilium across Claude, GPT, Gemini. SDK v1.29.1, 1,987 tests, 96 modules, MCP v2.19.0 (125 tools)."
+  status: done
+  workstream: protocol
+  day_start: 42
+  day_end: 42
+  dependencies:
+    - d41-agent-wallets
+
+- id: d43-multi-attestation
+  title: "Multi-Attestation Verification"
+  description: "douglasborthwick-crypto ran 5-issuer live verification: InsumerAPI, ThoughtProof, RNWY, Maiat, APS. Five trust dimensions, two algorithms (ES256 + EdDSA), independently signed. APS is the 5th verified issuer."
+  status: done
+  workstream: protocol
+  day_start: 43
+  day_end: 43
+  dependencies:
+    - d42-attestation-architecture
+
+- id: d44-solana-integration
+  title: "First External Code Integration"
+  description: "PR #3 merged into kai-agent-free/solana-agent-identity. APSProvider is the 4th identity provider in Solana Agent Kit. First external code dependency on APS — running code in another project's repo. Plus 5 security fixes."
+  status: done
+  workstream: protocol
+  day_start: 44
+  day_end: 44
+  dependencies:
+    - d43-multi-attestation
+
+- id: d45-governance-hardening
+  title: "SDK v1.31.0: Governance Hardening"
+  description: "Stricter validation on delegation chains. Tighter scope authorization. 34 new tests covering edge cases from MoltyCel security audit. 2,085 tests passing."
+  status: done
+  workstream: protocol
+  day_start: 45
+  day_end: 45
+  dependencies:
+    - d44-solana-integration
+
+- id: d46-byoi
+  title: "Bring Your Own Identity"
+  description: "APS stopped looking like an identity system. Four modules accept external credentials: did:key, did:web, SPIFFE SVIDs, OAuth 2.0 tokens — routed through enforcement boundary."
+  status: done
+  workstream: protocol
+  day_start: 46
+  day_end: 46
+  dependencies:
+    - d45-governance-hardening
+
+- id: d47-ms-merged
+  title: "Microsoft Merged + SINT Interop + W3C Normative"
+  description: "Microsoft approved APS PR into Agent Governance Toolkit. SINT v0.2 shipped with our delegation_depth_floor. W3C behavioral attestation reached normative language. Evidence-based grading + freshness semantics."
+  status: done
+  workstream: protocol
+  day_start: 47
+  day_end: 47
+  dependencies:
+    - d46-byoi
+
+- id: d48-six-sessions
+  title: "Six Build Sessions, One Shipping Day"
+  description: "Five consilium models attacked specs before a single line shipped. Six build sessions sequential — each depends on the previous deploy. Gateway auto-deploys on push, no staging."
   status: done
   workstream: protocol
   day_start: 48
-  day_end: 50
+  day_end: 48
   dependencies:
-    - integration-sprint
+    - d47-ms-merged
 
-- id: quantum-governance
+- id: d49-twelve-primitives
+  title: "Twelve Primitives in One Day"
+  description: "Nate B Jones reverse-engineered Claude Code's orchestration layer into 12 primitives. We shipped all twelve. Tool registry, permission tiers, context compression, state machines, the full set."
+  status: done
+  workstream: protocol
+  day_start: 49
+  day_end: 49
+  dependencies:
+    - d48-six-sessions
+
+- id: d51-quantum-governance
   title: "Quantum Governance"
-  description: "7 experiments on IBM Quantum hardware. Bell 5.2pp + GHZ 7.7pp fidelity gaps. Physics facets on delegations."
+  description: "Six weeks of circling quantum. Consilium found the angle: physics facets on delegations. 7 experiments on IBM Quantum hardware. Bell 5.2pp + GHZ 7.7pp fidelity gaps."
   status: done
   workstream: protocol
   day_start: 51
   day_end: 51
   dependencies:
-    - scale-sprint
+    - d49-twelve-primitives
 
-- id: repositioning
-  title: "Repositioning"
-  description: "SDK /core subpath (~25 curated functions). MCP essential profile (20 tools). Vocabulary repo launched. Nanook PDR adapter batch."
+- id: d52-three-walls
+  title: "Three Walls: SDK /core + MCP Essential"
+  description: "New user bounced in 90 seconds from 132-tool flood and 925 SDK exports. Shipped /core subpath (~25 curated functions) and MCP essential profile (20 tools). Three walls torn down."
   status: done
   workstream: protocol
   day_start: 52
+  day_end: 52
+  dependencies:
+    - d51-quantum-governance
+
+- id: d53-convergence
+  title: "The Convergence Layer Earns a Name"
+  description: "Every project named the same field differently. delegation_root, chain_hash, provenance_anchor — same bytes, zero interop. Vocabulary repo launched to converge the naming. Nanook PDR adapter batch."
+  status: done
+  workstream: protocol
+  day_start: 53
   day_end: 53
   dependencies:
-    - scale-sprint
+    - d52-three-walls
 
 # ═══ CURRENT + FUTURE — PROTOCOL ═══
 
@@ -144,33 +334,33 @@
   day_start: 54
   day_end: 54
   dependencies:
-    - repositioning
+    - d53-convergence
   links:
     - url: "https://github.com/aeoess/agent-governance-vocabulary"
       label: "Vocabulary repo"
 
 - id: build-g-oversight-harness
   title: "Build G: Cross-Family Harness"
-  description: "15-config experiment harness (5 scenarios x 3 AI families). Measures complementarity-gain across Claude, GPT, Gemini."
+  description: "15-config experiment harness (5 scenarios × 3 AI families). Measures complementarity-gain across Claude, GPT, Gemini."
   status: done
   workstream: protocol
   day_start: 54
   day_end: 54
   dependencies:
-    - repositioning
+    - d53-convergence
   links:
     - url: "https://github.com/aeoess/agent-passport-system"
       label: "SDK repo"
 
 - id: build-d1-audit-export
   title: "Build D1: Audit Log Export"
-  description: "Audit log export in JSONL, CSV, and PDF formats. Tenant isolation, rate limiting, delegation chain resolution."
+  description: "Audit log export in JSONL, CSV, PDF. Tenant isolation, rate limiting, delegation chain resolution."
   status: done
   workstream: protocol
   day_start: 54
   day_end: 54
   dependencies:
-    - repositioning
+    - d53-convergence
 
 - id: build-d2-jws-fix
   title: "Build D2: Public JWS Signing"
@@ -226,29 +416,59 @@
 
 # ═══ HISTORIC — PRODUCT ═══
 
-- id: intent-network-mingle
-  title: "Intent Network + Mingle"
-  description: "Publish-discover-match for agents. Intent Network Day 22. Mingle v1 Day 23. Mingle v2 Day 26 with semantic matching and ghost mode."
+- id: d22-intent-network
+  title: "Intent Network"
+  description: "Biggest ship since protocol launched. Network where agents represent humans, discover matches, propose introductions. No app, no signup. AI conversation is the interface."
   status: done
   workstream: product
   day_start: 22
-  day_end: 26
+  day_end: 22
   dependencies:
     - reputation-gates
 
+- id: d23-mingle-v1
+  title: "Mingle v1"
+  description: "Standalone MCP plugin that turns AI into a networking agent. Tell Claude or GPT who you need — your agent publishes a signed card, matches, introduces."
+  status: done
+  workstream: product
+  day_start: 23
+  day_end: 23
+  dependencies:
+    - d22-intent-network
+
+- id: d26-mingle-v2
+  title: "Mingle v2: Semantic + Ghost Mode"
+  description: "Biggest Mingle ship since launch. Four phases in one day. Semantic matching, ghost mode, consent flow. The network actually connects people now."
+  status: done
+  workstream: product
+  day_start: 26
+  day_end: 26
+  dependencies:
+    - d23-mingle-v1
+
+- id: d27-stats-sweep
+  title: "Full Stats Sweep + Gateway Decision"
+  description: "Strategic decision day. Full staleness audit across all surfaces. Gateway architecture call that shaped the next month."
+  status: done
+  workstream: product
+  day_start: 27
+  day_end: 27
+  dependencies:
+    - d26-mingle-v2
+
 - id: governance-distribution
-  title: "Governance Distribution"
-  description: "aps.txt, 360 consumer loop, 132 MCP tools live. Interactive 57-module protocol map. TAT deploys APS."
+  title: "Governance Distribution Stack"
+  description: "Protocol could sign content and verify signatures. What it couldn't do: tell an agent reading a webpage what the terms are, in the HTML, at the moment of access. aps.txt, 360 consumer loop, 132 MCP tools. TAT deploys APS."
   status: done
   workstream: product
   day_start: 37
   day_end: 37
   dependencies:
-    - constitutional-v2
+    - d34-30-modules
 
 - id: gateway-production
   title: "Gateway on Railway"
-  description: "Production enforcement at gateway.aeoess.com. Multi-tenant. Policy evaluation <1ms. Agent Wallets. Pixel attribution live."
+  description: "Production enforcement at gateway.aeoess.com. Multi-tenant. Policy evaluation <1ms. Pixel attribution live."
   status: done
   workstream: product
   day_start: 40
@@ -256,25 +476,15 @@
   dependencies:
     - institutional-layer
 
-- id: attestation-architecture
-  title: "Agent Attestation Architecture"
-  description: "Response to Sybil drain (Lev's agent farmed unlimited passports, drained Nik's promo wallet in 60s). 3-round consilium across Claude, GPT, Gemini. Day 43: douglasborthwick ran 5-issuer live verification pass (InsumerAPI, ThoughtProof, RNWY, Maiat, APS)."
-  status: done
-  workstream: product
-  day_start: 42
-  day_end: 43
-  dependencies:
-    - gateway-production
-
 - id: customer-ready-gateway
   title: "Customer-Ready Gateway"
-  description: "4-pass audit (30 fixes). Email infrastructure. Portal redesign. Full API docs. Status page. Admin endpoints."
+  description: "Longest session yet. 4-pass security audit (30 findings, all fixed). Email infrastructure. Portal redesign. Full API docs. Status page. Admin endpoints. Gateway that can onboard paying customers."
   status: done
   workstream: product
   day_start: 50
   day_end: 50
   dependencies:
-    - gateway-production
+    - d49-twelve-primitives
 
 # ═══ CURRENT + FUTURE — PRODUCT ═══
 
@@ -327,7 +537,7 @@
   description: "First formalization of agent governance as a social contract. Ed25519 identity, monotonic delegation."
   status: done
   workstream: research
-  day_start: 5
+  day_start: 4
   day_end: 5
   dependencies:
     - project-begins
@@ -358,6 +568,16 @@
   dependencies:
     - paper-2-monotonic-narrowing
 
+- id: d32-data-attribution-thesis
+  title: "Data Attribution Thesis"
+  description: "Listening to Bernie Sanders on data rights, realizing the protocol had 80% of the answer. Gateway tracks access (taint tracking), Merkle trees commit receipts, delegation chains attribute. The 'pixel on crypto' concept crystallizes."
+  status: done
+  workstream: research
+  day_start: 32
+  day_end: 32
+  dependencies:
+    - cross-protocol-envelope-spec
+
 - id: paper-3-faceted-authority
   title: "Paper 3: Faceted Authority"
   description: "Product lattice model. Seven dimensions. IETF Internet-Draft submitted same day (draft-pidlisnyi-aps-00)."
@@ -366,7 +586,7 @@
   day_start: 39
   day_end: 39
   dependencies:
-    - paper-2-monotonic-narrowing
+    - d32-data-attribution-thesis
   links:
     - url: "https://doi.org/10.5281/zenodo.19260073"
       label: "Zenodo"
@@ -408,11 +628,6 @@
   day_end: 57
   dependencies:
     - paper-5-physics
-  links:
-    - url: "https://doi.org/10.5281/zenodo.18749779"
-      label: "Paper 1"
-    - url: "https://doi.org/10.5281/zenodo.19260073"
-      label: "Paper 2"
 
 - id: paper-5-attribution-primitive
   title: "Paper 6: Attribution Primitive"
@@ -458,26 +673,47 @@
 
 # ═══ HISTORIC — COMMS ═══
 
+- id: d4-community-shows-up
+  title: "The Community Shows Up"
+  description: "Days 4-5. Paper published, media coverage breaks. First wave of external attention."
+  status: done
+  workstream: comms
+  day_start: 4
+  day_end: 5
+  dependencies: []
+
 - id: substack-launch
   title: "Substack Launch"
-  description: "Cross-protocol bridge article. First public writing on the protocol thesis."
+  description: "Two Substack articles published. Cross-Protocol Bridge and Tesla Social. Social media posts across X and LinkedIn."
   status: done
   workstream: comms
   day_start: 25
   day_end: 25
-  dependencies: []
+  dependencies:
+    - d4-community-shows-up
 
 - id: yc-ceo-endorsed
-  title: "YC CEO Endorsed"
-  description: "Garry Tan repost. Microsoft merged APS code. Federal agency reviewing."
+  title: "YC CEO Endorsed + Microsoft Merged"
+  description: "The weekend the protocol stopped being just Tima's. Garry Tan repost. Microsoft merged APS code. Federal agency reviewing."
   status: done
   workstream: comms
   day_start: 28
   day_end: 28
-  dependencies: []
+  dependencies:
+    - substack-launch
   links:
     - url: "blog.html#day-28"
       label: "Blog"
+
+- id: d36-clean-slate
+  title: "Clean Slate + OATR Founding Member"
+  description: "Audited instead of building. Pulled all four repos, full test suite (1178 pass, 0 fail), went line by line looking for dead weight. 68 dead imports removed. OATR founding member."
+  status: done
+  workstream: comms
+  day_start: 36
+  day_end: 36
+  dependencies:
+    - yc-ceo-endorsed
 
 - id: wg-specs-ratified
   title: "3 WG Specs Ratified"
@@ -486,7 +722,8 @@
   workstream: comms
   day_start: 36
   day_end: 36
-  dependencies: []
+  dependencies:
+    - d36-clean-slate
 
 - id: w3c-normative
   title: "W3C Behavioral Attestation Normative"
@@ -495,7 +732,8 @@
   workstream: comms
   day_start: 47
   day_end: 47
-  dependencies: []
+  dependencies:
+    - wg-specs-ratified
 
 - id: ecosystem-28-threads
   title: "28 Active Ecosystem Threads"
@@ -504,7 +742,8 @@
   workstream: comms
   day_start: 53
   day_end: 53
-  dependencies: []
+  dependencies:
+    - w3c-normative
 
 # ═══ CURRENT + FUTURE — COMMS ═══
 
@@ -619,11 +858,11 @@
 
 - id: rebrand
   title: "Rebrand: Governance for the Agent Economy"
-  description: "Academic redesign. Enterprise positioning. 10-question FAQ."
+  description: "Site said 'AEOESS' in giant letters, three paragraphs saying the same thing three ways. Passports metaphor doing the work plain language should do. Academic redesign, enterprise positioning, 10-question FAQ."
   status: done
   workstream: ops
-  day_start: 40
-  day_end: 40
+  day_start: 39
+  day_end: 39
   dependencies: []
 
 - id: roadmap-interface
