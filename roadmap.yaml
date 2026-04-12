@@ -175,8 +175,8 @@
     - d33-constitutional-running
 
 - id: encrypted-relay
-  title: "First APS Envelope Through Encrypted Relay"
-  description: "Vessenes asked if APS could communicate through encrypted channels. Module 19 met qntm relay. Encrypted transport through external relay, composable stack. 1,178 tests, 320 suites, 63 test files."
+  title: "qntm Bridge: First Encrypted APS Envelope"
+  description: "Vessenes shipped the qntm relay spec. HKDF-SHA-256 + XChaCha20-Poly1305 bridge built in 369 lines, zero new deps. 3/3 known-answer vectors match byte-for-byte. Live relay test: HTTP 201, seq:6 — first encrypted agent governance communication anywhere. 1,178 tests, 320 suites, 63 test files."
   status: done
   workstream: protocol
   day_start: 35
@@ -905,4 +905,90 @@
   workstream: ops
   day_start: 55
   day_end: 56
+  dependencies: []
+
+# ═══ HISTORIC ADDITIONS FROM CONVERSATION RECORD ═══
+# Items not in blog.html but documented across session chats.
+# Added 2026-04-12 (Day 55).
+
+- id: wg-formed
+  title: "Working Group Formed"
+  description: "Five independent projects agreed on a shared spec. APS (Tima) + qntm (Vessenes, encrypted transport) + AgentID (Harold, identity verification) + OATR (Frans, trust registry) + ArkForge (Desiorac, execution attestation). First spec ratified unanimously. Five weeks from first commit to four-project convergence."
+  status: done
+  workstream: comms
+  day_start: 35
+  day_end: 36
+  dependencies:
+    - encrypted-relay
+
+- id: consilium-methodology
+  title: "Consilium as Practice"
+  description: "Multi-model adversarial review — same prompt to Claude, GPT, Gemini simultaneously, no cross-talk, synthesize after. Origin Day 25 (first honest pushback). First formal three-way Day 37. Peak Days 40-42 (Sybil, Agent DNA, data lifecycle, constraint architecture). Self-critique Day 38 identified anti-patterns. Stopped being default, became selective tool for genuine competing framings."
+  status: done
+  workstream: research
+  day_start: 25
+  day_end: 42
+  dependencies:
+    - paper-2-monotonic-narrowing
+
+- id: harold-canonical-repo
+  title: "Harold Canonical Repo"
+  description: "haroldmalikfrimpong-ops shipped agentid-aps-interop on getagentid.dev. 32/32 tests passing. Harold's PolicyChain primitive (SHA-256 policy hash chaining) adopted into APS SDK with name-attribution in commit message. Canonical external collaborator — contributor attribution as compounding strategy."
+  status: done
+  workstream: comms
+  day_start: 43
+  day_end: 43
+  dependencies:
+    - d43-multi-attestation
+
+- id: moltrust-partnership
+  title: "MolTrust Production Partnership"
+  description: "Lars Kroehl / CryptoKRI GmbH. Partner API key received (10K calls/day, 1K agents per batch). 11 APS agents bridged did:aps → did:moltrust → Base L2. Reciprocal gateway verification via GET /api/v1/public/trust/{agentId} with JWKS. First bilateral production partnership."
+  status: done
+  workstream: product
+  day_start: 46
+  day_end: 47
+  dependencies:
+    - d46-byoi
+
+- id: pdr-paper-cites-aps
+  title: "PDR v1.9 Cites APS (Section 7.6.2)"
+  description: "Nanook's PDR in Production v1.9 published on Zenodo. Section 7.6 is the first independent deep technical review of APS architecture — Bayesian sigma dynamics, structuralVerdict/trustVerdict separation, Module 37 as worked example. Tony Mason UBC production deploy (Hamut'ay, 98 cycles on Sonnet 4.6). DOI 10.5281/zenodo.19323172."
+  status: done
+  workstream: research
+  day_start: 47
+  day_end: 47
+  dependencies:
+    - paper-3-faceted-authority
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19323172"
+      label: "PDR v1.9"
+
+- id: drift-structural-response
+  title: "Drift Protocol Structural Response"
+  description: "$285M UNC4736 DPRK social engineering hack. Ran 5-model consilium on forensic attribution vs structural constraints. Killed 5 bad ideas (behavioral signals, cascade verification, prosecution scoring, general stake, forensic attribution test). Posted A2A#1628 reply framing authority-class separation + non-bypassable timelocks + hard velocity ceilings. Drove Values Floor timelock + Grade-gated authority build queue."
+  status: done
+  workstream: research
+  day_start: 48
+  day_end: 48
+  dependencies:
+    - consilium-methodology
+
+- id: insumer-7-issuers
+  title: "Insumer 7-Verified Issuers"
+  description: "douglasborthwick-crypto ran multi-issuer verification on insumer-examples#1. APS position 5 (passport_grade, gateway-v1 kid) verified alongside InsumerAPI (wallet_state), ThoughtProof (reasoning_integrity), RNWY (behavioral_trust), Maiat (job_performance), AgentID (trust_verification), AgentGraph (security_posture). Cross-protocol attestation composable format."
+  status: done
+  workstream: comms
+  day_start: 49
+  day_end: 49
+  dependencies:
+    - harold-canonical-repo
+
+- id: mcp-block
+  title: "MCP Block (Risk Guardian Origin)"
+  description: "60 GitHub issues posted in one afternoon. Anthropic/MCP org blocked the aeoess account from posting on modelcontextprotocol/modelcontextprotocol. Permanent reference case for what volume costs. Origin of the Risk Guardian discipline — proactive flagging before any bulk or public action."
+  status: done
+  workstream: ops
+  day_start: 49
+  day_end: 49
   dependencies: []
