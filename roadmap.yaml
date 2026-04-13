@@ -913,13 +913,14 @@
 
 - id: wg-formed
   title: "Working Group Formed"
-  description: "Five independent projects agreed on a shared spec. APS (Tima) + qntm (Vessenes, encrypted transport) + AgentID (Harold, identity verification) + OATR (Frans, trust registry) + ArkForge (Desiorac, execution attestation). First spec ratified unanimously. Five weeks from first commit to four-project convergence."
+  description: "Five independent projects agreed on a shared spec. APS (Tima) + qntm (Vessenes, encrypted transport) + AgentID (Harold, identity verification) + OATR (Frans, trust registry) + ArkForge (Desiorac, execution attestation). First spec ratified unanimously. Five weeks from first commit to four-project convergence. The inversion — inbound matching outbound."
   status: done
   workstream: comms
   day_start: 35
   day_end: 36
   dependencies:
     - encrypted-relay
+    - comms-phase-2-external-engagement
 
 - id: consilium-methodology
   title: "Consilium as Practice"
@@ -986,9 +987,44 @@
 
 - id: mcp-block
   title: "MCP Block (Risk Guardian Origin)"
-  description: "60 GitHub issues posted in one afternoon. Anthropic/MCP org blocked the aeoess account from posting on modelcontextprotocol/modelcontextprotocol. Permanent reference case for what volume costs. Origin of the Risk Guardian discipline — proactive flagging before any bulk or public action."
+  description: "60 GitHub issues posted in one afternoon. Anthropic/MCP org blocked the aeoess account from posting on modelcontextprotocol/modelcontextprotocol. Permanent reference case for what volume costs. Origin of the Risk Guardian discipline — comms became something to govern, not just do."
   status: done
   workstream: ops
   day_start: 49
   day_end: 49
-  dependencies: []
+  dependencies:
+    - wg-formed
+
+# ═══ COMMS PRACTICE EVOLUTION (added Day 55) ═══
+# Five-beat arc: how multi-agent communication practice itself evolved.
+# Inflection points only. The current concrete comms items remain unchanged.
+
+- id: comms-phase-1-cross-model-dialogue
+  title: "Cross-Model Dialogue as Practice"
+  description: "Manual carrying of ideas between Claude, GPT, Gemini. Not assistants — adversarial reviewers. Their disagreements treated as signal. By Day 8 the practice was articulated in the YC application as 'Claude for architecture, GPT for hostile review, Gemini as tiebreaker.' Origin of every later consilium."
+  status: done
+  workstream: comms
+  day_start: 8
+  day_end: 8
+  dependencies:
+    - mcp-server-ships
+
+- id: comms-phase-3-multi-agent-ops
+  title: "Multi-Agent Ops Layer"
+  description: "Three-bot Telegram group operational (Tima + aeoess on Mac Mini + Portal on OpenClaw). GitHub comms bridge built (from-portal.json ↔ from-aeoess.json) — Telegram blocks bot-to-bot so the repo became the shared nervous system. Portal's first message to aeoess shipped 15 source files and 15 tests autonomously."
+  status: done
+  workstream: comms
+  day_start: 8
+  day_end: 8
+  dependencies:
+    - comms-phase-1-cross-model-dialogue
+
+- id: comms-phase-2-external-engagement
+  title: "External Ecosystem Engagement Begins"
+  description: "First substantive comment on someone else's repo — Karpathy's autoresearch on Garry Tan's repost thread. Same posture from internal model dialogue, now applied externally. The shift from 'building in private' to 'showing work in public.' By Day 28 this had compounded into Garry Tan endorsement and Microsoft merging APS code."
+  status: done
+  workstream: comms
+  day_start: 22
+  day_end: 22
+  dependencies:
+    - comms-phase-3-multi-agent-ops
