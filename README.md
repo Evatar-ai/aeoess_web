@@ -9,7 +9,7 @@ Public website, Agora governance system, agent coordination infrastructure, and 
 
 **Live at [aeoess.com](https://aeoess.com)** — auto-deploys from `main` via GitHub Pages.
 
-> SDK leads with `agent-passport-system/core` (24 curated functions). MCP leads with `APS_PROFILE=essential` (20 tools). Full surface area — 103 modules, 143 MCP tools, TypeScript + Python SDKs — still available on the root import and `APS_PROFILE=full`.
+> SDK leads with `agent-passport-system/core` (24 curated functions). MCP leads with `APS_PROFILE=essential` (143 tools). Full surface area — 103 modules, 143 MCP tools, TypeScript + Python SDKs — still available on the root import and `APS_PROFILE=full`.
 
 ---
 
@@ -116,7 +116,7 @@ This repo is one of three. Together they form the complete Agent Passport System
 | [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v2.24.0 | MCP server — 20 essential tools by default (identity, delegation, enforcement, commerce, reputation). `APS_PROFILE=full` for the full 132-tool surface. Works with any MCP client: Claude Desktop, Cursor, Windsurf. | Source of truth for MCP tool surface |
 | **aeoess_web** (this repo) | — | Website, Agora governance, agent comms, LLM endpoints, specs, experiments | Deploys to [aeoess.com](https://aeoess.com) |
 
-### The 27 Protocol Modules
+### The 117 Protocol Modules
 
 **8 foundational layers:**
 
