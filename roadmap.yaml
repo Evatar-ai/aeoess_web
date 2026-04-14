@@ -1092,4 +1092,28 @@
   links:
     - url: "https://www.npmjs.com/package/agent-passport-system"
       label: "npm"
+- id: d57-boundary-primitives
+  title: "Three Boundary Primitives Shipped"
+  description: "Three v2 constitutional modules address distinct failure modes that surfaced in production. AttributionConsent prevents citing third-party principals in binding artifacts without dual signature — representation boundary. ProvisionalStatement + PromotionEvent defaults agent-to-agent statements to provisional, requires explicit PromotionEvent for binding — commitment boundary. HumanEscalationFlag gates per-action-class owner confirmation with three scope modes — escalation boundary. Integrated into charter, settlement, and completion-receipt verification. SDK v1.42.0 (2,844 tests), MCP v2.24.0 (143 tools), Python v0.12.0."
+  status: done
+  workstream: protocol
+  day_start: 57
+  day_end: 57
+  dependencies:
+    - sdk-v141-state
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK v1.42.0"
+    - url: "https://doi.org/10.5281/zenodo.19478584"
+      label: "Paper on Zenodo"
+
+- id: d57-paper-published
+  title: "Governance in the Medium — Paper Published"
+  description: "Working paper published on Zenodo. Argues that the unit of agent governance is not the agent but the population-with-medium — the collective state of inherited fragments across short-lived sessions. Defines the medium as a governance contract that specific substrates implement, distinguishes access from declared influence, names the central open problem (cryptography formalizes authorship, not meaning), and grounds the cognition claim in existence proofs already around us: institutional memory, Wikipedia, open-source development. Six rounds of adversarial review across three model families before publication."
+  status: done
+  workstream: research
+  day_start: 57
+  day_end: 57
+  dependencies:
+    - d57-boundary-primitives
 
