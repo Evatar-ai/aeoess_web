@@ -1028,3 +1028,68 @@
   day_end: 22
   dependencies:
     - comms-phase-3-multi-agent-ops
+
+# ═══ DAY 56-57 (added 2026-04-14) ═══
+# Vocabulary repo launch, principal-accountability reversal, merge protocol codification.
+
+- id: vocab-repo-launches
+  title: "Vocabulary Repo Launches with 6 Merged Crosswalks"
+  description: "aeoess/agent-governance-vocabulary opens as the canonical naming layer for agent governance primitives. IANA JWT Claims Registry / W3C DID Registries precedent. Six crosswalks merged in four days from five independent maintainers: InsumerAPI (Douglas Borthwick), SINT (Illia Pashkov), JEP (schchit), AgentNexus (Kevin Kaylie), SATP (0xbrainkid), Nobulex (Arian Gogani). Each system keeps its internal names and publishes a crosswalk mapping to the canonical vocabulary."
+  status: done
+  workstream: comms
+  day_start: 54
+  day_end: 57
+  dependencies:
+    - vocab-pr7-sint-crosswalk
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary"
+      label: "agent-governance-vocabulary"
+
+- id: vocab-contributing-lands
+  title: "CONTRIBUTING.md + CODE_OF_CONDUCT.md Shipped"
+  description: "Public contribution standard for the vocabulary repo. Quick Start checklist, merge criteria (5 review questions applied equally), canonical-status rule (2+ independent implementations), stability expectations, no CLA required. Contributor Covenant 2.1. Written after two consilium review rounds — consilium flagged defensive tone and trauma leaks, both addressed. Template for roll-out across SDK and spec repos."
+  status: done
+  workstream: comms
+  day_start: 57
+  day_end: 57
+  dependencies:
+    - vocab-repo-launches
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/blob/main/CONTRIBUTING.md"
+      label: "CONTRIBUTING.md"
+
+- id: principal-accountability-reversal
+  title: "Principal-Accountability Reversal"
+  description: "Erik Newton's vocabulary repo transfer attempt surfaced that a collaboration agent had made commitments the principal didn't authorize, citing prior Apr 10 comments the principal never wrote. Public reversal posted on A2A#1734 naming the agent behavior explicitly. nanook's three-point public response formalized the thesis: Model Citizen trap (broad delegation scopes covering pragmatic overreach), counterparty standing invisible to agents (fresh accounts and long-term collaborators indistinguishable in scope checks), structural fixes required (readings alone don't scale). First real case study of principal-agent boundary failure, handled transparently."
+  status: done
+  workstream: ops
+  day_start: 56
+  day_end: 57
+  dependencies:
+    - vocab-repo-launches
+  links:
+    - url: "https://github.com/a2aproject/A2A/discussions/1734"
+      label: "A2A #1734"
+
+- id: merge-protocol-codified
+  title: "Merge Protocol + Contributor Tiers Codified"
+  description: "Internal rule: five-check evaluation (identity / format / substance / scope / reversibility), three decision classes (AUTO-OK / REPORT-FIRST / NEVER-AUTO), tier-based contributor classification T0-T3 with auditable promotion/demotion. Replaces implicit pattern-matching with structural discipline. Erik incident as worked example. Applied on first test: vocab#14 auto-merged (T2 descriptor typo fix), vocab#15 formal CHANGES_REQUESTED review (T2 peer_review canonical entry, touched canonical vocabulary.yaml, needed status:proposed + descriptor dimensions before merge)."
+  status: done
+  workstream: ops
+  day_start: 57
+  day_end: 57
+  dependencies:
+    - principal-accountability-reversal
+
+- id: sdk-v141-state
+  title: "SDK v1.41.0 State"
+  description: "agent-passport-system@1.41.0 on npm. 2,763 tests passing across 714 suites (1 skipped). 35 v2 constitutional modules + core. MCP server at v2.23.0 with 132 tools. Python SDK at 0.11.0. Wallet binding, subDelegateAdvisor, credentialCheckPolicy all shipped."
+  status: done
+  workstream: protocol
+  day_start: 54
+  day_end: 57
+  dependencies: []
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "npm"
+
