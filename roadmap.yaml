@@ -1094,7 +1094,7 @@
       label: "npm"
 - id: d57-boundary-primitives
   title: "Three Boundary Primitives Shipped"
-  description: "Three v2 constitutional modules address distinct failure modes that surfaced in production. AttributionConsent prevents citing third-party principals in binding artifacts without dual signature — representation boundary. ProvisionalStatement + PromotionEvent defaults agent-to-agent statements to provisional, requires explicit PromotionEvent for binding — commitment boundary. HumanEscalationFlag gates per-action-class owner confirmation with three scope modes — escalation boundary. Integrated into charter, settlement, and completion-receipt verification. SDK v1.42.0 (2,844 tests), MCP v2.24.0 (143 tools), Python v0.12.0."
+  description: "Three v2 constitutional modules address distinct failure modes that surfaced in production. AttributionConsent prevents citing third-party principals in binding artifacts without dual signature — representation boundary. ProvisionalStatement + PromotionEvent defaults agent-to-agent statements to provisional, requires explicit PromotionEvent for binding — commitment boundary. HumanEscalationFlag gates per-action-class owner confirmation with three scope modes — escalation boundary. Integrated into charter, settlement, and completion-receipt verification. SDK v1.42.0 (2,848 tests), MCP v2.24.0 (143 tools), Python v0.12.0."
   status: done
   workstream: protocol
   day_start: 57
