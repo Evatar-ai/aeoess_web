@@ -1,6 +1,6 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-12 (Day 55) — Layer 3 enriched with shipped version/test/module numbers
+# Last updated: 2026-04-15 (Day 58) — Apr 15 items added: Solana wallet_ref + vocab momentum. Stale active/next-up statuses for merged PRs cleared.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ HISTORIC — PROTOCOL ═══
@@ -798,7 +798,7 @@
 - id: vocab-pr7-sint-crosswalk
   title: "Vocab PR #7: SINT Crosswalk"
   description: "pshkv's SINT crosswalk. Review complete. Waiting on validity_temporal fix."
-  status: active
+  status: done
   workstream: comms
   day_start: 54
   day_end: 57
@@ -807,7 +807,7 @@
 - id: vocab-pr9-agentnexus-crosswalk
   title: "Vocab PR #9: AgentNexus"
   description: "kevinkaylie's AgentNexus governance vocabulary crosswalk."
-  status: next-up
+  status: done
   workstream: comms
   day_start: 55
   day_end: 57
@@ -836,7 +836,7 @@
 - id: qntm7-xsa520-response
   title: "qntm #7: Decision Composition"
   description: "xsa520's evaluation-point vs decision-point gap. Hard/state-volatile/contextual gates."
-  status: next-up
+  status: done
   workstream: comms
   day_start: 55
   day_end: 58
@@ -845,7 +845,7 @@
 - id: aeoess13-queball-acknowledgment
   title: "#13: BBIS Boundary"
   description: "QueBallSharken boundary statement. Three separate problems acknowledged."
-  status: next-up
+  status: done
   workstream: comms
   day_start: 55
   day_end: 57
@@ -1116,4 +1116,45 @@
   day_end: 57
   dependencies:
     - d57-boundary-primitives
+
+- id: d58-solana-wallet-ref
+  title: "Solana wallet_ref — chain enum + case-sensitivity fix"
+  description: "SDK v1.43.0 adds Solana to the wallet_ref chain enum with base58 validation. Paired gateway fix: chain-aware normalization replaces blanket lowercasing of the wallet payload so base58 addresses round-trip correctly. Bug was silent data corruption — every receipt that passed through would have signed over the wrong address. End-to-end wallet binding now spans Ethereum, Bitcoin, Solana. 2,848 tests. Closes openclaw #49971."
+  status: done
+  workstream: protocol
+  day_start: 58
+  day_end: 58
+  dependencies:
+    - d57-boundary-primitives
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK v1.43.0"
+    - url: "https://github.com/openclaw/openclaw/issues/49971"
+      label: "openclaw #49971"
+
+- id: d58-vocab-momentum
+  title: "Vocab registry — four PRs merged + peer_review canonical"
+  description: "Four PRs merged Apr 15: asqav crosswalk (jagmarques, ML-DSA-65 server-side, first lattice-based contributor), JEP (schchit, IETF I-D pending, JCS+Ed25519), insumerapi license-endpoint fix (douglasborthwick-crypto), validator cleanup + format normalization. peer_review promoted to canonical status after Logpose (rkaushik29) and RNWY (rnwy) landed as two independent implementations — first post-launch canonical promotion under the CONTRIBUTING.md two-implementation threshold. 14+ contributors, 11 PRs merged in 6 days."
+  status: done
+  workstream: comms
+  day_start: 58
+  day_end: 58
+  dependencies:
+    - vocab-contributing-lands
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary"
+      label: "agent-governance-vocabulary"
+
+- id: pr28-sbr-crosswalk
+  title: "Vocab PR #28: SoulboundRobots (entity_continuity)"
+  description: "rnwy opened PR#28 adding SBR crosswalk for entity_continuity. In review."
+  status: active
+  workstream: comms
+  day_start: 58
+  day_end: 59
+  dependencies:
+    - d58-vocab-momentum
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/28"
+      label: "PR #28"
 
