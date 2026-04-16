@@ -370,11 +370,11 @@
 
 - id: build-a-attribution-primitive
   title: "Build A: Attribution Primitive"
-  description: "Single cryptographic primitive with three axis projections (data, protocol, governance). Merkle-committed, Ed25519 signed."
-  status: next-up
+  description: "Unified four-axis (D, P, G, C) signed Merkle receipt. One AttributionPrimitive envelope, four independently-verifiable axis projections, cross-verify by shared action_ref + merkle_root + signature. Canonical weight-string representation, balanced Merkle composition, residual-bucket aggregation for sub-threshold contributors. Shipped SDK v1.44.0, MCP v2.25.0, Python v0.13.0."
+  status: done
   workstream: protocol
   day_start: 56
-  day_end: 62
+  day_end: 59
   dependencies:
     - attribution-primitive-spec
 
@@ -816,7 +816,7 @@
 
 - id: sdk-pr14-sint-integration
   title: "SDK PR #14: SINT Integration"
-  description: "pshkv\'s SINT integration merged (9/9 cross-verify passing). Physical-world enforcement layer. Now in INTEGRATION.md."
+  description: "pshkv's SINT integration merged (9/9 cross-verify passing). Physical-world enforcement layer. Now in INTEGRATION.md."
   status: done
   workstream: comms
   day_start: 55
@@ -1170,4 +1170,40 @@
   links:
     - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/29"
       label: "Issue #29"
+
+- id: d59-build-a-shipped
+  title: "Build A shipped — unified four-axis attribution primitive"
+  description: "One signed Merkle envelope replaces four separate attribution receipt types. D (data), P (protocol), G (governance), C (compute). Each axis projection verifies independently; two projections of the same receipt cross-verify by shared action_ref + merkle_root + signature. 6 new SDK exports, 6 new MCP tools, 1:1 Python port with cross-language sig verification. SDK v1.44.0 (2,910 tests), MCP v2.25.0 (149 tools), Python v0.13.0. Unblocks Builds B and C."
+  status: done
+  workstream: protocol
+  day_start: 59
+  day_end: 59
+  dependencies:
+    - build-a-attribution-primitive
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK v1.44.0"
+    - url: "https://aeoess.com/blog.html#day-59"
+      label: "Blog"
+
+- id: d59-build-d2-jws-signing
+  title: "Build D2 — JWS-signed gateway trust profiles"
+  description: "Gateway /api/v1/public/trust/:agentId now attaches compact Ed25519 JWS to successful responses via three headers: X-APS-JWS, X-APS-JWS-KID: gateway-v1, X-APS-JWS-JWKS pointing at the public JWKS. Body unchanged — non-breaking for existing consumers. Cross-engine verifiable with jose: kid matches, alg is EdDSA, signature checks out against the public key. Closes the gap between 'the gateway told me X' and 'I can prove the gateway told me X.'"
+  status: done
+  workstream: protocol
+  day_start: 59
+  day_end: 59
+  dependencies: []
+  links:
+    - url: "https://gateway.aeoess.com/.well-known/jwks.json"
+      label: "Gateway JWKS"
+
+- id: d59-portal-retirement
+  title: "Coordination layer consolidated"
+  description: "Three-agent coordination path (primary operator + reviewer agent + comms relay) retired. Reviewer agent workflows archived under archive-portal-era/ with ARCHIVE-README.md, nightly cron deleted, GitHub posting flows through a single path. Historical records (roadmap, blog, ops log) preserved as-is. Fewer moving parts."
+  status: done
+  workstream: ops
+  day_start: 59
+  day_end: 59
+  dependencies: []
 

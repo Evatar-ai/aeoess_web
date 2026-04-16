@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog | AEOESS</title>
 <!-- PROPAGATION-ZONE-START -->
-<meta name="description" content="Day-by-day dev log of building the Agent Passport System — enforcement and accountability layer for AI agents. Bring your own identity. Policy eval under 2ms. 2,848 tests. SDK leads with /core subpath (curated 24 functions), MCP leads with 20 essential tools. Full surface area: 103 modules, 143 MCP tools, 5 research papers, IETF Internet-Draft. Started February 18, 2026.">
+<meta name="description" content="Day-by-day dev log of building the Agent Passport System — enforcement and accountability layer for AI agents. Bring your own identity. Policy eval under 2ms. 2,848 tests. SDK leads with /core subpath (curated 24 functions), MCP leads with 20 essential tools. Full surface area: 103 modules, 149 MCP tools, 5 research papers, IETF Internet-Draft. Started February 18, 2026.">
 <meta name="keywords" content="AI agent identity, agent passport, Ed25519, MCP server, multi-agent coordination, agentic commerce, AI governance, delegation chains, values floor, cryptographic identity, agent protocol, open source AI infrastructure, build in public">
 <meta name="author" content="Tymofii Pidlisnyi">
 <meta name="robots" content="index, follow">
@@ -31,7 +31,7 @@
 <meta property="og:type" content="blog">
 <meta property="og:site_name" content="AEOESS">
 <meta property="og:title" content="AEOESS Dev Log — Building AI Agent Infrastructure in 28 Days">
-<meta property="og:description" content="Day-by-day dev log: enforcement and accountability layer for AI agents. Bring your own identity. 2,848 tests. SDK /core subpath (24 functions), MCP essential profile (143 tools). Full surface: 103 modules, 143 MCP tools. Open source.">
+<meta property="og:description" content="Day-by-day dev log: enforcement and accountability layer for AI agents. Bring your own identity. 2,848 tests. SDK /core subpath (24 functions), MCP essential profile (149 tools). Full surface: 103 modules, 149 MCP tools. Open source.">
 <meta property="og:url" content="https://aeoess.com/blog.html">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta property="article:author" content="https://tymofii.me">
@@ -94,6 +94,14 @@
     }
   ],
   "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Day 59: One receipt, four projections",
+      "datePublished": "2026-04-16",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-59",
+      "description": "Build A shipped — a unified four-axis attribution primitive that replaces four separate receipt types with one signed Merkle envelope. D (data), P (protocol), G (governance), C (compute). Each axis projection verifies independently; two projections of the same receipt cross-verify by shared action_ref and merkle_root. SDK v1.44.0, MCP v2.25.0, Python v0.13.0 all published. Build D2 also shipped: gateway trust profiles now return JWS-signed responses cross-verifiable against the public JWKS. And the coordination layer got simpler."
+    },
     {
       "@type": "BlogPosting",
       "headline": "Day 58: One chain added, one bug caught at the boundary",
@@ -738,11 +746,36 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building the enforcement and accountability layer for AI agents. Bring your own identity: did:key, did:web, SPIFFE, OAuth, native did:aps. Started February 18, 2026. 2,848 tests, five papers, IETF draft. Open source. <span style="color:var(--ink-5)">Full surface area: 103 modules, 143 MCP tools.</span></p>
+  <p class="sub">Day-by-day record of building the enforcement and accountability layer for AI agents. Bring your own identity: did:key, did:web, SPIFFE, OAuth, native did:aps. Started February 18, 2026. 2,848 tests, five papers, IETF draft. Open source. <span style="color:var(--ink-5)">Full surface area: 103 modules, 149 MCP tools.</span></p>
 <!-- PROPAGATION-ZONE-END -->
   <p class="sub" style="margin-top:.6rem">See the full picture on <a href="roadmap.html" style="font-weight:600">the roadmap</a> — every ship across protocol, product, research, comms, and ops with dependency arrows.</p>
 </div>
 
+
+<article class="post" id="day-59">
+  <time class="post-date" datetime="2026-04-16">April 16, 2026</time>
+  <h2>Day 59: One receipt, four projections</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Two ships and a retirement today.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Build A &mdash; the attribution primitive</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">For a while now the SDK has been accumulating attribution machinery along four different axes. Data sources contributing to an output &mdash; that had its own receipt. Protocol modules that evaluated the action &mdash; another. The governance chain that authorized it &mdash; another. Compute providers that ran it &mdash; a fourth. Four signed artifacts per action, four verification paths, and no single object that said &quot;this is the attribution for <em>this specific action</em>.&quot;</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Build A consolidates all four into one signed Merkle envelope.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">One <code>AttributionPrimitive</code>, four axis leaves (D, P, G, C), one <code>merkle_root</code>, one Ed25519 signature over the envelope. Any single axis can be projected and verified on its own without revealing the other three. Two projections of the same receipt cross-verify by shared <code>action_ref + merkle_root + signature</code> &mdash; you can tell, cryptographically, that the D projection someone showed you came from the same underlying action as the G projection someone else showed you.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The spec has been sitting at <code>/specs/ATTRIBUTION-PRIMITIVE-v1.1.md</code> since Apr 12. Today it landed as running code: 6 new SDK exports, 6 new MCP tools, a 1:1 Python port with cross-language signature verification, and an <code>AttributionPrimitive</code> type with canonical weight-string representation, balanced Merkle composition, and residual-bucket aggregation for sub-threshold contributors.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">SDK</strong> <a href="https://www.npmjs.com/package/agent-passport-system">v1.44.0</a>. <strong style="color:var(--text)">MCP</strong> <a href="https://www.npmjs.com/package/agent-passport-system-mcp">v2.25.0</a>. <strong style="color:var(--text)">Python</strong> <a href="https://pypi.org/project/agent-passport-system/">v0.13.0</a>. All three published, all three compatible.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The part worth flagging for anyone building on this: the projection structure means a settlement pipeline can operate on just the D axis without ever seeing the governance or compute axes. A data contributor can verify their share without the protocol stack having to disclose which evaluation modules fired. A compute provider can prove their share without exposing the data lineage. One receipt, four audiences, no disclosure leakage across them.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Builds B and C (fractional weights, settlement) are unblocked by this. Two-week arc.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Build D2 &mdash; signed trust profiles</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Smaller ship, but the kind that changes integration shape.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The gateway has always exposed public trust profiles at <code>/api/v1/public/trust/:agentId</code> &mdash; a JSON document describing an agent&#39;s grade, wallet bindings, delegation state, and so on. Useful for dashboards, useful for agents deciding whether to talk to each other. Not directly <em>verifiable</em> by a third party, because it came over HTTPS and that&#39;s it. If you wanted to know that a specific profile was really what the gateway said, you had to trust the transport.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Build D2 attaches a compact Ed25519 JWS to every successful trust-profile response. Three headers: <code>X-APS-JWS</code> (the compact JWS), <code>X-APS-JWS-KID: gateway-v1</code>, and <code>X-APS-JWS-JWKS</code> pointing at <a href="https://gateway.aeoess.com/.well-known/jwks.json">the public JWKS</a>.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The JWS is over the canonical JSON body. The JWKS endpoint publishes the gateway&#39;s public key. Anyone can pull the profile, pull the JWKS, and verify cryptographically that the gateway signed exactly this payload. Body unchanged &mdash; existing consumers keep working, the signature just rides along in headers.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Tried it end-to-end with <code>jose</code>. Verifies cleanly. Kid matches, alg is EdDSA, signature checks out against the public JWKS.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">This is the protocol layer that was missing between &quot;the gateway told me X&quot; and &quot;I can prove the gateway told me X.&quot; Consumers that need that proof can now get it without changing how they fetch.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Coordination retired</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">One quiet change worth naming. For a long stretch, work on this project ran through three coordination paths &mdash; a primary operator, a reviewer agent that handled GitHub posting, and a comms relay. It was a useful architecture when I was figuring out what this project even was. It stopped being useful a while ago.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Today it got retired. The reviewer agent&#39;s workflows are archived under <code>archive-portal-era/</code>, the nightly cron is gone, and the GitHub posting flows through one path now. Historical records &mdash; roadmap, blog, ops log &mdash; are preserved as they were. Nothing lost, just fewer moving parts.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Simpler is usually better.</p>
+</article>
 
 <article class="post" id="day-58">
   <time class="post-date" datetime="2026-04-15">April 15, 2026</time>
