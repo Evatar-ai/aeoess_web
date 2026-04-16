@@ -1158,3 +1158,16 @@
     - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/28"
       label: "PR #28"
 
+- id: d58-peer-review-integrity-fix
+  title: "Vocab #29: peer_review canonical definition audit"
+  description: "Self-opened issue. peer_review was promoted to canonical Apr 16 on two implementations (Logpose task-completion, RNWY reviewer-credibility) but RNWY itself documents a different primitive. Different measurements sharing a container shape is not the two-implementations standard. Issue proposes Path A: narrow peer_review to task-completion (Logpose), introduce reviewer_credibility as proposed with RNWY as sole implementer. CONTRIBUTING.md follow-up to sharpen the two-implementations rule. Caught during PR#28 review (entity_continuity by same contributor)."
+  status: active
+  workstream: comms
+  day_start: 58
+  day_end: 59
+  dependencies:
+    - d58-vocab-momentum
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/29"
+      label: "Issue #29"
+
