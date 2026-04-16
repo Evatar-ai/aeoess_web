@@ -625,8 +625,8 @@
 
 - id: attribution-primitive-spec
   title: "Attribution Primitive Spec"
-  description: "Formal spec for the unified cryptographic object. Sections 1-2 drafted, Section 3 in progress. Zenodo DOI target."
-  status: active
+  description: "Formal spec v1.1 (71KB) committed to aeoess_web/specs/ATTRIBUTION-PRIMITIVE-v1.1.md on Apr 12. Unified cryptographic object with three axis projections (data, protocol, governance). Unblocks Build A."
+  status: done
   workstream: research
   day_start: 54
   day_end: 57
@@ -816,8 +816,8 @@
 
 - id: sdk-pr14-sint-integration
   title: "SDK PR #14: SINT Integration"
-  description: "pshkv's SINT integration into INTEGRATION.md."
-  status: next-up
+  description: "pshkv\'s SINT integration merged (9/9 cross-verify passing). Physical-world enforcement layer. Now in INTEGRATION.md."
+  status: done
   workstream: comms
   day_start: 55
   day_end: 57
@@ -826,8 +826,8 @@
 
 - id: sdk-pr15-say5-vocab-module
   title: "SDK PR #15: SAY-5 Redirect"
-  description: "First-time contributor. 534 additions. Thank-and-redirect to separate vocabulary repo."
-  status: next-up
+  description: "First-time contributor PR on SDK repo. Redirected to separate vocabulary repo, which became the canonical home for this kind of contribution. PR closed. 7 SAY-5 equivalents have since landed in agent-governance-vocabulary from other contributors."
+  status: done
   workstream: comms
   day_start: 55
   day_end: 57
