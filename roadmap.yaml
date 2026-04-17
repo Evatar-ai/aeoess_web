@@ -1,6 +1,6 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-15 (Day 58) — Apr 15 items added: Solana wallet_ref + vocab momentum. Stale active/next-up statuses for merged PRs cleared.
+# Last updated: 2026-04-16 (Day 60) — Build C — Settlement Pipeline shipped (SDK v1.46.0, MCP v2.27.0, Python v0.15.0). Build B flipped to done.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ HISTORIC — PROTOCOL ═══
@@ -380,21 +380,21 @@
 
 - id: build-b-fractional-weights
   title: "Build B: Fractional Weights"
-  description: "Role-based formula for DataContributionReceipt fractional weights. Merkle tree composition. Sum-to-one property tests."
-  status: next-up
+  description: "Role-based fractional weight formulas for D and C axes. Merkle tree composition. Sum-to-one property tests. Shipped SDK v1.45.0."
+  status: done
   workstream: protocol
-  day_start: 62
-  day_end: 65
+  day_start: 59
+  day_end: 59
   dependencies:
     - build-a-attribution-primitive
 
 - id: build-c-settlement-pipeline
   title: "Build C: Settlement Pipeline"
-  description: "Merkle-committed signed settlement records from DataContributionReceipts. Contributor query endpoint."
-  status: next-up
+  description: "Per-period signed settlement records aggregating Attribution Primitives across D/P/G/C axes. Four Merkle-committed axis roots. Contributor query endpoint verifying end-to-end without trusting the gateway beyond its JWKS. Economic half stays gateway-private; evidence half ships in the SDK. 5 cross-language fixtures, byte-identical across runs. Shipped SDK v1.46.0, MCP v2.27.0 (3 new settlement tools), Python v0.15.0."
+  status: done
   workstream: protocol
-  day_start: 65
-  day_end: 70
+  day_start: 60
+  day_end: 60
   dependencies:
     - build-b-fractional-weights
 

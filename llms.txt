@@ -15,9 +15,9 @@ Copyright: 2024-2026 Tymofii Pidlisnyi
 
 AEOESS is the enforcement layer that sits on top of whatever identity the agent already has. Accepts did:key, did:web, SPIFFE SVIDs, OAuth tokens, and native did:aps. Identity is the input. Enforcement is the product. The gateway is both judge and executor. Authority can only decrease at each transfer point.
 
-The SDK is structured in two tiers. **Core** is a curated 24-function surface (`agent-passport-system/core`) covering identity, delegation, enforcement, commerce, reputation. **Extended** is the full 925-export API (`agent-passport-system`) covering 79 specialized modules: coordination, EU AI Act compliance, framework adapters, bilateral receipts, execution attestation, DID resolution, data lifecycle, and 32 v2 constitutional modules. Start with Core; pull from Extended only when needed.
+The SDK is structured in two tiers. **Core** is a curated 24-function surface (`agent-passport-system/core`) covering identity, delegation, enforcement, commerce, reputation. **Extended** is the full 925-export API (`agent-passport-system`) covering 99 specialized modules: coordination, EU AI Act compliance, framework adapters, bilateral receipts, execution attestation, DID resolution, data lifecycle, and 39 v2 constitutional modules. Start with Core; pull from Extended only when needed.
 
-One hundred and three protocol modules (71 core + 32 v2 constitutional, SDK v1.46.0):
+One hundred and twenty-three protocol modules (84 core + 39 v2 constitutional, SDK v1.46.0):
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 8 principles (F-001 to F-008), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
@@ -50,7 +50,7 @@ One hundred and three protocol modules (71 core + 32 v2 constitutional, SDK v1.4
 30. **Policy Conflict Detection** — DFS cycle detection on policy dependency graphs (deadlock prevention). Shadowed rule detection, contradiction detection, unreachable action analysis
 31. **Data Source Registration & Access Receipts** — Foundation for data attribution. Three attestation modes (self/custodian/gateway-observed), machine-readable DataTerms, gateway-signed access receipts as pure evidence, hard vs advisory compliance, Merkle commitment for independent verification
 32. **Decision Semantics & Cross-Engine Interop** — Content-addressable decisions (SHA-256 of canonical JSON), evaluation method classification (deterministic/heuristic/LLM/hybrid/human), scope interpretation declarations, cross-engine decision artifacts with provenance. Enables multi-engine verdict comparison
-33. **V2 Constitutional Framework** (32 modules) — Full constitutional governance for AI agent systems. Core governance: v2 bridge, delegation versioning, outcome registration, anomaly detection, emergency pathways, migration, contextual attestation. Attack defenses: approval fatigue detection (rubber-stamping, impossible latency), effect enforcement (declared vs actual outcomes), semantic drift detection, composite workflow audit (authority laundering), cascade correlation, inaction auditing, values override with justification review, governance drift tracking, emergence detection (epistemic monoculture, market concentration). Structural safeguards: separation of powers (legislative/executive/judicial), constitutional amendment (supermajority + human ratification), policy profiles (per-target rule sets), affected-party standing (complaint + appeal), circuit breakers (automatic category suspension), epistemic isolation (independent evaluation barriers), root authority transition (founding to democratic), intent binding, effect sampling, output proportionality, blind evaluation, externality accounting, semantic scoping, cross-chain audit
+33. **V2 Constitutional Framework** (39 modules) — Full constitutional governance for AI agent systems. Core governance: v2 bridge, delegation versioning, outcome registration, anomaly detection, emergency pathways, migration, contextual attestation. Attack defenses: approval fatigue detection (rubber-stamping, impossible latency), effect enforcement (declared vs actual outcomes), semantic drift detection, composite workflow audit (authority laundering), cascade correlation, inaction auditing, values override with justification review, governance drift tracking, emergence detection (epistemic monoculture, market concentration). Structural safeguards: separation of powers (legislative/executive/judicial), constitutional amendment (supermajority + human ratification), policy profiles (per-target rule sets), affected-party standing (complaint + appeal), circuit breakers (automatic category suspension), epistemic isolation (independent evaluation barriers), root authority transition (founding to democratic), intent binding, effect sampling, output proportionality, blind evaluation, externality accounting, semantic scoping, cross-chain audit
 34. **Data Contribution Ledger** — Aggregates access receipts into contribution records indexed by source, agent, and principal. Per-source metrics (total accesses, unique agents, compensation owed), per-agent data footprint (every source touched), 6 compensation models (none, attribution_only, per_access, revenue_share, pool, negotiate)
 35. **Data Settlement Protocol** — Merkle-committed settlement records with line-item verification. Generates GDPR Article 30, EU AI Act Article 10, and SOC 2 compliance reports. Settlement verification detects tampered Merkle roots and totals
 36. **Data Enforcement Gate** — Composable enforcement layer: enforce/audit/off modes. Checks DataTerms before every access, auto-generates receipts, feeds contribution ledger. Preflight check validates multiple sources before execution starts
@@ -66,11 +66,11 @@ One hundred and three protocol modules (71 core + 32 v2 constitutional, SDK v1.4
 
 **AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications. Developed by The Agent Times in partnership with AEOESS. 6 requirements across two layers: cryptographic infrastructure (Ed25519 provenance, journalist agent passports, MCP server) and editorial accountability (confidence labels, published code of conduct, automated ethics verification). Draws from SPJ Code of Ethics, National Press Club Constitution, E.W. Scripps Guidelines. Any publication can apply. Reference implementation: The Agent Times. Spec: https://aeoess.com/amcs.html | Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md
 
-Plus: **MCP Server** (v2.27.0) — 20 essential tools by default, 132 total. Set `APS_PROFILE=full` for the complete surface, or pick a profile: essential (recommended), identity, governance, coordination, commerce, data, gateway, comms, minimal, full. Role-scoped access control for any MCP client.
+Plus: **MCP Server** (v2.27.0) — 20 essential tools by default, 154 total. Set `APS_PROFILE=full` for the complete surface, or pick a profile: essential (recommended), identity, governance, coordination, commerce, data, gateway, comms, minimal, full. Role-scoped access control for any MCP client.
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v1.46.0 — 2,937 tests passing. Zero heavy dependencies.**
+**v1.46.0 — 2,972 tests passing. Zero heavy dependencies.**
 
 ## Tiered Access (Recommended Onboarding)
 
@@ -85,13 +85,13 @@ import {
 } from 'agent-passport-system/core'
 ```
 
-**Extended (full 925-export API)** — coordination, EU AI Act compliance, framework adapters (CrewAI/LangChain/ADK/A2A/MCP), bilateral receipts, execution attestation, DID resolution, data lifecycle, 32 v2 constitutional modules, institutional governance.
+**Extended (full 925-export API)** — coordination, EU AI Act compliance, framework adapters (CrewAI/LangChain/ADK/A2A/MCP), bilateral receipts, execution attestation, DID resolution, data lifecycle, 39 v2 constitutional modules, institutional governance.
 
 ```typescript
 import { /* anything from the full surface */ } from 'agent-passport-system'
 ```
 
-**MCP server** defaults to 20 essential tools. Set `APS_PROFILE=full` for all 132. Profiles: essential, identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
+**MCP server** defaults to 20 essential tools. Set `APS_PROFILE=full` for all 154. Profiles: essential, identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
 
 ## Quick Start
 
@@ -177,6 +177,7 @@ Private enforcement gateway: 37 API routes, multi-tenant, SQLite (Railway Volume
 - Paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
 - Paper (Behavioral Derivation Rights): https://doi.org/10.5281/zenodo.19476002
 - Paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584
+- Paper (Governance in the Medium): https://doi.org/10.5281/zenodo.19582550
 - Dev Log: https://aeoess.com/blog.html
 - Threat Model: https://aeoess.com/threat-model.html
 - Author: https://tymofii.me

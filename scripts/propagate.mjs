@@ -58,9 +58,14 @@ function readSourceOfTruth() {
     values.CORE_MODULE_COUNT = coreFiles.length;
   } catch { values.CORE_MODULE_COUNT = 71; }
   try {
-    const v2Files = readdirSync(`${REPOS.sdk}/src/v2`).filter(f => f.endsWith('.ts') && f !== 'index.ts');
-    values.V2_MODULE_COUNT = v2Files.length;
-  } catch { values.V2_MODULE_COUNT = 32; }
+    const v2Entries = readdirSync(`${REPOS.sdk}/src/v2`, { withFileTypes: true });
+    // Count .ts files (excluding index.ts and types.ts) PLUS subdirectories.
+    // Subdirectories are multi-file modules added from Build A onward
+    // (attribution-primitive, attribution-weights, attribution-settlement, etc.).
+    const v2Files = v2Entries.filter(d => d.isFile() && d.name.endsWith('.ts') && d.name !== 'index.ts' && d.name !== 'types.ts');
+    const v2Dirs = v2Entries.filter(d => d.isDirectory());
+    values.V2_MODULE_COUNT = v2Files.length + v2Dirs.length;
+  } catch { values.V2_MODULE_COUNT = 39; }
   values.LAYER_COUNT = values.CORE_MODULE_COUNT + values.V2_MODULE_COUNT;
 
   // ADVERSARIAL_COUNT — count across ALL adversarial test files
