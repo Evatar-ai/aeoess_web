@@ -1,6 +1,6 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-16 (Day 60) — Build C — Settlement Pipeline shipped (SDK v1.46.0, MCP v2.27.0, Python v0.15.0). Build B flipped to done.
+# Last updated: 2026-04-17 (Day 61) — V2 architecture swap shipped: SDK v2.0.0-beta.0 on npm @next (v1.46.0 remains on @latest), gateway repinned and auto-deployed to Railway, Python SDK v2.0.0b0 on PyPI pre-release. MCP adaptation to v2 pending.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ HISTORIC — PROTOCOL ═══
