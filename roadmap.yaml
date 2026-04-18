@@ -1207,3 +1207,71 @@
   day_end: 59
   dependencies: []
 
+
+- id: d61-v2-architecture-separation
+  title: "Day 61: V2 architecture separation shipped"
+  description: "Monolithic SDK split along the protocol-vs-product axis. Public SDK keeps crypto, types, scope logic, adapters, conformance suite, interop vectors, and the 8 core primitives (byte-identical to v1.46.0). Private gateway package takes ProxyGateway, DataEnforcementGate, ContributionLedger, SettlementGenerator, IntentNetwork, DelegationStore, ReceiptLedger, 18 behavioral-analytics modules, EscalationWorkflow, SemanticDriftTracker, AnomalyDetection, MigrationWorkflow, AttestationLedger, and runtime state management. ~647 tests moved with them. Partners on any v1 pin unaffected: v1.46.0 stays on npm @latest through stability window. Unlocks foundation submission (AAIF target) and protects the pixel attribution moat. SDK v2.0.0-beta.0 on @next (2,325 tests, 130+ modules), MCP v3.0.0 on @next (142 tools, down from 154 after removing 12 product-only tools and stubbing 10 gateway-moved tools), Python v2.0.0b0 on PyPI as PEP 440 pre-release, Gateway repinned to ^2.0.0-beta.0 and Railway-redeployed zero-downtime. Three-layer safety net: anchor tags in every repo, local snapshot kit, private archive repo (aeoess/v2-swap-archive-2026-04-17)."
+  status: done
+  workstream: protocol
+  day_start: 61
+  day_end: 61
+  dependencies:
+    - d59-build-a-shipped
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK @next v2.0.0"
+    - url: "https://www.npmjs.com/package/agent-passport-system-mcp"
+      label: "MCP @next v3.0.0"
+    - url: "https://pypi.org/project/agent-passport-system/"
+      label: "PyPI v2.0.0b0"
+    - url: "https://github.com/aeoess/agent-passport-system/issues/16"
+      label: "Release notes"
+    - url: "https://aeoess.com/blog.html#day-61"
+      label: "Blog"
+
+- id: d61-aeoess-aps-crosswalk
+  title: "Day 61: aeoess-aps.yaml crosswalk published in the governance vocabulary"
+  description: "First time we published our own crosswalk in the registry we host. Closes a dogfooding gap: twelve external partners had contributed their crosswalks (InsumerAPI, SINT, AgentNexus, Veritas Acta, Logpose, RNWY, SoulboundRobots, Nobulex, SAR, JEP, asqav, SATP), we had not. crosswalk/aeoess-aps.yaml covers 3 exact-match signal types (passport_grade, trust_verification, governance_attestation), 2 partial (behavioral_trust, entity_continuity), 7 honest no_mapping entries, 4 decision_trajectory mappings, 1 constraint mapping, and out_of_vocabulary_primitives section for runtime enforcement mechanics. vocabulary.yaml updated: APS added to governance_attestation.issuers_in_production as 4th production issuer via Build D2 JWS trust profile endpoint."
+  status: done
+  workstream: comms
+  day_start: 61
+  day_end: 61
+  dependencies:
+    - d58-vocab-momentum
+    - d59-build-d2-jws-signing
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/blob/main/crosswalk/aeoess-aps.yaml"
+      label: "aeoess-aps.yaml"
+
+- id: d61-ecosystem-engagement
+  title: "Day 61: 11 substantive partner replies + release announcement"
+  description: "Posted primary release announcement at aeoess/agent-passport-system#16 as canonical reference link. Four cross-references to targeted threads (aeoess#2 closing SDK-publish issue, haroldmalikfrimpong-ops/agentid-aps-interop for Harold's interop fixtures, aeoess#12 for Nanook §8 coordination, openclaw#49971 for MoltyCel wallet binding). Seven substantive replies to active partners: A2A#1742+1755 (MoltyCel coordination plan + DID resolution), VeritasActa/verify#3 (tomjwxf ecosystem tracker), microsoft/agent-governance-toolkit#787 (pshkv + tomjwxf wine-shipment three-way composition, committed to ship aps_delegation_wrapper.py PR), google/adk-python#5164 (tomjwxf co-maintain acceptance for agent-governance-stack-example repo), aeoess/agent-governance-vocabulary#12 (nutstrut failure_codes draft feedback), langchain-ai/langchain#35691 (vdineshk Observatory composition observation). OPEN-COMMITMENTS.md updated with 3 new deliverables for the Apr 21-24 window."
+  status: done
+  workstream: comms
+  day_start: 61
+  day_end: 61
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/issues/16"
+      label: "Release announcement #16"
+
+- id: ledger-events-primitive
+  title: "Ledger Events primitive (v2.1.0 target)"
+  description: "Next protocol build post-v2 swap. Ordered content-addressable signed events with chain-integrity verifier. Public SDK gets LedgerEvent type, createLedgerEvent, verifyLedgerEvent, chainIntegrity, computeLedgerRoot. Any ledger store, analytics, subscription delivery, or gateway-signed attestation layer ships as a separate gateway build. Target v2.1.0-beta.0 on @next following the same opt-in pattern. Handoff prompt at specs/LEDGER-HANDOFF-PROMPT.md."
+  status: active
+  workstream: protocol
+  day_start: 62
+  day_end: 65
+  dependencies:
+    - d61-v2-architecture-separation
+
+- id: v2-promotion-decision
+  title: "v2.0.0 promotion to @latest (Mon/Tue 2026-04-21)"
+  description: "End of 48-72h stability window. If no critical partner issues surface, promote v2.0.0 to npm @latest across SDK and MCP, publish PyPI 2.0.0 final (non-pre-release), move v1.46.0 to legacy-v1 tag for 6 months, then frozen. Rollback path documented at /Users/tima/v2-swap-safety/ROLLBACK-PROCEDURES.md for every failure scenario (within-72h unpublish, post-72h deprecate, partner integration rollback)."
+  status: active
+  workstream: ops
+  day_start: 61
+  day_end: 65
+  dependencies:
+    - d61-v2-architecture-separation
