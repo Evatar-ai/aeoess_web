@@ -194,13 +194,13 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <div><span class="ps-n">20</span><span class="ps-l">Essential tools</span></div>
       <div><span class="ps-n">2,326</span><span class="ps-l">Tests</span></div>
     </div>
-    <div style="font:400 .7rem/1.55 var(--sans);color:var(--ink-5);margin:.1rem 0 .8rem">Full surface area: 130+ modules, 154 MCP tools, TypeScript + Python SDKs.</div>
+    <div style="font:400 .7rem/1.55 var(--sans);color:var(--ink-5);margin:.1rem 0 .8rem">Full surface area: 130+ modules, 142 MCP tools, TypeScript + Python SDKs.</div>
     <div style="font:400 .72rem/1.5 var(--sans);color:var(--ink-4);margin-bottom:.6rem;padding:.4rem .6rem;border-left:2px solid var(--green);background:var(--code-bg);border-radius:0 6px 6px 0"><strong style="color:var(--ink-3)">Independently cited</strong> — PDR in Production (University of British Columbia) validates APS Bayesian model. <a href="https://doi.org/10.5281/zenodo.19323172" style="font-size:.68rem">Zenodo</a></div>
     <div class="install-cmd" onclick="navigator.clipboard.writeText('npm install agent-passport-system')"><span class="cm">$</span> npm install agent-passport-system</div>
     <div class="install-cmd" onclick="navigator.clipboard.writeText('clawhub install agent-passport-system')" style="margin-left:.5rem"><span class="cm">$</span> clawhub install agent-passport-system</div>
     <div class="pkg-links">
       <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v2.0.0</a>
-      <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v2.27.0</a>
+      <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v3.0.0</a>
       <a href="https://clawhub.ai/aeoess/agent-passport-system">ClawHub Skill</a>
       <a href="https://pypi.org/project/agent-passport-system/">Python SDK v0.15.0</a>
       <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
@@ -223,7 +223,7 @@ import {
     <div class="updates">
       <div class="up-h">Updates</div>
       <div class="up-i"><span class="up-d">Apr 16</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Build C — Settlement Pipeline</strong> — Per-period signed settlement records aggregating Attribution Primitives across D/P/G/C axes. 3 new MCP tools, 123 modules. <a href="blog.html#day-60">Blog</a></span></div>
-      <div class="up-i"><span class="up-d">Apr 16</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Build A — unified four-axis attribution primitive</strong> — One signed Merkle receipt across D (data), P (protocol), G (governance), C (compute). Four independently-verifiable projections, one envelope. SDK v2.0.0, MCP v2.27.0, Python v0.13.0. <a href="blog.html#day-59">Blog</a>.</span></div>
+      <div class="up-i"><span class="up-d">Apr 16</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Build A — unified four-axis attribution primitive</strong> — One signed Merkle receipt across D (data), P (protocol), G (governance), C (compute). Four independently-verifiable projections, one envelope. SDK v2.0.0, MCP v3.0.0, Python v0.13.0. <a href="blog.html#day-59">Blog</a>.</span></div>
       <div class="up-i"><span class="up-d">Apr 16</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Build D2 — gateway trust profiles are now JWS-signed</strong> — <code>/api/v1/public/trust/:agentId</code> returns <code>X-APS-JWS</code> / <code>X-APS-JWS-KID</code> / <code>X-APS-JWS-JWKS</code> headers. Ed25519, kid <code>gateway-v1</code>, cross-engine verifiable against the public JWKS.</span></div>
       <div class="up-i"><span class="up-d">Apr 16</span><span class="up-t"><span class="up-tag t-d">ops</span><strong>Coordination layer consolidated</strong> — Portal, Nightwatch, and the three-agent coordination path retired. Single operator model. Historical records preserved in <code>archive-portal-era/</code>.</span></div>
       <div class="up-i"><span class="up-d">Apr 15</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>SDK v2.0.0 — Solana wallet_ref</strong> — Added to the chain enum with base58 validation. End-to-end wallet binding now spans Ethereum, Bitcoin, Solana.</span></div>
@@ -264,7 +264,7 @@ import {
       <div class="up-i"><span class="up-d">Mar 27</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>IETF Internet-Draft submitted</strong> — draft-pidlisnyi-aps-00. Zero idnits errors.</span></div>
       <div class="up-i"><span class="up-d">Mar 26</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Rome-Complete institutional layer</strong> — Charter, offices, approval, federation, reserves. <a href="blog.html#day-38">Blog</a></span></div>
       <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-p">deploy</span><strong>The Agent Times deploys APS</strong> — Every article cryptographically governed. <a href="https://theagenttimes.com">TAT</a></span></div>
-      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Governance distribution</strong> — aps.txt, 360 consumer loop, 154 MCP tools. <a href="blog.html#day-37">Blog</a></span></div>
+      <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Governance distribution</strong> — aps.txt, 360 consumer loop, 142 MCP tools. <a href="blog.html#day-37">Blog</a></span></div>
       <div class="up-i"><span class="up-d">Mar 25</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>Interactive protocol map</strong> — 57-module molecular layout. <a href="blog.html">Blog</a></span></div>
       <div class="up-i"><span class="up-d">Mar 24</span><span class="up-t"><span class="up-tag t-d">standard</span><strong>3 WG specs ratified</strong> — QSP-1, DID Resolution, Entity Verification. <a href="blog.html">Blog</a></span></div>
       <div class="up-i"><span class="up-d">Mar 23</span><span class="up-t"><span class="up-tag t-s">ship</span><strong>OATR founding member + data governance</strong> — Ledger, settlement, attribution. <a href="blog.html">Blog</a></span></div>
