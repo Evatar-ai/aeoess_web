@@ -17,7 +17,7 @@ AEOESS is the enforcement layer that sits on top of whatever identity the agent 
 
 The SDK is structured in two tiers. **Core** is a curated 24-function surface (`agent-passport-system/core`) covering identity, delegation, enforcement, commerce, reputation. **Extended** is the full 925-export API (`agent-passport-system`) covering 99 specialized modules: coordination, EU AI Act compliance, framework adapters, bilateral receipts, execution attestation, DID resolution, data lifecycle, and 39 v2 constitutional modules. Start with Core; pull from Extended only when needed.
 
-One hundred and twenty-three protocol modules (84 core + 39 v2 constitutional, SDK v1.46.0):
+One hundred and twenty-three protocol modules (84 core + 39 v2 constitutional, SDK v2.0.0):
 1. **Identity** — Ed25519 passports, scoped delegation with depth limits, signed receipts, reputation, challenge-response verification
 2. **Human Values Floor** — 8 principles (F-001 to F-008), attestation, compliance verification, graduated enforcement (inline/audit/warn)
 3. **Beneficiary Attribution** — Merkle proofs, beneficiary tracing through delegation chains, anti-gaming
@@ -70,7 +70,7 @@ Plus: **MCP Server** (v2.27.0) — 20 essential tools by default, 154 total. Set
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v1.46.0 — 2,972 tests passing. Zero heavy dependencies.**
+**v2.0.0 — 2,972 tests passing. Zero heavy dependencies.**
 
 ## Tiered Access (Recommended Onboarding)
 
@@ -156,7 +156,7 @@ Connect via Claude Desktop, Cursor, or any MCP client. Every operation Ed25519 s
 Day-by-day build record from Feb 18 to present: https://aeoess.com/blog.html
 14 posts covering: protocol architecture decisions, layer-by-layer shipping, multi-agent experiments, community engagement, MCP server distribution, agentic commerce implementation, threat model, and graduated enforcement.
 
-## Persistence Layer (v1.46.0)
+## Persistence Layer (v2.0.0)
 
 StorageBackend interface for durable gateway state. Events are truth, state is derived. VolatileBackend (in-memory, testing) ships with core SDK. @aeoess/storage-sqlite (separate package, WAL mode, 12 tables) for production single-gateway deployments. Gateway integration: write-through cache, loadFromStorage() on restart, signed checkpoints with external anchoring. Receipt bundles: export/verify/import signed portable archives. GDPR tombstoning preserves chain integrity. Reserve/commit/release atomic spend pattern.
 
