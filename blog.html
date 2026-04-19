@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog | AEOESS</title>
 <!-- PROPAGATION-ZONE-START -->
-<meta name="description" content="Day-by-day dev log of building the Agent Passport System — enforcement and accountability layer for AI agents. Bring your own identity. Policy eval under 2ms. 2,326 tests. SDK leads with /core subpath (curated 24 functions), MCP leads with 20 essential tools. Full surface area: 130+ modules, 142 MCP tools, 5 research papers, IETF Internet-Draft. Started February 18, 2026.">
+<meta name="description" content="Day-by-day dev log of building the Agent Passport System — enforcement and accountability layer for AI agents. Bring your own identity. Policy eval under 2ms. 2,326 tests. SDK leads with /core subpath (curated 24 functions), MCP leads with 20 essential tools. Full surface area: 130+ modules, 142 MCP tools, 7 research papers, IETF Internet-Draft. Started February 18, 2026.">
 <meta name="keywords" content="AI agent identity, agent passport, Ed25519, MCP server, multi-agent coordination, agentic commerce, AI governance, delegation chains, values floor, cryptographic identity, agent protocol, open source AI infrastructure, build in public">
 <meta name="author" content="Tymofii Pidlisnyi">
 <meta name="robots" content="index, follow">
@@ -44,7 +44,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AEOESS Dev Log — Governance for the Agent Economy">
-<meta name="twitter:description" content="Enforcement and accountability layer for AI agents. Bring your own identity. 2,326 tests. SDK /core subpath, MCP essential profile. Five papers, IETF draft. Open source, build in public.">
+<meta name="twitter:description" content="Enforcement and accountability layer for AI agents. Bring your own identity. 2,326 tests. SDK /core subpath, MCP essential profile. Seven papers, IETF draft. Open source, build in public.">
 <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <!-- PROPAGATION-ZONE-END -->
 
@@ -746,10 +746,28 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building the enforcement and accountability layer for AI agents. Bring your own identity: did:key, did:web, SPIFFE, OAuth, native did:aps. Started February 18, 2026. 2,326 tests, five papers, IETF draft. Open source. <span style="color:var(--ink-5)">Full surface area: 130+ modules, 142 MCP tools.</span></p>
+  <p class="sub">Day-by-day record of building the enforcement and accountability layer for AI agents. Bring your own identity: did:key, did:web, SPIFFE, OAuth, native did:aps. Started February 18, 2026. 2,326 tests, seven papers, IETF draft. Open source. <span style="color:var(--ink-5)">Full surface area: 130+ modules, 142 MCP tools.</span></p>
 <!-- PROPAGATION-ZONE-END -->
   <p class="sub" style="margin-top:.6rem">See the full picture on <a href="roadmap.html" style="font-weight:600">the roadmap</a> — every ship across protocol, product, research, comms, and ops with dependency arrows.</p>
 </div>
+
+
+<article class="post" id="day-62">
+  <time class="post-date" datetime="2026-04-18">April 18, 2026</time>
+  <h2>Day 62: The protocol shows up in other people's code.</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Yesterday was the separation ship. Today is the day after. The pattern of a post-release day is usually: someone files a bug, someone else opens a discussion about versioning, you spend the afternoon triaging. Today was different. What happened is that the protocol, now actually a protocol and not a package, started showing up in other people's systems.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Two things landed in the SDK, and neither of them was a new module. Both were interop harnesses. Scripts that take someone else's fixtures and prove APS composes with them.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Round-tripping AgentNexus</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">kevinkaylie's Track A fixtures were sitting on <a href="https://github.com/aeoess/agent-passport-system/pull/17">PR #17</a>. Two delegation scenarios, a happy path and a scope expansion attempt. Merging the fixtures would have closed the PR. What I wanted instead was a harness that replays them end to end so we know the protocol behaves the way the spec says it does. Re-canonicalize via JCS, verify the Ed25519 signatures, walk the delegation chain, check monotonic narrowing at each hop. Both fixtures match expected. Happy path accepts. Scope expansion denies at the subset gate, which is where it should deny. Zero canonicalization drift between kevinkaylie's inputs and ours. That result is the thing. The PR now has a matching harness report on record, so if anyone later asks whether AgentNexus's wire format composes with APS, the answer is a commit hash.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Signing for VeritasActa</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">tomjwxf's <code>VeritasActa/verify</code> repo has a cross-verification bundle format with a slot called <code>external_receipts.aps</code>. That slot was empty. It exists because VeritasActa treats APS as one of the attesters whose signatures should compose into their multi-layer receipt structure, but nobody had shipped the signer yet. Today we did. <code>interop/scripts/sign-va-ku-receipt.ts</code> takes a VeritasActa KU bundle, computes a JCS-canonical sha256 over each knowledge unit receipt, records the chain in <code>contributingSources</code>, and signs with a deterministic test key. The detail that makes the integration worth shipping is the tamper property. If anyone mutates a single byte inside a KU after signing, the APS signature stays cryptographically valid, but the recorded <code>accessReceiptId</code> no longer matches the KU's hash. The cross-layer integrity becomes observable from either side. APS didn't have to change to support this. It slots in.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Two external crosswalks merged</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Illia's SINT refresh (<a href="https://github.com/aeoess/agent-governance-vocabulary/pull/30">PR #30</a>) normalized match semantics to the canonical enum, added a <code>peer_review</code> no_mapping row, and recorded entity_continuity and consent_provenance alignment notes. RNWY's a2a.yaml (<a href="https://github.com/aeoess/agent-governance-vocabulary/pull/32">PR #32</a>) maps A2A Agent Card governance metadata against <code>did:web:rnwy.com</code> with a live JWKS serving <code>rnwy-trust-v1</code>, <code>rnwy-trust-v2</code>, and <code>rnwy-wallet-v1</code>. Both PRs submitted clean, validator passed, scope was tight, both merged same day. The registry is now at fourteen external crosswalks plus our own. Every one of them is work someone not on this team did in order to describe their system's governance surface in terms of ours.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">Two threads worth naming</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Jerry at MnemoPay shipped x402-compatible paywalls plus a financial-brain MCP on <a href="https://github.com/x402-foundation/x402/pull/1904">x402#1904</a>. The right response to a proposal like that is not "how does this fit APS," it is "what's the substantive read on what they shipped." So I gave it a three-point read: the wallet-decision layer is new terrain, the evidence shape (receipts plus MCP tool outputs) is compatible with how APS signs for downstream composition, and a composition hook via <code>delegation-reference</code> in the <code>X-Agent-Identity</code> header would make APS passports attachable to x402 requests without modifying x402 itself. On <a href="https://github.com/massivescale-ai/agentic-trust-framework/issues/8">ATF#8</a>, desiorac proposed the ArkForge model, a three-plane decomposition of agentic trust into delegation, decision, and execution. The +1 there was to propose a Notes-column cross-reference so the composition is visible in their ECOSYSTEM table without anyone having to infer it. Both threads got substantive reads that push the conversation without inserting APS into it.</p>
+  <h3 style="color:var(--text);font-size:1.1rem;margin-top:1.6rem;margin-bottom:.6rem">The quiet-strong shape</h3>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Days that ship new modules are loud. Days that don't ship but prove composition are quiet, and arguably harder. Interop is the surface where wishful thinking gets falsified. If our canonicalization drifts against kevinkaylie's, it shows up. If our signature doesn't slot into tomjwxf's bundle, it shows up. If a partner's crosswalk doesn't pass our validator, it shows up. None of these could fail today, so none of them did. That is what a post-release day looks like when the release was correct.</p>
+</article>
 
 
 <article class="post" id="day-61">

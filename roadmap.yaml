@@ -1,6 +1,6 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-17 (Day 61) — V2 architecture swap shipped: SDK v2.0.0-beta.0 on npm @next (v1.46.0 remains on @latest), gateway repinned and auto-deployed to Railway, Python SDK v2.0.0b0 on PyPI pre-release. MCP adaptation to v2 pending.
+# Last updated: 2026-04-18 (Day 62) — Post-release interop day. AgentNexus Track A fixtures round-trip end-to-end under APS, VeritasActa KU signer ships for external_receipts.aps bundle slot, SINT refresh (PR #30) + RNWY a2a.yaml (PR #32) crosswalks merged same day. Registry at 14 external crosswalks + aeoess-aps. v2.0.0-beta.0 stability window continues toward Mon/Tue @latest promotion decision.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ HISTORIC — PROTOCOL ═══
@@ -1275,3 +1275,48 @@
   day_end: 65
   dependencies:
     - d61-v2-architecture-separation
+
+- id: d62-interop-verification
+  title: "Day 62: AgentNexus round-trip + VeritasActa KU signer"
+  description: "Two interop harnesses landed in the SDK. AgentNexus Track A fixtures (kevinkaylie, PR #17) replay end-to-end: JCS re-canonicalization, Ed25519 signature verification, delegation chain walk, monotonic narrowing check at each hop. Both fixtures match expected, happy-path accepts, scope-expansion denies at the subset gate, zero canonicalization drift. VeritasActa KU signer (tomjwxf, VeritasActa/verify#2, test vectors PR#6) slots APS into their external_receipts.aps bundle field with JCS-canonical sha256 over each knowledge unit receipt, records the chain in contributingSources, signs with deterministic test key. Cross-layer integrity is observable either direction: tampering any KU byte invalidates the recorded accessReceiptId while the APS signature stays cryptographically valid. Neither interop required a protocol change. APS slots in as specified."
+  status: done
+  workstream: protocol
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/pull/17"
+      label: "PR #17 AgentNexus fixtures"
+    - url: "https://aeoess.com/blog.html#day-62"
+      label: "Blog"
+
+- id: d62-external-crosswalks-merged
+  title: "Day 62: SINT refresh + RNWY a2a.yaml crosswalks merged"
+  description: "Two external vocabulary crosswalks merged same day. SINT refresh (PR #30, Illia Pashkov) normalized match semantics to the canonical enum (exact|partial|no_mapping), added a peer_review no_mapping row, updated home to docs.sint.gg, recorded entity_continuity and consent_provenance alignment notes. RNWY a2a.yaml (PR #32) maps A2A Agent Card governance metadata (peer_review, behavioral_trust, wallet_intelligence) against did:web:rnwy.com with a live JWKS serving rnwy-trust-v1, rnwy-trust-v2, rnwy-wallet-v1. Both PRs submitted clean, validator passed, scope was tight. Registry is now at 14 external partner crosswalks plus aeoess-aps (shipped Day 61). Validator chore f092f0e also landed same day, renaming note to notes for schema consistency."
+  status: done
+  workstream: comms
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d58-vocab-momentum
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/30"
+      label: "PR #30 SINT refresh"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/32"
+      label: "PR #32 RNWY a2a"
+
+- id: d62-ecosystem-engagement
+  title: "Day 62: Substantive reads on x402#1904 and ATF#8"
+  description: "Two ecosystem threads got substantive engagement, neither inserting APS into the conversation. x402#1904: MnemoPay (Jerry) shipped x402-compatible paywalls plus a financial-brain MCP. Reply was a three-point read on what they shipped (wallet-decision layer is new terrain, receipts plus MCP tool outputs are compatible with APS signing for downstream composition, composition hook via delegation-reference in X-Agent-Identity would make APS passports attachable to x402 requests without modifying x402). ATF#8: desiorac proposed the ArkForge three-plane decomposition (delegation, decision, execution). Reply was a +1 proposing a Notes-column cross-reference so the composition is visible in their ECOSYSTEM table without inference, linked in-toto#549 as the chain-linkable primitive. Both threads pushed forward the conversation on the partner's terms. Several unrelated canary threads correctly skipped (handles not named here for operational hygiene)."
+  status: done
+  workstream: comms
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/x402-foundation/x402/pull/1904#issuecomment-4274860122"
+      label: "x402#1904 reply"
+    - url: "https://github.com/massivescale-ai/agentic-trust-framework/issues/8#issuecomment-4274860149"
+      label: "ATF#8 reply"
