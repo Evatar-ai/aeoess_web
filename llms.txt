@@ -5,7 +5,7 @@
 Updated: 2026-04-11
 SDK version: agent-passport-system@2.0.0
 MCP version: agent-passport-system-mcp@3.0.0 (142 tools)
-Python SDK: agent-passport-system==2.0.0b0
+Python SDK: agent-passport-system==2.0.0
 Canonical: https://aeoess.com/llms.txt
 Full reference: https://aeoess.com/llms-full.txt
 License: Apache-2.0
