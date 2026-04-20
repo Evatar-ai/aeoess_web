@@ -3,9 +3,9 @@
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
 Updated: 2026-04-11
-SDK version: agent-passport-system@1.41.0
-MCP version: agent-passport-system-mcp@2.23.0 (142 tools)
-Python SDK: agent-passport-system==0.11.0
+SDK version: agent-passport-system@2.0.0
+MCP version: agent-passport-system-mcp@3.0.0 (142 tools)
+Python SDK: agent-passport-system==2.0.0b0
 Canonical: https://aeoess.com/llms.txt
 Full reference: https://aeoess.com/llms-full.txt
 License: Apache-2.0
@@ -121,7 +121,7 @@ import { /* anything from the full surface */ } from 'agent-passport-system'
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. Default profile is `essential` (142 tools: identity, delegation, enforcement, commerce, reputation). Set `APS_PROFILE=full` for all 142 tools across all layers. Other profiles: identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
+The `agent-passport-system-mcp` package provides a full-stack MCP server. Default profile is `essential` (20 tools: identity, delegation, enforcement, commerce, reputation). Set `APS_PROFILE=full` for all 142 tools across all layers. Other profiles: identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
 
 **Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 
