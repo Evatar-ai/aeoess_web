@@ -114,6 +114,36 @@
   dependencies:
     - d15-ship-day
 
+- id: d17-did-vc-bridge
+  title: "W3C DID Method + Verifiable Credentials"
+  description: "Shipped W3C DID Method (did:aps) — passports now resolve as Decentralized Identifiers. W3C Verifiable Credentials issue/verify from passport data. SDK modules did.ts, did-interop.ts, vc.ts, vc-wrapper.ts. Part of SDK v1.10.0 (commit d34abb2)."
+  status: done
+  workstream: protocol
+  day_start: 17
+  day_end: 17
+  dependencies:
+    - d17-principal-identity
+
+- id: d17-a2a-bridge
+  title: "A2A Protocol Bridge"
+  description: "Interop module for Google's Agent-to-Agent protocol: passportToAgentCard, verifyAgentCard. 8 tests. Commit bb88f90. src/core/a2a.ts shipped in SDK v1.10.0."
+  status: done
+  workstream: protocol
+  day_start: 17
+  day_end: 17
+  dependencies:
+    - d17-principal-identity
+
+- id: d17-python-sdk-pypi-launch
+  title: "Python SDK — First PyPI Releases"
+  description: "Four PyPI releases of agent-passport-system in a single day: v0.1.0, v0.2.0, v0.3.0, v0.4.0 (all 2026-03-06). Cross-language compat with TypeScript SDK via canonical JSON. 8 layers, 101 tests at v0.3.0. pip install agent-passport-system."
+  status: done
+  workstream: protocol
+  day_start: 17
+  day_end: 17
+  dependencies:
+    - d17-principal-identity
+
 - id: d18-autoresearch
   title: "Autoresearch: AI Finds Bugs AI Wrote"
   description: "Adapted Karpathy's autoresearch pattern. AI generates attacks, tests run, keep what breaks something new. 320 suites, 1,178 tests, 63 test files."
@@ -133,6 +163,16 @@
   day_end: 21
   dependencies:
     - d18-autoresearch
+
+- id: d22-proxy-gateway
+  title: "ProxyGateway Enforcement Boundary"
+  description: "Shipped src/core/gateway.ts — ProxyGateway enforcement boundary with replay protection and two-phase execution. 30 tests. The architectural piece that makes the gateway both judge and executor, not just approver."
+  status: done
+  workstream: protocol
+  day_start: 22
+  day_end: 22
+  dependencies:
+    - reputation-gates
 
 - id: d24-security-hardening
   title: "Gateway Security Hardening"
@@ -539,6 +579,26 @@
     - url: "https://doi.org/10.5281/zenodo.18749779"
       label: "Zenodo"
 
+- id: d13-threat-model
+  title: "Threat Model Published"
+  description: "Published threat-model.html — 38 attack scenarios with direct references to the test suite. Asset inventory, threat actors, trust boundaries, and explicit non-goals. Commit 52b7dd0."
+  status: done
+  workstream: research
+  day_start: 13
+  day_end: 13
+  dependencies:
+    - paper-1-social-contract
+
+- id: d17-eu-ai-act-mapping
+  title: "EU AI Act Compliance Mapping"
+  description: "Automated compliance checks against EU AI Act — risk classification, Articles 9–15 and 50 mapping, gap analysis, transparency disclosure. 14 tests. Commit 73d948e. src/core/euaiact.ts shipped in SDK v1.10.0."
+  status: done
+  workstream: research
+  day_start: 17
+  day_end: 17
+  dependencies:
+    - d13-threat-model
+
 - id: d18-autoresearch-findings
   title: "3-Experiment AI Agent Study"
   description: "Published findings from running 3 experiments with real AI agents. What broke, what worked. Early empirical backing for the threat model."
@@ -852,6 +912,24 @@
 
 # ═══ OPS ═══
 
+- id: d13-agent-district
+  title: "Agent District — Pixel-Art Protocol Visualization"
+  description: "Shipped world.html — a pixel-art operational map showing all protocol layers in live operation. Nine buildings (one per layer plus central square), four agents with unique character designs, walk cycles, and task queues moving between buildings in real time. Commit 23eba32. Live at aeoess.com/world.html."
+  status: done
+  workstream: ops
+  day_start: 12
+  day_end: 13
+  dependencies: []
+
+- id: d13-website-overhaul
+  title: "Website Overhaul + SEO Sprint"
+  description: "Fixed 56 misspelled 'Ed25519' occurrences across three repos (npm typo bump 1.8.1, commit 3b0f1ea). Rewrote hero text, aligned Quick Start to real API. Rolled out GA4, Open Graph, Twitter cards, and Schema.org across all 11 HTML pages (commit 2f69c6e). llms.txt layer descriptions aligned with actual architecture."
+  status: done
+  workstream: ops
+  day_start: 13
+  day_end: 13
+  dependencies: []
+
 - id: owasp-mapping
   title: "OWASP AI Security Mapping"
   description: "Community health baseline. APS scored 10/12 on BBIS later (Day 51)."
@@ -860,6 +938,25 @@
   day_start: 16
   day_end: 16
   dependencies: []
+
+- id: d17-remote-mcp-server
+  title: "Remote MCP Server Live at mcp.aeoess.com"
+  description: "New public repo aeoess/agent-passport-remote-mcp (created 2026-03-06T16:43:22Z). stdio-to-SSE/HTTP bridge, isolated MCP subprocesses per session. PM2 on port 3002 + cloudflared tunnel → mcp.aeoess.com."
+  status: done
+  workstream: ops
+  day_start: 17
+  day_end: 17
+  dependencies: []
+
+- id: d22-homepage-redesign
+  title: "Homepage Redesign + FAQ + Footer Sweep"
+  description: "Site-wide redesign: constellation visualization rebuilt with semantic layout, bold hero with gold gradient rule + accent initials, 3-tier copy (hook / plain-English / technical). Deleted bot.html and bio.html with reference cleanup across 13 subpages. Created faq.html with 10 questions + Schema.org FAQ markup. Footer added to all subpages. Commits 539e923, d09b893."
+  status: done
+  workstream: ops
+  day_start: 21
+  day_end: 22
+  dependencies:
+    - d13-website-overhaul
 
 - id: amcs-spec
   title: "AMCS v0.1.0"
