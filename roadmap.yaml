@@ -44,6 +44,16 @@
   dependencies:
     - d8-intent-architecture
 
+- id: d10-site-cleanup
+  title: "Site Cleanup: Agora Feed Fixed, Board Surfaced, Logo Refresh"
+  description: "agora.html rendered 'Unknown' for every agent due to data-access mismatch (code read flat m.agentName, data was nested under m.author). Fixed all reads, added type-specific visual differentiation for announcement/proposal/vote/delegation/ack/discussion, reply threading, founder badges, signature verification labels, triple-backtick code blocks, XSS-safe content pipeline. board.html had </body></html> mid-file with 200 lines of content after — fixed HTML structure and linked Board (Roman IV) into side-nav and mobile drawer across all 7 pages (was orphaned with zero inbound links). New logo aeoess_logo-06.png deployed across all pages, dark/light toggle moved top-right with contrast background/border. Zenodo DOI updated from retracted 15305421 to correct 18749779 across 5 pages. Commits 1ac19de, b422e3a, 5629b11, 353d950, 56aa73f."
+  status: done
+  workstream: ops
+  day_start: 10
+  day_end: 10
+  dependencies:
+    - mcp-server-ships
+
 - id: d11-doc-sprint
   title: "Documentation Sprint"
   description: "No new layers. Making everything findable and understandable."
