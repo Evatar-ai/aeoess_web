@@ -1756,9 +1756,9 @@
 # Each is a promise with a counterparty and a delivery window.
 
 - id: aivss-32-3-3-pr
-  title: "AIVSS §3.3 commit-level evidence rows (Apr 21 due)"
-  description: "Markdown PR against OWASP AIVSS v0.9 working branch covering §3.3: three sub-factors with 4-point scales, delegation depth, privilege aggregation (horizontal + vertical split), cross-agent correlation, plus a cryptographically-enforced-vs-asserted qualifier as 2x multiplier. Post to OWASP AARS#32 for review before PR. Committed Apr 17, due Apr 21 (≈ Day 65). @VeloGerber is the reviewer."
-  status: active
+  title: "AIVSS §3.3 commit-level evidence rows + naming boundary + conformance path"
+  description: "Day 64 (Apr 20): boundary held on §3.3 naming when a proposal came in to co-list AEOESS APS and AiEGIS APS as one citation. Accepted on technical content (evidence sequencing, measurement method); declined on naming — paste-ready §3.3 text names only AEOESS APS as shipped reference, with AiEGIS APS re-evaluated at v1.0. Day 65 (Apr 21): VeloGerber accepted the naming position (22:51 Apr 20) and asked scope-clarification: does independent Python reimpl (a) or SDK-consumption (b) qualify as §3.3 production conformance evidence for AiEGIS v1.0. Answered: (a) earns a separate conformance row, (b) is a deployment pattern; v0.9 cites AEOESS APS, v1.0 re-evaluates once (a) lands. Concrete offer: ship interop fixtures as standalone aps-conformance-suite repo so the bar is legible."
+  status: done
   workstream: comms
   day_start: 64
   day_end: 65
@@ -1770,16 +1770,16 @@
 
 - id: vocab-26-context-dimensions-pr
   title: "vocab#26 context_dimensions PR (Apr 22 target)"
-  description: "PR against aeoess/agent-governance-vocabulary adding context_dimensions as third top-level structural section in vocabulary.yaml. Four Day-1 entries with shape {definition, non-signal test, reference implementations, example field names}: counterparty_standing, request_origin, session_dynamics, physical_environment_state. Target Apr 22 (≈ Day 66). pshkv, tomjwxf, and the vocab community are the reviewers."
-  status: active
+  description: "PR #34 merged Day 65 (commit 6a24b73f) adding context_dimensions as third top-level structural section in vocabulary.yaml. Four Day-1 entries with non_signal_test discipline: counterparty_standing, request_origin, session_dynamics, physical_environment_state. Incorporated @pshkv review (resolution_source marked recommended-not-required in v0.1, physical_environment_state per-evaluation variance documented, 4-value enum as v0.2 fallback). @tomjwxf's 5-value enum preserved per his Day 63 sign-off. Self 5-check protocol run publicly before merge (transparency move on our own repo). Closes #26."
+  status: done
   workstream: protocol
   day_start: 64
-  day_end: 66
+  day_end: 65
   dependencies:
     - d61-aeoess-aps-crosswalk
   links:
-    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/26"
-      label: "vocab#26"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/34"
+      label: "vocab PR#34"
 
 - id: a2a-compliance-harness-repo
   title: "a2a-compliance-harness v0.1 repo (this week)"
@@ -1928,3 +1928,38 @@
     - vocab-contributing-lands
 
 # ═══ end of deep audit pass 2 additions ═══
+
+# ═══ DAY 65 items (added live) ═══
+
+- id: d65-harold-signing-alignment
+  title: "AgentID voluntary signing-convention alignment to raw digest bytes"
+  description: "Harold (haroldmalikfrimpong-ops) merged PR#38 (Interop Week 1 Step 1) and then, at 08:40 UTC Day 65, came back with a voluntary alignment: AgentID's production signer switched from signing UTF-8 hex strings to signing raw 32-byte digest bytes (the option (b) from our 5-check review, the convention APS/SINT/MolTrust already use). Follow-up PR will replace the one signature field on the already-merged fixture to match the new signer. Five production issuers now converge on one signing convention: the Week 1 bundle README convention table becomes a single sentence rather than per-issuer footnotes. Materially important for cross-issuer harness verification under OWASP / IETF reviewer gaze. Acked via https://github.com/aeoess/agent-governance-vocabulary/pull/38#issuecomment-4289797509."
+  status: done
+  workstream: comms
+  day_start: 65
+  day_end: 65
+  dependencies:
+    - harold-canonical-repo
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/38"
+      label: "vocab PR#38"
+
+- id: d65-interop-week-1-step-1
+  title: "Interop Week 1 Step 1 (trust_verification) merged"
+  description: "AgentID trust_verification fixture merged via PR#38 (Harold). First of five Week 1 slots filled. Production JWKS and Solana devnet anchor both verified live during 5-check. Status ack posted to vocab#36 with running fixture table; Step 4 (peer_review task_completion) re-pinged to @QueBallSharken / Logpose after @rnwy's graceful decline to pad bundle with reviewer_credibility into a task_completion shape."
+  status: done
+  workstream: comms
+  day_start: 64
+  day_end: 65
+  dependencies:
+    - d63-interop-week-1-opened
+
+- id: aps-conformance-suite-repo
+  title: "aps-conformance-suite standalone repo (offered to VeloGerber)"
+  description: "Offered on AARS#32 Day 65 as the path to make the §3.3 conformance bar legible rather than implicit. Lift interop/fixtures/ from the main SDK into a standalone repo with JCS-canonical test vectors covering happy-path, scope expansion, cascade revocation, chain-root verification. Any implementation (Python reimpl, Rust, Go) runs the test matrix and demonstrates conformance without needing to mirror our codebase. Not speculative — only builds if VeloGerber picks path (a) or another reimplementer signals demand. Standalone repo is cleaner to cite in OWASP/IETF documents than pointing at the interop directory of a main SDK."
+  status: backlog
+  workstream: protocol
+  day_start: 70
+  day_end: 90
+  dependencies:
+    - aivss-32-3-3-pr
