@@ -1,6 +1,6 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-18 (Day 62) — Post-release interop day. AgentNexus Track A fixtures round-trip end-to-end under APS, VeritasActa KU signer ships for external_receipts.aps bundle slot, SINT refresh (PR #30) + RNWY a2a.yaml (PR #32) crosswalks merged same day. Registry at 14 external crosswalks + aeoess-aps. v2.0.0-beta.0 stability window continues toward Mon/Tue @latest promotion decision.
+# Last updated: 2026-04-20 (Day 64) — v2.0.0 promoted to npm @latest after clean 72h stability window. SDK v2.1.0 shipped same day with Cognitive Attestation envelope primitive (Paper 7 port, Zenodo 10.5281/zenodo.19646276) plus verifyBoundWallet object-form overload. APS submitted to AAIF as project-proposals#14, path toward Linux Foundation stewardship for the public protocol layer. Ledger Events primitive killed on Day 61 review (SCITT overlap, no demand) — postmortem at specs/killed/. OWASP AARS#32 naming boundary held firm. Thirteen ecosystem engagements posted. ClawHub skill bumped to v5.5.0.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ HISTORIC — PROTOCOL ═══
@@ -1257,22 +1257,23 @@
       label: "Release announcement #16"
 
 - id: ledger-events-primitive
-  title: "Ledger Events primitive (v2.1.0 target)"
-  description: "Next protocol build post-v2 swap. Ordered content-addressable signed events with chain-integrity verifier. Public SDK gets LedgerEvent type, createLedgerEvent, verifyLedgerEvent, chainIntegrity, computeLedgerRoot. Any ledger store, analytics, subscription delivery, or gateway-signed attestation layer ships as a separate gateway build. Target v2.1.0-beta.0 on @next following the same opt-in pattern. Handoff prompt at specs/LEDGER-HANDOFF-PROMPT.md."
-  status: active
+  title: "Ledger Events primitive (KILLED Day 61)"
+  description: "Planned as the next protocol build post-v2 swap but killed on Day 61 review. Three-factor check failed on all three axes: concrete external demand (none surfaced), clean scope versus SCITT (substantial overlap), additive value beyond the existing ledger stack (marginal). Postmortem at specs/killed/LEDGER-EVENTS-v0-KILLED-2026-04-17.md with revival criteria for future reference. Former handoff prompt renamed to specs/killed/LEDGER-HANDOFF-PROMPT-STALE-2026-04-18.md with stale banner. Replaced in the v2.1.0 slot by Cognitive Attestation envelope primitive (actual demand, clean scope)."
+  status: killed
   workstream: protocol
   day_start: 62
-  day_end: 65
+  day_end: 64
   dependencies:
     - d61-v2-architecture-separation
+  kill_note: "Killed Day 61 consilium (Claude + GPT-5 + Gemini 2.5 Pro). Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. \"I can see it coming\" is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64)."
 
 - id: v2-promotion-decision
-  title: "v2.0.0 promotion to @latest (Mon/Tue 2026-04-21)"
-  description: "End of 48-72h stability window. If no critical partner issues surface, promote v2.0.0 to npm @latest across SDK and MCP, publish PyPI 2.0.0 final (non-pre-release), move v1.46.0 to legacy-v1 tag for 6 months, then frozen. Rollback path documented at /Users/tima/v2-swap-safety/ROLLBACK-PROCEDURES.md for every failure scenario (within-72h unpublish, post-72h deprecate, partner integration rollback)."
-  status: active
+  title: "v2.0.0 promotion to @latest, done Day 64"
+  description: "48-to-72-hour stability window closed clean. v2.0.0 promoted to npm @latest across SDK and MCP v3.0.0. PyPI 2.0.0 final shipped (non-pre-release, replacing 2.0.0b0). v1.46.0 and MCP v2.27.0 parked on legacy-v1 tag for six months, installable indefinitely. Four external partner integrations landed against v2 during the window (AgentNexus Track A, VeritasActa KU signer, SINT refresh, RNWY a2a.yaml) — all ran through v2 transparently. One partner compat test surfaced two shape/UX findings (MoltyCel, SDK#16), both fixed within the window. Python __init__.py __version__ drift also caught and corrected during promotion sweep."
+  status: done
   workstream: ops
   day_start: 61
-  day_end: 65
+  day_end: 64
   dependencies:
     - d61-v2-architecture-separation
 
@@ -1320,3 +1321,172 @@
       label: "x402#1904 reply"
     - url: "https://github.com/massivescale-ai/agentic-trust-framework/issues/8#issuecomment-4274860149"
       label: "ATF#8 reply"
+
+
+# ═══ DAY 63-64 (added 2026-04-20) ═══
+# Stability window close, v2 promotion, v2.1.0 ship, AAIF submission, OWASP naming boundary, 13 ecosystem engagements.
+
+- id: d63-moltycel-compat-test
+  title: "Day 63: MoltyCel v2 compat test + wallet binding shape-diff"
+  description: "Stability-window Sunday. Exactly one partner compat test ran through agent-passport-system@2.0.0-beta.0 and MCP v3.0.0, MoltyCel on Solana wallet binding with a fresh Ed25519 keypair, bs58 signature, full bindWallet → verifyBoundWallet round-trip. Two findings surfaced: MIGRATION.md did not call out the wallet_ref field-level v1-to-v2 shape change explicitly enough, and verifyBoundWallet accepted only positional args while bindWallet accepted an object form. Shape-diff clarification landed same day as commit 0a3edeb. UX overload queued for v2.1.0. Nothing else broke; promotion path stayed on for Monday."
+  status: done
+  workstream: protocol
+  day_start: 63
+  day_end: 63
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/issues/16"
+      label: "SDK#16 compat test"
+
+- id: d64-v2-promoted-latest
+  title: "Day 64: v2.0.0 promoted to npm @latest"
+  description: "Stability window closed clean. SDK v2.0.0 and MCP v3.0.0 flipped from @next to @latest. PyPI 2.0.0 final replaces the 2.0.0b0 pre-release. v1.46.0 and MCP v2.27.0 moved to the legacy-v1 tag, six months guaranteed availability. Propagation sweep also caught a Python __init__.py __version__ drift carrying \"0.15.0\" from the beta period, if a caller imported agent_passport.__version__ at runtime, they would have seen 0.15.0 while pyproject.toml and the wheel said 2.0.0b0. Fixed to 2.0.0 during the promotion sweep."
+  status: done
+  workstream: protocol
+  day_start: 64
+  day_end: 64
+  dependencies:
+    - v2-promotion-decision
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK v2.0.0 @latest"
+    - url: "https://aeoess.com/blog.html#day-64"
+      label: "Blog"
+
+- id: d64-v210-cognitive-attestation
+  title: "Day 64: SDK v2.1.0, Cognitive Attestation envelope + verifyBoundWallet object form"
+  description: "Two primitives shipped on @latest same day as the v2 promotion. Cognitive Attestation envelope: TypeScript port of the normative JSON schema from Paper 7 (Zenodo 10.5281/zenodo.19646276), module at src/v2/cognitive-attestation/ with types, envelope, verify, disputes, index, README. Stage 1 cryptographic verification with required_signer_roles coverage fully implemented; Stage 2 registry interface, Stage 3 replay typed stub with clear TODO. Typed dispute primitives ship the vocabulary of disputes without baking resolution logic into the protocol (resolution layer lives in the consumer). 35 new tests (envelope 17, verify 12, adversarial 6), zero new npm deps, reused internal canonicalizeJCS + crypto/keys. Second primitive: verifyBoundWallet object-form overload, closing the SDK#16 UX asymmetry MoltyCel flagged. Commits ceb1cd1 (wallet-binding) + 8c9cc14 (cognitive-attestation) on @latest. Test count 2,325 → 2,366."
+  status: done
+  workstream: protocol
+  day_start: 64
+  day_end: 64
+  dependencies:
+    - d64-v2-promoted-latest
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19646276"
+      label: "Paper 7 on Zenodo"
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK v2.1.0"
+
+- id: d64-aaif-submission
+  title: "Day 64: APS submitted to AAIF (path to Linux Foundation stewardship)"
+  description: "Filed as aaif/project-proposals#14. Foundation submission for the public protocol layer, cross-referencing SINT #12 (Illia) and the three-vendor governance_attestation convergence with MolTrust. AEOESS company, YC application, private gateway, and commercial partnerships deliberately excluded, commercial adjacencies stay independent of the protocol submission. Every live-artifact claim in the submission verified before posting: JWKS endpoints return 200, npm and PyPI artifacts resolve, Zenodo DOIs have landing pages, crosswalk entries validate. Gist for Illia's AAIF cover email at gist.github.com/aeoess/a622521d10625179c2d7760d83663714. Waiting on AAIF TC triage, expected Tuesday UTC per #12/#13 precedent."
+  status: active
+  workstream: ops
+  day_start: 64
+  day_end: 67
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/aaif/project-proposals/issues/14"
+      label: "aaif#14"
+
+- id: d64-owasp-aars32-boundary
+  title: "Day 64: OWASP AARS#32 naming boundary held"
+  description: "VeloGerber (AiEGIS) proposed co-listing 'AEOESS APS' and 'AiEGIS APS' as two entries in the permanent v0.9 §3.3 standards citation. Technical content of the proposal accepted on its merits (evidence sequencing, measurement methodology). Naming framing declined firmly in writing with paste-ready §3.3 text naming only APS. Apr 21 calendar typo in the proposal also flagged. Posted at github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/32#issuecomment-4284723330. Not every be-nice reflex is the right one."
+  status: done
+  workstream: comms
+  day_start: 64
+  day_end: 64
+  dependencies: []
+  links:
+    - url: "https://github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/32"
+      label: "OWASP AARS#32"
+
+- id: d64-ecosystem-engagement-13
+  title: "Day 64: Thirteen substantive partner engagements"
+  description: "Context: the structured ecosystem map from Day 61 rebuilt Sunday night, today's response queue visible at session start. Posts in two batches. Tier 1 (7): AAIF cover-email gist for Illia on sint#130, pshkv crosswalk ack on vocab#8, governance-declaration proposal for tomjwxf on ossf/security-insights#171, APS+SINT composition MVP for EchoOfDawn on autogen#7525, SDK#16 MIGRATION.md field-diff patch + v2.1.0 ship follow-up to MoltyCel, vocab#38 five-check protocol review for Harold's AgentID fixture (JWKS live, Solana tx verified, signing-input UTF-8-hex vs bytes ambiguity flagged), vocab#34 context_dimensions PR flipped ready-for-review. Tier 2 (4): autogen#7528 three-layer APS+SINT+OPA composition mapped onto ConversableAgent lifecycle, A2A#1716 Enclave+SINT+MolTrust converged-architecture ack with sub_delegate for 1→3 hop + AND-composition for MolTrust-score + APS-grade gate, VoltAgent#1166 full TS GuardrailDecision interface reference implementation (Alvasilev12/MEEET canary correctly ignored), llama_index#21312 dispute-primitives reference from v2.1.0. insumer-examples#1 skipped, zero activity since our Apr 17 scope ack."
+  status: done
+  workstream: comms
+  day_start: 64
+  day_end: 64
+  dependencies:
+    - d61-ecosystem-engagement
+
+- id: d64-clawhub-skill-v550
+  title: "Day 64: ClawHub skill bumped to v5.5.0"
+  description: "Numbers-only minor bump on the agent-passport ClawHub skill. Description, SKILL.md line 3, and SKILL.md line 181/184 all synced to the current surface: 124 modules, 2,366 tests, 142 MCP tools. _meta.json description rewritten to match. v5.4.0 already existed on ClawHub from an earlier auto-publish cycle; bumped straight to v5.5.0 to reflect on-disk state. Commits 00b40fd + 6e43f99."
+  status: done
+  workstream: ops
+  day_start: 64
+  day_end: 64
+  dependencies:
+    - d64-v210-cognitive-attestation
+
+# ═══ HISTORICAL KILLED ITEMS — restored from conversation record (added Day 64) ═══
+# Philosophy: showing what we decided NOT to build is as much a PM signal as showing what shipped.
+# Each killed item carries a kill_note surfaced in the roadmap tooltip.
+
+- id: killed-forensic-attribution-test
+  title: "Forensic attribution test (5-signal)"
+  description: "Proposed Day 48. A five-signal test to detect whether an authorized trade was secretly colluding with a counterparty — checking ordering, size, timing, pricing, and trajectory against benign baselines. Would have produced a forensic score on every gateway-observed action."
+  status: killed
+  workstream: research
+  day_start: 48
+  day_end: 48
+  dependencies:
+    - consilium-methodology
+  kill_note: "Killed Day 48 consilium. All four model reviewers (Claude, GPT-5, Gemini 2.5 Pro, plus a fourth adversarial Claude) independently designed an undetectable attacker class, legitimate-looking losing trades against colluding counterparties within per-transaction limits. The test catches naive attackers designed to be catchable and fails against adversarial-aware ones. Building it is a waste. Replaced by cumulative-exposure-tracking: enforce net position change per delegation per rolling window at the gateway, not behavioral forensics per action. 95% confidence kill."
+
+- id: killed-cascade-verification
+  title: "Cascade verification (supervisor chain)"
+  description: "Proposed Day 48. Before every delegated action, walk the full delegation chain and require each supervisor in the chain to re-verify that the downstream action is still within scope. Intended to catch chained compromise through deep delegation trees."
+  status: killed
+  workstream: protocol
+  day_start: 48
+  day_end: 48
+  dependencies:
+    - consilium-methodology
+  kill_note: "Killed Day 48 own-team attack. Supervisors rubber-stamp clean history. Routing is attacker-controlled, so an attacker can present only the supervisors who will sign. UX kills adoption, every action blocks on N manual approvals. Fell apart on first red-team pass. Replaced by structural authority-class separation plus non-bypassable timelocks at action time, not trust-chain verification. 95% confidence kill."
+
+- id: killed-quantum-inside-aps
+  title: "Quantum computing inside APS"
+  description: "Days 42-51. Six weeks of circling three framings for using quantum computing to strengthen APS itself: quantum speedup for delegation-chain math, quantum randomness for keygen, Bell-state non-collusion proofs between gateways. Each felt like it should work; none actually did."
+  status: killed
+  workstream: research
+  day_start: 42
+  day_end: 51
+  dependencies:
+    - consilium-methodology
+  kill_note: "Killed Day 51 consilium. Quantum speedup for APS math: delegation verification is already microsecond-fast, no asymptotic win matters. Quantum randomness for keygen: modern CSPRNGs are commodity, a quantum source adds cost with no security delta. Bell-state non-collusion: cute, not useful, the threat model doesn't need entangled gateways. Correct reframing: put APS *around* quantum, not quantum inside APS. Shipped as Paper 5 (Physics-Enforced Delegation, Zenodo 10.5281/zenodo.19478584) governing quantum hardware physics via delegation facets. Six weeks of circling produced a Zenodo paper and an IBM experiment, just not the paper we set out to write."
+
+# ═══ DAY 65+ UPCOMING — external dependencies ═══
+
+- id: aaif-tc-review-wait
+  title: "AAIF TC triage decision on #14"
+  description: "Waiting on the AI Agent Interoperability Foundation Technical Committee to triage project-proposals#14. #12 (SINT) and #13 (similar proposal) set the Tuesday UTC precedent for TC turnaround, expected window Apr 21. Outcome shapes whether APS moves toward Linux Foundation stewardship now or the Working Group path stays the primary governance vehicle. Tima's call alone, Claude advises only."
+  status: active
+  workstream: ops
+  day_start: 64
+  day_end: 68
+  dependencies:
+    - d64-aaif-submission
+  links:
+    - url: "https://github.com/aaif/project-proposals/issues/14"
+      label: "aaif#14"
+
+- id: aisec-workshop-paper
+  title: "AISec Workshop at ACM CCS submission"
+  description: "Paper submission target ~July 2026 deadline. Likely draws on Paper 4 (Behavioral Derivation Rights) and Paper 7 (Cognitive Attestation) as the empirical spine. LaTeX conversion pipeline needed, current paper pipeline ships markdown-to-PDF. Workshop is the first venue where APS can land a paper alongside mainstream AI security research rather than in the protocol-spec lane."
+  status: backlog
+  workstream: research
+  day_start: 78
+  day_end: 90
+  dependencies:
+    - paper-4-bdr
+  links:
+    - url: "https://aisec.cc"
+      label: "AISec Workshop"
+
+- id: yc-application-update-may4
+  title: "YC application update (May 4 deadline)"
+  description: "Batch update on the existing YC application. Day 64 state to carry: v2 architecture separation, AAIF filing, Paper 7 ship, 124 modules, 2,366 tests, 142 MCP tools. Tima owns the irreversible commercial lane, Claude drafts the update diff only. Deadline May 4."
+  status: active
+  workstream: ops
+  day_start: 64
+  day_end: 76
+  dependencies:
+    - yc-application
+
+# ═══ end of Day 64 additions ═══
