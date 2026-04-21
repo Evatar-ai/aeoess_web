@@ -1670,3 +1670,261 @@
     - aaif-tc-review-wait
 
 # ═══ end of deep audit additions ═══
+
+# ═══ DEEP AUDIT PASS 2 — RECENT SHIPS MISSING FROM ROADMAP (added Day 64) ═══
+# Cross-referenced OPEN-COMMITMENTS.md + specs/cc-prompts/ + model-citizen/promises.yaml.
+# These shipped Days 60-64 but weren't individually captured.
+
+- id: d62-adk-aps-integration-repo
+  title: "adk-aps-integration repo (Google ADK × APS joint)"
+  description: "New repo at github.com/aeoess/adk-aps-integration spun up Day 62 in response to google/adk-python#5164. Joint ownership with @tomjwxf (ScopeBlind). LICENSE carries both names (Copyright 2026 Tymofii Pidlisnyi, Thomas Farley). Structure: main branch (README pointer) + integration-skeleton branch with aps_delegation.py, receipt_signing.py, verify.sh, examples/basic-tool-call. CI matrix across Python 3.10/3.11/3.12 against both @next and @latest APS SDK plus @veritasacta/verify@0.3.0. Receipt format shipped as audit-bundle shape (matches verifier's actual contract, not per-call receipts). Six jobs green after CI fix (commit 7f7bae68). tomjwxf collaborator invite pending acceptance."
+  status: done
+  workstream: product
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/aeoess/adk-aps-integration"
+      label: "adk-aps-integration"
+    - url: "https://github.com/google/adk-python/issues/5164"
+      label: "adk-python#5164"
+
+- id: d62-hermes-aps-delegation-repo
+  title: "hermes-aps-delegation repo (NousResearch Hermes × APS)"
+  description: "New repo at github.com/aeoess/hermes-aps-delegation spun up Day 62 in response to NousResearch/hermes-agent#11692. Single-repo scope (original prompt asked for three; scope correction held). Structure: src/, tests/, charter/, examples/, pyproject.toml, LICENSE, .gitignore. 12 pytest cases + ruff + 3 example smoke runs + charter validator, all green on Python 3.10/3.11/3.12. v0.1.0 release tracking at aeoess/hermes-aps-delegation#1 (end-of-April milestone). Hermes-specific hook points stubbed with offer to wire real interfaces if NousResearch shares their non-public integration surface."
+  status: done
+  workstream: product
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/aeoess/hermes-aps-delegation"
+      label: "hermes-aps-delegation"
+
+- id: d62-scopeblind-fixture-prs
+  title: "ScopeBlind/agent-governance-testvectors PRs #2 + #3"
+  description: "Two fixture PRs shipped upstream to ScopeBlind/agent-governance-testvectors. PR #2: A2A#1742 Week 2 APS fixtures in a2a-trust-header/ — 6 JSON fixtures (happy-path, scope-expansion, revocation, multi-hop, tampered, partial-chain) + deterministic generator + verify script + README, all Ed25519/JCS-canonical, 6/6 round-trip pass. PR #3: OWASP#802 gateway enforcement vectors — 4 vectors (fail-closed, external-verification, state-drift, portability), 34 files, every signed artifact verified before commit. Both PRs mergeable, tagged MoltyCel + tomjwxf."
+  status: done
+  workstream: comms
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d62-interop-verification
+
+- id: d62-mnemopay-framing-credit
+  title: "MnemoPay x402#1904 (framing credit from Day 49)"
+  description: "Jerry Omiagbo (MnemoPay) pinged aeoess directly on x402#1904, crediting the receipt-as-verifiable-economic-memory framing from Apr 2 (Day 44) with driving his last three MnemoPay releases. MnemoPay SDK @mnemopay/sdk v1.3.1 shipped Apr 17 with mnemopay.com live — receipt-as-primary-object, 3-verdict lifecycle (permit_settled/permit_failed/deny), per-agent Merkle log. First concrete case of another company building on a framing we published without us writing a line of their code. Replied with three substantive acks + composition hook for delegation-reference in X-Agent-Identity."
+  status: done
+  workstream: comms
+  day_start: 62
+  day_end: 62
+  dependencies:
+    - d49-twelve-primitives
+  links:
+    - url: "https://github.com/x402-foundation/x402/pull/1904#issuecomment-4274860122"
+      label: "x402#1904 reply"
+
+- id: d63-interop-week-1-opened
+  title: "Interop Week 1 issue #36 — five-signal compose test"
+  description: "Opened vocab#36 as a structured five-signal compose-test invitation to the ecosystem: trust_verification → governance_attestation → entity_continuity → peer_review → settlement_witness. Framed as a test not a standardization play, with explicit disclaimers (not a spec change, not an AEOESS showcase, not an entity_continuity canonical promotion attempt). Two fixtures confirmed within 45 minutes of opening: @arian-gogani (Nobulex, governance_attestation, HIPAA scenario with bilateral-receipt structure) and @nutstrut (continuity-analyzer, entity_continuity + settlement_witness). @rnwy declined step 4 gracefully (RNWY reference_point is reviewer_credibility, not task_completion), re-pinged Logpose for step 4. Steps 1 (MoltyCel/Harold) and 4 (Logpose) still open."
+  status: active
+  workstream: comms
+  day_start: 63
+  day_end: 76
+  dependencies:
+    - d58-vocab-momentum
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/36"
+      label: "vocab#36"
+
+- id: d64-gonka-1008-cosmos-offer
+  title: "Gonka #1008 Cosmos SDK integration offer"
+  description: "Substantive 1144-word reply on gonka-ai/gonka#1008 answering paranjko's three questions with concrete Cosmos SDK event shapes. Three attestation types defined: ProposalClassificationAttested, WeightClassAttested, DeliverableAttested — each with typed events slotting into Gonka's existing ante_validation.go pattern. Three-way deliverable attestation (proposer/evaluator/adjudicator) with auto-consensus at 0.15 tolerance using APS outcome-v2 primitives. Honest boundary statement on whale concentration (contract-level, not attestation-level). Offered Go-side Ed25519 verification library + ante handler wiring + CosmWasm helper contract as 1-2 weeks focused work if #1008 moves forward. First Cosmos SDK integration opportunity for APS; if shipped, positions for Juno/Osmosis/Secret/Cosmos Hub next. Gonka founders are Tima's friends/investors — friend-register, not commercial ask."
+  status: active
+  workstream: comms
+  day_start: 64
+  day_end: 78
+  dependencies:
+    - d64-ecosystem-engagement-13
+  links:
+    - url: "https://github.com/gonka-ai/gonka/discussions/1008#discussioncomment-16639513"
+      label: "gonka#1008 reply"
+
+# ═══ ACTIVE SHORT-TERM COMMITMENTS (added from OPEN-COMMITMENTS.md Day 64) ═══
+# Each is a promise with a counterparty and a delivery window.
+
+- id: aivss-32-3-3-pr
+  title: "AIVSS §3.3 commit-level evidence rows (Apr 21 due)"
+  description: "Markdown PR against OWASP AIVSS v0.9 working branch covering §3.3: three sub-factors with 4-point scales, delegation depth, privilege aggregation (horizontal + vertical split), cross-agent correlation, plus a cryptographically-enforced-vs-asserted qualifier as 2x multiplier. Post to OWASP AARS#32 for review before PR. Committed Apr 17, due Apr 21 (≈ Day 65). @VeloGerber is the reviewer."
+  status: active
+  workstream: comms
+  day_start: 64
+  day_end: 65
+  dependencies:
+    - d64-owasp-aars32-boundary
+  links:
+    - url: "https://github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/32"
+      label: "AARS#32"
+
+- id: vocab-26-context-dimensions-pr
+  title: "vocab#26 context_dimensions PR (Apr 22 target)"
+  description: "PR against aeoess/agent-governance-vocabulary adding context_dimensions as third top-level structural section in vocabulary.yaml. Four Day-1 entries with shape {definition, non-signal test, reference implementations, example field names}: counterparty_standing, request_origin, session_dynamics, physical_environment_state. Target Apr 22 (≈ Day 66). pshkv, tomjwxf, and the vocab community are the reviewers."
+  status: active
+  workstream: protocol
+  day_start: 64
+  day_end: 66
+  dependencies:
+    - d61-aeoess-aps-crosswalk
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/26"
+      label: "vocab#26"
+
+- id: a2a-compliance-harness-repo
+  title: "a2a-compliance-harness v0.1 repo (this week)"
+  description: "Bounded-scope Python repo under aeoess org. Single-file script, 5-step harness (fetch Agent Card, DID resolve, signature verify, delegation chain verify, emit v1.1-compatible JSON row). Three distinct failure modes observable: signature_invalid_format_drift, signature_invalid_key_mismatch, signature_invalid_tampered. MolTrust co-maintainer access on invite. Committed Apr 17 on a2aproject/A2A#1755, this-week deliverable (~Apr 21-24)."
+  status: active
+  workstream: product
+  day_start: 64
+  day_end: 68
+  dependencies:
+    - d61-v2-architecture-separation
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1755"
+      label: "A2A#1755"
+
+- id: in-toto-549-sibling-predicate-pr
+  title: "in-toto#549 Governance Attestation sibling predicate PR"
+  description: "PR against in-toto/attestation adding a sibling predicate type for session-level Governance Attestation, referenced by hash from Decision Receipts. Accepted delegationChainRoot: DigestSet camelCase per tomjwxf's #549. Triggers when tomjwxf's Decision Receipt predicate PR#549 lands. Draft scaffolding already started at specs/in-toto-sibling-predicate-draft/."
+  status: active
+  workstream: comms
+  day_start: 64
+  day_end: 80
+  dependencies:
+    - d61-ecosystem-engagement
+  links:
+    - url: "https://github.com/in-toto/attestation/pull/549"
+      label: "in-toto#549"
+
+- id: moltrust-fixtures-week-2-3
+  title: "MolTrust fixtures Week 2-3 (consumer test script)"
+  description: "Week 2 of the 3-week arc with @MoltyCel (A2A#1742, reconfirmed Apr 18 with sha256:hex delegation_chain_root format locked). Week 2: APS produces fixtures with non-trivial delegation_chain_root values (multi-hop chains, scope narrowing, revoked-parent negative testing). Week 3: consumer verifier test script validates both APS + MolTrust cards against single canonical schema. MolTrust import weighting note: 0.3 weight with 45-day half-life, POST /identity/resolve before import. Week 2 partially landed via ScopeBlind/agent-governance-testvectors PR#2; Week 3 still to ship."
+  status: active
+  workstream: comms
+  day_start: 64
+  day_end: 72
+  dependencies:
+    - d62-scopeblind-fixture-prs
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1742"
+      label: "A2A#1742"
+
+- id: openlineage-4409-facet-schema
+  title: "OpenLineage#4409 covenantInEffect facet JSON Schema draft"
+  description: "Commitment to @arian-gogani on OpenLineage/OpenLineage#4409 after his 8-minute endorsement of the vendor-agnostic digest abstraction. Three-step plan: minimal JSON Schema shape + open type enum + two worked examples from Nobulex and APS. Drafted and shared on the thread before any upstream OpenLineage PR. Positions APS's governance_attestation canonical as a referenceable issuer type in OpenLineage's covenantInEffect facet — multi-day audit exchange compresses to single verification step. This-week commitment."
+  status: active
+  workstream: comms
+  day_start: 63
+  day_end: 68
+  dependencies:
+    - d61-aeoess-aps-crosswalk
+  links:
+    - url: "https://github.com/OpenLineage/OpenLineage/issues/4409"
+      label: "OpenLineage#4409"
+
+- id: pdr-section-8-review
+  title: "Nanook PDR §8 review (48h SLA)"
+  description: "Committed on aeoess/agent-passport-system#12 to a 48-hour review turnaround once @nanookclaw sends the PDR v2.20 §8 draft. Section 8 is PDR's proof-of-orthogonality workbook between Saebo (constraint compliance), Pidlisnyi (Hold/Bend/Break), and PDR (cross-session reliability). Our v1.46.0 pin commitment + optional dogfood gist refresh for the experimental substrate is already on the table. Passive until nanookclaw sends."
+  status: active
+  workstream: research
+  day_start: 64
+  day_end: 76
+  dependencies:
+    - pdr-paper-cites-aps
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/issues/12"
+      label: "APS#12"
+
+# ═══ PAPER 7 BACKLOG (v1.1 / v1.2 / v2 — Q3 2026 onward) ═══
+# Explicit multi-version queue from specs/PAPER-7-BACKLOG.md.
+
+- id: paper-7-v1-1-governance-study
+  title: "Paper 7 v1.1: N≥200 governance-relevance study"
+  description: "Scale the Neuronpedia experiment from N=10 per group to N≥200 per group. Mechanical work, most code exists. Paired with controlled-probing feature-label validation (targeted prompts to activate/suppress the described concept), exact prompt set published in experiment/prompts-v1.1/, hosted-to-local verification transfer characterization (local sae_lens vs Neuronpedia hosted, within paper's epsilon), and cross-hardware reproducibility (H100 vs A100 or MI300X). This is the condition for submitting to FAccT/NeurIPS as a peer-reviewed venue rather than leaving the paper at preprint stage."
+  status: backlog
+  workstream: research
+  day_start: 120
+  day_end: 200
+  dependencies:
+    - d62-paper-7-cognitive-attestation
+
+- id: paper-7-v1-2-zkml-policy
+  title: "Paper 7 v1.2: zkML + OPA/Cedar policy extension"
+  description: "Two v1.2 items. (1) zkML or TEE-backed inference attestation paired with cognitive attestation, so the envelope proves both what features were active AND that the claimed inference actually ran on the claimed model. Research-stage engineering, 6+ months. (2) Working demonstration of feature-level policy expressions against cognitive attestation envelopes (OPA / Cedar / XACML). \"Reject any action where feature 20946 is active above 2.0.\" Could spin out as a separate paper rather than a v1.2 side-product."
+  status: backlog
+  workstream: research
+  day_start: 200
+  day_end: 280
+  dependencies:
+    - paper-7-v1-1-governance-study
+
+- id: paper-7-v2-multi-layer
+  title: "Paper 7 v2: multi-layer + transcoder + SCITT mapping"
+  description: "Three v2 items (12+ months out). (1) Multi-layer attestation specification — currently single layer, v2 needs composition semantics across multiple layers of the same forward pass. Load-bearing for decision-pathway attestation (vs concept-engagement attestation). (2) Transcoder and crosscoder attestation — v1 restricts to SAE variants with well-defined layer_index; transcoders operate across layers, spec needs a coherent representation. (3) SCITT CBOR/COSE mapping — v1's JSON/JCS canonicalization re-serialized under SCITT's canonical encoding rules, enabling cognitive attestations as SCITT transparency-log entries. Revisits the Ledger Events kill territory from a different angle."
+  status: backlog
+  workstream: research
+  day_start: 280
+  day_end: 400
+  dependencies:
+    - paper-7-v1-2-zkml-policy
+
+# ═══ FORMAL KILLS FROM CONVERSATION RECORD (added Day 64) ═══
+# Promises or scopes that were dropped and need to be visible as killed, not just silent.
+
+- id: killed-vessenes-a2a-1575-entity-binding
+  title: "vessenes entity binding test (A2A#1575)"
+  description: "An entity binding test promised to @vessenes on a2aproject/A2A#1575 around Day 37. The test would have demonstrated how a single entity (person or org) could be bound to multiple agents across different identity systems with APS as the binding layer. Sat open in the promise ledger for ~25 days."
+  status: killed
+  workstream: comms
+  day_start: 37
+  day_end: 62
+  dependencies:
+    - qntm7-xsa520-response
+  kill_note: "Dropped Day 54 and formally killed Day 62. The thread moved past entity binding into TCP-IP-vs-Visa architectural framing; kevinkaylie's AgentNexus participation made it a three-issuer architecture discussion, not a bilateral entity-binding test. vessenes has since closed APS#5 (Ed25519→X25519 test vectors) on his side without requiring our output. No partner harmed, no drift. Keep it visible as a reminder that sitting promises age: re-evaluate open promises older than 14 days, decide send/drop/pause."
+
+- id: killed-paper-attribution-standalone-arxiv
+  title: "Standalone Attribution Primitive paper for arXiv"
+  description: "A standalone academic paper on the unified four-axis attribution object was originally planned for the Paper 6 slot in the research sequence around Day 54-57. The working code (Build A + B + C + D2, Days 59-60) shipped first with full implementations across SDK, MCP, and Python."
+  status: killed
+  workstream: research
+  day_start: 54
+  day_end: 60
+  dependencies:
+    - attribution-primitive-spec
+  kill_note: "Not killed as in abandoned — killed as a standalone paper target. The working code arrived before the formal paper felt necessary. Venue pull never materialized (no reviewer asked for a paper, no conference deadline demanded one). The material remains strong and will likely land as part of the AISec Workshop submission (aisec-workshop-paper) alongside Paper 4 + Paper 7 material. Revival criterion: a concrete venue deadline that requires a bespoke Attribution Primitive paper separately from the other papers."
+
+# ═══ ACTIVE INVITES FROM model-citizen/promises.yaml ═══
+# Open goodwill promises that compound relationships with canonical external collaborators.
+
+- id: harold-fixture-batch-goodwill
+  title: "Harold fixture batch for agentid-aps-interop (goodwill)"
+  description: "Seed Harold's agentid-aps-interop repo with the first APS fixture batch as a goodwill gesture. Unprompted delivery with a short note crediting inspiration back to him. Open since Day 54. Harold is the canonical external collaborator (32/32 tests passing, PolicyChain primitive adopted into APS SDK with name-attribution) and deserves the unasked-for contribution pattern that compounds trust."
+  status: active
+  workstream: comms
+  day_start: 54
+  day_end: 72
+  dependencies:
+    - harold-canonical-repo
+
+- id: queball-brainkid-coauthorship-invites
+  title: "@QueBallSharken + @0xbrainkid section co-authorship (vocabulary spec)"
+  description: "Two active co-authorship invites on the vocabulary spec #13 sections that each contributor has been deepest on. @QueBallSharken on BBIS-adjacent continuity/boundary language, @0xbrainkid on SATP crosswalk semantics. Open since Day 54. Low-priority, high-durability — co-authorship compounds retention once accepted, and both contributors have been substantive on their respective sections."
+  status: active
+  workstream: comms
+  day_start: 54
+  day_end: 90
+  dependencies:
+    - vocab-contributing-lands
+
+# ═══ end of deep audit pass 2 additions ═══
