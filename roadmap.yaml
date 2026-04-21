@@ -1150,8 +1150,8 @@
 
 - id: pr28-sbr-crosswalk
   title: "Vocab PR #28: SoulboundRobots (entity_continuity)"
-  description: "rnwy opened PR#28 adding SBR crosswalk for entity_continuity. In review."
-  status: active
+  description: "rnwy opened PR#28 adding SBR crosswalk for entity_continuity. Merged 2026-04-17."
+  status: done
   workstream: comms
   day_start: 58
   day_end: 59
@@ -1163,8 +1163,8 @@
 
 - id: d58-peer-review-integrity-fix
   title: "Vocab #29: peer_review canonical definition audit"
-  description: "Self-opened issue. peer_review was promoted to canonical Apr 16 on two implementations (Logpose task-completion, RNWY reviewer-credibility) but RNWY itself documents a different primitive. Different measurements sharing a container shape is not the two-implementations standard. Issue proposes Path A: narrow peer_review to task-completion (Logpose), introduce reviewer_credibility as proposed with RNWY as sole implementer. CONTRIBUTING.md follow-up to sharpen the two-implementations rule. Caught during PR#28 review (entity_continuity by same contributor)."
-  status: active
+  description: "Self-opened issue auditing peer_review canonical promotion (Logpose task-completion vs RNWY reviewer-credibility — different primitives under one name). Proposed Path A: narrow peer_review to task-completion (Logpose), introduce reviewer_credibility as proposed with RNWY as sole implementer. Closed 2026-04-17 via PR#31 merge (rkaushik29 peer_review scope note)."
+  status: done
   workstream: comms
   day_start: 58
   day_end: 59
@@ -1921,7 +1921,7 @@
 
 - id: queball-brainkid-coauthorship-invites
   title: "@QueBallSharken + @0xbrainkid section co-authorship (vocabulary spec)"
-  description: "Two active co-authorship invites on the vocabulary spec #13 sections that each contributor has been deepest on. @QueBallSharken on BBIS-adjacent continuity/boundary language, @0xbrainkid on SATP crosswalk semantics. Open since Day 54. Low-priority, high-durability — co-authorship compounds retention once accepted, and both contributors have been substantive on their respective sections."
+  description: "Two active co-authorship invites on the vocabulary spec sections that each contributor has been deepest on. @QueBallSharken on BBIS-adjacent continuity/boundary language, @0xbrainkid on SATP crosswalk semantics. Invites posted 2026-04-21 as aeoess/agent-governance-vocabulary#39 (QueBall on invariant_survival descriptor) and #40 (0xbrainkid on SATP crosswalk + delegation_chain_root field spec). Passive-waiting on response. Co-authorship compounds retention once accepted."
   status: active
   workstream: comms
   day_start: 54
