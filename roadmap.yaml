@@ -1822,16 +1822,18 @@
 
 - id: openlineage-4409-facet-schema
   title: "OpenLineage#4409 covenantInEffect facet JSON Schema draft"
-  description: "Commitment to @arian-gogani on OpenLineage/OpenLineage#4409 after his 8-minute endorsement of the vendor-agnostic digest abstraction. Three-step plan: minimal JSON Schema shape + open type enum + two worked examples from Nobulex and APS. Drafted and shared on the thread before any upstream OpenLineage PR. Positions APS's governance_attestation canonical as a referenceable issuer type in OpenLineage's covenantInEffect facet — multi-day audit exchange compresses to single verification step. This-week commitment."
-  status: active
+  description: "Commitment to @arian-gogani on OpenLineage/OpenLineage#4409 after his 8-minute endorsement of the vendor-agnostic digest abstraction. Three-step plan delivered Day 65 (Apr 21): minimal JSON Schema shape, open type enum, two worked examples (Nobulex bilateral-receipt + APS gateway trust profile), all three files valid JSON and both examples validate cleanly against the schema. Posted on the thread for arian review before any upstream OpenLineage PR. Positions APS's governance_attestation canonical as a referenceable issuer type in OpenLineage's covenantInEffect facet, multi-day audit exchange compresses to single verification step. Committed inside the week window as promised on Apr 20. Waiting on arian sign-off before the upstream PR to OpenLineage/OpenLineage."
+  status: done
   workstream: comms
   day_start: 63
-  day_end: 68
+  day_end: 65
   dependencies:
     - d61-aeoess-aps-crosswalk
   links:
-    - url: "https://github.com/OpenLineage/OpenLineage/issues/4409"
-      label: "OpenLineage#4409"
+    - url: "https://github.com/OpenLineage/OpenLineage/issues/4409#issuecomment-4290200972"
+      label: "Schema delivery comment"
+    - url: "https://github.com/aeoess/aeoess_web/tree/main/specs/openlineage-4409"
+      label: "Schema + examples"
 
 - id: pdr-section-8-review
   title: "Nanook PDR §8 review (48h SLA)"
@@ -1963,3 +1965,31 @@
   day_end: 90
   dependencies:
     - aivss-32-3-3-pr
+
+- id: d65-agentid-aps-interop-5-kenne
+  title: "agentid-aps-interop#5: AgentGraph three-signal composition coordination"
+  description: "Kenne (AgentGraph) opened haroldmalikfrimpong-ops/agentid-aps-interop#5 proposing static_analysis fixtures for the empty composed/v1/ slot, completing the three-signal chain (identity + authorization + static_analysis) with each signal from an independent issuer. Posted substantive coordination reply: answered his one question (A = v1 structural now + v2 signed later matches repo cadence), offered to draft APS side of composed envelope slot in a PR once outer shape agreed, recommended shared subject DID (agent_interop_test_001) across all three slots, gently directed crosswalk/agentgraph-to-agentid.yaml to aeoess/agent-governance-vocabulary as right home if pure vocabulary mapping, explicitly deferred repo cadence to Harold. Verified kenneives legitimacy (2022 GH account, real endpoints, substantive across threads, not a canary) before engagement. Waiting on Kenne+Harold to agree composed envelope outer shape."
+  status: active
+  workstream: comms
+  day_start: 65
+  day_end: 72
+  dependencies:
+    - d65-harold-signing-alignment
+  links:
+    - url: "https://github.com/haroldmalikfrimpong-ops/agentid-aps-interop/issues/5"
+      label: "Issue #5"
+    - url: "https://github.com/haroldmalikfrimpong-ops/agentid-aps-interop/issues/5#issuecomment-4290100418"
+      label: "APS coordination reply"
+
+- id: d65-openlineage-4409-delivery
+  title: "OpenLineage#4409 covenantInEffect facet schema shipped"
+  description: "Delivered the three-step schema package (JSON Schema draft-2020-12 facet + two worked examples + README with design decisions) committed on Apr 20. Five load-bearing design decisions captured: RunFacet not DatasetFacet (agent + covenant are run-scoped), digest required with resolver optional (tamper-evidence without forcing public URLs), type is open enum with governance_attestation as vendor-agnostic default, covenantInEffect.additionalProperties: true scoped to sub-object for vendor extensions, digestAlgorithm defaults to sha-256 with explicit override. Both examples (Nobulex nobulex_covenant + APS governance_attestation) validate cleanly against the schema. Two asks back to @arian-gogani: (1) review Nobulex example shape since we don't have the live receipt structure, (2) confirm covenant-hash mapping still matches v0.2 CTEF governance_attestation digest shape. Next step: upstream PR to OpenLineage/OpenLineage spec repo once arian signs off. Caught and fixed an honesty drift in the draft (speculation that arian had mentioned covenant graphs, which he hadn't) before posting."
+  status: done
+  workstream: comms
+  day_start: 65
+  day_end: 65
+  dependencies:
+    - openlineage-4409-facet-schema
+  links:
+    - url: "https://github.com/OpenLineage/OpenLineage/issues/4409#issuecomment-4290200972"
+      label: "Schema delivery comment"
