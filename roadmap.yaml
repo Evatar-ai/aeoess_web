@@ -361,8 +361,8 @@
 
 - id: build-d2-jws-fix
   title: "Build D2: Public JWS Signing"
-  description: "Default /api/v1/public/trust/:agentId signs with gateway Ed25519 key. One-function-call fix on existing infrastructure."
-  status: next-up
+  description: "Default /api/v1/public/trust/:agentId signs with gateway Ed25519 key. X-APS-JWS / X-APS-JWS-KID / X-APS-JWS-JWKS response headers. Ed25519, kid gateway-v1, cross-engine verifiable against the public JWKS. Shipped 2026-04-16."
+  status: done
   workstream: protocol
   day_start: 55
   day_end: 57
@@ -489,16 +489,6 @@
   workstream: product
   day_start: 55
   day_end: 55
-  dependencies:
-    - attribution-primitive-spec
-
-- id: collaborative-monetization-doc
-  title: "Monetization Working Doc"
-  description: "Formula specification, measurement infrastructure, dispute mechanism. Revenue attribution framework."
-  status: next-up
-  workstream: product
-  day_start: 56
-  day_end: 60
   dependencies:
     - attribution-primitive-spec
 
@@ -640,16 +630,6 @@
   workstream: research
   day_start: 70
   day_end: 90
-  dependencies:
-    - attribution-primitive-spec
-
-- id: consilium-framing
-  title: "Consilium: Framing Review"
-  description: "Three-model adversarial review (Claude, GPT-5, Gemini 2.5 Pro). Attack the unification claim."
-  status: active
-  workstream: research
-  day_start: 55
-  day_end: 55
   dependencies:
     - attribution-primitive-spec
 
@@ -891,8 +871,8 @@
 
 - id: roadmap-interface
   title: "Public Roadmap"
-  description: "aeoess.com/roadmap timeline with dependency graph. YAML-driven, static, matches site design."
-  status: active
+  description: "aeoess.com/roadmap timeline with dependency graph. YAML-driven, static, matches site design. Shipped at https://aeoess.com/roadmap.html."
+  status: done
   workstream: ops
   day_start: 55
   day_end: 55
