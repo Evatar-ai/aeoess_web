@@ -634,12 +634,12 @@
     - paper-5-physics
 
 - id: paper-5-attribution-primitive
-  title: "Paper 6: Attribution Primitive"
-  description: "Formal paper on the unified attribution object. Zenodo DOI publication."
-  status: active
+  title: "Attribution primitive formal paper (deferred)"
+  description: "A standalone academic paper on the unified four-axis attribution object was planned for the Paper 6 slot in the research sequence, but the working code (Build A + B + C + D2, Days 59-60) landed first and the paper never materialized as a standalone artifact. The material is strong enough to ship as a paper whenever there is pull, but there has been no concrete demand for it. The AISec Workshop submission is a more likely home for this material than a standalone Zenodo drop."
+  status: backlog
   workstream: research
-  day_start: 55
-  day_end: 57
+  day_start: 70
+  day_end: 90
   dependencies:
     - attribution-primitive-spec
 
@@ -654,12 +654,12 @@
     - attribution-primitive-spec
 
 - id: paper-6-cross-family-oversight
-  title: "Paper 7: Cross-Family Oversight"
-  description: "Empirical paper using Build G data. Complementarity-gain metric across three AI families."
+  title: "Paper 8: Cross-Family Oversight (empirical)"
+  description: "Empirical paper built on Build G experimental data. Complementarity-gain metric measured across three AI families (Claude, GPT, Gemini) across 15 configurations and 5 scenarios. Venue likely ICLR, NeurIPS, or AISec workshop depending on how the experimental data lands."
   status: backlog
   workstream: research
   day_start: 70
-  day_end: 85
+  day_end: 90
   dependencies:
     - build-g-oversight-harness
     - build-e-converged-models
@@ -1108,14 +1108,17 @@
       label: "Paper on Zenodo"
 
 - id: d57-paper-published
-  title: "Governance in the Medium — Paper Published"
-  description: "Working paper published on Zenodo. Argues that the unit of agent governance is not the agent but the population-with-medium — the collective state of inherited fragments across short-lived sessions. Defines the medium as a governance contract that specific substrates implement, distinguishes access from declared influence, names the central open problem (cryptography formalizes authorship, not meaning), and grounds the cognition claim in existence proofs already around us: institutional memory, Wikipedia, open-source development. Six rounds of adversarial review across three model families before publication."
+  title: "Paper 6: Governance in the Medium (Zenodo)"
+  description: "Working paper published on Zenodo (DOI 10.5281/zenodo.19582550). Argues that the unit of agent governance is not the agent but the population-with-medium — the collective state of inherited fragments across short-lived sessions. Defines the medium as a governance contract that specific substrates implement, distinguishes access from declared influence, names the central open problem (cryptography formalizes authorship, not meaning), and grounds the cognition claim in existence proofs already around us: institutional memory, Wikipedia, open-source development. Six rounds of adversarial review across three model families before publication."
   status: done
   workstream: research
   day_start: 57
   day_end: 57
   dependencies:
     - d57-boundary-primitives
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19582550"
+      label: "Paper 6 on Zenodo"
 
 - id: d58-solana-wallet-ref
   title: "Solana wallet_ref — chain enum + case-sensitivity fix"
@@ -1490,3 +1493,180 @@
     - yc-application
 
 # ═══ end of Day 64 additions ═══
+
+# ═══ DEEP AUDIT — RESTORED HISTORICAL ITEMS (added Day 64) ═══
+# Items that shipped or happened but were not previously captured in the roadmap.
+# Deep-scanned from chat record and blog.html.
+
+- id: d17-nightwatch-spec
+  title: "Nightwatch autonomous loop spec"
+  description: "Three-agent autonomous governance loop designed. 02:00 UTC GitHub Action creates a dispatch issue with repo state (latest commit, open issues, open PRs). Three roles assigned: scanner (nik-prime), analyst (PortalX2), synthesizer (aeoess). Consensus vote 2-of-3 drives a PR that the human merges in the morning. The protocol governs its own development: every step is a signed Agora message, every delegation scoped, every vote through the consensus primitive. Retired Day 59 as part of the coordination-layer consolidation; spec kept as reference design for protocol-governs-protocol patterns."
+  status: done
+  workstream: ops
+  day_start: 17
+  day_end: 17
+  dependencies:
+    - d17-principal-identity
+
+- id: d22-intent-network-infra
+  title: "Intent Network API launched (api.aeoess.com)"
+  description: "Intent Network API deployed on the Mac Mini (clawrot) on port 3100 via PM2 + cloudflared tunnel. SQLite database, signed IntentCards, relevance scoring, intro protocol. First production service hosted outside Vercel or Railway, first use of named cloudflared tunnel for an AEOESS endpoint (tunnel id REDACTED-cloudflare-tunnel-id, CNAME api.aeoess.com). Established the Air-vs-Mini infrastructure split that still governs today: Air = dev only, Mini = production services."
+  status: done
+  workstream: ops
+  day_start: 22
+  day_end: 23
+  dependencies:
+    - d22-intent-network
+
+- id: d24-tat-integration
+  title: "The Agent Times on APS (TAT integration)"
+  description: "Three-layer integration of The Agent Times with APS. Layer 1 (article provenance): every published article carries an APS signature over canonical article JSON, verifiable at article-level permalink. Layer 2 (journalist passports): each AI journalist persona gets a scoped delegation (topic areas, token budget per article). Layer 3 (Ethics Engine binding): 274 scored articles against 10 checks, credentialing mirrored on NPC membership tiers. Full CTO audit of the 68-file Python pipeline (DISCOVER → GROUP → SCORE → RESEARCH → WRITE → IMAGE → PUBLISH, Neon Postgres, Vercel + Render) completed before any protocol binding. First production publication running APS receipts end-to-end in its editorial pipeline."
+  status: done
+  workstream: product
+  day_start: 24
+  day_end: 26
+  dependencies:
+    - reputation-gates
+
+- id: d25-tesla-social-mvp
+  title: "Tesla Social MVP (side project)"
+  description: "Working React + Supabase + Vercel MVP of a Tesla-community social app at tesla-social.vercel.app. Dashboard with miles-driven points, tier progression, odometer logging, proximity chat with real-time messaging, social feed, profiles. Not an APS product — a proof that a solo founder can ship a working social app in a weekend, used as a comms asset alongside the cross-protocol bridge Substack article. Not currently maintained; kept as a reference artifact for the Day 25 launch narrative."
+  status: done
+  workstream: product
+  day_start: 25
+  day_end: 25
+  dependencies:
+    - substack-launch
+  links:
+    - url: "https://tesla-social.vercel.app"
+      label: "tesla-social.vercel.app"
+
+- id: d32-amcs-spec-formalized
+  title: "AMCS v0.1.0 spec formalized (separable from TAT)"
+  description: "AMCS (AI-Native Media Credentialing Standard) shipped as an open specification developed by TAT in partnership with AEOESS — formally separated from TAT's editorial pipeline so other publications can apply. Editorial layer owned by TAT (self-attested + public evidence audit trail), cryptographic layer owned by AEOESS (Ed25519 signing, Merkle proofs, delegation chains). TAT is the first certified publication; the certifier role is AEOESS alone to avoid the self-certifying conflict. SPJ Code of Ethics independence principle reflected in the structure. 25 tests. Module 36 in the SDK."
+  status: done
+  workstream: ops
+  day_start: 32
+  day_end: 32
+  dependencies:
+    - d24-tat-integration
+
+- id: d40-gateway-dogfood-mini
+  title: "Gateway dogfood on Mac Mini + gw CLI"
+  description: "Private gateway cloned to the Mac Mini and run via PM2 on port 3200 alongside the Intent Network API. Four agents registered with real Ed25519 keys (tima-principal, claude-operator, portalx2-reviewer, aeoess-gpt-executor). Delegation chain bootstrapped with scoped authority and spend limits (tima→claude $500 build, tima→portal $0 review, claude→portal sub-delegation). Full enforcement test battery passed: scope enforcement, spend tracking, cascade revocation. Built the gw CLI (gw eval, gw receipt, gw dash, gw audit, gw agents) for one-line authorization checks against the live gateway. AEOESS runs on APS — this is the dogfood milestone."
+  status: done
+  workstream: product
+  day_start: 40
+  day_end: 42
+  dependencies:
+    - gateway-production
+
+- id: d26-mcp-registry-submission
+  title: "MCP Registry listing (distribution)"
+  description: "agent-passport-system-mcp listed on the official MCP Registry (registry.modelcontextprotocol.io) as the Anthropic-maintained discovery directory for MCP servers. Every Claude Desktop, Cursor, and Windsurf user browsing for agent-identity tools finds APS in the catalog. Complementary to the 12+ channel distribution done Day 7 (awesome-mcp-servers, clawhub, npm, Smithery, mcp.so)."
+  status: done
+  workstream: comms
+  day_start: 26
+  day_end: 27
+  dependencies:
+    - mcp-server-ships
+
+- id: d62-paper-7-cognitive-attestation
+  title: "Paper 7: Cognitive Attestation (Zenodo)"
+  description: "Paper 7 published on Zenodo (DOI 10.5281/zenodo.19646276). Introduces the Cognitive Attestation envelope: a cryptographic commitment attached to an agent's action record declaring which sparse-autoencoder features engaged and at what intensity during the output. Three-stage verification model — Stage 1 cryptographic verification (required_signer_roles coverage), Stage 2 registry interface, Stage 3 replay. Accompanied by a normative JSON schema (papers/paper-4/poc/schema/cognitive_attestation.schema.json) and a Python reference envelope validated against Llama-3.1-8B via Neuronpedia. Ported to TypeScript as SDK v2.1.0 on Day 64."
+  status: done
+  workstream: research
+  day_start: 62
+  day_end: 63
+  dependencies:
+    - d57-paper-published
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19646276"
+      label: "Paper 7 on Zenodo"
+
+
+# ═══ FUTURE — compliance, regulatory, enterprise readiness (added Day 64) ═══
+# The roadmap is a source of truth. These are real planned work items with named deadlines
+# where they exist, named open problems where they are less concrete.
+
+- id: feasibility-linting
+  title: "Feasibility linting for delegations"
+  description: "Tier-0 advisory checks at delegation creation + task assignment time. Catches valid-but-useless delegations before they fail silently at action time. Five cheap checks to ship first: spend limit below minimum useful amount for scope, scope does not cover required permissions for assigned tools, deadline already passed or delegation expires before task could complete, delegation depth at max (cannot sub-delegate), missing escalation path. Returns {severity, code, message}. Never blocks — advisory only. Admin UX fix, not a protocol invariant."
+  status: backlog
+  workstream: protocol
+  day_start: 68
+  day_end: 72
+  dependencies:
+    - d64-v210-cognitive-attestation
+
+- id: compliance-reports-eu-ai-act
+  title: "Compliance reports (EU AI Act Art 10, Aug 2026)"
+  description: "Gateway endpoint GET /api/v1/compliance/report generating machine-readable and human-readable reports for EU AI Act Article 10 and GDPR Article 30. Sections: agent registry, delegation inventory, evaluation log, revocation history, behavioral sequence per agent, data lifecycle, attestation summary. Query params: since, until, agent_id. We already have all the underlying data — this is formatting work, not new primitives. Hard deadline: EU AI Act enforcement Aug 2, 2026 (≈ Day 167). This is the single biggest enterprise-procurement unlock. Lives in the private gateway (product intelligence), not the public SDK."
+  status: backlog
+  workstream: product
+  day_start: 120
+  day_end: 165
+  dependencies:
+    - build-d-gateway-enterprise
+
+- id: compliance-reports-colorado
+  title: "Colorado AI Act compliance reports (Jun 2026)"
+  description: "Colorado AI Act enforcement window begins Jun 2026 (≈ Day 105). Subset of the EU AI Act reporting surface with Colorado-specific jurisdictional tags in the report metadata. Lower regulatory bar than EU but earlier deadline. Same private-gateway endpoint pattern, smaller report scope."
+  status: backlog
+  workstream: product
+  day_start: 90
+  day_end: 110
+  dependencies:
+    - compliance-reports-eu-ai-act
+
+- id: merkle-batch-commitments
+  title: "Merkle batch commitments (completeness proof)"
+  description: "Extend existing buildMerkleRoot() into periodic gateway commitments. Public Merkle inclusion proofs let any consumer prove \"these are ALL the receipts for this agent in this window.\" Closes the completeness gap — today we can prove any receipt is authentic but cannot prove the set is complete. Lives in the SDK as a primitive + in the gateway as a cron-emitted commitment."
+  status: backlog
+  workstream: protocol
+  day_start: 75
+  day_end: 82
+  dependencies:
+    - build-c-settlement-pipeline
+
+- id: machine-unlearning-verification
+  title: "Machine unlearning verification (Paper 4 open problem)"
+  description: "Named as one of four open problems in Paper 4 (Behavioral Derivation Rights). When a principal revokes consent for their data to have shaped an agent's behavior, can we verify cryptographically that the agent has actually unlearned it? Hard problem with no clean answer in the literature. Research item, not a build item — likely ships as a paper before it ships as code."
+  status: backlog
+  workstream: research
+  day_start: 85
+  day_end: 100
+  dependencies:
+    - paper-4-bdr
+
+- id: scitt-agent-profile
+  title: "SCITT agent-profile (Ledger Events revival path)"
+  description: "If SCITT (IETF Supply Chain Integrity, Transparency, Transparency) stalls at IESG or if the WG explicitly asks who is doing agent-specific profiles, the Ledger Events revival path is to ship a SCITT statement-type profile for agent governance receipts — not a parallel bespoke spec. Standing revival criterion, not active work. Track ietf-scitt-architecture on the standards-scanning pipeline (added to the watch list after the Ledger Events kill)."
+  status: backlog
+  workstream: research
+  day_start: 80
+  day_end: 120
+  dependencies:
+    - ledger-events-primitive
+
+- id: first-paying-gateway-customer
+  title: "First paying gateway customer (revenue threshold)"
+  description: "Commercial milestone: first tenant on the hosted gateway converts from free tier to paid (Team $99/mo or Enterprise $499/mo). Until this hits, gateway revenue is zero regardless of how much governance evidence the protocol generates. Portal + billing infrastructure is already live (Day 49-50 customer-ready work). Actual conversion is a sales-and-outreach motion, not a build motion. Tima's lane."
+  status: backlog
+  workstream: product
+  day_start: 65
+  day_end: 90
+  dependencies:
+    - customer-ready-gateway
+
+- id: wg-foundation-path-post-aaif
+  title: "WG + foundation path beyond AAIF"
+  description: "Contingent on AAIF TC triage outcome on project-proposals#14. If AAIF accepts: execute stewardship handoff over Q2 (governance reference, WG continuity, trademark assignment). If AAIF declines or stalls: LF AI & Data as secondary target, or CNCF sandbox as tertiary. Not about replacing the current Working Group — about giving the protocol layer a neutral home so enterprise procurement conversations stop tripping on sole-founder governance."
+  status: backlog
+  workstream: ops
+  day_start: 68
+  day_end: 120
+  dependencies:
+    - aaif-tc-review-wait
+
+# ═══ end of deep audit additions ═══

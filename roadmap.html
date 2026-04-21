@@ -38,7 +38,8 @@ svg.rm-svg .item-bar.done{fill:var(--green)}
 svg.rm-svg .item-bar.active{fill:var(--blue)}
 svg.rm-svg .item-bar.next-up{fill:var(--ink-3)}
 svg.rm-svg .item-bar.backlog{fill:var(--ink-5);opacity:.4}
-svg.rm-svg .item-bar.killed{fill:var(--ink-5);opacity:.35;stroke:#c14545;stroke-width:1;stroke-dasharray:3 2}
+svg.rm-svg .item-bar.killed{fill:#7f1d1d;opacity:.82;stroke:#dc2626;stroke-width:1.5;stroke-dasharray:3 2}
+svg.rm-svg .item-bar.killed + .item-text, svg.rm-svg text[data-killed]{fill:#fecaca !important}
 svg.rm-svg .item-text{font:500 .6rem var(--sans);fill:#fff;pointer-events:none}
 svg.rm-svg .dep-line{stroke:var(--rule);stroke-width:1;fill:none;opacity:.5;marker-end:url(#arr)}
 svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr-active)}
@@ -77,7 +78,7 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
       <div class="rm-legend-item"><div class="rm-legend-dot" style="background:var(--blue)"></div>Active</div>
       <div class="rm-legend-item"><div class="rm-legend-dot" style="background:var(--ink-3)"></div>Next Up</div>
       <div class="rm-legend-item"><div class="rm-legend-dot" style="background:var(--ink-5);opacity:.4"></div>Backlog</div>
-      <div class="rm-legend-item"><div class="rm-legend-dot" style="background:var(--ink-5);opacity:.35;border:1px dashed #c14545"></div>Killed</div>
+      <div class="rm-legend-item"><div class="rm-legend-dot" style="background:#7f1d1d;opacity:.82;border:1px dashed #dc2626"></div>Killed</div>
       <div class="rm-legend-item" style="margin-left:auto;font:.7rem var(--mono);color:var(--ink-5)">Arrows show dependencies</div>
     </div>
   </div>
