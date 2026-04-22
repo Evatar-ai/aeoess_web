@@ -2054,12 +2054,12 @@
     - aivss-32-3-3-pr
 
 - id: d65-agentid-aps-interop-5-kenne
-  title: "agentid-aps-interop#5: AgentGraph three-signal composition coordination"
-  description: "Kenne (AgentGraph) opened haroldmalikfrimpong-ops/agentid-aps-interop#5 proposing static_analysis fixtures for the empty composed/v1/ slot, completing the three-signal chain (identity + authorization + static_analysis) with each signal from an independent issuer. Posted substantive coordination reply: answered his one question (A = v1 structural now + v2 signed later matches repo cadence), offered to draft APS side of composed envelope slot in a PR once outer shape agreed, recommended shared subject DID (agent_interop_test_001) across all three slots, gently directed crosswalk/agentgraph-to-agentid.yaml to aeoess/agent-governance-vocabulary as right home if pure vocabulary mapping, explicitly deferred repo cadence to Harold. Verified kenneives legitimacy (2022 GH account, real endpoints, substantive across threads, not a canary) before engagement. Waiting on Kenne+Harold to agree composed envelope outer shape."
-  status: active
+  title: "agentid-aps-interop#7: composed/v1 three-signal worked examples shipped"
+  description: "First three-issuer composed envelope in the interop repo, shipped end-to-end in seven hours after slot shapes landed. PR#7 adds: (a) three APS v1 structural fixtures at fixtures/aps/v1/ (happy-path, revoked-delegation, scope-widening-attempt), (b) three composed envelopes at composed/v1/agent_interop_test_001/ stitching AgentID + APS + AgentGraph slots under shared subject DID, (c) issuer-neutral Python verify.py (jcs dep only, no APS SDK), (d) additive schema amendment 1.1.0 to 1.2.0, (e) composed/v1/README.md documenting composition contract and two-level version discipline. 51 of 51 checks pass at exit zero. Kenne ran verify.py on his machine and posted LGTM from the AgentGraph seat. Waiting on Harold merge."
+  status: done
   workstream: comms
   day_start: 65
-  day_end: 72
+  day_end: 65
   dependencies:
     - d65-harold-signing-alignment
   links:
