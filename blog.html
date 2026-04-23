@@ -96,6 +96,22 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "World ID is the root. APS is the chain.",
+      "datePublished": "2026-04-22",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#world-id-is-the-root-aps-is-the-chain",
+      "description": "World AgentKit proves a unique human is behind an agent. APS proves what that human authorized the agent to do, within what limits, and traces every action back to the delegation. World ID anchors the delegation root; APS narrows scope, enforces budget, and emits a signed CommerceActionReceipt at the merchant 4-gate preflight. Three trust layers in agentic commerce: payments, proof-of-human, scoped delegation. AgentKit is the root. APS is the chain."
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Day 66: The asymmetry closes, and the composition pattern runs on its own",
+      "datePublished": "2026-04-22",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-66",
+      "description": "SDK v2.2.0 ships mutual authentication as a protocol primitive: downgrade-proof four-step handshake, local trust-anchor bundle, A2A + MCP adapters, 29 new tests (2395 total). AgentID+APS+AgentGraph composed/v1 envelope picked up a fourth signal (JEP) within hours of merge. Microsoft AGT merged cognitive-attestation-governed as a community extension. EchoOfDawn accepted co-maintainer on aeoess/autogen-governance-adapter, 12 tests green on first push."
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "Day 65: Five issuers converge on one convention",
       "datePublished": "2026-04-21",
       "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
@@ -758,6 +774,24 @@
 <!-- PROPAGATION-ZONE-END -->
   <p class="sub" style="margin-top:.6rem">See the full picture on <a href="roadmap.html" style="font-weight:600">the roadmap</a> — every ship across protocol, product, research, comms, and ops with dependency arrows.</p>
 </div>
+
+
+<article class="post" id="world-id-is-the-root-aps-is-the-chain">
+  <time class="post-date" datetime="2026-04-22">April 22, 2026</time>
+  <h2>World ID is the root. APS is the chain.</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">World shipped AgentKit on April 17 with Okta, Vercel, Browserbase, and Exa. The pitch is clean. An AI agent can now carry cryptographic proof that a unique human is behind it. The Shopify demo routes a World ID signature through UCP to complete a purchase, and the merchant ends up with a receipt of human intent.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">This solves an identity question that payments alone never could. Is there a human here becomes yes or no, anchored in biometric proof-of-personhood. Real move, genuinely useful.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">But agentic commerce has two questions, not one. Who is the human is the first. What is the agent permitted to do on their behalf, with what limits, and how do we trace a specific action back to a specific delegation, is the second. AgentKit handles the first. It does not try to handle the second. That is the correct design choice. It also leaves a seam.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Agent Passport System (APS) fills that seam. A delegation object in APS is a signed, scoped, attenuated authorization that travels with an agent action. It says which human principal delegated it, what scopes are permitted (<code>commerce:checkout</code>, <code>data:read</code>), what budget remains, what TTL is left, and which sub-agents are allowed in the chain. Ed25519 signatures, offline-verifiable, no registry round-trip required. Apache 2.0. Shipped February 18, 2026.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The composition is clean.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">World ID proof of human anchors the delegation root. The signed World ID credential becomes the principal attestation for an APS delegation object. From there, the delegation narrows. An agent gets <code>commerce:checkout</code> scope with a $500 budget for a specific merchant allowlist, valid for 24 hours. The agent does its work. Every action it takes is signed against that delegation. At the merchant, a 4-gate preflight runs: passport valid, scope authorized, budget remaining, merchant allowed. Any fail emits a signed rejection receipt. Success produces a CommerceActionReceipt that links the purchase back through the delegation chain to the original human via their World ID.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">For a flash sale with limited inventory, that merchant now knows two things. There is a unique human behind this agent. That human delegated this specific purchase, within these specific limits, and the signed chain proves it. Fraud reduces. Over-purchase reduces. Audit trails become real.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The human-in-the-loop threshold pattern in AgentKit's docs maps directly onto the APS <code>HumanApprovalRequest</code> primitive. For purchases above a delegation-specified threshold, the agent pauses and emits a signed approval request. The human's response (signed, via World ID or otherwise) becomes part of the CommerceActionReceipt.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">None of this requires either side to change. AgentKit's SDK works as is. APS's commerce adapter works as is. The seam is a header or extension field carrying the delegation object alongside the World ID signature. Any UCP or ACP endpoint can implement the 4-gate preflight in under 50 lines.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">Working reference today: <a href="https://github.com/aeoess/agent-passport-system/tree/main/examples/stripe-governance">github.com/aeoess/agent-passport-system/tree/main/examples/stripe-governance</a></p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The agentic commerce stack has three trust layers emerging. Payments, proof-of-human, and scoped delegation. The first two are consolidating around strong incumbents. The third is the one that answers what did this agent do on behalf of whom, within what limits, provably. It belongs in the stack too, and it composes with what is already there rather than competing.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">AgentKit is the root. APS is the chain.</p>
+</article>
 
 
 <article class="post" id="day-66">
