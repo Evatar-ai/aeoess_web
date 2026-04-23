@@ -2130,3 +2130,16 @@
       label: "Repo"
     - url: "https://github.com/microsoft/autogen/issues/7525"
       label: "Origin thread autogen#7525"
+
+- id: d67-enforcement-trust-anchor-v1-1
+  title: "Enforcement Trust Anchor v1.1 + Capability Token Spec Draft"
+  description: "v1.1 reorganizes the enforcement-trust-anchor document around a sink-awareness boundary after sustained adversarial architectural review, replacing v1.0's flat four-closure-paths framing. Every construction is classified into a five-bucket taxonomy — full closure, subset closure, detection / deterrence, composition primitive, architectural limit — so the document no longer conflates full closure with partial or detection-only primitives. The companion capability-token spec draft at docs/CAPABILITY-TOKEN-SPEC-DRAFT.md proposes the four-component APS-aware closure stack (sink-authored canonical challenge, consumable authority tokens, sink-signed effect receipt, typed epistemic receipts) as a v3.0 research target with no fixed date; universal hygiene layers land incrementally in v2.3 through v2.5 without waiting for v3.0."
+  status: planned
+  workstream: research
+  day_start: 67
+  day_end: 67
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/docs/ENFORCEMENT-TRUST-ANCHOR.md"
+      label: "ENFORCEMENT-TRUST-ANCHOR.md v1.1"
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/docs/CAPABILITY-TOKEN-SPEC-DRAFT.md"
+      label: "CAPABILITY-TOKEN-SPEC-DRAFT.md v0.1"
