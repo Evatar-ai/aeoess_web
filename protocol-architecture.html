@@ -155,9 +155,9 @@
   <div class="scene-meta">
     <div class="title" id="scene-title"><strong>01 · Life of an Action.</strong> Passport → Delegation → Intent → Gateway → Enforcement → Receipt.</div>
     <div class="stats">
-      <div class="stat">policy eval <b id="stat-lat">1.4ms</b></div>
-      <div class="stat">throughput <b>403 ops/s</b></div>
-      <div class="stat">tests <b>2,326</b></div>
+      <div class="stat" id="stat-a-wrap"><span id="stat-a-label">policy eval</span> <b id="stat-a">1.4ms</b></div>
+      <div class="stat" id="stat-b-wrap"><span id="stat-b-label">throughput</span> <b id="stat-b">403 ops/s</b></div>
+      <div class="stat" id="stat-c-wrap"><span id="stat-c-label">tests</span> <b id="stat-c">2,410</b></div>
     </div>
   </div>
 
@@ -281,6 +281,22 @@ const BELOW = [
     ['Humans', 'Every chain terminates at a human principal. Attribution is Merkle-proven.'],
   ],
 ];
+// Per-scene stats: [[labelA, valueA, labelB, valueB, labelC, valueC], ...]
+const STATS_PER_SCENE = [
+  ['issuance', '<1ms',     'chain depth', 'up to 12', 'tests', '2,410'],
+  ['cascade',  '<3ms',     'max fanout',  '2,048',    'tests', '2,410'],
+  ['policy eval', '1.4ms', 'throughput',  '403 ops/s','tests', '2,410'],
+  ['mesh size','65k nodes','signed edges','all',      'tests', '2,410'],
+];
+
+function reportHeight() {
+  try {
+    const shell = document.querySelector('.shell');
+    if (!shell) return;
+    const h = Math.ceil(shell.getBoundingClientRect().bottom) + 4;
+    window.parent.postMessage({ type: 'aeoess-arch-embed:height', height: h }, '*');
+  } catch (e) {}
+}
 
 function selectScene(i) {
   state.sceneIdx = i;
@@ -288,6 +304,14 @@ function selectScene(i) {
   document.querySelectorAll('.scene').forEach(s => s.classList.toggle('active', parseInt(s.dataset.id) === i));
   const [t, sub] = TITLES[i];
   document.getElementById('scene-title').innerHTML = `<strong>${t}</strong> ${sub}`;
+  // stats per scene
+  const S = STATS_PER_SCENE[i];
+  document.getElementById('stat-a-label').textContent = S[0];
+  document.getElementById('stat-a').textContent = S[1];
+  document.getElementById('stat-b-label').textContent = S[2];
+  document.getElementById('stat-b').textContent = S[3];
+  document.getElementById('stat-c-label').textContent = S[4];
+  document.getElementById('stat-c').textContent = S[5];
   // below
   const below = document.getElementById('below'); below.innerHTML = '';
   BELOW[i].forEach(([h,v]) => {
@@ -296,10 +320,27 @@ function selectScene(i) {
     below.appendChild(cell);
   });
   try { localStorage.setItem('aeoess-scene', String(i)); } catch(e) {}
+  // notify parent of content height for iframe auto-resize
+  reportHeight();
 }
 
 /* restore */
 try { const s = parseInt(localStorage.getItem('aeoess-scene')); if (!isNaN(s)) selectScene(s); else selectScene(0); } catch(e) { selectScene(0); }
+
+/* iframe auto-resize: continuously report content height to parent */
+window.addEventListener('load', reportHeight);
+window.addEventListener('resize', reportHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  const ro = new ResizeObserver(() => reportHeight());
+  const shell = document.querySelector('.shell');
+  if (shell) ro.observe(shell);
+}
+/* also poll briefly during initial animation settling */
+let _heightPolls = 0;
+const _heightPoll = setInterval(() => {
+  reportHeight();
+  if (++_heightPolls > 20) clearInterval(_heightPoll);
+}, 200);
 
 /* ---------- tweaks UI ---------- */
 const tweaks = document.getElementById('tweaks');
@@ -619,7 +660,7 @@ const scene0 = {
       setCap(`act#${p.id} → ${this.stages[s].label.toLowerCase()}`, this.stages[s].sub);
     }
     // simulated latency
-    document.getElementById('stat-lat').textContent =
+    document.getElementById('stat-a').textContent =
       (1.1 + Math.sin(t/800)*0.35).toFixed(2) + 'ms';
   }
 };
@@ -1077,7 +1118,7 @@ const scene2 = {
     }
 
     // latency jitter
-    document.getElementById('stat-lat').textContent = (1.2 + Math.random()*0.5).toFixed(2) + 'ms';
+    document.getElementById('stat-a').textContent = (1.2 + Math.random()*0.5).toFixed(2) + 'ms';
   }
 };
 
