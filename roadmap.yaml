@@ -2080,3 +2080,53 @@
   links:
     - url: "https://github.com/OpenLineage/OpenLineage/issues/4409#issuecomment-4290200972"
       label: "Schema delivery comment"
+
+- id: d66-mutual-auth-v1
+  title: "Mutual authentication v1, SDK v2.2.0"
+  description: "Closed the protocol-level asymmetry where agents authenticated to systems but systems did not authenticate to agents. Downgrade-proof four-step handshake (hello + attest each way), local trust-anchor bundle with binding constraints and revocation, replay defence via nonces + signed timestamps + max_clock_skew_ms, downgrade defence baked into the attest signature covering the advertised trust-anchor set, adapters for A2A and MCP. 29 new tests, 2395 total, 146 MCP tools. Explicitly does NOT ship federation, gossip, consensus revocation, cross-signing, hosted CA, or legal-entity model. Mutual auth stands on its own as a primitive; a future federation layer composes on top without changing it. Module lives at src/v2/mutual-auth/ with standalone README."
+  status: done
+  workstream: protocol
+  day_start: 66
+  day_end: 66
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/src/v2/mutual-auth/README.md"
+      label: "Module README"
+    - url: "https://www.npmjs.com/package/agent-passport-system/v/2.2.0"
+      label: "npm v2.2.0"
+
+- id: d66-jep-4th-signal
+  title: "composed/v1 extends 3-signal → 4-signal via JEP PR#8"
+  description: "schchit (JEP author) opened PR #8 at agentid-aps-interop extending the composed/v1 envelope we shipped yesterday with JEP as a fourth signal in the decision_event CTEF category. JEP receipt flows into slots.jep verbatim without reshape. verify.py recognizes version: jep-v1 and handles judgment events per their native semantics (gate composition skips them rather than mistreating a judgment record as pass/fail). Pattern validated: composed/v1 host stays generic, new signals register by adding CTEF category + slots.<issuer> key + native version string. Harold merged PR #7 at 09:44 UTC, schchit opened PR #8 seven hours later, first third-party extension of the composed/v1 pattern. AgentID + APS + AgentGraph + JEP now composable under one shared subject DID."
+  status: done
+  workstream: comms
+  day_start: 66
+  day_end: 66
+  dependencies:
+    - d65-agentid-aps-interop-5-kenne
+  links:
+    - url: "https://github.com/haroldmalikfrimpong-ops/agentid-aps-interop/pull/8"
+      label: "PR #8 JEP fixtures"
+
+- id: d66-agt-1328-cognitive-attestation
+  title: "First merged aeoess code in microsoft/agent-governance-toolkit (PR #1328)"
+  description: "examples/cognitive-attestation-governed/ merged into microsoft/agent-governance-toolkit at 19:41 UTC. 443 lines, two files, zero APS SDK dep. Community example layering signed interpretability envelope on top of AGT's policy decision: AGT decides whether an action is permitted, the Cognitive Attestation envelope signs a sparse-autoencoder decomposition of the model state that drove the decision, downstream auditors can inspect what the reasoning substrate looked like when the action fired rather than just whether the policy rule matched. Follows the pattern set by examples/signet-attestation/ (willamhou's Signet example merged last week). Lands cleanly against the community-extension boundary formalized by ADR 0006 two days ago: policy evaluation stays in AGT core, proofs about the reasoning that produced the decision live as extensions that plug into the decision boundary without changing AGT's interface."
+  status: done
+  workstream: comms
+  day_start: 66
+  day_end: 66
+  links:
+    - url: "https://github.com/microsoft/agent-governance-toolkit/pull/1328"
+      label: "PR #1328 (merged)"
+
+- id: d66-autogen-governance-adapter-v01
+  title: "aeoess/autogen-governance-adapter v0.1 skeleton shipped"
+  description: "New public MIT repo standing up the composition glue for autogen's before_tool_call hook. Single governedToolCall() entry point, three ordered checks (identity via APS passport, authorization via delegation scope with monotonic narrowing invariant, optional trust provider), provider-agnostic TrustProvider Protocol that MoltBridge and MolTrust both implement on the same interface. 12 tests passing (target was 9+), CI green across Python 3.10/3.11/3.12 on first push at commit 8e1c88d. EchoOfDawn at SageMind AI invited as co-maintainer with write access (invitation 315925480 pending acceptance). providers/moltbridge/ reserved as Dawn's lane for MoltBridgeTrustProvider PR, providers/moltrust/ open for MolTrust implementation. Substrate requirements ride inside delegation scope per scope-bound design, no parallel capability-tier gate. Standalone dep footprint. Adapter does not import agent-passport-system SDK."
+  status: done
+  workstream: comms
+  day_start: 66
+  day_end: 66
+  links:
+    - url: "https://github.com/aeoess/autogen-governance-adapter"
+      label: "Repo"
+    - url: "https://github.com/microsoft/autogen/issues/7525"
+      label: "Origin thread autogen#7525"
