@@ -684,12 +684,42 @@ Private enforcement gateway with 37 API routes, multi-tenant with API key auth (
 
 **Dashboard:** aeoess.com/gateway.html — API key login, stats grid, alerts, recent denials, agents, delegations with spend tracking, audit trail with auto-refresh.
 
+## Enforcement Trust Anchor (v1.1) and Capability Token Spec (draft v0.1)
+
+Published 2026-04-23. Specification documents that name a property APS v2.x does not close and the protocol-level closure path proposed for v3.0.
+
+**The gap.** In the current reference deployment, a compromised gateway can emit a cryptographically valid `PolicyReceipt` attesting to an enforcement decision that never occurred. Upstream provenance (delegation chain, passport binding, root JWKS, monotonic narrowing) remains verifiable end-to-end without the gateway, so out-of-scope forgery is still detected. The residual forgery surface is within-scope enforcement attestations signed by a single party.
+
+**The architectural claim.** The gateway must stop being the component that both describes the action and originates the usable authority for it. This is the surviving output of sustained hostile review across all primitives considered.
+
+**Sink-awareness boundary.** APS targets split into two classes with different honest closure stories. APS-aware sinks (MCP server, APS-compatible agents, AgentGraph, MolTrust, OATR, SINT-integrated agents) can verify delegation-bound authorization tokens natively — full structural closure is available. Dumb Web2 sinks (Stripe, AWS billing, OpenAI, Anthropic, Shopify) accept ordinary HTTP and do not evaluate delegation semantics — structural closure is not available at the protocol layer, only hardening.
+
+**APS-aware closure stack (four components).**
+1. Sink-authored canonical challenge — the sink, not the gateway, signs the canonical statement of the action; the gateway's evaluation receipt binds to the sink's challenge hash.
+2. Consumable authority tokens — finite tokens minted by the delegator at delegation time (not by the gateway), committed to a Merkle root in the delegation envelope, consumed via nullifier at the sink.
+3. Sink-signed effect receipt — after execution the sink emits its own signed receipt; this becomes the primary attestation that enforcement occurred.
+4. Typed epistemic receipts — each claim labeled `closed` (cryptographically verifiable), `witnessed` (attested by an external party under a stated threat model), or `unresolved` (asserted but not externally attested). Enforced by schema, not documentation convention.
+
+**Dumb Web2 hardening stack (non-closing).** Bilateral receipts (Component A, primary), tamper-evident log with pre-effect commitment (Component B), homomorphic state commitments for arithmetic invariants (Component C), MPC-TLS network binding for high-value transactions (Component D), BMO ground-truthing as forensic audit overlay (Component E). None of these structurally closes the gap against dumb sinks. Deployers accept residual gateway-compromise risk.
+
+**Universal hygiene (applies everywhere).** Typed epistemic receipts, delegator liveness beacons for revocation finality, canonical hashing discipline via JCS (RFC 8785) with cross-implementation fixture vectors at `fixtures/bilateral-delegation/`.
+
+**Named architectural limits.** Synchronous three-party collusion (subject + gateway + sink against absent delegator). Full sink compromise (sink in same trust domain as gateway). Dumb Web2 sinks (property of 2026's Web2 surface, not of APS). Read-only fraud in non-ABE deployments.
+
+**Capability Token wire format (v0.1 draft, target APS v3.0).** Four message types with Ed25519 signatures over JCS canonical serialization: M1 `SinkChallenge` (sink → subject), M2 `AuthorityEvaluationRequest` (subject → gateway, carries challenge + delegation chain + token reveal + freshness beacon), M3 `ChallengeReceipt` (gateway → subject → sink, policy evaluation bound to challenge hash, typed epistemic claims), M4 `EffectReceipt` (sink → subject, optionally published, upgrades `effect_occurred` from `unresolved` to `closed`). Four signatures per cycle: sink (M1), subject (M2), gateway (M3), sink (M4). The gateway's M3 is policy-evaluation attestation, not enforcement attestation. M1+M4 together constitute the enforcement attestation. Degrades gracefully to v2.x bilateral-receipt path when sink cannot be upgraded; typed-epistemic labels make the degradation explicit at the wire level.
+
+**Composition with v2.x.** Delegation chain mechanisms unchanged. Cascade revocation composes. Passport grades unchanged. BMO serves as forensic audit overlay upgrading `policy_evaluation_correct` from `witnessed` to `corroborated` where subsequent behavior confirms claimed scope. In-toto Decision Receipt predicate at `in-toto/attestation#549` is the v2.x-to-v3.0 integration path.
+
+**Source documents.** Full specification at `docs/ENFORCEMENT-TRUST-ANCHOR.md` (v1.1, supersedes v1.0). Wire format draft at `docs/CAPABILITY-TOKEN-SPEC-DRAFT.md` (v0.1). Both on main in the SDK repo.
+
 ## Links
 
 - npm package: https://www.npmjs.com/package/agent-passport-system
 - npm MCP server: https://www.npmjs.com/package/agent-passport-system-mcp
 - npm SQLite storage: https://www.npmjs.com/package/@aeoess/storage-sqlite
 - GitHub repository: https://github.com/aeoess/agent-passport-system
+- Enforcement trust anchor spec (v1.1): https://github.com/aeoess/agent-passport-system/blob/main/docs/ENFORCEMENT-TRUST-ANCHOR.md
+- Capability token spec (draft v0.1): https://github.com/aeoess/agent-passport-system/blob/main/docs/CAPABILITY-TOKEN-SPEC-DRAFT.md
 - GitHub MCP server: https://github.com/aeoess/agent-passport-mcp
 - npm Mingle: https://www.npmjs.com/package/mingle-mcp
 - GitHub Mingle: https://github.com/aeoess/mingle-mcp

@@ -96,6 +96,14 @@
   "blogPost": [
     {
       "@type": "BlogPosting",
+      "headline": "Enforcement trust anchor v1.1: we found the floor.",
+      "datePublished": "2026-04-23",
+      "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
+      "url": "https://aeoess.com/blog.html#day-66-enforcement-trust-anchor-v1-1",
+      "description": "A compromised gateway can emit a cryptographically valid PolicyReceipt attesting to an enforcement decision that never occurred. Trust-anchor v1.1 reorganizes around the sink-awareness boundary and names a four-piece APS-aware closure stack (sink-authored challenge, consumable authority tokens, sink-signed effect receipt, typed epistemic receipts). Dumb Web2 sinks remain an architectural limit. The architectural claim: the gateway must stop being the component that both describes the action and originates the usable authority for it."
+    },
+    {
+      "@type": "BlogPosting",
       "headline": "World ID is the root. APS is the chain.",
       "datePublished": "2026-04-22",
       "author": {"@type": "Person", "name": "Tymofii Pidlisnyi"},
@@ -774,6 +782,19 @@
 <!-- PROPAGATION-ZONE-END -->
   <p class="sub" style="margin-top:.6rem">See the full picture on <a href="roadmap.html" style="font-weight:600">the roadmap</a> — every ship across protocol, product, research, comms, and ops with dependency arrows.</p>
 </div>
+
+
+<article class="post" id="day-66-enforcement-trust-anchor-v1-1">
+  <time class="post-date" datetime="2026-04-23">April 23, 2026</time>
+  <h2>Enforcement trust anchor v1.1: we found the floor.</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">A technical reader read the v2.2 mutual-auth writeup and asked a question we did not have a clean answer to: a compromised gateway can emit a cryptographically valid <code>PolicyReceipt</code> attesting to an enforcement decision that never occurred, and nothing in the current deployment lets a third party dispute it. The delegation chain still verifies. The passport binding still verifies. Monotonic narrowing still mechanically rules out out-of-scope forgery. What the gateway can do is fabricate a within-scope enforcement decision. As single-party attestations, those receipts are indistinguishable from real ones.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">v1.0 of the enforcement-trust-anchor spec listed four closure paths (bilateral receipts, tamper-evident log, TEE, multi-gateway quorum) and committed to bilateral receipts as primary. That framing was the ecosystem's consensus on the problem. After sustained adversarial review, it turned out to be incomplete in a specific way: all four paths preserved the gateway as the attestation root and diluted single-party lying through honesty assumptions on other parties. None of them removed the gateway from the loop for the property under dispute.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The reorganization that survived review is called the sink-awareness boundary. APS targets split into two classes and the honest closure story differs per class. For resources that can verify delegation-bound authorization tokens natively (our MCP server, APS-compatible agents, SINT-integrated sinks), full structural closure is available. For dumb Web2 sinks (Stripe, AWS billing, model provider APIs), it is not.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The APS-aware closure stack is four pieces composed. The sink, not the gateway, defines the canonical action in a signed challenge. Authority is represented as consumable tokens minted by the delegator at delegation time, not by the gateway at evaluation time. After execution the sink signs its own effect receipt, which becomes the primary attestation that enforcement occurred. Every receipt labels each claim it carries as closed, witnessed, or unresolved, so downstream verifiers cannot be tricked into treating self-assertion as cryptographic closure.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">For dumb Web2 sinks, this is not available at the protocol layer. Whoever holds the connection to a sink that does not read cryptography has absolute power over it. Bilateral receipts, tamper-evident logs, homomorphic state commitments, MPC-TLS for high-value transactions, and BMO ground-truthing narrow the gap. None of them close it. Deployers using APS against dumb sinks accept residual gateway-compromise risk. Saying this plainly is the point.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The architectural claim that comes out the other side is this: the gateway must stop being the component that both describes the action and originates the usable authority for it.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">v1.1 of the trust-anchor spec and the v0.1 draft of the capability-token wire format are both on the main branch now. <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/ENFORCEMENT-TRUST-ANCHOR.md">ENFORCEMENT-TRUST-ANCHOR.md</a> and <a href="https://github.com/aeoess/agent-passport-system/blob/main/docs/CAPABILITY-TOKEN-SPEC-DRAFT.md">CAPABILITY-TOKEN-SPEC-DRAFT.md</a>.</p>
+</article>
 
 
 <article class="post" id="world-id-is-the-root-aps-is-the-chain">
