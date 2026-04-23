@@ -710,7 +710,7 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 
 **Composition with v2.x.** Delegation chain mechanisms unchanged. Cascade revocation composes. Passport grades unchanged. BMO serves as forensic audit overlay upgrading `policy_evaluation_correct` from `witnessed` to `corroborated` where subsequent behavior confirms claimed scope. In-toto Decision Receipt predicate at `in-toto/attestation#549` is the v2.x-to-v3.0 integration path.
 
-**Source documents.** Full specification at `docs/ENFORCEMENT-TRUST-ANCHOR.md` (v1.1, supersedes v1.0). Wire format draft at `docs/CAPABILITY-TOKEN-SPEC-DRAFT.md` (v0.1). Both on main in the SDK repo.
+**Source documents.** Full specification at `docs/ENFORCEMENT-TRUST-ANCHOR.md` (v1.2 on feat/v1.2-bbis-grammar branch awaiting merge, supersedes v1.1 on main which supersedes v1.0). Wire format draft at `docs/CAPABILITY-TOKEN-SPEC-DRAFT.md` (v0.2 on same branch awaiting merge, supersedes v0.1 on main). v1.2 adopts BBIS classification grammar (closed / bounded / partial / detectable-only / theater) per Hensley's OWASP#817. v0.2 renames M4 EffectReceipt to FRCBE (Final Refusal-Capable Boundary Event) per Hensley's qntm#7 coinage and splits post-effect forensic into a new optional M5 ExecutionReceipt.
 
 ## Links
 
@@ -718,8 +718,8 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 - npm MCP server: https://www.npmjs.com/package/agent-passport-system-mcp
 - npm SQLite storage: https://www.npmjs.com/package/@aeoess/storage-sqlite
 - GitHub repository: https://github.com/aeoess/agent-passport-system
-- Enforcement trust anchor spec (v1.1): https://github.com/aeoess/agent-passport-system/blob/main/docs/ENFORCEMENT-TRUST-ANCHOR.md
-- Capability token spec (draft v0.1): https://github.com/aeoess/agent-passport-system/blob/main/docs/CAPABILITY-TOKEN-SPEC-DRAFT.md
+- Enforcement trust anchor spec (v1.2 feat branch, v1.1 on main): https://github.com/aeoess/agent-passport-system/blob/main/docs/ENFORCEMENT-TRUST-ANCHOR.md
+- Capability token spec (v0.2 feat branch, v0.1 on main): https://github.com/aeoess/agent-passport-system/blob/main/docs/CAPABILITY-TOKEN-SPEC-DRAFT.md
 - GitHub MCP server: https://github.com/aeoess/agent-passport-mcp
 - npm Mingle: https://www.npmjs.com/package/mingle-mcp
 - GitHub Mingle: https://github.com/aeoess/mingle-mcp
