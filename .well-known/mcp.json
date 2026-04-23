@@ -1,14 +1,14 @@
 {
   "name": "AEOESS \u2014 Agent Passport System",
   "description": "Enforcement infrastructure for AI agents. Cryptographic identity, scoped delegation, Bayesian reputation, gateway enforcement, passport grades, Merkle attribution.",
-  "version": "2.23.0",
+  "version": "3.1.0",
   "servers": [
     {
       "name": "agent-passport-mcp",
-      "description": "132 MCP tools for AI agent governance. Identity, delegation, trust scoring, enforcement, commerce, coordination, attribution, institutional governance.",
+      "description": "150 MCP tools for AI agent governance. Identity, delegation, trust scoring, enforcement, commerce, coordination, attribution, institutional governance.",
       "transport": "sse",
       "url": "https://mcp.aeoess.com/sse",
-      "tools_count": 132,
+      "tools_count": 150,
       "install": "npx -y agent-passport-system-mcp",
       "npm": "https://www.npmjs.com/package/agent-passport-system-mcp"
     }
@@ -16,10 +16,11 @@
   "sdk": {
     "npm": "agent-passport-system",
     "pypi": "agent-passport-system",
-    "version": "1.41.0",
-    "modules": 103,
-    "tests": 2764,
-    "python_version": "0.11.0"
+    "version": "2.3.0-alpha",
+    "stable_version": "2.2.0",
+    "modules": 125,
+    "tests": 2410,
+    "python_version": "2.2.0"
   },
   "documentation": {
     "llms_txt": "https://aeoess.com/llms.txt",
@@ -40,5 +41,5 @@
     "throughput": "403 ops/sec",
     "routes": 37
   },
-  "lastUpdated": "2026-04-11"
+  "lastUpdated": "2026-04-23"
 }
