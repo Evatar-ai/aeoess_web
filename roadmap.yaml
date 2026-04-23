@@ -2083,7 +2083,7 @@
 
 - id: d66-mutual-auth-v1
   title: "Mutual authentication v1, SDK v2.2.0"
-  description: "Closed the protocol-level asymmetry where agents authenticated to systems but systems did not authenticate to agents. Downgrade-proof four-step handshake (hello + attest each way), local trust-anchor bundle with binding constraints and revocation, replay defence via nonces + signed timestamps + max_clock_skew_ms, downgrade defence baked into the attest signature covering the advertised trust-anchor set, adapters for A2A and MCP. 29 new tests, 2395 total, 146 MCP tools. Explicitly does NOT ship federation, gossip, consensus revocation, cross-signing, hosted CA, or legal-entity model. Mutual auth stands on its own as a primitive; a future federation layer composes on top without changing it. Module lives at src/v2/mutual-auth/ with standalone README."
+  description: "Closed the protocol-level asymmetry where agents authenticated to systems but systems did not authenticate to agents. Downgrade-proof four-step handshake (hello + attest each way), local trust-anchor bundle with binding constraints and revocation, replay defence via nonces + signed timestamps + max_clock_skew_ms, downgrade defence baked into the attest signature covering chosen_version + both nonces + peer certificate, adapters for A2A and MCP. 29 new tests, 2395 total, 146 MCP tools. Explicitly does NOT ship federation, gossip, consensus revocation, cross-signing, hosted CA, or legal-entity model. Mutual auth stands on its own as a primitive; a future federation layer composes on top without changing it. Module lives at src/v2/mutual-auth/ with standalone README."
   status: done
   workstream: protocol
   day_start: 66
