@@ -2081,6 +2081,19 @@
     - url: "https://github.com/OpenLineage/OpenLineage/issues/4409#issuecomment-4290200972"
       label: "Schema delivery comment"
 
+- id: d67-ecosystem-directory
+  title: "Agent Ecosystem Directory shipped. Projects, people, threads as sortable tables on GitHub Pages."
+  description: "A community-maintained directory of the agent infrastructure field, built on live GitHub data. 18 projects enriched from projects/*.yaml + GitHub repo metadata (stars, license, created, last push). 115 people (filtered from 130 raw) pulled from the contribution map and enriched with GitHub user metadata (account age, bio, company, followers). 93 governance threads enriched with state, comments, participants. Three sortable, filterable tables replace the earlier force-directed graph, which was pretty but buried its data in tooltips. Account ages visible as pills (amber under 60 days, green 60-365 days, plain after), so a 3-week-old promotional account is instantly distinguishable from a 10-year veteran at a glance. Explicitly not a ranking, not a coalition, not a property of AEOESS: the README invites co-maintainers from other projects in the directory and commits to neutral stewardship once anyone wants to co-steward. Code MIT, data CC-BY-4.0."
+  status: done
+  workstream: ecosystem
+  day_start: 67
+  day_end: 67
+  links:
+    - url: "https://aeoess.github.io/agent-ecosystem-map/"
+      label: "Live directory"
+    - url: "https://github.com/aeoess/agent-ecosystem-map"
+      label: "Source + contribute"
+
 - id: d67-bbis-grammar-frcbe
   title: "BBIS classification grammar adopted: v1.2 of trust-anchor doc, v0.2 of capability-token spec"
   description: "ENFORCEMENT-TRUST-ANCHOR.md v1.2 replaces v1.1's five-bucket taxonomy with the BBIS classification grammar (closed, bounded, partial, detectable-only, theater) per Steven Kyle Hensley's OWASP#817 answer. The Class B framing is tightened so typed epistemic receipts are classified as honesty discipline, not admissibility upgrade. Construction is implementation detail; invariant survival is the claim. CAPABILITY-TOKEN-SPEC-DRAFT.md v0.2 renames M4 EffectReceipt to FRCBE (Final Refusal-Capable Boundary Event) per the qntm#7 naming coined by the same author. Post-effect forensic artifacts split into a new optional M5 ExecutionReceipt; most deployments omit M5. Three-way naming convergence lands within 18 hours: BBIS (framework), APS (protocol), AgentGraph (implementation committed to CTEF v0.3 accepting delegation_chain_root by end of week). Branch feat/v1.2-bbis-grammar awaiting review before merge to main."
