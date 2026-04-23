@@ -4,7 +4,7 @@
 
 Updated: 2026-04-11
 SDK version: agent-passport-system@2.1.0
-MCP version: agent-passport-system-mcp@3.1.0 (146 tools)
+MCP version: agent-passport-system-mcp@3.1.0 (150 tools)
 Python SDK: agent-passport-system==2.0.0
 Canonical: https://aeoess.com/llms.txt
 Full reference: https://aeoess.com/llms-full.txt
@@ -70,7 +70,7 @@ Plus: **MCP Server** (v3.1.0) — 20 essential tools by default, 146 total. Set 
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v2.2.0 — 2,395 tests passing. Zero heavy dependencies.**
+**v2.3.0-alpha — 2,395 tests passing. Zero heavy dependencies.**
 
 ## Tiered Access (Recommended Onboarding)
 
@@ -121,7 +121,7 @@ import { /* anything from the full surface */ } from 'agent-passport-system'
 
 ## MCP Server
 
-The `agent-passport-system-mcp` package provides a full-stack MCP server. Default profile is `essential` (20 tools: identity, delegation, enforcement, commerce, reputation). Set `APS_PROFILE=full` for all 146 tools across all layers. Other profiles: identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
+The `agent-passport-system-mcp` package provides a full-stack MCP server. Default profile is `essential` (20 tools: identity, delegation, enforcement, commerce, reputation). Set `APS_PROFILE=full` for all 150 tools across all layers. Other profiles: identity, governance, coordination, commerce, data, gateway, comms, minimal, full.
 
 **Remote endpoint:** Connect via SSE at `https://mcp.aeoess.com/sse` — no install required.
 
