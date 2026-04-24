@@ -129,9 +129,12 @@ function getTargetFiles() {
     // SDK repo
     { path: `${REPOS.sdk}/README.md`, repo: 'sdk' },
     { path: `${REPOS.sdk}/package.json`, repo: 'sdk' },
+    { path: `${REPOS.sdk}/llms.txt`, repo: 'sdk' },                     // v3 spec: was missing
     // MCP repo
     { path: `${REPOS.mcp}/README.md`, repo: 'mcp' },
     { path: `${REPOS.mcp}/package.json`, repo: 'mcp' },
+    { path: `${REPOS.mcp}/llms.txt`, repo: 'mcp' },                     // v3 spec: was missing
+    { path: `${REPOS.mcp}/glama.json`, repo: 'mcp' },                   // v3 spec: tools_count
     // Web repo — public pages
     { path: `${REPOS.web}/index.html`, repo: 'web' },
     { path: `${REPOS.web}/llms.txt`, repo: 'web' },
@@ -149,6 +152,10 @@ function getTargetFiles() {
     { path: `${REPOS.web}/aivss.html`, repo: 'web' },
     { path: `${REPOS.web}/wallet.html`, repo: 'web' },
     { path: `${REPOS.web}/benchmarks.html`, repo: 'web' },
+    { path: `${REPOS.web}/protocol-architecture.html`, repo: 'web' },  // v3 spec: STATS_PER_SCENE has 4 hardcoded TEST_COUNT + 1 in <b id="stat-c">
+    { path: `${REPOS.web}/protocol.html`, repo: 'web' },                // v3 spec: TOTAL_MODULES, TEST_COUNT, MCP_TOOL_COUNT
+    { path: `${REPOS.web}/working-group.html`, repo: 'web' },           // v3 spec: TEST_COUNT references
+    { path: `${REPOS.web}/amcs.html`, repo: 'web' },                    // v3 spec: TEST_COUNT
     { path: `${REPOS.web}/README.md`, repo: 'web' },
     // Org profile README (if repo exists)
     ...(existsSync(`${REPOS.org}/profile/README.md`) ? [{ path: `${REPOS.org}/profile/README.md`, repo: 'org' }] : []),
