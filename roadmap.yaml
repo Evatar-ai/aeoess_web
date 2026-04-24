@@ -2210,3 +2210,55 @@
       label: "A2A #1672 thread"
     - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/OPEN-COMMITMENTS.md"
       label: "Rotation-attestation fixtures commitment"
+
+- id: d67-agt-1354-interop-proposal
+  title: "Microsoft AGT #1354 interop proposal posted to Imran Siddique"
+  description: "Imran Siddique (Microsoft Engineering Architect driving the agent-governance-toolkit and active on the ADR-0007 cross-org federation direction in #1386) opened the door on #1354 for a concrete interop proposal between APS and AGT. Reply maps the three questions he opened #1386 with — policy precedence across orgs, evidence correlation across boundaries, trust tier compatibility — to named APS primitives that already ship in the public SDK. Policy precedence resolves through the combination of invariant_survival (pre_action / during_action / post_action / permanent) and refusal_authority (issuer / verifier / consumer_policy / shared), giving a declarative precedence grammar covering all four candidates (tool-side, agent-side, intersection, declared). Evidence correlation is DecisionLineageReceipt with content-addressed delegation_chain_root (SHA-256 over RFC 8785 JCS-canonicalized hops), which lets two verifiers independently confirm the same chain without round-tripping a registry. Trust tier semantics map the AGT TrustProvider tier enum from #1274 to the vocabulary's passport_grade plus behavioral_trust scoring; the bridge is already half-built through RNWY and MolTrust as trust_verification issuers. Four possible artifacts offered in increasing scope and without prescribing an order: vocab crosswalk entry pointing AGT's runtime evidence format at canonical terms (mirrors the rnwy.yaml and moltrust.yaml pattern); interop spec section as a follow-on ADR to #1234/ADR-0007 with canonical bytes + hash algorithm + envelope shape (APS drafts first pass, byline follows contribution during review); Tutorial 42 on cross-org delegation drafted against AGT's tutorial template; conformance fixture exchange adding AGT as a second verifier target in the existing harness. Three prior AEOESS PRs already merged in AGT (#274 reputation-gated authority, #598 APS-AgentMesh adapter, #1328 cognitive-attestation example) provide established contribution standing. Posted 22:22 PT; response pending."
+  status: in_progress
+  workstream: comms
+  day_start: 67
+  day_end: 67
+  links:
+    - url: "https://github.com/microsoft/agent-governance-toolkit/issues/1354#issuecomment-4310873128"
+      label: "Reply on #1354"
+    - url: "https://github.com/microsoft/agent-governance-toolkit/issues/1386"
+      label: "AGT #1386 federation thread"
+
+- id: d68-rotation-attestation-fixtures-v1
+  title: "Rotation-attestation fixtures v1 live + canonicalization loop closed with AgentGraph"
+  description: "Five canonical DID-document rotation-attestation fixtures plus JSON Schema plus test-vectors manifest published at aeoess.com/fixtures/rotation-attestation/. Fixtures cover happy-path, cross-signed, migration-attested, happy-path-compound (cross-signed + migration-attested in one entry, realistic production case), and negative-no-attestation (rotationLog entry with empty rotationSignature, must trigger INVALID_CLAIM_SCOPE on a conformant verifier). Every signature and hash input is RFC 8785 JCS-canonicalized; attestor is a dedicated fixture-signing key separate from the gateway with pubkey at keys/attestor-v1.pub.json and seed documented so third parties reproduce the set byte-identical from a fresh clone. v1 narrows migration_type to key_class_upgrade only; v2 extends to did_method_migration. Closes OPEN-COMMITMENTS #11 on the same day as the commitment (Apr 23 PT commitment, Apr 24 PT delivery). AgentGraph landed test_aps_rotation_attestation_interop.py in main at commit 8baaad4 within hours of publication, live-fetching fixtures at test-collection time rather than pinning a repo-local snapshot, dual-locking each fixture against the published test-vectors.json canonical SHA-256 AND what their canonicalize_jcs_strict produces from the live body. All five fixtures reproduce byte-identical. Canonicalization loop closed: APS bilateral delegation, APS continuity rotation, and AgentGraph CTE vectors now pin the same canonicalization through JCS bytes rather than shared code — which is the actual interop test. Pattern will mirror into v0.2 capability-token fixtures once those publish."
+  status: done
+  workstream: protocol
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://aeoess.com/fixtures/rotation-attestation/test-vectors.json"
+      label: "test-vectors manifest"
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/docs/ROTATION-ATTESTATION-SPEC.md"
+      label: "Spec"
+    - url: "https://github.com/a2aproject/A2A/issues/1672#issuecomment-4310448182"
+      label: "A2A #1672 closure exchange"
+
+- id: d68-autogen-jwks-kid-strict-match
+  title: "autogen-governance-adapter: first external security contribution (pshkv PR #1 merged)"
+  description: "Second external contributor on the repo after EchoOfDawn's MoltBridge lane opening, and the first security-class PR. Previous _lookup_issuer_key implementation had a silent fallback: if the declared kid did not match any key in the issuer's JWKS, it would accept the first Ed25519 key in the keyset anyway, producing a silent binding failure rather than a rejection. This is precisely the class of implicit-trust hazard the composition-rule discipline in CTEF v0.3.1 §6.3 is designed to prevent. PR tightens to strict kid-match and raises UnknownKeyIdError on mismatch. 16/16 tests green post-merge. Good signal that kid/alg registry discipline (which we have been arguing for in the A2A Agent Cards and CTEF threads) is showing up as concrete patch-level work from independent contributors, not just spec-level advocacy."
+  status: done
+  workstream: comms
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://github.com/aeoess/autogen-governance-adapter/pull/1"
+      label: "PR #1 (merged)"
+
+- id: d68-housekeeping-batch-audit-v2-3
+  title: "Housekeeping batch from AUDIT-2026-04-24 + audit spec v2.3"
+  description: "Seven fixes applied from the Apr 24 audit report. Code side: engines.node >= 18.0.0 declared on six Node packages (agent-passport-mcp, aeoess-gateway, agent-passport-remote-mcp, mingle-mcp, intent-network-api, solana-agent-identity) to prevent silent Node-version drift on Railway and npm installers; LICENSE + NOTICE copied to agent-passport-remote-mcp root (files shipped through the npm dep tree already, but the repo itself should carry them for GitHub, SBOM, and glama audits); two SDK example files referencing v1-era APIs that changed in v2.0.0-beta.0 (examples/crewai-governance.ts invoking removed createCrewAIGovernance, examples/enforcement-demo.ts invoking createAgentContext that moved to the gateway surface) archived under _archive/examples-pre-v2/ with an explanatory README, so contributors following the docs no longer hit broken TypeScript imports; SDK dist/ refreshed against current src/. Spec side: audit prompt bumped from v2.1 to v2.3 with three corrections. v2.2 fixed A11 (remote-MCP build output moved from repo root to build/, check path updated), A13 (agent-governance-toolkit is a monorepo with no root package.json, step iterates packages/agent-*/ sub-trees), and added an explicit Python pip install -e exception to the read-only constraints block since pytest collection fails on ModuleNotFoundError without editable install. v2.3 replaced the C8 dist-staleness check which used find -newer against the dist/ directory's own mtime rather than the mtime of files inside it, producing a consistent false positive (audit reported 240 src files newer than dist/ even immediately after npm run build because directory mtime does not update on internal file rewrites). New check compares newest src/ file mtime against newest dist/ file mtime in Python. Next full audit now expected clean PASS. Completion report at specs/AUDIT-2026-04-24-FIXES.md."
+  status: done
+  workstream: ops
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/AUDIT-2026-04-24-FIXES.md"
+      label: "Completion report"
+    - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/cc-prompts/10-full-code-audit-v2.md"
+      label: "Audit spec v2.3"
