@@ -111,14 +111,19 @@ section "B. .well-known/ files"
 for wk in mcp.json aeoess-issuer.json agent-trust.json aps.txt agents.json; do
   f="$WEB/.well-known/$wk"
   [ -f "$f" ] || { record_fail ".well-known/$wk missing"; continue; }
+  # agents.json and aps.txt have schema versions, not product versions — not propagation targets
+  if [ "$wk" = "agents.json" ] || [ "$wk" = "aps.txt" ] || [ "$wk" = "agent-trust.json" ]; then
+    record_pass ".well-known/$wk (schema/cert only, not propagation target)"
+    continue
+  fi
   if grep -Fq ".well-known/$wk" "$PROP" 2>/dev/null; then
     record_pass ".well-known/$wk in propagate.mjs"
   else
-    # Only flag as fail if file contains version/count markers
-    if grep -qE "\"version\"|tools_count|modules|tests" "$f" 2>/dev/null; then
-      record_fail ".well-known/$wk has versioned content but NOT in propagate.mjs"
+    # Flag only if file contains product-version-bound content
+    if grep -qE "sdk.*version|tools_count|\"modules\"[[:space:]]*:[[:space:]]*[0-9]|\"tests\"[[:space:]]*:[[:space:]]*[0-9]" "$f" 2>/dev/null; then
+      record_fail ".well-known/$wk has product-versioned content but NOT in propagate.mjs"
     else
-      record_pass ".well-known/$wk (no versioned content, OK not in propagate)"
+      record_pass ".well-known/$wk (no product-versioned content, OK not in propagate)"
     fi
   fi
 done
