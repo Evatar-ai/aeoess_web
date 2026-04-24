@@ -2173,3 +2173,40 @@
       label: "ENFORCEMENT-TRUST-ANCHOR.md v1.1"
     - url: "https://github.com/aeoess/agent-passport-system/blob/main/docs/CAPABILITY-TOKEN-SPEC-DRAFT.md"
       label: "CAPABILITY-TOKEN-SPEC-DRAFT.md v0.1"
+
+- id: d67-pr-merge-protocol-v02
+  title: "PR Merge Protocol v0.2 + public CONTRIBUTING.md expansion"
+  description: "Added §3.6 Seven Deep-Review Dimensions to the internal PR merge protocol, codifying what Phase 1 (Adversarial First) and Phase 4 (Invariant Cross-Check) must catch beyond the surface checklist. Seven dimensions: Ecosystem Precedent (novel structure sets permissive template), Semantic-Primitive Mismatch (match: exact vs vocab definition), Cross-Signal Field Overlap (composition hazard for consumers), Endpoint Content Depth (HTTP 200 is not production data), Cryptographic Coherence (alg/curve/proof-type/chain pairing), Ownership &amp; Coordination (concurrence on THIS PR not related issues), Related-Issue Dependency (PR jumping ahead of open debate). Distributed across Phase 1 and Phase 4 — not new phases, named patterns the existing phases must catch. Extracted from PR #43 nutstrut measurement_point and PR #44 alex-pathcourse Pathcourse Health reviews where validator-clean PRs still carried substantive issues only visible under cross-touchpoint analysis. CONTRIBUTING.md on agent-governance-vocabulary expanded from 5 one-line review questions to explicit sub-bullets under Substance and Scope so contributors can self-calibrate before submission. First PR through the public criteria (#44) merged clean after three iterations."
+  status: done
+  workstream: ops
+  day_start: 67
+  day_end: 67
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/blob/main/CONTRIBUTING.md"
+      label: "CONTRIBUTING.md"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/44"
+      label: "PR #44 Pathcourse Health (merged)"
+
+- id: d67-full-code-audit-v2-1
+  title: "Full Code Audit v2.1 — 42 steps, three tiers, 14 repos"
+  description: "Rewrote the CMD-SET-2 pre-publish audit from v1's 12 steps (SDK + MCP focused) to 42 steps across three tiers covering the full shipped codebase surface. Tier A Code Integrity runs test suites, typecheck, lint, build artifacts across SDK, MCP, Python SDK, Remote MCP, Gateway, Agent Governance Toolkit (405 tests), autogen-governance-adapter, vocab validator, intent-network-api, hermes-aps-delegation, hermes-decision-receipts, a2a-compliance-harness, solana-agent-identity, mingle-mcp, plus the SDK examples/ adapter apps and aeoess_web operational scripts. Tier B Supply Chain runs npm audit and pip-audit across every repo, secret scan with fixture/test exclusions, .npmignore and MANIFEST.in hygiene, LICENSE and NOTICE presence, CI workflow YAML validity and floating-action-ref detection, Dockerfile and Railway config pinning, Node engines field presence, package-lock presence. Tier C Runtime checks cross-repo version alignment across SDK/MCP/Python/Remote-MCP, npm and PyPI registry drift, live endpoint health, Gateway JWKS parity against source, committed fixture URLs from OPEN-COMMITMENTS reachable, PM2 RSS memory leak detection with proper PM2-presence detection, git status across 20 repos with expected-branch check, build artifact freshness, stale artifact hunt, canonical number consistency including paper count, TAT licensee sentinel, large binary accidental-commit hunt. Self-check found 17 gaps in the initial v2 which v2.1 closes. Read-only throughout; explicit do-not-install / do-not-restart / do-not-commit-outside-aeoess_web constraints. Paste-ready for CC in one message."
+  status: done
+  workstream: ops
+  day_start: 67
+  day_end: 67
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/cc-prompts/10-full-code-audit-v2.md"
+      label: "Audit v2.1 prompt"
+
+- id: d67-ctef-v031-adoption
+  title: "CTEF v0.3.1 adopts APS composition-rule table and INVALID_COMPOSITION error code"
+  description: "AgentGraph pulled the four-row per-layer composition grammar (identity / transport / authority / continuity, each with its declared composition rule) from the A2A #1672 thread into CTEF v0.3.1 §6.3 verbatim as normative language. Identity composes by key binding, transport by identity-key binding, authority by monotonic narrowing with content-addressed delegation_chain_root, continuity by rotation-attestation chain. Two verifiers given the same inputs must arrive at the same composed result; layers that cannot declare a deterministic composition rule are underspecified. INVALID_COMPOSITION adopted as a distinct error code alongside INVALID_CLAIM_SCOPE — they share the ordering constraint (structural failure precedes semantic evaluation) but surface different divergence classes. APS commits to publish canonical rotation-attestation fixtures at aeoess.com/fixtures/rotation-attestation/ this week (four fixtures: happy-path, cross-signed, migration-attested, negative-no-attestation) with versioned schema and matching test-vectors.json; AgentGraph lands them under tests/fixtures/aps-rotation-attestation/ with a companion test_aps_rotation_attestation_interop.py locking byte-identical canonicalization. Concurrent spec PR plan: A2A Agent Cards PR citing CTEF v0.3.1 §6.3 for composition-rule table + error codes, v0.3.1 citing the Agent Cards PR for the four-layer split + claim_type discriminator. Both held pending @haroldmalikfrimpong-ops signal on WG direction."
+  status: done
+  workstream: ecosystem
+  day_start: 67
+  day_end: 67
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1672#issuecomment-4310448182"
+      label: "A2A #1672 thread"
+    - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/OPEN-COMMITMENTS.md"
+      label: "Rotation-attestation fixtures commitment"
