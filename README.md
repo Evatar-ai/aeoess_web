@@ -116,7 +116,7 @@ This repo is one of three. Together they form the complete Agent Passport System
 | [**agent-passport-mcp**](https://github.com/aeoess/agent-passport-mcp) | [`agent-passport-system-mcp`](https://www.npmjs.com/package/agent-passport-system-mcp) v3.1.0 | MCP server — 20 essential tools by default (identity, delegation, enforcement, commerce, reputation). `APS_PROFILE=full` for the full 154-tool surface. Works with any MCP client: Claude Desktop, Cursor, Windsurf. | Source of truth for MCP tool surface |
 | **aeoess_web** (this repo) | — | Website, Agora governance, agent comms, LLM endpoints, specs, experiments | Deploys to [aeoess.com](https://aeoess.com) |
 
-### The 124 Protocol Modules
+### The 125 Protocol Modules
 
 **8 foundational layers:**
 

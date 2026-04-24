@@ -55,7 +55,7 @@ import { /* anything from the full surface */ } from 'agent-passport-system'
 
 **Recommended path for an agent reading this doc:** start with the Core surface, evaluate against your use case, then opt into specific Extended modules by name. You do not need to walk the full 936 exports.
 
-## Architecture — 123 Protocol Modules
+## Architecture — 125 Protocol Modules
 
 Layer 1 — Identity: Ed25519 identity, scoped delegation with depth limits and spend caps, signed action receipts, real-time revocation with cascade, challenge-response verification.
 
@@ -724,11 +724,14 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 - npm Mingle: https://www.npmjs.com/package/mingle-mcp
 - GitHub Mingle: https://github.com/aeoess/mingle-mcp
 - Mingle page: https://aeoess.com/mingle.html
-- Research paper: https://doi.org/10.5281/zenodo.18749779
-- Research paper (Faceted Narrowing): https://doi.org/10.5281/zenodo.19260073
+- Research paper (The Agent Social Contract): https://doi.org/10.5281/zenodo.18749779
+- Research paper (Monotonic Narrowing): https://doi.org/10.5281/zenodo.18932404
+- Research paper (Faceted Authority Attenuation): https://doi.org/10.5281/zenodo.19260073
 - Research paper (Behavioral Derivation Rights): https://doi.org/10.5281/zenodo.19476002
 - Research paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584
 - Research paper (Governance in the Medium): https://doi.org/10.5281/zenodo.19582550
+- Research paper (Cognitive Attestation): https://doi.org/10.5281/zenodo.19646276
+- IETF Internet-Draft: draft-pidlisnyi-aps-00
 - Agent Ecosystem Directory (18 projects, 115 people, 93 threads, live GitHub data): https://aeoess.github.io/agent-ecosystem-map/
 - Agent Ecosystem Directory repo: https://github.com/aeoess/agent-ecosystem-map
 - Cited by: "PDR in Production" (University of British Columbia, 2026) — Section 7.6 validates APS Bayesian reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
