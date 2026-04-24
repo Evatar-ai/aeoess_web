@@ -27,6 +27,9 @@ const REPOS = {
   mcp: resolve(`${HOME}/agent-passport-mcp`),
   web: resolve(`${HOME}/aeoess_web`),
   org: resolve(`${HOME}/aeoess-dot-github`), // GitHub org profile README
+  python: resolve(`${HOME}/agent-passport-python`),                     // v3 audit: Python SDK
+  vocab: resolve(`${HOME}/agent-governance-vocabulary`),                // v3 audit: vocabulary repo
+  ecomap: resolve(`${HOME}/agent-ecosystem-map`),                       // v3 audit: ecosystem map
 };
 
 // ── Read source-of-truth values ──
@@ -135,6 +138,10 @@ function getTargetFiles() {
     { path: `${REPOS.mcp}/package.json`, repo: 'mcp' },
     { path: `${REPOS.mcp}/llms.txt`, repo: 'mcp' },                     // v3 spec: was missing
     { path: `${REPOS.mcp}/glama.json`, repo: 'mcp' },                   // v3 spec: tools_count
+    { path: `${REPOS.mcp}/AGENTS.md`, repo: 'mcp' },                    // v3 audit: counts in prose
+    { path: `${REPOS.mcp}/CLAUDE.md`, repo: 'mcp' },                    // v3 audit: pointer-only but kept in sync
+    { path: `${REPOS.sdk}/AGENTS.md`, repo: 'sdk' },                    // v3 audit: counts in prose
+    { path: `${REPOS.sdk}/CLAUDE.md`, repo: 'sdk' },                    // v3 audit: HEAVILY DRIFTED — catch here
     // Web repo — public pages
     { path: `${REPOS.web}/index.html`, repo: 'web' },
     { path: `${REPOS.web}/llms.txt`, repo: 'web' },
@@ -159,6 +166,28 @@ function getTargetFiles() {
     { path: `${REPOS.web}/README.md`, repo: 'web' },
     // Org profile README (if repo exists)
     ...(existsSync(`${REPOS.org}/profile/README.md`) ? [{ path: `${REPOS.org}/profile/README.md`, repo: 'org' }] : []),
+    // Python SDK (v3 audit: was missing)
+    ...(existsSync(`${REPOS.python}/README.md`) ? [
+      { path: `${REPOS.python}/README.md`, repo: 'python' },
+      { path: `${REPOS.python}/AGENTS.md`, repo: 'python' },
+      { path: `${REPOS.python}/CLAUDE.md`, repo: 'python' },
+      { path: `${REPOS.python}/llms.txt`, repo: 'python' },
+      { path: `${REPOS.python}/pyproject.toml`, repo: 'python' },
+    ] : []),
+    // Vocabulary repo (v3 audit: was missing)
+    ...(existsSync(`${REPOS.vocab}/README.md`) ? [
+      { path: `${REPOS.vocab}/AGENTS.md`, repo: 'vocab' },
+      { path: `${REPOS.vocab}/CLAUDE.md`, repo: 'vocab' },
+      { path: `${REPOS.vocab}/llms.txt`, repo: 'vocab' },
+    ] : []),
+    // Ecosystem map repo (v3 audit: was missing)
+    ...(existsSync(`${REPOS.ecomap}/README.md`) ? [
+      { path: `${REPOS.ecomap}/README.md`, repo: 'ecomap' },
+    ] : []),
+    // .well-known/ files (v3 audit: was entirely missing)
+    { path: `${REPOS.web}/.well-known/mcp.json`, repo: 'web' },
+    { path: `${REPOS.web}/.well-known/aeoess-issuer.json`, repo: 'web' },
+    { path: `${REPOS.web}/protocol-registry.json`, repo: 'web' },
     // Web repo — specs (agent-readable context)
     { path: `${REPOS.web}/specs/PROJECT-INSTRUCTIONS.md`, repo: 'web' },
     { path: `${REPOS.web}/specs/FILE-TREE.md`, repo: 'web' },
