@@ -2262,3 +2262,57 @@
       label: "Completion report"
     - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/cc-prompts/10-full-code-audit-v2.md"
       label: "Audit spec v2.3"
+
+- id: d68-a2a-1786-cai-extension-proposal
+  title: "A2A #1786: Cryptographic Agent Identity extension proposal opened"
+  description: "Proposal-phase issue opened at a2aproject/A2A per the documented extension-and-binding-governance.md Proposal Phase, requesting maintainer sponsorship to create the corresponding experimental-ext-* repository. Aligned to CTEF v0.3.1 substrate (frozen at agentgraph-co/agentgraph@69ad94d, normative endpoint at agentgraph.co/.well-known/cte-test-vectors.json). Declares claim_type discriminator over the closed set {identity, transport, authority, continuity} with envelope reserved, structural-before-semantic error codes (INVALID_CLAIM_SCOPE, INVALID_COMPOSITION), and uses A2A's existing AgentExtension mechanism (Section 4.4.4) with params carrying per-claim payload — no proto schema changes proposed. Reference URI experimental-ext prefixed: a2a-protocol.org/extensions/cryptographic-agent-identity/v0.3.1. Three correction loops before opening: 9KB extension manifesto rejected for size + wrong process (PR vs issue first), 100-line topic doc rejected for wrong surface (docs/topics/ is core protocol concepts not extension specs) and skipping proposal phase, third draft caught a 404 references link to the rotation-attestation directory before posting (test-vectors.json direct link replaced the 404 path). kenneives posted co-normative AgentGraph endorsement at the top of the thread within 4 minutes of opening including a four-way byte-match harness table. lawcontinue posted substantive question on validity_window for long-running inference sessions; reply confirmed APS already implements sequence_bound continuity, accepted contribution offer for distributed-inference test fixture against APS bilateral-delegation regression."
+  status: in_progress
+  workstream: standards
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1786"
+      label: "Proposal issue #1786"
+    - url: "https://github.com/a2aproject/A2A/issues/1672"
+      label: "#1672 design discussion"
+    - url: "https://agentgraph.co/.well-known/cte-test-vectors.json"
+      label: "CTEF v0.3.1 normative endpoint"
+
+- id: d68-five-way-claim-type-convergence
+  title: "Five-way claim_type convergence (AgentGraph + AgentID + APS + Nobulex + HiveTrust)"
+  description: "Wire-format substrate convergence across five live implementations on the discriminator key name. Naming collision was identified mid-thread on #1672: AgentID had been shipping claim_type on the live /verify endpoint; AgentGraph + APS rotation-attestation spec used claim_category. Same concept, same closed set values, different key name. kenne offered three resolution options and renamed AgentGraph claim_category → claim_type at commit agentgraph-co/agentgraph@69ad94d so all live implementations agree. AgentID's harold confirmed claim_type live with 32/32 endpoint tests pass and JCS canonicalizer byte-matching all 10 APS bilateral-delegation vectors. Nobulex (arian-gogani's @nobulex/crypto TS canonicalizer) byte-matching APS + AgentGraph fixtures. HiveTrust (srotzin) confirmed concur with the four-layer split + 'history-stability under rotation' framing on #1672, and posted the disjoint-namespace projection rule resolving the wire-collision concern: ctef.envelope.claim_type vs hivetrust.internal.claim_type sit at different envelope levels with explicit projection_rule mapping HiveTrust claim records onto ctef.envelope.claim_type='authority' when carried in a CTEF-composed envelope. Risk-tier bucketing under HiveTrust's claim_category stays HiveTrust-local until a future WG reservation. HiveTrust byte-match fixture committed pending claim_type.envelope composition-rule spec draft. Settlement-evidence-as-reputation-anchor (x402 receipt on Base 8453 → evidence_basis.evidence_type.payment_execution) lands on a v0.3.1-reserved field, with crewAI #4560 cited as cross-reference."
+  status: done
+  workstream: standards
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1672"
+      label: "#1672 thread"
+    - url: "https://github.com/a2aproject/A2A/issues/1786"
+      label: "#1786 proposal"
+
+- id: d68-vocab-pr-46-agentlair-merged
+  title: "Vocab PR #46 merged: crosswalk/agentlair.yaml — pre-delegation behavioral check"
+  description: "piiiico's agentlair.yaml lands as the canonical pre-delegation behavioral check issuer. Maps to peer_review as primary signal type (match: exact, production data exists — trust endpoints live, behavioral event ingestion live, three-dimensional scoring operational consistency/restraint/transparency, Bayesian with cold-start prior, non-null scores on non-test agents). Secondary mappings: behavioral_trust (exact), trust_verification (partial — AAT is session auth with identity component), governance_attestation (partial — hash-chained audit trail). Eight explicit no_mapping entries with technical rationale per CONTRIBUTING.md §3.6 Seven Deep-Review Dimensions. Four-temporal-layer sequencing (pre-delegation → at-delegation → at-execution → post-execution → feedback loop) documented inline in the peer_review notes block, NOT as a new top-level section — preserves PR #44 precedent that novel top-level blocks set permissive precedent for every later issuer. AgentLair added to behavioral_trust.issuers_in_production in follow-on commit 0653c1b. Five-check protocol applied (Identity / Format / Substance / Scope / Reversibility) with STEP 0 mandatory disk-read of CONTRIBUTING.md from filesystem before applying memory-cached protocol — the slot #29 swap codified earlier in the day."
+  status: done
+  workstream: vocab
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/46"
+      label: "PR #46"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/blob/main/crosswalk/agentlair.yaml"
+      label: "agentlair.yaml"
+
+- id: d68-openclaw-49971-integration-surface
+  title: "OpenClaw #49971 closed COMPLETED: integration surface defined as public plugin contract"
+  description: "MoltyCel's RFC 'Native Agent Identity & Trust Verification for OpenClaw' closed by maintainer steipete (Codex review) with stateReason: COMPLETED at 04:34Z. Ruling: trust providers (APS, MolTrust, AgentLair, AgentID, etc.) build on existing public hooks rather than a new core onAgentVerify. Five hooks cited at file/line precision against commit 45146913007d: before_install (src/plugins/hook-types.ts:635, runtime invocation at install-security-scan.runtime.ts:586) for skill install gating; before_tool_call (hook-types.ts:318) for per-action enforcement at the runtime tool-call gate; inbound_claim + message_received + before_dispatch (hook-message.types.ts:16) for inter-agent verification; gateway_start (server-startup-post-attach.ts:503) for self-verification on startup. SDK reference docs at docs.openclaw.ai/plugins/sdk-overview confirm these as supported public plugin contracts. This is an architectural answer not a soft punt — different from the openclaw#43705 showcase closure (route to ClawHub, no architectural commitment) — steipete did codebase work mapping the RFC requirements onto specific hook surfaces and committed them as public plugin API. Reframes the openclaw integration story: APS ships @aeoess/openclaw-trust-plugin as the integration artifact (not a core dependency) targeting at minimum before_install + before_tool_call + inbound_claim + gateway_start, calling gateway.aeoess.com/api/v1/public/trust/{agent_id} for per-agent JWS-signed trust attestation. ~200-300 line plugin, npm-publishable, README cites CTEF v0.3.1 substrate. Post acknowledgment to #49971 only after scaffold exists."
+  status: in_progress
+  workstream: comms
+  day_start: 68
+  day_end: 68
+  links:
+    - url: "https://github.com/openclaw/openclaw/issues/49971"
+      label: "#49971 closure"
+    - url: "https://docs.openclaw.ai/plugins/sdk-overview"
+      label: "OpenClaw plugin SDK reference"
