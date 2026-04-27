@@ -19,3 +19,7 @@ scripts/.propagate-cache.json
 
 # Nested repo — canonical home: github.com/aeoess/cognitive-attestation-poc
 papers/paper-4/poc/
+
+# Personal correspondence drafts (NEVER commit — public repo)
+specs/DRAFTS-*/email-to-*.md
+specs/**/email-to-*.md
