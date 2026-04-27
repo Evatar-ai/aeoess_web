@@ -1,7 +1,70 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-25 (Day 69) — five external merges plus two co-authored opens. Vocab PR #49 (PIC Standard, 23rd crosswalk) and PR #46 (AgentLair, third behavioral_trust production issuer) merged. aps-system PR #19 (lawcontinue, seven-vector CTEF inference-session fixtures) merged with twenty-two-minute structural-fix iteration cycle. Vocab PR #51 (invariant-survival.md, co-authored with QueBallSharken) and PR #52 (entity_continuity PDR validator, co-authored with nanookclaw, 32 tests) opened. a2a-compliance-harness PR #1 (MoltyCel optional moltrust resolver adapter, 13/13 tests on Python 3.12) almost-merge in DRAFT, co-maintainer access granted.
+# Last updated: 2026-04-26 (Day 70) — three new public repos (aps-conformance-suite, governance-attestation-predicate), APS↔ACTA crosswalk vocab PR #55 opened, contributor-check installed across three active repos pinned to AGT v3.3.0, Discussion #20 opened on substance evaluation as the half above pattern detection.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 70 — 2026-04-26 ═══
+
+- id: d70-discussion-20-substance-vs-pattern
+  title: "Discussion #20: The threat is laundering, not cyborg contribution"
+  description: "Public Discussion opened in aeoess/agent-passport-system on substance evaluation as the layer above pattern detection. Endorses Imran's contributor-check tool, names that most active contributors in agent-governance today are human + AI systems (including aeoess), draws the substance-vs-pattern line. Names internal Model Citizen mode framing publicly. Includes the actual HIGH score and three signals fired against the aeoess account when run through contributor-check, framing the cross-repo activity as independent convergence rather than coordination. Companion comment on microsoft/agent-governance-toolkit#1473 linking back to the discussion."
+  status: done
+  workstream: ecosystem
+  day_start: 70
+  day_end: 70
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/discussions/20"
+      label: "Discussion #20"
+    - url: "https://github.com/microsoft/agent-governance-toolkit/issues/1473#issuecomment-4324433131"
+      label: "companion comment on #1473"
+
+- id: d70-contributor-check-installed
+  title: "MS AGT contributor-check installed across three active repos"
+  description: "GitHub Actions workflow installed on agent-passport-system, agent-passport-mcp, agent-governance-vocabulary. Pinned to AGT v3.3.0 (commit 15e001f9b53f). Profile + credential checks run on opened PRs and issues from external contributors. Cluster detection opt-in via workflow_dispatch (API-heavy). Risk threshold set to HIGH for the calibration window so only HIGH-risk events trigger public PR comment + label. Excluded actors: dependabot[bot], github-actions[bot], copilot-swe-agent[bot], aeoess. Validation runs: lawcontinue scored LOW (legit dev), mrperfectness-sketch scored MEDIUM (canary), aeoess scored HIGH (three signals fired: recent_repo_burst 41 repos in 90 days, cross_repo_spray 72 repos in 7 days, credential_laundering across 5 repos)."
+  status: done
+  workstream: infra
+  day_start: 70
+  day_end: 70
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/.github/workflows/contributor-check.yml"
+      label: "workflow (agent-passport-system)"
+    - url: "https://github.com/microsoft/agent-governance-toolkit/issues/1473"
+      label: "AGT contributor-check (source)"
+
+- id: d70-vocab-pr-55-aps-acta-crosswalk
+  title: "Vocab PR #55 opened: APS ↔ ACTA receipt crosswalk v0.1"
+  description: "Pairwise composition crosswalk between Agent Passport System receipt primitives and ACTA Signed Receipts (draft-farley-acta-signed-receipts-01). 14 mappings: 1 exact, 7 partial, 3 divergent, 2 no_mapping, 1 non_equivalent_similar_label. Calibrated against actual shipped versions: APS 2.3.0-alpha, @veritasacta/artifacts 0.2.2, @veritasacta/protocol 0.1.1, @veritasacta/verify 0.6.0, protect-mcp 0.6.0. Migration paths documented for partial/divergent rows. Strategic posture: complementary surfaces, not competing stacks. APS specializes in delegation chain + cascade revocation + scope narrowing; ACTA specializes in selective-disclosure receipts via RFC 6962 Merkle commitment. Authored APS-side, ACTA-side review pending."
+  status: in_progress
+  workstream: ecosystem
+  day_start: 70
+  day_end: 70
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/55"
+      label: "PR #55 (open)"
+
+- id: d70-governance-attestation-predicate
+  title: "aeoess/governance-attestation-predicate v0.1 live (in-toto sibling to Decision Receipt)"
+  description: "in-toto Statement predicate binding agent authority-to-act: delegation chain root, principal signature, scope narrowing invariants, Values Floor attestation hash. Predicate type URI https://aeoess.com/attestation/governance/v0.1. JWS + Ed25519. Sibling to nobulex's Decision Receipt PR (in-toto/attestation#549). Composition: Decision Receipts reference GovernanceAttestation by digest in subject.digest.sha256, walking the chain proves both axes. 5 fixture vectors deterministically reproducible (minimal-tier-1-self-delegation, multi-hop-delegation-tier-2, expired-window, monotonic-narrowing-violated, chain-root-mismatch). 29 tests pass including a composition test that exercises the full round-trip with tampering detection. Public notice posted on in-toto/attestation#549 with @arian-gogani tagged for the Apr 30 cross-impl round-trip."
+  status: done
+  workstream: protocol
+  day_start: 70
+  day_end: 70
+  links:
+    - url: "https://github.com/aeoess/governance-attestation-predicate"
+      label: "repo"
+    - url: "https://github.com/in-toto/attestation/pull/549#issuecomment-4324065740"
+      label: "in-toto #549 follow-up"
+
+- id: d70-aps-conformance-suite
+  title: "aeoess/aps-conformance-suite v0.1.0 live"
+  description: "Packaged corpus of byte-identical test vectors for Agent Passport System cross-implementation conformance. 37 fixture vectors across 4 categories: bilateral-delegation (10 vectors), inference-session (7 vectors), instruction-provenance (10 vectors), aivss-scenarios (10 vectors covering OWASP AIVSS §3.6.1 through §3.6.10). TS reference runner. .well-known endpoint mirror following the agentgraph.co/.well-known/cte-test-vectors.json pattern. All vectors deterministically reproducible from a fixed Ed25519 seed, JCS-canonicalized, signature-verified. Apache-2.0. Spec refs: 7 papers (Zenodo) + draft-pidlisnyi-aps-00."
+  status: done
+  workstream: protocol
+  day_start: 70
+  day_end: 70
+  links:
+    - url: "https://github.com/aeoess/aps-conformance-suite"
+      label: "repo"
 
 # ═══ DAY 69 — 2026-04-25 ═══
 
