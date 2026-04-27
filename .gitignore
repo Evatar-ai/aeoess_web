@@ -23,3 +23,4 @@ papers/paper-4/poc/
 # Personal correspondence drafts (NEVER commit — public repo)
 specs/DRAFTS-*/email-to-*.md
 specs/**/email-to-*.md
+*.bak
