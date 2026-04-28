@@ -69,7 +69,7 @@
 
 <div class="w-section">
   <h2>Why Agents Need Wallets</h2>
-  <p>Agents are already spending money. Coinbase Agentic Wallets charge gas. ChainHop takes 0.75%. Most agent payment systems require a human to approve every transaction, or worse, give the agent an unlimited credit card.</p>
+  <p>Agents are already spending money. Coinbase Agentic Wallets charge gas. Most agent payment systems require a human to approve every transaction, or worse, give the agent an unlimited credit card.</p>
   <p>The APS Agent Wallet is different. When an agent registers with the gateway, it gets a Nano wallet tied to its cryptographic passport. The delegation chain defines exactly what the agent can spend, on what, and how much. The gateway enforces it. Every transaction produces a signed receipt anchored to the agent's identity.</p>
 </div>
 
@@ -138,9 +138,8 @@ One deterministic address per agent via HD derivation.</pre></div>
 
 <div class="w-section">
   <h2>Compared to Alternatives</h2>
-  <div class="w-grid">
+  <div class="w-grid" style="grid-template-columns:repeat(2,1fr)">
     <div class="w-card"><h3>Coinbase Agentic</h3><p>EVM gas fees on every transaction. Session-based. No delegation scoping. No cryptographic receipts tied to agent identity.</p></div>
-    <div class="w-card"><h3>ChainHop</h3><p>0.75% fee per transaction. No governance layer. No spend limits tied to delegation chains. No audit trail.</p></div>
     <div class="w-card"><h3>APS Wallet</h3><p>0% fees. Delegation-scoped. Budget-enforced. Signed receipts. Cascade revocation. On-chain finality in under 1 second.</p></div>
   </div>
 </div>
