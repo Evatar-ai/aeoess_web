@@ -10,37 +10,61 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=20260428a">
 <style>
-.status-wrap{max-width:640px;margin:0 auto;padding:2rem 1.5rem}
+.status-wrap{max-width:640px;margin:0 auto;padding:5.5rem 1.5rem 2rem}
 .status-hero{text-align:center;margin-bottom:2rem}
 .status-hero h1{font:700 2rem 'Crimson Pro',serif;margin-bottom:.3rem}
 .status-hero p{color:var(--dim);font:.95rem 'Source Sans 3',sans-serif}
 .check{display:flex;align-items:center;gap:.8rem;padding:1rem;border:1px solid var(--border);border-radius:8px;margin-bottom:.8rem;background:var(--surface)}
 .check .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-.dot.ok{background:#22c55e}.dot.down{background:#ef4444}.dot.loading{background:#f59e0b;animation:pulse 1s infinite}
+.dot.ok{background:var(--green)}.dot.down{background:var(--red)}.dot.loading{background:#f59e0b;animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .check .name{font:500 .95rem 'Source Sans 3',sans-serif;flex:1}
 .check .latency{font:.8rem 'JetBrains Mono',monospace;color:var(--dim)}
 .check .detail{font:.78rem 'Source Sans 3',sans-serif;color:var(--dim)}
-.overall{text-align:center;padding:1.5rem;border-radius:10px;margin-bottom:2rem;font:600 1.1rem 'Source Sans 3',sans-serif}
-.overall.allgood{background:#dcfce7;color:#166534;border:1px solid #86efac}
-.overall.issues{background:#fef2f2;color:#991b1b;border:1px solid #fca5a5}
-.overall.checking{background:var(--surface);color:var(--dim);border:1px solid var(--border)}
+.overall{text-align:center;padding:1.5rem;border-radius:10px;margin-bottom:2rem;font:600 1.1rem 'Source Sans 3',sans-serif;border:1px solid}
+.overall.allgood{background:rgba(22,101,52,.1);color:var(--green);border-color:var(--green)}
+.overall.issues{background:rgba(185,28,28,.1);color:var(--red);border-color:var(--red)}
+.overall.checking{background:var(--surface);color:var(--dim);border-color:var(--border)}
 .ts{text-align:center;font:.8rem 'JetBrains Mono',monospace;color:var(--dim);margin-top:1.5rem}
+@media(max-width:560px){
+  .status-wrap{padding:4.5rem 1rem 1rem}
+  .status-hero h1{font-size:1.7rem}
+  .check{padding:.8rem;gap:.6rem}
+  .check .name{font-size:.88rem}
+  .overall{padding:1.2rem;font-size:1rem}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"AEOESS \u2014 System Status","description":"Live status of AEOESS Gateway, MCP server, and website.","url":"https://aeoess.com/status.html","dateModified":"2026-04-11","publisher":{"@type":"Organization","name":"AEOESS","url":"https://aeoess.com","logo":{"@type":"ImageObject","url":"https://aeoess.com/assets/images/aeoess_logo.png"}},"inLanguage":"en","about":{"@type":"Thing","name":"AEOESS system status"}}</script>
 </head>
 <body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
-  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button><div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div></div>
 </nav>
 <div class="nav-drawer">
-  <a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Docs</a>
-  <a href="portal.html">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
-  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Build</div>
+    <a href="portal.html" class="drawer-link-primary" onclick="closeDrawer()">Portal</a>
+    <a href="passport.html" onclick="closeDrawer()">Spec</a>
+    <a href="docs.html" onclick="closeDrawer()">API Reference</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Explore</div>
+    <a href="blog.html" onclick="closeDrawer()">Blog</a>
+    <a href="roadmap.html" onclick="closeDrawer()">Roadmap</a>
+    <a href="compare.html" onclick="closeDrawer()">Compare</a>
+    <a href="faq.html" onclick="closeDrawer()">FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Connect</div>
+    <a href="mingle.html" onclick="closeDrawer()">Mingle</a>
+    <a href="wallet.html" onclick="closeDrawer()">Wallet</a>
+    <a href="https://github.com/aeoess" onclick="closeDrawer()">GitHub</a>
+    <a href="mailto:signal@aeoess.com" onclick="closeDrawer()">Contact</a>
+  </div>
 </div>
 <div class="status-wrap">
   <div class="status-hero">
@@ -59,6 +83,7 @@
 </div>
 <script>
 // Theme + nav
+function closeDrawer(){document.querySelector('.nav-burger')?.classList.remove('open');document.querySelector('.nav-drawer')?.classList.remove('open');}
 function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
 (function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
 window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});

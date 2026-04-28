@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=20260428a">
 <style>
 .world-wrap{display:flex;flex-direction:column;min-height:100vh}
 .world-header{padding:5rem 0 1.5rem}
@@ -95,8 +95,8 @@
 <body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
-  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button><div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div></div>
 </nav>
 <a href="world.html" class="district-btn" title="Agent District">Agent District</a>
 <div class="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></div>
@@ -429,7 +429,7 @@ function drawBuilding(b){
   r(bx-4,by-14,bw+8,16,P.wallDark);r(bx-2,by-12,bw+4,14,b.roof);
   // shingles
   for(let sx=0;sx<b.w+1;sx++){
-    if(sx%2===0)r(bx-2+sx*TILE,by-12,TILE,3,'rgba(255,255,255,.06)');
+    if(sx%2===0)r(bx-2+sx*TILE,by-12,TILE,3,'var(--rule-light)');
     else r(bx-2+sx*TILE,by-6,TILE,3,'rgba(0,0,0,.08)');
   }
   // roof highlight

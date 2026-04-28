@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=20260428a">
 <style>
-.portal-wrap{max-width:760px;margin:0 auto;padding:2rem 1.5rem}
+.portal-wrap{max-width:980px;margin:0 auto;padding:5.5rem 2rem 2rem}
 .portal-hero{text-align:center;margin-bottom:2.5rem;padding-top:1rem}
 .portal-hero h1{font:700 2.4rem/1.15 'Crimson Pro',serif;margin-bottom:.6rem;color:var(--text)}
 .portal-hero p{color:var(--dim);font:400 1.05rem/1.6 'Source Sans 3',sans-serif;max-width:520px;margin:0 auto}
@@ -28,10 +28,10 @@
 .portal-btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
 .portal-btn-outline:hover{border-color:var(--text)}
 .portal-btn-sm{padding:.5rem 1.2rem;font-size:.85rem}
-.key-display{background:#1a1a2e;color:#0f0;font-family:'JetBrains Mono',monospace;padding:1rem;border-radius:8px;font-size:.85rem;word-break:break-all;margin:1rem 0;position:relative;user-select:all}
-.key-display .copy-btn{position:absolute;top:.5rem;right:.5rem;background:#333;color:#fff;border:none;border-radius:4px;padding:.3rem .6rem;font-size:.75rem;cursor:pointer}
-.key-display .copy-btn:hover{background:#555}
-.key-warning{color:#e74c3c;font-size:.85rem;font-weight:500;margin-top:.5rem}
+.key-display{background:var(--code-bg);color:var(--ink);font-family:'JetBrains Mono',monospace;padding:1rem;border:1px solid var(--rule);border-radius:8px;font-size:.85rem;word-break:break-all;margin:1rem 0;position:relative;user-select:all;line-height:1.5}
+.key-display .copy-btn{position:absolute;top:.5rem;right:.5rem;background:var(--ink);color:var(--bg);border:none;border-radius:4px;padding:.3rem .6rem;font-size:.75rem;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:500}
+.key-display .copy-btn:hover{opacity:.85}
+.key-warning{color:var(--red);font-size:.85rem;font-weight:500;margin-top:.5rem}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
 .plan{border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s,box-shadow .2s}
 .plan:hover{border-color:var(--link);box-shadow:0 2px 12px rgba(0,0,0,.06)}
@@ -48,31 +48,74 @@
 .feature p{font:.87rem/1.5 'Source Sans 3',sans-serif;color:var(--dim)}
 .step{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
 .step-num{background:var(--text);color:var(--bg);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 .8rem 'Source Sans 3',sans-serif;flex-shrink:0;margin-top:.1rem}
-.step-body{flex:1}
+.step-body{flex:1;min-width:0}
 .step-body h3{font:600 1rem 'Source Sans 3',sans-serif;margin-bottom:.3rem}
 .step-body p{font:.9rem/1.5 'Source Sans 3',sans-serif;color:var(--dim)}
-.step-body pre{background:#1a1a2e;color:#e0e0e0;padding:.7rem .9rem;border-radius:6px;font:.78rem/1.5 'JetBrains Mono',monospace;overflow-x:auto;margin:.4rem 0}
+.step-body pre{background:var(--code-bg);color:var(--ink);border:1px solid var(--rule);padding:.75rem .9rem;border-radius:6px;font:.78rem/1.6 'JetBrains Mono',monospace;overflow-x:auto;margin:.4rem 0;-webkit-overflow-scrolling:touch;max-width:100%;white-space:pre}
+.portal-card{overflow:hidden}
 .status-msg{padding:.8rem;border-radius:6px;margin:1rem 0;font-size:.9rem}
-.status-msg.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
-.status-msg.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.status-msg.success{background:rgba(22,101,52,.1);color:var(--green);border:1px solid var(--green)}
+.status-msg.error{background:rgba(185,28,28,.1);color:var(--red);border:1px solid var(--red)}
 .hidden{display:none}
 .section-divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
 .bottom-links{text-align:center;font:.85rem 'Source Sans 3',sans-serif;color:var(--dim);margin:2rem 0}
 .bottom-links a{color:var(--link);margin:0 .5rem}
-@media(max-width:600px){.plans,.features{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .portal-wrap{padding:5rem 1.5rem 1.5rem}
+  .portal-hero h1{font-size:2rem}
+  .portal-card{padding:1.6rem}
+  .plans,.features{grid-template-columns:1fr;gap:.8rem}
+}
+@media(max-width:560px){
+  .portal-wrap{padding:4.5rem 1rem 1rem}
+  .portal-hero{margin-bottom:1.6rem;padding-top:.5rem}
+  .portal-hero h1{font-size:1.7rem;line-height:1.2}
+  .portal-hero h1 br{display:none}
+  .portal-hero p{font-size:.95rem}
+  .portal-card{padding:1.2rem;margin-bottom:1.2rem;border-radius:10px}
+  .portal-card h2{font-size:1.2rem;margin-bottom:.7rem}
+  .plan{padding:1rem}
+  .plan h3{font-size:1rem}
+  .plan .price{font-size:1.5rem}
+  .step{gap:.7rem;margin-bottom:1.1rem}
+  .step-num{width:24px;height:24px;font-size:.72rem}
+  .step-body h3{font-size:.95rem}
+  .step-body pre{font-size:.66rem;padding:.6rem .7rem;line-height:1.55}
+  .key-display{font-size:.72rem;padding:.8rem;line-height:1.5}
+  .key-display .copy-btn{position:static;display:block;margin-top:.5rem;width:100%;padding:.45rem}
+  .portal-btn{padding:.7rem 1.4rem;font-size:.9rem;width:100%;text-align:center}
+  .portal-field input{font-size:.9rem;padding:.6rem .7rem}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"AEOESS Gateway Portal \u2014 Get Your API Key","description":"Governance infrastructure for AI agents. Get an API key, enforce delegation chains, prove every action with signed receipts.","url":"https://aeoess.com/portal.html","dateModified":"2026-04-11","publisher":{"@type":"Organization","name":"AEOESS","url":"https://aeoess.com","logo":{"@type":"ImageObject","url":"https://aeoess.com/assets/images/aeoess_logo.png"}},"inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AEOESS","url":"https://aeoess.com"},"about":{"@type":"Thing","name":"Agent governance API portal"}}</script>
 </head>
 <body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
-  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button><div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div></div>
 </nav>
 <div class="nav-drawer">
-  <a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Docs</a>
-  <a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
-  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Build</div>
+    <a href="portal.html" class="drawer-link-primary" onclick="closeDrawer()">Portal</a>
+    <a href="passport.html" onclick="closeDrawer()">Spec</a>
+    <a href="docs.html" onclick="closeDrawer()">API Reference</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Explore</div>
+    <a href="blog.html" onclick="closeDrawer()">Blog</a>
+    <a href="roadmap.html" onclick="closeDrawer()">Roadmap</a>
+    <a href="compare.html" onclick="closeDrawer()">Compare</a>
+    <a href="faq.html" onclick="closeDrawer()">FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Connect</div>
+    <a href="mingle.html" onclick="closeDrawer()">Mingle</a>
+    <a href="wallet.html" onclick="closeDrawer()">Wallet</a>
+    <a href="https://github.com/aeoess" onclick="closeDrawer()">GitHub</a>
+    <a href="mailto:signal@aeoess.com" onclick="closeDrawer()">Contact</a>
+  </div>
 </div>
 
 <div class="portal-wrap">
@@ -233,6 +276,7 @@
 
 <script>
 // Theme + nav
+function closeDrawer(){document.querySelector('.nav-burger')?.classList.remove('open');document.querySelector('.nav-drawer')?.classList.remove('open');}
 function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('aeoess-theme',n);var b=document.querySelector('.theme-btn');if(b)b.textContent=n==='dark'?'\u2600':'\u263E';}
 (function(){var s=localStorage.getItem('aeoess-theme');if(s)document.documentElement.setAttribute('data-theme',s);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'\u2600':'\u263E';})();
 window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.classList.toggle('scrolled',window.scrollY>40)});

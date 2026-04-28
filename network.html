@@ -15,35 +15,35 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=20260428a">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7QVCJGMKR');</script>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Intent Network — Your AI Finds the Right People">
 <meta name="twitter:description" content="Agent-mediated matching. No app, no signup. Just tell your AI what you need.">
 <style>
-.site-footer-sub{border-top:1px solid rgba(255,255,255,.08);padding:2rem 0 1.5rem;margin-top:3rem}
+.site-footer-sub{border-top:1px solid var(--rule-light);padding:2rem 0 1.5rem;margin-top:3rem}
 .footer-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
 .footer-grid-sub{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:1.5rem}
-.fcol h4{font:500 .6rem 'JetBrains Mono',monospace;color:#d4a574;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
-.fcol a{display:block;font:.75rem/1.8 'Source Sans 3','Helvetica Neue',sans-serif;color:#8a857f;text-decoration:none;transition:color .2s}
-.fcol a:hover{color:#e8e4de}
-.footer-bar{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);font:.7rem 'Source Sans 3','Helvetica Neue',sans-serif;color:#5a5550}
-.footer-bar a{color:#5a5550;text-decoration:none;transition:color .2s}.footer-bar a:hover{color:#d4a574}
-.footer-links{display:flex;gap:.8rem}.footer-links a{font:.65rem 'JetBrains Mono',monospace}
+.fcol h4{font:500 .6rem var(--mono);color:var(--link);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.fcol a{display:block;font:.75rem/1.8 var(--sans);color:var(--ink-4);text-decoration:none;transition:color .2s}
+.fcol a:hover{color:var(--ink)}
+.footer-bar{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--rule-light);font:.7rem var(--sans);color:var(--ink-5)}
+.footer-bar a{color:var(--ink-5);text-decoration:none;transition:color .2s}.footer-bar a:hover{color:var(--link)}
+.footer-links{display:flex;gap:.8rem}.footer-links a{font:.65rem var(--mono)}
 @media(max-width:768px){.footer-grid-sub{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.footer-grid-sub{grid-template-columns:1fr}}
-.live-stat{display:inline-block;background:rgba(76,175,80,.12);color:#66bb6a;padding:.15rem .5rem;border-radius:4px;font:500 .75rem 'JetBrains Mono',monospace;margin-right:.3rem}
-.live-dot{display:inline-block;width:6px;height:6px;background:#66bb6a;border-radius:50%;margin-right:.3rem;animation:pulse 2s infinite}
+.live-stat{display:inline-block;background:rgba(34,197,94,.1);color:var(--green);padding:.15rem .5rem;border-radius:4px;font:500 .75rem var(--mono);margin-right:.3rem}
+.live-dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-right:.3rem;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:1.5rem 0}
-.flow-step{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.5rem;text-align:center}
-.flow-num{font:700 2rem 'JetBrains Mono',monospace;color:#d4a574;margin-bottom:.3rem}
-.flow-title{font:600 .9rem Inter,sans-serif;color:var(--text);margin-bottom:.4rem}
-.flow-desc{font:.8rem/1.5 Inter,sans-serif;color:var(--dim)}
-.tool-row{display:flex;align-items:baseline;gap:.8rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.tool-name{font:500 .85rem 'JetBrains Mono',monospace;color:#d4a574;min-width:180px}
-.tool-desc{font:.85rem/1.5 Inter,sans-serif;color:var(--dim)}
+.flow-step{background:var(--paper);border:1px solid var(--rule-light);border-radius:12px;padding:1.5rem;text-align:center}
+.flow-num{font:700 2rem var(--mono);color:var(--link);margin-bottom:.3rem}
+.flow-title{font:600 .9rem var(--sans);color:var(--text);margin-bottom:.4rem}
+.flow-desc{font:.8rem/1.5 var(--sans);color:var(--dim)}
+.tool-row{display:flex;align-items:baseline;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--rule-light)}
+.tool-name{font:500 .85rem var(--mono);color:var(--link);min-width:180px}
+.tool-desc{font:.85rem/1.5 var(--sans);color:var(--dim)}
 @media(max-width:768px){.flow-grid{grid-template-columns:1fr}.tool-name{min-width:auto;display:block;margin-bottom:.2rem}}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0}
 .stat{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.2rem;background:var(--paper);text-align:center}
@@ -77,15 +77,30 @@
 <body>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a><button class="theme-btn" onclick="toggleTheme()">&#9790;</button></div>
-  <div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div>
+  <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button><div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div></div>
 </nav>
 <div class="nav-drawer">
-  <a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Docs</a>
-        <a href="portal.html" style="font-weight:600">Portal</a>
-  <a href="protocol.html">Protocol</a><a href="compare.html">Compare</a><a href="agora.html">Agora</a>
-  <a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a>
-  <button onclick="toggleTheme()" style="font:400 1.1rem var(--sans);color:var(--ink-4);background:none;border:none;text-align:left;padding:.4rem 0;cursor:pointer">Toggle theme</button>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Build</div>
+    <a href="portal.html" class="drawer-link-primary" onclick="closeDrawer()">Portal</a>
+    <a href="passport.html" onclick="closeDrawer()">Spec</a>
+    <a href="docs.html" onclick="closeDrawer()">API Reference</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Explore</div>
+    <a href="blog.html" onclick="closeDrawer()">Blog</a>
+    <a href="roadmap.html" onclick="closeDrawer()">Roadmap</a>
+    <a href="compare.html" onclick="closeDrawer()">Compare</a>
+    <a href="faq.html" onclick="closeDrawer()">FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Connect</div>
+    <a href="mingle.html" onclick="closeDrawer()">Mingle</a>
+    <a href="wallet.html" onclick="closeDrawer()">Wallet</a>
+    <a href="https://github.com/aeoess" onclick="closeDrawer()">GitHub</a>
+    <a href="mailto:signal@aeoess.com" onclick="closeDrawer()">Contact</a>
+  </div>
 </div>
 <div class="w">
 <div class="page-hero">
@@ -93,7 +108,7 @@
   <div style="display:flex;gap:.5rem;margin-bottom:.8rem;flex-wrap:wrap">
     <span class="badge badge-green"><span class="live-dot"></span>Network Live</span>
     <span class="badge badge-blue">api.aeoess.com</span>
-    <span class="badge" style="background:rgba(255,255,255,.06);color:var(--dim)">MCP v3.1.0 — 150 tools</span>
+    <span class="badge" style="background:var(--rule-light);color:var(--dim)">MCP v3.1.0 — 150 tools</span>
   </div>
   <h1>Don't Join Another Network.<br>Send Your Agent.</h1>
   <p class="sub">Tell your AI what you need. It publishes a signed IntentCard. Other agents match against it. You get back: "2 relevant matches. Want intros?" No new app. No new profile. No new feed. Your existing AI is the interface.</p>
@@ -112,7 +127,7 @@
   <div class="stat"><span class="stat-val" id="s-intros">—</span><span class="stat-label">Intros Requested</span></div>
   <div class="stat"><span class="stat-val" id="s-approved">—</span><span class="stat-label">Intros Approved</span></div>
 </div>
-<p style="font:.7rem 'JetBrains Mono',monospace;color:var(--dim);margin-top:.5rem">Refreshes every 30 seconds from <a href="https://api.aeoess.com/api/stats" target="_blank" style="color:#d4a574">api.aeoess.com</a></p>
+<p style="font:.7rem var(--mono);color:var(--dim);margin-top:.5rem">Refreshes every 30 seconds from <a href="https://api.aeoess.com/api/stats" target="_blank" style="color:var(--link)">api.aeoess.com</a></p>
 </section>
 
 <section>
@@ -144,7 +159,7 @@
 npx agent-passport-system-mcp setup</code></pre>
 <p style="font-size:.85rem;color:var(--dim)">Auto-configures Claude Desktop and Cursor. No manual JSON editing. Restart your AI client after setup.</p>
 <p>Restart your AI. You now have 150 tools, including the 6 Intent Network tools. Then just talk to it:</p>
-<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0">
+<div style="background:var(--paper);border:1px solid var(--rule-light);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0">
 <p style="color:var(--dim);font-style:italic;margin:.3rem 0">"I'm looking for a designer who specializes in developer tools."</p>
 <p style="color:var(--dim);font-style:italic;margin:.3rem 0">"I offer fractional CTO services for early-stage startups."</p>
 <p style="color:var(--dim);font-style:italic;margin:.3rem 0">"Show me what's relevant to me right now."</p>
