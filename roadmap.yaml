@@ -1,7 +1,73 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-26 (Day 70) — three new public repos (aps-conformance-suite, governance-attestation-predicate), APS↔ACTA crosswalk vocab PR #55 opened, contributor-check installed across three active repos pinned to AGT v3.3.0, Discussion #20 opened on substance evaluation as the half above pattern detection.
+# Last updated: 2026-04-27 (Day 71) — agent-governance-spec org created with Lars Kroehl as co-editor on agent-trust-verification-providers spec; vocab PR #59 (DCP-AI by lktron00, composite PQC) and PR #53 (AgentNexus three-issuer Interop Week 1 Step 2) merged; vocab #60 opened on post-quantum signature capability as vocabulary-level attribute; vocab #58 epoch enum reached three-way independent convergence (lawcontinue, kenneives, srotzin).
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 71 — 2026-04-27 ═══
+
+- id: d71-agent-governance-spec-org
+  title: "agent-governance-spec org created with co-editor"
+  description: "New GitHub organization agent-governance-spec hosts cross-vendor specs that should not live inside any single vendor's account. First spec is agent-trust-verification-providers (CC-BY-4.0). Lars Kroehl (MolTrust / CryptoKRI GmbH) accepted six conditions on editorial process, license separation (spec is CC-BY-4.0, reference implementations stay independent under their own licenses), MUST #2 split refinement on schema-fields versus schema-shape, implementation-name discipline, and editor-entry path. Editor line: 'Tymofii Pidlisnyi (APS by AEOESS), Lars Kroehl (MolTrust / CryptoKRI GmbH)'. v0.1 SPEC.md drafted (216 lines), six tracking issues opened for structural decisions, Lars accepted the org owner invitation."
+  status: in_progress
+  workstream: ecosystem
+  day_start: 71
+  day_end: 71
+  links:
+    - url: "https://github.com/agent-governance-spec/agent-trust-verification-providers"
+      label: "spec repo"
+    - url: "https://github.com/agent-governance-spec"
+      label: "org"
+
+- id: d71-vocab-pr-59-dcp-ai-merged
+  title: "Vocab PR #59 merged: DCP-AI crosswalk"
+  description: "lktron00 (Danilo Naranjo Emparanza, ORCID 0009-0003-7520-8527) merged the DCP-AI (Digital Citizenship Protocol for AI Agents) crosswalk. 570 lines. Composite Ed25519 + ML-DSA-65 (FIPS 204 level 3) signatures shipped from day one across four reference SDKs (TypeScript, Python, Go, Rust + WASM). Real production deps: @noble/post-quantum + tweetnacl in npm. 72KB interop test vectors, 11.8KB normative canonicalization profile (dcp-jcs-v1). Calibration discipline strong: passport_grade declared non_equivalent_similar_label with 'do not treat tiers as trust grades' note, 8 explicit no_mapping entries each naming the production issuer for the gap. Version-discrepancy disclosure (npm 2.1.1 vs PyPI/crates 2.8.1) honest and explained. Identity verified: dcp-ai.org, getocular.ai, ocularsolution.com all live, 6-year GitHub account. Cross-implementation round-trip is the bar before issuers_in_production addition; lktron00 committed to running it against APS, Nobulex, or SINT this week."
+  status: done
+  workstream: ecosystem
+  day_start: 71
+  day_end: 71
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/59"
+      label: "PR #59 (merged)"
+    - url: "https://dcp-ai.org"
+      label: "DCP-AI"
+
+- id: d71-vocab-pr-53-agentnexus-three-issuer-merged
+  title: "Vocab PR #53 merged: AgentNexus three-issuer fixture (Interop Week 1 Step 2)"
+  description: "kevinkaylie merged Step 2 of the four-signal compose test for Interop Week 1. AgentNexus governance attestation as the second link in the chain after AgentID's trust_verification (PR #38). JWS Ed25519 signatures verified end-to-end. prior_signal_digest matches Step 1's compound_digest byte-exact (621d40f1701521f9af084a08476a2deebd49f02ff0b9d7e7808b6a05c6fcad91). Squash-merged at 16:22:42Z. Step 3 (continuity-analyzer) and Step 4 (composition-behavioral-trust.json by nanookclaw, blocked on middle-issuer alternative) follow."
+  status: done
+  workstream: ecosystem
+  day_start: 71
+  day_end: 71
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/53"
+      label: "PR #53 (merged)"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/36"
+      label: "Interop Week 1 (#36)"
+
+- id: d71-vocab-issue-60-pqc-vocab-attribute
+  title: "Vocab #60 opened: post-quantum signature capability as vocabulary-level attribute"
+  description: "Cross-cutting question scoped on whether and how to express composite-or-post-quantum signature capability without overcommitting the vocabulary to particular algorithm choices. Three options framed: documentation-only per crosswalk (lightest), optional descriptor on signal_type (signature_capability enum: classical / post_quantum / composite), or crosscutting attribute matrix declared once per system (heaviest). Four named questions for the WG: is signature capability a property of the signal or of the issuer, should composite (Ed25519 + ML-DSA-65) be a distinct value from post_quantum, does this interact with enforcement_class or validity_temporal, and should the canonicalization profile (dcp-jcs-v1, JCS variants, undocumented) also be a crosscutting sibling attribute. Production issuers using post-quantum or composite signatures today: asqav (jagmarques, ML-DSA-65), DCP-AI (lktron00, composite Ed25519 + ML-DSA-65). Tagged jagmarques, lktron00, schchit, willamhou, arian-gogani, nutstrut, MoltyCel for perspective. No PR, no schema change, no timeline pressure. Reading the room first."
+  status: in_progress
+  workstream: protocol
+  day_start: 71
+  day_end: 71
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/60"
+      label: "#60"
+
+- id: d71-vocab-issue-58-epoch-three-way-convergence
+  title: "Vocab #58 epoch enum: three-way independent convergence"
+  description: "Proposal to add epoch as the sixth value in the validity_temporal enum (alongside immediate, decay_window, refresh_required, expires_at, condition_satisfied). The semantic gap epoch fills: distinguishing observer-relative event sequencing from substantive state transitions, where two verifiers of the same wall-clock window may reasonably count different numbers of events but agree on coarser substantive transitions. Three independent endorsements landed: lawcontinue (distributed inference setup, 50-token generation produces 50 sequence ticks but zero state transitions), kenneives (AgentGraph CTEF v0.3.1 session_epoch maps onto epoch verbatim once the enum lands), srotzin (HiveTrust + cont_epoch on continuity layer, plus substantive-transition lower bound clause for the PR description: epoch ticks MUST be coarser than per-call I/O). Direction locked, PR follows in the next 24 hours."
+  status: in_progress
+  workstream: protocol
+  day_start: 71
+  day_end: 71
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/58"
+      label: "#58"
+    - url: "https://github.com/a2aproject/A2A/issues/1786"
+      label: "A2A #1786 (parallel thread)"
+
 
 # ═══ DAY 70 — 2026-04-26 ═══
 
