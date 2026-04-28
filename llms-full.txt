@@ -186,9 +186,9 @@ Structural safeguards: Separation of Powers (legislative/executive/judicial bran
 
 **Cross-Engine Interop:** [RFC: Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md) — a minimal signed envelope that any governance engine can emit and any verifier can check. Fields: agent_did, run_id, action_id, capability_ref (scope + revocation status), decision (policy_ref, evaluation_method, verdict, evaluator_signature), attestation (receipt chain). Key innovation: `evaluation_method` field distinguishes deterministic (replayable) from probabilistic (LLM-based) decisions. Developed from independent convergence by CrewAI, Guardian/AutoGen, and DIF Trusted AI Agents contributors.
 
-**AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications as trustworthy agent-consumable news sources. Developed by The Agent Times in partnership with AEOESS. Two layers: Layer A (cryptographic, binary pass/fail) requires Ed25519 article provenance, journalist agent passports with delegation chains, and a public MCP server. Layer B (editorial, public audit) requires machine-readable confidence labels on every article, a published Code of Conduct citing SPJ/NPC/Scripps, and an automated ethics verification system scoring every article against stated standards. Certification is self-attestation verified by script (Layer A) and public evidence (Layer B). No subjective editorial gatekeeping. Does NOT integrate with trust scoring — badge is informational only. Reference implementation: The Agent Times. Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md | Page: https://aeoess.com/amcs.html
+**AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications as trustworthy agent-consumable news sources. Published by AEOESS. Two layers: Layer A (cryptographic, binary pass/fail) requires Ed25519 article provenance, journalist agent passports with delegation chains, and a public MCP server. Layer B (editorial, public audit) requires machine-readable confidence labels on every article, a published Code of Conduct citing SPJ/NPC/Scripps, and an automated ethics verification system scoring every article against stated standards. Certification is self-attestation verified by script (Layer A) and public evidence (Layer B). No subjective editorial gatekeeping. Does NOT integrate with trust scoring — badge is informational only. Any publication can apply. Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md | Page: https://aeoess.com/amcs.html
 
-**v2.3.0-alpha — 2410 tests (626 suites). 108 test files including 38 adversarial scenarios.**
+**v2.3.0-alpha — 2421 tests (626 suites). 108 test files including 38 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -569,7 +569,7 @@ Q: What platforms does it run on?
 A: Any platform with Node.js. The SDK is pure TypeScript with no platform-specific dependencies.
 
 Q: Is it production ready?
-A: The SDK has 2410 tests including 38 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
+A: The SDK has 2421 tests including 38 adversarial scenarios. It is published on npm and actively used. The protocol is research-stage but the code runs.
 
 Q: What is Intent Architecture?
 A: Layer 5 of the Agent Social Contract. It gives multi-agent systems organizational intent — goals, tradeoff hierarchies, and decision frameworks that agents can act on. Context engineering tells agents what they know. Intent architecture tells them what to care about.

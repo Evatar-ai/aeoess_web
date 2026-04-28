@@ -706,7 +706,7 @@
 
 - id: governance-distribution
   title: "Governance Distribution Stack"
-  description: "Protocol could sign and verify. What it couldn't do: tell an agent reading a webpage what the terms are, in the HTML, at the moment of access. aps.txt, 360 consumer loop, 108 MCP tools, SDK v1.25.0. TAT deploys APS. 1,480 tests."
+  description: "Protocol could sign and verify. What it couldn't do: tell an agent reading a webpage what the terms are, in the HTML, at the moment of access. aps.txt, 360 consumer loop, 108 MCP tools, SDK v1.25.0. First publication deploys APS. 1,480 tests."
   status: done
   workstream: product
   day_start: 37
@@ -1164,7 +1164,7 @@
 
 - id: amcs-spec
   title: "AMCS v0.1.0"
-  description: "AI-native media credentialing spec. The Agent Times editorial pipeline spec. 25 tests, Module 36."
+  description: "AI-native media credentialing spec. Open standard for AI-native publications. 25 tests, Module 36."
   status: done
   workstream: ops
   day_start: 32
@@ -1809,9 +1809,9 @@
   dependencies:
     - d22-intent-network
 
-- id: d24-tat-integration
-  title: "The Agent Times on APS (TAT integration)"
-  description: "Three-layer integration of The Agent Times with APS. Layer 1 (article provenance): every published article carries an APS signature over canonical article JSON, verifiable at article-level permalink. Layer 2 (journalist passports): each AI journalist persona gets a scoped delegation (topic areas, token budget per article). Layer 3 (Ethics Engine binding): 274 scored articles against 10 checks, credentialing mirrored on NPC membership tiers. Full CTO audit of the 68-file Python pipeline (DISCOVER → GROUP → SCORE → RESEARCH → WRITE → IMAGE → PUBLISH, Neon Postgres, Vercel + Render) completed before any protocol binding. First production publication running APS receipts end-to-end in its editorial pipeline."
+- id: d24-publication-integration
+  title: "First publication on APS"
+  description: "Three-layer integration of an AI-native publication with APS. Layer 1 (article provenance): every published article carries an APS signature over canonical article JSON, verifiable at article-level permalink. Layer 2 (journalist passports): each AI journalist persona gets a scoped delegation (topic areas, token budget per article). Layer 3 (Ethics Engine binding): 274 scored articles against 10 checks, credentialing mirrored on NPC membership tiers. Full CTO audit of the 68-file Python pipeline completed before any protocol binding. First production publication running APS receipts end-to-end in its editorial pipeline."
   status: done
   workstream: product
   day_start: 24
@@ -1833,14 +1833,14 @@
       label: "tesla-social.vercel.app"
 
 - id: d32-amcs-spec-formalized
-  title: "AMCS v0.1.0 spec formalized (separable from TAT)"
-  description: "AMCS (AI-Native Media Credentialing Standard) shipped as an open specification developed by TAT in partnership with AEOESS — formally separated from TAT's editorial pipeline so other publications can apply. Editorial layer owned by TAT (self-attested + public evidence audit trail), cryptographic layer owned by AEOESS (Ed25519 signing, Merkle proofs, delegation chains). TAT is the first certified publication; the certifier role is AEOESS alone to avoid the self-certifying conflict. SPJ Code of Ethics independence principle reflected in the structure. 25 tests. Module 36 in the SDK."
+  title: "AMCS v0.1.0 spec formalized"
+  description: "AMCS (AI-Native Media Credentialing Standard) shipped as an open specification published by AEOESS. Two-layer structure: editorial accountability (self-attested by the publication, public evidence audit trail) and cryptographic infrastructure (Ed25519 signing, Merkle proofs, delegation chains). Any publication can apply. SPJ Code of Ethics independence principle reflected in the structure. 25 tests. Module 36 in the SDK."
   status: done
   workstream: ops
   day_start: 32
   day_end: 32
   dependencies:
-    - d24-tat-integration
+    - d24-publication-integration
 
 - id: d40-gateway-dogfood-mini
   title: "Gateway dogfood on Mac Mini + gw CLI"
@@ -2393,7 +2393,7 @@
 
 - id: d67-full-code-audit-v2-1
   title: "Full Code Audit v2.1 — 42 steps, three tiers, 14 repos"
-  description: "Rewrote the CMD-SET-2 pre-publish audit from v1's 12 steps (SDK + MCP focused) to 42 steps across three tiers covering the full shipped codebase surface. Tier A Code Integrity runs test suites, typecheck, lint, build artifacts across SDK, MCP, Python SDK, Remote MCP, Gateway, Agent Governance Toolkit (405 tests), autogen-governance-adapter, vocab validator, intent-network-api, hermes-aps-delegation, hermes-decision-receipts, a2a-compliance-harness, solana-agent-identity, mingle-mcp, plus the SDK examples/ adapter apps and aeoess_web operational scripts. Tier B Supply Chain runs npm audit and pip-audit across every repo, secret scan with fixture/test exclusions, .npmignore and MANIFEST.in hygiene, LICENSE and NOTICE presence, CI workflow YAML validity and floating-action-ref detection, Dockerfile and Railway config pinning, Node engines field presence, package-lock presence. Tier C Runtime checks cross-repo version alignment across SDK/MCP/Python/Remote-MCP, npm and PyPI registry drift, live endpoint health, Gateway JWKS parity against source, committed fixture URLs from OPEN-COMMITMENTS reachable, PM2 RSS memory leak detection with proper PM2-presence detection, git status across 20 repos with expected-branch check, build artifact freshness, stale artifact hunt, canonical number consistency including paper count, TAT licensee sentinel, large binary accidental-commit hunt. Self-check found 17 gaps in the initial v2 which v2.1 closes. Read-only throughout; explicit do-not-install / do-not-restart / do-not-commit-outside-aeoess_web constraints. Paste-ready for CC in one message."
+  description: "Rewrote the CMD-SET-2 pre-publish audit from v1's 12 steps (SDK + MCP focused) to 42 steps across three tiers covering the full shipped codebase surface. Tier A Code Integrity runs test suites, typecheck, lint, build artifacts across SDK, MCP, Python SDK, Remote MCP, Gateway, Agent Governance Toolkit (405 tests), autogen-governance-adapter, vocab validator, intent-network-api, hermes-aps-delegation, hermes-decision-receipts, a2a-compliance-harness, solana-agent-identity, mingle-mcp, plus the SDK examples/ adapter apps and aeoess_web operational scripts. Tier B Supply Chain runs npm audit and pip-audit across every repo, secret scan with fixture/test exclusions, .npmignore and MANIFEST.in hygiene, LICENSE and NOTICE presence, CI workflow YAML validity and floating-action-ref detection, Dockerfile and Railway config pinning, Node engines field presence, package-lock presence. Tier C Runtime checks cross-repo version alignment across SDK/MCP/Python/Remote-MCP, npm and PyPI registry drift, live endpoint health, Gateway JWKS parity against source, committed fixture URLs from OPEN-COMMITMENTS reachable, PM2 RSS memory leak detection with proper PM2-presence detection, git status across 20 repos with expected-branch check, build artifact freshness, stale artifact hunt, canonical number consistency including paper count, downstream licensee sentinel, large binary accidental-commit hunt. Self-check found 17 gaps in the initial v2 which v2.1 closes. Read-only throughout; explicit do-not-install / do-not-restart / do-not-commit-outside-aeoess_web constraints. Paste-ready for CC in one message."
   status: done
   workstream: ops
   day_start: 67
