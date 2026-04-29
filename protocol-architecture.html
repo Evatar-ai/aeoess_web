@@ -141,6 +141,8 @@
 </style>
 </head>
 <body data-labels="medium">
+<script>if(window!==window.top)document.documentElement.classList.add('embedded');</script>
+<style>html.embedded .nav, html.embedded .nav-drawer { display: none !important; }</style>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
   <div class="nav-links"><a href="mingle.html">Mingle</a><a href="wallet.html">Wallet</a><a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
@@ -163,7 +165,7 @@
     <div class="stats">
       <div class="stat" id="stat-a-wrap"><span id="stat-a-label">policy eval</span> <b id="stat-a">1.4ms</b></div>
       <div class="stat" id="stat-b-wrap"><span id="stat-b-label">throughput</span> <b id="stat-b">403 ops/s</b></div>
-      <div class="stat" id="stat-c-wrap"><span id="stat-c-label">tests</span> <b id="stat-c">2,410</b></div>
+      <div class="stat" id="stat-c-wrap"><span id="stat-c-label">tests</span> <b id="stat-c">2,479</b></div>
     </div>
   </div>
 
@@ -289,10 +291,10 @@ const BELOW = [
 ];
 // Per-scene stats: [[labelA, valueA, labelB, valueB, labelC, valueC], ...]
 const STATS_PER_SCENE = [
-  ['issuance', '<1ms',     'chain depth', 'up to 12', 'tests', '2,410'],
-  ['cascade',  '<3ms',     'max fanout',  '2,048',    'tests', '2,410'],
-  ['policy eval', '1.4ms', 'throughput',  '403 ops/s','tests', '2,410'],
-  ['mesh size','65k nodes','signed edges','all',      'tests', '2,410'],
+  ['issuance', '<1ms',     'chain depth', 'up to 12', 'tests', '2,479'],
+  ['cascade',  '<3ms',     'max fanout',  '2,048',    'tests', '2,479'],
+  ['policy eval', '1.4ms', 'throughput',  '403 ops/s','tests', '2,479'],
+  ['mesh size','65k nodes','signed edges','all',      'tests', '2,479'],
 ];
 
 function reportHeight() {
