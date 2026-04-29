@@ -25,22 +25,11 @@ specs/DRAFTS-*/email-to-*.md
 specs/**/email-to-*.md
 *.bak
 
-# ── Private specs (Tier 1: never publish) ──────────────────
-# Per memory and explicit "DO NOT publish" headers in these files.
-# Restored locally as untracked after deletion from main on 2026-04-28.
-specs/NICK-*.md
-specs/CONSILIUM-*.md
-specs/consilium/
-specs/THE-SYNTHESIS.md
-specs/MODEL-CITIZEN-CANON.md
-specs/OPEN-COMMITMENTS.md
-specs/ERIK-NEWTON-PATTERN.md
-specs/RESEARCH-HYPOTHESES-*.md
-specs/MONDAY-PUBLISH-CHECKLIST.md
-specs/NANOOK-*.md
-specs/contribution-map/out/session-context.md
-specs/AGENT-PRINCIPAL-ANALYSIS.md
-specs/PROJECT-INSTRUCTIONS.md
+# ── ALL OF specs/ IS PRIVATE BY DEFAULT (Tier 1) ──────────
+# 2026-04-29 incident: 65 internal docs were public until force-push scrub.
+# specs/ is local working scratch space. Nothing in specs/ goes public.
+# To make a single file public, move it OUT of specs/ to a sibling location.
+specs/
 
 # ── Tier 2: internal process artifacts ─────────────────────
 specs/CC-PROMPT-*
