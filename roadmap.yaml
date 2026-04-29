@@ -3,6 +3,44 @@
 # Last updated: 2026-04-27 (Day 71) — agent-governance-spec org created with Lars Kroehl as co-editor on agent-trust-verification-providers spec; vocab PR #59 (DCP-AI by lktron00, composite PQC) and PR #53 (AgentNexus three-issuer Interop Week 1 Step 2) merged; vocab #60 opened on post-quantum signature capability as vocabulary-level attribute; vocab #58 epoch enum reached three-way independent convergence (lawcontinue, kenneives, srotzin).
 # Day 1 = 2026-02-17 (project start)
 
+# ═══ DAY 72 — 2026-04-28 ═══
+
+- id: d72-ipr-module-shipped
+  title: "Instruction Provenance Receipt module shipped"
+  description: "agent-passport-system@2.4.0-alpha published on npm under the alpha tag. The IPR module at src/v2/instruction-provenance/ ships canonicalize/envelope/verify for binding agent authority to a content-addressed digest of declared instruction files at delegation time. 32 conformance tests + 27 adversarial tests passing inside the 2,479-test suite. Addresses the recurring failure mode in recent AI IDE advisories (cursorignore bypass, .git settings sandbox escape, NTFS path quirks, .vscode/settings.json injection, MCP config drift): agent receives authority under one instruction context, a workspace file changes mid-session, agent acts under instructions that were never part of the original authority context. OWASP AIVSS describes this class as Goal Manipulation. Demo branch with byte-parity-checked drift-denial walkthrough at demo/drift-denial-cursor-cve/demos/drift-denial."
+  day_start: 72
+  day_end: 72
+
+- id: d72-gateway-poc-public
+  title: "Gateway proof-of-concept made public"
+  description: "aeoess/aeoess-gateway-v0-poc is a minimal HTTP service that recomputes the IPR context_root against the declared file set at action time and denies if the digest no longer matches the receipt. Three case fixtures (create_pr, read_file, send_payment) demonstrate before/after deny semantics. APS is one implementation of the receipt shape; the pattern works for any agent runtime that wants to bind authority to a file-content digest."
+  day_start: 72
+  day_end: 72
+
+- id: d72-cursor-outreach
+  title: "First-contact email to Cursor security"
+  description: "Email to security@cursor.com framing IPR as a structural mitigation for the recent instruction-file advisory class. Subject: 'Action time drift check for authority bearing instruction files.' Honest-scope language about what IPR does not do (it does not classify files as malicious; it only binds authority to the file state at delegation time). 5-business-day acknowledgment cadence per Cursor's published disclosure path."
+  day_start: 72
+  day_end: 72
+
+- id: d72-vocab-pr-63-merged
+  title: "Vocab PR #63 merged — agentlair trust_verify endpoint"
+  description: "piiiico added trust_verify (POST /v1/trust/verify) to AgentLair's behavioral_trust.endpoints block, a third surface alongside trust_profile and trust_gate that accepts an AAT JWT directly without requiring a resolved agentId path parameter. Endpoint verified live with proper structured 401 (HSTS, CSP, JSON content-type, 112-byte error body — production gateway behavior). 5-gate review passed clean."
+  day_start: 72
+  day_end: 72
+
+- id: d72-vocab-issue-64-completion-ratio
+  title: "Vocab #64 opened — completion_ratio canonical proposal"
+  description: "completion_ratio proposed as a new canonical signal_type. Three independent implementations confirmed in the original A2A #1628 thread (AgentID rolling 180d, APS configurable defaulting to 90d, RNWY derived 24h via peer_review sybil analysis), two-implementation rule met. Opening as issue rather than direct PR per CONTRIBUTING.md canonical-term protocol; PR follows once direction settles. Proposed descriptors: enforcement_class advisory, validity_temporal windowed, refusal_authority issuer, invariant_survival post_action, replay_class fingerprint_only, governed_action_class delegate."
+  day_start: 72
+  day_end: 72
+
+- id: d72-atvp-pr-8-request-changes
+  title: "ATVP PR #8 — REQUEST_CHANGES review posted"
+  description: "agent-governance-spec/agent-trust-verification-providers PR #8 review posted as CHANGES_REQUESTED for a structural peer_review / behavioral_trust mapping error needing correction in four places, plus three smaller items (cold-start prior, score range, naming). PR is now blocked from merge until corrections land. Lars Kroehl can independently concur or override per the spec's two-editor consensus."
+  day_start: 72
+  day_end: 72
+
 # ═══ DAY 71 — 2026-04-27 ═══
 
 - id: d71-agent-governance-spec-org
