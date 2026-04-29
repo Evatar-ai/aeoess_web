@@ -24,3 +24,19 @@ papers/paper-4/poc/
 specs/DRAFTS-*/email-to-*.md
 specs/**/email-to-*.md
 *.bak
+
+# ── Private specs (Tier 1: never publish) ──────────────────
+# Per memory and explicit "DO NOT publish" headers in these files.
+# Restored locally as untracked after deletion from main on 2026-04-28.
+specs/NICK-*.md
+specs/CONSILIUM-*.md
+specs/consilium/
+specs/THE-SYNTHESIS.md
+specs/MODEL-CITIZEN-CANON.md
+specs/OPEN-COMMITMENTS.md
+specs/ERIK-NEWTON-PATTERN.md
+specs/RESEARCH-HYPOTHESES-*.md
+specs/MONDAY-PUBLISH-CHECKLIST.md
+specs/NANOOK-*.md
+specs/contribution-map/out/session-context.md
+specs/AGENT-PRINCIPAL-ANALYSIS.md
