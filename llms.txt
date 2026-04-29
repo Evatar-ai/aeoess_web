@@ -174,7 +174,7 @@ Private enforcement gateway: 37 API routes, multi-tenant, SQLite (Railway Volume
 - AMCS Standard: https://aeoess.com/amcs.html
 - GitHub: https://github.com/aeoess
 - Paper (The Agent Social Contract): https://doi.org/10.5281/zenodo.18749779
-- Paper (Monotonic Narrowing): https://doi.org/10.5281/zenodo.18932404
+- Paper (Monotonic Narrowing): https://doi.org/10.5281/zenodo.18932404 (also at https://ssrn.com/abstract=6415678)
 - Paper (Faceted Authority Attenuation): https://doi.org/10.5281/zenodo.19260073
 - Paper (Behavioral Derivation Rights): https://doi.org/10.5281/zenodo.19476002
 - Paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584

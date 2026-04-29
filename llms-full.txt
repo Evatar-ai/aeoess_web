@@ -727,7 +727,7 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 - GitHub Mingle: https://github.com/aeoess/mingle-mcp
 - Mingle page: https://aeoess.com/mingle.html
 - Research paper (The Agent Social Contract): https://doi.org/10.5281/zenodo.18749779
-- Research paper (Monotonic Narrowing): https://doi.org/10.5281/zenodo.18932404
+- Research paper (Monotonic Narrowing): https://doi.org/10.5281/zenodo.18932404 (also at https://ssrn.com/abstract=6415678)
 - Research paper (Faceted Authority Attenuation): https://doi.org/10.5281/zenodo.19260073
 - Research paper (Behavioral Derivation Rights): https://doi.org/10.5281/zenodo.19476002
 - Research paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584
