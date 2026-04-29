@@ -40,3 +40,18 @@ specs/MONDAY-PUBLISH-CHECKLIST.md
 specs/NANOOK-*.md
 specs/contribution-map/out/session-context.md
 specs/AGENT-PRINCIPAL-ANALYSIS.md
+
+# ── Tier 2: internal process artifacts ─────────────────────
+specs/CC-PROMPT-*
+specs/cc-prompts/
+specs/contribution-map/
+specs/drafts/
+specs/DAILY-UPDATE-RHYTHM.md
+
+# ── Tier 3: archives + dated draft folders ─────────────────
+specs/_archive/
+specs/archive-portal-era/
+specs/killed/
+specs/model-citizen/
+specs/reports/
+specs/DRAFTS-*/
