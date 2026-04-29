@@ -46,3 +46,21 @@ specs/killed/
 specs/model-citizen/
 specs/reports/
 specs/DRAFTS-*/
+
+# ── 2026-04-29 second sweep: internal-staging dirs + root docs ──
+# Same pattern as the specs/ sweep earlier today. These dirs are
+# private working space. Public destination is ~/aeoess-private/.
+archive-portal-era/
+comms/*
+!comms/shared-state.json
+drafts/
+articles/
+experiments/
+papers/paper-4/
+papers/RETITLE-*.diff
+AGENT-INSTRUCTIONS.md
+TEAM-OPS.md
+OPS-LOG.md
+UPDATE-PROPAGATION-SPEC.md
+ONBOARDING.md
+docs/article-note.txt
