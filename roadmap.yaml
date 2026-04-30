@@ -1,7 +1,91 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-27 (Day 71) — agent-governance-spec org created with Lars Kroehl as co-editor on agent-trust-verification-providers spec; vocab PR #59 (DCP-AI by lktron00, composite PQC) and PR #53 (AgentNexus three-issuer Interop Week 1 Step 2) merged; vocab #60 opened on post-quantum signature capability as vocabulary-level attribute; vocab #58 epoch enum reached three-way independent convergence (lawcontinue, kenneives, srotzin).
+# Last updated: 2026-04-29 (Day 73) — Paper 8 published on Zenodo (Evidence-Safety Gap, DOI 10.5281/zenodo.19914628); three SSRN submissions in flight (Agent Social Contract, Physics-Enforced Delegation, Cognitive Attestation); ORCID profile 0009-0002-4700-3594 live with all 8 papers indexed; vocab PR #61 (epoch enum), PR #62 (refusal_authority correction), PR #52 (PDR validator co-authored @nanookclaw with 32/32 tests) merged; in-toto SVR extension worked-example draft scoped, May 1 maintainer meeting on calendar.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 73 — 2026-04-29 ═══
+
+- id: d73-paper-8-evidence-safety-gap
+  title: "Paper 8 published — The Evidence-Safety Gap"
+  description: "The Evidence-Safety Gap in Cryptographic Agent Governance: Compliance-Complete Failures and the Limits of Receipt-Based Accountability published on Zenodo (DOI 10.5281/zenodo.19914628). Defines compliance-complete failure as the simultaneous condition of procedural validity and unsafe effect. Names five omitted-variable classes (semantic, population, trust, pipeline, temporal state). Constructs explicit defeat traces against receipt-chain forensic signals in an open-source reference implementation. Two design implications follow: claim-scoped receipts and authorization-effect separation. Neither closes the gap; both make it visible and auditable. The minimal contribution is the formal separation of procedural validity from effect safety in receipt-based agent accountability — a vocabulary for the failure class the protocol's own success creates."
+  status: done
+  workstream: research
+  day_start: 73
+  day_end: 73
+  links:
+    - url: "https://doi.org/10.5281/zenodo.19914628"
+      label: "Paper 8 on Zenodo"
+
+- id: d73-ssrn-three-submissions
+  title: "Three SSRN submissions: Papers 1, 5, 7"
+  description: "Agent Social Contract (Paper 1, z.18749779), Physics-Enforced Delegation (Paper 5, z.19478584), and Cognitive Attestation (Paper 7, z.19646276) entering SSRN today. Each paper classified into five-to-six CS networks where the actual reviewer audience reads — Artificial Intelligence eJournal for the broad AI audience, Artificial Intelligence Law Policy & Ethics for auditability and governance angles, Cybersecurity Privacy & Networks for cryptographic primitives, Theoretical Computer Science for cryptography and distributed computation, Quantum Information for the IBM hardware experiment, Generative AI for the Llama-3.1 sparse autoencoder work. Classifications are routing decisions, not decoration. Author affiliation: Independent Researcher (corrected from auto-pulled GitHub Inc). Declaration of interest statements explicit about IBM Quantum and Neuronpedia third-party infrastructure use with no funding role."
+  status: in_progress
+  workstream: research
+  day_start: 73
+  day_end: 73
+
+- id: d73-orcid-profile-live
+  title: "ORCID profile 0009-0002-4700-3594 live"
+  description: "ORCID profile populated as Independent Researcher / Founder of AEOESS. All 8 papers indexed via DOI lookup. Five featured: Agent Social Contract, Physics-Enforced Delegation, Cognitive Attestation, Monotonic Narrowing, Behavioral Derivation Rights. The Evidence-Safety Gap paper added on the same day as publication. Bio frames the protocol scope without the cross-disciplinary career narrative. Websites: AEOESS, Personal, GitHub (AEOESS), APS SDK on npm. Keywords mirror paper-level keywords scoped broader: AI agents, multi-agent governance, cryptographic identity, delegation, Ed25519, agent attestation, governance protocols, mechanistic interpretability, accountability, open protocols."
+  status: done
+  workstream: research
+  day_start: 73
+  day_end: 73
+  links:
+    - url: "https://orcid.org/0009-0002-4700-3594"
+      label: "ORCID"
+
+- id: d73-vocab-pr-61-merged
+  title: "Vocab PR #61 merged — epoch enum"
+  description: "lawcontinue's epoch added to validity_temporal enum: observer-relative ticks on substantive state transitions, distinct from sequence's event-relative counts. Issue #58 settled with @lawcontinue's endorsement after three-way independent convergence (lawcontinue, kenneives, srotzin) on Day 71. Vendor-neutrality fix applied during review (commit 9cf2a1db)."
+  status: done
+  workstream: ecosystem
+  day_start: 73
+  day_end: 73
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/61"
+      label: "PR #61 (merged)"
+
+- id: d73-vocab-pr-62-merged
+  title: "Vocab PR #62 merged — refusal_authority correction"
+  description: "governance_attestation.refusal_authority brought into formal enum compliance: structurally_impossible_to_violate → issuer. One-line correction; the original value wasn't enum-valid anyway. @lowkey-divine concurred on issue #57 before merge."
+  status: done
+  workstream: ecosystem
+  day_start: 73
+  day_end: 73
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/62"
+      label: "PR #62 (merged)"
+
+- id: d73-vocab-pr-52-merged
+  title: "Vocab PR #52 merged — entity_continuity PDR validator (co-authored @nanookclaw)"
+  description: "PDR validator for behavioral-fingerprint-drift detection. 309 LOC pure-Node, zero deps, 32-test suite, four reference fixture vectors. Complementary to continuity-analyzer's structural fixture, addressing the namespace decision settled on Day 67. Co-authorship with @nanookclaw declared on PR per their explicit Apr 26 11:47 concurrence on the original issue."
+  status: done
+  workstream: ecosystem
+  day_start: 73
+  day_end: 73
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/52"
+      label: "PR #52 (merged)"
+
+- id: d73-vocab-pings-pr-55-pr-51
+  title: "Two vocab pings: PR #55 and PR #51"
+  description: "PR #55 (APS↔ACTA pairwise crosswalk by @tomjwxf) pinged with three specific questions: 14-mapping distribution analysis, divergent rows + migration paths, pairwise format precedent. PR #51 (invariant-survival.md doc co-authored @QueBallSharken) pinged with three questions: BBIS phrasings accuracy, boundary-keeping section, composition partners. Both moved to waiting-on-them. CONTRIBUTING.md gate-4 wants concurrence on the PR thread itself, not just on related issues."
+  status: in_progress
+  workstream: ecosystem
+  day_start: 73
+  day_end: 73
+
+- id: d73-intoto-svr-extension-go
+  title: "in-toto SVR extension Go decision"
+  description: "Path forward for governance attestation as an in-toto SVR extension scoped. Worked-example draft underway in private workspace at INTOTO-SVR-EXAMPLE-DRAFT/. Two artifacts: agent-governance-svr-extension.md (~200 LOC) plus agent-governance-svr-extension.json (~80 LOC). Single-SVR shape per maintainer framing; two-SVR variant flagged as open question for May 1 meeting. May 1 CNCF #in-toto-attestations meeting attendance committed (per Apr 28 PR #549 comment). Bilateral byte-match track with marcelamelara holds in parallel. aeoess/governance-attestation-predicate stays canonical."
+  status: in_progress
+  workstream: ecosystem
+  day_start: 73
+  day_end: 73
+  links:
+    - url: "https://github.com/in-toto/attestation/pull/549"
+      label: "in-toto PR #549"
 
 # ═══ DAY 72 — 2026-04-28 ═══
 
@@ -161,7 +245,7 @@
 
 - id: d70-aps-conformance-suite
   title: "aeoess/aps-conformance-suite v0.1.0 live"
-  description: "Packaged corpus of byte-identical test vectors for Agent Passport System cross-implementation conformance. 37 fixture vectors across 4 categories: bilateral-delegation (10 vectors), inference-session (7 vectors), instruction-provenance (10 vectors), aivss-scenarios (10 vectors covering OWASP AIVSS §3.6.1 through §3.6.10). TS reference runner. .well-known endpoint mirror following the agentgraph.co/.well-known/cte-test-vectors.json pattern. All vectors deterministically reproducible from a fixed Ed25519 seed, JCS-canonicalized, signature-verified. Apache-2.0. Spec refs: 7 papers (Zenodo) + draft-pidlisnyi-aps-00."
+  description: "Packaged corpus of byte-identical test vectors for Agent Passport System cross-implementation conformance. 37 fixture vectors across 4 categories: bilateral-delegation (10 vectors), inference-session (7 vectors), instruction-provenance (10 vectors), aivss-scenarios (10 vectors covering OWASP AIVSS §3.6.1 through §3.6.10). TS reference runner. .well-known endpoint mirror following the agentgraph.co/.well-known/cte-test-vectors.json pattern. All vectors deterministically reproducible from a fixed Ed25519 seed, JCS-canonicalized, signature-verified. Apache-2.0. Spec refs: 8 papers (Zenodo) + draft-pidlisnyi-aps-00."
   status: done
   workstream: protocol
   day_start: 70

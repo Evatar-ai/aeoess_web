@@ -733,6 +733,7 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 - Research paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584
 - Research paper (Governance in the Medium): https://doi.org/10.5281/zenodo.19582550
 - Research paper (Cognitive Attestation): https://doi.org/10.5281/zenodo.19646276
+- Research paper (The Evidence-Safety Gap): https://doi.org/10.5281/zenodo.19914628
 - IETF Internet-Draft: draft-pidlisnyi-aps-00
 - Agent Ecosystem Directory (18 projects, 115 people, 93 threads, live GitHub data): https://aeoess.github.io/agent-ecosystem-map/
 - Agent Ecosystem Directory repo: https://github.com/aeoess/agent-ecosystem-map

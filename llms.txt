@@ -180,6 +180,7 @@ Private enforcement gateway: 37 API routes, multi-tenant, SQLite (Railway Volume
 - Paper (Physics-Enforced Delegation): https://doi.org/10.5281/zenodo.19478584
 - Paper (Governance in the Medium): https://doi.org/10.5281/zenodo.19582550
 - Paper (Cognitive Attestation): https://doi.org/10.5281/zenodo.19646276
+- Paper (The Evidence-Safety Gap): https://doi.org/10.5281/zenodo.19914628
 - IETF Internet-Draft: draft-pidlisnyi-aps-00
 - Dev Log: https://aeoess.com/blog.html
 - Threat Model: https://aeoess.com/threat-model.html
