@@ -118,22 +118,24 @@
 <div class="sh"><h2>Quick Start</h2></div>
 <pre><span class="kw">npm</span> install agent-passport-system
 
-<span class="kw">import</span> { <span class="fn">joinSocialContract</span> } <span class="kw">from</span> <span class="st">'agent-passport-system'</span>;
+<span class="cm">// import the curated essentials from /core (24-function surface)</span>
+<span class="kw">import</span> {
+  <span class="fn">createPassport</span>, <span class="fn">createDelegation</span>,
+  <span class="fn">evaluateIntent</span>, <span class="fn">commercePreflight</span>, <span class="fn">generateKeyPair</span>
+} <span class="kw">from</span> <span class="st">'agent-passport-system/core'</span>;
 
-<span class="kw">const</span> agent = <span class="kw">await</span> <span class="fn">joinSocialContract</span>({
+<span class="kw">const</span> { publicKey, privateKey } = <span class="kw">await</span> <span class="fn">generateKeyPair</span>();
+<span class="kw">const</span> agent = <span class="kw">await</span> <span class="fn">createPassport</span>({
   name: <span class="st">'my-agent'</span>,
   owner: <span class="st">'builder'</span>,
   capabilities: [<span class="st">'code_execution'</span>, <span class="st">'web_search'</span>],
-  floor: <span class="st">'values/floor.yaml'</span>,
-  beneficiary: <span class="st">'builder'</span>
+  publicKey, privateKey
 });
 
-<span class="cm">// agent.passport   — Ed25519 signed identity</span>
-<span class="cm">// agent.verify()   — check any agent's passport</span>
-<span class="cm">// agent.delegate() — grant scoped authority</span>
-<span class="cm">// agent.work()     — record signed action receipts</span>
-<span class="cm">// agent.prove()    — Merkle proof of contributions</span>
-<span class="cm">// agent.audit()    — compliance against Values Floor</span></pre>
+<span class="cm">// full 925-export API still available at 'agent-passport-system'</span>
+<span class="cm">// createDelegation()   - scoped, revocable authority</span>
+<span class="cm">// evaluateIntent()     - 3-signature policy chain</span>
+<span class="cm">// commercePreflight()  - 4-gate spending controls</span></pre>
 </section>
 
 <div class="prose">
