@@ -104,12 +104,12 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
 .paper-body strong{color:var(--ink);font-weight:600}
 .paper-body .aside{display:block;margin-top:.5rem;font:300 .88rem/1.7 var(--serif);color:var(--ink-3);font-style:italic;padding-left:1rem;border-left:2px solid var(--rule)}
 .cmp-row{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:1rem 0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--paper)}
-.cmp{padding:.7rem .9rem}.cmp:first-child{border-right:1px solid var(--rule)}
+.cmp{padding:.55rem .85rem}.cmp:first-child{border-right:1px solid var(--rule)}
 .cmp-label{font:600 .5rem var(--mono);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem;display:block}.cmp-label.r{color:var(--red)}.cmp-label.g{color:var(--green)}
-.cmp-text{font:400 .84rem/1.6 var(--sans);color:var(--ink-3)}
+.cmp-text{font:400 .78rem/1.5 var(--sans);color:var(--ink-3)}
 .capabilities{display:grid;grid-template-columns:1fr 1fr;gap:.1rem .5rem;margin:.8rem 0;padding:0}
 .cap{display:flex;align-items:baseline;gap:.35rem;padding:.2rem 0}
-.cap-name{font:600 .88rem var(--serif);color:var(--ink);white-space:nowrap}.cap-dash{color:var(--rule);font-size:.7rem}.cap-desc{font:400 .76rem var(--sans);color:var(--ink-4)}
+.cap-name{font:600 .88rem var(--serif);color:var(--ink);white-space:nowrap}.cap-dash{color:var(--rule);font-size:.7rem}.cap-desc{font:400 .72rem var(--sans);color:var(--ink-4)}
 .paper-stats{display:flex;gap:2rem;margin-bottom:.7rem}
 .ps-n{font:700 1.8rem var(--serif);color:var(--ink);letter-spacing:-.02em;line-height:1}.ps-l{font:400 .5rem var(--mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.1rem}
 .install-cmd{font:500 .85rem var(--mono);color:var(--ink);background:var(--code-bg);border:1px solid var(--rule);padding:.55rem 1rem;display:inline-block;cursor:pointer;transition:border-color .15s;margin-bottom:.4rem;border-radius:8px}.install-cmd:hover{border-color:var(--ink-4)}.install-cmd .cm{color:var(--ink-5)}
@@ -255,13 +255,13 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
         <div class="cap"><span class="cap-name">Identity</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Bring your own: did:key, SPIFFE, OAuth</span></div>
         <div class="cap"><span class="cap-name">Delegation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Scoped, revocable chains</span></div>
         <div class="cap"><span class="cap-name">Composition</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Cross-DID-method identity contract</span></div>
-        <div class="cap"><span class="cap-name">Mutual Auth</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Agent &harr; information system handshake</span></div>
+        <div class="cap"><span class="cap-name">Mutual Auth</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Agent &harr; service handshake</span></div>
         <div class="cap"><span class="cap-name">Reputation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Earned trust, scoped to context</span></div>
         <div class="cap"><span class="cap-name">Governance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Values floor enforcement</span></div>
         <div class="cap"><span class="cap-name">Commerce</span><span class="cap-dash">&mdash;</span><span class="cap-desc">4-gate spending controls</span></div>
-        <div class="cap"><span class="cap-name">Payments</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Agent-to-agent, bound to delegation scope</span></div>
+        <div class="cap"><span class="cap-name">Payments</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Agent-to-agent, delegation-scoped</span></div>
         <div class="cap"><span class="cap-name">Attribution</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Merkle-proven audit trail</span></div>
-        <div class="cap"><span class="cap-name">Instruction Provenance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Drift denial across tool turns</span></div>
+        <div class="cap"><span class="cap-name">Instruction Provenance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Drift denial across turns</span></div>
         <div class="cap"><span class="cap-name">Enforcement</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Gateway boundary, &lt;2ms</span></div>
         <div class="cap"><span class="cap-name">Revocation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Cascade, one call kills all</span></div>
       </div>
