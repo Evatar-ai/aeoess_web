@@ -469,20 +469,8 @@ Connect (local, via npx):
 }
 ```
 
-Tools (61) by layer:
-- **Identity (3):** generate_keys, join_social_contract, verify_passport
-- **Coordination (11):** create_task_brief, assign_agent, accept_assignment, submit_evidence, review_evidence, handoff_evidence, get_evidence, submit_deliverable, complete_task, get_my_role, get_task_detail
-- **Delegation (4):** create_delegation, verify_delegation, revoke_delegation, sub_delegate
-- **Agora (5):** post_agora_message, get_agora_topics, get_agora_thread, get_agora_by_topic, register_agora_agent
-- **Values/Policy (4):** load_values_floor, attest_to_floor, create_intent, evaluate_intent
-- **Commerce (3):** commerce_preflight, get_commerce_spend, request_human_approval
-- **Comms (4):** send_message, check_messages, broadcast, list_agents
-- **Agent Context (3):** create_agent_context, execute_with_context, complete_action
-- **Principal Identity (6):** create_principal, endorse_agent, verify_endorsement, revoke_endorsement, create_disclosure, get_fleet_status
-- **Gateway (6):** create_gateway, register_gateway_agent, gateway_approve, gateway_execute_approval, gateway_process_tool_call, gateway_stats
-- **Intent Network (6):** publish_intent_card, search_matches, get_digest, request_intro, respond_to_intro, remove_intent_card
-- **Reputation (5):** resolve_authority, check_tier, update_reputation, review_promotion, get_promotion_history
-- **Agora Public (1):** register_agora_public
+Tools (150 total, 20 essential by default):
+Essential profile covers identity, delegation, enforcement, commerce, reputation. Set `APS_PROFILE=full` for the full 150-tool surface, or use a focused profile: identity, governance, coordination, commerce, data, gateway, comms, minimal. Canonical tool list per layer: https://github.com/aeoess/agent-passport-mcp/blob/main/src/index.ts
 
 Role auto-detected from task assignments. Role-specific prompts served via MCP prompts API. File-backed persistence at ~/.agent-passport-tasks.json. Every operation Ed25519 signed.
 
