@@ -2,7 +2,7 @@
 
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
-Updated: 2026-04-23
+Updated: 2026-04-30
 SDK version: agent-passport-system@2.3.0-alpha (pre-release) · agent-passport-system@2.2.0 (stable)
 MCP version: agent-passport-system-mcp@3.1.0 (150 tools)
 Python SDK: agent-passport-system==2.2.0
@@ -107,6 +107,8 @@ import { /* anything from the full surface */ } from 'agent-passport-system'
 ## Interoperability
 
 - [RFC: Cross-Engine Signed Execution Envelope](https://github.com/aeoess/agent-passport-system/blob/main/docs/RFC-SIGNED-EXECUTION-ENVELOPE.md): Minimal signed envelope for cross-engine governance interop. Any governance engine (CrewAI, Guardian, APS, AIP) can emit and verify. Developed from independent convergence by three groups (crewAI, Guardian/AutoGen, DIF Trusted AI Agents).
+- [Agent-DID composition](https://github.com/aeoess/agent-governance-vocabulary/blob/main/crosswalk/agent-did.yaml): Crosswalk between APS and Edison Munoz Duran's Agent-DID identity layer (RFC-001, TypeScript and Python SDKs, LangChain / CrewAI / Semantic Kernel / Microsoft AGT / A2A integrations). Co-drafted A2A composition contract on key rotation and per-request signature verification: [a2aproject/A2A#1742](https://github.com/a2aproject/A2A/issues/1742).
+- [VeritasActa Knowledge Unit cross-verify](https://github.com/VeritasActa/verify/pull/7): APS DecisionLineageReceipt drops into a VeritasActa KU bundle's `external_receipts.aps` slot. Sidecar-anchored verification key, JCS-canonical sha256 binding `contributingSources[].accessReceiptId` to per-receipt bundle entries. Cross-layer integrity: tampering any KU receipt breaks the recorded hash even though the APS Ed25519 signature stays cryptographically valid.
 
 ## Documentation
 
