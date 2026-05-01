@@ -3,9 +3,9 @@
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
 Updated: 2026-04-30
-SDK version: agent-passport-system@2.3.0-alpha (pre-release) · agent-passport-system@2.2.0 (stable)
-MCP version: agent-passport-system-mcp@3.1.0 (150 tools)
-Python SDK: agent-passport-system==2.2.0
+SDK version: agent-passport-system@2.5.0-alpha (pre-release)
+MCP version: agent-passport-system-mcp@3.1.1 (150 tools)
+Python SDK: agent-passport-system==2.3.0
 Canonical: https://aeoess.com/llms.txt
 Full reference: https://aeoess.com/llms-full.txt
 License: Apache-2.0
@@ -61,6 +61,7 @@ One hundred and twenty-three protocol modules (84 core + 41 v2 constitutional, S
 41. **Decision Equivalence** — Canonical boundary profiles for cross-system decision comparison. Two-layer architecture: decision question hash (the invariant) + boundary profiles (the comparison surface). Static projection-based comparison, no runtime negotiation. Threshold distance as metadata
 42. **Data Lifecycle Governance** — Extended derivation continuity (multi-hop chains with break markers, lineage confidence, transform class taxonomy), post-revocation obligation state (honest per-artifact-type obligations, not deletion theater), decision lineage receipt (Module 37 → data modules bridge, right-to-explanation primitive), purpose taxonomy (hierarchical with wildcard matching), retention TTL (ephemeral vs persistent), terms version pinning (settlement bug fix)
 43. **Data Lifecycle Phase 2** — Aggregation controls (rolling window rate limits), jurisdiction envelope (EU_ONLY, GDPR_ADEQUATE_ONLY transfer checks), governance taint propagation, dispute records (5 types, 8 statuses), combination constraints (forbidden joins for HIPAA/COPPA/GDPR), access snapshots (anti-rug-pull), rights propagation semantics, purpose drift detection, re-identification risk declarations
+44. **Wave 1 Accountability Primitives** — Ed25519 ActionReceipt, AuthorityBoundaryReceipt, CustodyReceipt, ContestabilityReceipt, APSBundle. RFC 8785 JCS canonicalized, content-addressed, byte-match across implementations.
 
 ## Standards
 
@@ -70,7 +71,7 @@ Plus: **MCP Server** (v3.1.1) — 20 essential tools by default, 150 total. Set 
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v2.5.0-alpha — 2,479 tests passing. Zero heavy dependencies.**
+**v2.5.0-alpha — 2,536 tests passing. Zero heavy dependencies.**
 
 ## Tiered Access (Recommended Onboarding)
 

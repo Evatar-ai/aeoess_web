@@ -20,7 +20,7 @@
     "stable_version": "2.2.0",
     "modules": 125,
     "tests": 2410,
-    "python_version": "2.2.0"
+    "python_version": "2.3.0"
   },
   "documentation": {
     "llms_txt": "https://aeoess.com/llms.txt",
