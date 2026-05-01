@@ -1,12 +1,12 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-30 (Day 74) — Wave 1 accountability MVP shipped on SDK v2.5.0-alpha (five signed receipt primitives: action, authority-boundary, custody, contestability, bundle; 57 new tests; deterministic byte-match fixtures); MCP v3.1.1, Python v2.3.0, ClawHub skill v5.8.0 all bumped and published; vocab PR #66 (Edison Munoz Duran's Agent-DID crosswalk) merged as second co-drafted-with-aeoess crosswalk; VeritasActa cross-layer integrity verification 10/10; A2A composition contract co-drafting in flight on shared spec branch with Edison; A2A #1786 acknowledgment to arian-gogani for Nobulex byte-match verifier scripts.
+# Last updated: 2026-04-30 (Day 74). Wave 1 accountability MVP shipped on SDK v2.5.0-alpha (five signed receipt primitives: action, authority-boundary, custody, contestability, bundle; 57 new tests; deterministic byte-match fixtures); MCP v3.1.1, Python v2.3.0, ClawHub skill v5.8.0 all bumped and published; vocab PR #66 (Edison Munoz Duran's Agent-DID crosswalk) merged as second co-drafted-with-aeoess crosswalk; VeritasActa cross-layer integrity verification 10/10; A2A composition contract co-drafting in flight on shared spec branch with Edison; A2A #1786 acknowledgment to arian-gogani for Nobulex byte-match verifier scripts.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ DAY 74 — 2026-04-30 ═══
 
 - id: d74-wave-1-accountability-shipped
-  title: "Wave 1 accountability MVP shipped — five signed receipt primitives"
+  title: "Wave 1 accountability MVP shipped: five signed receipt primitives"
   description: "Wave 1 accountability surface added to SDK v2.5.0-alpha at src/v2/accountability/. Five signed receipt types: ActionReceipt (aps:action:v1), AuthorityBoundaryReceipt (aps:authority_boundary:v1), CustodyReceipt (aps:custody:v1, eight event types and seven purposes), ContestabilityReceipt (aps:contestability:v1, affected-party challenge with controller response), APSBundle (aps:bundle:v1, signed aggregation envelope with balanced Merkle commitment). All RFC 8785 JCS canonicalized, all Ed25519 signed, all content-addressed. Design principle: verbal confessions, not brain scans. Every receipt declares scope_of_claim with explicit does_not_assert; honest scope is mandatory and part of the cryptographic integrity surface. 57 new tests across six suites (action 8, authority-boundary 7, bundle 12, custody 15, contestability 10, fixtures 5). Full SDK suite 2,536/2,537 pass, 0 fail, 1 pre-existing skip. Cross-impl byte-match anchor: five deterministic JSON fixtures using fixed Ed25519 private keys and timestamp 2026-04-30T00:00:00.000Z. Ships toward EU AI Act Article 12/14, GDPR Article 22, FRE 902(13)/(14). MCP v3.1.1 picks up the dependency, Python v2.3.0 ships for parity, ClawHub skill v5.8.0 carries the new surface."
   status: done
   workstream: protocol
@@ -23,7 +23,7 @@
       label: "Wave 1 spec"
 
 - id: d74-vocab-pr-66-merged
-  title: "Vocab PR #66 merged — Edison's Agent-DID crosswalk"
+  title: "Vocab PR #66 merged: Edison's Agent-DID crosswalk"
   description: "Edison Munoz Duran's Agent-DID crosswalk lands as the second co-drafted-with-aeoess crosswalk in the vocabulary. The first was the original AAIF entity_continuity work; this is the second public collaboration where aeoess and a co-author share the spec branch. The A2A composition contract co-drafting now runs on a shared spec branch with Edison; APS pushed the canonical spec to edisonduran/agent-did spec/a2a-composition-contract branch (commit 3fc3838); Edison confirmed pull. The pattern: external project authors a crosswalk, aeoess merges, then both projects co-draft the next interop primitive on a shared branch. Ecosystem hospitality compounding."
   status: done
   workstream: ecosystem
@@ -36,7 +36,7 @@
       label: "shared spec branch"
 
 - id: d74-veritasacta-cross-layer-integrity
-  title: "VeritasActa verify PR #7 — cross-layer integrity 10/10"
+  title: "VeritasActa verify PR #7: cross-layer integrity 10/10"
   description: "VeritasActa Knowledge Unit bundle with sidecar-anchored APS DecisionLineageReceipt verifies end-to-end against a sidecar JWKS. Ten access receipts, all hash-matched across both layers (KU layer and APS layer); APS signature valid against sidecar JWKS kid:aps-ku-cross-verify-v1. Tamper-detection holds across both layers when individual receipts are altered. The integration demonstrates that APS DecisionLineageReceipts can ride alongside an external knowledge-attestation format without either layer needing to absorb the other; the sidecar JWKS pattern lets the consumer verify both layers independently and cross-check at action time."
   status: done
   workstream: ecosystem
@@ -47,7 +47,7 @@
       label: "verify PR #7"
 
 - id: d74-a2a-1786-byte-match-ack
-  title: "A2A #1786 — Nobulex byte-match verifier scripts acknowledged"
+  title: "A2A #1786: Nobulex byte-match verifier scripts acknowledged"
   description: "arian-gogani (Nobulex) shipped reciprocal byte-match verifier scripts at github.com/arian-gogani/nobulex/tree/main/scripts: verify-aps-byte-match.mjs and verify-ctef-byte-match.mjs. Acknowledgment posted to A2A #1786 thread. Reciprocal verification queued for Day 75 morning: run Nobulex's scripts against APS fixtures, post receipt artifacts to thread, link both verifier scripts from APS fixture README. Pattern: APS publishes fixtures, peer publishes reciprocal verifier, APS publishes counter-verification, the loop closes byte-by-byte. This is the ninth way of verifying APS fixtures."
   status: in_progress
   workstream: ecosystem
