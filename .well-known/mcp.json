@@ -18,8 +18,8 @@
     "pypi": "agent-passport-system",
     "version": "2.5.0-alpha",
     "stable_version": "2.2.0",
-    "modules": 125,
-    "tests": 2410,
+    "modules": 126,
+    "tests": 2536,
     "python_version": "2.3.0"
   },
   "documentation": {
