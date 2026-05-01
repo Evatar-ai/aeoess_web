@@ -251,18 +251,18 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
         <div class="cmp"><span class="cmp-label r">Today</span><div class="cmp-text">Agents act anonymously. No audit trail. No spending controls. Revocation means shutting everything down. You find out after the damage.</div></div>
         <div class="cmp"><span class="cmp-label g">With AEOESS</span><div class="cmp-text">Every agent carries a signed identity. Authority can only narrow, never expand. One call revokes downstream. Full cryptographic audit trail.</div></div>
       </div>
-      <span class="aside">There are no rules. We wrote them.</span>
       <div class="capabilities">
         <div class="cap"><span class="cap-name">Identity</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Bring your own: did:key, SPIFFE, OAuth</span></div>
         <div class="cap"><span class="cap-name">Delegation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Scoped, revocable chains</span></div>
-        <div class="cap"><span class="cap-name">Reputation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Bayesian, earned trust</span></div>
+        <div class="cap"><span class="cap-name">Composition</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Cross-DID-method identity contract</span></div>
+        <div class="cap"><span class="cap-name">Mutual Auth</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Agent &harr; information system handshake</span></div>
+        <div class="cap"><span class="cap-name">Reputation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Earned trust, scoped to context</span></div>
         <div class="cap"><span class="cap-name">Governance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Values floor enforcement</span></div>
         <div class="cap"><span class="cap-name">Commerce</span><span class="cap-dash">&mdash;</span><span class="cap-desc">4-gate spending controls</span></div>
+        <div class="cap"><span class="cap-name">Payments</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Agent-to-agent, bound to delegation scope</span></div>
         <div class="cap"><span class="cap-name">Attribution</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Merkle-proven audit trail</span></div>
-        <div class="cap"><span class="cap-name">Communication</span><span class="cap-dash">&mdash;</span><span class="cap-desc">E2E encrypted, signed</span></div>
+        <div class="cap"><span class="cap-name">Instruction Provenance</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Drift denial across tool turns</span></div>
         <div class="cap"><span class="cap-name">Enforcement</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Gateway boundary, &lt;2ms</span></div>
-        <div class="cap"><span class="cap-name">Wallet</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Feeless Nano, delegation-scoped</span></div>
-        <div class="cap"><span class="cap-name">Institutional</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Charters, offices, succession</span></div>
         <div class="cap"><span class="cap-name">Revocation</span><span class="cap-dash">&mdash;</span><span class="cap-desc">Cascade, one call kills all</span></div>
       </div>
     </div>
@@ -280,14 +280,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v3.1.1</a>
       <a href="https://clawhub.ai/aeoess/agent-passport-system">ClawHub Skill</a>
       <a href="https://pypi.org/project/agent-passport-system/">Python SDK v2.3.0</a>
-      <a href="https://doi.org/10.5281/zenodo.18749779">Paper 1</a>
-      <a href="https://doi.org/10.5281/zenodo.18932404">Paper 2</a>
-      <a href="https://doi.org/10.5281/zenodo.19260073">Paper 3</a>
-      <a href="https://doi.org/10.5281/zenodo.19476002">Paper 4</a>
-      <a href="https://doi.org/10.5281/zenodo.19478584">Paper 5</a>
-      <a href="https://doi.org/10.5281/zenodo.19582550">Paper 6</a>
-      <a href="https://doi.org/10.5281/zenodo.19646276">Paper 7</a>
-      <a href="https://doi.org/10.5281/zenodo.19914628">Paper 8</a>
+      <a href="blog.html#paper">8 papers &rarr;</a>
     </div>
     <div style="margin-top:1rem;font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);margin-bottom:.35rem">Quick Start <span style="text-transform:none;letter-spacing:0;color:var(--ink-5)">— Core subpath, 24 curated functions</span></div>
     <pre class="code-block" style="font:500 .78rem/1.55 var(--mono);color:var(--ink-2);background:var(--code-bg);border:1px solid var(--rule);padding:.75rem 1rem;border-radius:8px;overflow-x:auto;margin-bottom:.6rem;-webkit-overflow-scrolling:touch"><span style="color:var(--ink-5)">// import the curated essentials</span>
