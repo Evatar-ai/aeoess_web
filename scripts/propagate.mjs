@@ -1,19 +1,36 @@
 #!/usr/bin/env node
 /**
- * propagate.mjs — Auto-propagate version/test/tool numbers across all repos.
- * 
- * Reads source-of-truth values from package.json files and test output,
- * then finds and replaces stale references across all files listed in
- * UPDATE-PROPAGATION-SPEC.md.
- * 
+ * propagate.mjs — Site-wide canonical-value propagation, JSON-driven.
+ *
+ * Single source of truth: ~/aeoess_web/project-state.json.
+ * Edit that JSON, run this script, every target file gets rewritten.
+ *
  * Usage:
- *   node scripts/propagate.mjs              # dry run (show what would change)
- *   node scripts/propagate.mjs --apply      # actually replace
- *   node scripts/propagate.mjs --apply --commit  # replace + git commit + push all repos
- *   node scripts/propagate.mjs --read-only  # just show current values
- * 
+ *   node scripts/propagate.mjs                    # dry run (show what would change)
+ *   node scripts/propagate.mjs --apply            # actually replace
+ *   node scripts/propagate.mjs --apply --commit   # replace + commit + push every repo
+ *   node scripts/propagate.mjs --read-only        # just show current canonical values
+ *   node scripts/propagate.mjs --verify-only      # cache-independent drift report
+ *   node scripts/propagate.mjs --apply --auto-fix-verify
+ *                                                 # opt-in: also auto-fix LAYER_COUNT drift
+ *                                                 # caught by the verify pass (Bug 1 patch).
+ *                                                 # TEST_COUNT and MCP_TOOL_COUNT remain
+ *                                                 # report-only because their regex patterns
+ *                                                 # match per-section counts as false positives
+ *                                                 # (see UPDATE-PROPAGATION-SPEC.md).
+ *
+ * Bug fixes vs prior cache-driven design:
+ *   Bug 1 (cache no-op on match): the cache-diff pass short-circuits when
+ *     `previous === current`, leaving on-disk drift invisible. With JSON
+ *     as the source of truth the cache is downgraded to a hint; the verify
+ *     pass runs on every invocation and is opt-in auto-fixable.
+ *   Bug 2 (parsed total tests, not passing): the script no longer parses
+ *     `npm test` output. The passing count is hand-entered in
+ *     project-state.json under counts.tests. The schema's `$comment`
+ *     reminds the editor to use the passing count, not the registered total.
+ *
  * Runs from: /Users/tima/aeoess_web
- * Requires: Node 18+
+ * Requires: Node 18+. Pure stdlib — no third-party deps.
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
@@ -32,96 +49,53 @@ const REPOS = {
   ecomap: resolve(`${HOME}/agent-ecosystem-map`),                       // v3 audit: ecosystem map
 };
 
-// ── Read source-of-truth values ──
-function readSourceOfTruth() {
-  const values = {};
+// ── Source-of-truth: project-state.json ──
+// Single hand-edited file. The propagator reads canonical values from
+// here and rewrites every target file to match. No npm test exec, no
+// filesystem-derived counts. Bumping a value in the JSON is the entire
+// release-time edit.
+const STATE_PATH = `${REPOS.web}/project-state.json`;
 
-  // SDK_VERSION from package.json
-  const sdkPkg = JSON.parse(readFileSync(`${REPOS.sdk}/package.json`, 'utf8'));
-  values.SDK_VERSION = sdkPkg.version;
-
-  // MCP_VERSION from package.json
-  const mcpPkg = JSON.parse(readFileSync(`${REPOS.mcp}/package.json`, 'utf8'));
-  values.MCP_VERSION = mcpPkg.version;
-
-  // TEST_FILES from package.json test script
-  const testScript = sdkPkg.scripts?.test || '';
-  const testFiles = testScript.match(/tests\/[\w.-]+\.ts/g) || [];
-  values.TEST_FILES = testFiles.length;
-
-  // Module counts. Split per spec PROPAGATE-SCRIPT-BUGS-2026-04-11 Option B:
-  //   CORE_MODULE_COUNT = src/core/*.ts minus index.ts (84 at HEAD 2026-04-11)
-  //   V2_MODULE_COUNT   = src/v2/*.ts   minus index.ts (33 at HEAD 2026-04-11)
-  //   LAYER_COUNT       = CORE + V2, kept as computed for back-compat with
-  //                       existing getVariablePatterns rules that match
-  //                       "{N} modules" / "{N} protocol modules". No longer
-  //                       treated as a primary canonical — CORE/V2 are.
-  try {
-    const coreFiles = readdirSync(`${REPOS.sdk}/src/core`).filter(f => f.endsWith('.ts') && f !== 'index.ts');
-    values.CORE_MODULE_COUNT = coreFiles.length;
-  } catch { values.CORE_MODULE_COUNT = 71; }
-  try {
-    const v2Entries = readdirSync(`${REPOS.sdk}/src/v2`, { withFileTypes: true });
-    // Count .ts files (excluding index.ts and types.ts) PLUS subdirectories.
-    // Subdirectories are multi-file modules added from Build A onward
-    // (attribution-primitive, attribution-weights, attribution-settlement, etc.).
-    const v2Files = v2Entries.filter(d => d.isFile() && d.name.endsWith('.ts') && d.name !== 'index.ts' && d.name !== 'types.ts');
-    const v2Dirs = v2Entries.filter(d => d.isDirectory());
-    values.V2_MODULE_COUNT = v2Files.length + v2Dirs.length;
-  } catch { values.V2_MODULE_COUNT = 39; }
-  values.LAYER_COUNT = values.CORE_MODULE_COUNT + values.V2_MODULE_COUNT;
-
-  // ADVERSARIAL_COUNT — count across ALL adversarial test files
-  try {
-    const advFiles = readdirSync(`${REPOS.sdk}/tests`).filter(f => f.startsWith('adversarial'));
-    let total = 0;
-    for (const f of advFiles) {
-      const content = readFileSync(`${REPOS.sdk}/tests/${f}`, 'utf8');
-      const matches = content.match(/it\(/g) || [];
-      total += matches.length;
-    }
-    values.ADVERSARIAL_COUNT = total || 73;
-  } catch { values.ADVERSARIAL_COUNT = 73; }
-
-  // MCP_TOOL_COUNT — count server.tool( calls in MCP source
-  try {
-    const mcpSrc = readFileSync(`${REPOS.mcp}/src/index.ts`, 'utf8');
-    const toolMatches = mcpSrc.match(/server\.tool\(/g) || [];
-    values.MCP_TOOL_COUNT = toolMatches.length;
-  } catch { values.MCP_TOOL_COUNT = 30; }
-
-  // TEST_COUNT and TEST_SUITES — run tests and parse output
-  try {
-    console.log('Running SDK tests to get counts...');
-    const testOutput = execSync('npm test 2>&1', {
-      cwd: REPOS.sdk,
-      encoding: 'utf8',
-      timeout: 60000,
-    });
-
-    // Parse: "tests 196 | suites 51 | pass 196"
-    const testCountMatch = testOutput.match(/tests\s+(\d+)/);
-    const suitesMatch = testOutput.match(/suites\s+(\d+)/);
-    values.TEST_COUNT = testCountMatch ? parseInt(testCountMatch[1]) : null;
-    values.TEST_SUITES = suitesMatch ? parseInt(suitesMatch[1]) : null;
-
-    if (!values.TEST_COUNT) {
-      // Fallback: count "ok" lines
-      const okLines = testOutput.match(/^ok \d+/gm) || [];
-      values.TEST_COUNT = okLines.length || null;
-    }
-    if (!values.TEST_SUITES) {
-      // Fallback: count "# Subtest:" lines
-      const subtests = testOutput.match(/# Subtest:/g) || [];
-      values.TEST_SUITES = subtests.length || null;
-    }
-  } catch (e) {
-    console.log('⚠ Could not run tests. Using --skip-tests or provide values manually.');
-    console.log(`  Error: ${e.message?.slice(0, 100)}`);
-    values.TEST_COUNT = null;
-    values.TEST_SUITES = null;
+function loadProjectState() {
+  if (!existsSync(STATE_PATH)) {
+    throw new Error(`project-state.json not found at ${STATE_PATH}`);
   }
+  const state = JSON.parse(readFileSync(STATE_PATH, 'utf8'));
+  // Validate the minimum-required shape rather than failing deep inside
+  // a pattern lookup if a key is missing.
+  if (!state.versions || !state.counts) {
+    throw new Error('project-state.json: missing required `versions` or `counts` block');
+  }
+  return state;
+}
 
+// Derive the flat variable namespace the rest of the script consumes.
+// Same shape as the pre-refactor readSourceOfTruth() returned, so all
+// downstream pattern-generation and replacement logic is unchanged.
+function readSourceOfTruth() {
+  const state = loadProjectState();
+  const values = {
+    SDK_VERSION:       state.versions.sdk,
+    MCP_VERSION:       state.versions.mcp,
+    PYTHON_VERSION:    state.versions.python,
+    TEST_COUNT:        state.counts.tests,        // PASSING count, not registered total
+    MCP_TOOL_COUNT:    state.counts.mcp_tools,
+    CORE_MODULE_COUNT: state.counts.modules_core,
+    V2_MODULE_COUNT:   state.counts.modules_v2,
+    LAYER_COUNT:       state.counts.modules_total,
+    PAPER_COUNT:       state.counts.papers,
+    CORE_SURFACE:      state.counts.core_surface_functions,
+    EXTENDED_SURFACE:  state.counts.extended_surface_exports,
+    UPDATED:           state.updated,
+  };
+  // Sanity-check the modules sum (catches typos in the hand-edited JSON
+  // before they propagate to 16+ files).
+  if (values.CORE_MODULE_COUNT + values.V2_MODULE_COUNT !== values.LAYER_COUNT) {
+    console.warn(
+      `⚠ project-state.json: modules_total (${values.LAYER_COUNT}) != ` +
+      `modules_core (${values.CORE_MODULE_COUNT}) + modules_v2 (${values.V2_MODULE_COUNT})`
+    );
+  }
   return values;
 }
 
@@ -593,6 +567,12 @@ const applyMode = args.includes('--apply');
 const readOnlyMode = args.includes('--read-only');
 const commitMode = args.includes('--commit');
 const verifyOnlyMode = args.includes('--verify-only');
+// Bug 1 patch: opt-in auto-fix for the verify-pass drift list.
+// Restricted to LAYER_COUNT because TEST_COUNT and MCP_TOOL_COUNT
+// regex patterns produce false positives on per-section counts
+// (e.g., "13 tests" inside a subsystem coverage block, "20 tools"
+// inside "the 20 tools 90% of integrations need").
+const autoFixVerifyMode = args.includes('--auto-fix-verify');
 
 const modeLabel = readOnlyMode ? 'READ-ONLY'
   : verifyOnlyMode ? 'VERIFY-ONLY'
@@ -747,16 +727,35 @@ if (staleCount === 0) {
 // --verify-only to dry-run the report. applyVerifyFixes() exists in
 // the file for the day patterns are tight enough to safely auto-fix.
 console.log('');
-console.log('Verify pass (cache-independent, report-only)...');
+console.log('Verify pass (cache-independent)...');
 const drifts = verifyConsistency(files, current);
 if (drifts.length === 0) {
   console.log('✅ Verify pass: all scanned surfaces match canonical values.');
 } else {
-  console.log(`⚠ Verify pass: found ${drifts.length} drift(s) the cache-diff missed.`);
-  console.log('   (mix of real drift and false positives — see spec PROPAGATE-SCRIPT-BUGS-2026-04-11)');
+  console.log(`⚠ Verify pass: found ${drifts.length} drift(s).`);
+  console.log('   (mix of real drift and known false positives — see UPDATE-PROPAGATION-SPEC.md)');
   for (const d of drifts) {
     const relPath = relative(REPOS.web + '/..', d.file);
     console.log(`   ${relPath}:${d.line}  ${d.variable} = ${d.found} (expected ${d.expected})  "${d.matched}"`);
   }
-  console.log('Auto-fix not wired — review drift list manually until pattern hardening lands.');
+  // Bug 1 patch: auto-fix on opt-in, restricted to LAYER_COUNT.
+  // The cache-diff pass at line ~664 short-circuits when previous === current,
+  // missing on-disk drift. The verify pass catches it; --auto-fix-verify
+  // closes it on the safe-pattern subset.
+  if (applyMode && autoFixVerifyMode) {
+    const safe = drifts.filter(d => d.variable === 'LAYER_COUNT');
+    const skipped = drifts.length - safe.length;
+    if (safe.length > 0) {
+      const fixed = applyVerifyFixes(safe);
+      console.log(`✅ Auto-fixed ${fixed} LAYER_COUNT drift(s) (--auto-fix-verify).`);
+    }
+    if (skipped > 0) {
+      console.log(
+        `⚠ ${skipped} TEST_COUNT/MCP_TOOL_COUNT drift(s) NOT auto-fixed ` +
+        `(known false-positive patterns; review and edit manually).`
+      );
+    }
+  } else if (drifts.length > 0) {
+    console.log('Auto-fix is opt-in: re-run with --apply --auto-fix-verify to close LAYER_COUNT drift.');
+  }
 }
