@@ -3,7 +3,7 @@
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
 Updated: 2026-04-30
-SDK version: agent-passport-system@2.5.0-alpha (pre-release)
+SDK version: agent-passport-system@2.5.1-alpha (pre-release)
 MCP version: agent-passport-system-mcp@3.1.1 (150 tools)
 Python SDK: agent-passport-system==2.3.0
 Canonical: https://aeoess.com/llms.txt
@@ -71,7 +71,7 @@ Plus: **MCP Server** (v3.1.1) — 20 essential tools by default, 150 total. Set 
 
 Plus: **Mingle** (v2.2) — Opt-in ecosystem service. Like LinkedIn, but inside your chat. Your AI networks for you. Semantic matching (all-MiniLM-L6-v2 embeddings), persistent Ed25519 identity, ghost mode browsing, consent-first publishing, trust signals, feedback loop. 120+ cards on a live network at api.aeoess.com. 7 MCP tools. Double opt-in, zero spam. Completely independent of the core protocol — no agent functionality requires Mingle. Install: `npx mingle-mcp setup`. npm: mingle-mcp. ClawHub: mingle. Page: https://aeoess.com/mingle.html
 
-**v2.5.1-alpha — 2,536 tests passing. Zero heavy dependencies.**
+**v2.5.1-alpha — 2,546 tests passing. Zero heavy dependencies.**
 
 ## Tiered Access (Recommended Onboarding)
 
