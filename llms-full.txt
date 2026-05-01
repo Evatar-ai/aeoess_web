@@ -725,7 +725,7 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 - IETF Internet-Draft: draft-pidlisnyi-aps-00
 - Agent Ecosystem Directory (18 projects, 115 people, 93 threads, live GitHub data): https://aeoess.github.io/agent-ecosystem-map/
 - Agent Ecosystem Directory repo: https://github.com/aeoess/agent-ecosystem-map
-- Cited by: "PDR in Production" (University of British Columbia, 2026) — Section 7.6 validates APS Bayesian reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
+- Cited by: "PDR in Production" (University of British Columbia, 2026) — Section 7.6 validates APS earned reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
 - Protocol page: https://aeoess.com/protocol.html
 - Dev log: https://aeoess.com/blog.html
 - Threat model: https://aeoess.com/threat-model.html
