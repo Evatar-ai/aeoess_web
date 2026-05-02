@@ -64,3 +64,6 @@ OPS-LOG.md
 UPDATE-PROPAGATION-SPEC.md
 ONBOARDING.md
 docs/article-note.txt
+
+# Local-state cache for build-roadmap.mjs (matches .propagate-cache.json convention)
+scripts/.roadmap-build-cache.json
