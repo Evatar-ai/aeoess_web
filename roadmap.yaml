@@ -617,7 +617,7 @@
     - d34-30-modules
 
 - id: institutional-layer
-  title: "Rome-Complete Institutional Layer"
+  title: "Institutional Governance Layer"
   description: "Estimated 12 sessions. Shipped in one. Charter, approval, time, reserve, federation. Zero lines to 1,634 passing tests. SDK v1.27.0, MCP v2.19.0, 108 tools, 53 modules, 503 suites."
   status: done
   workstream: protocol
@@ -648,7 +648,7 @@
 
 - id: d42-attestation-architecture
   title: "Agent Attestation Architecture"
-  description: "Lev's agent farmed unlimited passports, drained Nik's promo wallet in 60s. Identity Sybil unsolvable in open protocols. 3-round consilium across Claude, GPT, Gemini. SDK v1.29.1, 1,987 tests, 96 modules, MCP v2.19.0, 125 tools, Gateway v0.3.0, 37 routes."
+  description: "Lev's agent farmed unlimited passports, drained Nik's promo wallet in 60s. Identity Sybil unsolvable in open protocols. 3-round multi-model architectural review across Claude, GPT, Gemini. SDK v1.29.1, 1,987 tests, 96 modules, MCP v2.19.0, 125 tools, Gateway v0.3.0, 37 routes."
   status: done
   workstream: protocol
   day_start: 42
@@ -708,7 +708,7 @@
 
 - id: d48-six-sessions
   title: "Six Build Sessions, One Shipping Day"
-  description: "Five consilium models attacked specs before a single line shipped. Six sequential sessions, each depends on previous deploy. Gateway auto-deploys on push. SDK v1.34.0, MCP v2.21.0, 131 tools, 2,306 tests, 103 modules, Gateway v0.4.0, Python v0.9.0."
+  description: "Five reviewer models attacked specs before a single line shipped. Six sequential sessions, each depends on previous deploy. Gateway auto-deploys on push. SDK v1.34.0, MCP v2.21.0, 131 tools, 2,306 tests, 103 modules, Gateway v0.4.0, Python v0.9.0."
   status: done
   workstream: protocol
   day_start: 48
@@ -728,7 +728,7 @@
 
 - id: d51-quantum-governance
   title: "Quantum Governance"
-  description: "Six weeks of circling quantum. Consilium found it: physics facets on delegations. 7 experiments on IBM Quantum. Bell 5.2pp + GHZ 7.7pp fidelity gaps."
+  description: "Six weeks of circling quantum. Multi-model review found it: physics facets on delegations. 7 experiments on IBM Quantum. Bell 5.2pp + GHZ 7.7pp fidelity gaps."
   status: done
   workstream: protocol
   day_start: 51
@@ -1391,8 +1391,8 @@
     - encrypted-relay
     - comms-phase-2-external-engagement
 
-- id: consilium-methodology
-  title: "Consilium as Practice"
+- id: multi-model-review-methodology
+  title: "Multi-Model Review as Practice"
   description: "Multi-model adversarial review — same prompt to Claude, GPT, Gemini simultaneously, no cross-talk, synthesize after. Origin Day 25 (first honest pushback). First formal three-way Day 37. Peak Days 40-42 (Sybil, Agent DNA, data lifecycle, constraint architecture). Self-critique Day 38 identified anti-patterns. Stopped being default, became selective tool for genuine competing framings."
   status: done
   workstream: research
@@ -1436,13 +1436,13 @@
 
 - id: drift-structural-response
   title: "Drift Protocol Structural Response"
-  description: "$285M UNC4736 DPRK social engineering hack. Ran 5-model consilium on forensic attribution vs structural constraints. Killed 5 bad ideas (behavioral signals, cascade verification, prosecution scoring, general stake, forensic attribution test). Posted A2A#1628 reply framing authority-class separation + non-bypassable timelocks + hard velocity ceilings. Drove Values Floor timelock + Grade-gated authority build queue."
+  description: "$285M UNC4736 DPRK social engineering hack. Ran 5-model architectural review on forensic attribution vs structural constraints. Killed 5 bad ideas (behavioral signals, cascade verification, prosecution scoring, general stake, forensic attribution test). Posted A2A#1628 reply framing authority-class separation + non-bypassable timelocks + hard velocity ceilings. Drove Values Floor timelock + Grade-gated authority build queue."
   status: done
   workstream: research
   day_start: 48
   day_end: 48
   dependencies:
-    - consilium-methodology
+    - multi-model-review-methodology
 
 - id: insumer-7-issuers
   title: "Insumer 7-Verified Issuers"
@@ -1470,7 +1470,7 @@
 
 - id: comms-phase-1-cross-model-dialogue
   title: "Cross-Model Dialogue as Practice"
-  description: "Manual carrying of ideas between Claude, GPT, Gemini. Not assistants — adversarial reviewers. Their disagreements treated as signal. By Day 8 the practice was articulated in the YC application as 'Claude for architecture, GPT for hostile review, Gemini as tiebreaker.' Origin of every later consilium."
+  description: "Manual carrying of ideas between Claude, GPT, Gemini. Not assistants — adversarial reviewers. Their disagreements treated as signal. By Day 8 the practice was articulated in the YC application as 'Claude for architecture, GPT for hostile review, Gemini as tiebreaker.' Origin of every later multi-model architectural review."
   status: done
   workstream: comms
   day_start: 8
@@ -1516,7 +1516,7 @@
 
 - id: vocab-contributing-lands
   title: "CONTRIBUTING.md + CODE_OF_CONDUCT.md Shipped"
-  description: "Public contribution standard for the vocabulary repo. Quick Start checklist, merge criteria (5 review questions applied equally), canonical-status rule (2+ independent implementations), stability expectations, no CLA required. Contributor Covenant 2.1. Written after two consilium review rounds — consilium flagged defensive tone and trauma leaks, both addressed. Template for roll-out across SDK and spec repos."
+  description: "Public contribution standard for the vocabulary repo. Quick Start checklist, merge criteria (5 review questions applied equally), canonical-status rule (2+ independent implementations), stability expectations, no CLA required. Contributor Covenant 2.1. Written after two multi-model review rounds — the review flagged defensive tone and trauma leaks, both addressed. Template for roll-out across SDK and spec repos."
   status: done
   workstream: comms
   day_start: 57
@@ -1737,7 +1737,7 @@
   day_end: 64
   dependencies:
     - d61-v2-architecture-separation
-  kill_note: "Killed Day 61 consilium (Claude + GPT-5 + Gemini 2.5 Pro). Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. \"I can see it coming\" is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64)."
+  kill_note: "Killed Day 61 multi-model architectural review (Claude + GPT-5 + Gemini 2.5 Pro). Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. \"I can see it coming\" is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64)."
 
 - id: v2-promotion-decision
   title: "v2.0.0 promotion to @latest, done Day 64"
@@ -1898,8 +1898,8 @@
   day_start: 48
   day_end: 48
   dependencies:
-    - consilium-methodology
-  kill_note: "Killed Day 48 consilium. All four model reviewers (Claude, GPT-5, Gemini 2.5 Pro, plus a fourth adversarial Claude) independently designed an undetectable attacker class, legitimate-looking losing trades against colluding counterparties within per-transaction limits. The test catches naive attackers designed to be catchable and fails against adversarial-aware ones. Building it is a waste. Replaced by cumulative-exposure-tracking: enforce net position change per delegation per rolling window at the gateway, not behavioral forensics per action. 95% confidence kill."
+    - multi-model-review-methodology
+  kill_note: "Killed Day 48 multi-model architectural review. All four model reviewers (Claude, GPT-5, Gemini 2.5 Pro, plus a fourth adversarial Claude) independently designed an undetectable attacker class, legitimate-looking losing trades against colluding counterparties within per-transaction limits. The test catches naive attackers designed to be catchable and fails against adversarial-aware ones. Building it is a waste. Replaced by cumulative-exposure-tracking: enforce net position change per delegation per rolling window at the gateway, not behavioral forensics per action. 95% confidence kill."
 
 - id: killed-cascade-verification
   title: "Cascade verification (supervisor chain)"
@@ -1909,7 +1909,7 @@
   day_start: 48
   day_end: 48
   dependencies:
-    - consilium-methodology
+    - multi-model-review-methodology
   kill_note: "Killed Day 48 own-team attack. Supervisors rubber-stamp clean history. Routing is attacker-controlled, so an attacker can present only the supervisors who will sign. UX kills adoption, every action blocks on N manual approvals. Fell apart on first red-team pass. Replaced by structural authority-class separation plus non-bypassable timelocks at action time, not trust-chain verification. 95% confidence kill."
 
 - id: killed-quantum-inside-aps
@@ -1920,8 +1920,8 @@
   day_start: 42
   day_end: 51
   dependencies:
-    - consilium-methodology
-  kill_note: "Killed Day 51 consilium. Quantum speedup for APS math: delegation verification is already microsecond-fast, no asymptotic win matters. Quantum randomness for keygen: modern CSPRNGs are commodity, a quantum source adds cost with no security delta. Bell-state non-collusion: cute, not useful, the threat model doesn't need entangled gateways. Correct reframing: put APS *around* quantum, not quantum inside APS. Shipped as Paper 5 (Physics-Enforced Delegation, Zenodo 10.5281/zenodo.19478584) governing quantum hardware physics via delegation facets. Six weeks of circling produced a Zenodo paper and an IBM experiment, just not the paper we set out to write."
+    - multi-model-review-methodology
+  kill_note: "Killed Day 51 multi-model architectural review. Quantum speedup for APS math: delegation verification is already microsecond-fast, no asymptotic win matters. Quantum randomness for keygen: modern CSPRNGs are commodity, a quantum source adds cost with no security delta. Bell-state non-collusion: cute, not useful, the threat model doesn't need entangled gateways. Correct reframing: put APS *around* quantum, not quantum inside APS. Shipped as Paper 5 (Physics-Enforced Delegation, Zenodo 10.5281/zenodo.19478584) governing quantum hardware physics via delegation facets. Six weeks of circling produced a Zenodo paper and an IBM experiment, just not the paper we set out to write."
 
 # ═══ DAY 65+ UPCOMING — external dependencies ═══
 
@@ -2571,7 +2571,7 @@
 
 - id: d67-full-code-audit-v2-1
   title: "Full Code Audit v2.1 — 42 steps, three tiers, 14 repos"
-  description: "Rewrote the CMD-SET-2 pre-publish audit from v1's 12 steps (SDK + MCP focused) to 42 steps across three tiers covering the full shipped codebase surface. Tier A Code Integrity runs test suites, typecheck, lint, build artifacts across SDK, MCP, Python SDK, Remote MCP, Gateway, Agent Governance Toolkit (405 tests), autogen-governance-adapter, vocab validator, intent-network-api, hermes-aps-delegation, hermes-decision-receipts, a2a-compliance-harness, solana-agent-identity, mingle-mcp, plus the SDK examples/ adapter apps and aeoess_web operational scripts. Tier B Supply Chain runs npm audit and pip-audit across every repo, secret scan with fixture/test exclusions, .npmignore and MANIFEST.in hygiene, LICENSE and NOTICE presence, CI workflow YAML validity and floating-action-ref detection, Dockerfile and Railway config pinning, Node engines field presence, package-lock presence. Tier C Runtime checks cross-repo version alignment across SDK/MCP/Python/Remote-MCP, npm and PyPI registry drift, live endpoint health, Gateway JWKS parity against source, committed fixture URLs from OPEN-COMMITMENTS reachable, PM2 RSS memory leak detection with proper PM2-presence detection, git status across 20 repos with expected-branch check, build artifact freshness, stale artifact hunt, canonical number consistency including paper count, downstream licensee sentinel, large binary accidental-commit hunt. Self-check found 17 gaps in the initial v2 which v2.1 closes. Read-only throughout; explicit do-not-install / do-not-restart / do-not-commit-outside-aeoess_web constraints. Paste-ready for CC in one message."
+  description: "Rewrote the CMD-SET-2 pre-publish audit from v1's 12 steps (SDK + MCP focused) to 42 steps across three tiers covering the full shipped codebase surface. Tier A Code Integrity runs test suites, typecheck, lint, build artifacts across SDK, MCP, Python SDK, Remote MCP, Gateway, Agent Governance Toolkit (405 tests), autogen-governance-adapter, vocab validator, intent-network-api, hermes-aps-delegation, hermes-decision-receipts, a2a-compliance-harness, solana-agent-identity, mingle-mcp, plus the SDK examples/ adapter apps and aeoess_web operational scripts. Tier B Supply Chain runs npm audit and pip-audit across every repo, secret scan with fixture/test exclusions, .npmignore and MANIFEST.in hygiene, LICENSE and NOTICE presence, CI workflow YAML validity and floating-action-ref detection, Dockerfile and Railway config pinning, Node engines field presence, package-lock presence. Tier C Runtime checks cross-repo version alignment across SDK/MCP/Python/Remote-MCP, npm and PyPI registry drift, live endpoint health, Gateway JWKS parity against source, committed fixture URLs reachable, PM2 RSS memory leak detection with proper PM2-presence detection, git status across 20 repos with expected-branch check, build artifact freshness, stale artifact hunt, canonical number consistency including paper count, downstream licensee sentinel, large binary accidental-commit hunt. Self-check found 17 gaps in the initial v2 which v2.1 closes. Read-only throughout; explicit do-not-install / do-not-restart / do-not-commit-outside-aeoess_web constraints. Paste-ready for CC in one message."
   status: done
   workstream: ops
   day_start: 67
@@ -2590,8 +2590,6 @@
   links:
     - url: "https://github.com/a2aproject/A2A/issues/1672#issuecomment-4310448182"
       label: "A2A #1672 thread"
-    - url: "https://github.com/aeoess/aeoess_web/blob/main/specs/OPEN-COMMITMENTS.md"
-      label: "Rotation-attestation fixtures commitment"
 
 - id: d67-agt-1354-interop-proposal
   title: "Microsoft AGT #1354 interop proposal posted to Imran Siddique"
@@ -2608,7 +2606,7 @@
 
 - id: d68-rotation-attestation-fixtures-v1
   title: "Rotation-attestation fixtures v1 live + canonicalization loop closed with AgentGraph"
-  description: "Five canonical DID-document rotation-attestation fixtures plus JSON Schema plus test-vectors manifest published at aeoess.com/fixtures/rotation-attestation/. Fixtures cover happy-path, cross-signed, migration-attested, happy-path-compound (cross-signed + migration-attested in one entry, realistic production case), and negative-no-attestation (rotationLog entry with empty rotationSignature, must trigger INVALID_CLAIM_SCOPE on a conformant verifier). Every signature and hash input is RFC 8785 JCS-canonicalized; attestor is a dedicated fixture-signing key separate from the gateway with pubkey at keys/attestor-v1.pub.json and seed documented so third parties reproduce the set byte-identical from a fresh clone. v1 narrows migration_type to key_class_upgrade only; v2 extends to did_method_migration. Closes OPEN-COMMITMENTS #11 on the same day as the commitment (Apr 23 PT commitment, Apr 24 PT delivery). AgentGraph landed test_aps_rotation_attestation_interop.py in main at commit 8baaad4 within hours of publication, live-fetching fixtures at test-collection time rather than pinning a repo-local snapshot, dual-locking each fixture against the published test-vectors.json canonical SHA-256 AND what their canonicalize_jcs_strict produces from the live body. All five fixtures reproduce byte-identical. Canonicalization loop closed: APS bilateral delegation, APS continuity rotation, and AgentGraph CTE vectors now pin the same canonicalization through JCS bytes rather than shared code — which is the actual interop test. Pattern will mirror into v0.2 capability-token fixtures once those publish."
+  description: "Five canonical DID-document rotation-attestation fixtures plus JSON Schema plus test-vectors manifest published at aeoess.com/fixtures/rotation-attestation/. Fixtures cover happy-path, cross-signed, migration-attested, happy-path-compound (cross-signed + migration-attested in one entry, realistic production case), and negative-no-attestation (rotationLog entry with empty rotationSignature, must trigger INVALID_CLAIM_SCOPE on a conformant verifier). Every signature and hash input is RFC 8785 JCS-canonicalized; attestor is a dedicated fixture-signing key separate from the gateway with pubkey at keys/attestor-v1.pub.json and seed documented so third parties reproduce the set byte-identical from a fresh clone. v1 narrows migration_type to key_class_upgrade only; v2 extends to did_method_migration. Closes the rotation-attestation fixtures commitment on the same day (Apr 23 PT commitment, Apr 24 PT delivery). AgentGraph landed test_aps_rotation_attestation_interop.py in main at commit 8baaad4 within hours of publication, live-fetching fixtures at test-collection time rather than pinning a repo-local snapshot, dual-locking each fixture against the published test-vectors.json canonical SHA-256 AND what their canonicalize_jcs_strict produces from the live body. All five fixtures reproduce byte-identical. Canonicalization loop closed: APS bilateral delegation, APS continuity rotation, and AgentGraph CTE vectors now pin the same canonicalization through JCS bytes rather than shared code — which is the actual interop test. Pattern will mirror into v0.2 capability-token fixtures once those publish."
   status: done
   workstream: protocol
   day_start: 68
