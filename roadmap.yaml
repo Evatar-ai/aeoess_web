@@ -1,7 +1,59 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-04-30 (Day 74). Wave 1 accountability MVP shipped on SDK v2.5.0-alpha (five signed receipt primitives: action, authority-boundary, custody, contestability, bundle; 57 new tests; deterministic byte-match fixtures); MCP v3.1.1, Python v2.3.0, ClawHub skill v5.8.0 all bumped and published; vocab PR #66 (Edison Munoz Duran's Agent-DID crosswalk) merged as second co-drafted-with-aeoess crosswalk; VeritasActa cross-layer integrity verification 10/10; A2A composition contract co-drafting in flight on shared spec branch with Edison; A2A #1786 acknowledgment to arian-gogani for Nobulex byte-match verifier scripts.
+# Last updated: 2026-05-01 (Day 75). Vocab PR #72 opened (completion_ratio canonical signal type with three production issuers AgentID/APS/RNWY; new completion_ratio_method constraint); vocab issue #73 opened (self_enforced as fifth refusal_authority value for Nobulex actor-enforcer collapse); vocabulary validator hardened with nested descriptor_dimensions walk under signal_types and #57 legacy whitelist preserving three pre-resolution descriptor uses; drift prevention infrastructure installed across eight public repos (pre-commit hook, CI scan workflow, standardized .gitignore block, propagate.mjs final scan).
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 75 — 2026-05-01 ═══
+
+- id: d75-vocab-pr-72-completion-ratio
+  title: "Vocab PR #72: completion_ratio canonical signal type proposed"
+  description: "Per #64 thread three-issuer convergence, completion_ratio proposed as new canonical signal type with descriptor enforcement_class advisory, validity_temporal windowed, refusal_authority consumer_policy, invariant_survival post_action, replay_class fingerprint_only, governed_action_class delegate. Three production issuers cited: AgentID rolling 180d, APS configurable defaulting to 90d, RNWY derived 24h via peer_review. New constraint completion_ratio_method (signal_extension type) formalizes the strict-vs-quality-weighted choice with values [strict, quality_weighted] and default strict. Tagged Harold Frimpong (AgentID) and Douglas Borthwick for review."
+  status: open
+  workstream: protocol
+  day_start: 75
+  day_end: 75
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/72"
+      label: "PR #72"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/64"
+      label: "Issue #64 thread"
+
+- id: d75-vocab-73-self-enforced
+  title: "Vocab issue #73: self_enforced proposed as fifth refusal_authority value"
+  description: "Surfaced while auditing nobulex.yaml refusal_authority self_enforced usage. Distinct from #57's confusion (which was about location vs strength). Nobulex collapses actor and enforcer architecturally via Cedar-inspired covenant DSL where evaluator_did equals agentDid; refusal happens because the agent runtime cannot perform the refused action by construction. The four canonical values (issuer, verifier, consumer_policy, shared) cannot capture this pattern. Proposes adding self_enforced as canonical fifth value. Tagged arian-gogani for confirmation, Douglas Borthwick + QueBallSharken + MoltyCel for naming alternatives."
+  status: open
+  workstream: protocol
+  day_start: 75
+  day_end: 75
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/73"
+      label: "Issue #73"
+
+- id: d75-validator-hardening
+  title: "Vocab validator hardened: nested descriptor walk + #57 legacy whitelist"
+  description: "Two improvements to scripts/validate-crosswalks.js. Improvement 1: walks descriptor_dimensions blocks nested under signal_types.<key> entries, catching stale dimension values inside per-signal-type descriptor overrides that the previous validator skipped. Improvement 2: legacy whitelist file at scripts/legacy-descriptor-overrides.yaml preserves three pre-#57-resolution descriptor uses (dcp-ai active today, jep and fidelity-spec latent until those maintainers reformat) without warning maintainers, with resolution_issue annotation. Validator state post-hardening: 5 errors, 11 warnings across 26 crosswalks. Regression-tested with nested-descriptor fixture using deprecated value (errors as expected, baseline restored)."
+  status: done
+  workstream: protocol
+  day_start: 75
+  day_end: 75
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/blob/main/scripts/validate-crosswalks.js"
+      label: "validator"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/blob/main/scripts/legacy-descriptor-overrides.yaml"
+      label: "legacy overrides"
+
+- id: d75-drift-prevention-infrastructure
+  title: "Drift prevention infrastructure: four layers across eight public repos"
+  description: "Four-layer structural backstop against private-context drift into public repos. Layer 1: pre-commit hook scanning staged content against hard-block and soft-warn pattern lists. Layer 2: GitHub Actions workflow running the same pattern check on every push. Layer 3: standardized .gitignore block excluding categories that should never enter version control. Layer 4: final scan inside scripts/propagate.mjs runs the same check before any cross-surface update touches the file system. Installed across agent-passport-system, agent-passport-mcp, agent-passport-python, aeoess_web, agent-governance-vocabulary, aps-conformance-suite, agent-ecosystem-map, intent-network-api. Seventeen commits."
+  status: done
+  workstream: infra
+  day_start: 75
+  day_end: 75
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/.github/workflows/check-drift.yml"
+      label: "CI workflow (SDK)"
+    - url: "https://github.com/aeoess/aeoess_web/blob/main/scripts/propagate.mjs"
+      label: "propagate.mjs"
 
 # ═══ DAY 74 — 2026-04-30 ═══
 
