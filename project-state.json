@@ -1,5 +1,5 @@
 {
-  "$comment": "Single source of truth for site-wide propagation. Hand-edited; consumed by scripts/propagate.mjs. Bumping any value here propagates to every target file the propagator knows about. See UPDATE-PROPAGATION-SPEC.md for the flow.",
+  "$comment": "Single source of truth for site-wide propagation. Hand-edited; consumed by scripts/propagate.mjs. Bumping any value here propagates to every target file the propagator knows about.",
   "updated": "2026-05-01",
   "versions": {
     "sdk": "2.5.1-alpha",

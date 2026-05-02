@@ -11,7 +11,7 @@
 #   ./scripts/self-check-propagation.sh --strict   # exit non-zero on any fail
 #   ./scripts/self-check-propagation.sh --json     # machine-readable output
 #
-# Spec: UPDATE-PROPAGATION-SPEC.md §A-G (self-check audit)
+# Spec: see internal propagation spec (self-check audit).
 # Run as part of pre-publish discipline.
 
 set -u
@@ -410,7 +410,7 @@ else
     for f in "${FINDINGS[@]}"; do
       printf "    - %s\n" "$f"
     done
-    printf "\n  See UPDATE-PROPAGATION-SPEC.md §Self-Check Audit for remediation.\n"
+    printf "\n  See internal propagation spec (Self-Check Audit) for remediation.\n"
   else
     printf "\n  All surfaces pass. Propagation state is clean.\n"
   fi

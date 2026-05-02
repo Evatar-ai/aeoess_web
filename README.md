@@ -141,7 +141,6 @@ Structured specs live in `specs/` and are referenced as Claude Project files:
 |------|-------------|
 | [`FILE-TREE.md`](specs/FILE-TREE.md) | Every repo, directory, file — annotated with purpose. The orientation document. |
 | [`ARCHITECTURE.md`](specs/ARCHITECTURE.md) | Layer → file → test → MCP tool mapping. Integration points. Type system. |
-| [`UPDATE-PROPAGATION-SPEC.md`](UPDATE-PROPAGATION-SPEC.md) | 8 variables tracked across 3 repos. Variable → file → line mapping for stale reference prevention. |
 
 ---
 
@@ -167,8 +166,6 @@ When SDK versions, test counts, or tool counts change:
 ```bash
 node scripts/propagate.mjs --apply
 ```
-
-Or reference `UPDATE-PROPAGATION-SPEC.md` for the manual checklist.
 
 ---
 
