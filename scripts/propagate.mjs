@@ -57,6 +57,17 @@ const REPOS = {
   ecomap: resolve(`${HOME}/agent-ecosystem-map`),                       // v3 audit: ecosystem map
 };
 
+// ── Word-form lookup ──
+// Used by PAPER_COUNT patterns (rewrite + verify) so prose like "Eight
+// papers" stays in word-form when the canonical count bumps. Single-digit
+// only — multi-digit prose ("ten papers", "eleven papers") is unlikely
+// in this corpus and would expand the false-positive surface for thin
+// gain.
+const NUM_TO_WORD = { 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten' };
+const WORD_TO_NUM = Object.fromEntries(
+  Object.entries(NUM_TO_WORD).map(([k, v]) => [v.toLowerCase(), Number(k)])
+);
+
 // ── Source-of-truth: project-state.json ──
 // Single hand-edited file. The propagator reads canonical values from
 // here and rewrites every target file to match. No npm test exec, no
@@ -363,6 +374,30 @@ function getVariablePatterns(varName, oldValue, newValue) {
         { regex: new RegExp(`${o} attack`, 'g'), replace: `${n} attack` },
       ];
 
+    case 'PAPER_COUNT': {
+      // Digit form: single-digit only (6–9). Multi-digit collides with
+      // "10 paper scenarios", "200 papers worth of tests" and similar
+      // false positives. Plural-only avoids "10 paper scenarios" too.
+      const patterns = [
+        { regex: new RegExp(`(?<![\\d-])${o}\\s+papers\\b`, 'g'),
+          replace: `${n} papers` },
+      ];
+      // Word form: "Seven papers" / "Eight papers" — preserve case.
+      const wordOld = NUM_TO_WORD[Number(oldValue)];
+      const wordNew = NUM_TO_WORD[Number(newValue)];
+      if (wordOld && wordNew) {
+        patterns.push({
+          regex: new RegExp(`\\b${wordOld}\\s+papers\\b`, 'g'),
+          replace: `${wordNew} papers`,
+        });
+        patterns.push({
+          regex: new RegExp(`\\b${wordOld.toLowerCase()}\\s+papers\\b`, 'g'),
+          replace: `${wordNew.toLowerCase()} papers`,
+        });
+      }
+      return patterns;
+    }
+
     default:
       return [];
   }
@@ -454,6 +489,15 @@ function getVerifyPatterns(varName) {
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+protocol\s+modules\b/gi },
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+total\s+modules\b/gi },
       ];
+    case 'PAPER_COUNT':
+      // Digit form: single-digit 6–9 only. Multi-digit collides with
+      // "10 paper scenarios", "200 papers worth of tests".
+      // Word form: Six/Seven/Eight/Nine, both cases.
+      // Plural-only on both — singular collides with "10 paper scenarios".
+      return [
+        { regex: /(?<![\d-])([6-9])\s+papers\b/g },
+        { regex: /\b(Six|Seven|Eight|Nine|six|seven|eight|nine)\s+papers\b/g },
+      ];
     default:
       return [];
   }
@@ -490,7 +534,7 @@ function formatNumber(n, useCommas) {
 
 function verifyConsistency(files, currentValues) {
   const drifts = [];
-  const checkVars = ['TEST_COUNT', 'MCP_TOOL_COUNT', 'LAYER_COUNT'];
+  const checkVars = ['TEST_COUNT', 'MCP_TOOL_COUNT', 'LAYER_COUNT', 'PAPER_COUNT'];
 
   for (const { path: filePath, repo } of files) {
     if (!existsSync(filePath)) continue;
@@ -509,9 +553,22 @@ function verifyConsistency(files, currentValues) {
           let match;
           while ((match = regexCopy.exec(slice)) !== null) {
             const foundStr = match[1];
-            // Strip commas for numeric comparison.
-            const foundNum = Number(foundStr.replace(/,/g, ''));
+            // Resolve to numeric: strip commas, then try word-form lookup.
+            const stripped = foundStr.replace(/,/g, '');
+            const wordNum = WORD_TO_NUM[stripped.toLowerCase()];
+            const foundNum = wordNum !== undefined ? wordNum : Number(stripped);
             if (foundNum === Number(currentVal)) continue;
+            // For word-form drift, pre-compute a word-preserving replacement
+            // so applyVerifyFixes doesn't substitute "Seven" with "8".
+            let replacement;
+            if (wordNum !== undefined) {
+              const newWord = NUM_TO_WORD[Number(currentVal)];
+              if (newWord) {
+                const isCap = /^[A-Z]/.test(stripped);
+                const replWord = isCap ? newWord : newWord.toLowerCase();
+                replacement = match[0].replace(stripped, replWord);
+              }
+            }
             const absIdx = start + match.index;
             const lineNum = content.slice(0, absIdx).split('\n').length;
             drifts.push({
@@ -522,6 +579,7 @@ function verifyConsistency(files, currentValues) {
               found: foundStr,
               expected: currentVal,
               matched: match[0],
+              ...(replacement !== undefined ? { replacement } : {}),
             });
           }
         }
@@ -545,9 +603,17 @@ function applyVerifyFixes(drifts) {
   for (const [filePath, fileDrifts] of byFile) {
     const patterns = [];
     for (const d of fileDrifts) {
-      const hasComma = d.found.includes(',');
-      const newNumStr = formatNumber(d.expected, hasComma);
-      const newMatch = d.matched.replace(d.found, newNumStr);
+      // Word-form drifts (PAPER_COUNT prose) carry a pre-computed
+      // replacement so "Seven papers" becomes "Eight papers" instead of
+      // "8 papers". Digit drifts fall through to the comma-aware path.
+      let newMatch;
+      if (d.replacement !== undefined) {
+        newMatch = d.replacement;
+      } else {
+        const hasComma = d.found.includes(',');
+        const newNumStr = formatNumber(d.expected, hasComma);
+        newMatch = d.matched.replace(d.found, newNumStr);
+      }
       const escaped = d.matched.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       patterns.push({ regex: new RegExp(escaped, 'g'), replace: newMatch });
     }
@@ -842,11 +908,22 @@ if (drifts.length === 0) {
   // missing on-disk drift. The verify pass catches it; --auto-fix-verify
   // closes it on the safe-pattern subset.
   if (applyMode && autoFixVerifyMode) {
-    const safe = drifts.filter(d => d.variable === 'LAYER_COUNT');
+    // PAPER_COUNT joins LAYER_COUNT in the safe set: pattern is bounded
+    // (single-digit 6–9 + Six/Seven/Eight/Nine word-form, plural-only).
+    // TEST_COUNT and MCP_TOOL_COUNT remain report-only — see the §3.4
+    // structural-exclusion proposal in UPDATE-PROPAGATION-SPEC.md for the
+    // path that would let them join.
+    const SAFE_VARS = new Set(['LAYER_COUNT', 'PAPER_COUNT']);
+    const safe = drifts.filter(d => SAFE_VARS.has(d.variable));
     const skipped = drifts.length - safe.length;
     if (safe.length > 0) {
       const fixed = applyVerifyFixes(safe);
-      console.log(`✅ Auto-fixed ${fixed} LAYER_COUNT drift(s) (--auto-fix-verify).`);
+      const counts = {};
+      for (const d of safe) counts[d.variable] = (counts[d.variable] || 0) + 1;
+      const breakdown = Object.entries(counts)
+        .map(([k, v]) => `${v} ${k}`)
+        .join(' + ');
+      console.log(`✅ Auto-fixed ${fixed} drift(s) (${breakdown}) via --auto-fix-verify.`);
     }
     if (skipped > 0) {
       console.log(
@@ -855,6 +932,6 @@ if (drifts.length === 0) {
       );
     }
   } else if (drifts.length > 0) {
-    console.log('Auto-fix is opt-in: re-run with --apply --auto-fix-verify to close LAYER_COUNT drift.');
+    console.log('Auto-fix is opt-in: re-run with --apply --auto-fix-verify to close LAYER_COUNT/PAPER_COUNT drift.');
   }
 }
