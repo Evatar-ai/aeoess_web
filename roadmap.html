@@ -131,7 +131,7 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
   <!-- BUILD:ROADMAP_START -->
 <noscript class="rm-noscript-hint"><div class="rm-noscript-msg">JavaScript is disabled — showing the full roadmap as a list. With JavaScript on, this page renders an interactive timeline above.</div></noscript>
 <div class="rm-static" id="rm-static" aria-label="Roadmap (static fallback)">
-<p class="rm-static-intro">235 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
+<p class="rm-static-intro">239 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
 <section class="rm-group rm-group-active">
 <h2 class="rm-group-title">Active <span class="rm-group-count">(14)</span></h2>
 <article class="rm-item rm-item-active" id="a2a-compliance-harness-repo">
@@ -495,7 +495,31 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
 </article>
 </section>
 <section class="rm-group rm-group-shipped">
-<h2 class="rm-group-title">Shipped <span class="rm-group-count">(174)</span></h2>
+<h2 class="rm-group-title">Shipped <span class="rm-group-count">(176)</span></h2>
+<article class="rm-item rm-item-done" id="d75-drift-prevention-infrastructure">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Drift prevention infrastructure: four layers across eight public repos</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 75</span> 
+<span class="rm-item-ws">infra</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Four-layer structural backstop against private-context drift into public repos. Layer 1: pre-commit hook scanning staged content against hard-block and soft-warn pattern lists. Layer 2: GitHub Actions workflow running the same pattern check on every push. Layer 3: standardized .gitignore block excluding categories that should never enter version control. Layer 4: final scan inside scripts/propagate.mjs runs the same check before any cross-surface update touches the file system. Installed across agent-passport-system, agent-passport-mcp, agent-passport-python, aeoess_web, agent-governance-vocabulary, aps-conformance-suite, agent-ecosystem-map, intent-network-api. Seventeen commits.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-passport-system/blob/main/.github/workflows/check-drift.yml">CI workflow (SDK)</a></li><li><a href="https://github.com/aeoess/aeoess_web/blob/main/scripts/propagate.mjs">propagate.mjs</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d75-validator-hardening">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab validator hardened: nested descriptor walk + #57 legacy whitelist</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 75</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Two improvements to scripts/validate-crosswalks.js. Improvement 1: walks descriptor_dimensions blocks nested under signal_types.&lt;key&gt; entries, catching stale dimension values inside per-signal-type descriptor overrides that the previous validator skipped. Improvement 2: legacy whitelist file at scripts/legacy-descriptor-overrides.yaml preserves three pre-#57-resolution descriptor uses (dcp-ai active today, jep and fidelity-spec latent until those maintainers reformat) without warning maintainers, with resolution_issue annotation. Validator state post-hardening: 5 errors, 11 warnings across 26 crosswalks. Regression-tested with nested-descriptor fixture using deprecated value (errors as expected, baseline restored).</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/blob/main/scripts/validate-crosswalks.js">validator</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/blob/main/scripts/legacy-descriptor-overrides.yaml">legacy overrides</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d74-veritasacta-cross-layer-integrity">
 <header class="rm-item-h">
 <h3 class="rm-item-title">VeritasActa verify PR #7: cross-layer integrity 10/10</h3>
@@ -2934,7 +2958,31 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
 </article>
 </section>
 <section class="rm-group rm-group-other-no-status-declared-">
-<h2 class="rm-group-title">Other (no status declared) <span class="rm-group-count">(6)</span></h2>
+<h2 class="rm-group-title">Other (no status declared) <span class="rm-group-count">(8)</span></h2>
+<article class="rm-item rm-item-open" id="d75-vocab-73-self-enforced">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab issue #73: self_enforced proposed as fifth refusal_authority value</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 75</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">open</span>
+</p>
+</header>
+<p class="rm-item-desc">Surfaced while auditing nobulex.yaml refusal_authority self_enforced usage. Distinct from #57's confusion (which was about location vs strength). Nobulex collapses actor and enforcer architecturally via Cedar-inspired covenant DSL where evaluator_did equals agentDid; refusal happens because the agent runtime cannot perform the refused action by construction. The four canonical values (issuer, verifier, consumer_policy, shared) cannot capture this pattern. Proposes adding self_enforced as canonical fifth value. Tagged arian-gogani for confirmation, Douglas Borthwick + QueBallSharken + MoltyCel for naming alternatives.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/73">Issue #73</a></li></ul>
+</article>
+<article class="rm-item rm-item-open" id="d75-vocab-pr-72-completion-ratio">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab PR #72: completion_ratio canonical signal type proposed</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 75</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">open</span>
+</p>
+</header>
+<p class="rm-item-desc">Per #64 thread three-issuer convergence, completion_ratio proposed as new canonical signal type with descriptor enforcement_class advisory, validity_temporal windowed, refusal_authority consumer_policy, invariant_survival post_action, replay_class fingerprint_only, governed_action_class delegate. Three production issuers cited: AgentID rolling 180d, APS configurable defaulting to 90d, RNWY derived 24h via peer_review. New constraint completion_ratio_method (signal_extension type) formalizes the strict-vs-quality-weighted choice with values [strict, quality_weighted] and default strict. Tagged Harold Frimpong (AgentID) and Douglas Borthwick for review.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/72">PR #72</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/64">Issue #64 thread</a></li></ul>
+</article>
 <article class="rm-item rm-item-unspecified" id="d72-atvp-pr-8-request-changes">
 <header class="rm-item-h">
 <h3 class="rm-item-title">ATVP PR #8 — REQUEST_CHANGES review posted</h3>
