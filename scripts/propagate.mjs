@@ -506,22 +506,73 @@ function getVerifyPatterns(varName) {
 // Returns an array of {start, end} absolute offsets into `content` that
 // are safe to scan. If a file uses PROPAGATION-ZONE-START/END markers
 // (blog.html etc.), only zone interiors are scannable. Otherwise the
-// whole file is scannable. Mirrors applyReplacementsToContent zone logic.
+// whole file is scannable, MINUS dated update-ribbon entries
+// (`<div class="up-i">…</div>`) — those are date-stamped historical
+// snapshots on index.html and are by definition immutable.
+//
+// Caller: verifyConsistency only. Rewrite-pass replacements use
+// applyReplacementsToContent's own zone logic, so a too-aggressive
+// exclusion here can only narrow the verify-pass report, never cause
+// stale rewrites.
 function getScannableRanges(content) {
   const ZONE_START = '<!-- PROPAGATION-ZONE-START -->';
   const ZONE_END = '<!-- PROPAGATION-ZONE-END -->';
-  if (!content.includes(ZONE_START)) return [{ start: 0, end: content.length }];
-  const ranges = [];
-  let cursor = 0;
-  while (true) {
-    const zs = content.indexOf(ZONE_START, cursor);
-    if (zs === -1) break;
-    const ze = content.indexOf(ZONE_END, zs);
-    if (ze === -1) break;
-    ranges.push({ start: zs + ZONE_START.length, end: ze });
-    cursor = ze + ZONE_END.length;
+
+  // Step A: base ranges — full file or zone interiors.
+  const base = [];
+  if (!content.includes(ZONE_START)) {
+    base.push({ start: 0, end: content.length });
+  } else {
+    let cursor = 0;
+    while (true) {
+      const zs = content.indexOf(ZONE_START, cursor);
+      if (zs === -1) break;
+      const ze = content.indexOf(ZONE_END, zs);
+      if (ze === -1) break;
+      base.push({ start: zs + ZONE_START.length, end: ze });
+      cursor = ze + ZONE_END.length;
+    }
   }
-  return ranges;
+
+  // Step B: collect exclusion holes for dated `<div class="up-i">…</div>`
+  // ribbon entries. Single-line, never nested inside themselves; safe to
+  // capture with a non-greedy regex.
+  const holes = [];
+  const upi = /<div class="up-i">[\s\S]*?<\/div>/g;
+  let m;
+  while ((m = upi.exec(content)) !== null) {
+    holes.push({ start: m.index, end: m.index + m[0].length });
+  }
+  if (holes.length === 0) return base;
+
+  // Step C: subtract holes from each base range.
+  return subtractHoles(base, holes);
+}
+
+// Subtract a sorted list of `holes` from each base range, returning the
+// surviving sub-ranges. Handles partial overlaps and fully-enclosed holes.
+function subtractHoles(base, holes) {
+  const out = [];
+  for (const range of base) {
+    let segments = [{ start: range.start, end: range.end }];
+    for (const hole of holes) {
+      const next = [];
+      for (const s of segments) {
+        if (hole.end <= s.start || hole.start >= s.end) {
+          // No overlap.
+          next.push(s);
+          continue;
+        }
+        if (hole.start > s.start) next.push({ start: s.start, end: hole.start });
+        if (hole.end < s.end)     next.push({ start: hole.end,   end: s.end });
+      }
+      segments = next;
+    }
+    for (const s of segments) {
+      if (s.end > s.start) out.push(s);
+    }
+  }
+  return out;
 }
 
 // Format a number with thousands-separator commas if `useCommas` is true.
