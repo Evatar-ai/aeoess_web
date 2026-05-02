@@ -75,6 +75,106 @@ const WORD_TO_NUM = Object.fromEntries(
 // release-time edit.
 const STATE_PATH = `${REPOS.web}/project-state.json`;
 
+// ── Drift prevention (Layer 4) ──
+// Final pre-publish scan that mirrors the local pre-commit hook and CI
+// workflow. Hard-coded here to avoid an extra cross-repo dependency.
+// Keep this list in sync with:
+//   ~/aeoess-private/scripts/check-drift.sh (HARD_BLOCK_PATTERNS)
+//   .github/workflows/check-drift.yml (PATTERNS array)
+const FORBIDDEN_PATTERNS = [
+  'aeoess-private',
+  '/Users/tima',
+  'MODEL-CITIZEN-CANON',
+  'MODEL_CITIZEN_CANON',
+  'THE-SYNTHESIS',
+  'THE_SYNTHESIS',
+  'ERIK-NEWTON',
+  'ERIK_NEWTON',
+  'OPEN-COMMITMENTS',
+  'OPEN_COMMITMENTS',
+  'CC-PROMPT-TEMPLATES',
+  'CC_PROMPT_TEMPLATES',
+  'DAILY-UPDATE-RHYTHM',
+  'DAILY_UPDATE_RHYTHM',
+  'MUTUAL-MODE',
+  'MUTUAL_MODE',
+  'canary watch',
+  'UPDATE-PROPAGATION-SPEC',
+  'CONSILIUM-FORENSIC',
+  'CONSILIUM-BRIEFING',
+  'ROME-COMPLETE',
+];
+
+// Files exempt from the drift scan (each one legitimately enumerates the
+// patterns to check for them).
+const DRIFT_CHECK_EXEMPT = new Set([
+  '.gitignore',
+  '.github/workflows/check-drift.yml',
+  'scripts/check-drift.sh',
+  'scripts/propagate.mjs',
+]);
+
+function runDriftCheck() {
+  let tracked;
+  try {
+    tracked = execSync('git ls-files', {
+      cwd: REPOS.web,
+      encoding: 'utf8',
+    }).trim().split('\n').filter(Boolean);
+  } catch (e) {
+    console.error(`⚠ runDriftCheck: could not list tracked files (${(e.message || '').slice(0, 80)}). Skipping.`);
+    return;
+  }
+
+  const violations = []; // { file, kind: 'filename'|'content', pattern }
+  for (const file of tracked) {
+    if (DRIFT_CHECK_EXEMPT.has(file)) continue;
+
+    // Filename check
+    for (const pat of FORBIDDEN_PATTERNS) {
+      if (file.includes(pat)) {
+        violations.push({ file, kind: 'filename', pattern: pat });
+        break;
+      }
+    }
+
+    // Content check (skip on read failure — binary or missing)
+    let content;
+    try {
+      content = readFileSync(`${REPOS.web}/${file}`, 'utf8');
+    } catch { continue }
+    for (const pat of FORBIDDEN_PATTERNS) {
+      if (content.includes(pat)) {
+        violations.push({ file, kind: 'content', pattern: pat });
+      }
+    }
+  }
+
+  if (violations.length === 0) {
+    console.log('✓ Drift check passed: no forbidden patterns in tracked files.');
+    return;
+  }
+
+  console.error('');
+  console.error(`✗ Drift check failed: ${violations.length} violation(s) across tracked files.`);
+  // Group by file for readable output
+  const byFile = new Map();
+  for (const v of violations) {
+    if (!byFile.has(v.file)) byFile.set(v.file, []);
+    byFile.get(v.file).push(v);
+  }
+  for (const [file, vs] of byFile) {
+    console.error(`  ${file}:`);
+    for (const v of vs) {
+      console.error(`    ${v.kind === 'filename' ? '⚠ filename' : '·  content'} matches "${v.pattern}"`);
+    }
+  }
+  console.error('');
+  console.error('  See ~/aeoess-private/scripts/check-drift.sh for the canonical pattern list.');
+  console.error('  Aborting before final success.');
+  process.exit(1);
+}
+
 function loadProjectState() {
   if (!existsSync(STATE_PATH)) {
     throw new Error(`project-state.json not found at ${STATE_PATH}`);
@@ -985,3 +1085,10 @@ if (drifts.length === 0) {
     console.log('Auto-fix is opt-in: re-run with --apply --auto-fix-verify to close LAYER_COUNT/PAPER_COUNT drift.');
   }
 }
+
+// ── Layer 4: final drift-prevention scan ──
+// Runs unconditionally at the end of every invocation. The scan is
+// read-only so it costs nothing in dry-run / read-only modes; it is
+// the last line of defense before publish.
+console.log('');
+runDriftCheck();
