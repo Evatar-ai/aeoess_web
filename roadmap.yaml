@@ -360,7 +360,7 @@
 
 - id: d69-vocab-pr-52-entity-continuity-pdr-validator
   title: "Vocab PR #52 opened: entity_continuity PDR validator + reference vectors (co-authored with nanookclaw)"
-  description: "Validator built directly from nanookclaw's slope-computation spec posted earlier the same evening on issue #36. 309 lines of pure-Node validator (scripts/validators/entity-continuity-pdr.js) with no dependencies, a 32-test suite all passing (scripts/validators/test-entity-continuity-pdr.js, 300 lines), four reference vectors at fixtures/validator-vectors/ covering stable, drifting, improving, and out-of-range agent behavior, and a long-form docs file at docs/descriptor-dimensions/entity-continuity-pdr.md (184 lines). Slope formula from nanookclaw's spec: L2 distance over four normalized fingerprint dimensions, OLS over a window of twelve sessions, max divergence of sqrt(4)=2.0, max possible slope of 2.0/(N-2), score clamped to [0.0, 1.0]. Verified scores: stable=1.0, drifting=0.9212, improving=1.0 (clamped), invalid=exit-1. nanookclaw posted the spec at 21:34Z; the validator opened at 22:52Z. Co-authored-by: Nanook on commit 069ef9a. Effectively closes OPEN-COMMITMENTS Nanook §8 promise. Complementary to nutstrut's structural continuity-analyzer (vocab PR #42). Awaiting nanookclaw review."
+  description: "Validator built directly from nanookclaw's slope-computation spec posted earlier the same evening on issue #36. 309 lines of pure-Node validator (scripts/validators/entity-continuity-pdr.js) with no dependencies, a 32-test suite all passing (scripts/validators/test-entity-continuity-pdr.js, 300 lines), four reference vectors at fixtures/validator-vectors/ covering stable, drifting, improving, and out-of-range agent behavior, and a long-form docs file at docs/descriptor-dimensions/entity-continuity-pdr.md (184 lines). Slope formula from nanookclaw's spec: L2 distance over four normalized fingerprint dimensions, OLS over a window of twelve sessions, max divergence of sqrt(4)=2.0, max possible slope of 2.0/(N-2), score clamped to [0.0, 1.0]. Verified scores: stable=1.0, drifting=0.9212, improving=1.0 (clamped), invalid=exit-1. nanookclaw posted the spec at 21:34Z; the validator opened at 22:52Z. Co-authored-by: Nanook on commit 069ef9a. Closes the Nanook §8 commitment. Complementary to nutstrut's structural continuity-analyzer (vocab PR #42). Awaiting nanookclaw review."
   status: in_progress
   workstream: protocol
   day_start: 69
@@ -373,7 +373,7 @@
 
 - id: d69-harness-pr-1-moltrust-resolver-adapter
   title: "a2a-compliance-harness PR #1: MolTrust optional resolver adapter (almost-merge, DRAFT)"
-  description: "MoltyCel published moltrust v0.2.0 to PyPI today, then opened a PR adding moltrust as an optional resolver adapter to the harness with a clean fallback path when the package is not installed. Thirteen tests pass on Python 3.12. Two minor asks from review (a docstring sharpening and a pytest.skip for the no-moltrust path), both acknowledged. Co-maintainer access granted on aeoess/a2a-compliance-harness with maintain permission tier (effective write per org base-permission cap). Once MoltyCel marks the PR ready for review on Monday, the merge is mechanical. MolTrust now positioned as a drop-in second-issuer reference under the harness's resolver interface; the harness was originally shipped as APS-only on Apr 21 (a2a-compliance-harness v0.1, OPEN-COMMITMENTS #2). Three weeks of cycle: schema lock (Apr 17 a2aproject/A2A#1742), v0.1 single-issuer ship (Apr 21), second-issuer drop-in (Apr 25)."
+  description: "MoltyCel published moltrust v0.2.0 to PyPI today, then opened a PR adding moltrust as an optional resolver adapter to the harness with a clean fallback path when the package is not installed. Thirteen tests pass on Python 3.12. Two minor asks from review (a docstring sharpening and a pytest.skip for the no-moltrust path), both acknowledged. Co-maintainer access granted on aeoess/a2a-compliance-harness with maintain permission tier (effective write per org base-permission cap). Once MoltyCel marks the PR ready for review on Monday, the merge is mechanical. MolTrust now positioned as a drop-in second-issuer reference under the harness's resolver interface; the harness was originally shipped as APS-only on Apr 21 (a2a-compliance-harness v0.1). Three weeks of cycle: schema lock (Apr 17 a2aproject/A2A#1742), v0.1 single-issuer ship (Apr 21), second-issuer drop-in (Apr 25)."
   status: in_progress
   workstream: ecosystem
   day_start: 69
@@ -1717,7 +1717,7 @@
 
 - id: d61-ecosystem-engagement
   title: "Day 61: 11 substantive partner replies + release announcement"
-  description: "Posted primary release announcement at aeoess/agent-passport-system#16 as canonical reference link. Four cross-references to targeted threads (aeoess#2 closing SDK-publish issue, haroldmalikfrimpong-ops/agentid-aps-interop for Harold's interop fixtures, aeoess#12 for Nanook §8 coordination, openclaw#49971 for MoltyCel wallet binding). Seven substantive replies to active partners: A2A#1742+1755 (MoltyCel coordination plan + DID resolution), VeritasActa/verify#3 (tomjwxf ecosystem tracker), microsoft/agent-governance-toolkit#787 (pshkv + tomjwxf wine-shipment three-way composition, committed to ship aps_delegation_wrapper.py PR), google/adk-python#5164 (tomjwxf co-maintain acceptance for agent-governance-stack-example repo), aeoess/agent-governance-vocabulary#12 (nutstrut failure_codes draft feedback), langchain-ai/langchain#35691 (vdineshk Observatory composition observation). OPEN-COMMITMENTS.md updated with 3 new deliverables for the Apr 21-24 window."
+  description: "Posted primary release announcement at aeoess/agent-passport-system#16 as canonical reference link. Four cross-references to targeted threads (aeoess#2 closing SDK-publish issue, haroldmalikfrimpong-ops/agentid-aps-interop for Harold's interop fixtures, aeoess#12 for Nanook §8 coordination, openclaw#49971 for MoltyCel wallet binding). Seven substantive replies to active partners: A2A#1742+1755 (MoltyCel coordination plan + DID resolution), VeritasActa/verify#3 (tomjwxf ecosystem tracker), microsoft/agent-governance-toolkit#787 (pshkv + tomjwxf wine-shipment three-way composition, committed to ship aps_delegation_wrapper.py PR), google/adk-python#5164 (tomjwxf co-maintain acceptance for agent-governance-stack-example repo), aeoess/agent-governance-vocabulary#12 (nutstrut failure_codes draft feedback), langchain-ai/langchain#35691 (vdineshk Observatory composition observation). 3 new deliverables tracked for the Apr 21-24 window."
   status: done
   workstream: comms
   day_start: 61
@@ -2141,7 +2141,7 @@
 # ═══ end of deep audit additions ═══
 
 # ═══ DEEP AUDIT PASS 2 — RECENT SHIPS MISSING FROM ROADMAP (added Day 64) ═══
-# Cross-referenced OPEN-COMMITMENTS.md + specs/cc-prompts/ + model-citizen/promises.yaml.
+# Cross-referenced internal commitment tracking.
 # These shipped Days 60-64 but weren't individually captured.
 
 - id: d62-adk-aps-integration-repo
@@ -2221,7 +2221,7 @@
     - url: "https://github.com/gonka-ai/gonka/discussions/1008#discussioncomment-16639513"
       label: "gonka#1008 reply"
 
-# ═══ ACTIVE SHORT-TERM COMMITMENTS (added from OPEN-COMMITMENTS.md Day 64) ═══
+# ═══ ACTIVE SHORT-TERM COMMITMENTS ═══
 # Each is a promise with a counterparty and a delivery window.
 
 - id: aivss-32-3-3-pr

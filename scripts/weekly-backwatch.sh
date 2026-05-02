@@ -11,7 +11,7 @@
 #     Zenodo paper view counts, npm download trends)
 
 set -e
-WEB="/Users/tima/aeoess_web"
+WEB="$HOME/aeoess_web"
 cd "$WEB"
 echo "=== Weekly backwatch — $(date +%Y-%m-%d) ==="
 echo
@@ -54,15 +54,15 @@ echo
 
 # 3. Registry version drift (npm + PyPI)
 echo "=== Registry version drift ==="
-LOCAL_SDK=$(cat /Users/tima/agent-passport-system/package.json | python3 -c "import json,sys;print(json.load(sys.stdin)['version'])")
+LOCAL_SDK=$(cat $HOME/agent-passport-system/package.json | python3 -c "import json,sys;print(json.load(sys.stdin)['version'])")
 NPM_SDK=$(curl -s https://registry.npmjs.org/agent-passport-system/latest 2>/dev/null | python3 -c "import json,sys;print(json.load(sys.stdin).get('version','?'))" 2>/dev/null || echo "?")
 echo "  SDK   local=$LOCAL_SDK  npm=$NPM_SDK  $([ "$LOCAL_SDK" = "$NPM_SDK" ] && echo ✓ || echo ⚠️)"
 
-LOCAL_MCP=$(cat /Users/tima/agent-passport-mcp/package.json | python3 -c "import json,sys;print(json.load(sys.stdin)['version'])")
+LOCAL_MCP=$(cat $HOME/agent-passport-mcp/package.json | python3 -c "import json,sys;print(json.load(sys.stdin)['version'])")
 NPM_MCP=$(curl -s https://registry.npmjs.org/agent-passport-system-mcp/latest 2>/dev/null | python3 -c "import json,sys;print(json.load(sys.stdin).get('version','?'))" 2>/dev/null || echo "?")
 echo "  MCP   local=$LOCAL_MCP  npm=$NPM_MCP  $([ "$LOCAL_MCP" = "$NPM_MCP" ] && echo ✓ || echo ⚠️)"
 
-LOCAL_PY=$(grep '^version' /Users/tima/agent-passport-python/pyproject.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+LOCAL_PY=$(grep '^version' $HOME/agent-passport-python/pyproject.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
 PYPI_PY=$(curl -s https://pypi.org/pypi/agent-passport-system/json 2>/dev/null | python3 -c "import json,sys;print(json.load(sys.stdin).get('info',{}).get('version','?'))" 2>/dev/null || echo "?")
 echo "  PyPI  local=$LOCAL_PY  pypi=$PYPI_PY  $([ "$LOCAL_PY" = "$PYPI_PY" ] && echo ✓ || echo ⚠️)"
 echo

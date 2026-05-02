@@ -16,7 +16,7 @@
 # Designed to be idempotent — safe to run multiple times.
 
 set -e
-ROOT="/Users/tima"
+ROOT="$HOME"
 WEB="$ROOT/aeoess_web"
 SDK="$ROOT/agent-passport-system"
 MCP="$ROOT/agent-passport-mcp"

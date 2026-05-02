@@ -12,8 +12,7 @@
 #   ./scripts/self-check-propagation.sh --json     # machine-readable output
 #
 # Spec: UPDATE-PROPAGATION-SPEC.md §A-G (self-check audit)
-# Daily cadence: DAILY-UPDATE-RHYTHM.md
-# Companion CC prompt: CC-PROMPT-TEMPLATES.md Prompt 6
+# Run as part of pre-publish discipline.
 
 set -u
 

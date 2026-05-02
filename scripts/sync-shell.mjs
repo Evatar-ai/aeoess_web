@@ -38,13 +38,13 @@ import { fileURLToPath } from 'node:url'
 
 const REPOS = {
   aeoess_web: {
-    root: '/Users/tima/aeoess_web',
+    root: `${process.env.HOME}/aeoess_web`,
     recursive: false,
     skip: new Set(['board.html']),
     skipDirs: new Set([]),
   },
   tymofii: {
-    root: '/Users/tima/tymofii',
+    root: `${process.env.HOME}/tymofii`,
     recursive: true,
     skip: new Set(['board.html', 'forvlad.html', 'ideas-admin.html']),
     skipDirs: new Set([

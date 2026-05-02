@@ -17,7 +17,7 @@
  *                                                 # TEST_COUNT and MCP_TOOL_COUNT remain
  *                                                 # report-only because their regex patterns
  *                                                 # match per-section counts as false positives
- *                                                 # (see UPDATE-PROPAGATION-SPEC.md).
+ *                                                 # (see internal propagation spec).
  *   node scripts/propagate.mjs --apply --force-roadmap-build
  *                                                 # rebuild roadmap.html even if roadmap.yaml
  *                                                 # hash matches the cache. Useful after
@@ -36,7 +36,7 @@
  *     project-state.json under counts.tests. The schema's `$comment`
  *     reminds the editor to use the passing count, not the registered total.
  *
- * Runs from: /Users/tima/aeoess_web
+ * Runs from: $HOME/aeoess_web
  * Requires: Node 18+. Pure stdlib — no third-party deps.
  */
 
@@ -46,7 +46,7 @@ import { createHash } from 'node:crypto';
 import { resolve, relative } from 'path';
 
 // ── Repo paths (portable — works on Air or Mini) ──
-const HOME = process.env.HOME || '/Users/tima';
+const HOME = process.env.HOME;
 const REPOS = {
   sdk: resolve(`${HOME}/agent-passport-system`),
   mcp: resolve(`${HOME}/agent-passport-mcp`),
@@ -259,7 +259,6 @@ function getTargetFiles() {
     { path: `${REPOS.web}/specs/PROJECT-INSTRUCTIONS.md`, repo: 'web' },
     { path: `${REPOS.web}/specs/FILE-TREE.md`, repo: 'web' },
     { path: `${REPOS.web}/specs/ARCHITECTURE.md`, repo: 'web' },
-    { path: `${REPOS.web}/UPDATE-PROPAGATION-SPEC.md`, repo: 'web' },
   ];
 }
 
@@ -949,7 +948,7 @@ if (drifts.length === 0) {
   console.log('✅ Verify pass: all scanned surfaces match canonical values.');
 } else {
   console.log(`⚠ Verify pass: found ${drifts.length} drift(s).`);
-  console.log('   (mix of real drift and known false positives — see UPDATE-PROPAGATION-SPEC.md)');
+  console.log('   (mix of real drift and known false positives — see internal propagation spec)');
   for (const d of drifts) {
     const relPath = relative(REPOS.web + '/..', d.file);
     console.log(`   ${relPath}:${d.line}  ${d.variable} = ${d.found} (expected ${d.expected})  "${d.matched}"`);
@@ -962,7 +961,7 @@ if (drifts.length === 0) {
     // PAPER_COUNT joins LAYER_COUNT in the safe set: pattern is bounded
     // (single-digit 6–9 + Six/Seven/Eight/Nine word-form, plural-only).
     // TEST_COUNT and MCP_TOOL_COUNT remain report-only — see the §3.4
-    // structural-exclusion proposal in UPDATE-PROPAGATION-SPEC.md for the
+    // structural-exclusion proposal in the internal propagation spec for the
     // path that would let them join.
     const SAFE_VARS = new Set(['LAYER_COUNT', 'PAPER_COUNT']);
     const safe = drifts.filter(d => SAFE_VARS.has(d.variable));

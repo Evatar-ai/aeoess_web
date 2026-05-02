@@ -49,7 +49,7 @@ specs/DRAFTS-*/
 
 # ── 2026-04-29 second sweep: internal-staging dirs + root docs ──
 # Same pattern as the specs/ sweep earlier today. These dirs are
-# private working space. Public destination is ~/aeoess-private/.
+# private working space.
 archive-portal-era/
 comms/*
 !comms/shared-state.json
