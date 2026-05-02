@@ -18,6 +18,13 @@
  *                                                 # report-only because their regex patterns
  *                                                 # match per-section counts as false positives
  *                                                 # (see UPDATE-PROPAGATION-SPEC.md).
+ *   node scripts/propagate.mjs --apply --force-roadmap-build
+ *                                                 # rebuild roadmap.html even if roadmap.yaml
+ *                                                 # hash matches the cache. Useful after
+ *                                                 # build-roadmap.mjs itself changes.
+ *   node scripts/propagate.mjs --apply --skip-roadmap-build
+ *                                                 # skip the roadmap.yaml hash check entirely.
+ *                                                 # Use during partial recovery / debugging.
  *
  * Bug fixes vs prior cache-driven design:
  *   Bug 1 (cache no-op on match): the cache-diff pass short-circuits when
@@ -35,6 +42,7 @@
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { execSync } from 'child_process';
+import { createHash } from 'node:crypto';
 import { resolve, relative } from 'path';
 
 // ── Repo paths (portable — works on Air or Mini) ──
@@ -67,6 +75,80 @@ function loadProjectState() {
     throw new Error('project-state.json: missing required `versions` or `counts` block');
   }
   return state;
+}
+
+// ── Roadmap auto-rebuild ──
+// In --apply mode, detect roadmap.yaml drift and rebuild roadmap.html
+// before the per-file rewrite loop runs. The rebuilt roadmap.html then
+// flows through the regular drift-check pipeline. Cache lives in its
+// own file (.roadmap-build-cache.json) — distinct from the propagate
+// cache schema. Build failure aborts the propagate run so we never
+// push partial state. Dry-run is side-effect-free: this function is
+// only called from the apply-mode branch.
+const ROADMAP_YAML_PATH = `${REPOS.web}/roadmap.yaml`;
+const ROADMAP_BUILD_SCRIPT = `${REPOS.web}/scripts/build-roadmap.mjs`;
+const ROADMAP_CACHE_PATH = `${REPOS.web}/scripts/.roadmap-build-cache.json`;
+
+function runRoadmapBuild({ force = false } = {}) {
+  if (!existsSync(ROADMAP_YAML_PATH)) {
+    console.log('Roadmap: roadmap.yaml not found — skipping rebuild.');
+    return;
+  }
+  if (!existsSync(ROADMAP_BUILD_SCRIPT)) {
+    console.log('Roadmap: build-roadmap.mjs not found — skipping rebuild.');
+    return;
+  }
+
+  const yamlBytes = readFileSync(ROADMAP_YAML_PATH);
+  const currentHash = createHash('sha256').update(yamlBytes).digest('hex');
+
+  let previousHash = null;
+  let cacheMissing = !existsSync(ROADMAP_CACHE_PATH);
+  if (!cacheMissing) {
+    try {
+      const cached = JSON.parse(readFileSync(ROADMAP_CACHE_PATH, 'utf8'));
+      previousHash = cached?.roadmap_yaml_sha256 ?? null;
+    } catch {
+      // Corrupt cache — treat as missing, force rebuild.
+      cacheMissing = true;
+    }
+  }
+
+  const reason = force
+    ? 'force'
+    : cacheMissing
+      ? 'cache-missing'
+      : previousHash !== currentHash
+        ? 'hash-changed'
+        : null;
+
+  if (!reason) {
+    console.log(`Roadmap: cache hash matches (${currentHash.slice(0, 12)}…). Skipping rebuild.`);
+    return;
+  }
+
+  console.log(`Roadmap: rebuilding (${reason})...`);
+  try {
+    const out = execSync(`node ${JSON.stringify(ROADMAP_BUILD_SCRIPT)}`, {
+      cwd: REPOS.web,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    if (out) process.stdout.write(out);
+  } catch (e) {
+    console.error('❌ Roadmap rebuild failed. Aborting propagate run (no partial state pushed).');
+    if (e.stdout) process.stdout.write(e.stdout);
+    if (e.stderr) process.stderr.write(e.stderr);
+    process.exit(1);
+  }
+
+  // Cache is updated only on successful build.
+  const cachePayload = {
+    roadmap_yaml_sha256: currentHash,
+    last_built_at: new Date().toISOString(),
+  };
+  writeFileSync(ROADMAP_CACHE_PATH, JSON.stringify(cachePayload, null, 2) + '\n', 'utf8');
+  console.log(`Roadmap: cache updated (${currentHash.slice(0, 12)}…).`);
 }
 
 // Derive the flat variable namespace the rest of the script consumes.
@@ -573,6 +655,12 @@ const verifyOnlyMode = args.includes('--verify-only');
 // (e.g., "13 tests" inside a subsystem coverage block, "20 tools"
 // inside "the 20 tools 90% of integrations need").
 const autoFixVerifyMode = args.includes('--auto-fix-verify');
+// Roadmap auto-rebuild flags (apply-mode only). --force-roadmap-build
+// forces a rebuild even if the YAML hash matches the cache (e.g. after
+// build-roadmap.mjs itself changed). --skip-roadmap-build bypasses the
+// rebuild check entirely for partial recovery / debugging.
+const forceRoadmapBuildMode = args.includes('--force-roadmap-build');
+const skipRoadmapBuildMode = args.includes('--skip-roadmap-build');
 
 const modeLabel = readOnlyMode ? 'READ-ONLY'
   : verifyOnlyMode ? 'VERIFY-ONLY'
@@ -615,6 +703,17 @@ if (verifyOnlyMode) {
     console.log(`   ${relPath}:${d.line}  ${d.variable} = ${d.found} (expected ${d.expected})  "${d.matched}"`);
   }
   process.exit(1);
+}
+
+// Roadmap auto-rebuild — fires only in apply mode so dry-run stays
+// side-effect-free. Runs BEFORE the per-file scan so the regenerated
+// roadmap.html is included in downstream drift detection.
+if (applyMode && !skipRoadmapBuildMode) {
+  runRoadmapBuild({ force: forceRoadmapBuildMode });
+  console.log('');
+} else if (applyMode && skipRoadmapBuildMode) {
+  console.log('Roadmap: --skip-roadmap-build set, hash check bypassed.');
+  console.log('');
 }
 
 // Step 2: Ask for previous values (what to search for)
