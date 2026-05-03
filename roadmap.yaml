@@ -1,7 +1,37 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-01 (Day 75). Vocab PR #72 opened (completion_ratio canonical signal type with three production issuers AgentID/APS/RNWY; new completion_ratio_method constraint); vocab issue #73 opened (self_enforced as fifth refusal_authority value for Nobulex actor-enforcer collapse); vocabulary validator hardened with nested descriptor_dimensions walk under signal_types and #57 legacy whitelist preserving three pre-resolution descriptor uses; drift prevention infrastructure installed across eight public repos (pre-commit hook, CI scan workflow, standardized .gitignore block, propagate.mjs final scan).
+# Last updated: 2026-05-03 (Day 77). Gateway latency benchmark restored to public SDK behind a minimal test-only shim at tests/test-helpers/test-proxy-gateway.ts (commits 3c6182c restore + b7177f1 scrub on agent-passport-system); CLAIMS.md gateway latency section refactored with both cited and re-measured tables, scope-of-claim explicit on each. Mingle removed from homepage promo block and top navigation across 26 HTML pages, footer Community column link preserved (commit b257bcb on aeoess_web).
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 77 — 2026-05-03 ═══
+
+- id: d77-benchmark-restored
+  title: "Gateway latency benchmark restored to public SDK behind a test-only shim"
+  description: "tests/benchmark-gateway.ts moved private on April 17 with the AAIF boundary refactor (commit 842cd87) when the ProxyGateway runtime relocated to @aeoess/gateway. Restored today at the original path with one import line changed (createProxyGateway now imported from a public test-only shim at tests/test-helpers/test-proxy-gateway.ts) plus a 12-line restoration banner. The shim implements signature verification, scope authorization, the spend-limit check, and small constant-work mocks for the optional reputation/HLC/fidelity/data-enforcement gates. NOT the product gateway (cascade revocation, escalation, charter governance, settlement, drift detection, decision equivalence stay private). Re-measured numbers run ~14x faster than the cited values (p50 0.144ms vs 2.0ms cited; 7,083 ops/sec vs 403 cited) because the shim does ~14x less work. CLAIMS.md gateway latency section refactored with both cited and re-measured tables side by side, scope-of-claim explicit on each. Internal-process references (Consilium codename, Path B / Day 77 banner language) scrubbed from the public test file in follow-up commit b7177f1."
+  status: done
+  workstream: protocol
+  day_start: 77
+  day_end: 77
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/tests/benchmark-gateway.ts"
+      label: "benchmark file"
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/tests/test-helpers/test-proxy-gateway.ts"
+      label: "test shim"
+    - url: "https://github.com/aeoess/agent-passport-system/commit/3c6182c"
+      label: "restore commit"
+
+- id: d77-mingle-homepage-removed
+  title: "Mingle removed from aeoess.com homepage focus, kept in footer"
+  description: "Mingle came off the top navigation and homepage promo block across all 26 HTML pages on aeoess.com. The .mingle-box div on index.html removed along with associated dead CSS rules. Mobile drawer Mingle link removed. Footer Community column link to mingle.html preserved across all pages (Mingle stays a shipping product, just no longer leads the homepage). The mingle.html page itself remains live and reachable. Historical Mar 15 'Mingle v2.0' updates panel entry preserved as immutable record. Reflects strategic surface-positioning move toward enterprise/standards/partner readers for the next phase. Three CC-flagged surprises (mingle.html itself got its own self-link scrubbed; benchmarks.html has duplicate footer Community columns from a pre-existing template issue; blog.html line 1492 historical Mingle reference preserved per blog-immutability rule)."
+  status: done
+  workstream: ops
+  day_start: 77
+  day_end: 77
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/commit/b257bcb"
+      label: "removal commit"
+    - url: "https://aeoess.com/mingle.html"
+      label: "Mingle page (still live)"
 
 # ═══ DAY 75 — 2026-05-01 ═══
 
