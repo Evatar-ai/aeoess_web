@@ -355,10 +355,9 @@ function getTargetFiles() {
     { path: `${REPOS.web}/.well-known/mcp.json`, repo: 'web' },
     { path: `${REPOS.web}/.well-known/aeoess-issuer.json`, repo: 'web' },
     { path: `${REPOS.web}/protocol-registry.json`, repo: 'web' },
-    // Web repo — specs (agent-readable context)
-    { path: `${REPOS.web}/specs/PROJECT-INSTRUCTIONS.md`, repo: 'web' },
-    { path: `${REPOS.web}/specs/FILE-TREE.md`, repo: 'web' },
-    { path: `${REPOS.web}/specs/ARCHITECTURE.md`, repo: 'web' },
+    // NOTE (Day 76): aeoess_web/specs/{PROJECT-INSTRUCTIONS,FILE-TREE,ARCHITECTURE}.md
+    // were moved to ~/aeoess-private/ on Day 75 per the public-paths-only rule
+    // for public repos. Do not re-add those targets here.
   ];
 }
 
