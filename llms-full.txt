@@ -17,7 +17,7 @@ Copyright: 2024-2026 Tymofii Pidlisnyi
 
 ## What It Is
 
-The Agent Passport System is the enforcement and accountability layer for the agent economy. It is not an identity system. It sits on top of whatever identity the agent already has: did:key, did:web, SPIFFE SVIDs, OAuth tokens, or native did:aps. The gateway is both judge and executor. Authority can only decrease at each transfer point. Monotonic narrowing, cascade revocation, data lifecycle, Merkle attribution, signed coordination. Ed25519 cryptography throughout. No blockchain required. Feeless Nano payments for agent-to-agent commerce.
+The Agent Passport System is the enforcement and accountability layer for the agent economy. It is not an identity system. It sits on top of whatever identity the agent already has: did:key, did:web, SPIFFE SVIDs, OAuth tokens, or native did:aps. The gateway is both judge and executor. Authority can only decrease at each transfer point. Monotonic narrowing, cascade revocation, data lifecycle, Merkle attribution, signed coordination. Ed25519 cryptography throughout. No blockchain required for the core protocol; multi-chain wallet binding when commerce needs settle to an external chain.
 
 It answers: when AI agents from different creators, running different models, serving different humans begin to collaborate — who is responsible, under what authority, according to what values, and who benefits?
 
@@ -188,7 +188,7 @@ Structural safeguards: Separation of Powers (legislative/executive/judicial bran
 
 **AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications as trustworthy agent-consumable news sources. Published by AEOESS. Two layers: Layer A (cryptographic, binary pass/fail) requires Ed25519 article provenance, journalist agent passports with delegation chains, and a public MCP server. Layer B (editorial, public audit) requires machine-readable confidence labels on every article, a published Code of Conduct citing SPJ/NPC/Scripps, and an automated ethics verification system scoring every article against stated standards. Certification is self-attestation verified by script (Layer A) and public evidence (Layer B). No subjective editorial gatekeeping. Does NOT integrate with trust scoring — badge is informational only. Any publication can apply. Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md | Page: https://aeoess.com/amcs.html
 
-**v2.6.0-alpha.0 — 2,586 tests (650 suites). 108 test files including 38 adversarial scenarios.**
+**v2.6.0-alpha.0 — 2,586 tests (656 suites). 108 test files including 38 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -668,7 +668,7 @@ Private enforcement gateway with 37 API routes, multi-tenant with API key auth (
 
 **Data attribution (Pixel):** data source registration with purpose-weighted pricing (read 1x, training 10x, fine-tune 10x), access receipts, contribution ledger, attribution dashboard with time series, settlements with line items, agent self-service consumption view, derivation declarations, verified self-declaration with TF-IDF plausibility scoring, provenance dossier with longitudinal patterns and negative evidence, lexical forensic scoring (ngram Jaccard). Every response includes coverage scope and evidence limits disclaimers.
 
-**Nano payment rail:** feeless instant agent-to-agent payments on Nano Layer 1. Agent wallets with delegation-gated sends (3-gate pipeline: active wallet check, commerce scope via SDK scopeAuthorizes(), spend limit with 1e6 rounding). Local HD key derivation via nanocurrency-web from master seed. Public RPC (rpc.nano.to) for work generation and block publishing. No Nano node required. Every transaction produces signed receipt with on-chain block hash proof. Rate limiting: 10 provisions/min, 30 sends/min per tenant. Revocation cascade automatically freezes agent wallets.
+**Nano wallet implementation:** Nano-based wallet implementation, one of the chains supported by the wallet binding primitive class. Agent wallets with delegation-gated sends (3-gate pipeline: active wallet check, commerce scope via SDK scopeAuthorizes(), spend limit with 1e6 rounding). Local HD key derivation via nanocurrency-web from master seed. Public RPC (rpc.nano.to) for work generation and block publishing. No Nano node required. Every transaction produces signed receipt with on-chain block hash proof. Rate limiting: 10 provisions/min, 30 sends/min per tenant. Revocation cascade automatically freezes agent wallets.
 
 **Dashboard:** aeoess.com/gateway.html — API key login, stats grid, alerts, recent denials, agents, delegations with spend tracking, audit trail with auto-refresh.
 

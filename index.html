@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AEOESS — Governance for the Agent Economy</title>
 <meta name="description" content="Enforcement and accountability layer for AI agents. Bring your own identity (did:key, did:web, SPIFFE, OAuth). Every action evaluated in under 2ms. 14 constraint dimensions. Monotonic narrowing, cascade revocation, earned reputation. 2,586 tests. Gateway evaluation under 2ms.">
-<meta name="keywords" content="AI agent governance, agent passport system, AI agent enforcement, agent identity protocol, multi-agent coordination, agent delegation chains, Ed25519 cryptographic identity, autonomous AI agents, MCP server, agent commerce protocol, agentic economy, values floor, agent wallet, feeless AI payments, Nano cryptocurrency agents, agent trust scoring, AI agent spending controls">
+<meta name="keywords" content="AI agent governance, agent passport system, AI agent enforcement, agent identity protocol, multi-agent coordination, agent delegation chains, Ed25519 cryptographic identity, autonomous AI agents, MCP server, agent commerce protocol, agentic economy, values floor, agent wallet, multi-chain wallet binding, Nano cryptocurrency agents, agent trust scoring, AI agent spending controls">
 <link rel="canonical" href="https://aeoess.com/">
 <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
 <link rel="alternate" type="text/plain" href="https://aeoess.com/llms.txt" title="LLM documentation (compact)">
@@ -279,7 +279,7 @@ a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var
       <a href="https://www.npmjs.com/package/agent-passport-system">npm SDK v2.6.0-alpha.0</a>
       <a href="https://www.npmjs.com/package/agent-passport-system-mcp">MCP Server v3.1.1</a>
       <a href="https://clawhub.ai/aeoess/agent-passport-system">ClawHub Skill</a>
-      <a href="https://pypi.org/project/agent-passport-system/">Python SDK v2.3.0</a>
+      <a href="https://pypi.org/project/agent-passport-system/">Python SDK v2.4.0a0</a>
       <a href="blog.html#paper">8 papers &rarr;</a>
     </div>
     <div style="margin-top:1rem;font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);margin-bottom:.35rem">Quick Start <span style="text-transform:none;letter-spacing:0;color:var(--ink-5)">— Core subpath, curated essentials</span></div>
@@ -463,7 +463,7 @@ import {
   <div class="faq-item"><div class="faq-q">How does revocation work at scale?</div><div class="faq-a"><strong>Cascade revocation.</strong> Delegation chains form a tree. Revoke any node and every downstream delegation dies instantly — all sub-agents, all sub-sub-agents. One API call. The gateway enforces this at the boundary, so revoked agents can't sneak through on cached credentials. Circuit breakers auto-trip on error rate spikes.</div></div>
   <div class="faq-item"><div class="faq-q">Is there a standard?</div><div class="faq-a">Yes. <strong>draft-pidlisnyi-aps-00</strong> is submitted to the IETF. Eight papers on Zenodo formalize the theory: monotonic narrowing, product lattice authority model, institutional governance composition. Three WG specifications ratified: QSP-1, DID Resolution, Entity Verification.</div></div>
   <div class="faq-item"><div class="faq-q">What about compliance?</div><div class="faq-a">The SDK includes <strong>EU AI Act Article 10 mapping</strong> and AIVSS risk assessment (5 strong, 3 partial, 2 weak — honestly rated). Every action produces a signed receipt. The audit trail is cryptographic, not log-based. Compliance reports can be generated from the receipt chain.</div></div>
-  <div class="faq-item"><div class="faq-q">What's the pricing?</div><div class="faq-a">The protocol and SDK are <strong>free and open source</strong> (Apache-2.0). Always will be. Agent-to-agent payments use Nano: feeless, sub-second, delegation-scoped. The hosted enforcement gateway is live: free plan (3 agents, 1K evaluations/mo), Team $99/mo (25 agents, 50K evaluations), Enterprise custom. Sign up at <a href="portal.html">portal</a>.</div></div>
+  <div class="faq-item"><div class="faq-q">What's the pricing?</div><div class="faq-a">The protocol and SDK are <strong>free and open source</strong> (Apache-2.0). Always will be. Agent-to-agent payments use the agent wallet (currently Nano-based, multi-chain in roadmap): sub-second, delegation-scoped. The hosted enforcement gateway is live: free plan (3 agents, 1K evaluations/mo), Team $99/mo (25 agents, 50K evaluations), Enterprise custom. Sign up at <a href="portal.html">portal</a>.</div></div>
 </section>
 <div class="agent-box"><strong>For AI agents:</strong> Visit <a href="https://aeoess.com/AGENTS.md">aeoess.com/AGENTS.md</a> for agent-friendly project instructions, <a href="https://aeoess.com/llms.txt">llms.txt</a> for machine-readable documentation, <a href="https://aeoess.com/llms-full.txt">llms-full.txt</a> for the full technical reference, or <a href="https://aeoess.com/.well-known/mcp.json">.well-known/mcp.json</a> for MCP server discovery. This page is designed for humans.</div>
 <footer class="footer-wrap" role="contentinfo">
