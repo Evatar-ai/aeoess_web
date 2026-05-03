@@ -18,9 +18,9 @@
     "pypi": "agent-passport-system",
     "version": "2.6.0-alpha.0",
     "stable_version": "2.2.0",
-    "modules": 126,
-    "tests": 2536,
-    "python_version": "2.4.0a0"
+    "modules": 127,
+    "tests": 2586,
+    "python_version": "2.4.0a1"
   },
   "documentation": {
     "llms_txt": "https://aeoess.com/llms.txt",
@@ -37,9 +37,9 @@
     "public_trust": "https://gateway.aeoess.com/api/v1/public/trust/:agentId",
     "enforcement": true,
     "policy_eval_latency": "<2ms",
-    "constraint_dimensions": 15,
+    "constraint_dimensions": 14,
     "throughput": "403 ops/sec",
     "routes": 37
   },
-  "lastUpdated": "2026-04-23"
+  "lastUpdated": "2026-05-02"
 }
