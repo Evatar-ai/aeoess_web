@@ -16,7 +16,7 @@
   "sdk": {
     "npm": "agent-passport-system",
     "pypi": "agent-passport-system",
-    "version": "2.6.0-alpha.0",
+    "version": "2.6.0-alpha.1",
     "stable_version": "2.2.0",
     "modules": 127,
     "tests": 2586,
