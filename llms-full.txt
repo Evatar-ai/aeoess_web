@@ -2,10 +2,10 @@
 
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
-Updated: 2026-04-23
-SDK version: agent-passport-system@2.5.1-alpha (pre-release)
+Updated: 2026-05-02
+SDK version: agent-passport-system@2.6.0-alpha.0 (pre-release)
 MCP version: agent-passport-system-mcp@3.1.1 (150 tools)
-Python SDK: agent-passport-system==2.3.0
+Python SDK: agent-passport-system==2.4.0a1 (pre-release)
 Compact: https://aeoess.com/llms.txt
 Canonical: https://aeoess.com/llms-full.txt
 License: Apache-2.0
