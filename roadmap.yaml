@@ -1,7 +1,50 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-01 (Day 75). Vocab PR #72 opened (completion_ratio canonical signal type with three production issuers AgentID/APS/RNWY; new completion_ratio_method constraint); vocab issue #73 opened (self_enforced as fifth refusal_authority value for Nobulex actor-enforcer collapse); vocabulary validator hardened with nested descriptor_dimensions walk under signal_types and #57 legacy whitelist preserving three pre-resolution descriptor uses; drift prevention infrastructure installed across eight public repos (pre-commit hook, CI scan workflow, standardized .gitignore block, propagate.mjs final scan).
+# Last updated: 2026-05-02 (Day 76). Cross-language byte-parity reached across the full Wave 1 governance surface (Python SDK 2.4.0a1 ports v2/accountability + v2/cognitive_attestation + v2/instruction_provenance from TS SDK 2.6.0-alpha.0; 27 cross-impl byte-parity test scenarios pass). TS SDK 2.6.0-alpha.0 ships v2 evidentiary type safety primitives (claim_evidence_types registry with BATCH_ATTESTED + EVIDENCE_CUSTODY_HELD, claim_verifier, contestation cascade with verifier hook, path-scoped cycle detection in mergeTaints). Vocab phantom-issuer audit (PR #74 removed RNWY from behavioral_trust + wallet_intelligence; PR #75 marked passport_grade status: proposed under single-issuer rule).
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 76 — 2026-05-02 ═══
+
+- id: d76-cross-language-byte-parity-wave-1
+  title: "Cross-language byte-parity reached across full Wave 1 surface"
+  description: "Python SDK 2.4.0a1 ports the full Wave 1 governance surface from TS SDK 2.6.0-alpha.0: v2/accountability/* (action, authority-boundary, bundle, custody, contestability), v2/cognitive_attestation/*, v2/instruction_provenance/*. Plus the four evidentiary type safety primitives (claim_evidence_types, claim_verifier, downstream_taint, minimal cascade ContestabilityReceipt) ported earlier in the day as 2.4.0a0. Cross-impl byte-parity verified across 27 test scenarios: 15 evidentiary type safety (9 verifier + 6 cascade) plus 12 Wave 1 (5 accountability fixtures shipped from TS SDK at src/v2/accountability/fixtures/*.fixture.json plus 7 generated for cognitive_attestation and instruction_provenance via tests/v2/fixtures/wave1/_generate.mjs pinned to agent-passport-system@2.6.0-alpha.0). Python canonical-JSON output and sha256 hashes match TS-generated fixtures byte-for-byte across all 27 scenarios. Test count 398 to 518."
+  status: done
+  workstream: protocol
+  day_start: 76
+  day_end: 76
+  links:
+    - url: "https://pypi.org/project/agent-passport-system/2.4.0a1/"
+      label: "Python 2.4.0a1 on PyPI"
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "TS SDK on npm"
+    - url: "https://github.com/aeoess/agent-passport-python/commit/515c08e"
+      label: "Wave 1 port commit"
+
+- id: d76-sdk-260-evidentiary-type-safety
+  title: "SDK 2.6.0-alpha.0: v2 evidentiary type safety primitives"
+  description: "Four new v2 modules: claim_evidence_types registry with BATCH_ATTESTED and EVIDENCE_CUSTODY_HELD extensions (Module 1 + Module 1a), claim_verifier (Module 2), contestation cascade with verifier hook (Module 4). Plus path-scoped cycle detection and dedupe in mergeTaints (resolves cross-chain skip case caught in property test). Compliance-complete failure scenario added for EFFECT_SAFETY_ATTESTED. Postpublish wrapper fixed to surface real errors instead of masking them. Test count 2,545 to 2,586 across the day."
+  status: done
+  workstream: protocol
+  day_start: 76
+  day_end: 76
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "npm"
+    - url: "https://github.com/aeoess/agent-passport-system/commit/b59db22"
+      label: "release commit"
+
+- id: d76-vocab-phantom-issuer-audit
+  title: "Vocab phantom-issuer audit: PR #74 + PR #75 merged"
+  description: "Two cleanup PRs landed in the agent-governance-vocabulary repo. PR #74 removed RNWY from behavioral_trust and wallet_intelligence after verification couldn't confirm those signals are issued in production. PR #75 marked passport_grade with status: proposed (downgrade from canonical) because APS is currently the sole production issuer and the canonical-promotion rule requires two independent implementations. Single-source-of-truth discipline maintained. Vocabulary registry now reflects only verified production attributions."
+  status: done
+  workstream: protocol
+  day_start: 76
+  day_end: 76
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/74"
+      label: "PR #74"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/75"
+      label: "PR #75"
 
 # ═══ DAY 75 — 2026-05-01 ═══
 

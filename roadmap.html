@@ -130,7 +130,7 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
   <!-- BUILD:ROADMAP_START -->
 <noscript class="rm-noscript-hint"><div class="rm-noscript-msg">JavaScript is disabled — showing the full roadmap as a list. With JavaScript on, this page renders an interactive timeline above.</div></noscript>
 <div class="rm-static" id="rm-static" aria-label="Roadmap (static fallback)">
-<p class="rm-static-intro">239 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
+<p class="rm-static-intro">242 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
 <section class="rm-group rm-group-active">
 <h2 class="rm-group-title">Active <span class="rm-group-count">(14)</span></h2>
 <article class="rm-item rm-item-active" id="a2a-compliance-harness-repo">
@@ -494,7 +494,43 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
 </article>
 </section>
 <section class="rm-group rm-group-shipped">
-<h2 class="rm-group-title">Shipped <span class="rm-group-count">(176)</span></h2>
+<h2 class="rm-group-title">Shipped <span class="rm-group-count">(179)</span></h2>
+<article class="rm-item rm-item-done" id="d76-cross-language-byte-parity-wave-1">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Cross-language byte-parity reached across full Wave 1 surface</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 76</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Python SDK 2.4.0a1 ports the full Wave 1 governance surface from TS SDK 2.6.0-alpha.0: v2/accountability/* (action, authority-boundary, bundle, custody, contestability), v2/cognitive_attestation/*, v2/instruction_provenance/*. Plus the four evidentiary type safety primitives (claim_evidence_types, claim_verifier, downstream_taint, minimal cascade ContestabilityReceipt) ported earlier in the day as 2.4.0a0. Cross-impl byte-parity verified across 27 test scenarios: 15 evidentiary type safety (9 verifier + 6 cascade) plus 12 Wave 1 (5 accountability fixtures shipped from TS SDK at src/v2/accountability/fixtures/*.fixture.json plus 7 generated for cognitive_attestation and instruction_provenance via tests/v2/fixtures/wave1/_generate.mjs pinned to agent-passport-system@2.6.0-alpha.0). Python canonical-JSON output and sha256 hashes match TS-generated fixtures byte-for-byte across all 27 scenarios. Test count 398 to 518.</p>
+<ul class="rm-item-links"><li><a href="https://pypi.org/project/agent-passport-system/2.4.0a1/">Python 2.4.0a1 on PyPI</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system">TS SDK on npm</a></li><li><a href="https://github.com/aeoess/agent-passport-python/commit/515c08e">Wave 1 port commit</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d76-sdk-260-evidentiary-type-safety">
+<header class="rm-item-h">
+<h3 class="rm-item-title">SDK 2.6.0-alpha.0: v2 evidentiary type safety primitives</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 76</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Four new v2 modules: claim_evidence_types registry with BATCH_ATTESTED and EVIDENCE_CUSTODY_HELD extensions (Module 1 + Module 1a), claim_verifier (Module 2), contestation cascade with verifier hook (Module 4). Plus path-scoped cycle detection and dedupe in mergeTaints (resolves cross-chain skip case caught in property test). Compliance-complete failure scenario added for EFFECT_SAFETY_ATTESTED. Postpublish wrapper fixed to surface real errors instead of masking them. Test count 2,545 to 2,586 across the day.</p>
+<ul class="rm-item-links"><li><a href="https://www.npmjs.com/package/agent-passport-system">npm</a></li><li><a href="https://github.com/aeoess/agent-passport-system/commit/b59db22">release commit</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d76-vocab-phantom-issuer-audit">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab phantom-issuer audit: PR #74 + PR #75 merged</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 76</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Two cleanup PRs landed in the agent-governance-vocabulary repo. PR #74 removed RNWY from behavioral_trust and wallet_intelligence after verification couldn't confirm those signals are issued in production. PR #75 marked passport_grade with status: proposed (downgrade from canonical) because APS is currently the sole production issuer and the canonical-promotion rule requires two independent implementations. Single-source-of-truth discipline maintained. Vocabulary registry now reflects only verified production attributions.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/74">PR #74</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/75">PR #75</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d75-drift-prevention-infrastructure">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Drift prevention infrastructure: four layers across eight public repos</h3>
