@@ -130,7 +130,7 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
   <!-- BUILD:ROADMAP_START -->
 <noscript class="rm-noscript-hint"><div class="rm-noscript-msg">JavaScript is disabled — showing the full roadmap as a list. With JavaScript on, this page renders an interactive timeline above.</div></noscript>
 <div class="rm-static" id="rm-static" aria-label="Roadmap (static fallback)">
-<p class="rm-static-intro">241 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
+<p class="rm-static-intro">239 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
 <section class="rm-group rm-group-active">
 <h2 class="rm-group-title">Active <span class="rm-group-count">(14)</span></h2>
 <article class="rm-item rm-item-active" id="a2a-compliance-harness-repo">
@@ -494,31 +494,7 @@ svg.rm-svg .dep-line.to-active{stroke:var(--blue);opacity:.7;marker-end:url(#arr
 </article>
 </section>
 <section class="rm-group rm-group-shipped">
-<h2 class="rm-group-title">Shipped <span class="rm-group-count">(178)</span></h2>
-<article class="rm-item rm-item-done" id="d77-benchmark-restored">
-<header class="rm-item-h">
-<h3 class="rm-item-title">Gateway latency benchmark restored to public SDK behind a test-only shim</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 77</span> 
-<span class="rm-item-ws">Protocol</span> 
-<span class="rm-item-status">done</span>
-</p>
-</header>
-<p class="rm-item-desc">tests/benchmark-gateway.ts moved private on April 17 with the AAIF boundary refactor (commit 842cd87) when the ProxyGateway runtime relocated to @aeoess/gateway. Restored today at the original path with one import line changed (createProxyGateway now imported from a public test-only shim at tests/test-helpers/test-proxy-gateway.ts) plus a 12-line restoration banner. The shim implements signature verification, scope authorization, the spend-limit check, and small constant-work mocks for the optional reputation/HLC/fidelity/data-enforcement gates. NOT the product gateway (cascade revocation, escalation, charter governance, settlement, drift detection, decision equivalence stay private). Re-measured numbers run ~14x faster than the cited values (p50 0.144ms vs 2.0ms cited; 7,083 ops/sec vs 403 cited) because the shim does ~14x less work. CLAIMS.md gateway latency section refactored with both cited and re-measured tables side by side, scope-of-claim explicit on each. Internal session vocabulary scrubbed from the public test file in a follow-up commit.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-passport-system/blob/main/tests/benchmark-gateway.ts">benchmark file</a></li><li><a href="https://github.com/aeoess/agent-passport-system/blob/main/tests/test-helpers/test-proxy-gateway.ts">test shim</a></li><li><a href="https://github.com/aeoess/agent-passport-system/commit/3c6182c">restore commit</a></li></ul>
-</article>
-<article class="rm-item rm-item-done" id="d77-mingle-homepage-removed">
-<header class="rm-item-h">
-<h3 class="rm-item-title">Mingle removed from aeoess.com homepage focus, kept in footer</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 77</span> 
-<span class="rm-item-ws">Ops</span> 
-<span class="rm-item-status">done</span>
-</p>
-</header>
-<p class="rm-item-desc">Mingle came off the top navigation and homepage promo block across all 26 HTML pages on aeoess.com. The .mingle-box div on index.html removed along with associated dead CSS rules. Mobile drawer Mingle link removed. Footer Community column link to mingle.html preserved across all pages (Mingle stays a shipping product, just no longer leads the homepage). The mingle.html page itself remains live and reachable. Historical Mar 15 'Mingle v2.0' updates panel entry preserved as immutable record. Reflects strategic surface-positioning move toward enterprise/standards/partner readers for the next phase. Three CC-flagged surprises (mingle.html itself got its own self-link scrubbed; benchmarks.html has duplicate footer Community columns from a pre-existing template issue; blog.html line 1492 historical Mingle reference preserved per blog-immutability rule).</p>
-<ul class="rm-item-links"><li><a href="https://github.com/aeoess/aeoess_web/commit/b257bcb">removal commit</a></li><li><a href="https://aeoess.com/mingle.html">Mingle page (still live)</a></li></ul>
-</article>
+<h2 class="rm-group-title">Shipped <span class="rm-group-count">(176)</span></h2>
 <article class="rm-item rm-item-done" id="d75-drift-prevention-infrastructure">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Drift prevention infrastructure: four layers across eight public repos</h3>
