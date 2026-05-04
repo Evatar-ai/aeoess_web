@@ -975,9 +975,92 @@ for (const result of results) {
   // Don't print 'ok' files to reduce noise
 }
 
+// Cache-no-op recovery (Bug 1 follow-up). The cache-diff pass above
+// short-circuits when previous === current. If on-disk drift exists at
+// that point (e.g., one file got reverted by hand, or a prior release
+// updated project-state without running propagate), the verify pass
+// would normally just report — and in apply mode we'd silently exit 0.
+// This branch promotes verify-pass drift on safe variables (TEST_COUNT,
+// MCP_TOOL_COUNT) into the apply path.
+//
+// IMPORTANT: the verify regex patterns DO match documented per-section
+// false positives ("13 tests" inside passport.html, "20 tools" subset
+// language). RECOVERY_SKIP filters those (file-suffix, variable) pairs
+// so cache-no-op recovery never rewrites them. LAYER_COUNT and
+// PAPER_COUNT are NOT in RECOVERY_VARS — they remain gated behind the
+// explicit --auto-fix-verify flag.
+const RECOVERY_VARS = new Set(['TEST_COUNT', 'MCP_TOOL_COUNT']);
+// Hardcoded skiplist of (file path suffix, variable) pairs that are
+// known to contain per-section / subset counts. The verify regex
+// anchors flag them as drift but they are NOT canonical totals and
+// MUST stay untouched. Match by suffix so the same skiplist works
+// across worktrees (e.g., aps-q1-accountability/README.md still maps
+// to "agent-passport-system/README.md" tail). Empty variable means
+// skip every variable in that file.
+const RECOVERY_SKIP = [
+  { suffix: 'aeoess_web/passport.html', variable: 'TEST_COUNT' },
+  { suffix: 'aeoess_web/threat-model.html', variable: 'TEST_COUNT' },
+  { suffix: 'aeoess_web/llms-full.txt', variable: 'MCP_TOOL_COUNT' },
+  { suffix: 'agent-passport-mcp/README.md', variable: 'MCP_TOOL_COUNT' },
+];
+function isRecoverySkip(filePath, variable) {
+  return RECOVERY_SKIP.some(
+    (s) => filePath.endsWith(s.suffix) && (s.variable === '' || s.variable === variable),
+  );
+}
+let recoveryDriftHandled = false;
+if (applyMode && staleCount === 0) {
+  const recoveryAllDrifts = verifyConsistency(files, current);
+  const recoveryDrifts = recoveryAllDrifts.filter(
+    (d) => RECOVERY_VARS.has(d.variable) && !isRecoverySkip(d.file, d.variable),
+  );
+  const skippedFalsePositives = recoveryAllDrifts.filter(
+    (d) => RECOVERY_VARS.has(d.variable) && isRecoverySkip(d.file, d.variable),
+  ).length;
+  if (recoveryDrifts.length > 0) {
+    console.log('');
+    console.log(`⚠ Cache matches source-of-truth but verify-pass detected ${recoveryDrifts.length} on-disk drift(s) on auto-recoverable vars.`);
+    for (const d of recoveryDrifts) {
+      const relPath = relative(REPOS.web + '/..', d.file);
+      console.log(`   ${relPath}:${d.line}  ${d.variable} = ${d.found} (expected ${d.expected})`);
+    }
+    const fixed = applyVerifyFixes(recoveryDrifts);
+    console.log(`✅ Applied ${fixed} verify-drift recovery fix(es) (cache-no-op recovery).`);
+    if (skippedFalsePositives > 0) {
+      console.log(`   (${skippedFalsePositives} per-section drift(s) skipped via RECOVERY_SKIP — review report at end of run)`);
+    }
+    // Cache is already aligned with source-of-truth; rewrite to keep mtime
+    // fresh and to clear any partial-write window.
+    writeFileSync(cacheFile, JSON.stringify(current, null, 2), 'utf8');
+    console.log('Cache reaffirmed (already matched source-of-truth).');
+    recoveryDriftHandled = true;
+  }
+}
+
 console.log('');
-if (staleCount === 0) {
+if (staleCount === 0 && !recoveryDriftHandled) {
   console.log('✅ All files are up to date!');
+} else if (staleCount === 0 && recoveryDriftHandled) {
+  // Recovery already applied above; fall through to commit/push if --commit set.
+  if (commitMode) {
+    console.log('');
+    console.log('Committing and pushing all repos...');
+    const msg = `propagate: SDK v${current.SDK_VERSION}, MCP v${current.MCP_VERSION}, ${current.TEST_COUNT} tests, ${current.MCP_TOOL_COUNT} tools (verify-drift recovery)`;
+    for (const [name, repoPath] of Object.entries(REPOS)) {
+      try {
+        const status = execSync('git status --porcelain', { cwd: repoPath, encoding: 'utf8' }).trim();
+        if (status) {
+          execSync(`git add -A && git commit -m "${msg}"`, { cwd: repoPath, encoding: 'utf8' });
+          execSync('git push', { cwd: repoPath, encoding: 'utf8', timeout: 30000 });
+          console.log(`  ✅ ${name}: committed and pushed`);
+        } else {
+          console.log(`  ⏭  ${name}: no changes`);
+        }
+      } catch (e) {
+        console.log(`  ❌ ${name}: ${e.message?.slice(0, 100)}`);
+      }
+    }
+  }
 } else {
   console.log(`Found ${staleCount} stale reference(s).`);
 
