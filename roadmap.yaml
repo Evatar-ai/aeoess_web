@@ -5,18 +5,18 @@
 
 # ═══ DAY 77 — 2026-05-03 ═══
 
-- id: d77-cross-project-vocab-conformance
-  title: "Cross-project vocab + conformance work with Edison and desiorac"
-  description: "Two substantive PR replies on cross-project work with named long-term collaborators. (1) edisonduran/agent-did PR #45 §6.3 sanity check posted with three spec deltas to resolve, building on Edison's Agent-DID crosswalk merged Apr 30 (vocab PR #66, the second co-drafted-with-aeoess crosswalk). (2) corpollc/qntm PR #15 bilateral receipt fixture verifies 5/5 against APS canonical-bytes path on src/core/bilateral-receipt.ts (canonicalize(body), sorted-keys JSON, RFC 8785 JCS for v2/accountability bundle). Mirror offered into aeoess/aps-conformance-suite as a regression test for desiorac's qntm v0.3.2 mid-May publish. desiorac is a substantive contributor on bilateral receipt conformance, distinct from the broader vessenes thread."
+- id: d77-bilateral-receipt-cross-impl-byte-match
+  title: "Bilateral receipt cross-impl byte-match against qntm v0.3.1 fixture"
+  description: "APS canonical-bytes path on src/core/bilateral-receipt.ts (canonicalize(body), sorted-keys JSON; RFC 8785 JCS for the v2/accountability bundle module) verifies 5/5 against desiorac's bilateral receipt fixture in corpollc/qntm v0.3.1. This is third-party byte-match independent of the Wave 1 cross-language scenarios published Apr 30 to May 02 (Python 2.4.0a1 ports across 27 fixture scenarios). Mirror offered into aeoess/aps-conformance-suite as a regression test ahead of desiorac's qntm v0.3.2 mid-May publish; desiorac is a substantive bilateral-receipt contributor distinct from the broader vessenes thread."
   status: done
   workstream: vocab
   day_start: 77
   day_end: 77
   links:
-    - url: "https://github.com/edisonduran/agent-did/pull/45#issuecomment-4368169672"
-      label: "agent-did #45 reply"
     - url: "https://github.com/corpollc/qntm/pull/15#issuecomment-4368169755"
-      label: "qntm #15 reply"
+      label: "qntm #15 byte-match reply"
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/src/core/bilateral-receipt.ts"
+      label: "APS bilateral-receipt module"
 
 - id: d77-phase-4-1-alpha-four-registries
   title: "Phase 4.1 alpha across four registries"
@@ -33,20 +33,6 @@
     - url: "https://www.npmjs.com/package/agent-passport-system-mcp"
       label: "MCP 3.2.0 on npm"
 
-- id: d77-payment-rails-community-engagement
-  title: "Payment-rails community engagement across five ecosystems"
-  description: "Six issue comments and two awesome-list inclusion PRs across x402-foundation/x402 (#2067 hybrid policy enforcement architecture, #694 delegated billing spec), Agent Commerce Protocol (#231 governance-binding discussion), Stripe agent-toolkit (#356 commerce delegation, #381 policy enforcement for financial operations), Microsoft AutoGen (#7372 cryptographic governance layer), xpaysh/awesome-x402 (#328), xpaysh/awesome-mcp-monetization (#6). Each post opens with a failure mode, names the primitive, points to evidence, asks an open question. Architecture position on per-condition attestation, DID-keyed cap accounting, and proof-of-constraint receipts."
-  status: done
-  workstream: ecosystem
-  day_start: 77
-  day_end: 77
-  links:
-    - url: "https://github.com/x402-foundation/x402/issues/2067#issuecomment-4368784349"
-      label: "x402 #2067"
-    - url: "https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231#issuecomment-4368736886"
-      label: "ACP #231"
-    - url: "https://github.com/stripe/ai/issues/381#issuecomment-4368781393"
-      label: "Stripe #381"
 
 
 # ═══ DAY 76 — 2026-05-02 ═══
