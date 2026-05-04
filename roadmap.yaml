@@ -3,6 +3,39 @@
 # Last updated: 2026-05-02 (Day 76). Cross-language byte-parity reached across the full Wave 1 governance surface (Python SDK 2.4.0a1 ports v2/accountability + v2/cognitive_attestation + v2/instruction_provenance from TS SDK 2.6.0-alpha.0; 27 cross-impl byte-parity test scenarios pass). TS SDK 2.6.0-alpha.0 ships v2 evidentiary type safety primitives (claim_evidence_types registry with BATCH_ATTESTED + EVIDENCE_CUSTODY_HELD, claim_verifier, contestation cascade with verifier hook, path-scoped cycle detection in mergeTaints). Vocab phantom-issuer audit (PR #74 removed RNWY from behavioral_trust + wallet_intelligence; PR #75 marked passport_grade status: proposed under single-issuer rule).
 # Day 1 = 2026-02-17 (project start)
 
+# ═══ DAY 77 — 2026-05-03 ═══
+
+- id: d77-phase-4-1-alpha-four-registries
+  title: "Phase 4.1 alpha across four registries"
+  description: "Phase 4.1 of the SDK published to npm (agent-passport-system@2.6.0-alpha.2), PyPI (agent-passport-system==2.4.0a2), ClawHub (agent-passport skill 5.9.0), and the MCP server on npm (agent-passport-system-mcp@3.2.0). Three architecture decisions merged earlier in the day: Q1 (rail receipts as accountability evidence with claim_type, scope_of_claim, and timestamp fields), P12 (DID URI signing with rotation-aware verifier walking RotatableDIDDocument.verificationMethod and respecting retiredAt markers), Q2 (optional PaymentObligationRef and cross-receipt link fields for hybrid Option C settlement binding). Test count moved 2,711 to 2,884 across the three branches."
+  status: done
+  workstream: protocol
+  day_start: 77
+  day_end: 77
+  links:
+    - url: "https://www.npmjs.com/package/agent-passport-system"
+      label: "SDK 2.6.0-alpha.2 on npm"
+    - url: "https://pypi.org/project/agent-passport-system/2.4.0a2/"
+      label: "Python 2.4.0a2 on PyPI"
+    - url: "https://www.npmjs.com/package/agent-passport-system-mcp"
+      label: "MCP 3.2.0 on npm"
+
+- id: d77-payment-rails-community-engagement
+  title: "Payment-rails community engagement across five ecosystems"
+  description: "Six issue comments and two awesome-list inclusion PRs across x402-foundation/x402 (#2067 hybrid policy enforcement architecture, #694 delegated billing spec), Agent Commerce Protocol (#231 governance-binding discussion), Stripe agent-toolkit (#356 commerce delegation, #381 policy enforcement for financial operations), Microsoft AutoGen (#7372 cryptographic governance layer), xpaysh/awesome-x402 (#328), xpaysh/awesome-mcp-monetization (#6). Each post opens with a failure mode, names the primitive, points to evidence, asks an open question. Architecture position on per-condition attestation, DID-keyed cap accounting, and proof-of-constraint receipts."
+  status: done
+  workstream: ecosystem
+  day_start: 77
+  day_end: 77
+  links:
+    - url: "https://github.com/x402-foundation/x402/issues/2067#issuecomment-4368784349"
+      label: "x402 #2067"
+    - url: "https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231#issuecomment-4368736886"
+      label: "ACP #231"
+    - url: "https://github.com/stripe/ai/issues/381#issuecomment-4368781393"
+      label: "Stripe #381"
+
+
 # ═══ DAY 76 — 2026-05-02 ═══
 
 - id: d76-cross-language-byte-parity-wave-1

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog | AEOESS</title>
 <!-- PROPAGATION-ZONE-START -->
-<meta name="description" content="Day-by-day dev log of building the Agent Passport System — enforcement and accountability layer for AI agents. Bring your own identity. Policy eval under 2ms. 2,711 tests. SDK leads with /core subpath (curated essentials), MCP leads with 20 essential tools. Full surface area: 150 MCP tools, 8 research papers, IETF Internet-Draft. Started February 18, 2026.">
+<meta name="description" content="Day-by-day dev log of building the Agent Passport System — enforcement and accountability layer for AI agents. Bring your own identity. Policy eval under 2ms. 2,884 tests. SDK leads with /core subpath (curated essentials), MCP leads with 20 essential tools. Full surface area: 150 MCP tools, 8 research papers, IETF Internet-Draft. Started February 18, 2026.">
 <meta name="keywords" content="AI agent identity, agent passport, Ed25519, MCP server, multi-agent coordination, agentic commerce, AI governance, delegation chains, values floor, cryptographic identity, agent protocol, open source AI infrastructure, build in public">
 <meta name="author" content="Tymofii Pidlisnyi">
 <meta name="robots" content="index, follow">
@@ -31,7 +31,7 @@
 <meta property="og:type" content="blog">
 <meta property="og:site_name" content="AEOESS">
 <meta property="og:title" content="AEOESS Dev Log — Building AI Agent Infrastructure in 28 Days">
-<meta property="og:description" content="Day-by-day dev log: enforcement and accountability layer for AI agents. Bring your own identity. 2,711 tests. SDK /core subpath (curated essentials), MCP essential profile (150 tools). Full surface: 150 MCP tools. Open source.">
+<meta property="og:description" content="Day-by-day dev log: enforcement and accountability layer for AI agents. Bring your own identity. 2,884 tests. SDK /core subpath (curated essentials), MCP essential profile (150 tools). Full surface: 150 MCP tools. Open source.">
 <meta property="og:url" content="https://aeoess.com/blog.html">
 <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <meta property="article:author" content="https://tymofii.me">
@@ -44,7 +44,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AEOESS Dev Log — Governance for the Agent Economy">
-<meta name="twitter:description" content="Enforcement and accountability layer for AI agents. Bring your own identity. 2,711 tests. SDK /core subpath, MCP essential profile. Eight papers, IETF draft. Open source, build in public.">
+<meta name="twitter:description" content="Enforcement and accountability layer for AI agents. Bring your own identity. 2,884 tests. SDK /core subpath, MCP essential profile. Eight papers, IETF draft. Open source, build in public.">
 <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
 <!-- PROPAGATION-ZONE-END -->
 
@@ -816,10 +816,21 @@
   <div class="breadcrumb"><a href="/">AEOESS</a> / Blog</div>
   <h1>Dev Log: Building Agent Passport System</h1>
 <!-- PROPAGATION-ZONE-START -->
-  <p class="sub">Day-by-day record of building the enforcement and accountability layer for AI agents. Bring your own identity: did:key, did:web, SPIFFE, OAuth, native did:aps. Started February 18, 2026. 2,711 tests, eight papers, IETF draft. Open source. <span style="color:var(--ink-5)">Full surface area: 150 MCP tools.</span></p>
+  <p class="sub">Day-by-day record of building the enforcement and accountability layer for AI agents. Bring your own identity: did:key, did:web, SPIFFE, OAuth, native did:aps. Started February 18, 2026. 2,884 tests, eight papers, IETF draft. Open source. <span style="color:var(--ink-5)">Full surface area: 150 MCP tools.</span></p>
 <!-- PROPAGATION-ZONE-END -->
   <p class="sub" style="margin-top:.6rem">See the full picture on <a href="roadmap.html" style="font-weight:600">the roadmap</a> — every ship across protocol, product, research, comms, and ops with dependency arrows.</p>
 </div>
+
+
+<article class="post" id="day-77-phase-4-1-alpha-and-per-condition-attestation">
+  <time class="post-date" datetime="2026-05-03">May 3, 2026</time>
+  <h2>Day 77: Phase 4.1 alpha and the per-condition attestation question.</h2>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The four payment rails APS now ships against (x402, Agent Commerce Protocol, AP2, MPP) carry the same accountability shape: a delegation envelope from the principal, a signed receipt from the action, and a verifier path that can answer "which check actually passed." Phase 4.1 alpha shipped today across four registries: SDK <code>2.6.0-alpha.2</code> on npm, MCP <code>3.2.0</code> on npm, Python <code>2.4.0a2</code> on PyPI, Skill <code>5.9.0</code> on ClawHub. The architecture pieces inside it are the ones the broader payment-rails community has been working through in parallel: rail receipts as accountability evidence with <code>claim_type</code> and <code>scope_of_claim</code> fields, DID URI signing with rotation-aware verification, and optional cross-receipt link fields for settlement binding. Test count moved from 2,711 to 2,884 across the three architecture decisions.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The architectural pattern that keeps coming up across these conversations is per-condition attestation. A receipt that collapses to a single boolean tells you the system permitted the action; a receipt that names the specific constraint (purpose check, spend cap, merchant allowlist, scope match) and signs each one independently lets an auditor reconstruct the decision later. The Phase 4.1 receipt shape carries <code>claim_type</code> plus <code>scope_of_claim</code> for that reason. The forbidden-substitution detector rejects a receipt that tries to use a <code>purpose_check</code> signature where a <code>spend_cap_check</code> was required, so the per-condition guarantee survives compositions where multiple receipts cross-reference each other.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The DID URI signer answers a related question on the identity side. Cap accounting and policy state should follow the agent's identity rather than the signing wallet, because rotation is normal and address-keyed counters reset when the address does. The verifier walks <code>verificationMethod[]</code> on a <code>RotatableDIDDocument</code> and respects <code>retiredAt</code> markers, so a key retired before a receipt was signed reads as compromise (reject) and a key retired after reads as legitimate post-rotation (accept). Native <code>did:aps</code> ships with the rotation log built in. <code>did:key</code> resolves through the existing W3C VC wrapper. Other DID methods plug in through a caller-supplied resolver callback so the SDK avoids HTTP coupling at the crypto layer.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75"><strong style="color:var(--text)">Eight comments and pull requests went up across the payment-rails ecosystem today.</strong> x402 architecture and spec threads (<a href="https://github.com/x402-foundation/x402/issues/2067">#2067</a>, <a href="https://github.com/x402-foundation/x402/issues/694">#694</a>), Agent Commerce Protocol governance binding discussion (<a href="https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231">#231</a>), Stripe agent-toolkit policy enforcement (<a href="https://github.com/stripe/ai/issues/356">#356</a>, <a href="https://github.com/stripe/ai/issues/381">#381</a>), AutoGen distributed agent runtime (<a href="https://github.com/microsoft/autogen/issues/7372">#7372</a>), plus inclusion PRs for <a href="https://github.com/xpaysh/awesome-x402/pull/328">awesome-x402</a> and <a href="https://github.com/xpaysh/awesome-mcp-monetization/pull/6">awesome-mcp-monetization</a>. Each post opens with a failure mode, names the primitive, points to evidence, ends with an open question. The substance is the architecture argument and the code is what backs it.</p>
+  <p style="color:var(--dim);font-size:.95rem;line-height:1.75">The protocol-level point underneath all of this: the four rails share one accountability primitive, instantiated four ways. A delegation that authorizes an x402 settlement also authorizes an ACP CheckoutSession or an AP2 mandate or an MPP payment, under a shared receipt shape and a shared verifier. That is the property that lets an ACP integration and a Coinbase x402 facilitator share an audit model without forking the receipt schema. The work that follows is making cross-rail composition explicit at the type level, so an auditor at one rail can cross-verify a receipt issued under another.</p>
+</article>
 
 
 <article class="post" id="day-76-cross-language-byte-parity">
