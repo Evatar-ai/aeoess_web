@@ -11,23 +11,31 @@ Allow: /.well-known/mcp.json
 Allow: /.well-known/aps.txt
 Allow: /.well-known/agent-trust.json
 Allow: /.well-known/agents.json
+Allow: /.well-known/security.txt
 
-# Private / admin / legacy
-Disallow: /ideas-admin.html
-Disallow: /forvlad.html
+# Private / admin
 Disallow: /board.html
 Disallow: /comms/
 Disallow: /mywork/
 Disallow: /datadividend/
-Disallow: /index_old*.html
+
+# Comparison builds (canonical is opensource.html)
+Disallow: /opensource-v1.html
+Disallow: /opensource-v2.html
+
+# Off-system explorations (not for indexing)
+Disallow: /explorations/
+
+# Legacy index variants (already 301'd or removed)
 Disallow: /index_v2.html
+Disallow: /index_old1.html
+Disallow: /index_old2.html
 Disallow: /index_new.html
 Disallow: /index_aeoess.html
 Disallow: /index-old-backup.html
 Disallow: /index-v2.html
 
 # Assets
-# Disallow: /*.pdf$  (removed 2026-04-11: was blocking Zenodo papers + IETF drafts from Google Scholar)
 Disallow: /*.zip$
 
 Sitemap: https://aeoess.com/sitemap.xml
@@ -41,6 +49,9 @@ Sitemap: https://aeoess.com/sitemap.xml
 
 # Agent governance
 # https://aeoess.com/.well-known/aps.txt
+
+# Security disclosure (RFC 9116)
+# https://aeoess.com/.well-known/security.txt
 
 # AI crawlers welcome
 User-agent: GPTBot
