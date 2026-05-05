@@ -72,12 +72,14 @@
   });
 
   // 6. Desktop dropdown menus (Solutions, Resources)
-  // React stripped at build time; reattach hover + click + outside-close.
+  // React stripped at build time; reattach hover + click + outside-close
+  // with hover-bridge delay so cursor can cross the 8px gap to the panel.
   document.querySelectorAll('[data-nav-dropdown]').forEach((dropdown) => {
     const button = dropdown.querySelector('button');
     const panel = dropdown.querySelector('[data-nav-dropdown-panel]');
     if (!button || !panel) return;
     let isOpen = false;
+    let closeTimer = null;
     const open = () => {
       panel.style.opacity = '1';
       panel.style.transform = 'translateY(0)';
@@ -92,10 +94,20 @@
       isOpen = false;
       button.setAttribute('aria-expanded', 'false');
     };
+    const cancelClose = () => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    };
+    const scheduleClose = () => {
+      cancelClose();
+      closeTimer = setTimeout(close, 220);
+    };
+    button.style.cursor = 'pointer';
     button.setAttribute('aria-haspopup', 'true');
     button.setAttribute('aria-expanded', 'false');
-    dropdown.addEventListener('mouseenter', open);
-    dropdown.addEventListener('mouseleave', close);
+    dropdown.addEventListener('mouseenter', () => { cancelClose(); open(); });
+    dropdown.addEventListener('mouseleave', scheduleClose);
+    panel.addEventListener('mouseenter', cancelClose);
+    panel.addEventListener('mouseleave', scheduleClose);
     button.addEventListener('click', (e) => {
       e.preventDefault();
       isOpen ? close() : open();
