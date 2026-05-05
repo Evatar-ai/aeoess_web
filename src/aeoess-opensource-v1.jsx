@@ -32,7 +32,7 @@ const V1_CAPABILITIES = [
 { k: 'REPUTATION', v: 'Trust is earned through performance. Each receipt updates a Bayesian score. Scores travel with the passport.' },
 { k: 'COORDINATION', v: 'Agents discover each other through signed capability ads. No central registry, no single point of trust.' },
 { k: 'COMMUNICATION', v: 'Every message is a signed envelope. Tamper-evident, replay-resistant, addressable by DID.' },
-{ k: 'GOVERNANCE', v: 'Policies are first-class objects. Versioned, signed, and evaluated at the gateway.' },
+{ k: 'GOVERNANCE', v: 'Policies are first-class objects. Versioned, signed, and evaluated at the gateway. 14 constraint dimensions.' },
 { k: 'COMMERCE', v: 'Spend caps, currency limits, recipient allowlists. Enforced before the call leaves the agent.' },
 { k: 'DATA', v: 'Per-resource scopes. Read vs. write. Time-bounded. Auto-expires.' },
 { k: 'NETWORK', v: 'Egress is gated. Allowlists by host and method. No silent exfiltration.' },
@@ -155,9 +155,9 @@ function AeoessOpenSourceV1({ palette, density, showProof, heroFont }) {
           {/* Inline stat row, three large numerals */}
           <div style={{ display: 'flex', gap: 48, alignItems: 'baseline', marginTop: 32 }}>
             {[
-              { v: '8', l: 'PAPERS' },
+              { v: '<2ms', l: 'POLICY EVAL' },
               { v: '20', l: 'ESSENTIAL TOOLS' },
-              { v: '2,884', l: 'TESTS' }].
+              { v: '2,586', l: 'TESTS' }].
               map((s) =>
               <div key={s.l}>
                 <div style={{
@@ -273,7 +273,7 @@ import {
         </div>
 
         {/* RIGHT, Updates rail */}
-        <aside data-updates-panel="" style={{
+        <aside style={{
             position: 'sticky', top: 90,
             border: `1px solid ${P.ruleLight}`, borderRadius: 6, background: P.paper,
             maxHeight: `calc(100vh - 110px)`, display: 'flex', flexDirection: 'column', overflow: 'hidden'
