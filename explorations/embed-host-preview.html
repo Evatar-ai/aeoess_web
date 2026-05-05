@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Embed host preview · protocol architecture</title>
+<style>
+  :root { --bg:#fff; --ink:#0a0b0d; --ink-2:#3a3a3a; --ink-3:#666; --line:#e6e6e6; --accent:#0e8f5b; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--ink);
+    font-family: 'Fraunces', ui-serif, Georgia, serif; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 64px 28px 96px; }
+  .kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+  h1 { font-size: 44px; font-weight: 300; line-height: 1.08; margin: 0 0 18px; letter-spacing: -0.01em; }
+  .lede { font-size: 19px; line-height: 1.55; color: var(--ink-2); max-width: 680px; margin: 0 0 56px; }
+  .lede em { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; font-style: normal;
+    background: rgba(14,143,91,0.06); padding: 1px 6px; border-radius: 2px; color: var(--accent); }
+  .meta { display: flex; gap: 28px; flex-wrap: wrap; margin: 0 0 36px; padding: 14px 0;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--ink-3);
+    letter-spacing: 0.06em; }
+  .meta b { color: var(--ink); font-weight: 500; }
+  .embed { margin: 0; }
+  .embed-frame { width: 100%; border: 0; display: block; background: #0a0b0d; }
+  .embed-caption { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px;
+    color: var(--ink-3); letter-spacing: 0.05em; margin: 12px 0 0; display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; }
+  .embed-caption code { background: rgba(0,0,0,0.04); padding: 1px 6px; border-radius: 2px; }
+  .body { margin: 56px 0 0; }
+  .body h2 { font-size: 24px; font-weight: 400; margin: 0 0 12px; }
+  .body p { font-size: 16px; line-height: 1.6; color: var(--ink-2); max-width: 680px; }
+  .footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--ink-3);
+    letter-spacing: 0.04em; }
+  .pulse { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    margin-right: 8px; vertical-align: middle; animation: p 1.4s infinite; }
+  @keyframes p { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Fraunces:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+
+  <p class="kicker">embed host · preview</p>
+  <h1>Protocol architecture, in motion.</h1>
+  <p class="lede">
+    This page mocks the surrounding article shell so the visualization can be reviewed
+    in context — light theme, body type, real measure. The block below is the same
+    iframe a published post would mount, talking to this host through
+    <em>postMessage</em> for height.
+  </p>
+
+  <div class="meta">
+    <span><b>SOURCE</b> &nbsp; protocol-architecture.html</span>
+    <span><b>EMBED</b> &nbsp; iframe + postMessage(height)</span>
+    <span><b>HOST</b> &nbsp; light, serif body</span>
+    <span><b>STATUS</b> &nbsp; <span class="pulse"></span>live</span>
+  </div>
+
+  <figure class="embed">
+    <iframe id="viz" class="embed-frame" src="protocol-architecture.html"
+            title="Protocol architecture visualization"
+            loading="lazy"
+            style="height: 760px;"></iframe>
+    <figcaption class="embed-caption">
+      <span>fig 1 · the action lifecycle, the cascade, the gateway, the mesh, the rails, the interop matrix.</span>
+      <span>height: <code id="h-readout">760px</code></span>
+    </figcaption>
+  </figure>
+
+  <section class="body">
+    <h2>Six scenes, one substrate.</h2>
+    <p>
+      Each tab in the embed above is a different cross-section of the same architecture.
+      Tabs persist via localStorage; the iframe reports its rendered height up to this host
+      after every layout change so the surrounding column reflows cleanly. No magic
+      numbers, no scroll-inside-scroll.
+    </p>
+  </section>
+
+  <p class="footer">aeoess · protocol architecture · embed host preview</p>
+</div>
+
+<script>
+  // Listen for height messages from the embedded viz and resize the iframe.
+  const iframe = document.getElementById('viz');
+  const readout = document.getElementById('h-readout');
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === 'aeoess-arch-embed:height' && typeof d.height === 'number') {
+      const h = Math.max(420, Math.min(2400, d.height));
+      iframe.style.height = h + 'px';
+      readout.textContent = h + 'px';
+    }
+  });
+</script>
+</body>
+</html>

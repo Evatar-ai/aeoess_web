@@ -1,0 +1,114 @@
+/* aeoess-responsive.css
+   Global mobile rules. Targets the inline-styled grids and flex layouts
+   used throughout aeoess-* page components. Activates at <=768px.
+
+   Strategy: !important overrides to beat React's inline styles.
+   Scoped under [data-aeoess-page] so this only affects our pages,
+   not the design canvas chrome.
+*/
+
+/* ─────────────────────────────────────────────────────────────────
+   Mark every aeoess page root with [data-aeoess-page]
+   so we can scope without collateral damage.
+   We auto-tag: any element with class .aeoess-page, OR
+   the responsive rules below use a media query + a generic selector.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Hide hamburger by default; the SubHeader renders both */
+.aeoess-hamburger { display: none !important; }
+.aeoess-mobile-menu { display: none; }
+
+@media (max-width: 768px) {
+
+  /* ── 1. SubHeader: hide desktop nav, show hamburger ─────────── */
+  .aeoess-nav-desktop {
+    display: none !important;
+  }
+  .aeoess-hamburger {
+    display: inline-flex !important;
+  }
+  .aeoess-mobile-menu.open {
+    display: flex !important;
+  }
+
+  /* ── 2. Reduce horizontal padding everywhere ────────────────── */
+  /* Pages use padding: '72px 40px' or similar. Force inner padding down. */
+  [data-aeoess-page] section,
+  [data-aeoess-page] header,
+  [data-aeoess-page] footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* ── 3. Force every multi-column grid to single column ──────── */
+  /* Catches the dominant "1fr 1fr", "1fr 1fr 1fr", "1.3fr 1fr",
+     "200px 1fr", "90px 90px 1fr 80px" etc. patterns we use */
+  [data-aeoess-page] [style*="grid-template-columns"],
+  [data-aeoess-page] [style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── 4. Force flex rows with explicit gaps to wrap ──────────── */
+  [data-aeoess-page] [style*="display: flex"][style*="gap"],
+  [data-aeoess-page] [style*="display:flex"][style*="gap"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* ── 5. Reduce hero typography ──────────────────────────────── */
+  [data-aeoess-page] h1 {
+    font-size: clamp(32px, 9vw, 44px) !important;
+    line-height: 1.1 !important;
+  }
+  [data-aeoess-page] h2 {
+    font-size: clamp(24px, 6.5vw, 32px) !important;
+    line-height: 1.15 !important;
+  }
+
+  /* ── 6. Tables: allow horizontal scroll ─────────────────────── */
+  [data-aeoess-page] table {
+    display: block !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+  }
+
+  /* ── 7. Code blocks scroll horizontally instead of overflowing  */
+  [data-aeoess-page] pre {
+    overflow-x: auto !important;
+    font-size: 11.5px !important;
+  }
+
+  /* ── 8. Sticky aside (Updates rail) becomes inline ──────────── */
+  [data-aeoess-page] aside[style*="sticky"] {
+    position: static !important;
+    max-height: none !important;
+    margin-top: 32px !important;
+  }
+
+  /* ── 9. Footer columns stack ────────────────────────────────── */
+  [data-aeoess-page] footer [style*="grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* ── 10. Reduce padding on inner panels ─────────────────────── */
+  [data-aeoess-page] [style*="padding: 28px 32px"],
+  [data-aeoess-page] [style*="padding:28px 32px"],
+  [data-aeoess-page] [style*="padding: 24px 28px"] {
+    padding: 18px 16px !important;
+  }
+
+  /* ── 11. Update entry rail (a in updates list) ──────────────── */
+  [data-aeoess-page] aside [style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── 12. Buttons stay readable ──────────────────────────────── */
+  [data-aeoess-page] a[style*="padding: 10px 16px"],
+  [data-aeoess-page] button {
+    min-height: 40px;
+  }
+}
+
+/* iOS-frame artboards have a smaller viewport; let the same media
+   query catch them too. iOS frame inner width is 375px so it triggers. */

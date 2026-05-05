@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Protocol Architecture — Wireframe Exploration</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fbf9f3;
+    --paper-2: #f3efe3;
+    --ink: #1a1814;
+    --ink-2: #4a463d;
+    --ink-3: #8a857a;
+    --rule: #2a2620;
+    --rule-soft: #c8c2b1;
+    --tape: #ffe680;
+    --tape-2: #ffb8a8;
+    --pencil: #2a2620;
+    --hand: 'Caveat', cursive;
+    --print: 'Patrick Hand', cursive;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--print); font-size: 16px; }
+  body {
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 27px, rgba(0,0,0,0.025) 27px 28px),
+      radial-gradient(ellipse 800px 400px at 30% 0%, rgba(255,220,180,0.3), transparent 60%),
+      radial-gradient(ellipse 600px 600px at 90% 80%, rgba(200,220,255,0.2), transparent 70%);
+    min-height: 100vh;
+  }
+
+  .sheet { max-width: 1480px; margin: 0 auto; padding: 36px 48px 80px; position: relative; }
+  @media (max-width: 720px) { .sheet { padding: 22px 18px 60px; } }
+
+  /* top header — handwritten masthead */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 12px; border-bottom: 2px solid var(--rule); margin-bottom: 8px; gap: 24px; flex-wrap: wrap; }
+  .masthead h1 { font-family: var(--hand); font-weight: 700; font-size: 64px; line-height: 0.9; margin: 0; letter-spacing: -0.01em; }
+  .masthead h1 .scribble { display: inline-block; transform: rotate(-1.2deg); }
+  .masthead h1 small { display: block; font-family: var(--print); font-size: 16px; font-weight: 400; color: var(--ink-2); letter-spacing: 0.02em; margin-top: 6px; }
+  .masthead .meta { font-family: var(--mono); font-size: 11px; color: var(--ink-2); letter-spacing: 0.06em; text-align: right; line-height: 1.7; }
+  .masthead .meta .stamp { display: inline-block; border: 1.5px solid var(--rule); padding: 4px 10px; transform: rotate(-2deg); margin-bottom: 6px; font-weight: 600; }
+
+  .sub-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0 28px; gap: 24px; flex-wrap: wrap; font-family: var(--print); color: var(--ink-2); }
+  .sub-row .pill { display: inline-block; background: var(--tape); padding: 4px 10px; transform: rotate(-1deg); font-family: var(--hand); font-size: 22px; }
+
+  /* legend strip */
+  .legend { display: flex; gap: 22px; padding: 12px 16px; border: 1.5px dashed var(--rule); background: rgba(255,255,255,0.4); margin-bottom: 32px; flex-wrap: wrap; }
+  .legend .item { display: flex; align-items: center; gap: 8px; font-family: var(--print); font-size: 14px; color: var(--ink-2); }
+  .legend .swatch { width: 22px; height: 14px; border: 1.2px solid var(--rule); }
+  .legend .swatch.dashed { border-style: dashed; background: transparent; }
+  .legend .swatch.solid { background: var(--ink); }
+  .legend .swatch.tape { background: var(--tape); transform: rotate(-3deg); }
+  .legend .swatch.line { height: 2px; background: var(--ink); border: 0; }
+  .legend .arrow { font-family: var(--mono); font-size: 14px; color: var(--ink); }
+
+  /* Section labels */
+  .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--ink-2); margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 1.5px solid var(--rule); display: flex; justify-content: space-between; align-items: baseline; }
+  .section-label .num { font-family: var(--hand); font-size: 26px; color: var(--ink); margin-right: 8px; }
+  .section-label .right { font-family: var(--print); font-size: 14px; color: var(--ink-3); letter-spacing: 0; }
+
+  /* Scene grid */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 28px; }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+  .scene-card { position: relative; }
+  .scene-card .idx { position: absolute; top: -8px; left: -10px; font-family: var(--hand); font-size: 56px; line-height: 1; color: var(--ink); transform: rotate(-4deg); z-index: 3; pointer-events: none; }
+  .scene-card .idx::after { content: ''; display: block; width: 60px; height: 8px; background: var(--tape); margin-top: -10px; margin-left: 2px; transform: rotate(2deg); }
+
+  .frame {
+    border: 2px solid var(--rule); background: var(--paper);
+    padding: 22px 22px 18px; position: relative;
+    box-shadow: 3px 3px 0 var(--rule);
+  }
+  .frame .title { font-family: var(--hand); font-size: 32px; line-height: 1; margin: 0 0 4px 50px; }
+  .frame .sub { font-family: var(--print); font-size: 14px; color: var(--ink-2); margin: 0 0 14px 50px; max-width: 56ch; }
+  .frame .canvas { position: relative; width: 100%; aspect-ratio: 16 / 8.5; border: 1.5px dashed var(--rule); background: rgba(255,255,255,0.5); overflow: hidden; }
+  .frame .canvas svg { width: 100%; height: 100%; display: block; }
+  .frame .footnotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
+  .frame .footnotes .fn { font-family: var(--print); font-size: 13px; color: var(--ink-2); line-height: 1.4; }
+  .frame .footnotes .fn b { font-family: var(--hand); font-size: 18px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; letter-spacing: 0.01em; }
+  @media (max-width: 540px) { .frame .footnotes { grid-template-columns: 1fr; } }
+
+  /* alt sketch tabs (within each scene, 2 layout options) */
+  .alt-tabs { display: flex; gap: 6px; position: absolute; top: 14px; right: 16px; z-index: 2; }
+  .alt-tab { font-family: var(--mono); font-size: 10px; padding: 3px 8px; border: 1.2px solid var(--rule); background: var(--paper); cursor: pointer; letter-spacing: 0.08em; color: var(--ink-2); }
+  .alt-tab[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .alt { display: none; position: absolute; inset: 0; }
+  .alt.active { display: block; }
+
+  /* annotations / scribbles */
+  .annot { position: absolute; font-family: var(--hand); font-size: 18px; color: var(--ink); pointer-events: none; }
+  .annot.q { color: #c4412c; }
+  .annot.tape-tag { background: var(--tape-2); padding: 1px 6px; transform: rotate(-2deg); }
+
+  /* margin notes */
+  .margin-note { font-family: var(--hand); font-size: 22px; color: var(--ink-2); transform: rotate(-1.5deg); margin-top: 16px; padding-left: 50px; }
+  .margin-note::before { content: '↳ '; color: var(--ink-3); }
+
+  /* questions row */
+  .questions { margin-top: 48px; padding: 22px 26px; border: 2px solid var(--rule); background: rgba(255,230,128,0.25); }
+  .questions h3 { font-family: var(--hand); font-size: 30px; margin: 0 0 10px; }
+  .questions ol { font-family: var(--print); font-size: 16px; color: var(--ink); margin: 0; padding-left: 24px; line-height: 1.7; }
+  .questions ol li { margin-bottom: 4px; }
+  .questions ol li b { font-family: var(--hand); font-size: 18px; }
+
+  /* sketch SVG default styles */
+  svg .stroke { stroke: var(--pencil); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  svg .stroke.dashed { stroke-dasharray: 4 3; }
+  svg .stroke.thick { stroke-width: 2.2; }
+  svg .ink { fill: var(--pencil); }
+  svg .label { font-family: 'Patrick Hand', cursive; font-size: 13px; fill: var(--ink); }
+  svg .hand { font-family: 'Caveat', cursive; font-size: 18px; fill: var(--ink); }
+  svg .small { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: var(--ink-2); letter-spacing: 0.06em; }
+  svg .accent { fill: #d8462b; }
+  svg .tape-fill { fill: var(--tape); }
+  svg .soft { stroke: var(--rule-soft); }
+
+  /* hand-drawn-look filter */
+  .wobble { filter: url(#wobble); }
+
+  footer { margin-top: 44px; padding-top: 22px; border-top: 1.5px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--mono); font-size: 11px; color: var(--ink-2); letter-spacing: 0.06em; }
+  footer a { color: var(--ink); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="wobble">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="1.6"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <h1><span class="scribble">protocol architecture.</span><small>wireframe explorations · low-fi · structure first, polish later</small></h1>
+    <div class="meta">
+      <span class="stamp">DRAFT v0.3</span><br>
+      sheet 01 / 01<br>
+      pages: 6 scenes · 2 alt layouts each<br>
+      revision: <b>open</b>
+    </div>
+  </header>
+
+  <div class="sub-row">
+    <div>Same six scenes as the cinematic build. Different question: <b>what's the right shape for each one?</b></div>
+    <div><span class="pill">→ 12 sketches total</span></div>
+  </div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch solid"></span> signed / committed</div>
+    <div class="item"><span class="swatch dashed"></span> proposed / candidate</div>
+    <div class="item"><span class="swatch tape"></span> hot path / focus</div>
+    <div class="item"><span class="arrow">→</span> control flow</div>
+    <div class="item"><span class="arrow">⤳</span> async / receipt</div>
+    <div class="item"><span class="arrow">⊘</span> denied / fail-closed</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-label"><span><span class="num">01</span>LIFE OF AN ACTION</span><span class="right">six stages, each signed · pick: linear track vs. swimlane</span></div>
+
+  <div class="scene-card">
+    <div class="idx">01</div>
+    <div class="frame" data-scene="0">
+      <div class="alt-tabs" role="tablist">
+        <button class="alt-tab" aria-pressed="true" data-alt="0">A · TRACK</button>
+        <button class="alt-tab" aria-pressed="false" data-alt="1">B · SWIM</button>
+      </div>
+      <h3 class="title">Life of an action.</h3>
+      <p class="sub">Passport → delegation → intent → gateway → enforcement → receipt. Six checkpoints, all signed.</p>
+      <div class="canvas">
+        <div class="alt active" data-alt="0">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- horizontal track with 6 stages -->
+            <line x1="80" y1="240" x2="1120" y2="240" class="stroke thick"/>
+            <text x="80" y="80" class="hand">stage by stage —</text>
+            <text x="600" y="80" class="hand" text-anchor="middle">authority narrows ➜</text>
+            <text x="1100" y="80" class="hand" text-anchor="end">receipt out.</text>
+            <g>
+              <!-- 6 nodes -->
+              <g transform="translate(140,240)"><circle r="34" class="stroke"/><text y="6" text-anchor="middle" class="hand">passport</text><text y="86" text-anchor="middle" class="small">DID + ED25519</text><text y="-56" text-anchor="middle" class="small">01</text></g>
+              <g transform="translate(320,240)"><circle r="34" class="stroke"/><text y="6" text-anchor="middle" class="hand">deleg.</text><text y="86" text-anchor="middle" class="small">SCOPE NARROW</text><text y="-56" text-anchor="middle" class="small">02</text></g>
+              <g transform="translate(500,240)"><circle r="34" class="stroke"/><text y="6" text-anchor="middle" class="hand">intent</text><text y="86" text-anchor="middle" class="small">SIGNED ASK</text><text y="-56" text-anchor="middle" class="small">03</text></g>
+              <g transform="translate(680,240)">
+                <rect x="-44" y="-30" width="88" height="60" class="stroke tape-fill"/>
+                <text y="6" text-anchor="middle" class="hand">gateway</text><text y="86" text-anchor="middle" class="small">14 GATES</text><text y="-56" text-anchor="middle" class="small">04 · HOT</text>
+              </g>
+              <g transform="translate(860,240)"><circle r="34" class="stroke"/><text y="6" text-anchor="middle" class="hand">enforce</text><text y="86" text-anchor="middle" class="small">RAIL ADAPTER</text><text y="-56" text-anchor="middle" class="small">05</text></g>
+              <g transform="translate(1040,240)"><circle r="34" class="stroke"/><text y="6" text-anchor="middle" class="hand">receipt</text><text y="86" text-anchor="middle" class="small">CANONICAL JSON</text><text y="-56" text-anchor="middle" class="small">06</text></g>
+            </g>
+            <!-- arrows -->
+            <g class="ink" font-family="JetBrains Mono" font-size="14">
+              <text x="230" y="244" text-anchor="middle">→</text>
+              <text x="410" y="244" text-anchor="middle">→</text>
+              <text x="590" y="244" text-anchor="middle">→</text>
+              <text x="770" y="244" text-anchor="middle">→</text>
+              <text x="950" y="244" text-anchor="middle">→</text>
+            </g>
+            <!-- annotation scribble -->
+            <g transform="translate(680,170)">
+              <path d="M -50,30 Q -20,5 0,-10 Q 20,-25 60,-30" class="stroke dashed"/>
+              <text x="-90" y="20" class="hand">deny here = stops everything</text>
+            </g>
+            <!-- baseline annot -->
+            <g transform="translate(80,440)">
+              <text class="hand">cap: 5-receipt set is the only thing the auditor sees.</text>
+            </g>
+          </svg>
+        </div>
+        <div class="alt" data-alt="1">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- swimlane: human / agent / gateway / merchant -->
+            <g class="stroke soft">
+              <line x1="200" y1="80" x2="200" y2="500"/>
+              <line x1="80" y1="140" x2="1120" y2="140"/>
+              <line x1="80" y1="240" x2="1120" y2="240"/>
+              <line x1="80" y1="340" x2="1120" y2="340"/>
+              <line x1="80" y1="440" x2="1120" y2="440"/>
+            </g>
+            <g class="hand" text-anchor="end">
+              <text x="190" y="118">human</text>
+              <text x="190" y="218">agent</text>
+              <text x="190" y="318">gateway</text>
+              <text x="190" y="418">merchant</text>
+            </g>
+            <!-- events -->
+            <g>
+              <circle cx="280" cy="120" r="10" class="ink"/><text x="280" y="100" text-anchor="middle" class="small">ROOT.PASS</text>
+              <circle cx="380" cy="220" r="10" class="ink"/><text x="380" y="200" text-anchor="middle" class="small">DELEGATE</text>
+              <circle cx="500" cy="220" r="10" class="ink"/><text x="500" y="200" text-anchor="middle" class="small">INTENT</text>
+              <rect x="630" y="310" width="40" height="60" class="stroke tape-fill"/><text x="650" y="290" text-anchor="middle" class="small">GATE</text>
+              <circle cx="800" cy="420" r="10" class="ink"/><text x="800" y="402" text-anchor="middle" class="small">EXECUTE</text>
+              <circle cx="940" cy="420" r="10" class="ink"/><text x="940" y="402" text-anchor="middle" class="small">RECEIPT</text>
+            </g>
+            <!-- flow arrows -->
+            <path d="M 280,128 C 320,170 340,180 380,212" class="stroke"/>
+            <path d="M 388,224 L 492,224" class="stroke"/>
+            <path d="M 510,224 C 560,260 600,290 640,316" class="stroke"/>
+            <path d="M 670,340 C 720,380 760,400 800,418" class="stroke"/>
+            <path d="M 808,420 L 932,420" class="stroke"/>
+            <path d="M 940,412 C 900,360 700,250 290,130" class="stroke dashed"/>
+            <text x="600" y="498" text-anchor="middle" class="hand">receipt fans back to every signer ⤳</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footnotes">
+        <div class="fn"><b>identity</b>Ed25519 passport bound to a human principal. <code>did:key</code>, <code>did:web</code>, SPIFFE.</div>
+        <div class="fn"><b>scope</b>Each delegation narrows tools / budget / services. Never expands.</div>
+        <div class="fn"><b>receipts</b>5 primitives: Action, AuthorityBoundary, Custody, Contestability, APSBundle.</div>
+      </div>
+    </div>
+    <div class="margin-note">A reads as a story (1→6). B reads as choreography. Pick A for marketing, B for engineers.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-label"><span><span class="num">02</span>DELEGATION & CASCADE</span><span class="right">tree of authority · pick: radial vs. dendrogram</span></div>
+
+  <div class="scene-card">
+    <div class="idx">02</div>
+    <div class="frame" data-scene="1">
+      <div class="alt-tabs" role="tablist">
+        <button class="alt-tab" aria-pressed="true" data-alt="0">A · TREE</button>
+        <button class="alt-tab" aria-pressed="false" data-alt="1">B · RADIAL</button>
+      </div>
+      <h3 class="title">Delegation & cascade.</h3>
+      <p class="sub">Authority can only narrow downward. Revoke a node → the whole subtree dies in one call. Fail-closed at the gateway.</p>
+      <div class="canvas">
+        <div class="alt active" data-alt="0">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- top-down tree -->
+            <g transform="translate(600,80)">
+              <circle r="22" class="ink"/>
+              <text y="6" class="hand" fill="#fbf9f3" text-anchor="middle">H</text>
+              <text y="-34" class="small" text-anchor="middle">ROOT.PASS · HUMAN</text>
+            </g>
+            <!-- level 1 -->
+            <g class="stroke">
+              <path d="M 600,102 L 360,200"/>
+              <path d="M 600,102 L 600,200"/>
+              <path d="M 600,102 L 840,200"/>
+            </g>
+            <g>
+              <g transform="translate(360,220)"><circle r="16" class="stroke"/><text y="36" text-anchor="middle" class="small">orchestrator</text></g>
+              <g transform="translate(600,220)"><circle r="16" class="stroke"/><text y="36" text-anchor="middle" class="small">researcher</text></g>
+              <g transform="translate(840,220)"><circle r="16" class="stroke"/><text y="36" text-anchor="middle" class="small">payer-bot</text></g>
+            </g>
+            <!-- level 2 (some descendants of payer-bot) -->
+            <g class="stroke">
+              <path d="M 840,236 L 760,320"/>
+              <path d="M 840,236 L 920,320"/>
+              <path d="M 600,236 L 540,320"/>
+              <path d="M 600,236 L 660,320"/>
+              <path d="M 360,236 L 280,320"/>
+              <path d="M 360,236 L 440,320"/>
+            </g>
+            <g>
+              <g transform="translate(280,330)"><circle r="10" class="stroke"/></g>
+              <g transform="translate(440,330)"><circle r="10" class="stroke"/></g>
+              <g transform="translate(540,330)"><circle r="10" class="stroke"/></g>
+              <g transform="translate(660,330)"><circle r="10" class="stroke"/></g>
+              <g transform="translate(760,330)"><circle r="10" class="stroke"/></g>
+              <g transform="translate(920,330)"><circle r="10" class="stroke"/></g>
+            </g>
+            <!-- revoke marker on payer-bot subtree -->
+            <g transform="translate(840,220)">
+              <circle r="32" class="stroke dashed" stroke="#d8462b"/>
+              <text x="50" y="-8" class="hand q">revoke this node ↻</text>
+              <text x="50" y="14" class="hand q">→ subtree gone, 1 call.</text>
+            </g>
+            <line x1="760" y1="330" x2="760" y2="330" class="stroke"/>
+            <g class="stroke" stroke="#d8462b" stroke-dasharray="2 3">
+              <path d="M 770,328 L 750,332"/>
+              <path d="M 930,328 L 910,332"/>
+            </g>
+            <text x="600" y="430" text-anchor="middle" class="hand">authority can only narrow ⌄ (monotonic)</text>
+            <text x="600" y="460" text-anchor="middle" class="small">CHILD ⊆ PARENT  ·  ENFORCED AT ISSUANCE</text>
+          </svg>
+        </div>
+        <div class="alt" data-alt="1">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- radial -->
+            <g transform="translate(600,270)">
+              <circle r="190" class="stroke soft dashed"/>
+              <circle r="120" class="stroke soft dashed"/>
+              <circle r="60" class="stroke soft dashed"/>
+              <circle r="22" class="ink"/>
+              <text y="6" class="hand" fill="#fbf9f3" text-anchor="middle">H</text>
+              <!-- level 1 around 60r -->
+              <g class="stroke">
+                <line x1="0" y1="0" x2="0" y2="-60"/>
+                <line x1="0" y1="0" x2="52" y2="30"/>
+                <line x1="0" y1="0" x2="-52" y2="30"/>
+              </g>
+              <g><circle cx="0" cy="-60" r="10" class="stroke"/><text x="0" y="-72" text-anchor="middle" class="small">orch.</text></g>
+              <g><circle cx="52" cy="30" r="10" class="stroke"/><text x="80" y="34" class="small">payer</text></g>
+              <g><circle cx="-52" cy="30" r="10" class="stroke"/><text x="-80" y="34" text-anchor="end" class="small">research</text></g>
+              <!-- level 2 (around 120r) -->
+              <g class="stroke">
+                <line x1="0" y1="-60" x2="-30" y2="-115"/>
+                <line x1="0" y1="-60" x2="30" y2="-115"/>
+                <line x1="52" y1="30" x2="92" y2="62"/>
+                <line x1="52" y1="30" x2="40" y2="100"/>
+                <line x1="-52" y1="30" x2="-92" y2="62"/>
+                <line x1="-52" y1="30" x2="-40" y2="100"/>
+              </g>
+              <g class="stroke" fill="#fbf9f3">
+                <circle cx="-30" cy="-115" r="6"/>
+                <circle cx="30" cy="-115" r="6"/>
+                <circle cx="92" cy="62" r="6"/>
+                <circle cx="40" cy="100" r="6"/>
+                <circle cx="-92" cy="62" r="6"/>
+                <circle cx="-40" cy="100" r="6"/>
+              </g>
+              <!-- revoked subtree highlight -->
+              <g stroke="#d8462b" fill="none" stroke-dasharray="3 3">
+                <circle cx="52" cy="30" r="22"/>
+              </g>
+            </g>
+            <text x="600" y="490" text-anchor="middle" class="hand q">red ring = revoke target. radial shows reach at a glance.</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footnotes">
+        <div class="fn"><b>root</b>Human principal. Authority originates here.</div>
+        <div class="fn"><b>narrow</b>Child scopes are strict subsets of parent scopes.</div>
+        <div class="fn"><b>cascade</b>One API call revokes a node and every descendant.</div>
+      </div>
+    </div>
+    <div class="margin-note">A is more legible. B is more <i>impressive</i>. ?which does the audience need?</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-label"><span><span class="num">03</span>GATEWAY JUDGEMENT</span><span class="right">14 gates · pick: stack vs. radial dial</span></div>
+
+  <div class="scene-card">
+    <div class="idx">03</div>
+    <div class="frame" data-scene="2">
+      <div class="alt-tabs" role="tablist">
+        <button class="alt-tab" aria-pressed="true" data-alt="0">A · STACK</button>
+        <button class="alt-tab" aria-pressed="false" data-alt="1">B · DIAL</button>
+      </div>
+      <h3 class="title">Gateway judgement.</h3>
+      <p class="sub">Every action evaluated against 14 constraint dimensions. Miss a check → deny. No bypass on cache miss or ambiguity.</p>
+      <div class="canvas">
+        <div class="alt active" data-alt="0">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- left: incoming intent -->
+            <g transform="translate(120,260)">
+              <rect x="-60" y="-40" width="120" height="80" class="stroke"/>
+              <text class="hand" text-anchor="middle" y="6">intent</text>
+              <text class="small" text-anchor="middle" y="60">SIGNED · INBOUND</text>
+            </g>
+            <path d="M 200,260 L 320,260" class="stroke"/>
+            <text x="260" y="248" text-anchor="middle" class="small">ASK</text>
+            <!-- 14 gates as a vertical stack of horizontal hairlines -->
+            <g transform="translate(360,80)">
+              <text x="240" y="0" text-anchor="middle" class="hand">14 gates · evaluated in order</text>
+              <g>
+                <!-- gates -->
+                <g id="gates"></g>
+              </g>
+            </g>
+            <!-- right: outcome -->
+            <g transform="translate(1080,180)">
+              <rect x="-50" y="-26" width="100" height="52" class="stroke"/>
+              <text class="hand" text-anchor="middle" y="6">ALLOW</text>
+            </g>
+            <g transform="translate(1080,340)">
+              <rect x="-50" y="-26" width="100" height="52" class="stroke" stroke="#d8462b"/>
+              <text class="hand q" text-anchor="middle" y="6">DENY ⊘</text>
+            </g>
+            <text x="1080" y="430" text-anchor="middle" class="small">FAIL-CLOSED</text>
+            <text x="1080" y="448" text-anchor="middle" class="small">(default)</text>
+            <script type="application/json" id="g3-data">{"items":["identity","signature","scope","budget","rate","values","reputation","freshness","provenance","destination","payload-shape","cap-ledger","jurisdiction","conformance"]}</script>
+          </svg>
+        </div>
+        <div class="alt" data-alt="1">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- radial dial of 14 gates -->
+            <g transform="translate(600,270)">
+              <circle r="180" class="stroke dashed soft"/>
+              <circle r="140" class="stroke soft"/>
+              <circle r="40" class="ink"/>
+              <text y="6" text-anchor="middle" class="hand" fill="#fbf9f3">GATE</text>
+              <g id="dial"></g>
+            </g>
+            <text x="600" y="498" text-anchor="middle" class="hand">all 14 must pass · skip = deny</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footnotes">
+        <div class="fn"><b>14 gates</b>identity, sig, scope, budget, rate, values, reputation, freshness · plus six more.</div>
+        <div class="fn"><b>conformance</b>37 + 10 conformance vectors. Public test suite.</div>
+        <div class="fn"><b>fail-closed</b>Missing a check is a deny. No bypass.</div>
+      </div>
+    </div>
+    <div class="margin-note">A wins on legibility, B wins on "memorable visual." Try B in marketing, A in docs.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-label"><span><span class="num">04</span>TRUST MESH</span><span class="right">graph of bindings · pick: dense mesh vs. ego-graph</span></div>
+
+  <div class="scene-card">
+    <div class="idx">04</div>
+    <div class="frame" data-scene="3">
+      <div class="alt-tabs" role="tablist">
+        <button class="alt-tab" aria-pressed="true" data-alt="0">A · MESH</button>
+        <button class="alt-tab" aria-pressed="false" data-alt="1">B · EGO</button>
+      </div>
+      <h3 class="title">Trust mesh.</h3>
+      <p class="sub">Agents, humans, services bound by signed delegations, receipts, reputation. Every chain terminates at a human principal.</p>
+      <div class="canvas">
+        <div class="alt active" data-alt="0">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <g id="meshA"></g>
+            <text x="80" y="500" class="hand">edges = signed delegations · weight = reputation earned, not declared.</text>
+          </svg>
+        </div>
+        <div class="alt" data-alt="1">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- ego graph: zoom in on one agent -->
+            <g transform="translate(600,270)">
+              <circle r="36" class="ink"/>
+              <text y="6" text-anchor="middle" class="hand" fill="#fbf9f3">agent</text>
+              <text y="58" text-anchor="middle" class="small">YOU</text>
+              <g id="egoRing"></g>
+            </g>
+            <text x="600" y="490" text-anchor="middle" class="hand">first-hop only. zoom in / focus.</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footnotes">
+        <div class="fn"><b>agents</b>Passports as nodes. Reputation earned through completed work.</div>
+        <div class="fn"><b>mutual auth</b>Four-step downgrade-proof handshake (v1, Apr 22).</div>
+        <div class="fn"><b>humans</b>Every chain terminates at a human principal. Merkle-proven.</div>
+      </div>
+    </div>
+    <div class="margin-note">Mesh = "the network is real." Ego = "your agent specifically." Marketing wants both.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-label"><span><span class="num">05</span>PAYMENT RAILS</span><span class="right">scope check at the rail · pick: lanes vs. funnel</span></div>
+
+  <div class="scene-card">
+    <div class="idx">04</div>
+    <div class="frame" data-scene="4">
+      <div class="alt-tabs" role="tablist">
+        <button class="alt-tab" aria-pressed="true" data-alt="0">A · LANES</button>
+        <button class="alt-tab" aria-pressed="false" data-alt="1">B · FUNNEL</button>
+      </div>
+      <h3 class="title">Payment rails.</h3>
+      <p class="sub">Agent pays. Scope narrows. Merchant receives. Settlement record signed and filed per period.</p>
+      <div class="canvas">
+        <div class="alt active" data-alt="0">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- 5 horizontal rails (x402, AP2, ACP, MPP, Stripe Issuing) -->
+            <g transform="translate(80,90)">
+              <text x="0" y="0" class="small">5 RAILS</text>
+            </g>
+            <g id="rails"></g>
+            <!-- agent box -->
+            <g transform="translate(120,260)">
+              <rect x="-60" y="-90" width="120" height="180" class="stroke"/>
+              <text y="0" text-anchor="middle" class="hand">agent</text>
+              <text y="118" text-anchor="middle" class="small">SIGNED INTENT</text>
+            </g>
+            <!-- merchant box -->
+            <g transform="translate(1080,260)">
+              <rect x="-60" y="-90" width="120" height="180" class="stroke"/>
+              <text y="0" text-anchor="middle" class="hand">merchant</text>
+              <text y="118" text-anchor="middle" class="small">SETTLEMENT</text>
+            </g>
+            <!-- scope check vertical bar -->
+            <g transform="translate(620,160)">
+              <rect x="-12" y="0" width="24" height="200" class="stroke tape-fill"/>
+              <text x="0" y="-12" text-anchor="middle" class="small">SCOPE CHECK</text>
+              <text x="0" y="232" text-anchor="middle" class="small">CAP · MERCHANT · 1-USE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="alt" data-alt="1">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- funnel view -->
+            <path d="M 200,140 L 1000,140 L 720,400 L 480,400 Z" class="stroke" fill="rgba(0,0,0,0.03)"/>
+            <text x="600" y="120" text-anchor="middle" class="hand">all candidate rails — narrow to scope</text>
+            <text x="240" y="160" class="small">x402</text>
+            <text x="430" y="160" class="small">AP2</text>
+            <text x="600" y="160" text-anchor="middle" class="small">ACP</text>
+            <text x="770" y="160" class="small">MPP</text>
+            <text x="930" y="160" text-anchor="end" class="small">STRIPE ISSUING</text>
+            <text x="600" y="430" text-anchor="middle" class="hand">→ chosen rail · scope-narrowed</text>
+            <line x1="600" y1="410" x2="600" y2="470" class="stroke"/>
+            <rect x="540" y="470" width="120" height="40" class="stroke tape-fill"/>
+            <text x="600" y="496" text-anchor="middle" class="small">SETTLEMENT</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footnotes">
+        <div class="fn"><b>rails</b>x402, AP2, ACP, MPP, Stripe Issuing. Phase 4.1 alpha (May 03).</div>
+        <div class="fn"><b>scope check</b>Spend cap · merchant allow-list · single-use intent.</div>
+        <div class="fn"><b>settlement</b>Per-period signed records. Build C pipeline (Apr 16).</div>
+      </div>
+    </div>
+    <div class="margin-note">Lanes for "we support 5 rails." Funnel for "scope narrows the choice." → both true.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-label"><span><span class="num">06</span>CROSS-IMPL INTEROP</span><span class="right">six runs, identical hash · pick: ladder vs. fan</span></div>
+
+  <div class="scene-card">
+    <div class="idx">06</div>
+    <div class="frame" data-scene="5">
+      <div class="alt-tabs" role="tablist">
+        <button class="alt-tab" aria-pressed="true" data-alt="0">A · LADDER</button>
+        <button class="alt-tab" aria-pressed="false" data-alt="1">B · FAN</button>
+      </div>
+      <h3 class="title">Cross-impl interop.</h3>
+      <p class="sub">One canonical fixture. Six independent implementations. Eight independent canonicalizers. Same SHA-256.</p>
+      <div class="canvas">
+        <div class="alt active" data-alt="0">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- ladder: fixture left, 6 impls middle, hash right -->
+            <g transform="translate(120,80)">
+              <rect x="-60" y="0" width="120" height="380" class="stroke"/>
+              <text x="0" y="190" text-anchor="middle" class="hand">fixture</text>
+              <text x="0" y="406" text-anchor="middle" class="small">CTEF v0.3.2 §A</text>
+            </g>
+            <!-- 6 impl pillars -->
+            <g id="impls"></g>
+            <!-- hash on right -->
+            <g transform="translate(1080,80)">
+              <rect x="-70" y="0" width="140" height="380" class="stroke tape-fill"/>
+              <text x="0" y="190" text-anchor="middle" class="hand">SHA-256</text>
+              <text x="0" y="214" text-anchor="middle" class="small">IDENTICAL</text>
+              <text x="0" y="406" text-anchor="middle" class="small">7e3a · 9c41 · ...</text>
+            </g>
+          </svg>
+        </div>
+        <div class="alt" data-alt="1">
+          <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+            <!-- fan: 6 lines from fixture to one hash node -->
+            <g transform="translate(160,270)">
+              <rect x="-60" y="-50" width="120" height="100" class="stroke"/>
+              <text y="6" text-anchor="middle" class="hand">fixture</text>
+            </g>
+            <g transform="translate(1040,270)">
+              <circle r="46" class="stroke tape-fill"/>
+              <text y="-2" text-anchor="middle" class="hand">SHA-256</text>
+              <text y="16" text-anchor="middle" class="small">match.</text>
+            </g>
+            <g id="fan"></g>
+            <text x="600" y="500" text-anchor="middle" class="hand">all six paths converge ✦ byte-match.</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footnotes">
+        <div class="fn"><b>fixture</b>CTEF v0.3.2 §A draft, public.</div>
+        <div class="fn"><b>impls</b>qntm, AgentGraph, Foxbook, AgentID, Nobulex, ArkForge.</div>
+        <div class="fn"><b>commit</b>Identical SHA-256 across all 6 runs. Reproducible.</div>
+      </div>
+    </div>
+    <div class="margin-note">Ladder makes the comparison concrete. Fan makes the convergence dramatic. Both.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="questions">
+    <h3>open questions for the next round →</h3>
+    <ol>
+      <li><b>Scene 03 — gates:</b> do we name all 14, or generalize to "14 dimensions"? Naming all 14 is honest but slow.</li>
+      <li><b>Scene 04 — mesh:</b> live data, or hand-built representative graph? Live is impressive, hand-built is on-message.</li>
+      <li><b>Scene 05 — rails:</b> show 5 rails always, or just the one a given customer uses? Per-vertical might be clearer.</li>
+      <li><b>Whole piece:</b> single scrolling spread (this), or interactive tabs (current build)? Spread reads on mobile better.</li>
+      <li><b>Annotations:</b> handwritten margin notes are fun in low-fi. In hi-fi, do we keep them as a deliberate device, or drop?</li>
+    </ol>
+  </div>
+
+  <footer>
+    <div>aeoess · protocol architecture · <b>wireframe explorations</b></div>
+    <div>v0.3 draft · low-fi · <a href="protocol-architecture.html">↻ back to cinematic build</a></div>
+  </footer>
+
+</div>
+
+<script>
+  // ---------- alt-tab switching ----------
+  document.querySelectorAll('.frame').forEach(frame => {
+    const tabs = frame.querySelectorAll('.alt-tab');
+    const alts = frame.querySelectorAll('.alt');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.alt;
+        tabs.forEach(t => t.setAttribute('aria-pressed', t.dataset.alt === id));
+        alts.forEach(a => a.classList.toggle('active', a.dataset.alt === id));
+      });
+    });
+  });
+
+  // ---------- scene 3 stack of gates ----------
+  (function(){
+    const items = ['identity','signature','scope','budget','rate','values','reputation','freshness','provenance','destination','payload-shape','cap-ledger','jurisdiction','conformance'];
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    document.querySelectorAll('[data-scene="2"] .alt[data-alt="0"] svg').forEach(svg => {
+      const host = svg.querySelector('#gates');
+      if (!host) return;
+      items.forEach((label, i) => {
+        const y = 30 + i * 26;
+        const line = document.createElementNS(SVGNS, 'line');
+        line.setAttribute('x1', 0); line.setAttribute('x2', 480);
+        line.setAttribute('y1', y); line.setAttribute('y2', y);
+        line.setAttribute('class','stroke');
+        host.appendChild(line);
+        const num = document.createElementNS(SVGNS,'text');
+        num.setAttribute('x', -8); num.setAttribute('y', y+4); num.setAttribute('text-anchor','end'); num.setAttribute('class','small');
+        num.textContent = String(i+1).padStart(2,'0');
+        host.appendChild(num);
+        const t = document.createElementNS(SVGNS,'text');
+        t.setAttribute('x', 8); t.setAttribute('y', y - 4); t.setAttribute('class','label');
+        t.textContent = label;
+        host.appendChild(t);
+        const tick = document.createElementNS(SVGNS,'line');
+        tick.setAttribute('x1', 480); tick.setAttribute('x2', 510);
+        tick.setAttribute('y1', y); tick.setAttribute('y2', y);
+        tick.setAttribute('class','stroke');
+        host.appendChild(tick);
+      });
+    });
+
+    // dial version
+    document.querySelectorAll('[data-scene="2"] .alt[data-alt="1"] svg').forEach(svg => {
+      const host = svg.querySelector('#dial');
+      if (!host) return;
+      items.forEach((label, i) => {
+        const a = (i / items.length) * Math.PI * 2 - Math.PI/2;
+        const r1 = 140, r2 = 180;
+        const x1 = Math.cos(a)*r1, y1 = Math.sin(a)*r1;
+        const x2 = Math.cos(a)*r2, y2 = Math.sin(a)*r2;
+        const tx = Math.cos(a)*200, ty = Math.sin(a)*200;
+        const line = document.createElementNS(SVGNS,'line');
+        line.setAttribute('x1', x1); line.setAttribute('x2', x2);
+        line.setAttribute('y1', y1); line.setAttribute('y2', y2);
+        line.setAttribute('class','stroke');
+        host.appendChild(line);
+        const t = document.createElementNS(SVGNS,'text');
+        t.setAttribute('x', tx); t.setAttribute('y', ty + 4);
+        t.setAttribute('text-anchor', tx > 4 ? 'start' : (tx < -4 ? 'end' : 'middle'));
+        t.setAttribute('class','small');
+        t.textContent = label;
+        host.appendChild(t);
+      });
+    });
+  })();
+
+  // ---------- scene 4 mesh A ----------
+  (function(){
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    const svgs = document.querySelectorAll('[data-scene="3"] .alt[data-alt="0"] svg');
+    svgs.forEach(svg => {
+      const host = svg.querySelector('#meshA');
+      if (!host) return;
+      // seeded pseudo-random
+      let s = 7;
+      const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+      const N = 40;
+      const nodes = [];
+      for (let i=0;i<N;i++) {
+        const x = 80 + rnd()*1040;
+        const y = 60 + rnd()*400;
+        nodes.push({x,y, deg: 0});
+      }
+      // edges: connect nearest 2-3 with some chance
+      const edges = [];
+      for (let i=0;i<N;i++) {
+        const cands = nodes.map((n,j)=>({j, d: Math.hypot(n.x-nodes[i].x, n.y-nodes[i].y)})).filter(o=>o.j!==i).sort((a,b)=>a.d-b.d);
+        const k = 1 + Math.floor(rnd()*3);
+        for (let m=0;m<k && m<cands.length;m++) {
+          const j = cands[m].j;
+          if (i<j) { edges.push([i,j]); nodes[i].deg++; nodes[j].deg++; }
+        }
+      }
+      edges.forEach(([a,b]) => {
+        const l = document.createElementNS(SVGNS,'line');
+        l.setAttribute('x1', nodes[a].x); l.setAttribute('y1', nodes[a].y);
+        l.setAttribute('x2', nodes[b].x); l.setAttribute('y2', nodes[b].y);
+        l.setAttribute('class','stroke soft');
+        l.setAttribute('stroke-width', '0.8');
+        host.appendChild(l);
+      });
+      nodes.forEach((n,i) => {
+        const r = 3 + Math.min(n.deg, 6) * 1.0;
+        const isHuman = i < 3;
+        const c = document.createElementNS(SVGNS,'circle');
+        c.setAttribute('cx', n.x); c.setAttribute('cy', n.y); c.setAttribute('r', isHuman ? r+3 : r);
+        c.setAttribute('class', isHuman ? 'ink' : 'stroke');
+        c.setAttribute('fill', isHuman ? 'var(--pencil)' : 'var(--paper)');
+        host.appendChild(c);
+        if (isHuman) {
+          const t = document.createElementNS(SVGNS,'text');
+          t.setAttribute('x', n.x + 10); t.setAttribute('y', n.y - 6);
+          t.setAttribute('class','small');
+          t.textContent = ['HUMAN-A','HUMAN-B','HUMAN-C'][i];
+          host.appendChild(t);
+        }
+      });
+    });
+
+    // ego
+    const egoSvgs = document.querySelectorAll('[data-scene="3"] .alt[data-alt="1"] svg');
+    egoSvgs.forEach(svg => {
+      const host = svg.querySelector('#egoRing');
+      if (!host) return;
+      const N = 9;
+      const labels = ['orchestrator','researcher','payer-bot','retriever','linter','summarizer','approver','auditor','witness'];
+      for (let i=0;i<N;i++) {
+        const a = (i/N)*Math.PI*2 - Math.PI/2;
+        const r = 140;
+        const x = Math.cos(a)*r, y = Math.sin(a)*r;
+        const l = document.createElementNS(SVGNS,'line');
+        l.setAttribute('x1', 0); l.setAttribute('y1', 0);
+        l.setAttribute('x2', x); l.setAttribute('y2', y);
+        l.setAttribute('class','stroke');
+        host.appendChild(l);
+        const c = document.createElementNS(SVGNS,'circle');
+        c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 14);
+        c.setAttribute('class','stroke');
+        c.setAttribute('fill','var(--paper)');
+        host.appendChild(c);
+        const t = document.createElementNS(SVGNS,'text');
+        const tx = Math.cos(a)*180, ty = Math.sin(a)*180;
+        t.setAttribute('x', tx); t.setAttribute('y', ty+4);
+        t.setAttribute('text-anchor', tx>4?'start':(tx<-4?'end':'middle'));
+        t.setAttribute('class','small');
+        t.textContent = labels[i];
+        host.appendChild(t);
+      }
+    });
+  })();
+
+  // ---------- scene 5 rails ----------
+  (function(){
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    const rails = ['x402','AP2','ACP','MPP','Stripe Issuing'];
+    document.querySelectorAll('[data-scene="4"] .alt[data-alt="0"] svg').forEach(svg => {
+      const host = svg.querySelector('#rails');
+      if (!host) return;
+      rails.forEach((r, i) => {
+        const y = 180 + i * 40;
+        const l = document.createElementNS(SVGNS,'line');
+        l.setAttribute('x1', 180); l.setAttribute('x2', 1020);
+        l.setAttribute('y1', y); l.setAttribute('y2', y);
+        l.setAttribute('class','stroke');
+        host.appendChild(l);
+        const t = document.createElementNS(SVGNS,'text');
+        t.setAttribute('x', 168); t.setAttribute('y', y+4); t.setAttribute('text-anchor','end');
+        t.setAttribute('class','small');
+        t.textContent = r.toUpperCase();
+        host.appendChild(t);
+        // gate tick on each rail
+        const tick = document.createElementNS(SVGNS,'line');
+        tick.setAttribute('x1', 620); tick.setAttribute('x2', 620);
+        tick.setAttribute('y1', y-10); tick.setAttribute('y2', y+10);
+        tick.setAttribute('class','stroke');
+        host.appendChild(tick);
+      });
+    });
+  })();
+
+  // ---------- scene 6 ladder + fan ----------
+  (function(){
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    const impls = ['qntm','AgentGraph','Foxbook','AgentID','Nobulex','ArkForge'];
+    document.querySelectorAll('[data-scene="5"] .alt[data-alt="0"] svg').forEach(svg => {
+      const host = svg.querySelector('#impls');
+      if (!host) return;
+      impls.forEach((name,i) => {
+        const x = 260 + i * 130;
+        // pillar
+        const r = document.createElementNS(SVGNS,'rect');
+        r.setAttribute('x', x-50); r.setAttribute('y', 80); r.setAttribute('width', 100); r.setAttribute('height', 380);
+        r.setAttribute('class', 'stroke');
+        host.appendChild(r);
+        // line in
+        const lin = document.createElementNS(SVGNS,'line');
+        lin.setAttribute('x1', 180); lin.setAttribute('y1', 270);
+        lin.setAttribute('x2', x-50); lin.setAttribute('y2', 270);
+        lin.setAttribute('class','stroke soft dashed');
+        host.appendChild(lin);
+        // line out
+        const lout = document.createElementNS(SVGNS,'line');
+        lout.setAttribute('x1', x+50); lout.setAttribute('y1', 270);
+        lout.setAttribute('x2', 1010); lout.setAttribute('y2', 270);
+        lout.setAttribute('class','stroke soft dashed');
+        host.appendChild(lout);
+        // label
+        const t = document.createElementNS(SVGNS,'text');
+        t.setAttribute('x', x); t.setAttribute('y', 270); t.setAttribute('text-anchor','middle');
+        t.setAttribute('class','hand');
+        t.textContent = name;
+        host.appendChild(t);
+        const sub = document.createElementNS(SVGNS,'text');
+        sub.setAttribute('x', x); sub.setAttribute('y', 60); sub.setAttribute('text-anchor','middle');
+        sub.setAttribute('class','small');
+        sub.textContent = String(i+1).padStart(2,'0');
+        host.appendChild(sub);
+      });
+    });
+
+    document.querySelectorAll('[data-scene="5"] .alt[data-alt="1"] svg').forEach(svg => {
+      const host = svg.querySelector('#fan');
+      if (!host) return;
+      impls.forEach((name,i) => {
+        const yOff = (i - 2.5) * 60;
+        const path = document.createElementNS(SVGNS,'path');
+        const d = `M 220,270 C 500,${270+yOff} 700,${270+yOff} 994,270`;
+        path.setAttribute('d', d);
+        path.setAttribute('class','stroke soft');
+        host.appendChild(path);
+        // label at midpoint
+        const t = document.createElementNS(SVGNS,'text');
+        t.setAttribute('x', 600); t.setAttribute('y', 270 + yOff - 6); t.setAttribute('text-anchor','middle');
+        t.setAttribute('class','small');
+        t.textContent = name;
+        host.appendChild(t);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

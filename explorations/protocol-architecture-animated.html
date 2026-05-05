@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Protocol Architecture — Animated Explainer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #f6f4ef;
+    color: #1a1816;
+    font-family: 'Fraunces', serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  /* page chrome around the stage */
+  .page-frame {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: #f6f4ef;
+  }
+
+  .page-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 20px 36px 14px;
+    border-bottom: 1px solid rgba(26,24,22,0.10);
+  }
+  .page-header .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: #1a1816;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .page-header .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: #6b6458;
+    text-transform: uppercase;
+  }
+  .page-header .meta a {
+    color: #1a1816;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(26,24,22,0.20);
+    margin-left: 18px;
+    padding-bottom: 1px;
+    transition: color 120ms, border-color 120ms;
+  }
+  .page-header .meta a:hover { color: #c2402a; border-bottom-color: #c2402a; }
+
+  .stage-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Stage's own outer letterbox is hardcoded #0a0a0a; override to paper. */
+  .stage-wrap > div { background: #f6f4ef !important; }
+
+  /* Loader fallback */
+  #loader {
+    position: fixed; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    color: #6b6458; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div id="loader">loading explainer …</div>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="animations.jsx"></script>
+<script type="text/babel" src="arch-scenes.jsx"></script>
+
+<script type="text/babel">
+  // Chapter map: each scene's start/duration on the master timeline
+  const CHAPTERS = [
+    { id: 'open',  num: '00', name: 'cold open',           start: 0,    dur: 6.5,  Comp: () => <SceneOpen/> },
+    { id: 'i',     num: 'i',  name: 'life of an action',   start: 6.5,  dur: 11.0, Comp: () => <SceneOne/> },
+    { id: 'ii',    num: 'ii', name: 'delegation cascade',  start: 17.5, dur: 11.0, Comp: () => <SceneTwo/> },
+    { id: 'iii',   num: 'iii',name: 'gateway judgement',   start: 28.5, dur: 10.5, Comp: () => <SceneThree/> },
+    { id: 'iv',    num: 'iv', name: 'trust mesh',          start: 39.0, dur: 10.0, Comp: () => <SceneFour/> },
+    { id: 'v',     num: 'v',  name: 'payment rails',       start: 49.0, dur: 10.0, Comp: () => <SceneFive/> },
+    { id: 'vi',    num: 'vi', name: 'cross-impl interop',  start: 59.0, dur: 10.0, Comp: () => <SceneSix/> },
+  ];
+  const TOTAL = CHAPTERS.reduce((acc, c) => Math.max(acc, c.start + c.dur), 0) + 6.0; // + end card
+
+  function ChapterStrip() {
+    const { time, setTime } = useTimeline();
+    const stripStyle = {
+      position: 'absolute',
+      left: 36, right: 36, bottom: 24,
+      display: 'grid',
+      gridTemplateColumns: 'repeat(7, 1fr)',
+      gap: 12,
+      pointerEvents: 'auto',
+      zIndex: 10,
+    };
+    const allChapters = [...CHAPTERS, { id: 'end', num: 'end', name: 'signature', start: TOTAL - 5.5, dur: 5.5 }];
+    return (
+      <div style={stripStyle}>
+        {allChapters.map((c) => {
+          const inside = time >= c.start && time < c.start + c.dur;
+          const pct = inside ? clamp((time - c.start) / c.dur, 0, 1) * 100 : 0;
+          return (
+            <button
+              key={c.id}
+              onClick={() => setTime(c.start + 0.05)}
+              style={{
+                background: inside ? '#1a1816' : 'transparent',
+                border: '1px solid ' + (inside ? '#1a1816' : 'rgba(26,24,22,0.20)'),
+                color: inside ? '#f6f4ef' : '#1a1816',
+                padding: '14px 16px',
+                textAlign: 'left',
+                cursor: 'pointer',
+                borderRadius: 0,
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6,
+                transition: 'border-color 160ms, color 160ms, background 160ms',
+              }}
+            >
+              <span style={{
+                fontFamily: 'JetBrains Mono, monospace', fontSize: 12,
+                letterSpacing: '0.24em', textTransform: 'uppercase',
+                color: inside ? 'rgba(246,244,239,0.7)' : '#6b6458', fontWeight: 500,
+              }}>{c.num.toUpperCase()}</span>
+              <span style={{
+                fontFamily: 'Fraunces, serif', fontStyle: 'italic',
+                fontSize: 22, lineHeight: 1.15, fontWeight: 400, color: 'inherit',
+              }}>{c.name}</span>
+              <span style={{
+                position: 'absolute', left: 0, bottom: 0, height: 2,
+                background: '#c2402a', width: pct + '%',
+              }}/>
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+
+  function App() {
+    React.useEffect(() => {
+      const l = document.getElementById('loader');
+      if (l) l.remove();
+    }, []);
+
+    return (
+      <div className="page-frame">
+        <header className="page-header">
+          <div className="brand">aeoess · protocol architecture · animated</div>
+          <div className="meta">
+            v0.3
+            <a href="protocol-architecture.html">cinematic</a>
+            <a href="protocol-architecture-editorial.html">editorial</a>
+            <a href="protocol-architecture-wireframe.html">wireframe</a>
+            <a href="architecture-versions.html">all three</a>
+          </div>
+        </header>
+
+        <div className="stage-wrap">
+          <Stage
+            width={1920}
+            height={1080}
+            duration={TOTAL}
+            background="#f6f4ef"
+            loop={false}
+            autoplay={true}
+            persistKey="protocol-arch-animated"
+          >
+            {CHAPTERS.map((c) => (
+              <Sprite key={c.id} start={c.start} end={c.start + c.dur}>
+                <c.Comp/>
+              </Sprite>
+            ))}
+            {/* End card after last chapter */}
+            <Sprite start={CHAPTERS[CHAPTERS.length-1].start + CHAPTERS[CHAPTERS.length-1].dur} end={TOTAL}>
+              <SceneEnd/>
+            </Sprite>
+            <ChapterStrip/>
+          </Stage>
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>

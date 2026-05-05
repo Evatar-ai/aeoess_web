@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Protocol Architecture — Editorial</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f1ead7;
+    --paper-2: #e8e0c8;
+    --ink: #15110b;
+    --ink-2: #3a3528;
+    --ink-3: #6f6857;
+    --rule: #15110b;
+    --rule-soft: #2a2418;
+    --accent: #c2402a;
+    --accent-2: #d6a04a;
+    --serif: 'Fraunces', 'Times New Roman', serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.5; }
+  body {
+    background-image:
+      radial-gradient(circle at 0% 0%, rgba(194,64,42,0.04), transparent 60%),
+      radial-gradient(circle at 100% 100%, rgba(214,160,74,0.06), transparent 60%);
+    min-height: 100vh;
+  }
+  ::selection { background: var(--accent); color: var(--paper); }
+
+  a { color: inherit; }
+
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; }
+  .accent { color: var(--accent); }
+  .ital { font-style: italic; font-feature-settings: 'ss01' on, 'ss02' on; }
+
+  /* ----- masthead ----- */
+  .masthead {
+    border-bottom: 1.5px solid var(--rule);
+    padding: 18px 0 16px;
+    margin: 0 56px;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 24px;
+  }
+  @media (max-width: 720px) { .masthead { margin: 0 18px; grid-template-columns: 1fr; gap: 8px; } }
+  .masthead .left { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+  .masthead .left b { color: var(--ink); font-weight: 600; }
+  .masthead .center { font-family: var(--serif); font-weight: 500; font-size: 15px; letter-spacing: 0.04em; text-align: center; color: var(--ink); font-variation-settings: "opsz" 14; }
+  .masthead .right { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); text-align: right; }
+  .masthead .right .num { color: var(--accent); }
+
+  /* ----- top hero ----- */
+  .hero {
+    margin: 0 56px;
+    padding: 48px 0 36px;
+    border-bottom: 1.5px solid var(--rule);
+    display: grid; grid-template-columns: 8fr 4fr; gap: 56px; align-items: end;
+  }
+  @media (max-width: 980px) { .hero { grid-template-columns: 1fr; gap: 24px; } .masthead, .hero, .spread, .end { margin: 0 22px !important; } }
+
+  .hero .display {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(56px, 9.2vw, 152px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-variation-settings: "opsz" 144;
+    color: var(--ink);
+  }
+  .hero .display .ital { color: var(--accent); font-weight: 400; }
+  .hero .display .ital::after { content: '.'; color: var(--ink); }
+
+  .hero .lede {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 32ch;
+    text-wrap: pretty;
+  }
+  .hero .lede:first-line { font-variant: small-caps; letter-spacing: 0.06em; color: var(--ink); font-weight: 500; }
+  .hero .lede + .meta { margin-top: 18px; }
+  .hero .meta { display: flex; gap: 24px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .hero .meta .col { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); line-height: 1.7; }
+  .hero .meta .col b { display: block; color: var(--ink); font-weight: 600; font-size: 11px; }
+
+  /* ----- contents ----- */
+  .toc {
+    margin: 36px 56px 48px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+    border-top: 1.5px solid var(--rule);
+  }
+  @media (max-width: 980px) { .toc { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .toc { grid-template-columns: 1fr; } }
+  .toc .item {
+    padding: 14px 16px 18px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 6px; min-height: 110px;
+    text-decoration: none; color: inherit;
+    transition: background 0.2s;
+  }
+  .toc .item:hover { background: var(--paper-2); }
+  .toc .item:last-child { border-right: 0; }
+  .toc .item .num { font-family: var(--serif); font-size: 38px; font-weight: 400; line-height: 1; color: var(--accent); font-style: italic; }
+  .toc .item .name { font-family: var(--serif); font-size: 17px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); margin-top: auto; text-wrap: balance; }
+  .toc .item .pg { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* ----- spread ----- */
+  .spread {
+    margin: 0 56px;
+    padding: 56px 0 48px;
+    border-bottom: 1.5px solid var(--rule);
+    display: grid; grid-template-columns: 5fr 7fr; gap: 56px;
+  }
+  @media (max-width: 980px) { .spread { grid-template-columns: 1fr; gap: 32px; } }
+
+  .spread .left { display: flex; flex-direction: column; gap: 22px; }
+  .spread .num-rule {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center;
+    border-top: 1.5px solid var(--rule); border-bottom: 1.5px solid var(--rule);
+    padding: 10px 0;
+  }
+  .spread .num-rule .roman { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 28px; color: var(--accent); line-height: 1; }
+  .spread .num-rule .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
+  .spread .num-rule .pg { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+
+  .spread h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(40px, 5.4vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.022em;
+    margin: 0;
+    font-variation-settings: "opsz" 96;
+    text-wrap: balance;
+  }
+  .spread h2 .ital { font-style: italic; font-weight: 400; color: var(--accent); }
+
+  .spread .standfirst {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--ink-2);
+    font-weight: 400;
+    text-wrap: pretty;
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .spread .body { font-family: var(--serif); font-size: 16px; line-height: 1.55; color: var(--ink); column-count: 1; max-width: 38ch; }
+  .spread .body p { margin: 0 0 12px; text-indent: 0; }
+  .spread .body p:first-of-type::first-letter {
+    font-family: var(--serif); font-size: 64px; line-height: 0.85; float: left; padding: 4px 8px 0 0;
+    font-weight: 500; color: var(--accent); font-variation-settings: "opsz" 144;
+  }
+  .spread .body em { color: var(--accent); font-style: italic; }
+  .spread .body code, .spread .marg code { font-family: var(--mono); font-size: 12px; background: var(--paper-2); padding: 1px 4px; border-radius: 2px; }
+
+  .spread .marg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-top: 16px; border-top: 1px solid var(--rule); }
+  .spread .marg .item { display: flex; flex-direction: column; gap: 4px; font-family: var(--serif); font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+  .spread .marg .item b { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+
+  .spread .right { position: relative; }
+  .figure { position: relative; }
+  .figure .label { position: absolute; top: -28px; left: 0; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-2); }
+  .figure .label::before { content: 'fig. '; color: var(--accent); }
+  .figure svg { width: 100%; height: auto; display: block; background: transparent; }
+  .figure .caption {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-2); line-height: 1.45;
+    max-width: 62ch;
+  }
+  .figure .caption b { font-style: normal; color: var(--ink); }
+
+  /* alternating spread orientation */
+  .spread.flip { grid-template-columns: 7fr 5fr; }
+  .spread.flip .left { order: 2; }
+  .spread.flip .right { order: 1; }
+  @media (max-width: 980px) { .spread.flip { grid-template-columns: 1fr; } .spread.flip .left, .spread.flip .right { order: initial; } }
+
+  /* ----- pull quote spread ----- */
+  .pull {
+    margin: 0 56px;
+    padding: 80px 0;
+    border-bottom: 1.5px solid var(--rule);
+    text-align: center;
+  }
+  .pull blockquote {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 5.4vw, 78px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 auto;
+    max-width: 22ch;
+    font-variation-settings: "opsz" 96;
+    text-wrap: balance;
+    font-style: italic;
+  }
+  .pull blockquote::before { content: '“'; color: var(--accent); }
+  .pull blockquote::after { content: '”'; color: var(--accent); }
+  .pull cite { display: block; margin-top: 28px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-2); font-style: normal; }
+
+  /* ----- end matter ----- */
+  .end {
+    margin: 0 56px;
+    padding: 56px 0 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+    border-bottom: 1.5px solid var(--rule);
+  }
+  @media (max-width: 720px) { .end { grid-template-columns: 1fr; gap: 24px; } }
+  .end h3 { font-family: var(--serif); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); font-weight: 600; }
+  .end ol { padding-left: 18px; margin: 0; font-family: var(--serif); font-size: 15px; line-height: 1.6; color: var(--ink); }
+  .end ol li { margin-bottom: 8px; }
+  .end ol li b { color: var(--accent); font-weight: 500; }
+  .end .colophon { font-family: var(--serif); font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+  .end .colophon p { margin: 0 0 10px; }
+  .end .colophon .mono { display: block; margin-top: 10px; }
+
+  footer.foot {
+    margin: 0 56px; padding: 18px 0 22px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2);
+  }
+  @media (max-width: 980px) { footer.foot { margin: 0 22px; } }
+
+  /* ----- SVG defaults for figures ----- */
+  svg .ink { fill: var(--ink); }
+  svg .stroke { stroke: var(--ink); fill: none; stroke-width: 1; }
+  svg .stroke-2 { stroke-width: 1.5; }
+  svg .soft { stroke: var(--rule-soft); opacity: 0.4; }
+  svg .accent { fill: var(--accent); }
+  svg .accent-stroke { stroke: var(--accent); fill: none; }
+  svg text { fill: var(--ink); }
+  svg .lab { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; fill: var(--ink-2); }
+  svg .nm  { font-family: var(--serif); font-size: 14px; font-style: italic; fill: var(--ink); }
+  svg .num { font-family: var(--serif); font-size: 11px; fill: var(--ink-3); }
+
+  /* embed mode */
+  html.embedded .masthead, html.embedded footer.foot { display: none; }
+</style>
+</head>
+<body>
+
+<script>if(window!==window.top)document.documentElement.classList.add('embedded');</script>
+
+<header class="masthead">
+  <div class="left"><b>aeoess</b> · protocol architecture · <span class="accent">vol. ɪɪ</span></div>
+  <div class="center">A printed reading of the system, in <span class="ital">six movements.</span></div>
+  <div class="right">№ 04 / 2025 · <span class="num">PP. 02–14</span></div>
+</header>
+
+<section class="hero">
+  <h1 class="display">Six<br>movements,<br>one <span class="ital">signature</span></h1>
+  <div>
+    <p class="lede">The agentic-action protocol explained as a sequence of small, irreversible commitments — each cryptographically witnessed, each narrower than the last.</p>
+    <div class="meta">
+      <div class="col"><b>edition</b>v0.3 — draft</div>
+      <div class="col"><b>scenes</b>06</div>
+      <div class="col"><b>tests</b>2,884</div>
+      <div class="col"><b>impls</b>06</div>
+    </div>
+  </div>
+</section>
+
+<nav class="toc" aria-label="Contents">
+  <a class="item" href="#m1"><span class="num">i</span><span class="pg">pp. 02</span><span class="name">Life of an action</span></a>
+  <a class="item" href="#m2"><span class="num">ii</span><span class="pg">pp. 04</span><span class="name">Delegation &amp; cascade</span></a>
+  <a class="item" href="#m3"><span class="num">iii</span><span class="pg">pp. 06</span><span class="name">Gateway judgement</span></a>
+  <a class="item" href="#m4"><span class="num">iv</span><span class="pg">pp. 08</span><span class="name">The trust mesh</span></a>
+  <a class="item" href="#m5"><span class="num">v</span><span class="pg">pp. 10</span><span class="name">Payment rails</span></a>
+  <a class="item" href="#m6"><span class="num">vi</span><span class="pg">pp. 12</span><span class="name">Cross-impl interop</span></a>
+</nav>
+
+<!-- ============================================================ MOVEMENT I -->
+<article id="m1" class="spread">
+  <div class="left">
+    <div class="num-rule"><span class="roman">i</span><span class="label">life of an action</span><span class="pg">pp. 02–03</span></div>
+    <h2>From human <span class="ital">will</span> to a signed receipt, in six steps.</h2>
+    <p class="standfirst">An action begins in a human and ends in a record. Between the two: passport, delegation, intent, gateway, enforcement, receipt — six checkpoints, all signed.</p>
+    <div class="body">
+      <p>Every act an agent performs traces back, in principle, to a person. The system makes that traceability literal. A passport — an Ed25519 keypair bound to a human principal — sits at the root. From there, the human signs a delegation that lists what an agent may do, and only what an agent may do.</p>
+      <p>The agent then issues an <em>intent</em>: a precisely-shaped ask that names the tool, the target, and the budget. The gateway evaluates that intent against fourteen distinct constraints. If any check is missing or ambiguous the gateway denies. Permitted actions execute on a rail adapter, and the entire transit is captured in a canonical receipt.</p>
+    </div>
+    <div class="marg">
+      <div class="item"><b>identity</b>Ed25519 passport. <code>did:key</code>, <code>did:web</code>, SPIFFE, OAuth — bring your own.</div>
+      <div class="item"><b>scope</b>Each delegation narrows tools, budget, services. Monotonic — never expands.</div>
+      <div class="item"><b>receipts</b>Five primitives: Action, AuthorityBoundary, Custody, Contestability, APSBundle.</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="figure">
+      <div class="label">i.1 — the six checkpoints, in order</div>
+      <svg viewBox="0 0 920 540" preserveAspectRatio="xMidYMid meet">
+        <!-- horizontal track -->
+        <line x1="60" y1="290" x2="860" y2="290" class="stroke stroke-2"/>
+        <g class="num">
+          <text x="60" y="60">tx · 0001</text>
+          <text x="860" y="60" text-anchor="end">tx · receipt</text>
+        </g>
+        <!-- six checkpoints -->
+        <g id="m1-checks"></g>
+        <!-- annotation: gateway is hot -->
+        <g>
+          <line x1="500" y1="200" x2="500" y2="246" class="accent-stroke" stroke-width="1.2"/>
+          <text x="510" y="186" class="nm" font-style="italic" fill="#c2402a">single point</text>
+          <text x="510" y="204" class="nm" font-style="italic" fill="#c2402a">of decision.</text>
+        </g>
+        <!-- baseline -->
+        <text x="60" y="500" class="lab">authority narrows monotonically · ←      →</text>
+        <text x="860" y="500" text-anchor="end" class="lab">canonical · RFC 8785 JCS</text>
+      </svg>
+      <div class="caption"><b>Fig. i.1.</b> The lifecycle is a single thread of signatures. The gateway, marked in red, is where ninety-nine percent of denials happen — and the only place a human-authored constraint can stop the chain.</div>
+    </div>
+  </div>
+</article>
+
+<!-- ============================================================ MOVEMENT II -->
+<article id="m2" class="spread flip">
+  <div class="left">
+    <div class="num-rule"><span class="roman">ii</span><span class="label">delegation &amp; cascade</span><span class="pg">pp. 04–05</span></div>
+    <h2>Authority can only <span class="ital">narrow</span>.</h2>
+    <p class="standfirst">A child scope is a strict subset of its parent. Revoke any node, and the entire subtree dies — fail-closed at the gateway, in one call.</p>
+    <div class="body">
+      <p>Delegation is the protocol's load-bearing idea. A human signs a passport. That passport signs a delegation to an orchestrator agent. The orchestrator signs a sub-delegation to a worker. At every step the new scope is checked against the previous: tools removed are gone forever; budgets only ever go down; allowed merchants only ever shorten.</p>
+      <p>Because delegations form a tree, revocation is a single operation. Issue <code>revoke(agentId)</code> and the gateway refuses every descendant on the next request — <em>fail-closed</em>, with no cache or ambiguity to slip through.</p>
+    </div>
+    <div class="marg">
+      <div class="item"><b>root</b>Human principal. Authority originates here, and only here.</div>
+      <div class="item"><b>narrow</b>Strict subset, enforced at issuance. The chain rejects expansions.</div>
+      <div class="item"><b>cascade</b>One API call — the entire subtree denies on next attempt.</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="figure">
+      <div class="label">ii.1 — authority tree, with one revocation</div>
+      <svg viewBox="0 0 920 540" preserveAspectRatio="xMidYMid meet">
+        <g id="m2-tree"></g>
+      </svg>
+      <div class="caption"><b>Fig. ii.1.</b> A representative authority tree. The branch in red shows the consequence of <code>revoke(payer-bot)</code>: every descendant becomes inert in the next gateway evaluation, without further communication.</div>
+    </div>
+  </div>
+</article>
+
+<!-- ============================================================ PULL -->
+<aside class="pull">
+  <blockquote>The gateway's only job is to <span class="ital">say no</span> well — and to remember why.</blockquote>
+  <cite>— internal note, gateway team, april</cite>
+</aside>
+
+<!-- ============================================================ MOVEMENT III -->
+<article id="m3" class="spread">
+  <div class="left">
+    <div class="num-rule"><span class="roman">iii</span><span class="label">gateway judgement</span><span class="pg">pp. 06–07</span></div>
+    <h2>Fourteen <span class="ital">checks</span>. No bypass.</h2>
+    <p class="standfirst">Every action is evaluated against fourteen constraint dimensions. A missing check is a denial. There is no fallback, no soft-pass, no cache leak.</p>
+    <div class="body">
+      <p>The gateway is intentionally boring. It ingests a signed intent, walks a fixed list of fourteen dimensions, and emits either an authorization or a contestable denial. The list is short enough to enumerate in a footnote and long enough to encode every constraint a real-world deployment has needed so far.</p>
+      <p>Conformance is governed by a public test suite of thirty-seven plus ten vectors, run on every commit across six implementations. The list is intentionally not extensible at runtime — a gate added in production is treated, by the suite, as a missing gate.</p>
+    </div>
+    <div class="marg">
+      <div class="item"><b>14 dimensions</b>identity, signature, scope, budget, rate, values, reputation, freshness, +6 more.</div>
+      <div class="item"><b>conformance</b>37 + 10 vectors. <code>aps-conformance-suite</code>, public.</div>
+      <div class="item"><b>fail-closed</b>Cache miss, ambiguity, missing dim. → deny.</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="figure">
+      <div class="label">iii.1 — the fourteen, evaluated in order</div>
+      <svg viewBox="0 0 920 540" preserveAspectRatio="xMidYMid meet">
+        <!-- list of 14 -->
+        <g id="m3-list"></g>
+        <!-- decision -->
+        <g transform="translate(640,200)">
+          <line x1="0" y1="-70" x2="0" y2="160" class="stroke"/>
+          <line x1="0" y1="-70" x2="120" y2="-70" class="stroke"/>
+          <line x1="0" y1="160" x2="120" y2="160" class="stroke accent-stroke"/>
+          <text x="130" y="-66" class="nm">allow</text>
+          <text x="130" y="-50" class="lab">all 14 pass</text>
+          <text x="130" y="164" class="nm" fill="#c2402a">deny</text>
+          <text x="130" y="180" class="lab" fill="#c2402a">any miss · cache · ambiguity</text>
+        </g>
+      </svg>
+      <div class="caption"><b>Fig. iii.1.</b> The gate set, evaluated in a fixed order. The decision is total: a single missing or ambiguous check funnels the action into the lower path. There is no probabilistic admission and no soft denial.</div>
+    </div>
+  </div>
+</article>
+
+<!-- ============================================================ MOVEMENT IV -->
+<article id="m4" class="spread flip">
+  <div class="left">
+    <div class="num-rule"><span class="roman">iv</span><span class="label">the trust mesh</span><span class="pg">pp. 08–09</span></div>
+    <h2>A graph that <span class="ital">terminates in people</span>.</h2>
+    <p class="standfirst">Agents, humans and services bind to one another through signed delegations and receipts. Reputation is earned by completed work — never declared.</p>
+    <div class="body">
+      <p>Zoom out far enough and the protocol becomes a graph. Nodes are passports — sometimes a human's, more often an agent's. Edges are signed delegations, settled receipts, and Merkle-proven mutual-auth handshakes (the four-step downgrade-proof variety, version one of which shipped on the twenty-second of April).</p>
+      <p>Every chain of edges, however long, terminates at a human principal. That is the property the system most jealously defends. An <em>agent without a human</em> at the end of its chain is, by definition, unable to act.</p>
+    </div>
+    <div class="marg">
+      <div class="item"><b>agents</b>Passports as nodes. Reputation earned through completed work.</div>
+      <div class="item"><b>handshake</b>Four-step, downgrade-proof. v1, shipped 22 April.</div>
+      <div class="item"><b>humans</b>Every chain terminates at a human. Merkle-proven.</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="figure">
+      <div class="label">iv.1 — a representative slice of the mesh</div>
+      <svg viewBox="0 0 920 540" preserveAspectRatio="xMidYMid meet">
+        <g id="m4-mesh"></g>
+      </svg>
+      <div class="caption"><b>Fig. iv.1.</b> A representative slice. Heavier nodes are humans (three, here); lighter nodes are agents and services. Edge weight reflects the count of settled receipts between two parties — the only currency of trust the system recognizes.</div>
+    </div>
+  </div>
+</article>
+
+<!-- ============================================================ MOVEMENT V -->
+<article id="m5" class="spread">
+  <div class="left">
+    <div class="num-rule"><span class="roman">v</span><span class="label">payment rails</span><span class="pg">pp. 10–11</span></div>
+    <h2>Pay <span class="ital">narrowly</span>, settle <span class="ital">openly</span>.</h2>
+    <p class="standfirst">Five rails — x402, AP2, ACP, MPP, Stripe Issuing — share one scope check. The agent pays under cap; the merchant receives a signed settlement record per period.</p>
+    <div class="body">
+      <p>Money is the place where soft norms become hard. The protocol does not invent a rail; it stands behind the rails the world already uses, and bolts a single, sharp check between the agent and the rail adapter. Spend cap. Merchant allow-list. Single-use intent. Three constraints, evaluated together, on every transaction.</p>
+      <p>What the merchant receives, in addition to funds, is a signed period record — produced by the Build C pipeline (16 April) and settled at every period boundary regardless of disputes. This is what makes the system <em>auditable</em> in the boring sense: an accountant can ask for a number, and there is a number.</p>
+    </div>
+    <div class="marg">
+      <div class="item"><b>rails</b>x402, AP2, ACP, MPP, Stripe Issuing. Phase 4.1 alpha · 4 registries.</div>
+      <div class="item"><b>scope check</b>Cap · merchant allow-list · single-use intent.</div>
+      <div class="item"><b>settlement</b>Per-period signed records. Build C · 16 April.</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="figure">
+      <div class="label">v.1 — agent → scope → rail → merchant</div>
+      <svg viewBox="0 0 920 540" preserveAspectRatio="xMidYMid meet">
+        <g id="m5-rails"></g>
+      </svg>
+      <div class="caption"><b>Fig. v.1.</b> Five rails, one check. The vertical bar represents the scope check at the rail adapter; the rightmost column represents the period record the merchant carries away. The protocol replaces no rail and respects every rail's local rules.</div>
+    </div>
+  </div>
+</article>
+
+<!-- ============================================================ MOVEMENT VI -->
+<article id="m6" class="spread flip">
+  <div class="left">
+    <div class="num-rule"><span class="roman">vi</span><span class="label">cross-impl interop</span><span class="pg">pp. 12–13</span></div>
+    <h2>Six <span class="ital">implementations</span>, one hash.</h2>
+    <p class="standfirst">A canonical fixture, run through six independent codebases and eight independent canonicalizers, must produce the same SHA-256. If it doesn't, the suite fails — the spec, not the code, is wrong.</p>
+    <div class="body">
+      <p>Interop is asserted, not assumed. The conformance suite holds a canonical input — CTEF v0.3.2, section A — and a target hash. Six independent implementations (qntm, AgentGraph, Foxbook, AgentID, Nobulex, ArkForge) and eight independent canonicalizers must converge, byte-for-byte, on the same digest.</p>
+      <p>This is the guarantee that survives any one implementation. If a vendor's library drifts, the suite catches it; if the spec under-specifies, multiple vendors disagree and the suite catches <em>that</em>. It is the protocol's slowest-moving and most public commitment.</p>
+    </div>
+    <div class="marg">
+      <div class="item"><b>fixture</b>CTEF v0.3.2 §A, public draft.</div>
+      <div class="item"><b>implementations</b>Six. Eight independent canonicalizers.</div>
+      <div class="item"><b>commit</b>Identical SHA-256 across runs. Reproducible.</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="figure">
+      <div class="label">vi.1 — six runs, identical hash</div>
+      <svg viewBox="0 0 920 540" preserveAspectRatio="xMidYMid meet">
+        <g id="m6-fan"></g>
+      </svg>
+      <div class="caption"><b>Fig. vi.1.</b> The six implementations are deliberately heterogeneous — different languages, different teams, different jurisdictions. Convergence on a single SHA-256 is the property the protocol most carefully maintains.</div>
+    </div>
+  </div>
+</article>
+
+<!-- ============================================================ END -->
+<section class="end">
+  <div>
+    <h3>For the next edition</h3>
+    <ol>
+      <li><b>Movement i.</b> Hand the gateway-deny annotation a real number once telemetry is settled (target: ratio of denies that are auditable vs. transient).</li>
+      <li><b>Movement iii.</b> Print the full fourteen-gate inventory in a foldout, not a footnote. Editorial note: only if the list is stable for two releases.</li>
+      <li><b>Movement iv.</b> The mesh figure is representative. A live render — keyed to the production graph — would be ideal once anonymization survives review.</li>
+      <li><b>Movement v.</b> Add a rail-by-rail scope-check delta: what each rail's adapter <em>narrows</em> the spec into.</li>
+      <li><b>Whole.</b> Consider a fold-out for movements ii + iii — they read as a pair.</li>
+    </ol>
+  </div>
+  <div class="colophon">
+    <h3>Colophon</h3>
+    <p>Set in <span class="ital">Fraunces</span> at varying optical sizes, with <span class="mono" style="text-transform:none; letter-spacing:0; font-size:14px; display:inline">JetBrains Mono</span> in the captions. Figures are vector, drawn from the same data that feeds the cinematic build.</p>
+    <p>This is a reading edition — the canonical artefact for the protocol is the test suite at <code>aps-conformance-suite</code>, not this paper.</p>
+    <p>Companion piece to the cinematic build (<a href="protocol-architecture.html">protocol-architecture.html</a>) and the wireframe explorations (<a href="protocol-architecture-wireframe.html">wireframe</a>).</p>
+    <span class="mono">aeoess · vol. ɪɪ · № 04 / 2025</span>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>protocol architecture · editorial</div>
+  <div>set in Fraunces &amp; JetBrains Mono · printed on screen</div>
+</footer>
+
+<script>
+const SVGNS = 'http://www.w3.org/2000/svg';
+const $ = sel => document.querySelector(sel);
+
+// ============================================================ M1 — six checkpoints
+(function(){
+  const host = $('#m1-checks'); if (!host) return;
+  const items = [
+    {x: 110, lbl: 'passport',  sub: 'Ed25519 + DID',         num: 'i'},
+    {x: 240, lbl: 'delegation',sub: 'scope, narrowed',       num: 'ii'},
+    {x: 370, lbl: 'intent',    sub: 'signed ask',            num: 'iii'},
+    {x: 500, lbl: 'gateway',   sub: '14 checks · fail-closed', num: 'iv', hot: true},
+    {x: 630, lbl: 'enforce',   sub: 'rail adapter',          num: 'v'},
+    {x: 800, lbl: 'receipt',   sub: 'canonical JSON',        num: 'vi'}
+  ];
+  items.forEach(it => {
+    const g = document.createElementNS(SVGNS,'g');
+    g.setAttribute('transform', `translate(${it.x}, 290)`);
+    // outer ring
+    const r = document.createElementNS(SVGNS,'circle');
+    r.setAttribute('r', it.hot ? 28 : 22);
+    r.setAttribute('class', it.hot ? 'accent-stroke' : 'stroke');
+    r.setAttribute('stroke-width', it.hot ? 1.6 : 1);
+    r.setAttribute('fill', it.hot ? 'rgba(194,64,42,0.08)' : 'transparent');
+    g.appendChild(r);
+    // inner dot
+    const d = document.createElementNS(SVGNS,'circle');
+    d.setAttribute('r', 3); d.setAttribute('class', it.hot ? 'accent' : 'ink');
+    g.appendChild(d);
+    // roman num above
+    const rn = document.createElementNS(SVGNS,'text');
+    rn.setAttribute('y', -42); rn.setAttribute('text-anchor','middle');
+    rn.setAttribute('font-family','Fraunces'); rn.setAttribute('font-size','13'); rn.setAttribute('font-style','italic');
+    rn.setAttribute('fill', it.hot ? '#c2402a' : '#15110b');
+    rn.textContent = it.num;
+    g.appendChild(rn);
+    // label below
+    const t = document.createElementNS(SVGNS,'text');
+    t.setAttribute('y', 56); t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-family','Fraunces'); t.setAttribute('font-size','16'); t.setAttribute('font-weight','500');
+    t.textContent = it.lbl;
+    g.appendChild(t);
+    const s = document.createElementNS(SVGNS,'text');
+    s.setAttribute('y', 78); s.setAttribute('text-anchor','middle');
+    s.setAttribute('class','lab');
+    s.textContent = it.sub;
+    g.appendChild(s);
+    host.appendChild(g);
+  });
+})();
+
+// ============================================================ M2 — authority tree
+(function(){
+  const host = $('#m2-tree'); if (!host) return;
+  const W = 920, H = 540;
+  // tree nodes
+  const root = {id:'H', x: 460, y: 80, type: 'human'};
+  const lvl1 = [
+    {id:'orchestrator', x: 240, y: 200},
+    {id:'researcher',   x: 460, y: 200},
+    {id:'payer-bot',    x: 700, y: 200, revoked: true}
+  ];
+  const lvl2 = [
+    {p: 'orchestrator', id:'planner',    x: 160, y: 320},
+    {p: 'orchestrator', id:'caller',     x: 320, y: 320},
+    {p: 'researcher',   id:'fetcher',    x: 400, y: 320},
+    {p: 'researcher',   id:'summarizer', x: 520, y: 320},
+    {p: 'payer-bot',    id:'rail-x402',  x: 620, y: 320, revoked: true},
+    {p: 'payer-bot',    id:'rail-stripe',x: 780, y: 320, revoked: true}
+  ];
+  const lvl3 = [
+    {p: 'rail-x402',  id:'tx-1', x: 600, y: 430, revoked: true},
+    {p: 'rail-x402',  id:'tx-2', x: 660, y: 430, revoked: true},
+    {p: 'rail-stripe',id:'tx-3', x: 760, y: 430, revoked: true},
+    {p: 'rail-stripe',id:'tx-4', x: 820, y: 430, revoked: true}
+  ];
+  const all = {[root.id]: root};
+  lvl1.forEach(n => all[n.id] = n);
+  lvl2.forEach(n => all[n.id] = n);
+  lvl3.forEach(n => all[n.id] = n);
+
+  // edges
+  const edges = [];
+  lvl1.forEach(n => edges.push([root, n]));
+  lvl2.forEach(n => edges.push([all[n.p], n]));
+  lvl3.forEach(n => edges.push([all[n.p], n]));
+  edges.forEach(([a,b]) => {
+    const path = document.createElementNS(SVGNS,'path');
+    const dy = (b.y - a.y) * 0.5;
+    path.setAttribute('d', `M ${a.x},${a.y+12} C ${a.x},${a.y+dy} ${b.x},${b.y-dy} ${b.x},${b.y-12}`);
+    path.setAttribute('class', b.revoked ? 'accent-stroke' : 'stroke');
+    path.setAttribute('stroke-width', b.revoked ? 1.2 : 0.8);
+    path.setAttribute('stroke-dasharray', b.revoked ? '4 3' : '');
+    host.appendChild(path);
+  });
+
+  // root
+  (function(){
+    const g = document.createElementNS(SVGNS,'g'); g.setAttribute('transform',`translate(${root.x},${root.y})`);
+    const r = document.createElementNS(SVGNS,'circle'); r.setAttribute('r',16); r.setAttribute('class','ink'); g.appendChild(r);
+    const t = document.createElementNS(SVGNS,'text'); t.setAttribute('text-anchor','middle'); t.setAttribute('y',5);
+    t.setAttribute('font-family','Fraunces'); t.setAttribute('font-size','14'); t.setAttribute('font-weight','600'); t.setAttribute('fill','#f1ead7'); t.textContent='H';
+    g.appendChild(t);
+    const lab = document.createElementNS(SVGNS,'text'); lab.setAttribute('text-anchor','middle'); lab.setAttribute('y',-26); lab.setAttribute('class','lab');
+    lab.textContent = 'human principal · root.pass'; g.appendChild(lab);
+    host.appendChild(g);
+  })();
+
+  // lvl1 + lvl2 + lvl3
+  [...lvl1, ...lvl2, ...lvl3].forEach(n => {
+    const g = document.createElementNS(SVGNS,'g'); g.setAttribute('transform',`translate(${n.x},${n.y})`);
+    const r = document.createElementNS(SVGNS,'circle');
+    const isLvl1 = lvl1.includes(n);
+    const isLvl2 = lvl2.includes(n);
+    const radius = isLvl1 ? 12 : (isLvl2 ? 8 : 5);
+    r.setAttribute('r', radius);
+    if (n.revoked) {
+      r.setAttribute('fill','rgba(194,64,42,0.08)');
+      r.setAttribute('stroke','#c2402a');
+      r.setAttribute('stroke-width',1);
+    } else {
+      r.setAttribute('fill','transparent');
+      r.setAttribute('stroke','#15110b');
+      r.setAttribute('stroke-width',1);
+    }
+    g.appendChild(r);
+    if (isLvl1 || (isLvl2 && !n.revoked)) {
+      const lab = document.createElementNS(SVGNS,'text'); lab.setAttribute('text-anchor','middle'); lab.setAttribute('y', isLvl1 ? -22 : 24); lab.setAttribute('class', n.revoked ? 'nm' : 'nm');
+      lab.setAttribute('fill', n.revoked ? '#c2402a' : '#15110b');
+      lab.textContent = n.id;
+      g.appendChild(lab);
+    }
+    host.appendChild(g);
+  });
+
+  // revoke annotation
+  (function(){
+    const ann = document.createElementNS(SVGNS,'g');
+    ann.setAttribute('transform','translate(700,160)');
+    const ring = document.createElementNS(SVGNS,'circle');
+    ring.setAttribute('r', 28); ring.setAttribute('class','accent-stroke'); ring.setAttribute('stroke-dasharray','3 3');
+    ring.setAttribute('cx',0); ring.setAttribute('cy',40);
+    ann.appendChild(ring);
+    const t = document.createElementNS(SVGNS,'text');
+    t.setAttribute('x', 50); t.setAttribute('y', 32); t.setAttribute('class','nm'); t.setAttribute('fill','#c2402a');
+    t.textContent = 'revoke(payer-bot)';
+    ann.appendChild(t);
+    const t2 = document.createElementNS(SVGNS,'text');
+    t2.setAttribute('x', 50); t2.setAttribute('y', 50); t2.setAttribute('class','lab'); t2.setAttribute('fill','#c2402a');
+    t2.textContent = 'subtree denies on next attempt';
+    ann.appendChild(t2);
+    host.appendChild(ann);
+  })();
+
+  // base label
+  const base = document.createElementNS(SVGNS,'text');
+  base.setAttribute('x', 60); base.setAttribute('y', 510); base.setAttribute('class','lab');
+  base.textContent = 'monotonic ↓  child ⊆ parent  ·  enforced at issuance';
+  host.appendChild(base);
+})();
+
+// ============================================================ M3 — fourteen list
+(function(){
+  const host = $('#m3-list'); if (!host) return;
+  const items = ['identity','signature','scope','budget','rate','values','reputation','freshness','provenance','destination','payload-shape','cap-ledger','jurisdiction','conformance'];
+  const x0 = 60, y0 = 60, lh = 28;
+  // section title
+  const ttl = document.createElementNS(SVGNS,'text');
+  ttl.setAttribute('x', x0); ttl.setAttribute('y', y0 - 18); ttl.setAttribute('class','lab');
+  ttl.textContent = 'evaluated in fixed order, all 14';
+  host.appendChild(ttl);
+  items.forEach((label, i) => {
+    const y = y0 + i * lh;
+    // hairline
+    const line = document.createElementNS(SVGNS,'line');
+    line.setAttribute('x1', x0 + 50); line.setAttribute('x2', 540);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('class','soft stroke');
+    host.appendChild(line);
+    // roman
+    const rn = document.createElementNS(SVGNS,'text');
+    rn.setAttribute('x', x0); rn.setAttribute('y', y + 4); rn.setAttribute('class','num');
+    rn.setAttribute('font-style','italic'); rn.setAttribute('font-family','Fraunces');
+    rn.textContent = toRoman(i+1).toLowerCase();
+    host.appendChild(rn);
+    // name
+    const t = document.createElementNS(SVGNS,'text');
+    t.setAttribute('x', x0 + 56); t.setAttribute('y', y + 4); t.setAttribute('font-family','Fraunces'); t.setAttribute('font-size','15'); t.setAttribute('font-style','italic');
+    t.setAttribute('fill', '#15110b');
+    t.textContent = label;
+    host.appendChild(t);
+    // tick on right rail
+    const tick = document.createElementNS(SVGNS,'circle');
+    tick.setAttribute('cx', 540); tick.setAttribute('cy', y); tick.setAttribute('r', 2);
+    tick.setAttribute('class','ink');
+    host.appendChild(tick);
+  });
+
+  // vertical rail
+  const rail = document.createElementNS(SVGNS,'line');
+  rail.setAttribute('x1', 540); rail.setAttribute('x2', 540);
+  rail.setAttribute('y1', y0); rail.setAttribute('y2', y0 + (items.length-1)*lh);
+  rail.setAttribute('class','stroke');
+  host.appendChild(rail);
+
+  function toRoman(n){
+    const arr = [['x',10],['ix',9],['v',5],['iv',4],['i',1]];
+    let r = ''; for (const [s,v] of arr) { while (n>=v){ r+=s; n-=v; } } return r;
+  }
+})();
+
+// ============================================================ M4 — mesh
+(function(){
+  const host = $('#m4-mesh'); if (!host) return;
+  const W = 920, H = 540;
+  let s = 11;
+  const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  const N = 46;
+  const nodes = [];
+  // 3 humans first, fixed positions
+  nodes.push({x: 180, y: 180, type:'human', label:'Human A'});
+  nodes.push({x: 740, y: 200, type:'human', label:'Human B'});
+  nodes.push({x: 460, y: 420, type:'human', label:'Human C'});
+  for (let i=3; i<N; i++) {
+    nodes.push({x: 80 + rnd()*760, y: 60 + rnd()*420, type: rnd() > 0.7 ? 'service' : 'agent'});
+  }
+  // edges: connect nearest 2-3
+  const edges = [];
+  for (let i=0;i<N;i++) {
+    const cands = nodes.map((n,j)=>({j, d: Math.hypot(n.x-nodes[i].x, n.y-nodes[i].y)})).filter(o=>o.j!==i).sort((a,b)=>a.d-b.d);
+    const k = 1 + Math.floor(rnd()*2);
+    for (let m=0;m<k && m<cands.length;m++) {
+      const j = cands[m].j;
+      if (i<j) edges.push([i,j]);
+    }
+  }
+  // edges
+  edges.forEach(([a,b]) => {
+    const l = document.createElementNS(SVGNS,'line');
+    l.setAttribute('x1', nodes[a].x); l.setAttribute('y1', nodes[a].y);
+    l.setAttribute('x2', nodes[b].x); l.setAttribute('y2', nodes[b].y);
+    l.setAttribute('stroke', '#15110b'); l.setAttribute('stroke-width', '0.5'); l.setAttribute('stroke-opacity','0.4');
+    host.appendChild(l);
+  });
+  // count degrees
+  const deg = new Array(N).fill(0); edges.forEach(([a,b])=>{deg[a]++;deg[b]++;});
+  nodes.forEach((n,i) => {
+    const c = document.createElementNS(SVGNS,'circle');
+    c.setAttribute('cx', n.x); c.setAttribute('cy', n.y);
+    if (n.type === 'human') {
+      c.setAttribute('r', 9); c.setAttribute('fill','#c2402a'); c.setAttribute('stroke','#15110b'); c.setAttribute('stroke-width','1');
+    } else {
+      c.setAttribute('r', 3 + Math.min(deg[i],4)*0.7); c.setAttribute('fill','#f1ead7'); c.setAttribute('stroke','#15110b'); c.setAttribute('stroke-width','0.8');
+    }
+    host.appendChild(c);
+    if (n.label) {
+      const t = document.createElementNS(SVGNS,'text');
+      t.setAttribute('x', n.x + 14); t.setAttribute('y', n.y + 4);
+      t.setAttribute('font-family','Fraunces'); t.setAttribute('font-size','13'); t.setAttribute('font-style','italic'); t.setAttribute('font-weight','500');
+      t.textContent = n.label;
+      host.appendChild(t);
+    }
+  });
+  // legend
+  const lg = document.createElementNS(SVGNS,'g'); lg.setAttribute('transform','translate(60,500)');
+  const l1 = document.createElementNS(SVGNS,'circle'); l1.setAttribute('r',6); l1.setAttribute('cx',0); l1.setAttribute('cy',0); l1.setAttribute('fill','#c2402a'); lg.appendChild(l1);
+  const tl1 = document.createElementNS(SVGNS,'text'); tl1.setAttribute('x',12); tl1.setAttribute('y',4); tl1.setAttribute('class','lab'); tl1.textContent='human principal'; lg.appendChild(tl1);
+  const l2 = document.createElementNS(SVGNS,'circle'); l2.setAttribute('r',4); l2.setAttribute('cx',150); l2.setAttribute('cy',0); l2.setAttribute('fill','#f1ead7'); l2.setAttribute('stroke','#15110b'); l2.setAttribute('stroke-width','0.8'); lg.appendChild(l2);
+  const tl2 = document.createElementNS(SVGNS,'text'); tl2.setAttribute('x',162); tl2.setAttribute('y',4); tl2.setAttribute('class','lab'); tl2.textContent='agent / service'; lg.appendChild(tl2);
+  host.appendChild(lg);
+})();
+
+// ============================================================ M5 — rails
+(function(){
+  const host = $('#m5-rails'); if (!host) return;
+  const rails = ['x402','AP2','ACP','MPP','Stripe Issuing'];
+  const W = 920, H = 540;
+  // agent box (left)
+  const ag = document.createElementNS(SVGNS,'g'); ag.setAttribute('transform','translate(80, 180)');
+  const aRect = document.createElementNS(SVGNS,'rect'); aRect.setAttribute('x',0); aRect.setAttribute('y',0); aRect.setAttribute('width',100); aRect.setAttribute('height',180);
+  aRect.setAttribute('class','stroke'); aRect.setAttribute('fill','transparent'); ag.appendChild(aRect);
+  const aT = document.createElementNS(SVGNS,'text'); aT.setAttribute('x',50); aT.setAttribute('y',96); aT.setAttribute('text-anchor','middle');
+  aT.setAttribute('font-family','Fraunces'); aT.setAttribute('font-size','22'); aT.setAttribute('font-style','italic'); aT.setAttribute('font-weight','500');
+  aT.textContent = 'agent'; ag.appendChild(aT);
+  const aL = document.createElementNS(SVGNS,'text'); aL.setAttribute('x',50); aL.setAttribute('y',200); aL.setAttribute('text-anchor','middle'); aL.setAttribute('class','lab');
+  aL.textContent = 'signed intent'; ag.appendChild(aL);
+  host.appendChild(ag);
+
+  // merchant box (right)
+  const mg = document.createElementNS(SVGNS,'g'); mg.setAttribute('transform','translate(740, 180)');
+  const mRect = document.createElementNS(SVGNS,'rect'); mRect.setAttribute('x',0); mRect.setAttribute('y',0); mRect.setAttribute('width',100); mRect.setAttribute('height',180);
+  mRect.setAttribute('class','stroke'); mRect.setAttribute('fill','transparent'); mg.appendChild(mRect);
+  const mT = document.createElementNS(SVGNS,'text'); mT.setAttribute('x',50); mT.setAttribute('y',96); mT.setAttribute('text-anchor','middle');
+  mT.setAttribute('font-family','Fraunces'); mT.setAttribute('font-size','22'); mT.setAttribute('font-style','italic'); mT.setAttribute('font-weight','500');
+  mT.textContent = 'merchant'; mg.appendChild(mT);
+  const mL = document.createElementNS(SVGNS,'text'); mL.setAttribute('x',50); mL.setAttribute('y',200); mL.setAttribute('text-anchor','middle'); mL.setAttribute('class','lab');
+  mL.textContent = 'period record'; mg.appendChild(mL);
+  host.appendChild(mg);
+
+  // 5 rails
+  const railX0 = 200, railX1 = 720;
+  rails.forEach((r,i) => {
+    const y = 200 + i*32;
+    const ln = document.createElementNS(SVGNS,'line');
+    ln.setAttribute('x1', railX0); ln.setAttribute('y1', y);
+    ln.setAttribute('x2', railX1); ln.setAttribute('y2', y);
+    ln.setAttribute('class','stroke'); ln.setAttribute('stroke-width','0.7');
+    host.appendChild(ln);
+    const lab = document.createElementNS(SVGNS,'text');
+    lab.setAttribute('x', railX0 - 10); lab.setAttribute('y', y+4); lab.setAttribute('text-anchor','end');
+    lab.setAttribute('class','lab');
+    lab.textContent = r;
+    host.appendChild(lab);
+    // gate dot
+    const dot = document.createElementNS(SVGNS,'circle');
+    dot.setAttribute('cx', 460); dot.setAttribute('cy', y); dot.setAttribute('r', 3);
+    dot.setAttribute('class', 'accent');
+    host.appendChild(dot);
+  });
+
+  // scope check column
+  const sc = document.createElementNS(SVGNS,'g'); sc.setAttribute('transform','translate(460, 0)');
+  const scLine = document.createElementNS(SVGNS,'line');
+  scLine.setAttribute('x1', 0); scLine.setAttribute('x2', 0);
+  scLine.setAttribute('y1', 180); scLine.setAttribute('y2', 380);
+  scLine.setAttribute('class','accent-stroke'); scLine.setAttribute('stroke-width','1.2');
+  sc.appendChild(scLine);
+  const scT = document.createElementNS(SVGNS,'text');
+  scT.setAttribute('x',0); scT.setAttribute('y',164); scT.setAttribute('text-anchor','middle');
+  scT.setAttribute('class','lab'); scT.setAttribute('fill','#c2402a');
+  scT.textContent = 'scope check';
+  sc.appendChild(scT);
+  const scT2 = document.createElementNS(SVGNS,'text');
+  scT2.setAttribute('x',0); scT2.setAttribute('y',400); scT2.setAttribute('text-anchor','middle');
+  scT2.setAttribute('font-family','Fraunces'); scT2.setAttribute('font-size','12'); scT2.setAttribute('font-style','italic');
+  scT2.setAttribute('fill','#3a3528');
+  scT2.textContent = 'cap · merchant · single-use';
+  sc.appendChild(scT2);
+  host.appendChild(sc);
+
+  // top label
+  const top = document.createElementNS(SVGNS,'text');
+  top.setAttribute('x', 460); top.setAttribute('y', 60); top.setAttribute('text-anchor','middle');
+  top.setAttribute('font-family','Fraunces'); top.setAttribute('font-size','22'); top.setAttribute('font-style','italic'); top.setAttribute('font-weight','400');
+  top.textContent = 'five rails, one check';
+  host.appendChild(top);
+  const top2 = document.createElementNS(SVGNS,'text');
+  top2.setAttribute('x', 460); top2.setAttribute('y', 80); top2.setAttribute('text-anchor','middle');
+  top2.setAttribute('class','lab');
+  top2.textContent = 'phase 4.1 alpha · 4 registries · build c';
+  host.appendChild(top2);
+})();
+
+// ============================================================ M6 — fan
+(function(){
+  const host = $('#m6-fan'); if (!host) return;
+  const impls = ['qntm','AgentGraph','Foxbook','AgentID','Nobulex','ArkForge'];
+  const W = 920, H = 540;
+
+  // fixture (left)
+  const fg = document.createElementNS(SVGNS,'g'); fg.setAttribute('transform','translate(60, 180)');
+  const fR = document.createElementNS(SVGNS,'rect'); fR.setAttribute('x',0); fR.setAttribute('y',0); fR.setAttribute('width',120); fR.setAttribute('height',180);
+  fR.setAttribute('class','stroke'); fR.setAttribute('fill','transparent'); fg.appendChild(fR);
+  const fT = document.createElementNS(SVGNS,'text'); fT.setAttribute('x',60); fT.setAttribute('y',92); fT.setAttribute('text-anchor','middle');
+  fT.setAttribute('font-family','Fraunces'); fT.setAttribute('font-size','22'); fT.setAttribute('font-style','italic'); fT.setAttribute('font-weight','500');
+  fT.textContent='fixture'; fg.appendChild(fT);
+  const fS = document.createElementNS(SVGNS,'text'); fS.setAttribute('x',60); fS.setAttribute('y',200); fS.setAttribute('text-anchor','middle'); fS.setAttribute('class','lab');
+  fS.textContent='CTEF v0.3.2 §A'; fg.appendChild(fS);
+  host.appendChild(fg);
+
+  // hash (right)
+  const hg = document.createElementNS(SVGNS,'g'); hg.setAttribute('transform','translate(680, 180)');
+  const hR = document.createElementNS(SVGNS,'rect'); hR.setAttribute('x',0); hR.setAttribute('y',0); hR.setAttribute('width',180); hR.setAttribute('height',180);
+  hR.setAttribute('class','accent-stroke'); hR.setAttribute('stroke-width','1.5'); hR.setAttribute('fill','rgba(194,64,42,0.06)'); hg.appendChild(hR);
+  const hT = document.createElementNS(SVGNS,'text'); hT.setAttribute('x',90); hT.setAttribute('y',82); hT.setAttribute('text-anchor','middle');
+  hT.setAttribute('font-family','Fraunces'); hT.setAttribute('font-size','20'); hT.setAttribute('font-style','italic'); hT.setAttribute('font-weight','500');
+  hT.setAttribute('fill','#c2402a');
+  hT.textContent='SHA-256'; hg.appendChild(hT);
+  const hT2 = document.createElementNS(SVGNS,'text'); hT2.setAttribute('x',90); hT2.setAttribute('y',106); hT2.setAttribute('text-anchor','middle');
+  hT2.setAttribute('font-family','JetBrains Mono'); hT2.setAttribute('font-size','11'); hT2.setAttribute('letter-spacing','0.08em');
+  hT2.setAttribute('fill','#3a3528');
+  hT2.textContent='7e3a · 9c41 · 1d8b'; hg.appendChild(hT2);
+  const hL = document.createElementNS(SVGNS,'text'); hL.setAttribute('x',90); hL.setAttribute('y',200); hL.setAttribute('text-anchor','middle'); hL.setAttribute('class','lab');
+  hL.textContent='identical · all six runs'; hg.appendChild(hL);
+  host.appendChild(hg);
+
+  // 6 paths
+  impls.forEach((name,i) => {
+    const yMid = 270 + (i - 2.5) * 50;
+    const path = document.createElementNS(SVGNS,'path');
+    const d = `M 180,270 C 320,${yMid} 540,${yMid} 680,270`;
+    path.setAttribute('d', d);
+    path.setAttribute('stroke','#15110b');
+    path.setAttribute('stroke-width','0.7');
+    path.setAttribute('fill','none');
+    path.setAttribute('opacity','0.55');
+    host.appendChild(path);
+    // mid label
+    const t = document.createElementNS(SVGNS,'text');
+    t.setAttribute('x', 430); t.setAttribute('y', yMid - 6); t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-family','Fraunces'); t.setAttribute('font-size','14'); t.setAttribute('font-style','italic');
+    t.textContent = name;
+    host.appendChild(t);
+  });
+
+  // top label
+  const top = document.createElementNS(SVGNS,'text');
+  top.setAttribute('x', 430); top.setAttribute('y', 60); top.setAttribute('text-anchor','middle');
+  top.setAttribute('font-family','Fraunces'); top.setAttribute('font-size','22'); top.setAttribute('font-style','italic'); top.setAttribute('font-weight','400');
+  top.textContent = 'one fixture · six runs · one hash';
+  host.appendChild(top);
+})();
+</script>
+
+</body>
+</html>
