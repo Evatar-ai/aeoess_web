@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/assets/theme-light.css">
   <meta charset="utf-8">
   <link rel="alternate" type="text/plain" href="https://aeoess.com/llms.txt" title="LLM documentation (compact)">
   <link rel="alternate" type="text/plain" href="https://aeoess.com/llms-full.txt" title="LLM documentation (full)">
@@ -9,65 +10,18 @@
   <link rel="alternate" type="text/plain" href="https://aeoess.com/.well-known/aps.txt" title="APS governance declaration">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Sitemap — AEOESS</title>
-  <meta name="description" content="All AEOESS pages organized by category, plus machine-readable endpoints for AI agents.">
+  <meta name="description" content="All AEOESS pages organized by bucket: primary, secondary, specialty, fragments, agent-readable surfaces.">
   <link rel="canonical" href="https://aeoess.com/sitemap.html">
   <meta name="robots" content="index,follow">
-  <meta property="og:title" content="Sitemap — AEOESS">
-  <meta property="og:description" content="All pages organized by category. Plus machine-readable endpoints for AI agents.">
-  <meta property="og:url" content="https://aeoess.com/sitemap.html">
-  <meta property="og:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aeoess.com/sitemap.html">
+  <meta property="og:title" content="Sitemap — AEOESS">
+  <meta property="og:description" content="All AEOESS pages organized by bucket.">
+  <meta property="og:image" content="https://aeoess.com/assets/og-default.png">
+  <meta property="og:site_name" content="AEOESS">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://aeoess.com/assets/images/aeoess_logo.png">
-  <link rel="icon" type="image/png" href="/assets/images/aeoess_logo.png">
-  <style>
-    :root {
-      --bg: #242426; --paper: #2a2a2c; --ink: #ececec; --ink2: #c8c8c8;
-      --ink3: #b0b0b0; --ink4: #808080; --rule: #2e2e32; --accent: #ececec;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
-      background: var(--bg); color: var(--ink);
-      font-size: 14.5px; line-height: 1.55;
-    }
-    a { color: inherit; text-decoration: none; }
-    a:hover { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 60px 40px 80px; }
-    header {
-      border-bottom: 1px solid var(--rule); padding-bottom: 28px; margin-bottom: 36px;
-    }
-    header .eyebrow {
-      font-size: 11.5px; letter-spacing: 0.14em; color: var(--accent);
-      font-weight: 600; text-transform: uppercase; margin-bottom: 14px;
-    }
-    header h1 {
-      font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.02em;
-      font-weight: 500; margin: 0 0 14px; line-height: 1.1; color: var(--ink);
-    }
-    header p { margin: 0; color: var(--ink3); max-width: 640px; }
-    .grid {
-      display: grid; gap: 36px 48px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-    section h2 {
-      font-size: 11.5px; letter-spacing: 0.14em; color: var(--accent);
-      font-weight: 600; text-transform: uppercase; margin: 0 0 12px;
-      padding-bottom: 8px; border-bottom: 1px solid var(--rule);
-    }
-    ul { list-style: none; margin: 0; padding: 0; }
-    li { padding: 5px 0; }
-    li a { color: var(--ink2); }
-    li a:hover { color: var(--ink); }
-    li .url { color: var(--ink4); font-size: 12px; margin-left: 4px; }
-    footer {
-      margin-top: 48px; padding-top: 24px;
-      border-top: 1px solid var(--rule); color: var(--ink4); font-size: 12.5px;
-    }
-    footer a { color: var(--ink3); }
-  </style>
-<style id="aeoess-nav-hover-v1">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <style id="aeoess-nav-hover-v1">
 .aeoess-nav-desktop a,
 .aeoess-nav-desktop button,
 header [data-nav-dropdown] button {
@@ -99,99 +53,111 @@ footer a:hover {
   color: #ececec !important;
 }
 </style>
+  <style>
+    body { margin: 0; background: rgb(36, 36, 38); color: rgb(236, 236, 236);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+      font-size: 14.5px; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    main { max-width: 1100px; margin: 0 auto; padding: 60px 40px 80px; }
+    .eyebrow { font-size: 11.5px; letter-spacing: 0.14em; color: rgb(176, 176, 176);
+      font-weight: 600; text-transform: uppercase; margin-bottom: 14px; }
+    h1 { font-size: clamp(34px, 4.6vw, 54px); letter-spacing: -0.02em;
+      font-weight: 500; margin: 0 0 20px; line-height: 1.1; }
+    .lead { color: rgb(176, 176, 176); margin-bottom: 36px; max-width: 640px; }
+    h2 { font-size: 13px; letter-spacing: 0.14em; color: rgb(176, 176, 176);
+      font-weight: 600; text-transform: uppercase;
+      margin: 36px 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid rgb(46, 46, 50); }
+    ul { margin: 0; padding: 0; list-style: none; }
+    li { padding: 7px 0; font-size: 14px; }
+    li a { color: rgb(236, 236, 236); }
+    li a:hover { color: rgb(124, 172, 222); }
+    .desc { color: rgb(138, 138, 142); font-size: 12.5px; }
+    details { margin-top: 14px; }
+    summary { cursor: pointer; color: rgb(176, 176, 176); font-size: 13px;
+      padding: 6px 0; }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="eyebrow">Sitemap</div>
-      <h1>All pages</h1>
-      <p>Everything on aeoess.com organized by category. The last section lists machine-readable
-         endpoints for AI agents (llms.txt, AGENTS.md, .well-known files).</p>
-    </header>
-    <div class="grid">
-      <section>
-        <h2>Solutions</h2>
-        <ul>
-        <li><a href="/solutions.html">Solutions overview</a></li>
-        <li><a href="/payments.html">Payments</a></li>
-        <li><a href="/content.html">Content governance</a></li>
-        <li><a href="/compliance.html">Compliance</a></li>
-        <li><a href="/enterprise.html">Enterprise</a></li>
-        </ul>
-      </section>
-      <section>
-        <h2>Identity & Tools</h2>
-        <ul>
-        <li><a href="/passport.html">Passport (spec)</a></li>
-        <li><a href="/wallet.html">Wallet</a></li>
-        <li><a href="/portal.html">Portal</a></li>
-        <li><a href="/amcs.html">AMCS</a></li>
-        <li><a href="/agora.html">Agora</a></li>
-        <li><a href="/mingle.html">Mingle</a></li>
-        </ul>
-      </section>
-      <section>
-        <h2>Open Source</h2>
-        <ul>
-        <li><a href="/opensource.html">Open Source overview</a></li>
-        <li><a href="/passport.html">Spec (Passport)</a></li>
-        <li><a href="/research.html">Research papers</a></li>
-        <li><a href="https://www.npmjs.com/package/agent-passport-system" rel="noopener" target="_blank">SDK on npm</a></li>
-        <li><a href="https://www.npmjs.com/package/agent-passport-system-mcp" rel="noopener" target="_blank">MCP on npm</a></li>
-        <li><a href="https://pypi.org/project/agent-passport-system/" rel="noopener" target="_blank">Python SDK on PyPI</a></li>
-        <li><a href="https://github.com/aeoess" rel="noopener" target="_blank">GitHub</a></li>
-        <li><a href="/docs.html">Docs</a></li>
-        </ul>
-      </section>
-      <section>
-        <h2>Technical</h2>
-        <ul>
-        <li><a href="/architecture.html">Architecture</a></li>
-        <li><a href="/opensource.html#architecture">Architecture diagram</a></li>
-        <li><a href="/benchmarks.html">Benchmarks</a></li>
-        <li><a href="/threat-model.html">Threat model</a></li>
-        <li><a href="/gateway.html">Gateway</a></li>
-        <li><a href="/aivss.html">AIVSS</a></li>
-        <li><a href="/security.html">Security</a></li>
-        </ul>
-      </section>
-      <section>
-        <h2>Resources</h2>
-        <ul>
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/roadmap.html">Roadmap</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="/compare.html">Compare</a></li>
-        <li><a href="/status.html">Status</a></li>
-        </ul>
-      </section>
-      <section>
-        <h2>Governance & community</h2>
-        <ul>
-        <li><a href="/working-group.html">Working group</a></li>
-        <li><a href="/board.html">Board / charter</a></li>
-        <li><a href="/agents-md.html">AGENTS.md</a></li>
-        <li><a href="/pricing.html">Pricing</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-        <li><a href="/media.html">Media / press</a></li>
-        </ul>
-      </section>
-      <section>
-        <h2>For agents (machine-readable)</h2>
-        <ul>
-        <li><a href="/llms.txt">llms.txt — compact</a></li>
-        <li><a href="/llms-full.txt">llms-full.txt — full</a></li>
-        <li><a href="/AGENTS.md">AGENTS.md</a></li>
-        <li><a href="/.well-known/aps.txt">.well-known/aps.txt</a></li>
-        <li><a href="/.well-known/mcp.json">.well-known/mcp.json</a></li>
-        <li><a href="/.well-known/agents.json">.well-known/agents.json</a></li>
-        <li><a href="/.well-known/security.txt">.well-known/security.txt</a></li>
-        </ul>
-      </section>
-    </div>
-    <footer>
-      <a href="/">← Back to AEOESS</a>
-    </footer>
-  </div>
+  <header style="border-bottom: 1px solid rgb(46, 46, 50); background: rgb(36, 36, 38); position: sticky; top: 0px; z-index: 5; backdrop-filter: blur(8px);"><div style="max-width: 1280px; margin: 0px auto; display: flex; align-items: center; gap: 24px; padding: 14px 40px;"><a href="/" style="display: flex; align-items: center; gap: 8px; color: rgb(236, 236, 236); text-decoration: none;"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style="height:24px;width:auto;display:block;"></a><nav class="aeoess-nav-desktop" style="display: flex; align-items: center; gap: 26px; font-size: 13.5px; color: rgb(176, 176, 176);"><div data-nav-dropdown="" style="position: relative;"><button style="color: rgb(176, 176, 176); text-decoration: none; font: inherit; padding: 0px; cursor: default; display: inline-flex; align-items: center; gap: 4px; background: none; border: 0px;">Solutions <span style="font-size: 9px; opacity: 0.6; margin-top: 1px;">▼</span></button><div data-nav-dropdown-panel="" style="position: absolute; top: 100%; left: -12px; margin-top: 0; padding-top: 8px; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity 0.15s, transform 0.15s; background: rgb(36, 36, 38); border: 1px solid rgb(58, 58, 62); border-radius: 8px; padding: 6px; min-width: 340px; box-shadow: rgba(0, 0, 0, 0.06) 0px 8px 24px;"><a href="/payments.html" style="display: flex; gap: 12px; padding: 10px 12px; text-decoration: none; color: rgb(236, 236, 236); border-radius: 5px;"><div style="width: 28px; height: 28px; border-radius: 5px; background: rgb(42, 42, 46); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h3"></path></svg></div><div><div style="font-size: 13.5px; font-weight: 600;">Payments</div><div style="font-size: 12px; color: rgb(138, 138, 142); margin-top: 2px;">For fintech, marketplaces, B2B commerce</div></div></a><a href="/content.html" style="display: flex; gap: 12px; padding: 10px 12px; text-decoration: none; color: rgb(236, 236, 236); border-radius: 5px;"><div style="width: 28px; height: 28px; border-radius: 5px; background: rgb(42, 42, 46); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"></path><path d="M15 3v4h4"></path><path d="M9 12h7M9 16h5"></path></svg></div><div><div style="font-size: 13.5px; font-weight: 600;">Content</div><div style="font-size: 12px; color: rgb(138, 138, 142); margin-top: 2px;">For publishers, data providers, IP owners</div></div></a><a href="/compliance.html" style="display: flex; gap: 12px; padding: 10px 12px; text-decoration: none; color: rgb(236, 236, 236); border-radius: 5px;"><div style="width: 28px; height: 28px; border-radius: 5px; background: rgb(42, 42, 46); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></div><div><div style="font-size: 13.5px; font-weight: 600;">Compliance</div><div style="font-size: 12px; color: rgb(138, 138, 142); margin-top: 2px;">For regulated industries and EU operators</div></div></a><a href="/enterprise.html" style="display: flex; gap: 12px; padding: 10px 12px; text-decoration: none; color: rgb(236, 236, 236); border-radius: 5px;"><div style="width: 28px; height: 28px; border-radius: 5px; background: rgb(42, 42, 46); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="7" height="11" rx="1"></rect><rect x="14" y="4" width="7" height="16" rx="1"></rect><path d="M5.5 13h2M5.5 16h2M16.5 8h2M16.5 11h2M16.5 14h2"></path></svg></div><div><div style="font-size: 13.5px; font-weight: 600;">Enterprise</div><div style="font-size: 12px; color: rgb(138, 138, 142); margin-top: 2px;">For internal agent fleets and platform teams</div></div></a></div></div><a href="/opensource.html" style="color: rgb(176, 176, 176); text-decoration: none; font-size: 13.5px; font-weight: 450; padding: 4px 0px; cursor: default;">Open Source</a><a href="/pricing.html" style="color: rgb(176, 176, 176); text-decoration: none; font-size: 13.5px; font-weight: 450; padding: 4px 0px; cursor: default;">Pricing</a><div data-nav-dropdown="" style="position: relative;"><button style="color: rgb(176, 176, 176); text-decoration: none; font: inherit; padding: 0px; cursor: default; display: inline-flex; align-items: center; gap: 4px; background: none; border: 0px;">Resources <span style="font-size: 9px; opacity: 0.6; margin-top: 1px;">▼</span></button><div data-nav-dropdown-panel="" style="position: absolute; top: 100%; left: -12px; margin-top: 0; padding-top: 8px; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity 0.15s, transform 0.15s; background: rgb(36, 36, 38); border: 1px solid rgb(58, 58, 62); border-radius: 8px; padding: 6px; min-width: 160px; box-shadow: rgba(0, 0, 0, 0.06) 0px 8px 24px;"><a href="/blog" style="display: block; padding: 8px 12px; text-decoration: none; color: rgb(221, 221, 221); font-size: 13px; border-radius: 5px;">Blog</a><a href="/roadmap" style="display: block; padding: 8px 12px; text-decoration: none; color: rgb(221, 221, 221); font-size: 13px; border-radius: 5px;">Roadmap</a><a href="/passport" style="display: block; padding: 8px 12px; text-decoration: none; color: rgb(221, 221, 221); font-size: 13px; border-radius: 5px;">Spec</a><a href="/faq" style="display: block; padding: 8px 12px; text-decoration: none; color: rgb(221, 221, 221); font-size: 13px; border-radius: 5px;">FAQ</a><a href="/compare" style="display: block; padding: 8px 12px; text-decoration: none; color: rgb(221, 221, 221); font-size: 13px; border-radius: 5px;">Compare</a></div></div></nav><div class="aeoess-nav-desktop" style="margin-left: auto; display: flex; align-items: center; gap: 10px;"><a href="/contact.html" style="color: rgb(176, 176, 176); text-decoration: none; font-size: 13px; font-weight: 450; padding: 4px 0px; cursor: default;">Contact</a><button data-theme-toggle="true" aria-label="Toggle theme" style="background: none; border: 0px; padding: 6px 8px; cursor: pointer; color: rgb(176, 176, 176); font-size: 14px; line-height: 1; margin-left: 4px;"><span data-theme-icon-dark="true" style="display: inline;">☾</span><span data-theme-icon-light="true" style="display: none;">☀</span></button><a href="/pricing.html" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; background: rgb(236, 236, 236); color: rgb(36, 36, 38); font-size: 13px; font-weight: 500; border-radius: 4px; text-decoration: none; white-space: nowrap;">Get Started <span style="opacity: 0.7;">→</span></a></div><button class="aeoess-hamburger" aria-label="Menu" style="margin-left: auto; display: none; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0px; background: transparent; border: 1px solid rgb(46, 46, 50); border-radius: 4px; cursor: pointer; color: rgb(236, 236, 236);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg></button></div><div class="aeoess-mobile-menu" style="display: none; flex-direction: column; border-top: 1px solid rgb(46, 46, 50); background: rgb(36, 36, 38); padding: 8px 40px 16px;"><a href="/solutions.html" style="padding: 14px 0px; border-bottom: 1px solid rgb(46, 46, 50); color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Solutions</a><a href="/opensource.html" style="padding: 14px 0px; border-bottom: 1px solid rgb(46, 46, 50); color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Open Source</a><a href="/pricing.html" style="padding: 14px 0px; border-bottom: 1px solid rgb(46, 46, 50); color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Pricing</a><a href="/passport.html" style="padding: 14px 0px; border-bottom: 1px solid rgb(46, 46, 50); color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Spec</a><a href="/docs.html" style="padding: 14px 0px; border-bottom: 1px solid rgb(46, 46, 50); color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Docs</a><a href="/docs.html" style="padding: 14px 0px; border-bottom: 1px solid rgb(46, 46, 50); color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Resources</a><a href="/contact.html" style="padding: 14px 0px; border-bottom: none; color: rgb(236, 236, 236); text-decoration: none; font-size: 15px; font-weight: 500;">Contact</a><a href="/pricing.html" style="margin-top: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 16px; background: rgb(236, 236, 236); color: rgb(36, 36, 38); font-size: 14px; font-weight: 500; border-radius: 4px; text-decoration: none;">Get Started <span style="opacity: 0.7;">→</span></a></div></header>
+  <main>
+    <div class="eyebrow">Sitemap</div>
+    <h1>All pages, organized.</h1>
+    <p class="lead">Every AEOESS page grouped by audience. Plus machine-readable surfaces for AI agents.</p>
+
+    <h2>Primary</h2>
+    <ul>
+        <li><a href="/compliance.html">AEOESS compliance</a><span class=desc> · Receipts an auditor can verify without trusting the issuer. Mapped to NIST, ISO,…</span></li>
+        <li><a href="/contact.html">Contact AEOESS</a><span class=desc> · Direct lines for partnerships, security disclosure, press, and the working group…</span></li>
+        <li><a href="/content.html">AEOESS content governance for AI training data</a><span class=desc> · Source-bound consent, lineage receipts, and auditable derivation chains for cont…</span></li>
+        <li><a href="/enterprise.html">AEOESS for enterprise</a><span class=desc> · Hosted enforcement edge, multi-region, fleet-scale revocation. Enterprise terms …</span></li>
+        <li><a href="/index.html">AEOESS</a><span class=desc> · Open protocol giving AI agents cryptographic identity, scoped delegation, and si…</span></li>
+        <li><a href="/opensource.html">AEOESS</a><span class=desc> · Comparison build of the AEOESS landing surface. Same protocol, alternate layout.</span></li>
+        <li><a href="/payments.html">AEOESS payments</a><span class=desc> · Per-transaction signed receipts, scoped budgets, fail-closed gateway enforcement…</span></li>
+        <li><a href="/pricing.html">AEOESS pricing</a><span class=desc> · Apache-2.0 self-hosting is free. Managed gateway pricing on request.</span></li>
+        <li><a href="/solutions.html">AEOESS solutions</a><span class=desc> · Vertical solutions built on the AEOESS protocol. Same primitives, surfaced for s…</span></li>
+    </ul>
+
+    <h2>Secondary</h2>
+    <ul>
+        <li><a href="/blog.html">AEOESS blog</a><span class=desc> · Engineering posts, ecosystem dispatches, and standards-body progress from the AE…</span></li>
+        <li><a href="/board.html">AEOESS board</a><span class=desc> · The aeoess working group is governed under a cross-vendor charter with separatio…</span></li>
+        <li><a href="/compare.html">How AEOESS compares to adjacent agent-governance projects</a><span class=desc> · AEOESS vs A2A, AGT, AGNTCY, AgentGraph, MoltyCel, Cedar, SINT. Where overlaps en…</span></li>
+        <li><a href="/docs.html">AEOESS documentation</a><span class=desc> · API reference, integration guides, and protocol specifications for the AEOESS ag…</span></li>
+        <li><a href="/faq.html">AEOESS FAQ</a><span class=desc> · Common questions about agent passports, delegation, the gateway, and what AEOESS…</span></li>
+        <li><a href="/passport.html">Agent Passport</a><span class=desc> · Ed25519-signed identity, scoped delegation chains, and verifiable receipts. The …</span></li>
+        <li><a href="/research.html">AEOESS research</a><span class=desc> · Eight peer-reviewable papers, eight DOIs, federal-record submissions (NIST CAISI…</span></li>
+        <li><a href="/roadmap.html">Roadmap</a><span class=desc> · Public roadmap for the AEOESS protocol. 244 items grouped by lane and status. Da…</span></li>
+        <li><a href="/security.html">AEOESS security</a><span class=desc> · Disclosure policy, vulnerability scope, and the protocol's threat boundary at a …</span></li>
+        <li><a href="/status.html">AEOESS status</a><span class=desc> · Real-time status of aeoess.com, the gateway, MCP, and the SDK package registries…</span></li>
+        <li><a href="/working-group.html">AEOESS working group</a><span class=desc> · Cross-vendor charter, separation of powers, and the working group governing AEOE…</span></li>
+    </ul>
+
+    <h2>More</h2>
+    <ul>
+        <li><a href="/agents-md.html">AEOESS agents.md</a><span class=desc> · How website owners publish a signed AI-policy declaration that AEOESS-aware agen…</span></li>
+        <li><a href="/agora.html">AEOESS Agora</a><span class=desc> · An open coordination surface for AEOESS agents. Signed posts, public verificatio…</span></li>
+        <li><a href="/aivss.html">AIVSS</a><span class=desc> · A scoring system for AI-system vulnerabilities. Severity, exploitability, and sc…</span></li>
+        <li><a href="/amcs.html">AEOESS AMCS</a><span class=desc> · Settlement primitives for agent-to-agent commerce: scoped budgets, escrow, and v…</span></li>
+        <li><a href="/architecture.html">AEOESS architecture</a><span class=desc> · Identity, delegation, gateway, and receipt layers explained. How the protocol co…</span></li>
+        <li><a href="/benchmarks.html">AEOESS benchmarks</a><span class=desc> · Independent benchmark methodology and reproducible results for the AEOESS gatewa…</span></li>
+        <li><a href="/gateway.html">AEOESS gateway</a><span class=desc> · The enforcement edge: gateway boundary, fail-closed evaluation, and signed recei…</span></li>
+        <li><a href="/mingle.html">AEOESS Mingle</a><span class=desc> · Privacy-preserving matching of needs and offers across human-agent pairs. Both s…</span></li>
+        <li><a href="/portal.html">AEOESS portal</a><span class=desc> · Operator-facing dashboards for delegations, receipts, and gateway policy.</span></li>
+        <li><a href="/roadmap-page.html">AEOESS roadmap</a><span class=desc> · Where the protocol is, what's shipping next, and where it's headed. Seven lanes …</span></li>
+        <li><a href="/threat-model.html">AEOESS threat model</a><span class=desc> · Adversarial model, trust assumptions, and the failure modes the AEOESS protocol …</span></li>
+        <li><a href="/wallet.html">AEOESS wallet</a><span class=desc> · Reference wallet for managing agent passports, delegations, and the receipts the…</span></li>
+    </ul>
+
+    <h2>Agent-readable surfaces</h2>
+    <ul>
+        <li><a href="/AGENTS.md">/AGENTS.md</a><span class=desc> · agent instructions in AGENTS.md standard</span></li>
+        <li><a href="/llms.txt">/llms.txt</a><span class=desc> · compact LLM documentation</span></li>
+        <li><a href="/llms-full.txt">/llms-full.txt</a><span class=desc> · full LLM documentation</span></li>
+        <li><a href="/.well-known/aps.txt">/.well-known/aps.txt</a><span class=desc> · APS governance declaration</span></li>
+        <li><a href="/.well-known/mcp.json">/.well-known/mcp.json</a><span class=desc> · MCP server discovery</span></li>
+        <li><a href="/sitemap.xml">/sitemap.xml</a><span class=desc> · machine-readable sitemap</span></li>
+        <li><a href="/robots.txt">/robots.txt</a><span class=desc> · crawler policy</span></li>
+    </ul>
+
+    <details>
+      <summary>Embedded fragments (dev reference)</summary>
+      <ul>
+        <li><a href="/arch-action.html">AEOESS</a><span class=desc> · Passport → Delegation → Intent → Gateway → Enforcement → Receipt</span></li>
+        <li><a href="/arch-delegation.html">AEOESS</a><span class=desc> · Authority can only narrow. Revoke a node, the whole subtree dies in one call.</span></li>
+        <li><a href="/arch-gateway.html">AEOESS</a><span class=desc> · Every action evaluated against 14 constraint dimensions. Fail-closed.</span></li>
+        <li><a href="/arch-interop.html">AEOESS</a><span class=desc> · Six independent implementations. Same fixture. Byte-match SHA-256.</span></li>
+        <li><a href="/arch-mesh.html">AEOESS</a><span class=desc> · Agents, humans, services bound by signed delegations and receipts.</span></li>
+        <li><a href="/arch-payments.html">AEOESS</a><span class=desc> · Agent pays. Scope narrows. Merchant receives. Settlement record signed.</span></li>
+        <li><a href="/embed-host-preview.html">Embed host preview · protocol architecture</a></li>
+        <li><a href="/network.html">Moved</a></li>
+        <li><a href="/protocol-architecture.html">AEOESS</a></li>
+        <li><a href="/protocol.html">Moved</a></li>
+        <li><a href="/sitemap.html">Sitemap</a><span class=desc> · All AEOESS pages organized by category, plus machine-readable endpoints for AI a…</span></li>
+        <li><a href="/world.html">Moved</a></li>
+      </ul>
+    </details>
+  </main>
+  <footer style="padding: 60px 40px 36px; border-top: 1px solid rgb(46, 46, 50); background: rgb(36, 36, 38); color: rgb(138, 138, 142); font-size: 13px;"><div style="max-width: 1100px; margin: 0px auto; display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 32px;"><div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;"><a href="/" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style="height:20px;width:auto;display:block;"></a></div><p style="margin: 0px; font-size: 12.5px; color: rgb(138, 138, 142); max-width: 280px; line-height: 1.5;">Open-source enforcement protocol for AI agents. Identity, delegation, accountability.</p></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Solutions</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/payments.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Payments</a></li><li><a href="/content.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Content</a></li><li><a href="/compliance.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Compliance</a></li><li><a href="/enterprise.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Enterprise</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Open Source</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/passport.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Spec</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">SDK</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system-mcp" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">MCP</a></li><li><a href="https://github.com/aeoess" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">GitHub</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Resources</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/blog.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Blog</a></li><li><a href="/roadmap.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Roadmap</a></li><li><a href="/faq.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">FAQ</a></li><li><a href="/compare.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Compare</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Company</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/passport.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">About</a></li><li><a href="/contact.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Contact</a></li><li><a href="/media.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Press</a></li><li><a href="/security.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Security</a></li></ul></div></div><div style="max-width: 1100px; margin: 48px auto 0px; padding-top: 18px; border-top: 1px solid rgb(46, 46, 50); display: flex; justify-content: space-between; font-size: 12px; color: rgb(90, 90, 94);"><span>© 2026 aeoess. Apache 2.0 protocol, commercial gateway.</span><span>signal@aeoess.com</span></div><div style="max-width:1100px;margin:24px auto 0;padding-top:18px;border-top:1px solid rgba(128,128,128,0.18);font-size:11.5px;color:rgba(128,128,128,0.85);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;"><span>© 2026 AEOESS / APS by Tymofii Pidlisnyi · Apache 2.0</span><a href="/sitemap.html" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">All pages →</a></div></footer>
 </body>
 </html>
