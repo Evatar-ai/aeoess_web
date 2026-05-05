@@ -99,7 +99,7 @@
     };
     const scheduleClose = () => {
       cancelClose();
-      closeTimer = setTimeout(close, 220);
+      closeTimer = setTimeout(close, 400);
     };
     button.style.cursor = 'pointer';
     button.setAttribute('aria-haspopup', 'true');

@@ -448,7 +448,7 @@ function NavDropdown({ label, palette }) {
         {label} <span style={{ fontSize: 9, opacity: .6, marginTop: 1 }}>▼</span>
       </button>
       <div data-nav-dropdown-panel="" style={{
-        position: 'absolute', top: '100%', left: -12, marginTop: 8,
+        position: 'absolute', top: '100%', left: -12, marginTop: 0, paddingTop: 8,
         opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)',
         pointerEvents: open ? 'auto' : 'none', transition: 'opacity .15s, transform .15s',
         background: P.paper, border: `1px solid ${P.rule}`, borderRadius: 8,
@@ -483,7 +483,7 @@ function NavDropdownResources({ palette }) {
         Resources <span style={{ fontSize: 9, opacity: .6, marginTop: 1 }}>▼</span>
       </button>
       <div data-nav-dropdown-panel="" style={{
-        position: 'absolute', top: '100%', left: -12, marginTop: 8,
+        position: 'absolute', top: '100%', left: -12, marginTop: 0, paddingTop: 8,
         opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)',
         pointerEvents: open ? 'auto' : 'none', transition: 'opacity .15s, transform .15s',
         background: P.paper, border: `1px solid ${P.rule}`, borderRadius: 8,
