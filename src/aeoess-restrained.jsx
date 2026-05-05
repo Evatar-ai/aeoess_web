@@ -217,7 +217,7 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
               </div>
             }
 
-            {/* Open source from day one, full-width, restrained tone */}
+            {/* OPEN PROTOCOL band, full-width, restrained tone */}
             <div style={{
               marginTop: sectionPadY + 10,
               paddingTop: sectionPadY - 10,
@@ -230,15 +230,26 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
                 fontSize: 'clamp(28px, 3.4vw, 42px)', letterSpacing: '-0.02em',
                 fontWeight: 500, margin: 0, color: P.ink, lineHeight: 1.1, maxWidth: 720
               }}>
-                Open source from day one.
+                OPEN PROTOCOL
               </h2>
               <p style={{
-                fontSize: 16, lineHeight: 1.6, color: P.ink3,
-                marginTop: 18, maxWidth: 640, fontWeight: 400
+                fontSize: 18, lineHeight: 1.5, color: P.ink2,
+                marginTop: 18, maxWidth: 640, fontWeight: 400, fontStyle: 'italic'
               }}>
-                AEOESS is built in the open because agent governance is too important to be proprietary.
-                Read the spec, audit the SDK, run the gateway yourself. Spec compatibility is permanent —
-                you are never locked in.
+                A passport system for agents should belong to the world they move through.
+              </p>
+              <p style={{
+                fontSize: 16, lineHeight: 1.6, color: P.ink3,
+                marginTop: 14, maxWidth: 640, fontWeight: 400
+              }}>
+                APS is public infrastructure for agent identity, delegation, enforcement, and receipts.
+                Read the spec. Run the gateway. Verify the chain.
+              </p>
+              <p style={{
+                fontSize: 14.5, lineHeight: 1.5, color: P.ink4,
+                marginTop: 14, maxWidth: 640, fontWeight: 500, letterSpacing: '0.01em'
+              }}>
+                No black boxes. No lock-in. No "trust us."
               </p>
               <div style={{ marginTop: 28, display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                 <a href="https://github.com/aeoess" style={{
