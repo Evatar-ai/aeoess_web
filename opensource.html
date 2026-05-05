@@ -1,14 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/assets/theme-light.css">
   <meta charset="utf-8"/>
-  <link rel="alternate" type="text/plain" href="https://aeoess.com/llms.txt" title="LLM documentation (compact)">
-  <link rel="alternate" type="text/plain" href="https://aeoess.com/llms-full.txt" title="LLM documentation (full)">
-  <link rel="alternate" type="text/markdown" href="https://aeoess.com/AGENTS.md" title="Agent instructions (AGENTS.md standard)">
-  <link rel="alternate" type="application/json" href="https://aeoess.com/.well-known/mcp.json" title="MCP server discovery">
-  <link rel="alternate" type="text/plain" href="https://aeoess.com/.well-known/aps.txt" title="APS governance declaration">
-
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>aeoess — opensource-v1</title>
 
@@ -383,19 +376,19 @@ function RestrainedHeader({ palette: P, pad }) {
   return (
     <header style={{ borderBottom: `1px solid ${P.ruleLight}`, background: P.paper, position: 'sticky', top: 0, zIndex: 5 }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: `14px ${pad}px`, display: 'flex', alignItems: 'center', gap: 36 }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, color: P.ink, textDecoration: 'none' }}>
+        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 8, color: P.ink, textDecoration: 'none' }}>
           <AeoessMark size={20} color={P.ink} />
           <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '0.04em' }}>AEOESS</span>
         </a>
         <nav className="aeoess-nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 26, fontSize: 13.5, color: P.ink3 }}>
           <NavDropdown label="Solutions" palette={P} />
-          <a href="/opensource.html" style={navLink(P)}>Open Source</a>
-          <a href="/pricing.html" style={navLink(P)}>Pricing</a>
+          <a href="#" style={navLink(P)}>Open Source</a>
+          <a href="#" style={navLink(P)}>Pricing</a>
           <NavDropdownResources palette={P} />
         </nav>
         <div className="aeoess-nav-desktop" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <a href="/contact.html" style={{ ...navLink(P), fontSize: 13 }}>Contact</a>
-          <a href="/pricing.html" style={{
+          <a href="#" style={{ ...navLink(P), fontSize: 13 }}>Contact</a>
+          <a href="#" style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 14px',
             background: P.accentColor, color: P.accentColor === P.ink ? P.paper : '#fff',
             fontSize: 13, fontWeight: 500, borderRadius: 4, textDecoration: 'none',
@@ -436,7 +429,7 @@ function RestrainedHeader({ palette: P, pad }) {
                color:P.ink, textDecoration:'none', fontSize:15, fontWeight:500,
              }}>{l}</a>
         ))}
-        <a href="/pricing.html" onClick={() => setOpen(false)}
+        <a href="#" onClick={() => setOpen(false)}
            style={{
              marginTop:14, display:'inline-flex', alignItems:'center', justifyContent:'center', gap:6,
              padding:'12px 16px',
@@ -503,8 +496,8 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
                   Built for the four jobs your agents already do.
                 </p>
                 <div style={{ display: 'flex', gap: 12, marginTop: 32 }}>
-                  <a href="/pricing.html" style={primaryBtn(P)}>Get Started <span style={{ opacity: .75 }}>→</span></a>
-                  <a href="/opensource.html#architecture" style={secondaryBtn(P)}>See how it works <span style={{ opacity: .6 }}>↓</span></a>
+                  <a href="#" style={primaryBtn(P)}>Get Started <span style={{ opacity: .75 }}>→</span></a>
+                  <a href="#arch" style={secondaryBtn(P)}>See how it works <span style={{ opacity: .6 }}>↓</span></a>
                 </div>
               </div>
 
@@ -539,7 +532,7 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
               </p>
               <ArchitectureMock palette={P} height={380} />
               <div style={{ marginTop: 14, fontSize: 13, color: P.ink4 }}>
-                Hover any node. <a href="/opensource.html#architecture" style={{ color: P.link, textDecoration: 'none' }}>Open the full architecture →</a>
+                Hover any node. <a href="#" style={{ color: P.link, textDecoration: 'none' }}>Open the full architecture →</a>
               </div>
             </div>
 
@@ -624,9 +617,10 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style={{ marginRight: 8 }}><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" /></svg>
                   <span>@aeoess</span>
                   <span style={{ color: P.ink5, margin: '0 10px' }}>|</span>
+                  <span style={{ fontWeight: 700, paddingRight: 12 }}>2.4K</span>
                 </a>
                 <span style={{ fontSize: 12.5, color: P.ink5 }}>
-                  Apache-2.0 · <a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a> · <a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">draft-pidlisnyi-aps-00</a> (IETF)
+                  Apache-2.0 · 8 papers · draft-pidlisnyi-aps-00 (IETF)
                 </span>
               </div>
             </div>
@@ -637,8 +631,8 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
                 Ready to govern your agents?
               </h2>
               <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
-                <a href="/pricing.html" style={primaryBtn(P)}>Get Started <span style={{ opacity: .75 }}>→</span></a>
-                <a href="/contact.html" style={secondaryBtn(P)}>Talk to us</a>
+                <a href="#" style={primaryBtn(P)}>Get Started <span style={{ opacity: .75 }}>→</span></a>
+                <a href="#" style={secondaryBtn(P)}>Talk to us</a>
               </div>
             </div>
           </div>
@@ -729,7 +723,7 @@ function SolutionCard({ sol, palette, density, variant }) {
 
   if (variant === 'editorial') {
     return (
-      <a href="/content.html" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      <a href="#" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'block', padding: `${pad + 4}px ${pad}px`, textDecoration: 'none',
         color: P.ink, borderTop: `1px solid ${hover ? P.ink5 : P.rule}`,
@@ -759,7 +753,7 @@ function SolutionCard({ sol, palette, density, variant }) {
   // restrained + bold share this card shape with subtle styling differences.
   const isBold = variant === 'bold';
   return (
-    <a href="/content.html" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+    <a href="#" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
     style={{
       display: 'block', padding: `${pad}px ${pad}px ${pad - 4}px`, textDecoration: 'none',
       background: isBold ? P.paper : P.paper,
@@ -810,7 +804,7 @@ function NavDropdown({ label, palette }) {
         padding: 6, minWidth: 340, boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
       }}>
         {SOLUTIONS.map((s) =>
-        <a key={s.id} href="/content.html" onClick={close}
+        <a key={s.id} href="#" onClick={close}
         style={{ display: 'flex', gap: 12, padding: '10px 12px', textDecoration: 'none', color: P.ink, borderRadius: 5 }}
         onMouseEnter={(e) => e.currentTarget.style.background = P.surface}
         onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
@@ -873,7 +867,7 @@ function Footer({ palette, pad }) {
             <span style={{ fontSize: 13, fontWeight: 600, color: P.ink, letterSpacing: '0.04em' }}>AEOESS</span>
           </div>
           <p style={{ margin: 0, fontSize: 12.5, color: P.ink4, maxWidth: 280, lineHeight: 1.5 }}>
-            Open-source enforcement protocol for AI agents. Identity, delegation, accountability.
+            Open protocol for governing AI agents. Identity, delegation, accountability.
           </p>
         </div>
         {cols.map(([title, items]) =>
@@ -891,7 +885,7 @@ function Footer({ palette, pad }) {
         <span>© 2026 aeoess. Apache 2.0 protocol, commercial gateway.</span>
         <span>signal@aeoess.com</span>
       </div>
-    <div style="max-width:1100px;margin:24px auto 0;padding-top:18px;border-top:1px solid rgba(128,128,128,0.18);font-size:11.5px;color:rgba(128,128,128,0.85);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;"><span>© 2026 AEOESS / APS by Tymofii Pidlisnyi · Apache 2.0</span><a href="/sitemap.html" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">All pages →</a></div></footer>);
+    </footer>);
 
 }
 
@@ -931,7 +925,7 @@ const PACKAGES = [
   { l:'MCP Server',  v:'v3.1.1' },
   { l:'ClawHub',     v:'Skill' },
   { l:'Python SDK',  v:'v2.4.0a1' },
-  { l:'<a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a>',    v:'→' },
+  { l:'8 papers',    v:'→' },
 ];
 
 const QUICKSTART = `// import the curated essentials
@@ -953,7 +947,7 @@ const UPDATES = [
   { date:'Apr 30', kind:'traction',    title:'Vocab PR #66 merged', body:'Edison Munoz Duran\'s Agent-DID crosswalk lands as the second co-drafted-with-aeoess crosswalk.' },
   { date:'Apr 30', kind:'convergence', title:'VeritasActa cross-layer integrity 10/10', body:'All ten access receipts cross-layer hash-matched, APS signature valid against sidecar JWKS.' },
   { date:'Apr 29', kind:'paper',       title:'Paper 8: The Evidence-Safety Gap', body:'Cryptographic agent governance proves procedural validity, not effect safety. Five omitted-variable classes catalogued.' },
-  { date:'Apr 29', kind:'traction',    title:'SSRN + ORCID research surface', body:'Three papers entering SSRN. ORCID 0009-0002-4700-3594 live with all <a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a> indexed via DOI.' },
+  { date:'Apr 29', kind:'traction',    title:'SSRN + ORCID research surface', body:'Three papers entering SSRN. ORCID 0009-0002-4700-3594 live with all 8 papers indexed via DOI.' },
   { date:'Apr 28', kind:'ship',        title:'IPR module on npm', body:'agent-passport-system@2.5.0 ships canonicalize/envelope/verify for binding agent authority to instruction-file digest.' },
   { date:'Apr 27', kind:'standard',    title:'agent-governance-spec org created', body:'Cross-vendor spec home, co-edited with Lars Kroehl (MolTrust).' },
   { date:'Apr 26', kind:'ship',        title:'aeoess/aps-conformance-suite live', body:'37 fixture vectors across 4 categories. All byte-identical reproducible.' },
@@ -964,7 +958,7 @@ const UPDATES = [
   { date:'Apr 14', kind:'paper',       title:'Governance in the Medium, published', body:'Unit of agent governance is the population-with-medium, not the agent. Six rounds of adversarial review.' },
   { date:'Apr 03', kind:'ship',        title:'Bring Your Own Identity', body:'did:key, did:web, SPIFFE SVID, OAuth interop. Python SDK proves cross-language: signatures round-trip TS ↔ Python.' },
   { date:'Mar 28', kind:'deploy',      title:'Gateway on Railway', body:'Production enforcement at gateway.aeoess.com. Multi-tenant. Policy evaluation in <1ms.' },
-  { date:'Mar 27', kind:'standard',    title:'IETF Internet-Draft submitted', body:'<a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">draft-pidlisnyi-aps-00</a>. Zero idnits errors.' },
+  { date:'Mar 27', kind:'standard',    title:'IETF Internet-Draft submitted', body:'draft-pidlisnyi-aps-00. Zero idnits errors.' },
   { date:'Mar 16', kind:'traction',    title:'YC CEO endorsed', body:'Garry Tan repost. Microsoft merged APS code. Federal agency reviewing.' },
   { date:'Feb 21', kind:'paper',       title:'Paper 1: The Agent Social Contract', body:'First formalization.' },
   { date:'Feb 18', kind:'start',       title:'Project begins', body:'Ed25519 identity, delegation chains, first tests.' },
@@ -1014,7 +1008,7 @@ function AeoessOpenSource({ palette, density, pillarCount, showProof, heroFont, 
             <NavDropdownResources palette={P}/>
           </nav>
           <div style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:10 }}>
-            <a href="/contact.html" style={{ ...navLink(P), fontSize:13 }}>Contact</a>
+            <a href="#" style={{ ...navLink(P), fontSize:13 }}>Contact</a>
             <a href="/portal" style={{
               display:'inline-flex', alignItems:'center', gap:6, padding:'7px 14px',
               background:P.accentColor, color: P.accentColor === P.ink ? P.paper : '#fff',
@@ -1332,7 +1326,7 @@ function AeoessOpenSourceV1({ palette, density, showProof, heroFont }) {
             <V1_NavDropdownResources palette={P} />
           </nav>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <a href="/contact.html" style={{ ...v1_navLink(P), fontSize: 13 }}>Contact</a>
+            <a href="#" style={{ ...v1_navLink(P), fontSize: 13 }}>Contact</a>
             <a href="/portal" style={{
               display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 14px',
               background: P.accentColor, color: P.accentColor === P.ink ? P.paper : '#fff',
@@ -1419,7 +1413,7 @@ function AeoessOpenSourceV1({ palette, density, showProof, heroFont }) {
                 borderRadius: 4, textDecoration: 'none', fontSize: 13.5, fontWeight: 500
               }}>npm</a>
             <span style={{ fontSize: 12, color: P.ink5, marginLeft: 4 }}>
-              <a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">draft-pidlisnyi-aps-00</a> (IETF)
+              draft-pidlisnyi-aps-00 (IETF)
             </span>
           </div>
 
@@ -1464,7 +1458,7 @@ function AeoessOpenSourceV1({ palette, density, showProof, heroFont }) {
               'MCP Server v3.1.1',
               'ClawHub Skill',
               'Python SDK v2.4.0a1',
-              '<a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a> →'].
+              '8 papers →'].
               map((label) =>
               <a key={label} href="#" style={{
                 fontSize: 13, color: P.link, textDecoration: 'none', fontWeight: 500
@@ -1765,7 +1759,7 @@ function V2OSHeader({ palette: P, pad }) {
           <V1_NavDropdownResources palette={P} />
         </nav>
         <div className="aeoess-nav-desktop" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <a href="/contact.html" style={{ ...v1_navLink(P), fontSize: 13 }}>Contact</a>
+          <a href="#" style={{ ...v1_navLink(P), fontSize: 13 }}>Contact</a>
           <a href="/portal" style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 14px',
             background: P.accentColor, color: P.accentColor === P.ink ? P.paper : '#fff',
@@ -1888,7 +1882,7 @@ function AeoessOpenSourceV2({ palette, density, showProof, heroFont }) {
               }}>npm</a>
           </div>
           <div style={{ fontSize: 11.5, color: P.ink5, marginTop: 10, fontFamily: mono, letterSpacing: '0.04em' }}>
-            IETF Internet-Draft <span style={{ color: P.ink3 }}><a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">draft-pidlisnyi-aps-00</a></span>
+            IETF Internet-Draft <span style={{ color: P.ink3 }}>draft-pidlisnyi-aps-00</span>
           </div>
 
           {/* ─── Panel 1: INSTALL · two commands + version chips ─── */}
@@ -2212,7 +2206,7 @@ function SubHeader({ palette: P, pad }) {
       position:'sticky', top:0, zIndex:5, backdropFilter:'blur(8px)',
     }}>
       <div style={{ maxWidth:1280, margin:'0 auto', display:'flex', alignItems:'center', gap:24, padding:`14px ${pad}px` }}>
-        <a href="/" style={{ display:'flex', alignItems:'center', gap:8, color:P.ink, textDecoration:'none' }}>
+        <a href="#" style={{ display:'flex', alignItems:'center', gap:8, color:P.ink, textDecoration:'none' }}>
           <AeoessMark size={20} color={P.ink}/>
           <span style={{ fontSize:18, fontWeight:600, letterSpacing:'-0.01em' }}>Aeoess</span>
         </a>
@@ -2220,12 +2214,12 @@ function SubHeader({ palette: P, pad }) {
         {/* Desktop nav (hidden on mobile via .aeoess-nav-desktop) */}
         <nav className="aeoess-nav-desktop" style={{ display:'flex', alignItems:'center', gap:24, fontSize:13, color:P.ink2 }}>
           <NavDropdown palette={P}/>
-          <a href="/pricing.html" style={navLink(P)}>Pricing</a>
+          <a href="#" style={navLink(P)}>Pricing</a>
           <NavDropdownResources palette={P}/>
         </nav>
         <div className="aeoess-nav-desktop" style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:10 }}>
-          <a href="/contact.html" style={{ ...navLink(P), fontSize:13 }}>Contact</a>
-          <a href="/pricing.html" style={{
+          <a href="#" style={{ ...navLink(P), fontSize:13 }}>Contact</a>
+          <a href="#" style={{
             display:'inline-flex', alignItems:'center', gap:6, padding:'7px 14px',
             background:P.accentColor, color: P.accentColor === P.ink ? P.paper : '#fff',
             fontSize:13, fontWeight:500, borderRadius:4, textDecoration:'none', whiteSpace:'nowrap',
@@ -2283,7 +2277,7 @@ function SubHeader({ palette: P, pad }) {
             {item.l}
           </a>
         ))}
-        <a href="/pricing.html"
+        <a href="#"
            onClick={() => setMobileOpen(false)}
            style={{
              marginTop:14,
@@ -2324,7 +2318,7 @@ function AeoessSpec({ palette }) {
       <section style={{ padding:`${sectionPadY}px ${pad}px ${sectionPadY-20}px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <div style={{ display:'inline-flex', alignItems:'center', gap:10, fontSize:12, color:P.ink4, marginBottom:24, fontFamily:mono }}>
-            <span><a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">draft-pidlisnyi-aps-00</a></span>
+            <span>draft-pidlisnyi-aps-00</span>
             <span style={{ color:P.ink5 }}>·</span>
             <span>IETF Internet-Draft</span>
             <span style={{ color:P.ink5 }}>·</span>
@@ -2337,8 +2331,8 @@ function AeoessSpec({ palette }) {
             A protocol for cryptographic identity, scoped delegation, and verifiable accountability across AI agents. Vendor-neutral. Apache-2.0. Cross-language byte-identical.
           </p>
           <div style={{ display:'flex', gap:12, marginTop:28, flexWrap:'wrap' }}>
-            <a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style={primaryBtn(P)}>Read latest draft <span style={{ opacity:.75 }}>→</span></a>
-            <a href="https://github.com/aeoess" style={secondaryBtn(P)}>Conformance suite</a>
+            <a href="#" style={primaryBtn(P)}>Read latest draft <span style={{ opacity:.75 }}>→</span></a>
+            <a href="#" style={secondaryBtn(P)}>Conformance suite</a>
             <a href="#" style={secondaryBtn(P)}>RFC bibtex</a>
           </div>
         </div>
@@ -2937,7 +2931,7 @@ function AeoessPricing({ palette }) {
           <div style={{ fontSize:13, color:P.ink3, lineHeight:1.55 }}>
             <strong style={{ color:P.ink, fontWeight:600 }}>Compatibility is permanent.</strong> Self-host today, switch to hosted later, or never. Your protocol envelopes verify the same way regardless.
           </div>
-          <a href="/compare.html" style={{ fontSize:13, color:P.link, textDecoration:'none', whiteSpace:'nowrap', fontWeight:500 }}>Compare plans in detail →</a>
+          <a href="#" style={{ fontSize:13, color:P.link, textDecoration:'none', whiteSpace:'nowrap', fontWeight:500 }}>Compare plans in detail →</a>
         </div>
       </section>
 
@@ -3367,9 +3361,9 @@ function SolBreadcrumb({ palette: P, label }) {
       display:'inline-flex', alignItems:'center', gap:8, fontSize:12,
       color:P.ink5, fontFamily:MONO, marginBottom:22, letterSpacing:'0.02em',
     }}>
-      <a href="/" style={{ color:P.ink5, textDecoration:'none' }}>aeoess</a>
+      <a href="#" style={{ color:P.ink5, textDecoration:'none' }}>aeoess</a>
       <span>/</span>
-      <a href="/solutions.html" style={{ color:P.ink5, textDecoration:'none' }}>solutions</a>
+      <a href="#" style={{ color:P.ink5, textDecoration:'none' }}>solutions</a>
       <span>/</span>
       <span style={{ color:P.ink3 }}>{label}</span>
     </div>
@@ -3443,7 +3437,7 @@ function AdjacentCards({ palette: P, items }) {
   return (
     <div style={{ display:'grid', gridTemplateColumns:'repeat(3, minmax(0,1fr))', gap:14 }}>
       {items.map((it, i) => (
-        <a key={i} href="/opensource.html" style={{
+        <a key={i} href="#" style={{
           padding:'18px 20px', border:`1px solid ${P.ruleLight}`, borderRadius:6,
           textDecoration:'none', color:P.ink, background:P.paper, display:'block',
         }}>
@@ -3907,7 +3901,7 @@ function AeoessCompliance({ palette }) {
           { t:'NIST CAISI input acknowledged.', d:'Acknowledged in writing by Drew Keller. Email on file.' },
           { t:'Two NCCoE concept-paper comments in federal record.', d:'Filed alongside BSA on the NCCoE site.' },
           { t:'AAIF project proposal #14 in review.', d:'Linux Foundation path for cross-vendor agent interoperability.' },
-          { t:'IETF Internet-Draft live.', d:'<a href="https://datatracker.ietf.org/doc/draft-pidlisnyi-aps/" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">draft-pidlisnyi-aps-00</a>. Eight Zenodo papers including Paper 8.' },
+          { t:'IETF Internet-Draft live.', d:'draft-pidlisnyi-aps-00. Eight Zenodo papers including Paper 8.' },
         ]}/>
       </Section>
 
