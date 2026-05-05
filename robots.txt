@@ -20,7 +20,6 @@ Disallow: /mywork/
 Disallow: /datadividend/
 
 # Comparison builds (canonical is opensource.html)
-Disallow: /opensource-v1.html
 Disallow: /opensource-v2.html
 
 # Off-system explorations (not for indexing)
