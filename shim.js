@@ -59,4 +59,38 @@
       try { localStorage.setItem('aeoess-theme', next); } catch {}
     });
   });
+
+  // 6. Desktop dropdown menus (Solutions, Resources)
+  // React stripped at build time; reattach hover + click + outside-close.
+  document.querySelectorAll('[data-nav-dropdown]').forEach((dropdown) => {
+    const button = dropdown.querySelector('button');
+    const panel = dropdown.querySelector('[data-nav-dropdown-panel]');
+    if (!button || !panel) return;
+    let isOpen = false;
+    const open = () => {
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+      panel.style.pointerEvents = 'auto';
+      isOpen = true;
+      button.setAttribute('aria-expanded', 'true');
+    };
+    const close = () => {
+      panel.style.opacity = '0';
+      panel.style.transform = 'translateY(-4px)';
+      panel.style.pointerEvents = 'none';
+      isOpen = false;
+      button.setAttribute('aria-expanded', 'false');
+    };
+    button.setAttribute('aria-haspopup', 'true');
+    button.setAttribute('aria-expanded', 'false');
+    dropdown.addEventListener('mouseenter', open);
+    dropdown.addEventListener('mouseleave', close);
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      isOpen ? close() : open();
+    });
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) close();
+    });
+  });
 })();

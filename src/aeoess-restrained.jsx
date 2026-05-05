@@ -424,12 +424,12 @@ function NavDropdown({ label, palette }) {
   const P = palette;
   const close = () => setOpen(false);
   return (
-    <div style={{ position: 'relative' }}
+    <div data-nav-dropdown="" style={{ position: 'relative' }}
     onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button style={{ ...navLink(P), display: 'inline-flex', alignItems: 'center', gap: 4, background: 'none', border: 0, font: 'inherit', padding: 0 }}>
         {label} <span style={{ fontSize: 9, opacity: .6, marginTop: 1 }}>▼</span>
       </button>
-      <div style={{
+      <div data-nav-dropdown-panel="" style={{
         position: 'absolute', top: '100%', left: -12, marginTop: 8,
         opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)',
         pointerEvents: open ? 'auto' : 'none', transition: 'opacity .15s, transform .15s',
@@ -460,11 +460,11 @@ function NavDropdownResources({ palette }) {
   const P = palette;
   const items = [['Blog', '/blog'], ['Roadmap', '/roadmap'], ['Spec', '/passport'], ['FAQ', '/faq'], ['Compare', '/compare']];
   return (
-    <div style={{ position: 'relative' }} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div data-nav-dropdown="" style={{ position: 'relative' }} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button style={{ ...navLink(P), display: 'inline-flex', alignItems: 'center', gap: 4, background: 'none', border: 0, font: 'inherit', padding: 0 }}>
         Resources <span style={{ fontSize: 9, opacity: .6, marginTop: 1 }}>▼</span>
       </button>
-      <div style={{
+      <div data-nav-dropdown-panel="" style={{
         position: 'absolute', top: '100%', left: -12, marginTop: 8,
         opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)',
         pointerEvents: open ? 'auto' : 'none', transition: 'opacity .15s, transform .15s',
