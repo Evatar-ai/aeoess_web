@@ -135,7 +135,7 @@ function AeoessSpec({ palette }) {
             <span style={{ color:P.ink5 }}>·</span>
             <span>Updated May 2026</span>
           </div>
-          <h1 style={{ fontSize:'clamp(44px, 5.4vw, 72px)', lineHeight:1.04, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.04, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
             The Agent Passport<br/>System specification.
           </h1>
           <p style={{ fontSize:18, lineHeight:1.55, color:P.ink3, marginTop:24, maxWidth:680 }}>
@@ -248,7 +248,7 @@ function AeoessRoadmap({ palette }) {
       <section style={{ padding:`${sectionPadY}px ${pad}px ${sectionPadY-20}px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SectionEyebrow palette={P}>Roadmap</SectionEyebrow>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
             What we're building<br/>and what's next.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.55, color:P.ink3, marginTop:22, maxWidth:640 }}>
@@ -322,7 +322,7 @@ function AeoessCompare({ palette }) {
       <section style={{ padding:`${sectionPadY}px ${pad}px ${sectionPadY-20}px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SectionEyebrow palette={P}>Compare</SectionEyebrow>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             Most frameworks orchestrate.<br/>AEOESS enforces.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:22, maxWidth:680 }}>
@@ -413,7 +413,7 @@ function AeoessBlog({ palette }) {
       <section style={{ padding:`${sectionPadY}px ${pad}px ${sectionPadY-20}px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SectionEyebrow palette={P}>Dev log</SectionEyebrow>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
             Every commit, paper,<br/>and merge.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.55, color:P.ink3, marginTop:22, maxWidth:600 }}>

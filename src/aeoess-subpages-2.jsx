@@ -39,7 +39,7 @@ function AeoessFAQ({ palette }) {
       <section style={{ padding:`${sectionPadY}px ${pad}px ${sectionPadY-20}px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SectionEyebrow palette={P}>Frequently asked</SectionEyebrow>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
             The questions a developer<br/>asks first.
           </h1>
         </div>
@@ -94,7 +94,7 @@ function AeoessPortal({ palette }) {
               <AeoessMark size={20} color={P.ink}/>
               <span style={{ fontSize:16, fontWeight:600, letterSpacing:'-0.01em' }}>Aeoess Portal</span>
             </div>
-            <h1 style={{ fontSize:30, fontWeight:500, letterSpacing:'-0.02em', margin:0, lineHeight:1.15, color:P.ink }}>
+            <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', fontWeight:500, letterSpacing:'-0.02em', margin:0, lineHeight:1.15, color:P.ink }}>
               Sign in to your<br/>governance dashboard.
             </h1>
             <p style={{ fontSize:14, color:P.ink3, marginTop:12, marginBottom:32, lineHeight:1.55 }}>
@@ -223,7 +223,7 @@ function AeoessPricing({ palette }) {
       <section style={{ padding:`${sectionPadY}px ${pad}px ${sectionPadY-20}px`, textAlign:'center' }}>
         <div style={{ maxWidth:780, margin:'0 auto' }}>
           <SectionEyebrow palette={P}>Pricing</SectionEyebrow>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
             Open protocol. Hosted gateway when you need it.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.55, color:P.ink3, marginTop:22, maxWidth:600, margin:'22px auto 0' }}>

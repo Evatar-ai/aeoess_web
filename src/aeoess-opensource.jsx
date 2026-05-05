@@ -146,7 +146,7 @@ function AeoessOpenSource({ palette, density, pillarCount, showProof, heroFont, 
             </div>
 
             <h1 style={{
-              fontSize:'clamp(40px, 5.6vw, 76px)', lineHeight:1.0, letterSpacing:'-0.025em',
+              fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.0, letterSpacing:'-0.025em',
               fontWeight:500, margin:0, color:P.ink, maxWidth:780,
             }}>
               Governance for<br/>the Agent Economy

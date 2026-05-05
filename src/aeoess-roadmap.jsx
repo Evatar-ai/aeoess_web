@@ -182,7 +182,7 @@ function AeoessRoadmap({ palette }) {
           <SectionEyebrow palette={P}>Roadmap · YAML-driven</SectionEyebrow>
           <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap:32, flexWrap:'wrap' }}>
             <div>
-              <h1 style={{ fontSize:'clamp(36px, 4.4vw, 56px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
+              <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink }}>
                 Every layer, every paper,<br/>every day shipped.
               </h1>
               <p style={{ fontSize:15.5, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>

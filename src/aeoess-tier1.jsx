@@ -70,7 +70,7 @@ function AeoessDocs({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <T1Crumb palette={P} label="API reference"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             API reference.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -164,7 +164,7 @@ function AeoessBenchmarks({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <T1Crumb palette={P} label="Benchmarks"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             Numbers, with a method.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -287,7 +287,7 @@ function AeoessThreatModel({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <T1Crumb palette={P} label="Threat model"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             What the protocol<br/>defends against.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -415,7 +415,7 @@ function AeoessGatewayDash({ palette }) {
         <div style={{ maxWidth:1280, margin:'0 auto', display:'flex', alignItems:'baseline', justifyContent:'space-between', gap:24, flexWrap:'wrap' }}>
           <div>
             <T1Crumb palette={P} label="Gateway"/>
-            <h1 style={{ fontSize:32, fontWeight:500, letterSpacing:'-0.018em', margin:0, color:P.ink }}>Live enforcement.</h1>
+            <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', fontWeight:500, letterSpacing:'-0.018em', margin:0, color:P.ink }}>Live enforcement.</h1>
             <p style={{ fontSize:14, color:P.ink3, margin:'8px 0 0' }}>gateway.aeoess.com · multi-tenant · production</p>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>

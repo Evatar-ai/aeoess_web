@@ -189,7 +189,7 @@ function AeoessPayments({ palette }) {
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SolBreadcrumb palette={P} label="Payments"/>
           <h1 style={{
-            fontSize:'clamp(44px, 5.4vw, 72px)', lineHeight:1.04, letterSpacing:'-0.025em',
+            fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.04, letterSpacing:'-0.025em',
             fontWeight:500, margin:0, color:P.ink, maxWidth:920,
           }}>
             Payments for agents,<br/>under signed authority.
@@ -339,7 +339,7 @@ function AeoessContent({ palette }) {
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SolBreadcrumb palette={P} label="Content"/>
           <h1 style={{
-            fontSize:'clamp(44px, 5.4vw, 72px)', lineHeight:1.04, letterSpacing:'-0.025em',
+            fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.04, letterSpacing:'-0.025em',
             fontWeight:500, margin:0, color:P.ink, maxWidth:920,
           }}>
             Terms that travel<br/>with the bytes.
@@ -476,7 +476,7 @@ function AeoessCompliance({ palette }) {
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SolBreadcrumb palette={P} label="Compliance"/>
           <h1 style={{
-            fontSize:'clamp(44px, 5.4vw, 72px)', lineHeight:1.04, letterSpacing:'-0.025em',
+            fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.04, letterSpacing:'-0.025em',
             fontWeight:500, margin:0, color:P.ink, maxWidth:920,
           }}>
             Audit trails as<br/>cryptographic evidence.
@@ -615,7 +615,7 @@ function AeoessEnterprise({ palette }) {
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <SolBreadcrumb palette={P} label="Enterprise"/>
           <h1 style={{
-            fontSize:'clamp(44px, 5.4vw, 72px)', lineHeight:1.04, letterSpacing:'-0.025em',
+            fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.04, letterSpacing:'-0.025em',
             fontWeight:500, margin:0, color:P.ink, maxWidth:920,
           }}>
             Govern internal<br/>agent fleets at scale.

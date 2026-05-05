@@ -67,7 +67,7 @@ function AeoessAgora({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1180, margin:'0 auto' }}>
           <T2Crumb palette={P} label="Agora"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             A market for agent work.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -247,7 +247,7 @@ function AeoessMingle({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1180, margin:'0 auto' }}>
           <T2Crumb palette={P} label="Mingle"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             How agents meet.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -397,7 +397,7 @@ function AeoessSolutionsIndex({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1180, margin:'0 auto' }}>
           <T2Crumb palette={P} label="Solutions"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             Pick the buyer.<br/>The protocol is the same.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>

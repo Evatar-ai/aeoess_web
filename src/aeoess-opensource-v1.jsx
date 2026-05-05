@@ -141,7 +141,7 @@ function AeoessOpenSourceV1({ palette, density, showProof, heroFont }) {
 
           {/* Headline, open-source positioning */}
           <h1 style={{
-              fontSize: 'clamp(40px, 5.4vw, 72px)', lineHeight: 1.04, letterSpacing: '-0.025em',
+              fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight: 1.04, letterSpacing: '-0.025em',
               fontWeight: 500, margin: 0, color: P.ink, maxWidth: 880
             }}>
             Open-source enforcement<br />infrastructure for AI agents.

@@ -53,7 +53,7 @@ function AeoessWallet({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1180, margin:'0 auto' }}>
           <T4Crumb palette={P} label="Wallet"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             One wallet, every rail.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -223,7 +223,7 @@ function AeoessWorkingGroup({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1180, margin:'0 auto' }}>
           <T4Crumb palette={P} label="Working group"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             Where the protocol gets settled.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -320,7 +320,7 @@ function AeoessAMCS({ palette }) {
         <div style={{ maxWidth:1080, margin:'0 auto' }}>
           <T4Crumb palette={P} label="AMCS"/>
           <div style={{ fontFamily:T4_MONO, fontSize:11, color:P.accentColor, letterSpacing:'0.10em', fontWeight:600, marginBottom:14 }}>SPEC · v0.1.0</div>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 64px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.05, letterSpacing:'-0.025em', fontWeight:500, margin:0, color:P.ink, maxWidth:920 }}>
             AI Media<br/>Credentialing Spec.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:18, maxWidth:680 }}>
@@ -408,7 +408,7 @@ function AeoessAgentsMd({ palette }) {
       <section style={{ padding:`72px ${pad}px 32px` }}>
         <div style={{ maxWidth:1020, margin:'0 auto' }}>
           <T4Crumb palette={P} label="For agents"/>
-          <h1 style={{ fontSize:'clamp(40px, 5vw, 56px)', lineHeight:1.06, letterSpacing:'-0.022em', fontWeight:500, margin:0, color:P.ink, maxWidth:880 }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1.06, letterSpacing:'-0.022em', fontWeight:500, margin:0, color:P.ink, maxWidth:880 }}>
             Reading this site as an agent.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.65, color:P.ink3, marginTop:18, maxWidth:720 }}>
@@ -489,7 +489,7 @@ function AeoessNotFound({ palette }) {
       <section style={{ flex:1, padding:`120px ${pad}px`, borderTop:`1px solid ${P.ruleLight}`, display:'flex', alignItems:'center' }}>
         <div style={{ maxWidth:780, margin:'0 auto', width:'100%' }}>
           <div style={{ fontFamily:T4_MONO, fontSize:11, color:P.ink5, letterSpacing:'0.10em', fontWeight:600, marginBottom:16 }}>HTTP · 404</div>
-          <h1 style={{ fontSize:'clamp(56px, 8vw, 96px)', lineHeight:1, letterSpacing:'-0.03em', fontWeight:500, margin:0, color:P.ink }}>
+          <h1 style={{ fontSize: 'clamp(34px, 4.6vw, 54px)', lineHeight:1, letterSpacing:'-0.03em', fontWeight:500, margin:0, color:P.ink }}>
             That page<br/>does not exist.
           </h1>
           <p style={{ fontSize:17, lineHeight:1.6, color:P.ink3, marginTop:24, maxWidth:560 }}>
