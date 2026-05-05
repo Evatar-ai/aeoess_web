@@ -48,15 +48,26 @@
     });
   });
 
-  // 5. Theme toggle (defaults to dark, persists)
+  // 5. Theme toggle (defaults to dark, persists, swaps the visible icon)
   const root = document.documentElement;
   const saved = (() => { try { return localStorage.getItem('aeoess-theme'); } catch { return null; } })();
   if (saved === 'light') root.dataset.theme = 'light';
+  function updateThemeIcons() {
+    const isLight = root.dataset.theme === 'light';
+    document.querySelectorAll('[data-theme-icon-dark]').forEach((el) => {
+      el.style.display = isLight ? 'none' : 'inline';
+    });
+    document.querySelectorAll('[data-theme-icon-light]').forEach((el) => {
+      el.style.display = isLight ? 'inline' : 'none';
+    });
+  }
+  updateThemeIcons();
   document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const next = root.dataset.theme === 'light' ? 'dark' : 'light';
       root.dataset.theme = next;
       try { localStorage.setItem('aeoess-theme', next); } catch {}
+      updateThemeIcons();
     });
   });
 

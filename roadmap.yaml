@@ -3,6 +3,21 @@
 # Last updated: 2026-05-02 (Day 76). Cross-language byte-parity reached across the full Wave 1 governance surface (Python SDK 2.4.0a1 ports v2/accountability + v2/cognitive_attestation + v2/instruction_provenance from TS SDK 2.6.0-alpha.0; 27 cross-impl byte-parity test scenarios pass). TS SDK 2.6.0-alpha.0 ships v2 evidentiary type safety primitives (claim_evidence_types registry with BATCH_ATTESTED + EVIDENCE_CUSTODY_HELD, claim_verifier, contestation cascade with verifier hook, path-scoped cycle detection in mergeTaints). Vocab phantom-issuer audit (PR #74 removed RNWY from behavioral_trust + wallet_intelligence; PR #75 marked passport_grade status: proposed under single-issuer rule).
 # Day 1 = 2026-02-17 (project start)
 
+# ═══ DAY 78 — 2026-05-04 ═══
+
+- id: d78-website-redesign-shipped
+  title: "Full website redesign shipped"
+  description: "Six commits land the v4 redesign on aeoess.com: 33-page restrained design language, per-page SEO meta with JSON-LD Organization schema, removed Updates rail from the homepage to recover hero focus, working desktop dropdown menus without React, fully wired navigation and footer (every href points to a real page), AEOESS logo clickable, '8 papers' linked to ORCID 0009-0002-4700-3594, draft-pidlisnyi-aps-00 linked to IETF datatracker, agent-discovery <link rel='alternate'> tags in <head> on all pages (llms.txt, llms-full.txt, AGENTS.md, .well-known/mcp.json, .well-known/aps.txt), new /sitemap.html overview catching the 17 secondary pages no nav reaches, and a runtime dark/light theme toggle. Footer tagline updated from 'Open protocol for governing AI agents' to 'Open-source enforcement protocol for AI agents'."
+  status: done
+  workstream: product
+  day_start: 78
+  day_end: 78
+  links:
+    - url: "https://aeoess.com/"
+      label: "Live site"
+    - url: "https://aeoess.com/sitemap.html"
+      label: "Sitemap overview"
+
 # ═══ DAY 77 — 2026-05-03 ═══
 
 - id: d77-bilateral-receipt-cross-impl-byte-match

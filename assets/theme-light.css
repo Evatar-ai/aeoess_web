@@ -1,0 +1,52 @@
+/* theme-light.css — runtime light-mode override for the v4 redesign.
+   The redesign bakes dark palette RGB values into inline styles via React.
+   These [data-theme="light"] selectors swap the most common values when
+   the user toggles. SVG strokes/fills via attributes are not covered (they
+   stay dark on the architecture diagram and similar SVGs). */
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Backgrounds */
+[data-theme="light"] body { background: #fafafa !important; color: #18181a !important; }
+[data-theme="light"] [style*="background: rgb(36, 36, 38)"] { background: #ffffff !important; }
+[data-theme="light"] [style*="background: rgb(28, 28, 30)"] { background: #fafafa !important; }
+[data-theme="light"] [style*="background: rgb(42, 42, 46)"] { background: #f0f0f3 !important; }
+[data-theme="light"] [style*="background: rgb(40, 40, 44)"] { background: #f3f3f5 !important; }
+[data-theme="light"] [style*="background: rgb(50, 50, 54)"] { background: #e8e8eb !important; }
+[data-theme="light"] [style*="background: rgb(58, 58, 62)"] { background: #d8d8db !important; }
+
+/* Text colors */
+[data-theme="light"] [style*="color: rgb(236, 236, 236)"] { color: #18181a !important; }
+[data-theme="light"] [style*="color: rgb(221, 221, 221)"] { color: #2c2c2e !important; }
+[data-theme="light"] [style*="color: rgb(200, 200, 200)"] { color: #3a3a3e !important; }
+[data-theme="light"] [style*="color: rgb(176, 176, 176)"] { color: #555558 !important; }
+[data-theme="light"] [style*="color: rgb(138, 138, 142)"] { color: #6b6b70 !important; }
+[data-theme="light"] [style*="color: rgb(90, 90, 94)"] { color: #8a8a8e !important; }
+[data-theme="light"] [style*="color: rgb(124, 172, 222)"] { color: #1a4fa0 !important; }
+
+/* Borders + rules */
+[data-theme="light"] [style*="border-bottom: 1px solid rgb(46, 46, 50)"] { border-bottom-color: #e5e5e7 !important; }
+[data-theme="light"] [style*="border-top: 1px solid rgb(46, 46, 50)"] { border-top-color: #e5e5e7 !important; }
+[data-theme="light"] [style*="border: 1px solid rgb(46, 46, 50)"] { border-color: #e5e5e7 !important; }
+[data-theme="light"] [style*="border-bottom: 1px solid rgb(58, 58, 62)"] { border-bottom-color: #cdcdd0 !important; }
+[data-theme="light"] [style*="border-top: 1px solid rgb(58, 58, 62)"] { border-top-color: #cdcdd0 !important; }
+[data-theme="light"] [style*="border: 1px solid rgb(58, 58, 62)"] { border-color: #cdcdd0 !important; }
+[data-theme="light"] [style*="border-color: rgb(46, 46, 50)"] { border-color: #e5e5e7 !important; }
+
+/* Headers and footer specifically */
+[data-theme="light"] header[style*="rgb(36, 36, 38)"] { background: #ffffff !important; border-bottom-color: #e5e5e7 !important; }
+[data-theme="light"] footer[style*="rgb(36, 36, 38)"] { background: #f5f5f7 !important; }
+
+/* Code blocks */
+[data-theme="light"] [style*="background: rgb(40, 40, 44)"] code,
+[data-theme="light"] code[style*="background: rgb(40, 40, 44)"] { background: #f3f3f1 !important; color: #18181a !important; }
+[data-theme="light"] pre[style*="rgb(36, 36, 38)"],
+[data-theme="light"] pre[style*="rgb(40, 40, 44)"] { background: #f3f3f1 !important; color: #18181a !important; }
+
+/* Theme toggle button hover */
+[data-theme="light"] [data-theme-toggle] { color: #555558 !important; }
+
+/* Cards / panels */
+[data-theme="light"] [style*="background: rgba(36, 36, 38"] { background: rgba(255, 255, 255, 0.9) !important; }

@@ -21,6 +21,13 @@ function RestrainedHeader({ palette: P, pad }) {
         </nav>
         <div className="aeoess-nav-desktop" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
           <a href="#" style={{ ...navLink(P), fontSize: 13 }}>Contact</a>
+          <button data-theme-toggle aria-label="Toggle theme" style={{
+            background: 'none', border: 0, padding: '6px 8px', cursor: 'pointer',
+            color: P.ink3, fontSize: 14, lineHeight: 1, marginLeft: 4,
+          }}>
+            <span data-theme-icon-dark style={{ display: 'inline' }}>☾</span>
+            <span data-theme-icon-light style={{ display: 'none' }}>☀</span>
+          </button>
           <a href="#" style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 14px',
             background: P.accentColor, color: P.accentColor === P.ink ? P.paper : '#fff',

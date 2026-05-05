@@ -389,6 +389,7 @@ function AeoessBlog({ palette }) {
   const mono = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 
   const POSTS = [
+    { date:'May 04', kind:'ship', title:'Full website redesign shipped', tease:'33 pages, restrained design language, fully wired navigation, agent-discovery alternates, /sitemap.html overview, runtime dark/light toggle. The site finally matches the protocol.', read:'5 min' },
     { date:'May 02', kind:'ship', title:'SDK 2.6.0-alpha.0 on npm', tease:'v2 evidentiary type safety landed: claim-evidence-types registry with BATCH_ATTESTED and EVIDENCE_CUSTODY_HELD extensions. 2,884 tests passing.', read:'4 min' },
     { date:'May 02', kind:'ship', title:'Python SDK 2.4.0a1 on PyPI', tease:'Full Wave 1 surface ported from TS. Cross-language byte-parity verified across 27 fixtures.', read:'3 min' },
     { date:'May 01', kind:'standard', title:'Vocabulary phantom-issuer audit', tease:'Removed RNWY from behavioral_trust and wallet_intelligence. Single-source-of-truth discipline matters when other people build on your types.', read:'6 min' },
