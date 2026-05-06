@@ -632,14 +632,61 @@ function getScannableRanges(content) {
     }
   }
 
-  // Step B: collect exclusion holes for dated `<div class="up-i">…</div>`
-  // ribbon entries. Single-line, never nested inside themselves; safe to
-  // capture with a non-greedy regex.
+  // Step B: collect exclusion holes for date-stamped historical regions.
+  // The verify pass MUST NOT rewrite numbers inside these regions because
+  // they record what was true on a past day, not what is true now.
+  //
+  // B1. Dated `<div class="up-i">…</div>` ribbon entries on index.html.
+  //     Single-line, never nested inside themselves.
+  // B2. `var UPDATES = [...]` JS arrays that feed the daily-update panels
+  //     across the site (agora.html, blog.html, etc.). Multi-line, body
+  //     fields contain historical test counts, version numbers, tool
+  //     counts captured at ship time. Bug 3 (Day 79): verify-pass
+  //     recovery was rewriting "518 tests" → "2884 tests" inside these
+  //     bodies because they were not excluded here.
+  // B3. Content between `<!-- BUILD:ROADMAP_START -->` and
+  //     `<!-- BUILD:ROADMAP_END -->` markers in roadmap.html. The region
+  //     is auto-regenerated from items.yaml on each apply, so rewrites
+  //     inside it would just flap. Source of truth is items.yaml, not
+  //     the rendered HTML.
   const holes = [];
-  const upi = /<div class="up-i">[\s\S]*?<\/div>/g;
   let m;
+  // B1: up-i ribbon entries
+  const upi = /<div class="up-i">[\s\S]*?<\/div>/g;
   while ((m = upi.exec(content)) !== null) {
     holes.push({ start: m.index, end: m.index + m[0].length });
+  }
+  // B2: var/const/let UPDATES = [...] arrays
+  const updatesArr = /(?:var|const|let)\s+UPDATES\s*=\s*\[[\s\S]*?\}\];/g;
+  while ((m = updatesArr.exec(content)) !== null) {
+    holes.push({ start: m.index, end: m.index + m[0].length });
+  }
+  // B3: BUILD:ROADMAP regions
+  const buildRoadmap = /<!--\s*BUILD:ROADMAP_START\s*-->[\s\S]*?<!--\s*BUILD:ROADMAP_END\s*-->/g;
+  while ((m = buildRoadmap.exec(content)) !== null) {
+    holes.push({ start: m.index, end: m.index + m[0].length });
+  }
+  // B4: APS_PROFILE=<name> subset references describe fixed-size MCP
+  //     tool subsets ("essential" = 20 tools, "minimal" = 11 tools).
+  //     The number is inherent to the named profile, not the current
+  //     canonical total. Verify-pass MUST NOT flag these. Line-level
+  //     exclusion: any line containing APS_PROFILE= is profile-doc.
+  //     Cache-driven rewrites with old→new pinned values still fire
+  //     correctly because applyReplacementsToContent does not use
+  //     these ranges.
+  //     Implementation: linear scan, not regex. /[^\n]*APS_PROFILE=[^\n]*/g
+  //     produces catastrophic backtracking on multi-MB files.
+  if (content.includes('APS_PROFILE=')) {
+    let lineStart = 0;
+    for (let i = 0; i <= content.length; i++) {
+      if (i === content.length || content[i] === '\n') {
+        const line = content.slice(lineStart, i);
+        if (line.includes('APS_PROFILE=')) {
+          holes.push({ start: lineStart, end: i });
+        }
+        lineStart = i + 1;
+      }
+    }
   }
   if (holes.length === 0) return base;
 
