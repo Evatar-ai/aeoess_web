@@ -3069,7 +3069,7 @@
     "id": "d22-intent-network-infra",
     "status": "done",
     "title": "Intent Network API launched (api.aeoess.com)",
-    "desc": "Intent Network API deployed on the Mac Mini (clawrot) on port 3100 via PM2 + cloudflared tunnel. SQLite database, signed IntentCards, relevance scoring, intro protocol. First production service hosted outside Vercel or Railway, first use of named cloudflared tunnel for an AEOESS endpoint (tunnel id REDACTED-cloudflare-tunnel-id, CNAME api.aeoess.com). Established the Air-vs-Mini infrastructure split that still governs today: Air = dev only, Mini = production services.",
+    "desc": "Intent Network API deployed on the Mac Mini (clawrot) on port 3100 via PM2 + cloudflared tunnel. SQLite database, signed IntentCards, relevance scoring, intro protocol. First production service hosted outside Vercel or Railway, first use of named cloudflared tunnel for an AEOESS endpoint (CNAME api.aeoess.com). Established the Air-vs-Mini infrastructure split that still governs today: Air = dev only, Mini = production services.",
     "day_start": 22,
     "day_end": 23,
     "workstream": "ops",
