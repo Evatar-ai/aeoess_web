@@ -580,12 +580,23 @@ function getVerifyPatterns(varName) {
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+tools\b/gi },
       ];
     case 'LAYER_COUNT':
-      // Spec-locked: only match the full phrases "N protocol modules"
-      // and "N total modules". Bare "N modules" is intentionally NOT
-      // matched because it collides with "32 v2 modules" and similar.
+      // Spec-locked: only match the full phrases "N protocol modules",
+      // "N total modules", "N modules total", and "N modules across".
+      // Bare "N modules" is intentionally NOT matched because it
+      // collides with "26 v2 modules" — V2_MODULE_COUNT handles those.
       return [
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+protocol\s+modules\b/gi },
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+total\s+modules\b/gi },
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+modules\s+total\b/gi },
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+modules\s+across\b/gi },
+      ];
+    case 'V2_MODULE_COUNT':
+      // Matches "N v2 constitutional modules" (README form) and "N v2
+      // modules" (JSX/site form). Bare "N modules" stays out of bounds
+      // — LAYER_COUNT handles total-module surfaces separately.
+      return [
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+v2\s+constitutional\s+modules\b/gi },
+        { regex: /(?<![\d-])(\d{2,4})(?!-)\s+v2\s+modules\b/gi },
       ];
     case 'PAPER_COUNT':
       // Digit form: single-digit 6–9 only. Multi-digit collides with
