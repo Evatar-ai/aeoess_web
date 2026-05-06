@@ -105,6 +105,21 @@ const FORBIDDEN_PATTERNS = [
   'ROME-COMPLETE',
 ];
 
+// Shape-only regex matchers for value-style infrastructure leaks
+// (UUIDs, credentials, local paths to non-aeoess accounts). The literal
+// values intentionally never appear here — these patterns describe the
+// SHAPE of a leak in context, so the deny list itself does not become a
+// new disclosure surface. Literal values live in
+// ~/aeoess-private/scripts/check-drift.sh (private, outside any git repo).
+const FORBIDDEN_REGEX = [
+  // "tunnel id <uuid>" — Cloudflare tunnel identifiers in narrative text.
+  /tunnel\s+id\s+[0-9a-f-]{36}/i,
+  // local path to non-tima users on this machine (Mac Mini origin).
+  /\/Users\/clawrot\b/,
+  // bare phone number with US country code in narrative text.
+  /\+1\d{10}\b/,
+];
+
 // Files exempt from the drift scan (each one legitimately enumerates the
 // patterns to check for them).
 const DRIFT_CHECK_EXEMPT = new Set([
@@ -146,6 +161,12 @@ function runDriftCheck() {
     for (const pat of FORBIDDEN_PATTERNS) {
       if (content.includes(pat)) {
         violations.push({ file, kind: 'content', pattern: pat });
+      }
+    }
+    for (const re of FORBIDDEN_REGEX) {
+      const m = content.match(re);
+      if (m) {
+        violations.push({ file, kind: 'content', pattern: `regex:${re.source}` });
       }
     }
   }

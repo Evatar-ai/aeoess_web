@@ -47,6 +47,17 @@ jobs:
           # intentionally enumerates the patterns to check for them).
           EXCLUDE_PATHS='(\.github/workflows/check-drift\.yml|\.gitignore|scripts/check-drift\.sh|scripts/propagate\.mjs)'
 
+          # Shape-only regex patterns for value-style infrastructure leaks.
+          # Literal values (specific UUIDs, credentials, etc.) intentionally
+          # never appear here so the workflow file does not become a new
+          # disclosure surface. Literal values live in the private
+          # ~/aeoess-private/scripts/check-drift.sh.
+          REGEX_PATTERNS=(
+            'tunnel[[:space:]]+id[[:space:]]+[0-9a-f-]{36}'
+            '/Users/clawrot\b'
+            '\+1[0-9]{10}\b'
+          )
+
           violations=0
           for pat in "${PATTERNS[@]}"; do
             # Search tracked files only, excluding self-references
@@ -62,6 +73,15 @@ jobs:
             if [ -n "$file_hits" ]; then
               echo "::error::Forbidden pattern '$pat' in filename(s):"
               echo "$file_hits" | sed 's/^/  /'
+              violations=$((violations + 1))
+            fi
+          done
+
+          for re in "${REGEX_PATTERNS[@]}"; do
+            hits=$(git ls-files | grep -v -E "$EXCLUDE_PATHS" | xargs grep -l -E "$re" 2>/dev/null || true)
+            if [ -n "$hits" ]; then
+              echo "::error::Forbidden regex pattern '$re' found in:"
+              echo "$hits" | sed 's/^/  /'
               violations=$((violations + 1))
             fi
           done
