@@ -425,7 +425,7 @@ function SolutionCard({ sol, palette, density, variant }) {
         }}>
           <SolutionIcon id={sol.id} size={20} />
         </div>
-        <span style={{ fontSize: 11, color: P.ink5, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{sol.tag.split(',')[0].replace('For ', '')}</span>
+        <span style={{ fontSize: 11, color: P.ink5, letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'right' }}>{sol.tag.split(',')[0].replace('For ', '')}</span>
       </div>
       <h3 style={{ fontSize: 22, fontWeight: 600, letterSpacing: '-0.01em', color: P.ink, margin: '22px 0 6px' }}>{sol.title}</h3>
       <p style={{ fontSize: 15.5, color: P.ink2, fontWeight: 500, lineHeight: 1.4, margin: '0 0 12px' }}>{sol.pitch}</p>
