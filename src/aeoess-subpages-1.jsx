@@ -389,6 +389,8 @@ function AeoessBlog({ palette }) {
   const mono = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 
   const POSTS = [
+    { date:'May 05', kind:'ship', title:'Tier-2 binding-adapter conformance harness', tease:'55 new tests landed in the conformance suite (2,911 total). The harness validates payment-rails adapter behavior across the bilateral attestation surface. Every adapter claiming to honor bilateral receipts now has byte-level verification it actually does.', read:'4 min' },
+    { date:'May 05', kind:'convergence', title:'bilateral_receipt schema convergence with AgentGraph', tease:'kenneives substantively concurred on three positions: bilateral_receipt as the canonical name (over mutual_receipt and acknowledgment_receipt), hybrid-registry pattern for purpose discriminator, and normative issued_at for TTL semantics. Schema awaiting Nobulex purpose-name decision before Track B PR.', read:'3 min' },
     { date:'May 04', kind:'ship', title:'Full website redesign shipped', tease:'33 pages, restrained design language, fully wired navigation, agent-discovery alternates, /sitemap.html overview, runtime dark/light toggle. The site finally matches the protocol.', read:'5 min' },
     { date:'May 02', kind:'ship', title:'SDK 2.6.0-alpha.0 on npm', tease:'v2 evidentiary type safety landed: claim-evidence-types registry with BATCH_ATTESTED and EVIDENCE_CUSTODY_HELD extensions. 2,884 tests passing.', read:'4 min' },
     { date:'May 02', kind:'ship', title:'Python SDK 2.4.0a1 on PyPI', tease:'Full Wave 1 surface ported from TS. Cross-language byte-parity verified across 27 fixtures.', read:'3 min' },

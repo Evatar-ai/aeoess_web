@@ -1,7 +1,57 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-02 (Day 76). Cross-language byte-parity reached across the full Wave 1 governance surface (Python SDK 2.4.0a1 ports v2/accountability + v2/cognitive_attestation + v2/instruction_provenance from TS SDK 2.6.0-alpha.0; 27 cross-impl byte-parity test scenarios pass). TS SDK 2.6.0-alpha.0 ships v2 evidentiary type safety primitives (claim_evidence_types registry with BATCH_ATTESTED + EVIDENCE_CUSTODY_HELD, claim_verifier, contestation cascade with verifier hook, path-scoped cycle detection in mergeTaints). Vocab phantom-issuer audit (PR #74 removed RNWY from behavioral_trust + wallet_intelligence; PR #75 marked passport_grade status: proposed under single-issuer rule).
+# Last updated: 2026-05-05 (Day 79). Tier-2 binding-adapter conformance harness landed (b505c22, 55 new tests, 2,911 total) validating payment-rails adapter behavior across bilateral attestation surface. Vocab three-thread momentum in 24h: kenneives (AgentGraph) substantive concur on bilateral_receipt schema (#81 — name + hybrid-registry pattern + normative issued_at), jagmarques offered asqav fixture for four-signal compose test step 2 (#36), msaleme proposed adversarial_verdict signal_type (#76).
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 79 — 2026-05-05 ═══
+
+- id: d79-tier2-binding-adapter-conformance-harness
+  title: "Tier-2 binding-adapter conformance harness landed"
+  description: "55-test harness committed at b505c22 against agent-passport-system payment-rails surface, raising the conformance suite to 2,911 total tests. Validates that every binding adapter claiming to honor bilateral receipts produces byte-equivalent envelope output when fed the same canonical input. Test surface includes happy-path bilateral confirm, partial-acknowledgment refusal, replay rejection on duplicate action_ref, and JCS-canonicalization equivalence across three adapter implementations. Closes the Tier-2 binding adapter conformance commitment (Day 76 internal tracker)."
+  status: done
+  workstream: protocol
+  day_start: 79
+  day_end: 79
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/commit/b505c22"
+      label: "Commit b505c22"
+
+- id: d79-bilateral-receipt-three-position-convergence
+  title: "bilateral_receipt three-position convergence with AgentGraph"
+  description: "kenneives (AgentGraph) replied substantively at 2026-05-06 05:55 UTC on vocab #81 with concurrence on three positions. (1) bilateral_receipt as the canonical name, preferred over mutual_receipt because reciprocal is not bilateral, and over acknowledgment_receipt as too vague. (2) Hybrid-registry pattern for purpose discriminator: canonical primitive shape with registered_purposes enum, matching the CTEF v0.3.2 §4.5.4 substrate-vs-primitive layering. Avoids the proliferation failure mode (delegation_bilateral_receipt / covenant_bilateral_receipt) and the divergence failure mode (purpose stays implicit, downstream verifiers cannot route). (3) issued_at promoted to normative: TTL semantics need a signed timestamp anchor or fresh-vs-replay cannot distinguish. Track B PR queued behind one open question: arian-gogani (Nobulex) purpose-name preference between covenant_handshake, covenant_completion, and lifecycle_attestation. Schema YAML committed to vocab #81 thread."
+  status: done
+  workstream: vocab
+  day_start: 79
+  day_end: 79
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/81"
+      label: "Vocab #81"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/81#issuecomment-4385741521"
+      label: "Reply with locked schema"
+
+- id: d79-three-thread-vocab-momentum
+  title: "Three-thread vocab momentum in 24 hours"
+  description: "Three substantive vocab threads progressed within a 24-hour window on 2026-05-05. Vocab #36 (four-signal compose test): jagmarques offered an asqav fixture for step 2 (action authorization) using previous_hash = sha256(JCS(prior_receipt)) chained-receipt digest discipline matching RNWY's middle-slot fixture, plus a one-line PR adding authors: field to crosswalk/asqav.yaml. Reply confirmed both. Vocab #76 (red-team adversarial verdicts): msaleme opened with the question of where adversarial-verdict signals fit in a vocab canonicalizing positive-framed signal types. Reply proposed adversarial_verdict as a new signal_type with concrete schema (subject, test_class, attack_vector enum, verdict, severity, test_run_id, issued_at, signed_by) and polarity at signal-type level rather than as a property field on existing types, citing the closed enum work on error_code and refusal_authority as precedent. Threshold for lock: second production issuer. Vocab #81 documented separately above."
+  status: done
+  workstream: vocab
+  day_start: 79
+  day_end: 79
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/36#issuecomment-4385741436"
+      label: "Vocab #36 reply"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/76#issuecomment-4385741618"
+      label: "Vocab #76 reply"
+
+- id: d79-updates-panel-readability-fix
+  title: "Updates panel: tag colors restored, link contrast brightened"
+  description: "ship tag now renders P.green (was falling through to ink4 gray). Most updates are ship entries so the panel was reading as monochrome. Link colors brightened in both palettes for readability against dark and light surfaces (light #1a4fa0 to #2563eb, dark #7cacde to #93c5fd). Applied to deployed index.html plus six JSX sources that define kindColor locally (opensource.jsx, restrained.jsx) and the palette source-of-truth (tokens.jsx). v1/v2 destructure the shared window.kindColor and pick up the fix automatically. subpages-1.jsx already had ship: P.green; tier2.jsx uses a different vocabulary unrelated to the Updates panel. Commit 8534ca1."
+  status: done
+  workstream: product
+  day_start: 79
+  day_end: 79
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/commit/8534ca1"
+      label: "Commit 8534ca1"
 
 # ═══ DAY 78 — 2026-05-04 ═══
 

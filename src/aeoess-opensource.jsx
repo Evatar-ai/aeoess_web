@@ -43,6 +43,8 @@ import {
 
 // Real entries pulled from the live site, trimmed for layout.
 const UPDATES = [
+  { date:'May 05', kind:'ship',        title:'Tier-2 binding-adapter conformance harness', body:'55 new tests landed, 2,911 total. Validates payment-rails adapter behavior across the bilateral attestation surface.' },
+  { date:'May 05', kind:'convergence', title:'bilateral_receipt schema convergence', body:'kenneives (AgentGraph) concurred on three positions: name, hybrid-registry pattern, normative issued_at. Awaiting Nobulex on purpose-discriminator.' },
   { date:'May 04', kind:'ship',        title:'Full website redesign', body:'33 pages restrained design, agent-discovery alternates in head, /sitemap.html overview, every link wired, dark/light toggle.' },
   { date:'May 02', kind:'ship',        title:'SDK 2.6.0-alpha.0 on npm', body:'v2 evidentiary type safety landed: claim-evidence-types registry with BATCH_ATTESTED and EVIDENCE_CUSTODY_HELD extensions. 2,884 tests passing.' },
   { date:'May 02', kind:'ship',        title:'Python SDK 2.4.0a1 on PyPI', body:'Full Wave 1 surface ported from TS. Cross-language byte-parity verified across 27 fixtures. 518 tests.' },
