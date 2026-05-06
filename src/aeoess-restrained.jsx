@@ -305,7 +305,7 @@ function AeoessRestrained({ palette, density, pillarCount, showProof, heroFont, 
             <div style={{ overflowY: 'auto', flex: 1 }}>
               {(window.UPDATES || []).map((u, i) => {
                 const kc = window.kindColor ? window.kindColor(P, u.kind) :
-                u.kind === 'paper' || u.kind === 'standard' ? P.blue :
+                u.kind === 'ship' ? P.green : u.kind === 'paper' || u.kind === 'standard' ? P.blue :
                 u.kind === 'traction' || u.kind === 'convergence' ? P.accentColor :
                 u.kind === 'deploy' || u.kind === 'rebrand' ? P.red :
                 P.ink4;

@@ -92,6 +92,7 @@ function AeoessOpenSource({ palette, density, pillarCount, showProof, heroFont, 
   const mono = 'ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace';
 
   const kindColor = (k) => {
+    if (k === 'ship') return P.green;
     if (k === 'paper' || k === 'standard') return P.blue;
     if (k === 'traction' || k === 'convergence') return P.accentColor;
     if (k === 'deploy' || k === 'rebrand') return P.red;
@@ -313,7 +314,8 @@ function AeoessOpenSource({ palette, density, pillarCount, showProof, heroFont, 
 }
 
 Object.assign(window, { AeoessOpenSource, UPDATES, kindColor: (P, k) => {
-  if (k === 'paper' || k === 'standard') return P.blue;
+  if (k === 'ship') return P.green;
+    if (k === 'paper' || k === 'standard') return P.blue;
   if (k === 'traction' || k === 'convergence') return P.accentColor;
   if (k === 'deploy' || k === 'rebrand') return P.red;
   return P.ink4;

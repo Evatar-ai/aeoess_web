@@ -78,8 +78,8 @@ var AEOESS_LIGHT = {
   ink5: '#888888',
   rule: '#bbbbbb',
   ruleLight: '#dddddd',
-  link: '#1a4fa0',
-  linkHover: '#0d3a7a',
+  link: '#2563eb',
+  linkHover: '#1d4ed8',
   codeBg: '#f3f3f1',
   green: '#166534',
   blue: '#1e40af',
@@ -97,8 +97,8 @@ var AEOESS_DARK = {
   ink5: '#5a5a5e',
   rule: '#3a3a3e',
   ruleLight: '#2e2e32',
-  link: '#7cacde',
-  linkHover: '#a0c8f0',
+  link: '#93c5fd',
+  linkHover: '#bfdbfe',
   codeBg: '#28282c',
   green: '#4ade80',
   blue: '#60a5fa',
@@ -2013,6 +2013,7 @@ function AeoessOpenSource(_ref) {
   var fontFamily = heroFont === 'inter' ? '"Inter", -apple-system, system-ui, sans-serif' : heroFont === 'plex' ? '"IBM Plex Sans", -apple-system, system-ui, sans-serif' : '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif';
   var mono = 'ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace';
   var kindColor = function kindColor(k) {
+    if (k === 'ship') return P.green;
     if (k === 'paper' || k === 'standard') return P.blue;
     if (k === 'traction' || k === 'convergence') return P.accentColor;
     if (k === 'deploy' || k === 'rebrand') return P.red;
@@ -2610,6 +2611,7 @@ Object.assign(window, {
   AeoessOpenSource: AeoessOpenSource,
   UPDATES: UPDATES,
   kindColor: function kindColor(P, k) {
+    if (k === 'ship') return P.green;
     if (k === 'paper' || k === 'standard') return P.blue;
     if (k === 'traction' || k === 'convergence') return P.accentColor;
     if (k === 'deploy' || k === 'rebrand') return P.red;

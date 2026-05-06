@@ -6,7 +6,7 @@ const AEOESS_LIGHT = {
   bg:'#ffffff', paper:'#fafaf8', surface:'#f4f4f2', surface2:'#eeeeed',
   ink:'#0a0a0a', ink2:'#1a1a1a', ink3:'#333333', ink4:'#555555', ink5:'#888888',
   rule:'#bbbbbb', ruleLight:'#dddddd',
-  link:'#1a4fa0', linkHover:'#0d3a7a',
+  link:'#2563eb', linkHover:'#1d4ed8',
   codeBg:'#f3f3f1',
   green:'#166534', blue:'#1e40af', red:'#b91c1c',
 };
@@ -14,7 +14,7 @@ const AEOESS_DARK = {
   bg:'#1c1c1e', paper:'#242426', surface:'#2a2a2e', surface2:'#323236',
   ink:'#ececec', ink2:'#dddddd', ink3:'#b0b0b0', ink4:'#8a8a8e', ink5:'#5a5a5e',
   rule:'#3a3a3e', ruleLight:'#2e2e32',
-  link:'#7cacde', linkHover:'#a0c8f0',
+  link:'#93c5fd', linkHover:'#bfdbfe',
   codeBg:'#28282c',
   green:'#4ade80', blue:'#60a5fa', red:'#f87171',
 };
