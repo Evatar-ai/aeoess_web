@@ -175,6 +175,62 @@ function runDriftCheck() {
   process.exit(1);
 }
 
+// ── UPDATES block divergence check ──
+// The Updates panel renders from inline `var UPDATES = [{...}]` blocks
+// across *.html files. Manual EOD prepends touch index.html only,
+// leaving the other deployed pages stale until the next sync. This
+// check fails dry-run if any block diverges from the others.
+//
+// Implementation: extract block, sha256, group by hash. Fail if more
+// than one group exists. Files without the panel are skipped.
+function checkUpdatesBlocksConsistent() {
+  let htmlFiles;
+  try {
+    htmlFiles = readdirSync(REPOS.web)
+      .filter(f => f.endsWith('.html'))
+      .map(f => `${REPOS.web}/${f}`);
+  } catch (e) {
+    console.error(`⚠ checkUpdatesBlocksConsistent: could not list *.html (${(e.message || '').slice(0, 80)}). Skipping.`);
+    return;
+  }
+
+  const groups = new Map(); // hash -> [filenames]
+  let withPanel = 0;
+  for (const path of htmlFiles) {
+    let content;
+    try { content = readFileSync(path, 'utf8'); } catch { continue }
+
+    const startIdx = content.indexOf('var UPDATES = [{');
+    if (startIdx === -1) continue;
+    // Find the closing "}];\n" — first occurrence after startIdx.
+    const endMarker = '\n}];\n';
+    const endIdx = content.indexOf(endMarker, startIdx);
+    if (endIdx === -1) continue;
+
+    const block = content.slice(startIdx, endIdx + endMarker.length);
+    const hash = createHash('sha256').update(block).digest('hex').slice(0, 12);
+    if (!groups.has(hash)) groups.set(hash, []);
+    groups.get(hash).push(path.split('/').pop());
+    withPanel++;
+  }
+
+  if (groups.size <= 1) {
+    console.log(`✓ UPDATES blocks consistent: ${withPanel} files share a single block hash.`);
+    return;
+  }
+
+  console.error('');
+  console.error(`✗ UPDATES block divergence: ${groups.size} distinct hashes across ${withPanel} files.`);
+  for (const [hash, files] of groups) {
+    console.error(`  hash ${hash} (${files.length} file${files.length === 1 ? '' : 's'}):`);
+    for (const f of files) console.error(`    ${f}`);
+  }
+  console.error('');
+  console.error('  Manual EOD prepends touched some pages but not all.');
+  console.error('  Sync the panel: copy the canonical block (from index.html) into every page above.');
+  process.exit(1);
+}
+
 function loadProjectState() {
   if (!existsSync(STATE_PATH)) {
     throw new Error(`project-state.json not found at ${STATE_PATH}`);
@@ -1246,3 +1302,8 @@ if (drifts.length === 0) {
 // the last line of defense before publish.
 console.log('');
 runDriftCheck();
+
+// ── Layer 5: UPDATES block divergence check ──
+// Catches the EOD-prepend-only failure mode where index.html updates
+// but the other deployed pages don't. Read-only, runs unconditionally.
+checkUpdatesBlocksConsistent();
