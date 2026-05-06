@@ -464,6 +464,16 @@ function getVariablePatterns(varName, oldValue, newValue) {
         ...getWordFormPatterns(o, n, 'protocol modules'),
       ];
 
+    case 'V2_MODULE_COUNT':
+      return [
+        // "43 v2 constitutional modules" — README hero / SDK README form
+        { regex: new RegExp(`${o} v2 constitutional modules`, 'g'), replace: `${n} v2 constitutional modules` },
+        // "43 v2 modules" — bare site copy
+        { regex: new RegExp(`${o} v2 modules`, 'g'), replace: `${n} v2 modules` },
+        // "src/v2/* (32 constitutional modules)" — JSX-source literal
+        { regex: new RegExp(`(src/v2/\\* \\()${o}( constitutional modules\\))`, 'g'), replace: `$1${n}$2` },
+      ];
+
     case 'ADVERSARIAL_COUNT':
       return [
         // "23 adversarial"
@@ -591,12 +601,16 @@ function getVerifyPatterns(varName) {
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+modules\s+across\b/gi },
       ];
     case 'V2_MODULE_COUNT':
-      // Matches "N v2 constitutional modules" (README form) and "N v2
-      // modules" (JSX/site form). Bare "N modules" stays out of bounds
-      // — LAYER_COUNT handles total-module surfaces separately.
+      // Matches "N v2 constitutional modules" (README form), "N v2
+      // modules" (site copy), and the JSX-source literal
+      // "src/v2/* (N constitutional modules)". Bare "N modules"
+      // stays out of bounds — LAYER_COUNT handles total-module
+      // surfaces separately. All patterns put the digit in capture
+      // group 1 so the verify pass reports the correct number.
       return [
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+v2\s+constitutional\s+modules\b/gi },
         { regex: /(?<![\d-])(\d{2,4})(?!-)\s+v2\s+modules\b/gi },
+        { regex: /src\/v2\/\*\s*\((\d{2,4})\s+constitutional\s+modules\)/gi },
       ];
     case 'PAPER_COUNT':
       // Digit form: single-digit 6–9 only. Multi-digit collides with
