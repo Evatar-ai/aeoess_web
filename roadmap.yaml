@@ -1,7 +1,61 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-05 (Day 79). Tier-2 binding-adapter conformance harness landed (b505c22, 55 new tests, 2,911 total) validating payment-rails adapter behavior across bilateral attestation surface. Vocab three-thread momentum in 24h: kenneives (AgentGraph) substantive concur on bilateral_receipt schema (#81 — name + hybrid-registry pattern + normative issued_at), jagmarques offered asqav fixture for four-signal compose test step 2 (#36), msaleme proposed adversarial_verdict signal_type (#76).
+# Last updated: 2026-05-06 (Day 80). Cross-rail PaymentReceipt locked with Mycelium + Asqav at the existing shape with zero new types (commit 0291b16, PR #24 merged). OWASP AISVS#31 race-test dimension engaged with three-axis composition proposal; APS-side reciprocal fixture committed for v1.0 panel review (soft deadline 2026-05-21). Vocab validator (PR #86) blocks phantom-issuer drift structurally at CI level. Website footer migrated to 4-column commercial structure across 30 pages; gitleaks sweep + Cloudflare tunnel ID redaction via filter-repo across 6 public repos.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 80 — 2026-05-06 ═══
+
+- id: d80-cross-rail-paymentreceipt-locked
+  title: "Cross-rail PaymentReceipt locked with Mycelium + Asqav"
+  description: "Three independent persistence surfaces (APS, Base mainnet via Mycelium, RFC 3161 + OpenTimestamps via Asqav) aligned on the existing PaymentReceipt shape with zero new types. Permit/revocation/re-issue lifecycle fixture landed in src/v2/payment-rails/stripe-issuing/fixtures/. Mycelium companion PR #24 merged with anchoring framing tightened post-hostile-review (Base mainnet anchoring queued, not yet live). Posted on stripe/ai#356 thread."
+  status: done
+  workstream: protocol
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/commit/0291b16"
+      label: "Cross-rail fixture (commit 0291b16)"
+    - url: "https://github.com/aeoess/agent-passport-system/pull/24"
+      label: "Mycelium companion PR #24"
+    - url: "https://github.com/stripe/ai/issues/356"
+      label: "stripe/ai#356"
+
+- id: d80-owasp-aisvs-revocation-to-enforce
+  title: "OWASP AISVS revocation-to-enforce dimension engagement"
+  description: "VeloGerber landed empirical race-test receipts on owasp-aisvs#31 (P50 to P99 = 0.00ms across 18,000 requests, open-sourced fixture). Replied proposing a three-axis composition for v1.0: structural enforcement (binary, x1.0/x2.0) times empirical block-rate (RMF, continuous) times time-to-enforce (continuous, VeloGerber's dim), with structural axis dominating. Tier thresholds anchored to user-perceptible action time per rail type rather than fixed ms cutoffs. Also flagged enforcement_locus in {customer, vendor, hybrid} as a fourth dimension worth pinning before v1.0 lands. Committed reciprocal APS-side race-test fixture against the SDK's revocation surface (delegation.expires_at, revoked_at) so the dimension reads reproducible across two implementations rather than one. Soft deadline 2026-05-21."
+  status: in_progress
+  workstream: standards
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/OWASP/www-project-artificial-intelligence-security-verification-standard/issues/31"
+      label: "OWASP AISVS #31"
+
+- id: d80-vocab-validator-phantom-issuer-block
+  title: "Vocab validator blocks phantom-issuer drift"
+  description: "PR #86 opened on agent-governance-vocabulary. CI validator now rejects any signal that lists a third-party issuer in production without a corresponding registry entry at maturity:in_production. Structural prevention of the failure class surfaced by the Day 76 audit (RNWY listed in behavioral_trust and wallet_intelligence without registry presence, three additional phantom issuers downgraded to proposed). Validator added to scripts/validate-crosswalks.js as validateSystemAttributes(). Same session: #84 (asqav step-2 fixture) and #85 (AgentID crosswalk file) merged, #68 (Cursor Hooks crosswalk) merged, #50 (alexchenai SWORN crosswalk parked) closed for good, #78/#79 schema-mismatched values corrected via maintainer-edit awaiting nutstrut ack."
+  status: done
+  workstream: vocab
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/86"
+      label: "PR #86 validator enforcement"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/84"
+      label: "PR #84 merged"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/85"
+      label: "PR #85 merged"
+
+- id: d80-website-footer-migration-and-drift-audit
+  title: "Footer migration across all pages, public-drift audit, history scrub"
+  description: "Footer rewritten to 4-column commercial structure (Product / Resources / Community / Contact) and propagated across 30 deployed HTML pages with single canonical hash. contact.html replaced (14K-line bloated version with a ~150-line standalone). board.html removed. opensource.html theme toggle added. Comprehensive gitleaks sweep across 6 public repos found and redacted a Cloudflare tunnel ID leak in roadmap.html via filter-repo history scrub; .gitleaksignore committed in 3 affected repos. Drift-check infrastructure extended with shape-only regex patterns (literal values held in private)."
+  status: done
+  workstream: ops
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://aeoess.com/"
+      label: "Live site"
 
 # ═══ DAY 79 — 2026-05-05 ═══
 

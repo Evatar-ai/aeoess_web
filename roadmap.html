@@ -407,7 +407,7 @@ footer a:hover {
     <!-- BUILD:ROADMAP_START -->
 <noscript class="rm-noscript-hint"><div class="rm-noscript-msg">JavaScript is disabled — showing the full roadmap as a list. With JavaScript on, this page renders an interactive timeline above.</div></noscript>
 <div class="rm-static" id="rm-static" aria-label="Roadmap (static fallback)">
-<p class="rm-static-intro">249 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
+<p class="rm-static-intro">253 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
 <section class="rm-group rm-group-active">
 <h2 class="rm-group-title">Active <span class="rm-group-count">(14)</span></h2>
 <article class="rm-item rm-item-active" id="a2a-compliance-harness-repo">
@@ -587,7 +587,19 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-in-progress">
-<h2 class="rm-group-title">In progress <span class="rm-group-count">(14)</span></h2>
+<h2 class="rm-group-title">In progress <span class="rm-group-count">(15)</span></h2>
+<article class="rm-item rm-item-in_progress" id="d80-owasp-aisvs-revocation-to-enforce">
+<header class="rm-item-h">
+<h3 class="rm-item-title">OWASP AISVS revocation-to-enforce dimension engagement</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 80</span> 
+<span class="rm-item-ws">Standards</span> 
+<span class="rm-item-status">in_progress</span>
+</p>
+</header>
+<p class="rm-item-desc">VeloGerber landed empirical race-test receipts on owasp-aisvs#31 (P50 to P99 = 0.00ms across 18,000 requests, open-sourced fixture). Replied proposing a three-axis composition for v1.0: structural enforcement (binary, x1.0/x2.0) times empirical block-rate (RMF, continuous) times time-to-enforce (continuous, VeloGerber's dim), with structural axis dominating. Tier thresholds anchored to user-perceptible action time per rail type rather than fixed ms cutoffs. Also flagged enforcement_locus in {customer, vendor, hybrid} as a fourth dimension worth pinning before v1.0 lands. Committed reciprocal APS-side race-test fixture against the SDK's revocation surface (delegation.expires_at, revoked_at) so the dimension reads reproducible across two implementations rather than one. Soft deadline 2026-05-21.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/OWASP/www-project-artificial-intelligence-security-verification-standard/issues/31">OWASP AISVS #31</a></li></ul>
+</article>
 <article class="rm-item rm-item-in_progress" id="d74-a2a-1786-byte-match-ack">
 <header class="rm-item-h">
 <h3 class="rm-item-title">A2A #1786: Nobulex byte-match verifier scripts acknowledged</h3>
@@ -771,7 +783,43 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-shipped">
-<h2 class="rm-group-title">Shipped <span class="rm-group-count">(186)</span></h2>
+<h2 class="rm-group-title">Shipped <span class="rm-group-count">(189)</span></h2>
+<article class="rm-item rm-item-done" id="d80-cross-rail-paymentreceipt-locked">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Cross-rail PaymentReceipt locked with Mycelium + Asqav</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 80</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Three independent persistence surfaces (APS, Base mainnet via Mycelium, RFC 3161 + OpenTimestamps via Asqav) aligned on the existing PaymentReceipt shape with zero new types. Permit/revocation/re-issue lifecycle fixture landed in src/v2/payment-rails/stripe-issuing/fixtures/. Mycelium companion PR #24 merged with anchoring framing tightened post-hostile-review (Base mainnet anchoring queued, not yet live). Posted on stripe/ai#356 thread.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-passport-system/commit/0291b16">Cross-rail fixture (commit 0291b16)</a></li><li><a href="https://github.com/aeoess/agent-passport-system/pull/24">Mycelium companion PR #24</a></li><li><a href="https://github.com/stripe/ai/issues/356">stripe/ai#356</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d80-vocab-validator-phantom-issuer-block">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab validator blocks phantom-issuer drift</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 80</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #86 opened on agent-governance-vocabulary. CI validator now rejects any signal that lists a third-party issuer in production without a corresponding registry entry at maturity:in_production. Structural prevention of the failure class surfaced by the Day 76 audit (RNWY listed in behavioral_trust and wallet_intelligence without registry presence, three additional phantom issuers downgraded to proposed). Validator added to scripts/validate-crosswalks.js as validateSystemAttributes(). Same session: #84 (asqav step-2 fixture) and #85 (AgentID crosswalk file) merged, #68 (Cursor Hooks crosswalk) merged, #50 (alexchenai SWORN crosswalk parked) closed for good, #78/#79 schema-mismatched values corrected via maintainer-edit awaiting nutstrut ack.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/86">PR #86 validator enforcement</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/84">PR #84 merged</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/85">PR #85 merged</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d80-website-footer-migration-and-drift-audit">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Footer migration across all pages, public-drift audit, history scrub</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 80</span> 
+<span class="rm-item-ws">Ops</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Footer rewritten to 4-column commercial structure (Product / Resources / Community / Contact) and propagated across 30 deployed HTML pages with single canonical hash. contact.html replaced (14K-line bloated version with a ~150-line standalone). board.html removed. opensource.html theme toggle added. Comprehensive gitleaks sweep across 6 public repos found and redacted a Cloudflare tunnel ID leak in roadmap.html via filter-repo history scrub; .gitleaksignore committed in 3 affected repos. Drift-check infrastructure extended with shape-only regex patterns (literal values held in private).</p>
+<ul class="rm-item-links"><li><a href="https://aeoess.com/">Live site</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d79-bilateral-receipt-three-position-convergence">
 <header class="rm-item-h">
 <h3 class="rm-item-title">bilateral_receipt three-position convergence with AgentGraph</h3>

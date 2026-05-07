@@ -1841,6 +1841,16 @@ var QUICKSTART = "// import the curated essentials\nimport {\n  createPassport, 
 // Real entries pulled from the live site, trimmed for layout.
 var UPDATES = [{
   date: 'May 06',
+  kind: 'standard',
+  title: 'OWASP AISVS revocation-to-enforce dimension',
+  body: 'VeloGerber\'s race-test methodology engaged on owasp-aisvs#31. Time-to-enforce proposed as a third axis alongside structural enforcement and empirical block-rate. Reciprocal APS-side race-test fixture committed for v1.0 panel review.'
+}, {
+  date: 'May 06',
+  kind: 'standard',
+  title: 'Vocab validator blocks phantom-issuer drift',
+  body: 'PR #86 adds CI rejection of signals that name an issuer not present at maturity:in_production in the registry. Structural fix for the failure class behind the Day 76 audit.'
+}, {
+  date: 'May 06',
   kind: 'convergence',
   title: 'Cross-rail PaymentReceipt locked with Mycelium + Asqav',
   body: 'Three independent persistence surfaces (APS, Base, RFC 3161+OTS) aligned on the existing PaymentReceipt shape with zero new types. Permit/revocation/re-issue lifecycle fixture landed in stripe-issuing.'
