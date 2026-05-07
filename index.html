@@ -1167,7 +1167,7 @@ function AeoessRestrained(_ref2) {
       flex: 1
     }
   }, (window.UPDATES || []).map(function (u, i) {
-    var kc = window.kindColor ? window.kindColor(P, u.kind) : u.kind === 'paper' || u.kind === 'standard' ? P.blue : u.kind === 'traction' || u.kind === 'convergence' ? P.accentColor : u.kind === 'deploy' || u.kind === 'rebrand' ? P.red : P.ink4;
+    var kc = window.kindColor ? window.kindColor(P, u.kind) : u.kind === 'ship' ? '#22c55e' : u.kind === 'traction' ? '#f97316' : u.kind === 'standard' ? '#3b82f6' : u.kind === 'paper' ? '#a855f7' : u.kind === 'convergence' ? '#06b6d4' : u.kind === 'deploy' ? '#ef4444' : u.kind === 'rebrand' ? '#ec4899' : '#94a3b8';
     return /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
@@ -5753,11 +5753,13 @@ function AeoessBlog(_ref6) {
     read: '5 min'
   }];
   var kindColor = {
-    ship: P.green,
-    standard: P.blue,
-    paper: P.blue,
-    traction: P.accentColor,
-    deploy: P.accentColor
+    ship: '#22c55e',
+    traction: '#f97316',
+    standard: '#3b82f6',
+    paper: '#a855f7',
+    convergence: '#06b6d4',
+    deploy: '#ef4444',
+    rebrand: '#ec4899'
   };
   return /*#__PURE__*/React.createElement("div", {
     "data-aeoess-page": "1",
