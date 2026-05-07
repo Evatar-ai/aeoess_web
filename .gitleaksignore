@@ -1,0 +1,26 @@
+# Gitleaks ignore file — fingerprints classified as false positives during the
+# 2026-05-06 audit. All hits below are legitimate fixture content, public keys,
+# or doc examples (verified by spot-check). Adding new fingerprints requires
+# manual review against the local audit log to prevent the ignore file
+# becoming a silent leak surface.
+#
+# Format: one fingerprint per line, # for comments.
+
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/cross-signed.json:generic-api-key:34
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/cross-signed.json:generic-api-key:35
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/happy-path-compound.json:generic-api-key:34
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/happy-path-compound.json:generic-api-key:35
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/happy-path-compound.json:generic-api-key:44
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/happy-path.json:generic-api-key:34
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/happy-path.json:generic-api-key:35
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/migration-attested.json:generic-api-key:34
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/migration-attested.json:generic-api-key:35
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/migration-attested.json:generic-api-key:43
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/negative-no-attestation.json:generic-api-key:34
+5a4aaef30afc3980195efe06dc7b79f5a5565783:fixtures/rotation-attestation/negative-no-attestation.json:generic-api-key:35
+5e2c6705bbcc922f42936a468f04f9709de18572:llms-full.txt:generic-api-key:111
+5e2c6705bbcc922f42936a468f04f9709de18572:llms.txt:generic-api-key:46
+76de741dccd91bcf4533131dfcf877b66c45ecbf:llms-full.txt:generic-api-key:324
+76de741dccd91bcf4533131dfcf877b66c45ecbf:wallet.html:generic-api-key:151
+7a5c6bb0b0ec6dc7b449cffba4ef2361ecce4d14:working-group.html:generic-api-key:88
+e666afae43cff0997e6153d7a1a17b9fe30ce241:docs.html:curl-auth-header:85
