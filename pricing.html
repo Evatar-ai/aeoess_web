@@ -6341,7 +6341,8 @@ function AeoessPricing(_ref3) {
     tag: 'Apache-2.0 · forever',
     cta: {
       l: 'Read the spec',
-      primary: false
+      primary: false,
+      href: '/opensource.html'
     },
     features: ['Full SDK (TS + Python)', 'MCP server, all 150 tools', 'Self-host the gateway', 'IETF-tracked spec', 'Conformance test suite', '8 published papers']
   }, {
@@ -6352,7 +6353,8 @@ function AeoessPricing(_ref3) {
     featured: true,
     cta: {
       l: 'Start 14-day trial',
-      primary: true
+      primary: true,
+      href: 'https://buy.stripe.com/fZucN78Wo8kB8gT5y543S00'
     },
     features: ['Everything in Open Source', 'Hosted gateway, fail-closed enforcement', 'Up to 25 active agents', '50K policy evals / mo', 'Audit log retention 90d', 'Email support']
   }, {
@@ -6361,7 +6363,8 @@ function AeoessPricing(_ref3) {
     tag: 'For regulated workloads',
     cta: {
       l: 'Talk to us',
-      primary: false
+      primary: false,
+      href: '/contact.html'
     },
     features: ['Everything in Team', 'SSO, SAML, SCIM', 'Dedicated region (EU/APAC)', 'Unlimited agents + evals', 'Audit log retention 7yr', 'Onboarding + 24/7 support']
   }];
@@ -6480,7 +6483,7 @@ function AeoessPricing(_ref3) {
         fontFamily: mono
       }
     }, t.tag), /*#__PURE__*/React.createElement("a", {
-      href: "#",
+      href: t.cta.href || "#",
       style: {
         display: 'block',
         textAlign: 'center',
