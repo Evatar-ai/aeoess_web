@@ -1,9 +1,87 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-06 (Day 80). Cross-rail PaymentReceipt locked with Mycelium + Asqav at the existing shape with zero new types (commit 0291b16, PR #24 merged). OWASP AISVS#31 race-test dimension engaged with three-axis composition proposal; APS-side reciprocal fixture committed for v1.0 panel review (soft deadline 2026-05-21). Vocab validator (PR #86) blocks phantom-issuer drift structurally at CI level. Website footer migrated to 4-column commercial structure across 30 pages; gitleaks sweep + Cloudflare tunnel ID redaction via filter-repo across 6 public repos.
+# Last updated: 2026-05-07 (Day 80). Pricing page now actually purchasable end-to-end (Stripe payment link + Cloudflare Worker at hook.aeoess.com + Resend transactional email). OWASP AIVSS#31 enforcement_effectiveness working text co-authorship accepted with four-axis dimension structure (structural × empirical block-rate × time-to-enforce × enforcement_locus); VeloGerber concurred. Mycelium cross-rail anchoring confirmed live on Arbitrum One + Base mainnet (dual-chain). Vocab system_attributes wave (#78/#79/#86 merged; #87/#88 opened; #89 AgentGraph crosswalk under review). Coinbase agentkit + crewAI Guardrails ecosystem cross-pollination posted.
 # Day 1 = 2026-02-17 (project start)
 
-# ═══ DAY 80 — 2026-05-06 ═══
+# ═══ DAY 80 — 2026-05-07 ═══
+
+- id: d80-pricing-surface-live
+  title: "Pricing page goes live with working checkout"
+  description: "Team tier ($99/month, 14-day trial) actually purchasable end-to-end. Stripe payment link wired to /welcome.html on success. Cloudflare Worker at hook.aeoess.com receives Stripe webhook events (checkout.session.completed, customer.subscription.deleted, invoice.payment_failed), verifies HMAC-SHA256 signature, sends notification email to signal@aeoess.com via Resend, and sends welcome email to the customer with 24-hour manual-provisioning posture. Three internal updates landed: CLAIMS.md RESOLVED on Mycelium dual-chain framing, new memory rule for standards-body vs major-company-observer signature forms, orphan $499/mo Enterprise price archived to keep the page sales-led."
+  status: done
+  workstream: infra
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://aeoess.com/pricing.html"
+      label: "Pricing page"
+    - url: "https://aeoess.com/welcome.html"
+      label: "Welcome page"
+
+- id: d80-owasp-aivss-coauthor-accepted
+  title: "OWASP AIVSS enforcement_effectiveness working text co-authorship accepted"
+  description: "VeloGerber concurred on all four points and proposed a four-axis dimension structure for v1.0: structural enforcement (binary, multiplier), empirical block-rate (continuous via RMF receipts), time-to-enforce (tiered with rail-anchored thresholds), enforcement_locus (enum, vendor-trust dependency). Co-authorship accepted with scoping that keeps the artifact tight: a working document on the enforcement_effectiveness dimension family, separable from the broader AIVSS v1.0 rubric. Inviting #32 contributors into the same working text since the structural-axis-dominance argument depends on the §3.2 cryptographic-enforcement multiplier they pinned. Cadence proposed: v0.1 to v0.2 cycle, v0.2 to include any third-implementation reproduction (Nobulex, asqav, Mycelium, AgentID candidates)."
+  status: in_progress
+  workstream: standards
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/31"
+      label: "OWASP AIVSS #31"
+
+- id: d80-mycelium-dual-chain-confirmed
+  title: "Mycelium cross-rail anchoring confirmed live on Arbitrum One + Base mainnet"
+  description: "argentum verify endpoint returns dual-chain anchors per receipt-id under anchors.arbitrum (chain_id 42161) and anchors.base (chain_id 8453), with real block numbers and tx_hashes for all three cross-rail fixture trail_ids (permit / revocation / re-issue). Three-surface alignment operational with on-chain commitment: APS receipt structure (Ed25519 + JCS + SHA-256, cross-language byte-parity TS plus Python), Mycelium TrailRecord dual-chain anchored, Asqav protectmcp:lifecycle (RFC 3161 timestamp + OpenTimestamps async). CLAIMS.md entry marked RESOLVED. Cross-rail fixture metadata updated in lock-step with the deterministic generator at SDK commit 24f5bdd (receipt IDs unchanged; metadata only)."
+  status: done
+  workstream: protocol
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/pull/24"
+      label: "PR #24"
+    - url: "https://github.com/stripe/ai/issues/356"
+      label: "stripe/ai#356"
+
+- id: d80-owasp-race-test-runner-shipped
+  title: "OWASP race-test runner shipped — methodology portability across two substrates"
+  description: "Open-source race-test runner against APS SDK's RevocationStorage primitive landed at SDK commit 20de7e9. Same methodology shape as VeloGerber's audit-pack-signing v0.5 fixture (4 workers, 500 qps, 3 seconds, 3 runs, 18,000 requests; revocation fires at run midpoint; measure time from revocation commit to last ACCEPT for the revoked delegation). Day 80 baseline: 18,000 requests, 0 ACCEPTs after revocation commit, P50/P95/P99/MAX = 0.00ms across all percentiles. Identical headline numbers across two independent substrates (in-process Map vs SQLite WAL multi-process). Methodology portability empirically established. Public-commitment closed within 12 hours of being made on a formal standards-body surface."
+  status: done
+  workstream: standards
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/blob/main/tests/race-test-revocation.ts"
+      label: "Race-test runner"
+
+- id: d80-coinbase-crewai-ecosystem-cross-pollination
+  title: "Coinbase agentkit + crewAI Guardrails ecosystem cross-pollination"
+  description: "Two substantive ecosystem engagements landed today. (1) coinbase/agentkit#1091: replied to Aigen-Protocol's SafeRouter pitch with a two-layer composition reading. APS as the pre-execution authorization-receipt layer; SafeRouter (atomic-revert via TokenUnsafe custom error on Base mainnet) as the on-chain target-safety layer. Five payment-rail binding adapters in v2 cited (ACP, AP2, x402, Stripe-Issuing, MPP); SafeRouter could slot in as a sixth via vocab crosswalk. (2) crewAIInc/crewAI#4877: proposed a common GuardrailDecision audit-metadata shape (verdict, namespaced reason_code, decision_id, policy_id, timestamp, provider-specific metadata bag) responding to @0pen7ech's question. Two providers converged on the shape so far (APS + AgentID via @haroldmalikfrimpong-ops, who corrected L0-L3 and folded in concrete reason_codes). Vocab crosswalk merge 9aef69a anchors the GuardrailDecision-deny semantic at the canonical-vocabulary layer."
+  status: in_progress
+  workstream: ecosystem
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/coinbase/agentkit/issues/1091"
+      label: "coinbase/agentkit#1091"
+    - url: "https://github.com/crewAIInc/crewAI/issues/4877"
+      label: "crewAI #4877"
+
+- id: d80-vocab-system-attributes-wave
+  title: "Vocab system_attributes wave: three merges, two opens, one under review"
+  description: "Three vocab merges and two new opens against the system_attributes enum from #77. PR #78 (nutstrut SAR system_attributes) and #79 (nutstrut continuity-analyzer system_attributes) merged Track A with conformant values (classical, jcs-rfc-8785, sha-256) after maintainer-edit fixed schema-conformance drift. PR #86 (validator enum enforcement) merged so future drift bounces at CI. Issue #87 opened on temporal-correctness gap (system_attributes lacks maintenance-status binding); recommended Option C (punt to v0.4, revisit on first cross-impl byte-match divergence) endorsed by AgentID maintainer @haroldmalikfrimpong-ops. PR #88 (validator soft-fail warnings on non-string values + unknown attribute names) opened. PR #89 (kenneives AgentGraph crosswalk, +403 lines, closes #82 hygiene gap) under hostile review with all live claims verified (5 URLs, JWKS to DID cryptographic chain, CTEF spec_anchor commit, vocabulary.yaml issuers_in_production cross-reference)."
+  status: in_progress
+  workstream: vocab
+  day_start: 80
+  day_end: 80
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/78"
+      label: "Vocab #78"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/86"
+      label: "Vocab #86"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/87"
+      label: "Vocab #87"
+
+# ═══ DAY 80 — 2026-05-06 (PT timezone label; work overlapped into May 7 UTC) ═══
 
 - id: d80-cross-rail-paymentreceipt-locked
   title: "Cross-rail PaymentReceipt locked with Mycelium + Asqav"
