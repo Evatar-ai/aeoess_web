@@ -30,6 +30,7 @@ Every page is standalone HTML with shared CSS/JS. No build step. No framework. S
 | **Comparison** | [`compare.html`](https://aeoess.com/compare.html) | Feature-by-feature comparison table: Agent Passport vs ANP, ACP, Google A2A, MCP | Engineers choosing between protocols |
 | **Blog** | [`blog.html`](https://aeoess.com/blog.html) | Published articles and research writeups | General audience |
 | **Bot** | [`bot.html`](https://aeoess.com/bot.html) | Agent interaction and status page | Developers, agent operators |
+| **Press Kit** | [`media.html`](https://aeoess.com/media.html) | Descriptions, key facts, logos, citations, press contact for journalists | Journalists, conference organizers |
 | **Bio** | [`bio.html`](https://aeoess.com/bio.html) | Tima Pidlisnyi — founder biography, career timeline, project history | Anyone checking credentials |
 | **Board** | [`board.html`](https://aeoess.com/board.html) | Governance board structure and roles | Governance participants |
 
