@@ -1,7 +1,46 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-07 (Day 80). Pricing page now actually purchasable end-to-end (Stripe payment link + Cloudflare Worker at hook.aeoess.com + Resend transactional email). OWASP AIVSS#31 enforcement_effectiveness working text co-authorship accepted with four-axis dimension structure (structural × empirical block-rate × time-to-enforce × enforcement_locus); VeloGerber concurred. Mycelium cross-rail anchoring confirmed live on Arbitrum One + Base mainnet (dual-chain). Vocab system_attributes wave (#78/#79/#86 merged; #87/#88 opened; #89 AgentGraph crosswalk under review). Coinbase agentkit + crewAI Guardrails ecosystem cross-pollination posted.
+# Last updated: 2026-05-08 (Day 81). First external PR on aivss-enforcement-effectiveness merged byte-match verified (VeloGerber race-test fixture, c5f62c9). Four-signal interop compose locked with three production implementers: AgentID trust_verification chain root, PDR continuity closing attestation by May 22, Nobulex byte-match verifier. Pre-press-launch sweep landed across 7 public files; propagate.mjs hardened to catch npm @-syntax + pip ==-syntax + prose forms. og-default.png 1200x630 social card shipped + meta tags swept across 27 pages. /media.html press kit page rebuilt from redirect stub.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 81 — 2026-05-08 ═══
+
+- id: d81-aivss-pr1-merged
+  title: "First external PR on aivss-enforcement-effectiveness merged"
+  description: "VeloGerber published the canonical race-test fixture for the time-to-enforce dimension at race-test-fixtures/audit-pack-signing-v0.5/. Three additive files: spec.md (140 lines, sha-256 c5f62c9fce6e08b55dab6dfbc8caa0196af61db1eddd0046b43dfa21c9261f28 byte-matches the WORKING-TEXT.md citation at five locations), race_test_runner.py (211 lines pure-stdlib portable runner), README.md. Fresh-checkout reproduction landed 6004 requests, 12 ACCEPTs after revoke commit, P99 4.57ms within the 50ms spec bound. PR-MERGE-PROTOCOL Track A discipline applied: phase 0 classification, phase 1 adversarial first read, phase 2 claim extraction, phase 2.5 contributor profile, phase 3 executable verification, phase 4 live invariants cross-check, phase 5 charitable read, phase 6 escalation triggers. Audit memo retained internally. AIVSS#31 follow-up posted granting redacted-incident-receipt path under race-test-fixtures/multi-tenant-isolation-precondition/."
+  status: done
+  workstream: standards
+  day_start: 81
+  day_end: 81
+  links:
+    - url: "https://github.com/aeoess/aivss-enforcement-effectiveness/pull/1"
+      label: "PR #1 merged"
+    - url: "https://github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/31"
+      label: "OWASP AIVSS#31 thread"
+
+- id: d81-four-signal-compose-locked
+  title: "Four-signal interop compose: PDR continuity attestation locked with three implementers"
+  description: "nanookclaw committed to authoring fixtures/interop-week-1/composition-behavioral-trust.json by 2026-05-22 with PDR entity_continuity as the closing attestation. Two-signal compose locked: AgentID trust_verification as chain root (compound_digest 621d40f1701521f9af084a08476a2deebd49f02ff0b9d7e7808b6a05c6fcad91, haroldmalikfrimpong-ops), PDR entity_continuity as closing with prior_signal_digest pinned to AgentID root. Signing key approved at https://nanook.hnrstage.xyz/.well-known/pdr-jwks.json with kid pdr-continuity-2026-05. Fresh Ed25519 dedicated to PDR continuity attestations. Recompute property carried by evidence_inputs[] structured as {source_compound_digest, extracted_signal} pairs; score, slope, p-value, R^2 emitted as named fields. JCS canonicalization (RFC 8785), JWS EdDSA, SHA-256 compound_digest. Independent recompute path documented inline so arian-gogani's Nobulex verifier can validate property (c) without PDR-side code. Same harness pattern that runs 4/4 on AgentGraph and 10/10 on APS bilateral-delegation."
+  status: in_progress
+  workstream: interop
+  day_start: 81
+  day_end: 92
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/36"
+      label: "vocab #36 four-signal compose thread"
+
+- id: d81-pre-press-launch-freshness
+  title: "Pre-press-launch freshness sweep + propagate.mjs hardened"
+  description: "Two-commit pass on aeoess_web before May 12 AgentGraph 'State of Agent Security 2026' press launch. Path A (commit 8e6474f) hand-fixed seven public files: .well-known/security.txt critical fixes (publicly-visible internal note dropped, Policy header repointed from deleted /security.html to /contact.html#security), .well-known/mcp.json full version + count + date refresh (parsed by MCP discovery clients), llms.txt + llms-full.txt + README.md version bumps and dead-link cleanup, .well-known/agents.json + protocol-registry.json date refresh (65/39 days stale). Path B (commit 59ef764) extended propagate.mjs: PYTHON_VERSION case added entirely (was read from project-state.json since Day 76 but never propagated, letting alpha.0 -> alpha.3 survive three publishes), SDK_VERSION + MCP_VERSION extended with npm @-syntax patterns and prose forms, .well-known/security.txt enrolled in target list. og-default.png 1200x630 social card shipped (commit 4a4582f) with meta tags swept across 27 pages. /media.html press kit page rebuilt from redirect stub (commit 884ec79) with 10 sections of verifiable-only claims, /contact.html Press row added."
+  status: done
+  workstream: infra
+  day_start: 81
+  day_end: 81
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/commit/8e6474f"
+      label: "Path A freshness commit"
+    - url: "https://github.com/aeoess/aeoess_web/commit/59ef764"
+      label: "Path B propagate.mjs extension"
 
 # ═══ DAY 80 — 2026-05-07 ═══
 
