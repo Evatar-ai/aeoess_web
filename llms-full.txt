@@ -2,10 +2,10 @@
 
 > Enforcement and accountability layer for AI agents. Bring your own identity. We govern what it can do.
 
-Updated: 2026-05-02
-SDK version: agent-passport-system@2.6.0-alpha.0 (pre-release)
-MCP version: agent-passport-system-mcp@3.1.1 (150 tools)
-Python SDK: agent-passport-system==2.4.0a1 (pre-release)
+Updated: 2026-05-08
+SDK version: agent-passport-system@2.6.0-alpha.3 (pre-release)
+MCP version: agent-passport-system-mcp@3.2.0 (150 tools)
+Python SDK: agent-passport-system==2.4.0a2 (pre-release)
 Compact: https://aeoess.com/llms.txt
 Canonical: https://aeoess.com/llms-full.txt
 License: Apache-2.0
@@ -188,7 +188,7 @@ Structural safeguards: Separation of Powers (legislative/executive/judicial bran
 
 **AMCS — AI-Native Media Credentialing Standard** (v0.1.0): Open specification for credentialing AI-native publications as trustworthy agent-consumable news sources. Published by AEOESS. Two layers: Layer A (cryptographic, binary pass/fail) requires Ed25519 article provenance, journalist agent passports with delegation chains, and a public MCP server. Layer B (editorial, public audit) requires machine-readable confidence labels on every article, a published Code of Conduct citing SPJ/NPC/Scripps, and an automated ethics verification system scoring every article against stated standards. Certification is self-attestation verified by script (Layer A) and public evidence (Layer B). No subjective editorial gatekeeping. Does NOT integrate with trust scoring — badge is informational only. Any publication can apply. Full spec: https://github.com/aeoess/agent-passport-system/blob/main/docs/AMCS-SPEC.md | Page: https://aeoess.com/amcs.html
 
-**v2.6.0-alpha.1 — 2,884 tests (656 suites). 108 test files including 38 adversarial scenarios.**
+**v2.6.0-alpha.3, 2,884 tests (656 suites). 108 test files including 38 adversarial scenarios.**
 
 ## Quick Start — 6 Functions
 
@@ -350,7 +350,6 @@ Agent lifecycle: register → active → suspended (temporary) or revoked (perma
 Features: threading via replyTo, topic filtering, message types (announcement, proposal, vote, request, response, discussion), proposal voting with configurable thresholds, full feed cryptographic verification.
 
 Authorization model docs: https://github.com/aeoess/aeoess_web/blob/main/docs/agora-authorization.md
-Web interface: https://aeoess.com/agora.html
 
 ## Passport Issuer (CA Model)
 
@@ -440,7 +439,7 @@ Layer 5 adds organizational intent to the agent stack. Key functions:
 - `resolveDeliberation(deliberation, decision, votes)` — produce signed outcome + create precedent
 - `getPrecedentsByTopic(precedents, topic)` — find prior decisions by topic
 
-## MCP Server — agent-passport-system-mcp v3.1.1
+## MCP Server — agent-passport-system-mcp v3.2.0
 
 A full-stack MCP server that any MCP client (Claude Desktop, Cursor, etc.) can connect to. Default profile is `essential` (20 tools covering identity, delegation, enforcement, commerce, reputation). Set `APS_PROFILE=full` for all 150 tools. Nine other profiles available: identity, governance, coordination, commerce, data, gateway, comms, minimal, full. Role-scoped access control throughout.
 
@@ -726,10 +725,9 @@ Published 2026-04-23. Specification documents that name a property APS v2.x does
 - Agent Ecosystem Directory (18 projects, 115 people, 93 threads, live GitHub data): https://aeoess.github.io/agent-ecosystem-map/
 - Agent Ecosystem Directory repo: https://github.com/aeoess/agent-ecosystem-map
 - Cited by: "PDR in Production" (University of British Columbia, 2026) — Section 7.6 validates APS earned reputation model, sigma dynamics, structuralVerdict/trustVerdict. DOI: https://doi.org/10.5281/zenodo.19323172
-- Protocol page: https://aeoess.com/protocol.html
+- Protocol page: https://aeoess.com/opensource.html
 - Dev log: https://aeoess.com/blog.html
 - Threat model: https://aeoess.com/threat-model.html
 - Comparison: https://aeoess.com/compare.html
-- Agent Agora: https://aeoess.com/agora.html
 - Author: Tymofii Pidlisnyi (https://aeoess.com)
 - License: Apache-2.0
