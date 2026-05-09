@@ -431,6 +431,7 @@ function getTargetFiles() {
     // .well-known/ files (v3 audit: was entirely missing)
     { path: `${REPOS.web}/.well-known/mcp.json`, repo: 'web' },
     { path: `${REPOS.web}/.well-known/aeoess-issuer.json`, repo: 'web' },
+    { path: `${REPOS.web}/.well-known/security.txt`, repo: 'web' },     // Day 81 freshness audit: defensive enrollment
     { path: `${REPOS.web}/protocol-registry.json`, repo: 'web' },
     // NOTE (Day 76): aeoess_web/specs/{PROJECT-INSTRUCTIONS,FILE-TREE,ARCHITECTURE}.md
     // were moved to ~/aeoess-private/ on Day 75 per the public-paths-only rule
@@ -486,6 +487,10 @@ function getVariablePatterns(varName, oldValue, newValue) {
         { regex: new RegExp(`"version":\\s*"${o}"`, 'g'), replace: `"version": "${n}"` },
         // softwareVersion":"1.7.0"
         { regex: new RegExp(`softwareVersion":"${o}"`, 'g'), replace: `softwareVersion":"${n}"` },
+        // npm package@version: agent-passport-system@2.6.0-alpha.3 (Day 81 freshness audit)
+        { regex: new RegExp(`agent-passport-system@${o}`, 'g'), replace: `agent-passport-system@${n}` },
+        // Header prose: "SDK 2.6.0-alpha.3" without leading v (Day 81)
+        { regex: new RegExp(`SDK ${o}\\b`, 'g'), replace: `SDK ${n}` },
       ];
 
     case 'MCP_VERSION':
@@ -493,6 +498,26 @@ function getVariablePatterns(varName, oldValue, newValue) {
         // v2.1.0 in MCP-specific contexts
         { regex: new RegExp(`v${o}`, 'g'), replace: `v${n}` },
         { regex: new RegExp(`"version":\\s*"${o}"`, 'g'), replace: `"version": "${n}"` },
+        // npm package@version: agent-passport-system-mcp@3.2.0 (Day 81 freshness audit)
+        { regex: new RegExp(`agent-passport-system-mcp@${o}`, 'g'), replace: `agent-passport-system-mcp@${n}` },
+        // Header prose: "MCP 3.2.0" without leading v (Day 81)
+        { regex: new RegExp(`MCP ${o}\\b`, 'g'), replace: `MCP ${n}` },
+      ];
+
+    case 'PYTHON_VERSION':
+      // Added Day 81. Was read from project-state.json by readSourceOfTruth()
+      // since at least Day 76 but never had a propagation case, leaving
+      // llms.txt / llms-full.txt / .well-known/mcp.json drifting through
+      // alpha.0 -> alpha.1 -> alpha.2 unswept.
+      return [
+        // pip syntax: agent-passport-system==2.4.0a2
+        { regex: new RegExp(`agent-passport-system==${o}`, 'g'), replace: `agent-passport-system==${n}` },
+        // mcp.json json field: "python_version": "2.4.0a2"
+        { regex: new RegExp(`"python_version":\\s*"${o}"`, 'g'), replace: `"python_version": "${n}"` },
+        // Prose: "Python 2.4.0a2" (header lines, prose mentions)
+        { regex: new RegExp(`Python ${o}\\b`, 'g'), replace: `Python ${n}` },
+        // Prose: "Python SDK 2.4.0a2"
+        { regex: new RegExp(`Python SDK ${o}\\b`, 'g'), replace: `Python SDK ${n}` },
       ];
 
     case 'TEST_COUNT':
