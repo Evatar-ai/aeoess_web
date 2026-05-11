@@ -437,8 +437,8 @@
 
 - id: d73-ssrn-three-submissions
   title: "Three SSRN submissions: Papers 1, 5, 7"
-  description: "Agent Social Contract (Paper 1, z.18749779), Physics-Enforced Delegation (Paper 5, z.19478584), and Cognitive Attestation (Paper 7, z.19646276) entering SSRN today. Each paper classified into five-to-six CS networks where the actual reviewer audience reads — Artificial Intelligence eJournal for the broad AI audience, Artificial Intelligence Law Policy & Ethics for auditability and governance angles, Cybersecurity Privacy & Networks for cryptographic primitives, Theoretical Computer Science for cryptography and distributed computation, Quantum Information for the IBM hardware experiment, Generative AI for the Llama-3.1 sparse autoencoder work. Classifications are routing decisions, not decoration. Author affiliation: Independent Researcher (corrected from auto-pulled GitHub Inc). Declaration of interest statements explicit about IBM Quantum and Neuronpedia third-party infrastructure use with no funding role."
-  status: in_progress
+  description: "Agent Social Contract (Paper 1, z.18749779), Physics-Enforced Delegation (Paper 5, z.19478584), and Cognitive Attestation (Paper 7, z.19646276) entering SSRN today. Each paper classified into five-to-six CS networks where the actual reviewer audience reads — Artificial Intelligence eJournal for the broad AI audience, Artificial Intelligence Law Policy & Ethics for auditability and governance angles, Cybersecurity Privacy & Networks for cryptographic primitives, Theoretical Computer Science for cryptography and distributed computation, Quantum Information for the IBM hardware experiment, Generative AI for the Llama-3.1 sparse autoencoder work. Classifications are routing decisions, not decoration. Author affiliation: Independent Researcher (corrected from auto-pulled GitHub Inc). Declaration of interest statements explicit about IBM Quantum and Neuronpedia third-party infrastructure use with no funding role. [APPROVED 2026-05-11: SSRN approved 5 papers per email notification.]"
+  status: done
   workstream: research
   day_start: 73
   day_end: 73
@@ -497,8 +497,8 @@
 
 - id: d73-intoto-svr-extension-go
   title: "in-toto SVR extension Go decision"
-  description: "Path forward for governance attestation as an in-toto SVR extension scoped. Worked-example draft underway in private workspace at INTOTO-SVR-EXAMPLE-DRAFT/. Two artifacts: agent-governance-svr-extension.md (~200 LOC) plus agent-governance-svr-extension.json (~80 LOC). Single-SVR shape per maintainer framing; two-SVR variant flagged as open question for May 1 meeting. May 1 CNCF #in-toto-attestations meeting attendance committed (per Apr 28 PR #549 comment). Bilateral byte-match track with marcelamelara holds in parallel. aeoess/governance-attestation-predicate stays canonical."
-  status: in_progress
+  description: "Path forward for governance attestation as an in-toto SVR extension scoped. Worked-example draft underway in private workspace at INTOTO-SVR-EXAMPLE-DRAFT/. Two artifacts: agent-governance-svr-extension.md (~200 LOC) plus agent-governance-svr-extension.json (~80 LOC). Single-SVR shape per maintainer framing; two-SVR variant flagged as open question for May 1 meeting. May 1 CNCF #in-toto-attestations meeting attendance committed (per Apr 28 PR #549 comment). Bilateral byte-match track with marcelamelara holds in parallel. aeoess/governance-attestation-predicate stays canonical. [DROPPED 2026-05-11: PR #549 closed unmerged 2026-04-28. No active aeoess activity on in-toto since. governance-attestation-predicate stays canonical at aeoess.]"
+  status: dropped
   workstream: ecosystem
   day_start: 73
   day_end: 73
@@ -598,8 +598,8 @@
 
 - id: d71-vocab-issue-58-epoch-three-way-convergence
   title: "Vocab #58 epoch enum: three-way independent convergence"
-  description: "Proposal to add epoch as the sixth value in the validity_temporal enum (alongside immediate, decay_window, refresh_required, expires_at, condition_satisfied). The semantic gap epoch fills: distinguishing observer-relative event sequencing from substantive state transitions, where two verifiers of the same wall-clock window may reasonably count different numbers of events but agree on coarser substantive transitions. Three independent endorsements landed: lawcontinue (distributed inference setup, 50-token generation produces 50 sequence ticks but zero state transitions), kenneives (AgentGraph CTEF v0.3.1 session_epoch maps onto epoch verbatim once the enum lands), srotzin (HiveTrust + cont_epoch on continuity layer, plus substantive-transition lower bound clause for the PR description: epoch ticks MUST be coarser than per-call I/O). Direction locked, PR follows in the next 24 hours."
-  status: in_progress
+  description: "Proposal to add epoch as the sixth value in the validity_temporal enum (alongside immediate, decay_window, refresh_required, expires_at, condition_satisfied). The semantic gap epoch fills: distinguishing observer-relative event sequencing from substantive state transitions, where two verifiers of the same wall-clock window may reasonably count different numbers of events but agree on coarser substantive transitions. Three independent endorsements landed: lawcontinue (distributed inference setup, 50-token generation produces 50 sequence ticks but zero state transitions), kenneives (AgentGraph CTEF v0.3.1 session_epoch maps onto epoch verbatim once the enum lands), srotzin (HiveTrust + cont_epoch on continuity layer, plus substantive-transition lower bound clause for the PR description: epoch ticks MUST be coarser than per-call I/O). Direction locked, PR followed and issue closed 2026-04-29."
+  status: done
   workstream: protocol
   day_start: 71
   day_end: 71
