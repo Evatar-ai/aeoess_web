@@ -95,7 +95,7 @@
 - id: d80-coinbase-crewai-ecosystem-cross-pollination
   title: "Coinbase agentkit + crewAI Guardrails ecosystem cross-pollination"
   description: "Two substantive ecosystem engagements landed today. (1) coinbase/agentkit#1091: replied to Aigen-Protocol's SafeRouter pitch with a two-layer composition reading. APS as the pre-execution authorization-receipt layer; SafeRouter (atomic-revert via TokenUnsafe custom error on Base mainnet) as the on-chain target-safety layer. Five payment-rail binding adapters in v2 cited (ACP, AP2, x402, Stripe-Issuing, MPP); SafeRouter could slot in as a sixth via vocab crosswalk. (2) crewAIInc/crewAI#4877: proposed a common GuardrailDecision audit-metadata shape (verdict, namespaced reason_code, decision_id, policy_id, timestamp, provider-specific metadata bag) responding to @0pen7ech's question. Two providers converged on the shape so far (APS + AgentID via @haroldmalikfrimpong-ops, who corrected L0-L3 and folded in concrete reason_codes). Vocab crosswalk merge 9aef69a anchors the GuardrailDecision-deny semantic at the canonical-vocabulary layer."
-  status: in_progress
+  status: done
   workstream: ecosystem
   day_start: 80
   day_end: 80
@@ -108,7 +108,7 @@
 - id: d80-vocab-system-attributes-wave
   title: "Vocab system_attributes wave: three merges, two opens, one under review"
   description: "Three vocab merges and two new opens against the system_attributes enum from #77. PR #78 (nutstrut SAR system_attributes) and #79 (nutstrut continuity-analyzer system_attributes) merged Track A with conformant values (classical, jcs-rfc-8785, sha-256) after maintainer-edit fixed schema-conformance drift. PR #86 (validator enum enforcement) merged so future drift bounces at CI. Issue #87 opened on temporal-correctness gap (system_attributes lacks maintenance-status binding); recommended Option C (punt to v0.4, revisit on first cross-impl byte-match divergence) endorsed by AgentID maintainer @haroldmalikfrimpong-ops. PR #88 (validator soft-fail warnings on non-string values + unknown attribute names) opened. PR #89 (kenneives AgentGraph crosswalk, +403 lines, closes #82 hygiene gap) under hostile review with all live claims verified (5 URLs, JWKS to DID cryptographic chain, CTEF spec_anchor commit, vocabulary.yaml issuers_in_production cross-reference)."
-  status: in_progress
+  status: done
   workstream: vocab
   day_start: 80
   day_end: 80
@@ -412,7 +412,7 @@
 - id: d74-a2a-1786-byte-match-ack
   title: "A2A #1786: Nobulex byte-match verifier scripts acknowledged"
   description: "arian-gogani (Nobulex) shipped reciprocal byte-match verifier scripts at github.com/arian-gogani/nobulex/tree/main/scripts: verify-aps-byte-match.mjs and verify-ctef-byte-match.mjs. Acknowledgment posted to A2A #1786 thread. Reciprocal verification queued for Day 75 morning: run Nobulex's scripts against APS fixtures, post receipt artifacts to thread, link both verifier scripts from APS fixture README. Pattern: APS publishes fixtures, peer publishes reciprocal verifier, APS publishes counter-verification, the loop closes byte-by-byte. This is the ninth way of verifying APS fixtures."
-  status: in_progress
+  status: done
   workstream: ecosystem
   day_start: 74
   day_end: 75
@@ -736,8 +736,8 @@
 
 - id: d69-harness-pr-1-moltrust-resolver-adapter
   title: "a2a-compliance-harness PR #1: MolTrust optional resolver adapter (almost-merge, DRAFT)"
-  description: "MoltyCel published moltrust v0.2.0 to PyPI today, then opened a PR adding moltrust as an optional resolver adapter to the harness with a clean fallback path when the package is not installed. Thirteen tests pass on Python 3.12. Two minor asks from review (a docstring sharpening and a pytest.skip for the no-moltrust path), both acknowledged. Co-maintainer access granted on aeoess/a2a-compliance-harness with maintain permission tier (effective write per org base-permission cap). Once MoltyCel marks the PR ready for review on Monday, the merge is mechanical. MolTrust now positioned as a drop-in second-issuer reference under the harness's resolver interface; the harness was originally shipped as APS-only on Apr 21 (a2a-compliance-harness v0.1). Three weeks of cycle: schema lock (Apr 17 a2aproject/A2A#1742), v0.1 single-issuer ship (Apr 21), second-issuer drop-in (Apr 25)."
-  status: in_progress
+  description: "MoltyCel published moltrust v0.2.0 to PyPI today, then opened a PR adding moltrust as an optional resolver adapter to the harness with a clean fallback path when the package is not installed. Thirteen tests pass on Python 3.12. Two minor asks from review (a docstring sharpening and a pytest.skip for the no-moltrust path), both acknowledged. Co-maintainer access granted on aeoess/a2a-compliance-harness with maintain permission tier (effective write per org base-permission cap). Once MoltyCel marks the PR ready for review on Monday, the merge is mechanical. MolTrust now positioned as a drop-in second-issuer reference under the harness's resolver interface; the harness was originally shipped as APS-only on Apr 21 (a2a-compliance-harness v0.1). Three weeks of cycle: schema lock (Apr 17 a2aproject/A2A#1742), v0.1 single-issuer ship (Apr 21), second-issuer drop-in (Apr 25). [DROPPED 2026-05-03 per CTO call. MoltyCel harness#1 stays on inbound-only watch list. No active integration work.]"
+  status: dropped
   workstream: ecosystem
   day_start: 69
   day_end: 69
@@ -3009,7 +3009,7 @@
 - id: d68-a2a-1786-cai-extension-proposal
   title: "A2A #1786: Cryptographic Agent Identity extension proposal opened"
   description: "Proposal-phase issue opened at a2aproject/A2A per the documented extension-and-binding-governance.md Proposal Phase, requesting maintainer sponsorship to create the corresponding experimental-ext-* repository. Aligned to CTEF v0.3.1 substrate (frozen at agentgraph-co/agentgraph@69ad94d, normative endpoint at agentgraph.co/.well-known/cte-test-vectors.json). Declares claim_type discriminator over the closed set {identity, transport, authority, continuity} with envelope reserved, structural-before-semantic error codes (INVALID_CLAIM_SCOPE, INVALID_COMPOSITION), and uses A2A's existing AgentExtension mechanism (Section 4.4.4) with params carrying per-claim payload — no proto schema changes proposed. Reference URI experimental-ext prefixed: a2a-protocol.org/extensions/cryptographic-agent-identity/v0.3.1. Three correction loops before opening: 9KB extension manifesto rejected for size + wrong process (PR vs issue first), 100-line topic doc rejected for wrong surface (docs/topics/ is core protocol concepts not extension specs) and skipping proposal phase, third draft caught a 404 references link to the rotation-attestation directory before posting (test-vectors.json direct link replaced the 404 path). kenneives posted co-normative AgentGraph endorsement at the top of the thread within 4 minutes of opening including a four-way byte-match harness table. lawcontinue posted substantive question on validity_window for long-running inference sessions; reply confirmed APS already implements sequence_bound continuity, accepted contribution offer for distributed-inference test fixture against APS bilateral-delegation regression."
-  status: in_progress
+  status: done
   workstream: standards
   day_start: 68
   day_end: 68
@@ -3050,7 +3050,7 @@
 - id: d68-openclaw-49971-integration-surface
   title: "OpenClaw #49971 closed COMPLETED: integration surface defined as public plugin contract"
   description: "MoltyCel's RFC 'Native Agent Identity & Trust Verification for OpenClaw' closed by maintainer steipete (Codex review) with stateReason: COMPLETED at 04:34Z. Ruling: trust providers (APS, MolTrust, AgentLair, AgentID, etc.) build on existing public hooks rather than a new core onAgentVerify. Five hooks cited at file/line precision against commit 45146913007d: before_install (src/plugins/hook-types.ts:635, runtime invocation at install-security-scan.runtime.ts:586) for skill install gating; before_tool_call (hook-types.ts:318) for per-action enforcement at the runtime tool-call gate; inbound_claim + message_received + before_dispatch (hook-message.types.ts:16) for inter-agent verification; gateway_start (server-startup-post-attach.ts:503) for self-verification on startup. SDK reference docs at docs.openclaw.ai/plugins/sdk-overview confirm these as supported public plugin contracts. This is an architectural answer not a soft punt — different from the openclaw#43705 showcase closure (route to ClawHub, no architectural commitment) — steipete did codebase work mapping the RFC requirements onto specific hook surfaces and committed them as public plugin API. Reframes the openclaw integration story: APS ships @aeoess/openclaw-trust-plugin as the integration artifact (not a core dependency) targeting at minimum before_install + before_tool_call + inbound_claim + gateway_start, calling gateway.aeoess.com/api/v1/public/trust/{agent_id} for per-agent JWS-signed trust attestation. ~200-300 line plugin, npm-publishable, README cites CTEF v0.3.1 substrate. Post acknowledgment to #49971 only after scaffold exists."
-  status: in_progress
+  status: done
   workstream: comms
   day_start: 68
   day_end: 68
