@@ -407,7 +407,7 @@ footer a:hover {
     <!-- BUILD:ROADMAP_START -->
 <noscript class="rm-noscript-hint"><div class="rm-noscript-msg">JavaScript is disabled — showing the full roadmap as a list. With JavaScript on, this page renders an interactive timeline above.</div></noscript>
 <div class="rm-static" id="rm-static" aria-label="Roadmap (static fallback)">
-<p class="rm-static-intro">259 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
+<p class="rm-static-intro">267 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
 <section class="rm-group rm-group-active">
 <h2 class="rm-group-title">Active <span class="rm-group-count">(14)</span></h2>
 <article class="rm-item rm-item-active" id="a2a-compliance-harness-repo">
@@ -587,18 +587,42 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-in-progress">
-<h2 class="rm-group-title">In progress <span class="rm-group-count">(18)</span></h2>
-<article class="rm-item rm-item-in_progress" id="d80-coinbase-crewai-ecosystem-cross-pollination">
+<h2 class="rm-group-title">In progress <span class="rm-group-count">(12)</span></h2>
+<article class="rm-item rm-item-in_progress" id="d84-a2a-1829-four-way-convergence">
 <header class="rm-item-h">
-<h3 class="rm-item-title">Coinbase agentkit + crewAI Guardrails ecosystem cross-pollination</h3>
+<h3 class="rm-item-title">A2A#1829 four-way alignment: byte-match verification, v0.3.3 hosting, canonicalization stance</h3>
 <p class="rm-item-meta">
-<span class="rm-item-day">Day 80</span> 
-<span class="rm-item-ws">Ecosystem</span> 
+<span class="rm-item-day">Day 84</span> 
+<span class="rm-item-ws">Standards</span> 
 <span class="rm-item-status">in_progress</span>
 </p>
 </header>
-<p class="rm-item-desc">Two substantive ecosystem engagements landed today. (1) coinbase/agentkit#1091: replied to Aigen-Protocol's SafeRouter pitch with a two-layer composition reading. APS as the pre-execution authorization-receipt layer; SafeRouter (atomic-revert via TokenUnsafe custom error on Base mainnet) as the on-chain target-safety layer. Five payment-rail binding adapters in v2 cited (ACP, AP2, x402, Stripe-Issuing, MPP); SafeRouter could slot in as a sixth via vocab crosswalk. (2) crewAIInc/crewAI#4877: proposed a common GuardrailDecision audit-metadata shape (verdict, namespaced reason_code, decision_id, policy_id, timestamp, provider-specific metadata bag) responding to @0pen7ech's question. Two providers converged on the shape so far (APS + AgentID via @haroldmalikfrimpong-ops, who corrected L0-L3 and folded in concrete reason_codes). Vocab crosswalk merge 9aef69a anchors the GuardrailDecision-deny semantic at the canonical-vocabulary layer.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/coinbase/agentkit/issues/1091">coinbase/agentkit#1091</a></li><li><a href="https://github.com/crewAIInc/crewAI/issues/4877">crewAI #4877</a></li></ul>
+<p class="rm-item-desc">Three substantive maintainer posts landed on A2A#1829 the same evening. jschoemaker (Envoys SDK) independently byte-match verified our envoys-rfc9421 composition fixture against §13 Vector 2, confirmed the §13 keypair is cross-impl-deliberate, and endorsed Hippo (lawcontinue/hippo-auth) landing as a sibling at aps-conformance-suite/fixtures/composition/hippo-rfc9421/. kenneives (AgentGraph PDR/CTEF) committed to hosting the v0.3.3 shared working doc at agentgraph-co/agentgraph/docs/standards/v0.3.3-working-doc.md with three artifact slots (envelope-shape diff, unified error enum, cross-extension fixture matrix). arian-gogani (Nobulex) confirmed the canonicalization stance: JCS + numeric profile, no floats in canonical hash scope, semantic equivalence at tool-version layer not chain layer. APS reply landed same evening acking all three, refining the five-layer composition framing to per-receipt-type layer attribution (delegation_receipt at authority, bilateral_receipt at envelope, rotation-attestation at continuity). spending_authorization claim subtype response committed for May 18.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/a2aproject/A2A/issues/1829">A2A#1829</a></li></ul>
+</article>
+<article class="rm-item rm-item-in_progress" id="d84-pr-91-budget-authority-crosswalk-amavashev-approved">
+<header class="rm-item-h">
+<h3 class="rm-item-title">PR #91 budget_authority.yaml v0.1 opens at vocab repo, amavashev approved</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 84</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">in_progress</span>
+</p>
+</header>
+<p class="rm-item-desc">First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B Consilium pass complete (three-engine + adversarial Phase 2). Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/91">PR #91</a></li><li><a href="https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231">ACP#231 public commitment</a></li></ul>
+</article>
+<article class="rm-item rm-item-in_progress" id="d81-four-signal-compose-locked">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Four-signal interop compose: PDR continuity attestation locked with three implementers</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 81–92</span> 
+<span class="rm-item-ws">interop</span> 
+<span class="rm-item-status">in_progress</span>
+</p>
+</header>
+<p class="rm-item-desc">nanookclaw committed to authoring fixtures/interop-week-1/composition-behavioral-trust.json by 2026-05-22 with PDR entity_continuity as the closing attestation. Two-signal compose locked: AgentID trust_verification as chain root (compound_digest 621d40f1701521f9af084a08476a2deebd49f02ff0b9d7e7808b6a05c6fcad91, haroldmalikfrimpong-ops), PDR entity_continuity as closing with prior_signal_digest pinned to AgentID root. Signing key approved at https://nanook.hnrstage.xyz/.well-known/pdr-jwks.json with kid pdr-continuity-2026-05. Fresh Ed25519 dedicated to PDR continuity attestations. Recompute property carried by evidence_inputs[] structured as {source_compound_digest, extracted_signal} pairs; score, slope, p-value, R^2 emitted as named fields. JCS canonicalization (RFC 8785), JWS EdDSA, SHA-256 compound_digest. Independent recompute path documented inline so arian-gogani's Nobulex verifier can validate property (c) without PDR-side code. Same harness pattern that runs 4/4 on AgentGraph and 10/10 on APS bilateral-delegation.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/36">vocab #36 four-signal compose thread</a></li></ul>
 </article>
 <article class="rm-item rm-item-in_progress" id="d80-owasp-aisvs-revocation-to-enforce">
 <header class="rm-item-h">
@@ -624,53 +648,6 @@ footer a:hover {
 <p class="rm-item-desc">VeloGerber concurred on all four points and proposed a four-axis dimension structure for v1.0: structural enforcement (binary, multiplier), empirical block-rate (continuous via RMF receipts), time-to-enforce (tiered with rail-anchored thresholds), enforcement_locus (enum, vendor-trust dependency). Co-authorship accepted with scoping that keeps the artifact tight: a working document on the enforcement_effectiveness dimension family, separable from the broader AIVSS v1.0 rubric. Inviting #32 contributors into the same working text since the structural-axis-dominance argument depends on the §3.2 cryptographic-enforcement multiplier they pinned. Cadence proposed: v0.1 to v0.2 cycle, v0.2 to include any third-implementation reproduction (Nobulex, asqav, Mycelium, AgentID candidates).</p>
 <ul class="rm-item-links"><li><a href="https://github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/31">OWASP AIVSS #31</a></li></ul>
 </article>
-<article class="rm-item rm-item-in_progress" id="d80-vocab-system-attributes-wave">
-<header class="rm-item-h">
-<h3 class="rm-item-title">Vocab system_attributes wave: three merges, two opens, one under review</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 80</span> 
-<span class="rm-item-ws">vocab</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">Three vocab merges and two new opens against the system_attributes enum from #77. PR #78 (nutstrut SAR system_attributes) and #79 (nutstrut continuity-analyzer system_attributes) merged Track A with conformant values (classical, jcs-rfc-8785, sha-256) after maintainer-edit fixed schema-conformance drift. PR #86 (validator enum enforcement) merged so future drift bounces at CI. Issue #87 opened on temporal-correctness gap (system_attributes lacks maintenance-status binding); recommended Option C (punt to v0.4, revisit on first cross-impl byte-match divergence) endorsed by AgentID maintainer @haroldmalikfrimpong-ops. PR #88 (validator soft-fail warnings on non-string values + unknown attribute names) opened. PR #89 (kenneives AgentGraph crosswalk, +403 lines, closes #82 hygiene gap) under hostile review with all live claims verified (5 URLs, JWKS to DID cryptographic chain, CTEF spec_anchor commit, vocabulary.yaml issuers_in_production cross-reference).</p>
-<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/78">Vocab #78</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/86">Vocab #86</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/87">Vocab #87</a></li></ul>
-</article>
-<article class="rm-item rm-item-in_progress" id="d74-a2a-1786-byte-match-ack">
-<header class="rm-item-h">
-<h3 class="rm-item-title">A2A #1786: Nobulex byte-match verifier scripts acknowledged</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 74–75</span> 
-<span class="rm-item-ws">Ecosystem</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">arian-gogani (Nobulex) shipped reciprocal byte-match verifier scripts at github.com/arian-gogani/nobulex/tree/main/scripts: verify-aps-byte-match.mjs and verify-ctef-byte-match.mjs. Acknowledgment posted to A2A #1786 thread. Reciprocal verification queued for Day 75 morning: run Nobulex's scripts against APS fixtures, post receipt artifacts to thread, link both verifier scripts from APS fixture README. Pattern: APS publishes fixtures, peer publishes reciprocal verifier, APS publishes counter-verification, the loop closes byte-by-byte. This is the ninth way of verifying APS fixtures.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/a2aproject/A2A/issues/1786#issuecomment-4357932959">acknowledgment</a></li><li><a href="https://github.com/arian-gogani/nobulex/tree/main/scripts">Nobulex verifier scripts</a></li></ul>
-</article>
-<article class="rm-item rm-item-in_progress" id="d73-intoto-svr-extension-go">
-<header class="rm-item-h">
-<h3 class="rm-item-title">in-toto SVR extension Go decision</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 73</span> 
-<span class="rm-item-ws">Ecosystem</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">Path forward for governance attestation as an in-toto SVR extension scoped. Worked-example draft underway in private workspace at INTOTO-SVR-EXAMPLE-DRAFT/. Two artifacts: agent-governance-svr-extension.md (~200 LOC) plus agent-governance-svr-extension.json (~80 LOC). Single-SVR shape per maintainer framing; two-SVR variant flagged as open question for May 1 meeting. May 1 CNCF #in-toto-attestations meeting attendance committed (per Apr 28 PR #549 comment). Bilateral byte-match track with marcelamelara holds in parallel. aeoess/governance-attestation-predicate stays canonical.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/in-toto/attestation/pull/549">in-toto PR #549</a></li></ul>
-</article>
-<article class="rm-item rm-item-in_progress" id="d73-ssrn-three-submissions">
-<header class="rm-item-h">
-<h3 class="rm-item-title">Three SSRN submissions: Papers 1, 5, 7</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 73</span> 
-<span class="rm-item-ws">Research</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">Agent Social Contract (Paper 1, z.18749779), Physics-Enforced Delegation (Paper 5, z.19478584), and Cognitive Attestation (Paper 7, z.19646276) entering SSRN today. Each paper classified into five-to-six CS networks where the actual reviewer audience reads — Artificial Intelligence eJournal for the broad AI audience, Artificial Intelligence Law Policy &amp; Ethics for auditability and governance angles, Cybersecurity Privacy &amp; Networks for cryptographic primitives, Theoretical Computer Science for cryptography and distributed computation, Quantum Information for the IBM hardware experiment, Generative AI for the Llama-3.1 sparse autoencoder work. Classifications are routing decisions, not decoration. Author affiliation: Independent Researcher (corrected from auto-pulled GitHub Inc). Declaration of interest statements explicit about IBM Quantum and Neuronpedia third-party infrastructure use with no funding role.</p>
-</article>
 <article class="rm-item rm-item-in_progress" id="d73-vocab-pings-pr-55-pr-51">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Two vocab pings: PR #55 and PR #51</h3>
@@ -693,18 +670,6 @@ footer a:hover {
 </header>
 <p class="rm-item-desc">New GitHub organization agent-governance-spec hosts cross-vendor specs that should not live inside any single vendor's account. First spec is agent-trust-verification-providers (CC-BY-4.0). Lars Kroehl (MolTrust / CryptoKRI GmbH) accepted six conditions on editorial process, license separation (spec is CC-BY-4.0, reference implementations stay independent under their own licenses), MUST #2 split refinement on schema-fields versus schema-shape, implementation-name discipline, and editor-entry path. Editor line: 'Tymofii Pidlisnyi (APS by AEOESS), Lars Kroehl (MolTrust / CryptoKRI GmbH)'. v0.1 SPEC.md drafted (216 lines), six tracking issues opened for structural decisions, Lars accepted the org owner invitation.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/agent-governance-spec/agent-trust-verification-providers">spec repo</a></li><li><a href="https://github.com/agent-governance-spec">org</a></li></ul>
-</article>
-<article class="rm-item rm-item-in_progress" id="d71-vocab-issue-58-epoch-three-way-convergence">
-<header class="rm-item-h">
-<h3 class="rm-item-title">Vocab #58 epoch enum: three-way independent convergence</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 71</span> 
-<span class="rm-item-ws">Protocol</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">Proposal to add epoch as the sixth value in the validity_temporal enum (alongside immediate, decay_window, refresh_required, expires_at, condition_satisfied). The semantic gap epoch fills: distinguishing observer-relative event sequencing from substantive state transitions, where two verifiers of the same wall-clock window may reasonably count different numbers of events but agree on coarser substantive transitions. Three independent endorsements landed: lawcontinue (distributed inference setup, 50-token generation produces 50 sequence ticks but zero state transitions), kenneives (AgentGraph CTEF v0.3.1 session_epoch maps onto epoch verbatim once the enum lands), srotzin (HiveTrust + cont_epoch on continuity layer, plus substantive-transition lower bound clause for the PR description: epoch ticks MUST be coarser than per-call I/O). Direction locked, PR follows in the next 24 hours.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/58">#58</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1786">A2A #1786 (parallel thread)</a></li></ul>
 </article>
 <article class="rm-item rm-item-in_progress" id="d71-vocab-issue-60-pqc-vocab-attribute">
 <header class="rm-item-h">
@@ -730,18 +695,6 @@ footer a:hover {
 <p class="rm-item-desc">Pairwise composition crosswalk between Agent Passport System receipt primitives and ACTA Signed Receipts (draft-farley-acta-signed-receipts-01). 14 mappings: 1 exact, 7 partial, 3 divergent, 2 no_mapping, 1 non_equivalent_similar_label. Calibrated against actual shipped versions: APS 2.3.0-alpha, @veritasacta/artifacts 0.2.2, @veritasacta/protocol 0.1.1, @veritasacta/verify 0.6.0, protect-mcp 0.6.0. Migration paths documented for partial/divergent rows. Strategic posture: complementary surfaces, not competing stacks. APS specializes in delegation chain + cascade revocation + scope narrowing; ACTA specializes in selective-disclosure receipts via RFC 6962 Merkle commitment. Authored APS-side, ACTA-side review pending.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/55">PR #55 (open)</a></li></ul>
 </article>
-<article class="rm-item rm-item-in_progress" id="d69-harness-pr-1-moltrust-resolver-adapter">
-<header class="rm-item-h">
-<h3 class="rm-item-title">a2a-compliance-harness PR #1: MolTrust optional resolver adapter (almost-merge, DRAFT)</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 69</span> 
-<span class="rm-item-ws">Ecosystem</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">MoltyCel published moltrust v0.2.0 to PyPI today, then opened a PR adding moltrust as an optional resolver adapter to the harness with a clean fallback path when the package is not installed. Thirteen tests pass on Python 3.12. Two minor asks from review (a docstring sharpening and a pytest.skip for the no-moltrust path), both acknowledged. Co-maintainer access granted on aeoess/a2a-compliance-harness with maintain permission tier (effective write per org base-permission cap). Once MoltyCel marks the PR ready for review on Monday, the merge is mechanical. MolTrust now positioned as a drop-in second-issuer reference under the harness's resolver interface; the harness was originally shipped as APS-only on Apr 21 (a2a-compliance-harness v0.1). Three weeks of cycle: schema lock (Apr 17 a2aproject/A2A#1742), v0.1 single-issuer ship (Apr 21), second-issuer drop-in (Apr 25).</p>
-<ul class="rm-item-links"><li><a href="https://github.com/aeoess/a2a-compliance-harness/pull/1">PR #1 (DRAFT, awaiting mark-ready)</a></li></ul>
-</article>
 <article class="rm-item rm-item-in_progress" id="d69-vocab-pr-51-invariant-survival">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Vocab PR #51 opened: docs/descriptor-dimensions/invariant-survival.md (co-authored with QueBallSharken)</h3>
@@ -765,30 +718,6 @@ footer a:hover {
 </header>
 <p class="rm-item-desc">Validator built directly from nanookclaw's slope-computation spec posted earlier the same evening on issue #36. 309 lines of pure-Node validator (scripts/validators/entity-continuity-pdr.js) with no dependencies, a 32-test suite all passing (scripts/validators/test-entity-continuity-pdr.js, 300 lines), four reference vectors at fixtures/validator-vectors/ covering stable, drifting, improving, and out-of-range agent behavior, and a long-form docs file at docs/descriptor-dimensions/entity-continuity-pdr.md (184 lines). Slope formula from nanookclaw's spec: L2 distance over four normalized fingerprint dimensions, OLS over a window of twelve sessions, max divergence of sqrt(4)=2.0, max possible slope of 2.0/(N-2), score clamped to [0.0, 1.0]. Verified scores: stable=1.0, drifting=0.9212, improving=1.0 (clamped), invalid=exit-1. nanookclaw posted the spec at 21:34Z; the validator opened at 22:52Z. Co-authored-by: Nanook on commit 069ef9a. Closes the Nanook §8 commitment. Complementary to nutstrut's structural continuity-analyzer (vocab PR #42). Awaiting nanookclaw review.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/52">PR #52</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/36">Issue #36 (slope spec source)</a></li></ul>
-</article>
-<article class="rm-item rm-item-in_progress" id="d68-a2a-1786-cai-extension-proposal">
-<header class="rm-item-h">
-<h3 class="rm-item-title">A2A #1786: Cryptographic Agent Identity extension proposal opened</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 68</span> 
-<span class="rm-item-ws">Standards</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">Proposal-phase issue opened at a2aproject/A2A per the documented extension-and-binding-governance.md Proposal Phase, requesting maintainer sponsorship to create the corresponding experimental-ext-* repository. Aligned to CTEF v0.3.1 substrate (frozen at agentgraph-co/agentgraph@69ad94d, normative endpoint at agentgraph.co/.well-known/cte-test-vectors.json). Declares claim_type discriminator over the closed set {identity, transport, authority, continuity} with envelope reserved, structural-before-semantic error codes (INVALID_CLAIM_SCOPE, INVALID_COMPOSITION), and uses A2A's existing AgentExtension mechanism (Section 4.4.4) with params carrying per-claim payload — no proto schema changes proposed. Reference URI experimental-ext prefixed: a2a-protocol.org/extensions/cryptographic-agent-identity/v0.3.1. Three correction loops before opening: 9KB extension manifesto rejected for size + wrong process (PR vs issue first), 100-line topic doc rejected for wrong surface (docs/topics/ is core protocol concepts not extension specs) and skipping proposal phase, third draft caught a 404 references link to the rotation-attestation directory before posting (test-vectors.json direct link replaced the 404 path). kenneives posted co-normative AgentGraph endorsement at the top of the thread within 4 minutes of opening including a four-way byte-match harness table. lawcontinue posted substantive question on validity_window for long-running inference sessions; reply confirmed APS already implements sequence_bound continuity, accepted contribution offer for distributed-inference test fixture against APS bilateral-delegation regression.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/a2aproject/A2A/issues/1786">Proposal issue #1786</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1672">#1672 design discussion</a></li><li><a href="https://agentgraph.co/.well-known/cte-test-vectors.json">CTEF v0.3.1 normative endpoint</a></li></ul>
-</article>
-<article class="rm-item rm-item-in_progress" id="d68-openclaw-49971-integration-surface">
-<header class="rm-item-h">
-<h3 class="rm-item-title">OpenClaw #49971 closed COMPLETED: integration surface defined as public plugin contract</h3>
-<p class="rm-item-meta">
-<span class="rm-item-day">Day 68</span> 
-<span class="rm-item-ws">Comms</span> 
-<span class="rm-item-status">in_progress</span>
-</p>
-</header>
-<p class="rm-item-desc">MoltyCel's RFC 'Native Agent Identity &amp; Trust Verification for OpenClaw' closed by maintainer steipete (Codex review) with stateReason: COMPLETED at 04:34Z. Ruling: trust providers (APS, MolTrust, AgentLair, AgentID, etc.) build on existing public hooks rather than a new core onAgentVerify. Five hooks cited at file/line precision against commit 45146913007d: before_install (src/plugins/hook-types.ts:635, runtime invocation at install-security-scan.runtime.ts:586) for skill install gating; before_tool_call (hook-types.ts:318) for per-action enforcement at the runtime tool-call gate; inbound_claim + message_received + before_dispatch (hook-message.types.ts:16) for inter-agent verification; gateway_start (server-startup-post-attach.ts:503) for self-verification on startup. SDK reference docs at docs.openclaw.ai/plugins/sdk-overview confirm these as supported public plugin contracts. This is an architectural answer not a soft punt — different from the openclaw#43705 showcase closure (route to ClawHub, no architectural commitment) — steipete did codebase work mapping the RFC requirements onto specific hook surfaces and committed them as public plugin API. Reframes the openclaw integration story: APS ships @aeoess/openclaw-trust-plugin as the integration artifact (not a core dependency) targeting at minimum before_install + before_tool_call + inbound_claim + gateway_start, calling gateway.aeoess.com/api/v1/public/trust/{agent_id} for per-agent JWS-signed trust attestation. ~200-300 line plugin, npm-publishable, README cites CTEF v0.3.1 substrate. Post acknowledgment to #49971 only after scaffold exists.</p>
-<ul class="rm-item-links"><li><a href="https://github.com/openclaw/openclaw/issues/49971">#49971 closure</a></li><li><a href="https://docs.openclaw.ai/plugins/sdk-overview">OpenClaw plugin SDK reference</a></li></ul>
 </article>
 <article class="rm-item rm-item-in_progress" id="d67-agt-1354-interop-proposal">
 <header class="rm-item-h">
@@ -819,7 +748,79 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-shipped">
-<h2 class="rm-group-title">Shipped <span class="rm-group-count">(192)</span></h2>
+<h2 class="rm-group-title">Shipped <span class="rm-group-count">(204)</span></h2>
+<article class="rm-item rm-item-done" id="d84-media-html-press-kit-expanded">
+<header class="rm-item-h">
+<h3 class="rm-item-title">media.html press kit expanded with five new sections for State of Agent Security launch</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 84</span> 
+<span class="rm-item-ws">infra</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Pre-press-launch expansion of /media.html with five additional sections matching the existing contact-row design pattern. Problem we solve (one-paragraph framing of the verifiability gap APS closes). Recent coverage (State of Agent Security 2026 reference with embargoed-quotes contact). Standards body work (IETF Internet-Draft, AAIF #14 in Linux Foundation CA review, A2A #1786 + #1829, OWASP AIVSS #31, agent-governance-vocabulary, OpenSSF / ACP / DIF). Business model (open protocol + commercial gateway, Team tier $99/mo pointer). Recent milestones (nine dated milestones from May 3-12, 2026). Total page now 12 sections, 262 lines. og-default.png verified live at 1200×630 HTTP 200. All numbers verified against current canonical values.</p>
+<ul class="rm-item-links"><li><a href="/media.html">Press kit</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d84-roadmap-drift-cleanup-two-commits">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Roadmap drift cleanup: eight items flipped across two commits</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 84</span> 
+<span class="rm-item-ws">Ops</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Pre-press-launch audit caught drift between closed-work tracking and roadmap status fields. Commit 6b739db flipped five items to done (coinbase-crewai cross-pollination, vocab system_attributes wave, A2A#1786 byte-match ack, A2A#1786 CAI extension proposal, openclaw#49971 integration surface) plus one to dropped (MoltyCel harness#1 resolver adapter per Day 77 CTO call). Commit a436374 flipped two more done (SSRN five-paper approval, vocab #58 epoch enum) plus one to dropped (in-toto SVR PR #549 closed unmerged April 28, no aeoess activity in 30 days). Counts moved from 194/19/0 to 201/11/2 across done/in_progress/dropped. Closes the 'filed at audit-time, never updated at ship-time' drift pattern.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/aeoess_web/commit/6b739db">First cleanup commit</a></li><li><a href="https://github.com/aeoess/aeoess_web/commit/a436374">Second cleanup commit</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d84-ssrn-five-papers-approved">
+<header class="rm-item-h">
+<h3 class="rm-item-title">SSRN approves five APS research papers for academic indexing</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 84</span> 
+<span class="rm-item-ws">Research</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Email notification from SSRN confirms five papers cleared review and entered the academic indexing pipeline. Each paper routed to five-to-six CS networks where reviewer audiences read: Artificial Intelligence eJournal, AI Law Policy &amp; Ethics, Cybersecurity Privacy &amp; Networks, Theoretical Computer Science, Quantum Information, Generative AI. Classifications are routing decisions. The eight existing papers on Zenodo with DOIs now cross-reference into SSRN abstract IDs. aeoess.com/research stays canonical.</p>
+<ul class="rm-item-links"><li><a href="/research.html">Research index</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d81-aivss-pr1-merged">
+<header class="rm-item-h">
+<h3 class="rm-item-title">First external PR on aivss-enforcement-effectiveness merged</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 81</span> 
+<span class="rm-item-ws">Standards</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">VeloGerber published the canonical race-test fixture for the time-to-enforce dimension at race-test-fixtures/audit-pack-signing-v0.5/. Three additive files: spec.md (140 lines, sha-256 c5f62c9fce6e08b55dab6dfbc8caa0196af61db1eddd0046b43dfa21c9261f28 byte-matches the WORKING-TEXT.md citation at five locations), race_test_runner.py (211 lines pure-stdlib portable runner), README.md. Fresh-checkout reproduction landed 6004 requests, 12 ACCEPTs after revoke commit, P99 4.57ms within the 50ms spec bound. PR-MERGE-PROTOCOL Track A discipline applied: phase 0 classification, phase 1 adversarial first read, phase 2 claim extraction, phase 2.5 contributor profile, phase 3 executable verification, phase 4 live invariants cross-check, phase 5 charitable read, phase 6 escalation triggers. Audit memo retained internally. AIVSS#31 follow-up posted granting redacted-incident-receipt path under race-test-fixtures/multi-tenant-isolation-precondition/.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/aivss-enforcement-effectiveness/pull/1">PR #1 merged</a></li><li><a href="https://github.com/OWASP/www-project-artificial-intelligence-vulnerability-scoring-system/issues/31">OWASP AIVSS#31 thread</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d81-pre-press-launch-freshness">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Pre-press-launch freshness sweep + propagate.mjs hardened</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 81</span> 
+<span class="rm-item-ws">infra</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Two-commit pass on aeoess_web before May 12 AgentGraph 'State of Agent Security 2026' press launch. Path A (commit 8e6474f) hand-fixed seven public files: .well-known/security.txt critical fixes (publicly-visible internal note dropped, Policy header repointed from deleted /security.html to /contact.html#security), .well-known/mcp.json full version + count + date refresh (parsed by MCP discovery clients), llms.txt + llms-full.txt + README.md version bumps and dead-link cleanup, .well-known/agents.json + protocol-registry.json date refresh (65/39 days stale). Path B (commit 59ef764) extended propagate.mjs: PYTHON_VERSION case added entirely (was read from project-state.json since Day 76 but never propagated, letting alpha.0 -&gt; alpha.3 survive three publishes), SDK_VERSION + MCP_VERSION extended with npm @-syntax patterns and prose forms, .well-known/security.txt enrolled in target list. og-default.png 1200x630 social card shipped (commit 4a4582f) with meta tags swept across 27 pages. /media.html press kit page rebuilt from redirect stub (commit 884ec79) with 10 sections of verifiable-only claims, /contact.html Press row added.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/aeoess_web/commit/8e6474f">Path A freshness commit</a></li><li><a href="https://github.com/aeoess/aeoess_web/commit/59ef764">Path B propagate.mjs extension</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d80-coinbase-crewai-ecosystem-cross-pollination">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Coinbase agentkit + crewAI Guardrails ecosystem cross-pollination</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 80</span> 
+<span class="rm-item-ws">Ecosystem</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Two substantive ecosystem engagements landed today. (1) coinbase/agentkit#1091: replied to Aigen-Protocol's SafeRouter pitch with a two-layer composition reading. APS as the pre-execution authorization-receipt layer; SafeRouter (atomic-revert via TokenUnsafe custom error on Base mainnet) as the on-chain target-safety layer. Five payment-rail binding adapters in v2 cited (ACP, AP2, x402, Stripe-Issuing, MPP); SafeRouter could slot in as a sixth via vocab crosswalk. (2) crewAIInc/crewAI#4877: proposed a common GuardrailDecision audit-metadata shape (verdict, namespaced reason_code, decision_id, policy_id, timestamp, provider-specific metadata bag) responding to @0pen7ech's question. Two providers converged on the shape so far (APS + AgentID via @haroldmalikfrimpong-ops, who corrected L0-L3 and folded in concrete reason_codes). Vocab crosswalk merge 9aef69a anchors the GuardrailDecision-deny semantic at the canonical-vocabulary layer.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/coinbase/agentkit/issues/1091">coinbase/agentkit#1091</a></li><li><a href="https://github.com/crewAIInc/crewAI/issues/4877">crewAI #4877</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d80-cross-rail-paymentreceipt-locked">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Cross-rail PaymentReceipt locked with Mycelium + Asqav</h3>
@@ -867,6 +868,18 @@ footer a:hover {
 </header>
 <p class="rm-item-desc">Team tier ($99/month, 14-day trial) actually purchasable end-to-end. Stripe payment link wired to /welcome.html on success. Cloudflare Worker at hook.aeoess.com receives Stripe webhook events (checkout.session.completed, customer.subscription.deleted, invoice.payment_failed), verifies HMAC-SHA256 signature, sends notification email to signal@aeoess.com via Resend, and sends welcome email to the customer with 24-hour manual-provisioning posture. Three internal updates landed: CLAIMS.md RESOLVED on Mycelium dual-chain framing, new memory rule for standards-body vs major-company-observer signature forms, orphan $499/mo Enterprise price archived to keep the page sales-led.</p>
 <ul class="rm-item-links"><li><a href="https://aeoess.com/pricing.html">Pricing page</a></li><li><a href="https://aeoess.com/welcome.html">Welcome page</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d80-vocab-system-attributes-wave">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab system_attributes wave: three merges, two opens, one under review</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 80</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Three vocab merges and two new opens against the system_attributes enum from #77. PR #78 (nutstrut SAR system_attributes) and #79 (nutstrut continuity-analyzer system_attributes) merged Track A with conformant values (classical, jcs-rfc-8785, sha-256) after maintainer-edit fixed schema-conformance drift. PR #86 (validator enum enforcement) merged so future drift bounces at CI. Issue #87 opened on temporal-correctness gap (system_attributes lacks maintenance-status binding); recommended Option C (punt to v0.4, revisit on first cross-impl byte-match divergence) endorsed by AgentID maintainer @haroldmalikfrimpong-ops. PR #88 (validator soft-fail warnings on non-string values + unknown attribute names) opened. PR #89 (kenneives AgentGraph crosswalk, +403 lines, closes #82 hygiene gap) under hostile review with all live claims verified (5 URLs, JWKS to DID cryptographic chain, CTEF spec_anchor commit, vocabulary.yaml issuers_in_production cross-reference).</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/78">Vocab #78</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/86">Vocab #86</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/87">Vocab #87</a></li></ul>
 </article>
 <article class="rm-item rm-item-done" id="d80-vocab-validator-phantom-issuer-block">
 <header class="rm-item-h">
@@ -1036,6 +1049,18 @@ footer a:hover {
 <p class="rm-item-desc">Two improvements to scripts/validate-crosswalks.js. Improvement 1: walks descriptor_dimensions blocks nested under signal_types.&lt;key&gt; entries, catching stale dimension values inside per-signal-type descriptor overrides that the previous validator skipped. Improvement 2: legacy whitelist file at scripts/legacy-descriptor-overrides.yaml preserves three pre-#57-resolution descriptor uses (dcp-ai active today, jep and fidelity-spec latent until those maintainers reformat) without warning maintainers, with resolution_issue annotation. Validator state post-hardening: 5 errors, 11 warnings across 26 crosswalks. Regression-tested with nested-descriptor fixture using deprecated value (errors as expected, baseline restored).</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/blob/main/scripts/validate-crosswalks.js">validator</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/blob/main/scripts/legacy-descriptor-overrides.yaml">legacy overrides</a></li></ul>
 </article>
+<article class="rm-item rm-item-done" id="d74-a2a-1786-byte-match-ack">
+<header class="rm-item-h">
+<h3 class="rm-item-title">A2A #1786: Nobulex byte-match verifier scripts acknowledged</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 74–75</span> 
+<span class="rm-item-ws">Ecosystem</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">arian-gogani (Nobulex) shipped reciprocal byte-match verifier scripts at github.com/arian-gogani/nobulex/tree/main/scripts: verify-aps-byte-match.mjs and verify-ctef-byte-match.mjs. Acknowledgment posted to A2A #1786 thread. Reciprocal verification queued for Day 75 morning: run Nobulex's scripts against APS fixtures, post receipt artifacts to thread, link both verifier scripts from APS fixture README. Pattern: APS publishes fixtures, peer publishes reciprocal verifier, APS publishes counter-verification, the loop closes byte-by-byte. This is the ninth way of verifying APS fixtures.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/a2aproject/A2A/issues/1786#issuecomment-4357932959">acknowledgment</a></li><li><a href="https://github.com/arian-gogani/nobulex/tree/main/scripts">Nobulex verifier scripts</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d74-veritasacta-cross-layer-integrity">
 <header class="rm-item-h">
 <h3 class="rm-item-title">VeritasActa verify PR #7: cross-layer integrity 10/10</h3>
@@ -1096,6 +1121,17 @@ footer a:hover {
 <p class="rm-item-desc">The Evidence-Safety Gap in Cryptographic Agent Governance: Compliance-Complete Failures and the Limits of Receipt-Based Accountability published on Zenodo (DOI 10.5281/zenodo.19914628). Defines compliance-complete failure as the simultaneous condition of procedural validity and unsafe effect. Names five omitted-variable classes (semantic, population, trust, pipeline, temporal state). Constructs explicit defeat traces against receipt-chain forensic signals in an open-source reference implementation. Two design implications follow: claim-scoped receipts and authorization-effect separation. Neither closes the gap; both make it visible and auditable. The minimal contribution is the formal separation of procedural validity from effect safety in receipt-based agent accountability — a vocabulary for the failure class the protocol's own success creates.</p>
 <ul class="rm-item-links"><li><a href="https://doi.org/10.5281/zenodo.19914628">Paper 8 on Zenodo</a></li></ul>
 </article>
+<article class="rm-item rm-item-done" id="d73-ssrn-three-submissions">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Three SSRN submissions: Papers 1, 5, 7</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 73</span> 
+<span class="rm-item-ws">Research</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Agent Social Contract (Paper 1, z.18749779), Physics-Enforced Delegation (Paper 5, z.19478584), and Cognitive Attestation (Paper 7, z.19646276) entering SSRN today. Each paper classified into five-to-six CS networks where the actual reviewer audience reads — Artificial Intelligence eJournal for the broad AI audience, Artificial Intelligence Law Policy &amp; Ethics for auditability and governance angles, Cybersecurity Privacy &amp; Networks for cryptographic primitives, Theoretical Computer Science for cryptography and distributed computation, Quantum Information for the IBM hardware experiment, Generative AI for the Llama-3.1 sparse autoencoder work. Classifications are routing decisions, not decoration. Author affiliation: Independent Researcher (corrected from auto-pulled GitHub Inc). Declaration of interest statements explicit about IBM Quantum and Neuronpedia third-party infrastructure use with no funding role. [APPROVED 2026-05-11: SSRN approved 5 papers per email notification.]</p>
+</article>
 <article class="rm-item rm-item-done" id="d73-vocab-pr-52-merged">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Vocab PR #52 merged — entity_continuity PDR validator (co-authored @nanookclaw)</h3>
@@ -1131,6 +1167,18 @@ footer a:hover {
 </header>
 <p class="rm-item-desc">governance_attestation.refusal_authority brought into formal enum compliance: structurally_impossible_to_violate → issuer. One-line correction; the original value wasn't enum-valid anyway. @lowkey-divine concurred on issue #57 before merge.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/62">PR #62 (merged)</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d71-vocab-issue-58-epoch-three-way-convergence">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Vocab #58 epoch enum: three-way independent convergence</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 71</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Proposal to add epoch as the sixth value in the validity_temporal enum (alongside immediate, decay_window, refresh_required, expires_at, condition_satisfied). The semantic gap epoch fills: distinguishing observer-relative event sequencing from substantive state transitions, where two verifiers of the same wall-clock window may reasonably count different numbers of events but agree on coarser substantive transitions. Three independent endorsements landed: lawcontinue (distributed inference setup, 50-token generation produces 50 sequence ticks but zero state transitions), kenneives (AgentGraph CTEF v0.3.1 session_epoch maps onto epoch verbatim once the enum lands), srotzin (HiveTrust + cont_epoch on continuity layer, plus substantive-transition lower bound clause for the PR description: epoch ticks MUST be coarser than per-call I/O). Direction locked, PR followed and issue closed 2026-04-29.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/58">#58</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1786">A2A #1786 (parallel thread)</a></li></ul>
 </article>
 <article class="rm-item rm-item-done" id="d71-vocab-pr-53-agentnexus-three-issuer-merged">
 <header class="rm-item-h">
@@ -1240,6 +1288,18 @@ footer a:hover {
 <p class="rm-item-desc">madeinplutofabio's crosswalk/pic.yaml merged at midmorning PT, mapping the PIC Standard's verification-pattern primitive to the vocabulary's canonical signal types. The crosswalk models action-boundary verification as a parallel surface to visa-layer issuance rather than a sub-field beneath it: visa-layer primitives like APS, AgentNexus, and MolTrust handle issuance-side identity and delegation tokens carried by the agent; PIC handles receiver-side fail-closed verification at the action boundary, consuming trust roots that may include visa-layer issuers but owning the verdict primitive itself. Both compose; neither contains the other. The crosswalk landed describing PIC in PIC's own terms first, with the composition pattern documented in the notes block. PIC became the twenty-third crosswalk in the vocabulary registry. Resolution of the visa-vs-verification-gate taxonomy debate that had been open on aeoess/agent-governance-vocabulary#48 for two days.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/49">PR #49 (merged)</a></li></ul>
 </article>
+<article class="rm-item rm-item-done" id="d68-a2a-1786-cai-extension-proposal">
+<header class="rm-item-h">
+<h3 class="rm-item-title">A2A #1786: Cryptographic Agent Identity extension proposal opened</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 68</span> 
+<span class="rm-item-ws">Standards</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Proposal-phase issue opened at a2aproject/A2A per the documented extension-and-binding-governance.md Proposal Phase, requesting maintainer sponsorship to create the corresponding experimental-ext-* repository. Aligned to CTEF v0.3.1 substrate (frozen at agentgraph-co/agentgraph@69ad94d, normative endpoint at agentgraph.co/.well-known/cte-test-vectors.json). Declares claim_type discriminator over the closed set {identity, transport, authority, continuity} with envelope reserved, structural-before-semantic error codes (INVALID_CLAIM_SCOPE, INVALID_COMPOSITION), and uses A2A's existing AgentExtension mechanism (Section 4.4.4) with params carrying per-claim payload — no proto schema changes proposed. Reference URI experimental-ext prefixed: a2a-protocol.org/extensions/cryptographic-agent-identity/v0.3.1. Three correction loops before opening: 9KB extension manifesto rejected for size + wrong process (PR vs issue first), 100-line topic doc rejected for wrong surface (docs/topics/ is core protocol concepts not extension specs) and skipping proposal phase, third draft caught a 404 references link to the rotation-attestation directory before posting (test-vectors.json direct link replaced the 404 path). kenneives posted co-normative AgentGraph endorsement at the top of the thread within 4 minutes of opening including a four-way byte-match harness table. lawcontinue posted substantive question on validity_window for long-running inference sessions; reply confirmed APS already implements sequence_bound continuity, accepted contribution offer for distributed-inference test fixture against APS bilateral-delegation regression.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/a2aproject/A2A/issues/1786">Proposal issue #1786</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1672">#1672 design discussion</a></li><li><a href="https://agentgraph.co/.well-known/cte-test-vectors.json">CTEF v0.3.1 normative endpoint</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d68-autogen-jwks-kid-strict-match">
 <header class="rm-item-h">
 <h3 class="rm-item-title">autogen-governance-adapter: first external security contribution (pshkv PR #1 merged)</h3>
@@ -1275,6 +1335,18 @@ footer a:hover {
 </header>
 <p class="rm-item-desc">Seven fixes applied from the Apr 24 audit report. Code side: engines.node &gt;= 18.0.0 declared on six Node packages (agent-passport-mcp, aeoess-gateway, agent-passport-remote-mcp, mingle-mcp, intent-network-api, solana-agent-identity) to prevent silent Node-version drift on Railway and npm installers; LICENSE + NOTICE copied to agent-passport-remote-mcp root (files shipped through the npm dep tree already, but the repo itself should carry them for GitHub, SBOM, and glama audits); two SDK example files referencing v1-era APIs that changed in v2.0.0-beta.0 (examples/crewai-governance.ts invoking removed createCrewAIGovernance, examples/enforcement-demo.ts invoking createAgentContext that moved to the gateway surface) archived under _archive/examples-pre-v2/ with an explanatory README, so contributors following the docs no longer hit broken TypeScript imports; SDK dist/ refreshed against current src/. Spec side: audit prompt bumped from v2.1 to v2.3 with three corrections. v2.2 fixed A11 (remote-MCP build output moved from repo root to build/, check path updated), A13 (agent-governance-toolkit is a monorepo with no root package.json, step iterates packages/agent-*/ sub-trees), and added an explicit Python pip install -e exception to the read-only constraints block since pytest collection fails on ModuleNotFoundError without editable install. v2.3 replaced the C8 dist-staleness check which used find -newer against the dist/ directory's own mtime rather than the mtime of files inside it, producing a consistent false positive (audit reported 240 src files newer than dist/ even immediately after npm run build because directory mtime does not update on internal file rewrites). New check compares newest src/ file mtime against newest dist/ file mtime in Python. Next full audit now expected clean PASS. Completion report at specs/AUDIT-2026-04-24-FIXES.md.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/aeoess_web/blob/main/specs/AUDIT-2026-04-24-FIXES.md">Completion report</a></li><li><a href="https://github.com/aeoess/aeoess_web/blob/main/specs/cc-prompts/10-full-code-audit-v2.md">Audit spec v2.3</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d68-openclaw-49971-integration-surface">
+<header class="rm-item-h">
+<h3 class="rm-item-title">OpenClaw #49971 closed COMPLETED: integration surface defined as public plugin contract</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 68</span> 
+<span class="rm-item-ws">Comms</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">MoltyCel's RFC 'Native Agent Identity &amp; Trust Verification for OpenClaw' closed by maintainer steipete (Codex review) with stateReason: COMPLETED at 04:34Z. Ruling: trust providers (APS, MolTrust, AgentLair, AgentID, etc.) build on existing public hooks rather than a new core onAgentVerify. Five hooks cited at file/line precision against commit 45146913007d: before_install (src/plugins/hook-types.ts:635, runtime invocation at install-security-scan.runtime.ts:586) for skill install gating; before_tool_call (hook-types.ts:318) for per-action enforcement at the runtime tool-call gate; inbound_claim + message_received + before_dispatch (hook-message.types.ts:16) for inter-agent verification; gateway_start (server-startup-post-attach.ts:503) for self-verification on startup. SDK reference docs at docs.openclaw.ai/plugins/sdk-overview confirm these as supported public plugin contracts. This is an architectural answer not a soft punt — different from the openclaw#43705 showcase closure (route to ClawHub, no architectural commitment) — steipete did codebase work mapping the RFC requirements onto specific hook surfaces and committed them as public plugin API. Reframes the openclaw integration story: APS ships @aeoess/openclaw-trust-plugin as the integration artifact (not a core dependency) targeting at minimum before_install + before_tool_call + inbound_claim + gateway_start, calling gateway.aeoess.com/api/v1/public/trust/{agent_id} for per-agent JWS-signed trust attestation. ~200-300 line plugin, npm-publishable, README cites CTEF v0.3.1 substrate. Post acknowledgment to #49971 only after scaffold exists.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/openclaw/openclaw/issues/49971">#49971 closure</a></li><li><a href="https://docs.openclaw.ai/plugins/sdk-overview">OpenClaw plugin SDK reference</a></li></ul>
 </article>
 <article class="rm-item rm-item-done" id="d68-rotation-attestation-fixtures-v1">
 <header class="rm-item-h">
@@ -3377,7 +3449,7 @@ footer a:hover {
 <span class="rm-item-status">backlog</span>
 </p>
 </header>
-<p class="rm-item-desc">Commercial milestone: first tenant on the hosted gateway converts from free tier to paid (Production $299/mo or Enterprise $499/mo). Until this hits, gateway revenue is zero regardless of how much governance evidence the protocol generates. Portal + billing infrastructure is already live (Day 49-50 customer-ready work). Actual conversion is a sales-and-outreach motion, not a build motion. Tima's lane.</p>
+<p class="rm-item-desc">Commercial milestone: first tenant on the hosted gateway converts from free tier to paid (Team $99/mo or Enterprise $499/mo). Until this hits, gateway revenue is zero regardless of how much governance evidence the protocol generates. Portal + billing infrastructure is already live (Day 49-50 customer-ready work). Actual conversion is a sales-and-outreach motion, not a build motion. Tima's lane.</p>
 <p class="rm-item-deps"><strong>Depends on:</strong> <code>customer-ready-gateway</code></p>
 </article>
 <article class="rm-item rm-item-backlog" id="a2a-1713-dual-signature">
@@ -3474,7 +3546,7 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-other-no-status-declared-">
-<h2 class="rm-group-title">Other (no status declared) <span class="rm-group-count">(8)</span></h2>
+<h2 class="rm-group-title">Other (no status declared) <span class="rm-group-count">(10)</span></h2>
 <article class="rm-item rm-item-open" id="d75-vocab-73-self-enforced">
 <header class="rm-item-h">
 <h3 class="rm-item-title">Vocab issue #73: self_enforced proposed as fifth refusal_authority value</h3>
@@ -3498,6 +3570,18 @@ footer a:hover {
 </header>
 <p class="rm-item-desc">Per #64 thread three-issuer convergence, completion_ratio proposed as new canonical signal type with descriptor enforcement_class advisory, validity_temporal windowed, refusal_authority consumer_policy, invariant_survival post_action, replay_class fingerprint_only, governed_action_class delegate. Three production issuers cited: AgentID rolling 180d, APS configurable defaulting to 90d, RNWY derived 24h via peer_review. New constraint completion_ratio_method (signal_extension type) formalizes the strict-vs-quality-weighted choice with values [strict, quality_weighted] and default strict. Tagged Harold Frimpong (AgentID) and Douglas Borthwick for review.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/72">PR #72</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/64">Issue #64 thread</a></li></ul>
+</article>
+<article class="rm-item rm-item-dropped" id="d73-intoto-svr-extension-go">
+<header class="rm-item-h">
+<h3 class="rm-item-title">in-toto SVR extension Go decision</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 73</span> 
+<span class="rm-item-ws">Ecosystem</span> 
+<span class="rm-item-status">dropped</span>
+</p>
+</header>
+<p class="rm-item-desc">Path forward for governance attestation as an in-toto SVR extension scoped. Worked-example draft underway in private workspace at INTOTO-SVR-EXAMPLE-DRAFT/. Two artifacts: agent-governance-svr-extension.md (~200 LOC) plus agent-governance-svr-extension.json (~80 LOC). Single-SVR shape per maintainer framing; two-SVR variant flagged as open question for May 1 meeting. May 1 CNCF #in-toto-attestations meeting attendance committed (per Apr 28 PR #549 comment). Bilateral byte-match track with marcelamelara holds in parallel. aeoess/governance-attestation-predicate stays canonical. [DROPPED 2026-05-11: PR #549 closed unmerged 2026-04-28. No active aeoess activity on in-toto since. governance-attestation-predicate stays canonical at aeoess.]</p>
+<ul class="rm-item-links"><li><a href="https://github.com/in-toto/attestation/pull/549">in-toto PR #549</a></li></ul>
 </article>
 <article class="rm-item rm-item-unspecified" id="d72-atvp-pr-8-request-changes">
 <header class="rm-item-h">
@@ -3564,6 +3648,18 @@ footer a:hover {
 </p>
 </header>
 <p class="rm-item-desc">piiiico added trust_verify (POST /v1/trust/verify) to AgentLair's behavioral_trust.endpoints block, a third surface alongside trust_profile and trust_gate that accepts an AAT JWT directly without requiring a resolved agentId path parameter. Endpoint verified live with proper structured 401 (HSTS, CSP, JSON content-type, 112-byte error body — production gateway behavior). 5-gate review passed clean.</p>
+</article>
+<article class="rm-item rm-item-dropped" id="d69-harness-pr-1-moltrust-resolver-adapter">
+<header class="rm-item-h">
+<h3 class="rm-item-title">a2a-compliance-harness PR #1: MolTrust optional resolver adapter (almost-merge, DRAFT)</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 69</span> 
+<span class="rm-item-ws">Ecosystem</span> 
+<span class="rm-item-status">dropped</span>
+</p>
+</header>
+<p class="rm-item-desc">MoltyCel published moltrust v0.2.0 to PyPI today, then opened a PR adding moltrust as an optional resolver adapter to the harness with a clean fallback path when the package is not installed. Thirteen tests pass on Python 3.12. Two minor asks from review (a docstring sharpening and a pytest.skip for the no-moltrust path), both acknowledged. Co-maintainer access granted on aeoess/a2a-compliance-harness with maintain permission tier (effective write per org base-permission cap). Once MoltyCel marks the PR ready for review on Monday, the merge is mechanical. MolTrust now positioned as a drop-in second-issuer reference under the harness's resolver interface; the harness was originally shipped as APS-only on Apr 21 (a2a-compliance-harness v0.1). Three weeks of cycle: schema lock (Apr 17 a2aproject/A2A#1742), v0.1 single-issuer ship (Apr 21), second-issuer drop-in (Apr 25). [DROPPED 2026-05-03 per CTO call. MoltyCel harness#1 stays on inbound-only watch list. No active integration work.]</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/a2a-compliance-harness/pull/1">PR #1 (DRAFT, awaiting mark-ready)</a></li></ul>
 </article>
 </section>
 </div>

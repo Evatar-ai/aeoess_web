@@ -1,7 +1,68 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-08 (Day 81). First external PR on aivss-enforcement-effectiveness merged byte-match verified (VeloGerber race-test fixture, c5f62c9). Four-signal interop compose locked with three production implementers: AgentID trust_verification chain root, PDR continuity closing attestation by May 22, Nobulex byte-match verifier. Pre-press-launch sweep landed across 7 public files; propagate.mjs hardened to catch npm @-syntax + pip ==-syntax + prose forms. og-default.png 1200x630 social card shipped + meta tags swept across 27 pages. /media.html press kit page rebuilt from redirect stub.
+# Last updated: 2026-05-11 (Day 84). Press launch eve. Budget-authority crosswalk v0.1 (PR #91) opened with six canonical verbs and per-verb candidate/proposed status, amavashev approved cycles column after two corrections. A2A#1829 four-way alignment landed across jschoemaker (byte-match verification), kenneives (v0.3.3 working-doc hosting), arian-gogani (canonicalization stance). SSRN approved five APS research papers. Roadmap drift cleanup: eight items flipped (six to done, two to dropped). media.html press kit expanded with five new sections. Klaimee (YC P26) partnership outreach sent.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 84 — 2026-05-11 ═══
+
+- id: d84-pr-91-budget-authority-crosswalk-amavashev-approved
+  title: "PR #91 budget_authority.yaml v0.1 opens at vocab repo, amavashev approved"
+  description: "First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B Consilium pass complete (three-engine + adversarial Phase 2). Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation."
+  status: in_progress
+  workstream: vocab
+  day_start: 84
+  day_end: 84
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/91"
+      label: "PR #91"
+    - url: "https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231"
+      label: "ACP#231 public commitment"
+
+- id: d84-a2a-1829-four-way-convergence
+  title: "A2A#1829 four-way alignment: byte-match verification, v0.3.3 hosting, canonicalization stance"
+  description: "Three substantive maintainer posts landed on A2A#1829 the same evening. jschoemaker (Envoys SDK) independently byte-match verified our envoys-rfc9421 composition fixture against §13 Vector 2, confirmed the §13 keypair is cross-impl-deliberate, and endorsed Hippo (lawcontinue/hippo-auth) landing as a sibling at aps-conformance-suite/fixtures/composition/hippo-rfc9421/. kenneives (AgentGraph PDR/CTEF) committed to hosting the v0.3.3 shared working doc at agentgraph-co/agentgraph/docs/standards/v0.3.3-working-doc.md with three artifact slots (envelope-shape diff, unified error enum, cross-extension fixture matrix). arian-gogani (Nobulex) confirmed the canonicalization stance: JCS + numeric profile, no floats in canonical hash scope, semantic equivalence at tool-version layer not chain layer. APS reply landed same evening acking all three, refining the five-layer composition framing to per-receipt-type layer attribution (delegation_receipt at authority, bilateral_receipt at envelope, rotation-attestation at continuity). spending_authorization claim subtype response committed for May 18."
+  status: in_progress
+  workstream: standards
+  day_start: 84
+  day_end: 84
+  links:
+    - url: "https://github.com/a2aproject/A2A/issues/1829"
+      label: "A2A#1829"
+
+- id: d84-ssrn-five-papers-approved
+  title: "SSRN approves five APS research papers for academic indexing"
+  description: "Email notification from SSRN confirms five papers cleared review and entered the academic indexing pipeline. Each paper routed to five-to-six CS networks where reviewer audiences read: Artificial Intelligence eJournal, AI Law Policy & Ethics, Cybersecurity Privacy & Networks, Theoretical Computer Science, Quantum Information, Generative AI. Classifications are routing decisions. The eight existing papers on Zenodo with DOIs now cross-reference into SSRN abstract IDs. aeoess.com/research stays canonical."
+  status: done
+  workstream: research
+  day_start: 84
+  day_end: 84
+  links:
+    - url: "/research.html"
+      label: "Research index"
+
+- id: d84-media-html-press-kit-expanded
+  title: "media.html press kit expanded with five new sections for State of Agent Security launch"
+  description: "Pre-press-launch expansion of /media.html with five additional sections matching the existing contact-row design pattern. Problem we solve (one-paragraph framing of the verifiability gap APS closes). Recent coverage (State of Agent Security 2026 reference with embargoed-quotes contact). Standards body work (IETF Internet-Draft, AAIF #14 in Linux Foundation CA review, A2A #1786 + #1829, OWASP AIVSS #31, agent-governance-vocabulary, OpenSSF / ACP / DIF). Business model (open protocol + commercial gateway, Team tier $99/mo pointer). Recent milestones (nine dated milestones from May 3-12, 2026). Total page now 12 sections, 262 lines. og-default.png verified live at 1200×630 HTTP 200. All numbers verified against current canonical values."
+  status: done
+  workstream: infra
+  day_start: 84
+  day_end: 84
+  links:
+    - url: "/media.html"
+      label: "Press kit"
+
+- id: d84-roadmap-drift-cleanup-two-commits
+  title: "Roadmap drift cleanup: eight items flipped across two commits"
+  description: "Pre-press-launch audit caught drift between closed-work tracking and roadmap status fields. Commit 6b739db flipped five items to done (coinbase-crewai cross-pollination, vocab system_attributes wave, A2A#1786 byte-match ack, A2A#1786 CAI extension proposal, openclaw#49971 integration surface) plus one to dropped (MoltyCel harness#1 resolver adapter per Day 77 CTO call). Commit a436374 flipped two more done (SSRN five-paper approval, vocab #58 epoch enum) plus one to dropped (in-toto SVR PR #549 closed unmerged April 28, no aeoess activity in 30 days). Counts moved from 194/19/0 to 201/11/2 across done/in_progress/dropped. Closes the 'filed at audit-time, never updated at ship-time' drift pattern."
+  status: done
+  workstream: ops
+  day_start: 84
+  day_end: 84
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/commit/6b739db"
+      label: "First cleanup commit"
+    - url: "https://github.com/aeoess/aeoess_web/commit/a436374"
+      label: "Second cleanup commit"
 
 # ═══ DAY 81 — 2026-05-08 ═══
 
