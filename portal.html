@@ -14539,8 +14539,11 @@ footer a:hover {
       return bar;
     }
 
-    function setStatus(kind, msg) {
-      var bar = statusBar(); if (!bar) return;
+    // C6: setStatus is now safe-by-default (textContent). For call sites
+    // that need anchor tags or other markup, use setStatusHTML — and the
+    // caller MUST esc() any interpolated untrusted data (res.body.error etc.).
+    function _paintStatusBar(kind) {
+      var bar = statusBar(); if (!bar) return null;
       var colors = {
         info:    { bg: 'rgb(30,40,55)',  fg: 'rgb(178,206,236)', bd: 'rgb(58,82,116)' },
         success: { bg: 'rgb(28,46,38)',  fg: 'rgb(168,224,184)', bd: 'rgb(58,108,80)' },
@@ -14551,7 +14554,15 @@ footer a:hover {
       bar.style.color = c.fg;
       bar.style.border = '1px solid ' + c.bd;
       bar.style.display = 'block';
-      bar.innerHTML = msg;
+      return bar;
+    }
+    function setStatus(kind, msg) {
+      var bar = _paintStatusBar(kind); if (!bar) return;
+      bar.textContent = msg == null ? '' : String(msg);
+    }
+    function setStatusHTML(kind, html) {
+      var bar = _paintStatusBar(kind); if (!bar) return;
+      bar.innerHTML = html;
     }
 
     // Mode: 'signin' (default) or 'signup'. Toggle via the small link
@@ -14680,12 +14691,20 @@ footer a:hover {
         }).then(function(r) { return r.json().then(function(j) { return { s: r.status, b: j }; }); })
           .then(function(res) {
             if (res.s === 200 && res.b.url) {
+              // C5: assert the redirect target is Stripe Checkout (or our own portal-return).
+              // The gateway constructs these URLs, but defense-in-depth: never blindly follow
+              // an arbitrary URL from JSON into window.location.href.
+              if (!/^https:\/\/checkout\.stripe\.com\//.test(res.b.url) &&
+                  !/^https:\/\/billing\.stripe\.com\//.test(res.b.url)) {
+                setStatus('error', 'Suspicious redirect blocked. Email signal@aeoess.com — this should never happen.');
+                return;
+              }
               window.location.href = res.b.url; // off to Stripe Checkout
             } else if (res.s === 503) {
-              setStatus('error', 'Billing not configured yet. Email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a> to upgrade manually.');
+              setStatusHTML('error', 'Billing not configured yet. Email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a> to upgrade manually.');
               setTimeout(function() { window.location.href = '/dashboard.html#welcome=' + encodeURIComponent(body.api_key); }, 3000);
             } else {
-              setStatus('error', 'Could not start checkout: ' + ((res.b && res.b.error) || 'unknown') + '. Continuing to dashboard.');
+              setStatus('error', 'Could not start checkout: ' + ((res.b && res.b.error) || 'unknown') + '. Continuing to dashboard.'); // setStatus is textContent-safe; raw interpolation is fine here
               setTimeout(function() { window.location.href = '/dashboard.html#welcome=' + encodeURIComponent(body.api_key); }, 2500);
             }
           }).catch(function() {
@@ -14718,7 +14737,7 @@ footer a:hover {
           return;
         }
         if (upgrade === 'cancelled') {
-          setStatus('info', 'Checkout cancelled. You are still on the Free plan. Try again any time from <a href="/pricing.html" style="color:inherit;text-decoration:underline;">pricing</a>.');
+          setStatusHTML('info', 'Checkout cancelled. You are still on the Free plan. Try again any time from <a href="/pricing.html" style="color:inherit;text-decoration:underline;">pricing</a>.');
           try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
           return;
         }
@@ -14739,18 +14758,24 @@ footer a:hover {
             }).then(function(r) { return r.json().then(function(j) { return { s: r.status, b: j }; }); })
               .then(function(res) {
                 if (res.s === 200 && res.b.url) {
+                  // C5: assert the redirect target is Stripe Checkout/Billing before redirecting.
+                  if (!/^https:\/\/checkout\.stripe\.com\//.test(res.b.url) &&
+                      !/^https:\/\/billing\.stripe\.com\//.test(res.b.url)) {
+                    setStatus('error', 'Suspicious redirect blocked. Email signal@aeoess.com — this should never happen.');
+                    return;
+                  }
                   window.location.href = res.b.url;
                 } else if (res.s === 401) {
                   // Stored key invalid — clear and let them sign in again.
                   try { localStorage.removeItem('aps_api_key'); } catch(e) {}
                   setStatus('error', 'Your sign-in expired. Enter your email below to continue to checkout.');
                 } else if (res.s === 503) {
-                  setStatus('error', 'Billing is not configured yet. Email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a> to upgrade.');
+                  setStatusHTML('error', 'Billing is not configured yet. Email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a> to upgrade.');
                 } else if (res.s === 400 && res.b && res.b.error && /already on/i.test(res.b.error)) {
                   setStatus('info', 'You are already on the ' + planLabel + ' plan. Heading to dashboard…');
                   setTimeout(function() { window.location.href = '/dashboard.html'; }, 1500);
                 } else {
-                  setStatus('error', 'Could not start checkout: ' + ((res.b && res.b.error) || 'unknown') + '. Email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a> if this persists.');
+                  setStatusHTML('error', 'Could not start checkout: ' + esc((res.b && res.b.error) || 'unknown') + '. Email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a> if this persists.');
                 }
               }).catch(function() {
                 setStatus('error', 'Network error reaching billing. Please retry.');
@@ -14793,7 +14818,7 @@ footer a:hover {
               : 'Signed in. Redirecting to your dashboard…'
           );
         } else if (res.status === 409) {
-          setStatus('info', 'This email already has an account. <a id="aps-switch-to-signin" href="#" style="color:inherit;text-decoration:underline;">Sign in instead →</a>');
+          setStatusHTML('info', 'This email already has an account. <a id="aps-switch-to-signin" href="#" style="color:inherit;text-decoration:underline;">Sign in instead →</a>');
           var sw = document.getElementById('aps-switch-to-signin');
           if (sw) sw.addEventListener('click', function(e) { e.preventDefault(); document.getElementById('aps-mode-toggle').click(); });
         } else if (res.status === 401) {
@@ -14805,7 +14830,7 @@ footer a:hover {
         } else if (res.status === 400) {
           setStatus('error', (res.body && res.body.error) || 'Check your input and try again.');
         } else {
-          setStatus('error', 'Auth failed: ' + ((res.body && res.body.error) || 'Unknown error') + '. Try again or email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a>.');
+          setStatusHTML('error', 'Auth failed: ' + esc((res.body && res.body.error) || 'Unknown error') + '. Try again or email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a>.');
         }
       }).catch(function(err) {
         setStatus('error', 'Could not reach the gateway. Check your connection and try again.');
@@ -14972,7 +14997,7 @@ footer a:hover {
         var params = new URLSearchParams(window.location.search);
         var err = params.get('auth_error');
         if (err) {
-          setStatus('error', esc(err) + '. Try email signup or contact <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a>.');
+          setStatusHTML('error', esc(err) + '. Try email signup or contact <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a>.');
           // Clean URL so reload doesn't re-display
           try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
         }

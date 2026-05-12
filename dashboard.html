@@ -374,6 +374,13 @@
         .then(res => {
           setBusy(false);
           if (res.s === 200 && res.b.url) {
+            // C5: assert the redirect target is Stripe Checkout/Billing before redirecting.
+            // Defense-in-depth: never follow an arbitrary URL from JSON into window.location.href.
+            if (!/^https:\/\/checkout\.stripe\.com\//.test(res.b.url) &&
+                !/^https:\/\/billing\.stripe\.com\//.test(res.b.url)) {
+              showToast('Suspicious redirect blocked. Email signal@aeoess.com.', 'error');
+              return;
+            }
             window.location.href = res.b.url;
           } else if (res.s === 503) {
             showToast('Billing not configured yet. Email signal@aeoess.com to upgrade.', 'error');
