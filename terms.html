@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Terms of Service — AEOESS</title>
+  <meta name="description" content="AEOESS Terms of Service. The terms that govern access to and use of the Agent Passport System hosted gateway, the SDK, and related services.">
+  <link rel="canonical" href="https://aeoess.com/terms.html">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="/assets/images/aeoess_logo-05.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #1c1c1e; color: #ececec;
+      font-family: "Inter", -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+    a { color: #7cacde; text-decoration: none; }
+    a:hover { color: #a0c8f0; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+    header.site { border-bottom: 1px solid #2e2e32; background: #242426; position: sticky; top: 0; z-index: 5; backdrop-filter: blur(8px); }
+    header.site .inner { display: flex; align-items: center; gap: 24px; padding: 14px 40px; max-width: 1280px; margin: 0 auto; }
+    header.site .brand { display: flex; align-items: center; gap: 8px; color: #ececec; }
+    header.site .brand img { height: 24px; }
+    header.site nav { display: flex; align-items: center; gap: 24px; font-size: 13px; color: #b0b0b0; margin-left: 8px; }
+    header.site nav a { color: #b0b0b0; }
+    main { max-width: 820px; margin: 0 auto; padding: 56px 40px 96px; font-size: 14.5px; color: #cccccc; }
+    h1 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; color: #ececec; margin: 0; }
+    .lede { color: #b0b0b0; font-size: 16px; margin-top: 12px; }
+    .meta { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; color: #5a5a5e; letter-spacing: 0.08em; text-transform: uppercase; margin: 28px 0 40px; }
+    h2 { font-size: 19px; font-weight: 600; color: #ececec; margin: 40px 0 12px; letter-spacing: -0.005em; }
+    h2 .num { color: #5a5a5e; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-weight: 500; margin-right: 10px; }
+    h3 { font-size: 15.5px; font-weight: 600; color: #dddddd; margin: 24px 0 8px; }
+    p { margin: 10px 0; }
+    ul, ol { padding-left: 22px; margin: 10px 0; }
+    li { margin: 6px 0; }
+    .all-caps { text-transform: uppercase; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 13.5px; }
+    .draft-banner { padding: 14px 18px; background: rgba(245,158,11,0.10); border: 1px solid #f59e0b; color: #f5cd7a; border-radius: 6px; font-size: 13px; margin-top: 24px; }
+    .toc { background: #242426; border: 1px solid #2e2e32; border-radius: 8px; padding: 18px 22px; margin: 24px 0 40px; }
+    .toc-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8a8e; font-weight: 600; margin-bottom: 10px; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+    .toc ol { columns: 2; column-gap: 24px; margin: 0; padding-left: 22px; font-size: 13.5px; }
+    .toc a { color: #dddddd; }
+    .toc li { margin: 4px 0; }
+    footer.site { border-top: 1px solid #2e2e32; background: #242426; color: #8a8a8e; font-size: 12px; padding: 24px 40px; text-align: center; }
+    footer.site a { color: #b0b0b0; }
+    @media (max-width: 720px) {
+      main { padding: 40px 20px 80px; }
+      .toc ol { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site">
+  <div class="inner">
+    <a href="/" class="brand">
+      <img src="/assets/images/aeoess_logo-05.png" alt="AEOESS">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.04em;">AEOESS</span>
+    </a>
+    <nav>
+      <a href="/passport.html">Spec</a>
+      <a href="/docs.html">Docs</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Terms of Service</h1>
+  <p class="lede">The agreement between you and AEOESS, Inc. for use of the Agent Passport System hosted gateway, the SDK, the website, and related services.</p>
+  <div class="meta">Effective date · 2026-05-12 · Version 1.0 (draft)</div>
+
+  <div class="draft-banner">
+    <strong>Draft for legal review.</strong> These terms describe the agreement we intend to enter into with you. A final version will be reviewed and ratified by counsel before being relied on in litigation, audit, or against any third party.
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#accept">Acceptance</a></li>
+      <li><a href="#service">The Service</a></li>
+      <li><a href="#accounts">Accounts and authentication</a></li>
+      <li><a href="#plans">Plans, payment, and renewal</a></li>
+      <li><a href="#aup">Acceptable use</a></li>
+      <li><a href="#customer-data">Customer data and license to us</a></li>
+      <li><a href="#our-ip">Our intellectual property; open source</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#third-party">Third-party services</a></li>
+      <li><a href="#availability">Availability and modifications</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#warranties">Warranties and disclaimers</a></li>
+      <li><a href="#liability">Limitation of liability</a></li>
+      <li><a href="#indemnity">Indemnification</a></li>
+      <li><a href="#export">Export, sanctions, and government use</a></li>
+      <li><a href="#disputes">Governing law and disputes</a></li>
+      <li><a href="#general">General</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <h2 id="accept"><span class="num">1.</span>Acceptance of these terms</h2>
+  <p>
+    These Terms of Service (the “Terms”) form a binding agreement between
+    AEOESS, Inc., a Delaware corporation (“AEOESS”, “we”, “us”), and the
+    person or entity accessing the Service (“you”, “Customer”). By creating
+    an account, by clicking a button labelled “I agree”, “Sign up”, or
+    similar, or by accessing or using the Service, you agree to be bound by
+    these Terms and by our <a href="/privacy.html">Privacy Policy</a>. If
+    you are entering into these Terms on behalf of an organisation, you
+    represent that you have authority to bind that organisation, and
+    “Customer” refers to that organisation.
+  </p>
+  <p>
+    If you do not agree, do not access or use the Service.
+  </p>
+
+  <h2 id="service"><span class="num">2.</span>The Service</h2>
+  <p>
+    The Service consists of: (a) the hosted Agent Passport System gateway
+    operated by AEOESS at <span class="mono">gateway.aeoess.com</span>;
+    (b) the AEOESS website at <span class="mono">aeoess.com</span>;
+    (c) the AEOESS Model Context Protocol (“MCP”) server;
+    (d) software development kits and command-line tools distributed by
+    AEOESS; and (e) any associated documentation, dashboards, and
+    customer-support channels. We may add to, remove from, or modify the
+    Service from time to time.
+  </p>
+  <p>
+    The underlying Agent Passport System protocol specification and the
+    reference SDK source code are made available separately under the
+    Apache License 2.0; see section 7.
+  </p>
+
+  <h2 id="accounts"><span class="num">3.</span>Accounts and authentication</h2>
+  <p>To use the Service you must create an account. You agree to:</p>
+  <ul>
+    <li>provide accurate and current account information;</li>
+    <li>keep your password and API keys confidential, and use reasonable measures (rotation, scoping, hardware security keys for sensitive workflows) to protect them;</li>
+    <li>be responsible for all activity that occurs under your account, whether or not authorised by you, until you notify us of compromise;</li>
+    <li>be at least 18 years old, or the age of contractual majority in your jurisdiction, and not be a prohibited person under section 15; and</li>
+    <li>ensure each individual using your account does so only as a representative of you and is bound by these Terms.</li>
+  </ul>
+  <p>
+    If you suspect any unauthorised use of your account, you must rotate the affected credentials immediately and notify us at <a href="mailto:security@aeoess.com">security@aeoess.com</a>.
+  </p>
+
+  <h2 id="plans"><span class="num">4.</span>Plans, payment, and renewal</h2>
+
+  <h3>4.1 Plan tiers</h3>
+  <p>
+    The Service is offered in plan tiers (currently <em>Open Source</em>,
+    <em>Production</em>, and <em>Enterprise</em>) with the limits and
+    features described at <a href="/pricing.html">aeoess.com/pricing</a>.
+    AEOESS may add, modify, or retire tiers, subject to your right to
+    terminate as set out in section 11.
+  </p>
+
+  <h3>4.2 Fees and billing</h3>
+  <p>
+    Production subscriptions are billed monthly or annually in advance, in
+    US dollars, via our payment processor Stripe. By providing a payment
+    method, you authorise AEOESS to charge applicable fees, taxes, and any
+    metered overage. Fees are non-refundable except as expressly stated in
+    these Terms or required by law.
+  </p>
+
+  <h3>4.3 Renewal</h3>
+  <p>
+    Subscriptions auto-renew for successive periods of the same length
+    unless you cancel before the renewal date. Cancellation takes effect
+    at the end of the then-current billing period; no prorated refund is
+    issued for partial periods.
+  </p>
+
+  <h3>4.4 Price changes</h3>
+  <p>
+    We may change list prices for new subscriptions at any time. Price
+    changes affecting an existing subscription will be communicated at
+    least 30 days in advance and will take effect at the next renewal.
+  </p>
+
+  <h3>4.5 Taxes</h3>
+  <p>
+    Fees are exclusive of taxes. You are responsible for sales, use,
+    value-added, and similar taxes other than taxes based on AEOESS’s net
+    income. Where required, we collect and remit such taxes through
+    Stripe Tax.
+  </p>
+
+  <h3>4.6 Plan limits and overage</h3>
+  <p>
+    Each plan tier has limits on active agents, monthly policy
+    evaluations, and retention duration as described at the time of
+    purchase. The Service may enforce these limits in real time
+    (e.g. by returning an error to a request that would exceed a hard
+    cap) and/or report overage on your invoice. You agree that AEOESS
+    is entitled to apply these limits without prior individual notice
+    beyond the published plan terms.
+  </p>
+
+  <h2 id="aup"><span class="num">5.</span>Acceptable use</h2>
+  <p>You may use the Service only for lawful purposes. You must not:</p>
+  <ul>
+    <li>use the Service to develop, train, or operate agents intended to harm individuals, infrastructure, or markets;</li>
+    <li>use the Service to facilitate fraud, money laundering, sanctions evasion, or any other illegal activity;</li>
+    <li>attempt to reverse engineer, decompile, or extract proprietary components of the hosted Service, except where this restriction is prohibited by applicable law or by the open-source license under which a given component is published;</li>
+    <li>circumvent or attempt to circumvent any rate limit, plan cap, authentication, or billing mechanism;</li>
+    <li>upload malware, conduct denial-of-service activity, or run automated traffic intended to overload the Service;</li>
+    <li>misrepresent agent identity, forge governance receipts, or impersonate another tenant;</li>
+    <li>scrape personal data of other users, infer membership of other tenants, or otherwise violate the privacy of others on the Service;</li>
+    <li>use the Service in any way that violates the rights of any third party, including intellectual property, privacy, or contract rights; or</li>
+    <li>resell, sublicense, or operate the hosted Service as a service to third parties without our written authorisation.</li>
+  </ul>
+  <p>
+    AEOESS may suspend or terminate accounts that engage in prohibited
+    use, and may report violations to law-enforcement or regulators
+    where appropriate. Where suspension is preventative (e.g. credible
+    compromise), we will make reasonable efforts to notify you and to
+    restore access once the issue is resolved.
+  </p>
+
+  <h2 id="customer-data"><span class="num">6.</span>Customer data and license to us</h2>
+  <p>
+    “Customer Data” means the agent identifiers, delegations, policy
+    inputs, evaluation results, receipts, and other content you submit to
+    the Service. As between you and AEOESS, Customer Data is and remains
+    yours.
+  </p>
+  <p>
+    You grant AEOESS a worldwide, non-exclusive, royalty-free license to
+    host, transmit, process, sign, store, back up, and display Customer
+    Data solely as necessary to provide the Service to you and to comply
+    with law. We will not use Customer Data to train machine-learning
+    models, to enrich third-party datasets, or for any purpose unrelated
+    to providing the Service.
+  </p>
+  <p>
+    You represent and warrant that you have all rights necessary to grant
+    this license and that Customer Data does not infringe the rights of
+    any third party.
+  </p>
+
+  <h2 id="our-ip"><span class="num">7.</span>Our intellectual property and the open-source protocol</h2>
+  <p>
+    The Agent Passport System protocol specification, the reference SDKs
+    in TypeScript and Python, and the MCP server reference implementation
+    are published by AEOESS under the Apache License, Version 2.0. Use of
+    those components is governed by that license; nothing in these Terms
+    grants you fewer rights than the Apache License grants you to those
+    open-source components.
+  </p>
+  <p>
+    Other components of the Service — including the hosted gateway
+    backend, the dashboard, the MCP coordination layer where applicable,
+    branding, and the AEOESS name and logos — are proprietary to AEOESS
+    and licensed to you under section 7.2.
+  </p>
+
+  <h3>7.2 License grant to you (hosted Service)</h3>
+  <p>
+    Subject to your compliance with these Terms and payment of applicable
+    fees, AEOESS grants you a limited, non-exclusive, non-transferable,
+    revocable license to access and use the hosted Service for your
+    internal business purposes during the subscription term.
+  </p>
+
+  <h3>7.3 Restrictions</h3>
+  <p>
+    You will not: (a) copy or modify the hosted Service except as
+    permitted by section 7.1 for the open-source components; (b)
+    sublicense or resell the hosted Service; (c) use the hosted Service
+    to build a competing offering of equivalent function; or (d) remove
+    proprietary notices from any portion of the Service.
+  </p>
+
+  <h2 id="feedback"><span class="num">8.</span>Feedback</h2>
+  <p>
+    If you provide AEOESS feedback or suggestions about the Service, you
+    grant AEOESS a perpetual, irrevocable, royalty-free, worldwide license
+    to use that feedback to improve the Service. We are not obligated to
+    treat feedback as confidential.
+  </p>
+
+  <h2 id="third-party"><span class="num">9.</span>Third-party services</h2>
+  <p>
+    The Service integrates with third-party services (Stripe for billing,
+    Resend for email delivery, GitHub for authentication, Railway for
+    hosting, Cloudflare for DNS and routing, and others) under those
+    parties’ own terms. AEOESS is not responsible for outages, errors,
+    data practices, or terms of those third-party services. If a
+    third-party service stops functioning or changes its terms in a way
+    that materially affects the Service, we will use reasonable efforts
+    to find an equivalent.
+  </p>
+
+  <h2 id="availability"><span class="num">10.</span>Availability, support, and modifications</h2>
+  <p>
+    AEOESS uses commercially reasonable efforts to keep the hosted Service
+    available, but availability is not guaranteed except where a separate
+    written service-level agreement (SLA) has been signed with you. We may
+    perform planned maintenance; where reasonably practicable, we will
+    give advance notice via the website, the dashboard, or email.
+  </p>
+  <p>
+    AEOESS may modify the Service, including adding or removing features,
+    so long as the core enforcement and receipt functions promised by your
+    plan continue to operate. Material adverse changes affecting paid
+    plans will be announced at least 30 days in advance, and you may
+    terminate in response under section 11.
+  </p>
+  <p>
+    Production-tier customers receive support during business hours via
+    email at <a href="mailto:signal@aeoess.com">signal@aeoess.com</a>.
+    Enterprise customers receive the support model agreed in their order
+    form.
+  </p>
+
+  <h2 id="termination"><span class="num">11.</span>Termination</h2>
+  <p>
+    Either party may terminate the subscription at any time. Your
+    termination takes effect at the end of the current billing period.
+    Termination by AEOESS for convenience also takes effect at the end of
+    the current billing period and we will refund any prepaid fees for
+    periods after termination.
+  </p>
+  <p>
+    AEOESS may suspend or terminate immediately, with notice where
+    reasonably practicable, if you (a) materially breach these Terms and
+    do not cure the breach within 10 days of notice; (b) misuse the
+    Service in a way that creates risk for AEOESS, other customers, or
+    third parties; (c) fail to pay fees when due and do not cure within
+    10 days of notice; or (d) are subject to bankruptcy or insolvency.
+  </p>
+  <p>
+    On termination, your right to access the Service ends. We will,
+    on request and where technically feasible, allow you to export
+    Customer Data within 30 days of termination. After that we may
+    delete Customer Data, subject to legal retention obligations and
+    backup-rotation schedules described in the Privacy Policy.
+  </p>
+
+  <h2 id="warranties"><span class="num">12.</span>Warranties and disclaimers</h2>
+  <p>
+    AEOESS warrants that it will provide the Service using commercially
+    reasonable skill and care.
+  </p>
+  <p class="all-caps">
+    Except as expressly stated in these Terms or in a separate written
+    agreement, the Service is provided “as is” and “as available”.
+    AEOESS disclaims all other warranties, express or implied, including
+    warranties of merchantability, fitness for a particular purpose,
+    non-infringement, and any warranty arising from course of dealing or
+    usage of trade. AEOESS does not warrant that the Service will be
+    uninterrupted, error-free, or that any defects will be corrected.
+  </p>
+
+  <h2 id="liability"><span class="num">13.</span>Limitation of liability</h2>
+  <p class="all-caps">
+    To the maximum extent permitted by law, in no event will AEOESS or its
+    suppliers be liable for any indirect, incidental, special,
+    consequential, exemplary, or punitive damages, or for any loss of
+    profits, revenue, goodwill, data, or business opportunity, arising out
+    of or related to these Terms or the Service, even if advised of the
+    possibility of such damages.
+  </p>
+  <p class="all-caps">
+    AEOESS’s aggregate liability arising out of or related to these Terms
+    and the Service will not exceed the greater of (a) the fees paid by
+    you to AEOESS for the Service in the 12 months immediately preceding
+    the event giving rise to the claim, and (b) one hundred US dollars
+    (USD $100).
+  </p>
+  <p>
+    The limitations in this section apply regardless of the form of action
+    (contract, tort, statute, or otherwise) and survive termination. They
+    do not apply where prohibited by law (for example, for gross
+    negligence, fraud, or wilful misconduct, or for liability that cannot
+    be excluded under consumer-protection law).
+  </p>
+
+  <h2 id="indemnity"><span class="num">14.</span>Indemnification</h2>
+  <p>
+    You will defend, indemnify, and hold harmless AEOESS and its officers,
+    directors, employees, and agents from and against any third-party
+    claims, damages, liabilities, costs, and expenses (including
+    reasonable attorneys’ fees) arising out of: (a) your breach of these
+    Terms; (b) your violation of any law or third-party right; or (c) your
+    use of the Service in a manner not authorised by these Terms.
+  </p>
+  <p>
+    AEOESS will defend, indemnify, and hold harmless Customer from
+    third-party claims that the Service, as provided by AEOESS and used in
+    accordance with these Terms, infringes a third party’s intellectual
+    property rights, subject to (a) prompt written notice; (b) sole
+    control of the defence by AEOESS; and (c) reasonable cooperation by
+    Customer. AEOESS may at its option modify the Service to make it
+    non-infringing, procure rights for continued use, or terminate the
+    affected portion of the Service and refund any prepaid fees.
+  </p>
+
+  <h2 id="export"><span class="num">15.</span>Export, sanctions, and government use</h2>
+  <p>
+    The Service is subject to US export-control and sanctions laws. You
+    represent that you are not located in, or a national of, any country
+    subject to comprehensive US embargo, and that you are not on any US
+    Government denied-persons or specially designated nationals list. You
+    will not export, re-export, or use the Service in violation of
+    applicable law.
+  </p>
+  <p>
+    If the Service is acquired by or on behalf of the US Government, it
+    is provided as “commercial computer software” under FAR 12.212 and
+    DFARS 227.7202; use, duplication, and disclosure are subject to these
+    Terms.
+  </p>
+
+  <h2 id="disputes"><span class="num">16.</span>Governing law and dispute resolution</h2>
+  <p>
+    These Terms are governed by the laws of the State of Delaware, United
+    States, without regard to its conflict-of-laws rules. The UN
+    Convention on Contracts for the International Sale of Goods does not
+    apply.
+  </p>
+  <p>
+    The parties will first attempt to resolve any dispute informally by
+    contacting <a href="mailto:legal@aeoess.com">legal@aeoess.com</a>. If
+    a dispute cannot be resolved informally within 30 days, the parties
+    submit to the exclusive jurisdiction of the state and federal courts
+    located in New Castle County, Delaware, and waive any objection to
+    venue in those courts. Either party may seek injunctive relief in any
+    court of competent jurisdiction to protect its intellectual property
+    or confidential information.
+  </p>
+  <p>
+    Where binding arbitration becomes a final business decision after
+    legal review, this section will be replaced with a JAMS or AAA
+    arbitration clause with class-action waiver. Until then, the courts
+    in Delaware are the agreed forum.
+  </p>
+
+  <h2 id="general"><span class="num">17.</span>General</h2>
+  <ul>
+    <li><strong>Entire agreement.</strong> These Terms, the Privacy Policy, any order form or DPA, and any rate-card or limits page incorporated by reference are the entire agreement between you and AEOESS regarding the Service and supersede any prior agreement on the same subject.</li>
+    <li><strong>Order of precedence.</strong> If an order form conflicts with these Terms, the order form controls for the conflict. If a Data Processing Addendum is signed, it controls for the conflict on data-protection topics.</li>
+    <li><strong>Modifications.</strong> AEOESS may modify these Terms by posting an updated version and updating the “Effective date”. Material changes affecting paid plans will be announced at least 30 days in advance to the account-holder email on file. Continued use after the effective date constitutes acceptance.</li>
+    <li><strong>Assignment.</strong> You may not assign these Terms without AEOESS’s prior written consent, except to a successor by merger or acquisition that assumes the obligations. AEOESS may assign these Terms.</li>
+    <li><strong>Severability.</strong> If a provision is held unenforceable, the remainder will continue in full force.</li>
+    <li><strong>No waiver.</strong> Failure to enforce a right is not a waiver of it.</li>
+    <li><strong>Force majeure.</strong> Neither party is liable for failure to perform due to events outside its reasonable control.</li>
+    <li><strong>Notices.</strong> Notices to AEOESS must be sent to <a href="mailto:legal@aeoess.com">legal@aeoess.com</a>. Notices to you are deemed delivered when sent to the email address on file for your account.</li>
+    <li><strong>No third-party beneficiaries.</strong> There are no third-party beneficiaries.</li>
+    <li><strong>Survival.</strong> Sections 6 (Customer data), 7 (IP), 8 (Feedback), 12 (Warranty disclaimer), 13 (Liability), 14 (Indemnification), 16 (Governing law), and 17 (General) survive termination.</li>
+  </ul>
+
+  <h2 id="contact"><span class="num">18.</span>Contact</h2>
+  <p>
+    Legal notices: <a href="mailto:legal@aeoess.com">legal@aeoess.com</a><br/>
+    Security disclosures: <a href="mailto:security@aeoess.com">security@aeoess.com</a><br/>
+    Privacy requests: <a href="mailto:privacy@aeoess.com">privacy@aeoess.com</a><br/>
+    General contact: <a href="mailto:signal@aeoess.com">signal@aeoess.com</a>
+  </p>
+
+  <p style="margin-top:48px; padding-top:24px; border-top:1px solid #2e2e32; color:#8a8a8e; font-size:13px;">
+    See also: <a href="/privacy.html">Privacy Policy</a> · <a href="/portal.html">Portal</a> · <a href="/pricing.html">Pricing</a>
+  </p>
+</main>
+
+<footer class="site">
+  © 2026 AEOESS, Inc. · <a href="mailto:signal@aeoess.com">signal@aeoess.com</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a>
+</footer>
+
+</body>
+</html>

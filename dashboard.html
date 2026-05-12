@@ -321,16 +321,92 @@
     );
   }
 
-  function Stats({ usage, limits, onNav }) {
+  function Stats({ usage, limits, onNav, account, apiKey, showToast }) {
+    // Per-tile accent: orange ≥80%, red ≥100% (hard cap). max_agents=-1 / evaluations_per_month=-1 mean unlimited.
+    const agentPct = (limits.max_agents != null && limits.max_agents > 0)
+      ? Math.round(((usage.agents || 0) / limits.max_agents) * 100) : 0;
+    const evalPct  = (limits.evaluations_per_month != null && limits.evaluations_per_month > 0)
+      ? Math.round(((usage.evaluations_this_month || 0) / limits.evaluations_per_month) * 100) : 0;
+    const agentColor = agentPct >= 100 ? P.red : agentPct >= 80 ? P.amber : null;
+    const evalColor  = evalPct  >= 100 ? P.red : evalPct  >= 80 ? P.amber : null;
+
     return (
       <section style={{ padding:'24px 40px 12px' }}>
         <div style={{ maxWidth:1280, margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:16 }}>
-          <StatTile label="Agents"             value={fmtNum(usage.agents)}                 sub={'limit · ' + fmtLimit(limits.max_agents)}       onClick={() => onNav('agents')}/>
-          <StatTile label="Delegations"        value={fmtNum(usage.delegations)}            sub="active"                                          onClick={() => onNav('delegations')}/>
-          <StatTile label="Evals this month"   value={fmtNum(usage.evaluations_this_month)} sub={'limit · ' + fmtLimit(limits.evaluations_per_month)} onClick={() => onNav('live')}/>
-          <StatTile label="Signed receipts"    value={fmtNum(usage.receipts)}               sub="verifiable"                                      onClick={() => onNav('receipts')}/>
+          <StatTile label="Agents"             value={fmtNum(usage.agents)}                 sub={limits.max_agents === -1 ? 'unlimited' : (usage.agents || 0) + ' of ' + limits.max_agents + ' used'}            accent={agentColor} onClick={() => onNav('agents')}/>
+          <StatTile label="Delegations"        value={fmtNum(usage.delegations)}            sub="active"                                                                                                       onClick={() => onNav('delegations')}/>
+          <StatTile label="Evals this month"   value={fmtNum(usage.evaluations_this_month)} sub={limits.evaluations_per_month === -1 ? 'unlimited' : (usage.evaluations_this_month || 0) + ' of ' + limits.evaluations_per_month}  accent={evalColor}  onClick={() => onNav('live')}/>
+          <StatTile label="Signed receipts"    value={fmtNum(usage.receipts)}               sub="verifiable"                                                                                                   onClick={() => onNav('receipts')}/>
         </div>
+        {account && account.plan === 'free' ? <FreePlanBanner usage={usage} limits={limits} apiKey={apiKey} showToast={showToast} /> : null}
       </section>
+    );
+  }
+
+  // Free-plan upgrade banner. Shows different copy when limits are near/at hit.
+  // Clicking "Upgrade to Pro" calls /api/v1/billing/checkout and redirects to Stripe.
+  function FreePlanBanner({ usage, limits, apiKey, showToast }) {
+    const [busy, setBusy] = React.useState(false);
+    const agentPct = (limits.max_agents != null && limits.max_agents > 0)
+      ? ((usage.agents || 0) / limits.max_agents) : 0;
+    const evalPct  = (limits.evaluations_per_month != null && limits.evaluations_per_month > 0)
+      ? ((usage.evaluations_this_month || 0) / limits.evaluations_per_month) : 0;
+    const atLimit  = agentPct >= 1 || evalPct >= 1;
+    const nearLimit = !atLimit && (agentPct >= 0.8 || evalPct >= 0.8);
+
+    const tone = atLimit ? 'red' : nearLimit ? 'amber' : 'neutral';
+    const accent = tone === 'red' ? P.red : tone === 'amber' ? P.amber : P.ink3;
+    const bg     = tone === 'red' ? P.red + '12' : tone === 'amber' ? P.amber + '12' : P.surface;
+    const headline = atLimit
+      ? 'You have hit a Free-plan limit. New requests will be rejected until you upgrade.'
+      : nearLimit
+      ? 'You are approaching your Free-plan limit.'
+      : 'You are on the Free plan. 3 agents and 1,000 evaluations per month.';
+    const cta = atLimit ? 'Upgrade now →' : nearLimit ? 'Upgrade to Pro →' : 'See Pro & Enterprise →';
+
+    const onUpgrade = () => {
+      setBusy(true);
+      fetch(GATEWAY + '/api/v1/billing/checkout', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: 'pro' }),
+      }).then(r => r.json().then(j => ({ s: r.status, b: j })))
+        .then(res => {
+          setBusy(false);
+          if (res.s === 200 && res.b.url) {
+            window.location.href = res.b.url;
+          } else if (res.s === 503) {
+            showToast('Billing not configured yet. Email signal@aeoess.com to upgrade.', 'error');
+          } else {
+            showToast('Could not start checkout: ' + ((res.b && res.b.error) || 'unknown'), 'error');
+          }
+        }).catch(() => { setBusy(false); showToast('Network error reaching billing.', 'error'); });
+    };
+
+    return (
+      <div style={{ maxWidth:1280, margin:'14px auto 0', padding:'14px 18px',
+        background: bg, border: `1px solid ${accent}`, borderRadius:6,
+        display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+          <span style={{ width:8, height:8, borderRadius:'50%', background:accent, flexShrink:0 }}/>
+          <div>
+            <div style={{ fontSize:13.5, color: accent, fontWeight:600 }}>{headline}</div>
+            <div style={{ fontSize:12, color:P.ink3, marginTop:2 }}>
+              {atLimit
+                ? 'Pro is $299/month: 25 agents, 50,000 evaluations, 1-year audit retention.'
+                : 'Hard limits enforced by the gateway. Pro removes them: 25 agents, 50,000 evaluations, 1-year retention.'}
+            </div>
+          </div>
+        </div>
+        <button onClick={onUpgrade} disabled={busy}
+          style={{ padding:'9px 16px', fontSize:13, fontWeight:600, borderRadius:4,
+            background: tone === 'red' ? accent : 'transparent',
+            color: tone === 'red' ? '#fff' : accent,
+            border: `1px solid ${accent}`,
+            cursor: busy ? 'wait' : 'pointer' }}>
+          {busy ? 'Starting checkout…' : cta}
+        </button>
+      </div>
     );
   }
 
@@ -1442,7 +1518,7 @@ curl -X POST -H "Authorization: Bearer ${displayKey}" \\
         <Header tenant={account} onSignOut={onSignOut} active={active} onNav={onNav}/>
         <Hero account={account} envHealthy={envHealthy}/>
         <SetupChecklist account={account}/>
-        <Stats usage={usage} limits={limits} onNav={onNav}/>
+        <Stats usage={usage} limits={limits} onNav={onNav} account={account} apiKey={apiKey} showToast={showToast}/>
         <LiveSection apiKey={apiKey} envState={envState}/>
         <ConnectTabs apiKey={apiKey} showToast={showToast}/>
         <IntegrationsSection apiKey={apiKey}/>
