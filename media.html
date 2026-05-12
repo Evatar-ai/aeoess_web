@@ -87,6 +87,13 @@ footer a:hover {
   .logo-gallery {
     grid-template-columns: 1fr !important;
   }
+  .cmp-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .cmp-grid > div:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid rgb(46, 46, 50) !important;
+  }
 }
 </style>
   <!-- aps-jsonld-v1 -->
@@ -102,8 +109,8 @@ footer a:hover {
     <div style="max-width: 760px; margin: 0px auto;">
       <div style="font-size: 11.5px; letter-spacing: 0.14em; color: rgb(176, 176, 176); font-weight: 600; text-transform: uppercase; margin-bottom: 18px;">FOR JOURNALISTS</div>
       <h1 style="font-size: clamp(34px, 4.6vw, 54px); line-height: 1.05; letter-spacing: -0.025em; font-weight: 500; margin: 0px; color: rgb(236, 236, 236);">Press Kit</h1>
-      <p style="font-size: 19px; line-height: 1.5; color: rgb(221, 221, 221); margin: 22px 0 0; max-width: 640px; font-weight: 450;">An open protocol that lets companies prove what an AI agent was authorized to do, what policy was enforced, and what happened.</p>
-      <p style="font-size: 15.5px; line-height: 1.6; color: rgb(176, 176, 176); margin: 14px 0 0; max-width: 640px;">Press contact, key facts, logos, citations, coverage.</p>
+      <p style="font-size: 19px; line-height: 1.5; color: rgb(221, 221, 221); margin: 22px 0 0; max-width: 640px; font-weight: 450;">APS is to AI agents what TLS is to the web and PCI-DSS is to payments.</p>
+      <p style="font-size: 15.5px; line-height: 1.6; color: rgb(176, 176, 176); margin: 14px 0 0; max-width: 640px;">Enforcement of authority that only decreases. Cryptographic identity, scoped delegation, signed receipts on every action.</p>
     </div>
   </section>
 
@@ -136,37 +143,40 @@ footer a:hover {
       <div class="contact-row" style="display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid rgb(46, 46, 50); align-items: start;">
         <div style="font-size: 12.5px; letter-spacing: 0.06em; color: rgb(176, 176, 176); font-weight: 600; text-transform: uppercase; padding-top: 2px;">Short description</div>
         <div>
-          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">AEOESS builds Agent Passport System, an open protocol that lets companies prove what an AI agent was authorized to do, what policy was enforced, and what happened. APS provides cryptographic identity, scoped delegation, gateway enforcement and signed receipts for agent actions.</p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">Agent Passport System: accountability and enforcement for agents with a full receipt trail. Cryptographic identity, scoped delegation, signed receipts on every action, so you can prove what an agent was allowed to do and what it actually did.</p>
         </div>
       </div>
 
       <div class="contact-row" style="display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid rgb(46, 46, 50); align-items: start;">
         <div style="font-size: 12.5px; letter-spacing: 0.06em; color: rgb(176, 176, 176); font-weight: 600; text-transform: uppercase; padding-top: 2px;">Long description</div>
         <div>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">AI agents are beginning to act on behalf of people and companies. They access tools, move data, trigger workflows, spend money and interact with other agents. But when something goes wrong, most teams still cannot prove the basics: who authorized the agent, what it was allowed to do, whether that authority was still valid, and what policy was enforced at the moment of action.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">AEOESS builds Agent Passport System, an open protocol for verifiable agent authority.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">APS gives agents cryptographic identity, lets principals delegate authority with scopes that can only narrow, enforces policy at the gateway, and signs receipts for important agent actions. Those receipts create an evidence trail that can survive backend changes, vendor disputes, revocation questions and post-incident review.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">The goal is not to prove that an agent was "safe" or "correct." APS proves something narrower and more useful: whether an agent action was admissible under a known identity, delegation and policy at the time it happened.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">That makes APS useful for agent certification, agent insurance, compliance, regulated workflows and any environment where agents need to act across organizational boundaries.</p>
-          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">APS is open source and ships with TypeScript, Python and MCP tooling, with work across agent identity, delegation, enforcement, receipts and conformance.</p>
+          <p style="margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: rgb(221, 221, 221);">The Agent Passport System is an open protocol that answers a single question with cryptographic evidence: by what authority does this agent act, and how do we prove what happened? Every agent gets a passport. Every action runs through a gateway that checks the agent's delegation and signs a receipt that an auditor can verify without trusting us.</p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: rgb(221, 221, 221);">It is identity, scoped delegation, gateway enforcement, signed receipts, cascade revocation, attribution, commerce, coordination, and instruction provenance, in one composable protocol. The protocol is Apache 2.0 on npm, PyPI, and as an MCP server. The hosted gateway is the commercial layer, the analytics, the compliance automation, the moat.</p>
         </div>
       </div>
 
       <div class="contact-row" style="display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid rgb(46, 46, 50); align-items: start;">
         <div style="font-size: 12.5px; letter-spacing: 0.06em; color: rgb(176, 176, 176); font-weight: 600; text-transform: uppercase; padding-top: 2px;">Problem we solve</div>
         <div>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">AI agents are starting to take real actions for humans and companies, but the evidence layer is missing.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">Today, if an agent causes damage, leaks data, spends money or violates policy, most organizations are left with logs, vendor claims and screenshots. That is not enough for compliance teams, insurers, auditors or enterprise buyers.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">APS turns agent actions into verifiable evidence.</p>
-          <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">For every important action, APS can show who authorized the agent, what scope applied, whether authority was still valid, what policy was enforced at the boundary, and what decision was made. The result is a cryptographic receipt trail for agent authority and enforcement.</p>
-          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgb(221, 221, 221);">This is the substrate for agent certification, agent liability insurance and regulated agent deployment.</p>
+          <p style="margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: rgb(221, 221, 221);">The agent economy is here. AI agents represent companies and people. They spend real money, access sensitive data, negotiate contracts, close deals, and talk to other agents on behalf of their principals. <strong style="color: rgb(236, 236, 236); font-weight: 600;">No one can verify who they are. No one controls what they do. No one can shut them down when things go wrong.</strong></p>
+          <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: rgb(221, 221, 221);">When an incident lands and the vendor disputes the timeline, you have cryptographic evidence to adjudicate on, not just a static audit report from three months ago.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 0 0 4px; border: 1px solid rgb(46, 46, 50); border-radius: 6px; overflow: hidden;" class="cmp-grid">
+            <div style="padding: 16px 18px; border-right: 1px solid rgb(46, 46, 50); background: rgb(20, 20, 22);">
+              <div style="font-size: 10.5px; letter-spacing: 0.08em; color: rgb(214, 130, 130); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Today</div>
+              <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: rgb(176, 176, 176);">Agents act anonymously. No audit trail. No spending controls. Revocation means shutting everything down. You find out after the damage.</p>
+            </div>
+            <div style="padding: 16px 18px; background: rgb(20, 20, 22);">
+              <div style="font-size: 10.5px; letter-spacing: 0.08em; color: rgb(134, 194, 134); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">With APS</div>
+              <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: rgb(221, 221, 221);">Every agent carries a signed identity. Authority can only narrow, never expand. One call revokes downstream. Full cryptographic audit trail.</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="contact-row" style="display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid rgb(46, 46, 50); align-items: start;">
         <div style="font-size: 12.5px; letter-spacing: 0.06em; color: rgb(176, 176, 176); font-weight: 600; text-transform: uppercase; padding-top: 2px;">Quote</div>
         <div>
-          <p style="margin: 0 0 10px; font-size: 17px; line-height: 1.5; color: rgb(236, 236, 236); font-style: italic;">"Identity is the input. Enforcement is the product. Receipts are the proof."</p>
+          <p style="margin: 0 0 10px; font-size: 18px; line-height: 1.45; color: rgb(236, 236, 236); font-style: italic;">"Protocol defines what governance is. Gateway defines how well it works."</p>
           <p style="margin: 0; font-size: 13px; line-height: 1.5; color: rgb(138, 138, 142);">Tymofii Pidlisnyi, founder of AEOESS</p>
         </div>
       </div>
