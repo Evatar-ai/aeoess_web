@@ -14732,6 +14732,11 @@ footer a:hover {
 
     function maybeShowResetForm() {
       try {
+        // Idempotent: if we already built the form, do not append another.
+        // Called multiple times from the decorateAll() schedule to survive
+        // React rehydration — without this check we get N reset forms.
+        if (document.getElementById('aps-reset-form')) return;
+
         var params = new URLSearchParams(window.location.search);
         var token = params.get('reset_token');
         var verifyOk = params.get('verify_ok');
@@ -14756,10 +14761,20 @@ footer a:hover {
         var emailBtn = Array.from(col.querySelectorAll('button')).find(function(b) {
           return /Continue with email|Create account/.test((b.textContent || '').trim());
         });
+        var ghBtn = Array.from(col.querySelectorAll('button')).find(function(b) {
+          return /Continue with GitHub/.test((b.textContent || '').trim());
+        });
         var modeRow = document.getElementById('aps-mode-row');
-        // Hide existing email/password form
+        // OR divider — find it by looking for a div with a span that says "or"
+        var orDivider = null;
+        col.querySelectorAll('div').forEach(function(d) {
+          var span = d.querySelector('span');
+          if (span && /^or$/i.test((span.textContent || '').trim())) orDivider = d;
+        });
+        // Hide existing email/password form + OR + GitHub button so the
+        // reset form stands alone.
         var emailLabel = emailInput && emailInput.previousElementSibling;
-        [emailLabel, emailInput, pwLabel, pw, emailBtn, modeRow].forEach(function(el) { if (el) el.style.display = 'none'; });
+        [emailLabel, emailInput, pwLabel, pw, emailBtn, modeRow, orDivider, ghBtn].forEach(function(el) { if (el) el.style.display = 'none'; });
         // Build reset form
         var form = document.createElement('div');
         form.id = 'aps-reset-form';
