@@ -5,21 +5,6 @@
 
 # ═══ DAY 84 — 2026-05-11 ═══
 
-- id: d84-portal-and-dashboard-ship
-  title: "Portal sign-in and tenant dashboard go live on gateway.aeoess.com with GitHub OAuth"
-  description: "portal.html email signup wired to existing /api/v1/signup endpoint via event-delegated script (156 lines) that survives React rehydration. Status banner covers loading, success, duplicate-email recovery, rate-limit, and network-error states. Enter-key submits. New /dashboard.html (250 lines vanilla) reads API key from URL hash (#welcome= on fresh signup) or localStorage on return visit, falls back to paste form. Renders tenant card (name, email, plan badge, status badge), four-stat usage grid (agents, delegations, evaluations this month, receipts), API keys table with rotate-key action via POST /api/v1/account/rotate-key, and quickstart curl snippet pre-filled with the user's actual key. GitHub OAuth shipped as two endpoints: GET /auth/github/start (24-byte hex CSRF state, 10-min TTL, 30 req/min IP rate limit), GET /auth/github/callback (validates state, exchanges code for access token, fetches verified primary email from api.github.com/user/emails, find-or-create-by-email tenant flow). Both flows redirect to /dashboard.html#welcome=KEY. Errors redirect to portal.html?auth_error= which the portal script reads and displays. Google and SSO labeled Coming soon. CC carried gateway forward with tenant_aliases (one tenant, many emails, fixes signal/tima split), gateway.aeoess.com root → portal.html redirect, and three new tenant-scoped API endpoints: /api/v1/decisions/recent, /api/v1/receipts/recent, /api/v1/conformance summary."
-  status: done
-  workstream: infra
-  day_start: 84
-  day_end: 84
-  links:
-    - url: "https://aeoess.com/portal.html"
-      label: "portal"
-    - url: "https://aeoess.com/dashboard.html"
-      label: "dashboard"
-    - url: "https://gateway.aeoess.com"
-      label: "gateway"
-
 - id: d84-pr-91-budget-authority-crosswalk-amavashev-approved
   title: "PR #91 budget_authority.yaml v0.1 opens at vocab repo, amavashev approved"
   description: "First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B review pass complete with three-engine independent review and adversarial phase. Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation."
