@@ -14553,49 +14553,262 @@ footer a:hover {
       bar.innerHTML = msg;
     }
 
-    function signupEmail(email) {
-      var name = email.split('@')[0].replace(/[^a-z0-9]/gi, ' ').trim() || email;
-      setStatus('info', 'Creating your account…');
-      return fetch(GATEWAY + '/api/v1/signup', {
+    // Mode: 'signin' (default) or 'signup'. Toggle via the small link
+    // injected next to the email button. We default to 'signin' because
+    // the legacy entry point header reads "Sign in to your governance
+    // dashboard." — signing in is the dominant path.
+    var authMode = 'signin';
+
+    function injectPasswordField() {
+      var emailInput = document.querySelector('input[type="email"]');
+      if (!emailInput) return;
+      if (document.getElementById('aps-password')) return; // already injected
+      var pwLabel = document.createElement('label');
+      pwLabel.style.cssText = 'display:block;font-size:12px;color:rgb(138,138,142);margin-top:12px;margin-bottom:6px;font-weight:500;';
+      pwLabel.textContent = 'Password';
+      var pwInput = document.createElement('input');
+      pwInput.type = 'password';
+      pwInput.id = 'aps-password';
+      pwInput.autocomplete = 'current-password';
+      pwInput.placeholder = '••••••••••';
+      pwInput.style.cssText = 'width:100%;padding:10px 14px;font-size:14px;color:rgb(236,236,236);border:1px solid rgb(58,58,62);border-radius:4px;background:rgb(36,36,38);font-family:inherit;box-sizing:border-box;';
+      emailInput.insertAdjacentElement('afterend', pwInput);
+      emailInput.insertAdjacentElement('afterend', pwLabel);
+    }
+
+    function injectModeToggle() {
+      var emailBtn = Array.from(document.querySelectorAll('button')).find(function(b) {
+        return /^Continue with email/.test((b.textContent || '').trim());
+      });
+      if (!emailBtn) return;
+      if (document.getElementById('aps-mode-row')) return;
+      var row = document.createElement('div');
+      row.id = 'aps-mode-row';
+      row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:rgb(138,138,142);';
+      row.innerHTML =
+        '<a id="aps-mode-toggle" href="#" style="color:rgb(124,172,222);text-decoration:none;">Need an account? Sign up</a>' +
+        '<a id="aps-forgot-link" href="#" style="color:rgb(138,138,142);text-decoration:none;">Forgot password?</a>';
+      emailBtn.insertAdjacentElement('afterend', row);
+
+      document.getElementById('aps-mode-toggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        authMode = (authMode === 'signin') ? 'signup' : 'signin';
+        var toggle = document.getElementById('aps-mode-toggle');
+        var pw = document.getElementById('aps-password');
+        if (authMode === 'signup') {
+          emailBtn.textContent = 'Create account →';
+          toggle.textContent = 'Have an account? Sign in';
+          if (pw) { pw.autocomplete = 'new-password'; pw.placeholder = 'At least 10 characters'; }
+        } else {
+          emailBtn.textContent = 'Continue with email →';
+          toggle.textContent = 'Need an account? Sign up';
+          if (pw) { pw.autocomplete = 'current-password'; pw.placeholder = '••••••••••'; }
+        }
+      });
+
+      document.getElementById('aps-forgot-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleForgotClick();
+      });
+    }
+
+    function authEndpoint(path) { return GATEWAY + '/auth/email/' + path; }
+
+    function loginEmail(email, password) {
+      setStatus('info', 'Signing you in…');
+      return fetch(authEndpoint('login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email })
+        body: JSON.stringify({ email: email, password: password })
       }).then(function(r) {
         return r.json().then(function(j) { return { status: r.status, body: j }; });
       });
     }
 
+    function signupWithPassword(email, password) {
+      var name = email.split('@')[0].replace(/[^a-z0-9]/gi, ' ').trim() || email;
+      setStatus('info', 'Creating your account…');
+      return fetch(authEndpoint('signup'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, password: password })
+      }).then(function(r) {
+        return r.json().then(function(j) { return { status: r.status, body: j }; });
+      });
+    }
+
+    function forgotPassword(email) {
+      return fetch(authEndpoint('forgot'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      }).then(function(r) {
+        return r.json().then(function(j) { return { status: r.status, body: j }; });
+      });
+    }
+
+    function resetPassword(token, password) {
+      return fetch(authEndpoint('reset'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: token, password: password })
+      }).then(function(r) {
+        return r.json().then(function(j) { return { status: r.status, body: j }; });
+      });
+    }
+
+    function persistAndRedirect(body, successMsg) {
+      try {
+        localStorage.setItem('aps_api_key', body.api_key);
+        localStorage.setItem('aps_tenant_id', body.tenant_id);
+      } catch (e) {}
+      setStatus('success', successMsg);
+      setTimeout(function() {
+        window.location.href = '/dashboard.html#welcome=' + encodeURIComponent(body.api_key);
+      }, 1000);
+    }
+
     function handleEmailClick() {
       var input = document.querySelector('input[type="email"]');
+      var pw = document.getElementById('aps-password');
       if (!input) return;
       var email = (input.value || '').trim();
+      var password = pw ? (pw.value || '') : '';
       if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
         setStatus('error', 'Enter a valid work email to continue.');
         input.focus();
         return;
       }
-      signupEmail(email).then(function(res) {
-        if (res.status === 201 && res.body.api_key) {
-          // Persist for dashboard
-          try {
-            localStorage.setItem('aps_api_key', res.body.api_key);
-            localStorage.setItem('aps_tenant_id', res.body.tenant_id);
-          } catch (e) {}
-          setStatus('success', 'Account created. Redirecting to your dashboard…<br><span style="font-size:11.5px;opacity:.75;">Your API key is also on its way to ' + email + '.</span>');
-          setTimeout(function() {
-            window.location.href = '/dashboard.html#welcome=' + encodeURIComponent(res.body.api_key);
-          }, 1200);
+      if (!password) {
+        setStatus('error', authMode === 'signup' ? 'Choose a password (at least 10 characters).' : 'Enter your password.');
+        if (pw) pw.focus();
+        return;
+      }
+      if (authMode === 'signup' && password.length < 10) {
+        setStatus('error', 'Password must be at least 10 characters.');
+        pw.focus();
+        return;
+      }
+
+      var fn = authMode === 'signup' ? signupWithPassword : loginEmail;
+      fn(email, password).then(function(res) {
+        if ((res.status === 201 || res.status === 200) && res.body.api_key) {
+          persistAndRedirect(res.body,
+            authMode === 'signup'
+              ? 'Account created. Redirecting to your dashboard…<br><span style="font-size:11.5px;opacity:.75;">Verify your email — link sent to ' + esc(email) + '.</span>'
+              : 'Signed in. Redirecting to your dashboard…'
+          );
         } else if (res.status === 409) {
-          setStatus('info', 'This email already has an account. <a href="/dashboard.html" style="color:inherit;text-decoration:underline;">Sign in with your API key →</a><br><span style="font-size:11.5px;opacity:.75;">Lost your key? Email <a href="mailto:signal@aeoess.com" style="color:inherit;">signal@aeoess.com</a> to recover.</span>');
+          setStatus('info', 'This email already has an account. <a id="aps-switch-to-signin" href="#" style="color:inherit;text-decoration:underline;">Sign in instead →</a>');
+          var sw = document.getElementById('aps-switch-to-signin');
+          if (sw) sw.addEventListener('click', function(e) { e.preventDefault(); document.getElementById('aps-mode-toggle').click(); });
+        } else if (res.status === 401) {
+          setStatus('error', 'Invalid email or password.');
+        } else if (res.status === 403) {
+          setStatus('error', (res.body && res.body.error) || 'Account is not active.');
         } else if (res.status === 429) {
-          setStatus('error', 'Too many signups from this network. Try again in a few minutes.');
+          setStatus('error', 'Too many attempts from this network. Try again in a few minutes.');
+        } else if (res.status === 400) {
+          setStatus('error', (res.body && res.body.error) || 'Check your input and try again.');
         } else {
-          setStatus('error', 'Signup failed: ' + (res.body.error || 'Unknown error') + '. Try again or email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a>.');
+          setStatus('error', 'Auth failed: ' + ((res.body && res.body.error) || 'Unknown error') + '. Try again or email <a href="mailto:signal@aeoess.com" style="color:inherit;text-decoration:underline;">signal@aeoess.com</a>.');
         }
       }).catch(function(err) {
         setStatus('error', 'Could not reach the gateway. Check your connection and try again.');
         console.error('[aps-auth]', err);
       });
+    }
+
+    function handleForgotClick() {
+      var input = document.querySelector('input[type="email"]');
+      var email = (input && (input.value || '').trim()) || '';
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        setStatus('error', 'Enter your email above first, then click Forgot password.');
+        if (input) input.focus();
+        return;
+      }
+      setStatus('info', 'Sending reset link…');
+      forgotPassword(email).then(function(res) {
+        // Server always returns 200 regardless of whether email exists (no enumeration)
+        setStatus('success', 'If that email is on file, a reset link is on its way. Check your inbox.');
+      }).catch(function() {
+        setStatus('error', 'Could not reach the gateway. Try again in a moment.');
+      });
+    }
+
+    function maybeShowResetForm() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('reset_token');
+        var verifyOk = params.get('verify_ok');
+        var verifyErr = params.get('verify_error');
+        if (verifyOk) {
+          setStatus('success', 'Email verified. You can now sign in.');
+          try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
+          return;
+        }
+        if (verifyErr) {
+          setStatus('error', esc(verifyErr));
+          try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
+          return;
+        }
+        if (!token) return;
+        // Replace the email/password form with a reset form
+        var col = getAuthColumn();
+        if (!col) return;
+        var emailInput = col.querySelector('input[type="email"]');
+        var pw = document.getElementById('aps-password');
+        var pwLabel = pw ? pw.previousElementSibling : null;
+        var emailBtn = Array.from(col.querySelectorAll('button')).find(function(b) {
+          return /Continue with email|Create account/.test((b.textContent || '').trim());
+        });
+        var modeRow = document.getElementById('aps-mode-row');
+        // Hide existing email/password form
+        var emailLabel = emailInput && emailInput.previousElementSibling;
+        [emailLabel, emailInput, pwLabel, pw, emailBtn, modeRow].forEach(function(el) { if (el) el.style.display = 'none'; });
+        // Build reset form
+        var form = document.createElement('div');
+        form.id = 'aps-reset-form';
+        form.innerHTML =
+          '<label style="display:block;font-size:12px;color:rgb(138,138,142);margin-bottom:6px;font-weight:500;">New password</label>' +
+          '<input id="aps-reset-pw" type="password" autocomplete="new-password" placeholder="At least 10 characters" style="width:100%;padding:10px 14px;font-size:14px;color:rgb(236,236,236);border:1px solid rgb(58,58,62);border-radius:4px;background:rgb(36,36,38);font-family:inherit;box-sizing:border-box;">' +
+          '<button id="aps-reset-submit" style="width:100%;margin-top:14px;padding:11px 16px;background:rgb(236,236,236);color:rgb(36,36,38);border:none;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Set new password</button>' +
+          '<p style="font-size:11.5px;color:rgb(138,138,142);margin-top:14px;">For your safety, all existing API keys will be revoked after the reset. Sign in again to issue a fresh key.</p>';
+        // Insert after the heading paragraph (find first <p> inside the col)
+        var firstP = col.querySelector('p');
+        (firstP || col).insertAdjacentElement('afterend', form);
+        document.getElementById('aps-reset-submit').addEventListener('click', function() {
+          var newPw = document.getElementById('aps-reset-pw').value || '';
+          if (newPw.length < 10) {
+            setStatus('error', 'Password must be at least 10 characters.');
+            return;
+          }
+          setStatus('info', 'Updating your password…');
+          resetPassword(token, newPw).then(function(res) {
+            if (res.status === 200) {
+              setStatus('success', 'Password updated. Sign in to issue a fresh API key.');
+              // Restore the sign-in form, clear the token from the URL
+              try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
+              setTimeout(function() { window.location.reload(); }, 1500);
+            } else if (res.status === 400) {
+              setStatus('error', (res.body && res.body.error) || 'Reset link is invalid or expired. Request a new one.');
+            } else if (res.status === 429) {
+              setStatus('error', 'Too many reset attempts, try again later.');
+            } else {
+              setStatus('error', 'Could not update password. Try again or email signal@aeoess.com.');
+            }
+          });
+        });
+        document.getElementById('aps-reset-pw').addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') { e.preventDefault(); document.getElementById('aps-reset-submit').click(); }
+        });
+      } catch(e) { console.error('[aps-auth] reset form', e); }
+    }
+
+    function signupEmail(email) {
+      // Legacy entry point (kept for backwards compat with anything that
+      // called it). New flows use the password-aware functions above.
+      return signupWithPassword(email, '');
     }
 
     // Event delegation — survives React rehydration
@@ -14642,14 +14855,20 @@ footer a:hover {
         }
       });
     }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', decorateButtons);
-    } else {
+    function decorateAll() {
       decorateButtons();
+      injectPasswordField();
+      injectModeToggle();
+      maybeShowResetForm();
     }
-    // Re-decorate after any late hydration
-    setTimeout(decorateButtons, 200);
-    setTimeout(decorateButtons, 1000);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', decorateAll);
+    } else {
+      decorateAll();
+    }
+    // Re-decorate after any late hydration (React rehydrates the static markup)
+    setTimeout(decorateAll, 200);
+    setTimeout(decorateAll, 1000);
 
     // Display any ?auth_error= passed back from OAuth callback redirect
     function showQueryError() {
