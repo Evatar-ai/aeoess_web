@@ -225,14 +225,17 @@
 
   // ───── Header / Sub-nav ───────────────────────────────────────────
   const NAV_SECTIONS = [
-    { id:'overview',    label:'Overview' },
-    { id:'live',        label:'Live' },
-    { id:'connect',     label:'Connect' },
-    { id:'agents',      label:'Agents' },
-    { id:'delegations', label:'Delegations' },
-    { id:'receipts',    label:'Receipts' },
-    { id:'keys',        label:'Keys' },
-    { id:'danger',      label:'Danger zone' },
+    { id:'overview',     label:'Overview' },
+    { id:'live',         label:'Live' },
+    { id:'connect',      label:'Connect' },
+    { id:'integrations', label:'Integrations' },
+    { id:'compliance',   label:'Compliance' },
+    { id:'agents',       label:'Agents' },
+    { id:'delegations',  label:'Delegations' },
+    { id:'receipts',     label:'Receipts' },
+    { id:'audit',        label:'Audit log' },
+    { id:'keys',         label:'Keys' },
+    { id:'danger',       label:'Danger zone' },
   ];
 
   function Header({ tenant, onSignOut, active, onNav }) {
@@ -401,27 +404,30 @@
             )}
           </div>
 
-          {/* Environment */}
-          <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8 }}>
-            <div style={{ padding:'14px 18px', borderBottom:`1px solid ${P.ruleLight}`, fontSize:13, fontWeight:600, color:P.ink }}>Environment</div>
-            {[
-              { k:'gateway.aeoess.com', v: envState.gateway.v, s: envState.gateway.s },
-              { k:'JWKS',               v: envState.jwks.v,    s: envState.jwks.s },
-              { k:'Policy bundle',      v: envState.bundle.v,  s: envState.bundle.s },
-              { k:'Trust feed',         v: envState.trust.v,   s: envState.trust.s },
-            ].map((e, i) => {
-              const dot = e.s === 'green' ? P.green : e.s === 'red' ? P.red : P.amber;
-              return (
-                <div key={e.k} style={{ padding:'12px 18px', borderTop: i ? `1px solid ${P.ruleLight}` : 'none',
-                  display:'grid', gridTemplateColumns:'14px 1fr', gap:10, alignItems:'baseline' }}>
-                  <span style={{ width:8, height:8, borderRadius:'50%', background:dot, marginTop:4 }}/>
-                  <div>
-                    <div style={{ fontSize:13, color:P.ink, fontWeight:500 }}>{e.k}</div>
-                    <div style={{ fontFamily:MONO, fontSize:11.5, color:P.ink4, marginTop:2 }}>{e.v}</div>
+          {/* Environment + Conformance (stacked sidebar) */}
+          <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+            <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8 }}>
+              <div style={{ padding:'14px 18px', borderBottom:`1px solid ${P.ruleLight}`, fontSize:13, fontWeight:600, color:P.ink }}>Environment</div>
+              {[
+                { k:'gateway.aeoess.com', v: envState.gateway.v, s: envState.gateway.s },
+                { k:'JWKS',               v: envState.jwks.v,    s: envState.jwks.s },
+                { k:'Policy bundle',      v: envState.bundle.v,  s: envState.bundle.s },
+                { k:'Trust feed',         v: envState.trust.v,   s: envState.trust.s },
+              ].map((e, i) => {
+                const dot = e.s === 'green' ? P.green : e.s === 'red' ? P.red : P.amber;
+                return (
+                  <div key={e.k} style={{ padding:'12px 18px', borderTop: i ? `1px solid ${P.ruleLight}` : 'none',
+                    display:'grid', gridTemplateColumns:'14px 1fr', gap:10, alignItems:'baseline' }}>
+                    <span style={{ width:8, height:8, borderRadius:'50%', background:dot, marginTop:4 }}/>
+                    <div>
+                      <div style={{ fontSize:13, color:P.ink, fontWeight:500 }}>{e.k}</div>
+                      <div style={{ fontFamily:MONO, fontSize:11.5, color:P.ink4, marginTop:2 }}>{e.v}</div>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            <ConformanceCard/>
           </div>
         </div>
       </section>
@@ -1032,6 +1038,341 @@ curl -X POST -H "Authorization: Bearer ${displayKey}" \\
     );
   }
 
+  // ───── Setup checklist (collapses once you've gotten started) ────
+  function SetupChecklist({ account }) {
+    const usage = account.usage || {};
+    const items = [
+      { id:'account',  label:'Account created',           done:true },
+      { id:'key',      label:'API key issued',            done:(account.api_keys || []).some(k => !k.revoked_at) },
+      { id:'runtime',  label:'Connect a runtime (MCP / SDK / curl)', done:false, hint:'See the Connect section below' },
+      { id:'agent',    label:'Register your first agent', done:(usage.agents || 0) > 0 },
+      { id:'eval',     label:'First policy evaluation',   done:(usage.receipts || 0) > 0 || (usage.evaluations_this_month || 0) > 0 },
+    ];
+    const allDone = items.every(i => i.done);
+    if (allDone) return null;
+
+    return (
+      <section style={{ padding:'16px 40px 0' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, padding:'18px 22px' }}>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:12 }}>
+            <div>
+              <div style={{ fontSize:13, fontWeight:600, color:P.ink }}>Getting started</div>
+              <div style={{ fontSize:12, color:P.ink4, marginTop:2 }}>{items.filter(i => i.done).length} of {items.length} complete</div>
+            </div>
+            <div style={{ display:'flex', gap:6 }}>
+              {items.map(i => (
+                <span key={i.id} style={{ width:24, height:4, borderRadius:2, background: i.done ? P.green : P.ruleLight }}/>
+              ))}
+            </div>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:10 }}>
+            {items.map(i => (
+              <div key={i.id} style={{
+                display:'flex', alignItems:'flex-start', gap:10, padding:'10px 12px',
+                border:`1px solid ${P.ruleLight}`, borderRadius:6,
+                background: i.done ? P.surface : 'transparent',
+                opacity: i.done ? 0.7 : 1,
+              }}>
+                <span style={{ marginTop:2, width:14, height:14, borderRadius:'50%',
+                  border: `1px solid ${i.done ? P.green : P.rule}`,
+                  background: i.done ? P.green : 'transparent',
+                  display:'flex', alignItems:'center', justifyContent:'center',
+                  fontSize:9, color: i.done ? P.bg : P.ink5, fontWeight:700, flexShrink:0
+                }}>
+                  {i.done ? '✓' : ''}
+                </span>
+                <div>
+                  <div style={{ fontSize:13, color: i.done ? P.ink3 : P.ink, fontWeight:500, textDecoration: i.done ? 'line-through' : 'none' }}>{i.label}</div>
+                  {!i.done && i.hint ? <div style={{ fontSize:11.5, color:P.ink4, marginTop:2 }}>{i.hint}</div> : null}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ───── Conformance card (sidebar in Live section) ─────────────────
+  function ConformanceCard() {
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+      fetch(GATEWAY + '/api/v1/public/conformance').then(r => r.json()).then(setData).catch(() => {});
+    }, []);
+    if (!data) {
+      return (
+        <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, padding:'18px 22px' }}>
+          <div style={{ fontSize:13, fontWeight:600, color:P.ink, marginBottom:6 }}>Conformance</div>
+          <div style={{ fontSize:12, color:P.ink4 }}>Loading…</div>
+        </div>
+      );
+    }
+    const passing = data.passing_vectors;
+    const total = data.total_vectors;
+    const pct = total > 0 ? Math.round(passing / total * 100) : 0;
+    return (
+      <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, padding:'18px 22px' }}>
+        <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:10 }}>
+          <div style={{ fontSize:13, fontWeight:600, color:P.ink }}>Conformance</div>
+          <span style={{ fontSize:11, color: passing === total ? P.green : P.amber, fontFamily:MONO }}>
+            {passing}/{total} · {pct}%
+          </span>
+        </div>
+        <div style={{ height:6, background:P.surface, borderRadius:3, overflow:'hidden', marginBottom:12 }}>
+          <div style={{ height:'100%', width: pct + '%', background: passing === total ? P.green : P.amber }}/>
+        </div>
+        {data.categories.map((c, i) => (
+          <div key={c.name} style={{ display:'flex', justifyContent:'space-between', padding:'6px 0',
+            borderTop: i ? `1px solid ${P.ruleLight}` : 'none', fontSize:11.5 }}>
+            <span style={{ color:P.ink3, fontFamily:MONO }}>{c.name}</span>
+            <span style={{ color: c.passing === c.total ? P.green : P.amber, fontFamily:MONO }}>{c.passing}/{c.total}</span>
+          </div>
+        ))}
+        <div style={{ marginTop:10, paddingTop:10, borderTop:`1px solid ${P.ruleLight}`, fontSize:11, color:P.ink4, lineHeight:1.5 }}>
+          RFC 8785 JCS · Ed25519 · last verified {data.last_verified} · <a href={data.repo} target="_blank" rel="noopener" style={{ color:P.link }}>repo →</a>
+        </div>
+      </div>
+    );
+  }
+
+  // ───── Integrations section ──────────────────────────────────────
+  function IntegrationsSection({ apiKey }) {
+    const [items, setItems] = React.useState(null);
+    React.useEffect(() => {
+      api('/api/v1/integrations/status', apiKey).then(res => {
+        if (res.status === 200) setItems(res.body.integrations || []);
+        else setItems([]);
+      }).catch(() => setItems([]));
+    }, [apiKey]);
+
+    return (
+      <section id="integrations" style={{ padding:'16px 40px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8 }}>
+          <div style={{ padding:'18px 22px 12px', borderBottom:`1px solid ${P.ruleLight}` }}>
+            <div style={{ fontSize:14, fontWeight:600, color:P.ink }}>Integrations</div>
+            <div style={{ fontSize:12.5, color:P.ink4, marginTop:4 }}>
+              Payment rails, anchoring substrates, and runtime adapters that the gateway ships with.
+            </div>
+          </div>
+          {!items ? (
+            <div style={{ padding:'48px 18px', textAlign:'center', color:P.ink4, fontSize:13 }}>Loading…</div>
+          ) : (
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:0 }}>
+              {items.map((it, i) => {
+                const col = i % 2, row = Math.floor(i / 2);
+                const dot = it.connected ? P.green : P.ink5;
+                return (
+                  <div key={it.id} style={{
+                    padding:'18px 22px',
+                    borderLeft: col > 0 ? `1px solid ${P.ruleLight}` : 'none',
+                    borderTop: row > 0 ? `1px solid ${P.ruleLight}` : 'none',
+                  }}>
+                    <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
+                      <span style={{ width:8, height:8, borderRadius:'50%', background: dot }}/>
+                      <span style={{ fontSize:13.5, fontWeight:600, color:P.ink }}>{it.name}</span>
+                      <span style={{ marginLeft:'auto', fontSize:10.5, color: it.connected ? P.green : P.ink4, fontFamily:MONO, letterSpacing:'0.05em' }}>
+                        {it.connected ? 'CONNECTED' : 'NOT CONNECTED'}
+                      </span>
+                    </div>
+                    <div style={{ fontSize:12.5, color:P.ink3, lineHeight:1.55, marginBottom:10 }}>{it.description}</div>
+                    <div style={{ display:'flex', gap:8, alignItems:'center' }}>
+                      <span style={{ fontSize:10.5, color:P.ink5, fontFamily:MONO, letterSpacing:'0.05em', textTransform:'uppercase' }}>{it.category}</span>
+                      <span style={{ fontSize:10.5, color:P.ink5, fontFamily:MONO }}>·</span>
+                      <span style={{ fontSize:10.5, color:P.ink5, fontFamily:MONO, letterSpacing:'0.05em' }}>plan: {it.availability}</span>
+                      {it.connect_url ? (
+                        <a href={it.connect_url} target="_blank" rel="noopener"
+                          style={{ marginLeft:'auto', fontSize:12, color:P.link, padding:'4px 10px', border:`1px solid ${P.rule}`, borderRadius:4 }}>
+                          Connect →
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  // ───── Compliance section ─────────────────────────────────────────
+  function ComplianceSection({ apiKey }) {
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+      api('/api/v1/compliance/coverage', apiKey).then(res => {
+        if (res.status === 200) setData(res.body);
+      }).catch(() => {});
+    }, [apiKey]);
+
+    return (
+      <section id="compliance" style={{ padding:'16px 40px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8 }}>
+          <div style={{ padding:'18px 22px 12px', borderBottom:`1px solid ${P.ruleLight}`, display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
+            <div>
+              <div style={{ fontSize:14, fontWeight:600, color:P.ink }}>Regulatory coverage</div>
+              <div style={{ fontSize:12.5, color:P.ink4, marginTop:4 }}>
+                Which AEOESS primitives map to each framework. Coverage % reflects primitives shipped against required controls.
+              </div>
+            </div>
+            {data?.compliance_reports_available ? (
+              <button onClick={() => alert('Compliance report generation is queued via signal@aeoess.com — UX coming soon.')}
+                style={{ padding:'9px 16px', border:`1px solid ${P.rule}`, borderRadius:4, background:'transparent', color:P.ink2, fontSize:12.5, cursor:'pointer' }}>
+                Request report →
+              </button>
+            ) : null}
+          </div>
+          {!data ? (
+            <div style={{ padding:'48px 18px', textAlign:'center', color:P.ink4, fontSize:13 }}>Loading…</div>
+          ) : (
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:0 }}>
+              {data.frameworks.map((f, i) => {
+                const col = i % 2, row = Math.floor(i / 2);
+                const accent = f.coverage_pct >= 85 ? P.green : f.coverage_pct >= 70 ? P.amber : P.red;
+                return (
+                  <div key={f.id} style={{
+                    padding:'20px 24px',
+                    borderLeft: col > 0 ? `1px solid ${P.ruleLight}` : 'none',
+                    borderTop: row > 0 ? `1px solid ${P.ruleLight}` : 'none',
+                  }}>
+                    <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:10 }}>
+                      <div>
+                        <div style={{ fontSize:13.5, fontWeight:600, color:P.ink }}>{f.name}</div>
+                        <div style={{ fontSize:11, color:P.ink4, fontFamily:MONO, marginTop:2, letterSpacing:'0.04em' }}>{f.status.toUpperCase()}</div>
+                      </div>
+                      <div style={{ fontSize:24, fontWeight:500, color: accent, fontFamily:MONO }}>{f.coverage_pct}%</div>
+                    </div>
+                    <div style={{ height:4, background:P.surface, borderRadius:2, overflow:'hidden', marginBottom:12 }}>
+                      <div style={{ height:'100%', width: f.coverage_pct + '%', background: accent }}/>
+                    </div>
+                    <div style={{ fontSize:11, color:P.ink4, letterSpacing:'0.04em', textTransform:'uppercase', marginBottom:6, fontWeight:600 }}>Primitives covered</div>
+                    <ul style={{ margin:0, paddingLeft:18, color:P.ink3, fontSize:12, fontFamily:MONO, lineHeight:1.65 }}>
+                      {f.primitives_covered.slice(0, 5).map(p => <li key={p}>{p}</li>)}
+                    </ul>
+                    {f.gaps && f.gaps.length ? (
+                      <div style={{ marginTop:10, fontSize:11.5, color:P.ink5 }}>
+                        <span style={{ color:P.amber, fontWeight:600 }}>Gap:</span> {f.gaps.join(', ')}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  // ───── Audit log section ──────────────────────────────────────────
+  function AuditSection({ apiKey }) {
+    const [rows, setRows] = React.useState([]);
+    const [total, setTotal] = React.useState(0);
+    const [status, setStatus] = React.useState('loading');
+    const [filterVerdict, setFilterVerdict] = React.useState('all');
+
+    const load = React.useCallback(() => {
+      setStatus('loading');
+      const qs = filterVerdict !== 'all' ? '?verdict=' + filterVerdict + '&limit=50' : '?limit=50';
+      api('/api/v1/audit' + qs, apiKey).then(res => {
+        if (res.status === 200) {
+          setRows(res.body.entries || []);
+          setTotal(res.body.total || 0);
+          setStatus('ok');
+        } else { setStatus('error'); }
+      }).catch(() => setStatus('error'));
+    }, [apiKey, filterVerdict]);
+
+    React.useEffect(() => { load(); }, [load]);
+
+    const downloadCSV = () => {
+      const cols = ['created_at', 'agent_id', 'action_type', 'scope_required', 'verdict', 'reason', 'duration_ms'];
+      const header = cols.join(',');
+      const escape = (v) => {
+        const s = v == null ? '' : String(v);
+        return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+      };
+      const body = rows.map(r => cols.map(c => escape(r[c])).join(',')).join('\n');
+      const blob = new Blob([header + '\n' + body], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'aeoess-audit-' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    return (
+      <section id="audit" style={{ padding:'16px 40px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8 }}>
+          <div style={{ padding:'18px 22px 12px', borderBottom:`1px solid ${P.ruleLight}`, display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
+            <div>
+              <div style={{ fontSize:14, fontWeight:600, color:P.ink }}>Audit log</div>
+              <div style={{ fontSize:12.5, color:P.ink4, marginTop:4 }}>
+                Every policy evaluation, with the signed receipt where one was emitted. {status === 'loading' ? 'loading…' : 'Showing ' + rows.length + ' of ' + total + '.'}
+              </div>
+            </div>
+            <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}>
+              <select value={filterVerdict} onChange={e => setFilterVerdict(e.target.value)}
+                style={{ padding:'7px 10px', fontSize:12.5, color:P.ink, border:`1px solid ${P.rule}`, borderRadius:4, background:P.bg, fontFamily:'inherit' }}>
+                <option value="all">All decisions</option>
+                <option value="permit">Permits only</option>
+                <option value="deny">Denies only</option>
+              </select>
+              <button onClick={downloadCSV} disabled={rows.length === 0}
+                style={{ padding:'7px 12px', fontSize:12.5, color:P.ink2, border:`1px solid ${P.rule}`, borderRadius:4, background:'transparent', cursor: rows.length ? 'pointer' : 'not-allowed' }}>
+                Download CSV
+              </button>
+            </div>
+          </div>
+          {rows.length === 0 ? (
+            <div style={{ padding:'48px 18px', textAlign:'center', color:P.ink4, fontSize:13 }}>
+              {status === 'loading' ? 'Loading audit log…'
+              : status === 'error' ? 'Could not load audit log.'
+              : 'No matching entries.'}
+            </div>
+          ) : (
+            <table style={{ width:'100%', borderCollapse:'collapse', fontFamily:MONO, fontSize:12 }}>
+              <thead>
+                <tr style={{ color:P.ink4, fontSize:10.5, letterSpacing:'0.06em', textTransform:'uppercase' }}>
+                  <th style={{ textAlign:'left', padding:'10px 22px', fontWeight:600 }}>When</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Verdict</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Agent</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Action</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Scope</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Reason</th>
+                  <th style={{ textAlign:'left', padding:'10px 22px', fontWeight:600 }}>Receipt</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r, i) => {
+                  const allow = r.verdict === 'permit' || r.verdict === 'allow';
+                  const c = allow ? P.green : P.red;
+                  return (
+                    <tr key={r.id || i}>
+                      <td style={{ padding:'10px 22px', color:P.ink5, borderTop:`1px solid ${P.ruleLight}` }}>{fmtRel(r.created_at)}</td>
+                      <td style={{ padding:'10px 12px', borderTop:`1px solid ${P.ruleLight}` }}>
+                        <span style={{ display:'inline-block', padding:'2px 8px', borderRadius:3, fontSize:11, background: c+'1f', color: c, fontWeight:600 }}>
+                          {String(r.verdict || '').toUpperCase()}
+                        </span>
+                      </td>
+                      <td style={{ padding:'10px 12px', color:P.ink2, borderTop:`1px solid ${P.ruleLight}` }}>{truncMid(r.agent_id || '', 10, 4)}</td>
+                      <td style={{ padding:'10px 12px', color:P.ink3, borderTop:`1px solid ${P.ruleLight}` }}>{r.action_type}</td>
+                      <td style={{ padding:'10px 12px', color:P.ink3, borderTop:`1px solid ${P.ruleLight}` }}>{r.scope_required}</td>
+                      <td style={{ padding:'10px 12px', color:P.ink4, borderTop:`1px solid ${P.ruleLight}` }}>{r.reason || '—'}</td>
+                      <td style={{ padding:'10px 22px', color: r.signature ? P.green : P.ink5, borderTop:`1px solid ${P.ruleLight}` }}>
+                        {r.signature ? '✓ signed' : '—'}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </section>
+    );
+  }
+
   // ───── Dashboard root ─────────────────────────────────────────────
   function Dashboard({ apiKey, onSignOut }) {
     const [account, setAccount] = React.useState(null);
@@ -1100,12 +1441,16 @@ curl -X POST -H "Authorization: Bearer ${displayKey}" \\
       <div style={{ background:P.bg, color:P.ink, minHeight:'100%' }}>
         <Header tenant={account} onSignOut={onSignOut} active={active} onNav={onNav}/>
         <Hero account={account} envHealthy={envHealthy}/>
+        <SetupChecklist account={account}/>
         <Stats usage={usage} limits={limits} onNav={onNav}/>
         <LiveSection apiKey={apiKey} envState={envState}/>
         <ConnectTabs apiKey={apiKey} showToast={showToast}/>
+        <IntegrationsSection apiKey={apiKey}/>
+        <ComplianceSection apiKey={apiKey}/>
         <AgentsSection apiKey={apiKey} refreshTrigger={agentsRefresh} showToast={showToast}/>
         <DelegationsSection apiKey={apiKey}/>
         <ReceiptsSection apiKey={apiKey}/>
+        <AuditSection apiKey={apiKey}/>
         <KeysSection apiKey={apiKey} account={account} onRotated={onRotated} showToast={showToast}/>
         <DangerZone apiKey={apiKey} onRevoked={() => setAgentsRefresh(x => x + 1)} showToast={showToast}/>
 
