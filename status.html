@@ -1661,7 +1661,8 @@ function Footer(_ref9) {
   var palette = _ref9.palette,
     pad = _ref9.pad;
   var P = palette;
-  var cols = [['Solutions', ['Payments', 'Content', 'Compliance', 'Enterprise']], ['Open Source', ['Spec', 'SDK', 'MCP', 'GitHub']], ['Resources', ['Blog', 'Roadmap', 'FAQ', 'Compare']], ['Company', ['About', 'Contact', 'Press', 'Security']]];
+  var cols = [['Solutions', ['Payments', 'Content', 'Compliance', 'Enterprise']], ['Open Source', ['Spec', 'SDK', 'MCP', 'GitHub']], ['Resources', ['Blog', 'Roadmap', 'FAQ', 'Compare']], ['Company', ['About', 'Contact', 'Press Kit', 'Security']]];
+  var footerHrefs = { 'Press Kit': '/media.html' };
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       padding: "60px ".concat(pad, "px 36px"),
@@ -1731,7 +1732,7 @@ function Footer(_ref9) {
       return /*#__PURE__*/React.createElement("li", {
         key: it
       }, /*#__PURE__*/React.createElement("a", {
-        href: "#",
+        href: footerHrefs[it] || "#",
         style: {
           color: P.ink4,
           textDecoration: 'none',
