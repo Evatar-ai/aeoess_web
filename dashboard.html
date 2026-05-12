@@ -1,374 +1,587 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard — AEOESS</title>
-<meta name="description" content="AEOESS governance dashboard. View tenant, agents, delegations, receipts, and manage API keys.">
-<meta name="robots" content="noindex">
-<link rel="icon" type="image/png" href="/assets/images/aeoess_logo-05.png">
-<style>
-  * { box-sizing: border-box; }
-  body { margin: 0; background: rgb(28,28,30); color: rgb(236,236,236); font-family: -apple-system, Inter, system-ui, sans-serif; min-height: 100vh; -webkit-font-smoothing: antialiased; }
-  a { color: rgb(124,172,222); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
-  header.site { border-bottom: 1px solid rgb(46,46,50); background: rgb(36,36,38); position: sticky; top: 0; z-index: 5; backdrop-filter: blur(8px); }
-  header.site .inner { display: flex; align-items: center; gap: 24px; padding: 14px 40px; max-width: 1280px; margin: 0 auto; }
-  header.site .brand { display: flex; align-items: center; gap: 8px; color: rgb(236,236,236); text-decoration: none; }
-  header.site .brand img { height: 24px; }
-  header.site nav { display: flex; align-items: center; gap: 24px; font-size: 13px; color: rgb(221,221,221); margin-left: 8px; }
-  header.site nav a { color: rgb(176,176,176); }
-  header.site .right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-  header.site .right a { color: rgb(176,176,176); font-size: 13px; }
-  header.site .right .signout { padding: 6px 12px; border: 1px solid rgb(58,58,62); border-radius: 4px; background: transparent; color: rgb(221,221,221); cursor: pointer; font-size: 12.5px; font-family: inherit; }
-  header.site .right .signout:hover { border-color: rgb(90,90,94); }
-  main { padding: 48px 0 80px; }
-  h1 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 500; letter-spacing: -0.02em; margin: 0 0 6px; line-height: 1.15; }
-  .sub { color: rgb(176,176,176); font-size: 14px; margin-bottom: 32px; }
-  .welcome { padding: 18px 22px; border: 1px solid rgb(58,108,80); background: rgb(28,46,38); color: rgb(168,224,184); border-radius: 6px; margin-bottom: 24px; display: none; }
-  .welcome.show { display: block; }
-  .welcome h3 { margin: 0 0 6px; font-size: 14px; font-weight: 600; }
-  .welcome p { margin: 0; font-size: 13px; line-height: 1.5; }
-  .welcome .key-row { margin-top: 10px; display: flex; gap: 8px; align-items: center; }
-  .welcome .key-row input { flex: 1; padding: 8px 12px; background: rgb(16,28,22); border: 1px solid rgb(58,108,80); color: rgb(168,224,184); border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
-  .welcome .key-row button { padding: 8px 14px; background: rgb(168,224,184); color: rgb(16,28,22); border: 0; border-radius: 4px; font-weight: 500; font-size: 12.5px; cursor: pointer; }
-  .signin-card { max-width: 460px; margin: 80px auto; padding: 40px; border: 1px solid rgb(46,46,50); border-radius: 8px; background: rgb(36,36,38); }
-  .signin-card h2 { font-size: 22px; font-weight: 500; margin: 0 0 6px; letter-spacing: -0.01em; }
-  .signin-card p { color: rgb(176,176,176); font-size: 13px; line-height: 1.5; margin: 0 0 22px; }
-  .signin-card label { display: block; font-size: 12px; color: rgb(138,138,142); margin-bottom: 6px; font-weight: 500; }
-  .signin-card input { width: 100%; padding: 10px 14px; font-size: 13px; color: rgb(236,236,236); border: 1px solid rgb(58,58,62); border-radius: 4px; background: rgb(28,28,30); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .signin-card .submit { width: 100%; margin-top: 12px; padding: 11px 16px; background: rgb(236,236,236); color: rgb(36,36,38); border: 0; border-radius: 4px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; }
-  .signin-card .hint { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgb(46,46,50); font-size: 12px; color: rgb(138,138,142); line-height: 1.55; }
-  .signin-card .signin-err { margin-top: 10px; padding: 10px 14px; background: rgb(46,28,32); color: rgb(236,168,176); border: 1px solid rgb(116,58,68); border-radius: 4px; font-size: 12.5px; display: none; }
-  .tenant-card { padding: 24px 28px; border: 1px solid rgb(46,46,50); border-radius: 8px; background: rgb(36,36,38); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .tenant-card .left h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.005em; }
-  .tenant-card .left .email { font-size: 13px; color: rgb(138,138,142); margin-top: 4px; }
-  .tenant-card .right { display: flex; align-items: center; gap: 12px; }
-  .badge { display: inline-flex; align-items: center; padding: 4px 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; }
-  .badge.plan-free { background: rgb(28,40,55); color: rgb(178,206,236); }
-  .badge.plan-pro { background: rgb(40,30,55); color: rgb(206,178,236); }
-  .badge.plan-enterprise { background: rgb(46,32,18); color: rgb(236,206,134); }
-  .badge.status-active { background: rgb(28,46,38); color: rgb(168,224,184); }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-  .stat { padding: 22px 24px; border: 1px solid rgb(46,46,50); border-radius: 8px; background: rgb(36,36,38); }
-  .stat .label { font-size: 11px; color: rgb(138,138,142); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
-  .stat .value { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; color: rgb(236,236,236); }
-  .stat .footnote { font-size: 11.5px; color: rgb(138,138,142); margin-top: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .section { padding: 28px 28px 24px; border: 1px solid rgb(46,46,50); border-radius: 8px; background: rgb(36,36,38); margin-bottom: 24px; }
-  .section h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; letter-spacing: -0.005em; }
-  .section .desc { font-size: 12.5px; color: rgb(138,138,142); margin: 0 0 18px; line-height: 1.5; }
-  .keys-table { width: 100%; border-collapse: collapse; }
-  .keys-table th { text-align: left; font-size: 10.5px; color: rgb(138,138,142); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; padding: 8px 0; border-bottom: 1px solid rgb(46,46,50); }
-  .keys-table td { padding: 12px 0; font-size: 13px; color: rgb(221,221,221); border-bottom: 1px solid rgb(46,46,50); }
-  .keys-table tr:last-child td { border-bottom: 0; }
-  .keys-table .key-prefix { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: rgb(236,236,236); }
-  .keys-table .revoked { color: rgb(138,138,142); text-decoration: line-through; }
-  .keys-table button { padding: 5px 10px; background: transparent; border: 1px solid rgb(58,58,62); color: rgb(221,221,221); border-radius: 4px; cursor: pointer; font-size: 12px; font-family: inherit; }
-  .keys-table button:hover { border-color: rgb(90,90,94); }
-  .quickstart { background: rgb(20,20,22); border: 1px solid rgb(46,46,50); border-radius: 8px; overflow: hidden; }
-  .quickstart .hd { padding: 16px 22px 12px; }
-  .quickstart .hd .label { font-size: 11px; color: rgb(138,138,142); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-  .quickstart .hd .title { font-size: 14px; font-weight: 500; color: rgb(236,236,236); }
-  .quickstart pre { margin: 0; padding: 18px 22px; background: rgb(16,16,18); color: rgb(178,206,236); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.65; overflow-x: auto; white-space: pre; border-top: 1px solid rgb(46,46,50); }
-  .loading { padding: 80px 40px; text-align: center; color: rgb(138,138,142); font-size: 13px; }
-  .error-banner { padding: 16px 20px; background: rgb(46,28,32); color: rgb(236,168,176); border: 1px solid rgb(116,58,68); border-radius: 6px; margin-bottom: 24px; font-size: 13px; }
-  footer.site { border-top: 1px solid rgb(46,46,50); background: rgb(36,36,38); color: rgb(138,138,142); font-size: 12px; padding: 24px 40px; text-align: center; }
-  footer.site a { color: rgb(176,176,176); }
-  @media (max-width: 720px) {
-    .container { padding: 0 20px; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .tenant-card { flex-direction: column; align-items: flex-start; }
-    .tenant-card .right { width: 100%; justify-content: flex-start; }
-  }
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Dashboard — AEOESS</title>
+  <meta name="description" content="AEOESS governance dashboard. Live state of your tenant: agents, delegations, receipts, evaluations.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/assets/images/aeoess_logo-05.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #1c1c1e; color: #ececec; min-height: 100vh;
+      font-family: -apple-system, "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .loading { padding: 80px 40px; text-align: center; color: #8a8a8e; font-size: 13px; }
+    /* Sign-in fallback */
+    .signin-card { max-width: 460px; margin: 80px auto; padding: 40px;
+      border: 1px solid #2e2e32; border-radius: 8px; background: #242426; }
+    .signin-card h2 { font-size: 22px; font-weight: 500; margin: 0 0 6px; letter-spacing: -0.01em; }
+    .signin-card p { color: #b0b0b0; font-size: 13px; line-height: 1.5; margin: 0 0 22px; }
+    .signin-card label { display: block; font-size: 12px; color: #8a8a8e; margin-bottom: 6px; font-weight: 500; }
+    .signin-card input { width: 100%; padding: 10px 14px; font-size: 13px; color: #ececec;
+      border: 1px solid #3a3a3e; border-radius: 4px; background: #1c1c1e;
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .signin-card .submit { width: 100%; margin-top: 12px; padding: 11px 16px;
+      background: #ececec; color: #242426; border: 0; border-radius: 4px;
+      font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; }
+    .signin-card .hint { margin-top: 18px; padding-top: 18px; border-top: 1px solid #2e2e32;
+      font-size: 12px; color: #8a8a8e; line-height: 1.55; }
+    .signin-card .signin-err { margin-top: 10px; padding: 10px 14px;
+      background: #2e1c20; color: #ecaab0; border: 1px solid #743a44; border-radius: 4px;
+      font-size: 12.5px; display: none; }
+    .signin-card a { color: #7cacde; text-decoration: none; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div id="root"><div class="loading">Loading dashboard…</div></div>
 
-<header class="site">
-  <div class="inner">
-    <a href="/" class="brand">
-      <img src="/assets/images/aeoess_logo-05.png" alt="AEOESS">
-      <span style="font-size:13px;font-weight:600;letter-spacing:0.04em;">AEOESS</span>
-    </a>
-    <nav>
-      <a href="/passport.html">Spec</a>
-      <a href="/docs.html">Docs</a>
-      <a href="/pricing.html">Pricing</a>
-      <a href="/blog.html">Blog</a>
-    </nav>
-    <div class="right">
-      <a href="https://gateway.aeoess.com" target="_blank" class="mono" style="font-size:11.5px;">gateway.aeoess.com</a>
-      <button class="signout" id="signout-btn" style="display:none;">Sign out</button>
-    </div>
-  </div>
-</header>
+  <script type="text/babel">
+  /* ─────────────────────────────────────────────────────────────────
+     AEOESS Dashboard
+     Single React component. Authenticates via an aps_live_* key stored
+     in localStorage (or freshly arrived in #welcome=...), fetches the
+     tenant's live state from gateway.aeoess.com, and renders the slick
+     enforcement view (metric tiles, decisions feed, environment widget,
+     working action buttons). Falls back to a sign-in card when no key.
+     ───────────────────────────────────────────────────────────────── */
 
-<main>
-  <div class="container" id="root">
-    <div class="loading">Loading…</div>
-  </div>
-</main>
+  const GATEWAY = 'https://gateway.aeoess.com';
+  const KEY_STORAGE = 'aps_api_key';
 
-<footer class="site">
-  © 2026 AEOESS · <a href="mailto:signal@aeoess.com">signal@aeoess.com</a> · <a href="/portal.html">Portal</a>
-</footer>
+  const P = {
+    bg:        '#1c1c1e',
+    paper:     '#242426',
+    surface:   '#2a2a2e',
+    ink:       '#ececec',
+    ink2:      '#dddddd',
+    ink3:      '#b0b0b0',
+    ink4:      '#8a8a8e',
+    ink5:      '#5a5a5e',
+    rule:      '#3a3a3e',
+    ruleLight: '#2e2e32',
+    link:      '#7cacde',
+    green:     '#4ade80',
+    blue:      '#60a5fa',
+    red:       '#f87171',
+    amber:     '#f59e0b',
+  };
 
-<script>
-(function() {
-  var GATEWAY = 'https://gateway.aeoess.com';
-  var KEY_STORAGE = 'aps_api_key';
-  var TENANT_STORAGE = 'aps_tenant_id';
+  const MONO = '"IBM Plex Mono", ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace';
 
-  function getKey() {
-    var hash = window.location.hash || '';
-    var m = hash.match(/welcome=([^&]+)/);
+  // ───── Storage + key handling ─────────────────────────────────────
+  function readWelcomeKey() {
+    const m = (window.location.hash || '').match(/welcome=([^&]+)/);
     if (m) {
-      var k = decodeURIComponent(m[1]);
+      const k = decodeURIComponent(m[1]);
       try { localStorage.setItem(KEY_STORAGE, k); } catch(e) {}
+      try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
       return { key: k, fresh: true };
     }
     try {
-      var stored = localStorage.getItem(KEY_STORAGE);
+      const stored = localStorage.getItem(KEY_STORAGE);
       if (stored) return { key: stored, fresh: false };
     } catch(e) {}
     return null;
   }
-
   function clearKey() {
-    try {
-      localStorage.removeItem(KEY_STORAGE);
-      localStorage.removeItem(TENANT_STORAGE);
-    } catch(e) {}
+    try { localStorage.removeItem(KEY_STORAGE); localStorage.removeItem('aps_tenant_id'); } catch(e) {}
   }
 
-  function api(path, opts) {
-    var key = (getKey() || {}).key;
-    if (!key) return Promise.reject(new Error('no_key'));
+  function api(path, key, opts) {
     opts = opts || {};
-    opts.headers = opts.headers || {};
-    opts.headers['Authorization'] = 'Bearer ' + key;
+    opts.headers = Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + key });
     if (opts.body) opts.headers['Content-Type'] = 'application/json';
-    return fetch(GATEWAY + path, opts).then(function(r) {
-      return r.json().then(function(j) { return { status: r.status, body: j }; });
-    });
+    return fetch(GATEWAY + path, opts).then(r => r.json().then(j => ({ status: r.status, body: j })));
   }
 
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"\u0027]/g, function(c) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"\u0027":'&#39;'}[c]); }); }
-
-  function fmtNum(n) { if (n < 0) return '\u221E'; return Number(n).toLocaleString(); }
-  function fmtLimit(n) { if (n === -1 || n == null) return 'unlimited'; return Number(n).toLocaleString(); }
-  function fmtDate(s) {
-    if (!s) return '\u2014';
+  // ───── Format helpers ─────────────────────────────────────────────
+  const fmtNum = (n) => n == null ? '—' : n < 0 ? '∞' : Number(n).toLocaleString();
+  const fmtLimit = (n) => n === -1 || n == null ? 'unlimited' : Number(n).toLocaleString();
+  const fmtMs = (ms) => ms == null ? '—' : Number(ms).toFixed(0) + 'ms';
+  const fmtPct = (r) => r == null ? '—' : (Number(r) * 100).toFixed(2) + '%';
+  const fmtTime = (iso) => {
+    if (!iso) return '—';
     try {
-      var d = new Date(s.replace(' ', 'T') + 'Z');
-      var diff = (Date.now() - d.getTime()) / 1000;
+      const d = new Date(String(iso).replace(' ', 'T') + (String(iso).includes('Z') ? '' : 'Z'));
+      return d.toISOString().substr(11, 8);
+    } catch(e) { return iso; }
+  };
+  const fmtRel = (iso) => {
+    if (!iso) return '—';
+    try {
+      const d = new Date(String(iso).replace(' ', 'T') + (String(iso).includes('Z') ? '' : 'Z'));
+      const diff = (Date.now() - d.getTime()) / 1000;
       if (diff < 60) return 'just now';
       if (diff < 3600) return Math.floor(diff/60) + ' min ago';
       if (diff < 86400) return Math.floor(diff/3600) + ' h ago';
       if (diff < 30*86400) return Math.floor(diff/86400) + ' d ago';
       return d.toISOString().slice(0,10);
-    } catch(e) { return s; }
+    } catch(e) { return iso; }
+  };
+
+  // ───── Sub-components ─────────────────────────────────────────────
+  function Header({ tenant, onSignOut }) {
+    return (
+      <header style={{ borderBottom:`1px solid ${P.ruleLight}`, background:P.paper, position:'sticky', top:0, zIndex:5, backdropFilter:'blur(8px)' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', display:'flex', alignItems:'center', gap:24, padding:'14px 40px' }}>
+          <a href="/" style={{ display:'flex', alignItems:'center', gap:8, color:P.ink, textDecoration:'none' }}>
+            <img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style={{ height:22, width:'auto' }}/>
+            <span style={{ fontSize:13, fontWeight:600, letterSpacing:'0.04em' }}>AEOESS</span>
+          </a>
+          <nav style={{ display:'flex', alignItems:'center', gap:24, fontSize:13, color:P.ink3, marginLeft:8 }}>
+            <a href="/passport.html" style={{ color:P.ink3 }}>Spec</a>
+            <a href="/docs.html"     style={{ color:P.ink3 }}>Docs</a>
+            <a href="/pricing.html"  style={{ color:P.ink3 }}>Pricing</a>
+            <a href="/blog.html"     style={{ color:P.ink3 }}>Blog</a>
+          </nav>
+          <div style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:14 }}>
+            <span style={{ color:P.ink4, fontSize:11.5, fontFamily:MONO }}>gateway.aeoess.com</span>
+            {tenant ? <span style={{ color:P.ink4, fontSize:12 }}>{tenant.email}</span> : null}
+            <button onClick={onSignOut}
+              style={{ padding:'6px 12px', border:`1px solid ${P.rule}`, borderRadius:4, background:'transparent', color:P.ink2, cursor:'pointer', fontSize:12.5, fontFamily:'inherit' }}>
+              Sign out
+            </button>
+          </div>
+        </div>
+      </header>
+    );
   }
 
-  function renderSignIn(errorMsg) {
-    var root = document.getElementById('root');
-    root.innerHTML = ''
-      + '<div class="signin-card">'
-      + '<h2>Sign in to your dashboard</h2>'
-      + '<p>Paste the API key you received when you signed up.</p>'
-      + '<label for="key-input">API key</label>'
-      + '<input id="key-input" type="text" placeholder="aps_live_..." autocomplete="off" spellcheck="false">'
-      + '<div class="signin-err" id="signin-err"' + (errorMsg ? ' style="display:block;"' : '') + '>' + (errorMsg ? esc(errorMsg) : '') + '</div>'
-      + '<button class="submit" id="signin-submit">Continue \u2192</button>'
-      + '<div class="hint">'
-      +   'New here? <a href="/portal.html">Create an account \u2192</a><br>'
-      +   'Lost your key? Email <a href="mailto:signal@aeoess.com">signal@aeoess.com</a>'
-      + '</div>'
-      + '</div>';
+  function Stat({ label, value, sub, color }) {
+    return (
+      <div style={{ padding:'22px 24px', border:`1px solid ${P.ruleLight}`, borderRadius:8, background:P.paper }}>
+        <div style={{ fontSize:11, color:P.ink4, letterSpacing:'0.06em', textTransform:'uppercase', fontWeight:600, marginBottom:8 }}>{label}</div>
+        <div style={{ fontSize:32, fontWeight:500, letterSpacing:'-0.02em', color: color || P.ink }}>{value}</div>
+        <div style={{ fontSize:11.5, color:P.ink4, marginTop:4, fontFamily:MONO }}>{sub}</div>
+      </div>
+    );
+  }
 
-    function submit() {
-      var k = (document.getElementById('key-input').value || '').trim();
+  function DecisionsFeed({ rows, status }) {
+    if (rows.length === 0) {
+      return (
+        <div style={{ padding:'48px 18px', textAlign:'center', color:P.ink4, fontSize:13 }}>
+          {status === 'idle'    ? 'No policy evaluations recorded yet. They will appear here as agents call /api/v1/evaluate.'
+          : status === 'error'  ? 'Could not load the decisions feed. Try again in a moment.'
+          : 'Loading recent decisions…'}
+        </div>
+      );
+    }
+    return (
+      <table style={{ width:'100%', borderCollapse:'collapse', fontFamily:MONO, fontSize:12.5 }}>
+        <tbody>
+          {rows.map((r, i) => {
+            const allow = r.decision === 'permit' || r.decision === 'allow';
+            const color = allow ? P.green : P.red;
+            return (
+              <tr key={r.id || i}>
+                <td style={{ padding:'10px 18px', color:P.ink5, borderTop: i ? `1px solid ${P.ruleLight}` : 'none', whiteSpace:'nowrap' }}>{fmtTime(r.ts)}</td>
+                <td style={{ padding:'10px 12px', borderTop: i ? `1px solid ${P.ruleLight}` : 'none' }}>
+                  <span style={{ display:'inline-block', padding:'2px 8px', borderRadius:3, fontSize:11, letterSpacing:'0.04em',
+                    background: color + '1f', color, fontWeight:600 }}>
+                    {String(r.decision || '').toUpperCase()}
+                  </span>
+                </td>
+                <td style={{ padding:'10px 12px', color:P.ink4, borderTop: i ? `1px solid ${P.ruleLight}` : 'none' }}>{fmtMs(r.duration_ms)}</td>
+                <td style={{ padding:'10px 12px', color:P.ink2, borderTop: i ? `1px solid ${P.ruleLight}` : 'none' }}>{(r.agent_id || '').slice(0, 10)}…</td>
+                <td style={{ padding:'10px 12px', color:P.ink3, borderTop: i ? `1px solid ${P.ruleLight}` : 'none' }}>{r.action_type}</td>
+                <td style={{ padding:'10px 18px', color:P.ink2, borderTop: i ? `1px solid ${P.ruleLight}` : 'none', textAlign:'right' }}>{r.scope_required}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
+
+  function ReceiptsList({ rows, status, onClose }) {
+    return (
+      <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, marginTop:24 }}>
+        <div style={{ padding:'14px 18px', borderBottom:`1px solid ${P.ruleLight}`, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+          <div style={{ fontSize:13, fontWeight:600, color:P.ink }}>Recent receipts</div>
+          <button onClick={onClose} style={{ background:'transparent', border:`1px solid ${P.rule}`, borderRadius:4, padding:'4px 10px', color:P.ink3, fontSize:11.5, cursor:'pointer', fontFamily:'inherit' }}>Close</button>
+        </div>
+        {rows.length === 0
+          ? <div style={{ padding:'32px 18px', textAlign:'center', color:P.ink4, fontSize:13 }}>{status === 'loading' ? 'Loading receipts…' : 'No receipts yet.'}</div>
+          : (
+            <table style={{ width:'100%', borderCollapse:'collapse', fontFamily:MONO, fontSize:12.5 }}>
+              <thead>
+                <tr style={{ color:P.ink4, fontSize:10.5, letterSpacing:'0.06em', textTransform:'uppercase' }}>
+                  <th style={{ textAlign:'left', padding:'10px 18px', fontWeight:600 }}>When</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Verdict</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Agent</th>
+                  <th style={{ textAlign:'left', padding:'10px 12px', fontWeight:600 }}>Action</th>
+                  <th style={{ textAlign:'left', padding:'10px 18px', fontWeight:600 }}>Receipt id</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r, i) => {
+                  const allow = r.verdict === 'permit' || r.verdict === 'allow';
+                  const color = allow ? P.green : P.red;
+                  return (
+                    <tr key={r.id || i}>
+                      <td style={{ padding:'10px 18px', color:P.ink5, borderTop: `1px solid ${P.ruleLight}` }}>{fmtRel(r.created_at)}</td>
+                      <td style={{ padding:'10px 12px', borderTop: `1px solid ${P.ruleLight}` }}>
+                        <span style={{ display:'inline-block', padding:'2px 8px', borderRadius:3, fontSize:11, background: color+'1f', color, fontWeight:600 }}>
+                          {String(r.verdict || '').toUpperCase()}
+                        </span>
+                      </td>
+                      <td style={{ padding:'10px 12px', color:P.ink2, borderTop: `1px solid ${P.ruleLight}` }}>{(r.agent_id || '').slice(0, 12)}…</td>
+                      <td style={{ padding:'10px 12px', color:P.ink3, borderTop: `1px solid ${P.ruleLight}` }}>{r.action_type}</td>
+                      <td style={{ padding:'10px 18px', color:P.ink4, borderTop: `1px solid ${P.ruleLight}`, fontFamily:MONO }}>{String(r.id || '').slice(0, 12)}…</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )
+        }
+      </div>
+    );
+  }
+
+  // ───── Sign-in screen (no key in storage) ─────────────────────────
+  function SignIn({ initialError, onKey }) {
+    const [err, setErr] = React.useState(initialError || '');
+    const [val, setVal] = React.useState('');
+    const submit = () => {
+      const k = val.trim();
       if (!k.startsWith('aps_live_') && !k.startsWith('aps_test_')) {
-        showSigninErr("That doesn\u0027t look like an API key. Keys start with aps_live_\u2026");
+        setErr("That doesn't look like an API key. Keys start with aps_live_…");
         return;
       }
       try { localStorage.setItem(KEY_STORAGE, k); } catch(e) {}
-      load();
-    }
-    document.getElementById('signin-submit').addEventListener('click', submit);
-    document.getElementById('key-input').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { e.preventDefault(); submit(); }
+      onKey(k);
+    };
+    return (
+      <div className="signin-card">
+        <h2>Sign in to your dashboard</h2>
+        <p>Paste the API key you received when you signed up — or <a href="/portal.html">sign in via portal</a>.</p>
+        <label htmlFor="key-input">API key</label>
+        <input id="key-input" type="text" placeholder="aps_live_..." autoComplete="off" spellCheck="false"
+          value={val} onChange={e => setVal(e.target.value)}
+          onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } }} />
+        {err ? <div className="signin-err" style={{display:'block'}}>{err}</div> : null}
+        <button className="submit" onClick={submit}>Continue →</button>
+        <div className="hint">
+          New here? <a href="/portal.html">Create an account →</a><br/>
+          Lost your key? <a href="/portal.html">Reset via portal</a> or email <a href="mailto:signal@aeoess.com">signal@aeoess.com</a>.
+        </div>
+      </div>
+    );
+  }
+
+  // ───── Main dashboard ─────────────────────────────────────────────
+  function Dashboard({ apiKey, freshKey, onSignOut }) {
+    const [account, setAccount] = React.useState(null);
+    const [dash, setDash] = React.useState(null);
+    const [decisions, setDecisions] = React.useState([]);
+    const [decisionsStatus, setDecisionsStatus] = React.useState('loading');
+    const [envState, setEnvState] = React.useState({
+      gateway: { v:'loading…', s:'amber' },
+      jwks:    { v:'loading…', s:'amber' },
+      bundle:  { v:'co-deployed with gateway', s:'green' },
+      trust:   { v:'multi-issuer feed live',   s:'green' },
     });
-    document.getElementById('key-input').focus();
-  }
-  function showSigninErr(msg) {
-    var el = document.getElementById('signin-err');
-    if (el) { el.textContent = msg; el.style.display = 'block'; }
-  }
+    const [showReceipts, setShowReceipts] = React.useState(false);
+    const [receipts, setReceipts] = React.useState([]);
+    const [receiptsStatus, setReceiptsStatus] = React.useState('idle');
+    const [busy, setBusy] = React.useState(null);
+    const [toast, setToast] = React.useState(null);
 
-  function renderDashboard(account, fresh, freshKey) {
-    var root = document.getElementById('root');
-    var planClass = 'plan-' + esc(account.plan);
-    var planLabel = account.plan.charAt(0).toUpperCase() + account.plan.slice(1);
-    var statusClass = 'status-' + esc(account.status);
+    // Initial + periodic loads
+    React.useEffect(() => {
+      let cancelled = false;
+      let pollDecisions, pollDash;
 
-    document.getElementById('signout-btn').style.display = 'inline-flex';
-
-    var welcomeHtml = '';
-    if (fresh && freshKey) {
-      welcomeHtml = ''
-        + '<div class="welcome show">'
-        +   '<h3>\uD83C\uDF89 Your account is live.</h3>'
-        +   '<p>Copy your API key and save it somewhere safe. This is the only place you\u0027ll see it in full \u2014 after this you\u0027ll only see the prefix.</p>'
-        +   '<div class="key-row">'
-        +     '<input id="fresh-key" type="text" value="' + esc(freshKey) + '" readonly>'
-        +     '<button id="fresh-copy">Copy</button>'
-        +   '</div>'
-        + '</div>';
-    }
-
-    var keysRows = (account.api_keys || []).map(function(k) {
-      var cls = k.revoked_at ? 'revoked' : '';
-      var actions = k.revoked_at ? '<span style="color:rgb(138,138,142);font-size:11.5px;">revoked</span>' : '';
-      return ''
-        + '<tr>'
-        +   '<td class="key-prefix ' + cls + '">' + esc(k.prefix) + '\u2026</td>'
-        +   '<td class="' + cls + '">' + esc(k.name) + '</td>'
-        +   '<td class="' + cls + '">' + esc(fmtDate(k.created_at)) + '</td>'
-        +   '<td class="' + cls + '">' + esc(fmtDate(k.last_used_at)) + '</td>'
-        +   '<td style="text-align:right;">' + actions + '</td>'
-        + '</tr>';
-    }).join('');
-
-    var rotateBlock = ''
-      + '<div style="margin-top:16px;padding-top:16px;border-top:1px solid rgb(46,46,50);font-size:12.5px;color:rgb(138,138,142);">'
-      +   'Need to rotate? <button id="rotate-btn" style="padding:5px 10px;margin-left:8px;background:transparent;border:1px solid rgb(58,58,62);color:rgb(221,221,221);border-radius:4px;cursor:pointer;font-size:12px;font-family:inherit;">Rotate key</button>'
-      +   '<span style="margin-left:8px;font-size:11.5px;">Issues a new key alongside the current one; revoke the old one when you\u0027ve switched over.</span>'
-      + '</div>';
-
-    var stats = account.usage || {};
-    var limits = account.limits || {};
-
-    var firstKey = (account.api_keys && account.api_keys[0]) ? account.api_keys[0] : null;
-    var quickstartKey = freshKey || (firstKey ? firstKey.prefix + '\u2026' : 'aps_live_\u2026');
-
-    root.innerHTML = ''
-      + welcomeHtml
-      + '<h1>Governance dashboard</h1>'
-      + '<div class="sub">Live state of your AEOESS tenant.</div>'
-      + '<div class="tenant-card">'
-      +   '<div class="left">'
-      +     '<h2>' + esc(account.name) + '</h2>'
-      +     '<div class="email">' + esc(account.email) + ' \u00B7 <span class="mono" style="font-size:11.5px;color:rgb(90,90,94);">' + esc(account.tenant_id) + '</span></div>'
-      +   '</div>'
-      +   '<div class="right">'
-      +     '<span class="badge ' + planClass + '">' + esc(planLabel) + '</span>'
-      +     '<span class="badge ' + statusClass + '">' + esc(account.status) + '</span>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="stats">'
-      +   '<div class="stat"><div class="label">Agents</div><div class="value">' + fmtNum(stats.agents || 0) + '</div><div class="footnote">limit \u00B7 ' + fmtLimit(limits.max_agents) + '</div></div>'
-      +   '<div class="stat"><div class="label">Delegations</div><div class="value">' + fmtNum(stats.delegations || 0) + '</div><div class="footnote">active</div></div>'
-      +   '<div class="stat"><div class="label">Evals this month</div><div class="value">' + fmtNum(stats.evaluations_this_month || 0) + '</div><div class="footnote">limit \u00B7 ' + fmtLimit(limits.evaluations_per_month) + '</div></div>'
-      +   '<div class="stat"><div class="label">Receipts</div><div class="value">' + fmtNum(stats.receipts || 0) + '</div><div class="footnote">signed \u00B7 verifiable</div></div>'
-      + '</div>'
-      + '<div class="section">'
-      +   '<h3>API keys</h3>'
-      +   '<p class="desc">These keys authenticate every call to the gateway. Treat them like passwords; rotate if exposed.</p>'
-      +   '<table class="keys-table">'
-      +     '<thead><tr><th>Key</th><th>Name</th><th>Created</th><th>Last used</th><th></th></tr></thead>'
-      +     '<tbody>' + keysRows + '</tbody>'
-      +   '</table>'
-      +   rotateBlock
-      + '</div>'
-      + '<div class="section" style="padding:0;border:0;background:transparent;">'
-      +   '<div class="quickstart">'
-      +     '<div class="hd"><div class="label">Quickstart</div><div class="title">Make your first authenticated call</div></div>'
-      +     '<pre>curl -H "Authorization: Bearer ' + esc(quickstartKey) + '" \\\n     ' + GATEWAY + '/api/v1/account</pre>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="section" style="background:transparent;border:0;padding:0;margin-top:32px;color:rgb(138,138,142);font-size:12.5px;text-align:center;">'
-      +   'Need a Pro or Enterprise plan, additional keys, or compliance reports? Email <a href="mailto:signal@aeoess.com">signal@aeoess.com</a>.'
-      + '</div>';
-
-    var fc = document.getElementById('fresh-copy');
-    if (fc) {
-      fc.addEventListener('click', function() {
-        var input = document.getElementById('fresh-key');
-        input.select();
-        try {
-          document.execCommand('copy');
-          fc.textContent = 'Copied \u2713';
-          setTimeout(function() { fc.textContent = 'Copy'; }, 1500);
-        } catch(e) {}
+      const loadAccount = () => api('/api/v1/account', apiKey).then(res => {
+        if (cancelled) return;
+        if (res.status === 401) { clearKey(); onSignOut('Your API key is no longer valid.'); return; }
+        if (res.status === 200) setAccount(res.body);
       });
-    }
 
-    var rb = document.getElementById('rotate-btn');
-    if (rb) {
-      rb.addEventListener('click', function() {
-        if (!confirm('Issue a new API key? Your current key will keep working until you revoke it.')) return;
-        rb.disabled = true;
-        rb.textContent = 'Rotating\u2026';
-        api('/api/v1/account/rotate-key', { method: 'POST' }).then(function(res) {
-          if (res.status === 200 && res.body.api_key) {
-            try { localStorage.setItem(KEY_STORAGE, res.body.api_key); } catch(e) {}
-            window.location.hash = 'welcome=' + encodeURIComponent(res.body.api_key);
-            load();
+      const loadDash = () => api('/api/v1/dashboard', apiKey).then(res => {
+        if (cancelled) return;
+        if (res.status === 200) setDash(res.body);
+      }).catch(()=>{});
+
+      const loadDecisions = () => api('/api/v1/decisions/recent?limit=20', apiKey).then(res => {
+        if (cancelled) return;
+        if (res.status === 200) {
+          setDecisions(res.body.decisions || []);
+          setDecisionsStatus((res.body.decisions || []).length > 0 ? 'live' : 'idle');
+        } else { setDecisionsStatus('error'); }
+      }).catch(() => { if (!cancelled) setDecisionsStatus('error'); });
+
+      const loadEnv = () => {
+        fetch(GATEWAY + '/healthz').then(r => r.json()).then(d => {
+          if (!cancelled) setEnvState(s => ({ ...s, gateway: { v: 'v' + (d.version || '?') + ' · us-west', s:'green' } }));
+        }).catch(() => { if (!cancelled) setEnvState(s => ({ ...s, gateway: { v:'unreachable', s:'red' } })); });
+        fetch(GATEWAY + '/.well-known/jwks.json').then(r => r.ok ? r.json() : null).then(d => {
+          if (cancelled) return;
+          if (d && d.keys && d.keys.length > 0) {
+            setEnvState(s => ({ ...s, jwks: { v: 'kid: ' + (d.keys[0].kid || 'unknown'), s:'green' } }));
           } else {
-            alert('Rotate failed: ' + (res.body.error || 'unknown'));
-            rb.disabled = false;
-            rb.textContent = 'Rotate key';
+            setEnvState(s => ({ ...s, jwks: { v: 'no keys advertised', s:'amber' } }));
           }
-        }).catch(function() {
-          alert('Rotate failed: network error');
-          rb.disabled = false;
-          rb.textContent = 'Rotate key';
-        });
-      });
+        }).catch(() => { if (!cancelled) setEnvState(s => ({ ...s, jwks: { v:'unreachable', s:'red' } })); });
+      };
+
+      loadAccount(); loadDash(); loadDecisions(); loadEnv();
+      pollDash = setInterval(loadDash, 30_000);
+      pollDecisions = setInterval(loadDecisions, 10_000);
+      return () => { cancelled = true; clearInterval(pollDash); clearInterval(pollDecisions); };
+    }, [apiKey]);
+
+    const showToast = (msg, kind) => { setToast({ msg, kind: kind || 'info' }); setTimeout(() => setToast(null), 4000); };
+
+    // Action: rotate key
+    const onRotate = () => {
+      if (!confirm('Issue a new API key alongside the current one? Your current key keeps working until you revoke it.')) return;
+      setBusy('rotate');
+      api('/api/v1/account/rotate-key', apiKey, { method: 'POST' }).then(res => {
+        setBusy(null);
+        if (res.status === 200 && res.body.api_key) {
+          try { localStorage.setItem(KEY_STORAGE, res.body.api_key); } catch(e) {}
+          showToast('New key issued. Save it: ' + res.body.api_key.substr(0, 16) + '…', 'success');
+          // Re-render with the new key so the keys table updates
+          window.location.hash = 'welcome=' + encodeURIComponent(res.body.api_key);
+          window.location.reload();
+        } else {
+          showToast('Rotate failed: ' + (res.body.error || 'unknown'), 'error');
+        }
+      }).catch(() => { setBusy(null); showToast('Rotate failed: network error', 'error'); });
+    };
+
+    // Action: open portal
+    const onOpenPortal = () => { window.open('/portal.html', '_self'); };
+
+    // Action: view receipts (toggle)
+    const onViewReceipts = () => {
+      if (showReceipts) { setShowReceipts(false); return; }
+      setShowReceipts(true);
+      setReceiptsStatus('loading');
+      api('/api/v1/receipts/recent?limit=20', apiKey).then(res => {
+        if (res.status === 200) { setReceipts(res.body.receipts || []); setReceiptsStatus(res.body.receipts && res.body.receipts.length ? 'live' : 'idle'); }
+        else { setReceiptsStatus('error'); }
+      }).catch(() => setReceiptsStatus('error'));
+    };
+
+    // Action: cascade revoke — admin guard via the portal flow
+    const onCascadeRevoke = () => {
+      const agentId = prompt('Cascade revoke: enter the agent_id at the root of the tree to revoke.\nAll downstream delegations cascade-revoke.\n\nThis is irreversible.');
+      if (!agentId || !agentId.trim()) return;
+      if (!confirm('Cascade-revoke agent ' + agentId.trim() + ' and all its descendants?')) return;
+      setBusy('revoke');
+      api('/api/v1/revoke', apiKey, { method: 'POST', body: JSON.stringify({ agent_id: agentId.trim(), reason: 'manual cascade revoke from dashboard' }) }).then(res => {
+        setBusy(null);
+        if (res.status >= 200 && res.status < 300) {
+          showToast('Cascade revoke issued for ' + agentId.trim() + '. Downstream delegations invalidated.', 'success');
+        } else {
+          showToast('Revoke failed: ' + (res.body && res.body.error ? res.body.error : 'HTTP ' + res.status), 'error');
+        }
+      }).catch(() => { setBusy(null); showToast('Revoke failed: network error', 'error'); });
+    };
+
+    if (!account) {
+      return (
+        <div>
+          <Header tenant={null} onSignOut={() => onSignOut()}/>
+          <div className="loading">Loading your tenant…</div>
+        </div>
+      );
     }
+
+    const PLAN_LABEL = String(account.plan || '').charAt(0).toUpperCase() + String(account.plan || '').slice(1);
+    const usage = account.usage || {};
+    const limits = account.limits || {};
+
+    return (
+      <div style={{ background:P.bg, color:P.ink, minHeight:'100%' }}>
+        <Header tenant={account} onSignOut={onSignOut}/>
+
+        {/* Hero strip */}
+        <section style={{ padding:'40px 40px 28px', background:P.paper, borderBottom:`1px solid ${P.ruleLight}` }}>
+          <div style={{ maxWidth:1280, margin:'0 auto', display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap:32, flexWrap:'wrap' }}>
+            <div>
+              <div style={{ fontFamily:MONO, fontSize:11, color:P.ink5, letterSpacing:'0.10em', textTransform:'uppercase', marginBottom:8 }}>
+                {account.email} · <span style={{ color:P.ink4 }}>{String(account.tenant_id).substr(0, 8)}…</span>
+              </div>
+              <h1 style={{ fontSize:'clamp(28px, 3.4vw, 44px)', lineHeight:1.1, letterSpacing:'-0.02em', fontWeight:500, margin:0 }}>
+                Live enforcement.
+              </h1>
+              <div style={{ marginTop:8, color:P.ink3, fontSize:14 }}>
+                {account.name} · {PLAN_LABEL} · {account.status}
+              </div>
+            </div>
+            <div style={{ display:'flex', gap:10 }}>
+              <span style={{ display:'inline-flex', alignItems:'center', gap:8, padding:'8px 14px', border:`1px solid ${P.ruleLight}`, borderRadius:999, fontSize:12.5, color:P.ink3 }}>
+                <span style={{ width:8, height:8, borderRadius:'50%', background:P.green }}/>
+                {envState.gateway.s === 'green' ? 'Gateway healthy' : 'Gateway degraded'}
+              </span>
+              <a href="/portal.html" style={{ display:'inline-flex', alignItems:'center', gap:6, padding:'9px 16px', border:`1px solid ${P.rule}`, borderRadius:4, fontSize:13, color:P.ink2, background:'transparent' }}>
+                Open portal →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section style={{ padding:'28px 40px 12px' }}>
+          <div style={{ maxWidth:1280, margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:16 }}>
+            <Stat label="Agents"            value={fmtNum(usage.agents)}                  sub={'limit · ' + fmtLimit(limits.max_agents)}/>
+            <Stat label="Delegations"       value={fmtNum(usage.delegations)}             sub={'active'}/>
+            <Stat label="Evals this month"  value={fmtNum(usage.evaluations_this_month)}  sub={'limit · ' + fmtLimit(limits.evaluations_per_month)}/>
+            <Stat label="Receipts"          value={fmtNum(usage.receipts)}                sub={'signed · verifiable'}/>
+          </div>
+        </section>
+
+        {/* Two-col: live feed + environment */}
+        <section style={{ padding:'12px 40px 16px' }}>
+          <div style={{ maxWidth:1280, margin:'0 auto', display:'grid', gridTemplateColumns:'2fr 1fr', gap:16 }}>
+            {/* Feed */}
+            <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, overflow:'hidden' }}>
+              <div style={{ padding:'14px 18px', borderBottom:`1px solid ${P.ruleLight}`, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                <div style={{ fontSize:13, fontWeight:600, color:P.ink }}>Live decisions</div>
+                <div style={{ fontSize:11, color: decisionsStatus === 'live' ? P.green : P.ink5, fontFamily:MONO, letterSpacing:'0.08em', textTransform:'uppercase' }}>
+                  {decisionsStatus === 'live'  ? 'live · last 20'
+                  : decisionsStatus === 'idle' ? 'no evaluations yet'
+                  : decisionsStatus === 'error'? 'feed error' : 'loading…'}
+                </div>
+              </div>
+              <DecisionsFeed rows={decisions} status={decisionsStatus}/>
+            </div>
+
+            {/* Environment + actions */}
+            <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+              <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8 }}>
+                <div style={{ padding:'14px 18px', borderBottom:`1px solid ${P.ruleLight}`, fontSize:13, fontWeight:600, color:P.ink }}>Environment</div>
+                {[
+                  { k:'gateway.aeoess.com', v: envState.gateway.v, s: envState.gateway.s },
+                  { k:'JWKS',               v: envState.jwks.v,    s: envState.jwks.s },
+                  { k:'Policy bundle',      v: envState.bundle.v,  s: envState.bundle.s },
+                  { k:'Trust feed',         v: envState.trust.v,   s: envState.trust.s },
+                ].map((e, i) => {
+                  const dot = e.s === 'green' ? P.green : e.s === 'red' ? P.red : P.amber;
+                  return (
+                    <div key={e.k} style={{ padding:'12px 18px', borderTop: i ? `1px solid ${P.ruleLight}` : 'none',
+                      display:'grid', gridTemplateColumns:'14px 1fr', gap:10, alignItems:'baseline' }}>
+                      <span style={{ width:8, height:8, borderRadius:'50%', background:dot, marginTop:4 }}/>
+                      <div>
+                        <div style={{ fontSize:13, color:P.ink, fontWeight:500 }}>{e.k}</div>
+                        <div style={{ fontFamily:MONO, fontSize:11.5, color:P.ink4, marginTop:2 }}>{e.v}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div style={{ background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, padding:'18px 20px' }}>
+                <div style={{ fontSize:13, fontWeight:600, color:P.ink, marginBottom:10 }}>Quick actions</div>
+                <div style={{ display:'grid', gap:8 }}>
+                  <button onClick={onOpenPortal} style={actionBtn}>
+                    <span>Open portal</span><span style={{ color:P.ink5, fontFamily:MONO }}>→</span>
+                  </button>
+                  <button onClick={onViewReceipts} style={actionBtn}>
+                    <span>{showReceipts ? 'Hide receipts' : 'View receipts'}</span><span style={{ color:P.ink5, fontFamily:MONO }}>{showReceipts ? '×' : '→'}</span>
+                  </button>
+                  <button onClick={onRotate} disabled={busy === 'rotate'} style={actionBtn}>
+                    <span>{busy === 'rotate' ? 'Rotating…' : 'Rotate gateway key'}</span><span style={{ color:P.ink5, fontFamily:MONO }}>→</span>
+                  </button>
+                  <button onClick={onCascadeRevoke} disabled={busy === 'revoke'} style={actionBtn}>
+                    <span>{busy === 'revoke' ? 'Revoking…' : 'Issue cascade revoke'}</span><span style={{ color:P.ink5, fontFamily:MONO }}>→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Receipts (collapsible) */}
+        {showReceipts ? (
+          <section style={{ padding:'4px 40px 16px' }}>
+            <div style={{ maxWidth:1280, margin:'0 auto' }}>
+              <ReceiptsList rows={receipts} status={receiptsStatus} onClose={() => setShowReceipts(false)}/>
+            </div>
+          </section>
+        ) : null}
+
+        {/* API keys */}
+        <section style={{ padding:'12px 40px 40px' }}>
+          <div style={{ maxWidth:1280, margin:'0 auto', background:P.paper, border:`1px solid ${P.ruleLight}`, borderRadius:8, padding:'24px 24px 18px' }}>
+            <div style={{ fontSize:14, fontWeight:600, color:P.ink, marginBottom:4 }}>API keys</div>
+            <div style={{ fontSize:12.5, color:P.ink4, marginBottom:14 }}>These authenticate every call to the gateway. Treat them like passwords; rotate if exposed.</div>
+            <table style={{ width:'100%', borderCollapse:'collapse', fontFamily:MONO, fontSize:12.5 }}>
+              <thead>
+                <tr style={{ color:P.ink4, fontSize:10.5, letterSpacing:'0.06em', textTransform:'uppercase' }}>
+                  <th style={{ textAlign:'left',  padding:'8px 0', fontWeight:600, borderBottom:`1px solid ${P.ruleLight}` }}>Key</th>
+                  <th style={{ textAlign:'left',  padding:'8px 0', fontWeight:600, borderBottom:`1px solid ${P.ruleLight}` }}>Name</th>
+                  <th style={{ textAlign:'left',  padding:'8px 0', fontWeight:600, borderBottom:`1px solid ${P.ruleLight}` }}>Created</th>
+                  <th style={{ textAlign:'left',  padding:'8px 0', fontWeight:600, borderBottom:`1px solid ${P.ruleLight}` }}>Last used</th>
+                  <th style={{ textAlign:'right', padding:'8px 0', fontWeight:600, borderBottom:`1px solid ${P.ruleLight}` }}></th>
+                </tr>
+              </thead>
+              <tbody>
+                {(account.api_keys || []).map((k, i) => (
+                  <tr key={k.prefix + i}>
+                    <td style={{ padding:'12px 0', borderBottom:`1px solid ${P.ruleLight}`, color: k.revoked_at ? P.ink5 : P.ink }}>{k.prefix}…</td>
+                    <td style={{ padding:'12px 0', borderBottom:`1px solid ${P.ruleLight}`, color: k.revoked_at ? P.ink5 : P.ink2 }}>{k.name}</td>
+                    <td style={{ padding:'12px 0', borderBottom:`1px solid ${P.ruleLight}`, color: k.revoked_at ? P.ink5 : P.ink3 }}>{fmtRel(k.created_at)}</td>
+                    <td style={{ padding:'12px 0', borderBottom:`1px solid ${P.ruleLight}`, color: k.revoked_at ? P.ink5 : P.ink3 }}>{fmtRel(k.last_used_at)}</td>
+                    <td style={{ padding:'12px 0', borderBottom:`1px solid ${P.ruleLight}`, color:P.ink5, fontSize:11.5, textAlign:'right' }}>{k.revoked_at ? 'revoked' : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer style={{ borderTop:`1px solid ${P.ruleLight}`, background:P.paper, color:P.ink4, fontSize:12, padding:'24px 40px', textAlign:'center' }}>
+          © 2026 AEOESS · <a href="mailto:signal@aeoess.com" style={{ color:P.ink3 }}>signal@aeoess.com</a> · <a href="/portal.html" style={{ color:P.ink3 }}>Portal</a>
+        </footer>
+
+        {/* Toast */}
+        {toast ? (
+          <div style={{ position:'fixed', bottom:24, right:24, padding:'12px 18px', borderRadius:6,
+            background: toast.kind === 'error' ? P.red + '1f' : toast.kind === 'success' ? P.green + '1f' : P.paper,
+            color: toast.kind === 'error' ? P.red : toast.kind === 'success' ? P.green : P.ink,
+            border:`1px solid ${P.rule}`, fontSize:13, maxWidth:520, zIndex:50 }}>
+            {toast.msg}
+          </div>
+        ) : null}
+      </div>
+    );
   }
 
-  function load() {
-    var ctx = getKey();
-    if (!ctx) {
-      renderSignIn();
-      return;
-    }
-    var freshKey = ctx.fresh ? ctx.key : null;
-    if (ctx.fresh) {
-      try { history.replaceState({}, '', window.location.pathname); } catch(e) {}
-    }
-    document.getElementById('root').innerHTML = '<div class="loading">Loading your dashboard\u2026</div>';
-    api('/api/v1/account').then(function(res) {
-      if (res.status === 401) {
-        clearKey();
-        renderSignIn("That API key isn\u0027t valid anymore. Sign in with a current key.");
-        return;
-      }
-      if (res.status !== 200) {
-        document.getElementById('root').innerHTML = '<div class="error-banner">Could not load account: ' + esc(res.body.error || 'HTTP ' + res.status) + '</div>';
-        return;
-      }
-      renderDashboard(res.body, ctx.fresh, freshKey);
-    }).catch(function(err) {
-      console.error('[dashboard]', err);
-      document.getElementById('root').innerHTML = '<div class="error-banner">Could not reach the gateway. Check your network connection and try again.</div>';
-    });
+  const actionBtn = {
+    background:'transparent', border:'1px solid #3a3a3e', borderRadius:4, padding:'10px 12px',
+    color:'#dddddd', cursor:'pointer', fontSize:13, fontFamily:'inherit',
+    display:'flex', justifyContent:'space-between', alignItems:'center',
+  };
+
+  function App() {
+    const [ctx, setCtx] = React.useState(() => readWelcomeKey());
+    const [signinErr, setSigninErr] = React.useState(null);
+
+    const onSignOut = (msg) => { clearKey(); setSigninErr(msg || null); setCtx(null); };
+
+    if (!ctx) return <SignIn initialError={signinErr} onKey={k => setCtx({ key: k, fresh: false })}/>;
+    return <Dashboard apiKey={ctx.key} freshKey={ctx.fresh ? ctx.key : null} onSignOut={onSignOut}/>;
   }
 
-  document.getElementById('signout-btn').addEventListener('click', function() {
-    if (!confirm('Sign out and forget your API key on this device?')) return;
-    clearKey();
-    window.location.hash = '';
-    load();
-  });
-
-  load();
-})();
-</script>
-
+  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
 </body>
 </html>
