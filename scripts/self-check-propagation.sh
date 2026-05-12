@@ -159,6 +159,12 @@ if [ -f "$WEB/sitemap.xml" ]; then
   record_pass "sitemap.xml exists ($sitemap_count URLs, $actual_count html files)"
   for f in "$WEB"/*.html; do
     bn=$(basename "$f")
+    # Skip pages that explicitly declare noindex — search engines should
+    # never crawl them from a sitemap, so demanding their presence is wrong.
+    # (welcome.html, dashboard.html, embed-host-preview.html, etc.)
+    if grep -q 'name="robots" content="noindex' "$f" 2>/dev/null; then
+      continue
+    fi
     # Special case for index.html → aeoess.com/
     if [ "$bn" = "index.html" ]; then
       grep -q "aeoess.com/</loc>\|aeoess.com/\"" "$WEB/sitemap.xml" \
