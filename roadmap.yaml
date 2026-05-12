@@ -31,12 +31,14 @@
 
 - id: d84-ssrn-five-papers-approved
   title: "SSRN approves five APS research papers for academic indexing"
-  description: "Email notification from SSRN confirms five papers cleared review and entered the academic indexing pipeline. Each paper routed to five-to-six CS networks where reviewer audiences read: Artificial Intelligence eJournal, AI Law Policy & Ethics, Cybersecurity Privacy & Networks, Theoretical Computer Science, Quantum Information, Generative AI. Classifications are routing decisions. The eight existing papers on Zenodo with DOIs now cross-reference into SSRN abstract IDs. aeoess.com/research stays canonical."
+  description: "Five APS research papers cleared SSRN review and entered the academic indexing pipeline with DISTRIBUTED status. Paper 1 The Agent Social Contract (abstract 6677378, DOI 10.2139/ssrn.6677378), Paper 2 Monotonic Narrowing for Agent Authority (abstract 6415678, DOI 10.2139/ssrn.6415678), Paper 5 Physics-Enforced Delegation (abstract 6677418, DOI 10.2139/ssrn.6677418), Paper 7 Cognitive Attestation (abstract 6677441, DOI 10.2139/ssrn.6677441), Paper 8 The Evidence-Safety Gap (abstract 6684401, DOI 10.2139/ssrn.6684401). Each routed to five-to-six CS networks where reviewer audiences read (Artificial Intelligence eJournal, AI Law Policy & Ethics, Cybersecurity Privacy & Networks, Theoretical Computer Science, Quantum Information, Generative AI). Author page at ssrn.com/author=10731856. Crossref also requested permission to auto-update ORCID 0009-0002-4700-3594 with DOI cross-references for the published works. aeoess.com/research stays canonical."
   status: done
   workstream: research
   day_start: 84
   day_end: 84
   links:
+    - url: "https://ssrn.com/author=10731856"
+      label: "SSRN Author Page"
     - url: "/research.html"
       label: "Research index"
 
