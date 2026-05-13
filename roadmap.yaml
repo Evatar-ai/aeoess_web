@@ -3122,3 +3122,17 @@
       label: "#49971 closure"
     - url: "https://docs.openclaw.ai/plugins/sdk-overview"
       label: "OpenClaw plugin SDK reference"
+
+- id: d85-budget-reservation-rename
+  title: "budget_authority renames to budget_reservation; domain_incubation gated"
+  description: "PR #91 renamed the budget_authority namespace to budget_reservation across vocabulary and validator to avoid semantic collision with APS delegation authority. Three engines converged on the rename as a CTO call. Reserve and query verbs downgraded from candidate to proposed status pending Ectsang. Validator gained domain_incubation crosswalk_type with three-concurrent cap and 90-day sunset, maintainer-only. Three coordination posts on ACP#231, aeoess#25, AP2#252. amavashev confirmed and committed to apply the same rename to PR#92 himself."
+  status: active
+  workstream: protocol
+  day_start: 84
+
+- id: d85-cognitive-attestation-descriptor-draft
+  title: "cognitive_attestation descriptor doc opens as draft PR #93"
+  description: "Long-form rationale at docs/descriptor-dimensions/cognitive-attestation.md (163 lines) grounding the cognitive_attestation descriptor in schchit Target Determinability under Partial Causal Observation framework. Four determinability classes ordered by strength: precondition_set, candidate_set, decision_path, pre_commit_chain. Composes with delegation_chain, entity_continuity, invariant_survival. Builds-on attribution to schchit (not co-authored). PR opens as draft, schchit theory-side review is the gate before Consilium pass on the four-class shape."
+  status: active
+  workstream: research
+  day_start: 85
