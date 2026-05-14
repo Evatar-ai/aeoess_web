@@ -409,9 +409,31 @@ footer a:hover {
     <!-- BUILD:ROADMAP_START -->
 <noscript class="rm-noscript-hint"><div class="rm-noscript-msg">JavaScript is disabled — showing the full roadmap as a list. With JavaScript on, this page renders an interactive timeline above.</div></noscript>
 <div class="rm-static" id="rm-static" aria-label="Roadmap (static fallback)">
-<p class="rm-static-intro">267 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
+<p class="rm-static-intro">278 roadmap items, grouped by status. Updated from <a href="https://github.com/aeoess/aeoess_web/blob/main/roadmap.yaml">roadmap.yaml</a>. Day 1 is 2026-02-17.</p>
 <section class="rm-group rm-group-active">
-<h2 class="rm-group-title">Active <span class="rm-group-count">(14)</span></h2>
+<h2 class="rm-group-title">Active <span class="rm-group-count">(16)</span></h2>
+<article class="rm-item rm-item-active" id="d85-cognitive-attestation-descriptor-draft">
+<header class="rm-item-h">
+<h3 class="rm-item-title">cognitive_attestation descriptor doc opens as draft PR #93</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 85</span> 
+<span class="rm-item-ws">Research</span> 
+<span class="rm-item-status">active</span>
+</p>
+</header>
+<p class="rm-item-desc">Long-form rationale at docs/descriptor-dimensions/cognitive-attestation.md (163 lines) grounding the cognitive_attestation descriptor in schchit Target Determinability under Partial Causal Observation framework. Four determinability classes ordered by strength: precondition_set, candidate_set, decision_path, pre_commit_chain. Composes with delegation_chain, entity_continuity, invariant_survival. Builds-on attribution to schchit (not co-authored). PR opens as draft, schchit theory-side review is the gate before review pass on the four-class shape.</p>
+</article>
+<article class="rm-item rm-item-active" id="d85-budget-reservation-rename">
+<header class="rm-item-h">
+<h3 class="rm-item-title">budget_authority renames to budget_reservation; domain_incubation gated</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 84</span> 
+<span class="rm-item-ws">Protocol</span> 
+<span class="rm-item-status">active</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #91 renamed the budget_authority namespace to budget_reservation across vocabulary and validator to avoid semantic collision with APS delegation authority. Independent review converged on the rename as a CTO call. Reserve and query verbs downgraded from candidate to proposed status pending Ectsang. Validator gained domain_incubation crosswalk_type with three-concurrent cap and 90-day sunset, maintainer-only. Three coordination posts on ACP#231, aeoess#25, AP2#252. amavashev confirmed and committed to apply the same rename to PR#92 himself.</p>
+</article>
 <article class="rm-item rm-item-active" id="a2a-compliance-harness-repo">
 <header class="rm-item-h">
 <h3 class="rm-item-title">a2a-compliance-harness v0.1 repo (this week)</h3>
@@ -589,7 +611,43 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-in-progress">
-<h2 class="rm-group-title">In progress <span class="rm-group-count">(12)</span></h2>
+<h2 class="rm-group-title">In progress <span class="rm-group-count">(15)</span></h2>
+<article class="rm-item rm-item-in_progress" id="d86-pr-3-negative-paths-scaffold-validator-wired">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Negative-paths scaffold + four-case validator wire at aps-conformance-suite</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 86</span> 
+<span class="rm-item-ws">Standards</span> 
+<span class="rm-item-status">in_progress</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #3 at aeoess/aps-conformance-suite lands fixtures/composition/a2a-1496-negative-paths/ directory scaffold (README + lib.ts + verify.ts) with commit 7935f00, then wires up a minimal four-case validator in commit 25f0300 covering INVALID_CLAIM_SCOPE, DELEGATION_DEPTH_EXCEEDED, INVALID_SIGNATURE, VALIDITY_EXPIRED. Smoke-passes on deterministic inputs. Quirks documented: signature direct-over-bytes (RFC 9421 / CTEF v0.3.2 §A convention, no sha256 wrap), JCS canonicalization preserving null values, camelCase field naming per CTEF substrate (not APS V2 snake_case), chain-level depth check. PR flipped from draft to ready at 14:06 PT. kenneives fixture PR lands as follow-on this week before v0.3.2 publish window May 19-22.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/aps-conformance-suite/pull/3">PR #3</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1786">A2A#1786</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1496">A2A#1496</a></li></ul>
+</article>
+<article class="rm-item rm-item-in_progress" id="d86-pr-96-mycelium-trails-crosswalk-track-b-opens">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Mycelium Trails crosswalk Track B opens at vocab repo, independent review</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 86</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">in_progress</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #96 at aeoess/agent-governance-vocabulary lands crosswalk/mycelium-trails.yaml v0.1 documenting TrailRecord byte-contract adoption against the APS attribution_receipt envelope. Independent review surfaced two descriptor corrections: match: structural → partial (TrailRecord adopts the byte contract but not the broader attribution semantics) and replay_class: full_replay → decision_replay (TrailRecord is decision-replayable, not full-state replayable). Adversarial pass dropped refusal_authority field due to enum gap, fixed local path leak, softened verbatim header. giskard09 tagged for Mycelium-side confirmation. Track B merge gated on PR-MERGE-PROTOCOL v0.3 review pass plus Tima signoff, both complete.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/96">PR #96</a></li></ul>
+</article>
+<article class="rm-item rm-item-in_progress" id="d85-cognitive-attestation-descriptor-pr-93-opens">
+<header class="rm-item-h">
+<h3 class="rm-item-title">cognitive_attestation descriptor doc opens as draft PR grounded in schchit Target Determinability</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 85</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">in_progress</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #93 at aeoess/agent-governance-vocabulary grounds the cognitive_attestation descriptor in @schchit's Target Determinability framework. Four determinability classes ordered by strength. Composes with delegation_chain, entity_continuity, invariant_survival to form the four-pillar accountability surface. Draft state pending schchit theory-side review. Vocab repo currently shows 45 external PRs from 23 external accounts.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/93">PR #93</a></li></ul>
+</article>
 <article class="rm-item rm-item-in_progress" id="d84-a2a-1829-four-way-convergence">
 <header class="rm-item-h">
 <h3 class="rm-item-title">A2A#1829 four-way alignment: byte-match verification, v0.3.3 hosting, canonicalization stance</h3>
@@ -611,7 +669,7 @@ footer a:hover {
 <span class="rm-item-status">in_progress</span>
 </p>
 </header>
-<p class="rm-item-desc">First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B review pass complete with three-engine independent review and adversarial phase. Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation.</p>
+<p class="rm-item-desc">First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B review pass complete with independent review and adversarial phase. Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation.</p>
 <ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/91">PR #91</a></li><li><a href="https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231">ACP#231 public commitment</a></li></ul>
 </article>
 <article class="rm-item rm-item-in_progress" id="d81-four-signal-compose-locked">
@@ -750,7 +808,79 @@ footer a:hover {
 </article>
 </section>
 <section class="rm-group rm-group-shipped">
-<h2 class="rm-group-title">Shipped <span class="rm-group-count">(204)</span></h2>
+<h2 class="rm-group-title">Shipped <span class="rm-group-count">(210)</span></h2>
+<article class="rm-item rm-item-done" id="d87-consilium-three-vocab-track-b">
+<header class="rm-item-h">
+<h3 class="rm-item-title">Three vocab Track B items reviewed via Consilium, all held with conditions</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 87</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #95 (jep.yaml draft-04 to draft-06 refresh), PR #93 (cognitive-attestation rationale doc), and the upstream question of whether cognitive_attestation enters vocabulary.yaml ran through a full three-engine Consilium: Claude, GPT, and Gemini in blind parallel adversarial passes. Seventeen findings, three-way unanimous, zero contested. PR #95 held on a validator-blindness gap plus three new sections that host JEP spec text inside a crosswalk. PR #93 held on placement and an internal pre_commit_chain contradiction. The primitive admitted in principle as a proposed signal_type, not a descriptor dimension, but deferred until the AAIF Contribution Agreement window closes. Comments posted to all three; nothing merged.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/issues/94">Issue #94</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d87-self-check-eod-verification-fix">
+<header class="rm-item-h">
+<h3 class="rm-item-title">EOD verification layer rewritten, catches a four-day updates-panel drift</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 87</span> 
+<span class="rm-item-ws">infra</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">self-check-propagation.sh Category J still tested pre-redesign markers, so a missed or misplaced end-of-day update passed silently. Rewrote Category J for the post-redesign updates panel and added Category K, a dead-directory guard. On first run the rewritten check caught 22 peer pages carrying a stale updates-panel array: the Day 85/86 EOD sync had only reached index.html and blog.html. sync-updates-panel.py repaired the 21 stale peers, re-run confirms clean. The verification layer now fails loudly on misplaced updates instead of passing vacuously.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/aeoess_web/commit/f236259">self-check fix</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d86-giskard09-full-adoption-delegation-ref-crosswalk-anchor">
+<header class="rm-item-h">
+<h3 class="rm-item-title">giskard09 adopts all four delegation_ref composition points, requests APS-side crosswalk anchor</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 86</span> 
+<span class="rm-item-ws">composition</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">Reply on agent-passport-system#1 from giskard09 at 13:41 PT confirms FULL ADOPTION of the four-point composition for delegation_ref in argentum (URN format, depth/scope/validity invariant carry-through, envelope-level binding, post-commitment receipt chain), plus explicit ask to anchor the crosswalk APS-side rather than argentum-side. Mycelium Trails crosswalk PR #96 opens the same hour, applying the same APS-anchored pattern. Convergence-class signal: an external implementer voluntarily routes their composition through APS primitives and asks APS to be the hub.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-passport-system/issues/1">agent-passport-system#1</a></li><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/96">PR #96</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d86-pr-67-invariant-survival-track-a-close">
+<header class="rm-item-h">
+<h3 class="rm-item-title">PR #67 invariant-survival.md merges under Track A after de-quote</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 86</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #67 at aeoess/agent-governance-vocabulary sat blocked since May 1 on a verbatim BBIS direct quote at lines 73-75 attributed to QueBallSharken's canonical definition. Audit of four originally-flagged BBIS phrasings found three were shared technical terminology covered by header attribution. The fourth was a verbatim direct quote, replaced in commit 623b80f with paraphrase preserving the substantive principle: refusal capability that exists only in theory does not satisfy during_action; the test is whether refusal can act in time. With no direct quotes remaining, Track A artifact-fix path cleared. Merged 18:19 PT with merge commit bd4961b. Branch docs-invariant-survival-v2 deleted on merge.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/67">PR #67</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d85-budget-authority-renames-to-budget-reservation">
+<header class="rm-item-h">
+<h3 class="rm-item-title">budget_authority renames to budget_reservation; domain_incubation crosswalk_type gated</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 85</span> 
+<span class="rm-item-ws">vocab</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">PR #91 at aeoess/agent-governance-vocabulary renames the verb namespace across vocabulary and validator. reserve and query verbs downgraded to proposed status pending Ectsang signoff. Validator now caps crosswalk_type: domain_incubation at three concurrent and 90-day sunset, maintainer-only. Rename coordination posted on ACP#231 (agentic-commerce-protocol public commitment), aeoess#25 (Cycles implementation reference), and AP2#252 (Google A2A x402). Six verb set locked: reserve, commit, release, refund, query_budget, query_reservation. Hostile pass on our own carve-outs caught the rename gap on the same day.</p>
+<ul class="rm-item-links"><li><a href="https://github.com/aeoess/agent-governance-vocabulary/pull/91">PR #91</a></li><li><a href="https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231">ACP#231</a></li></ul>
+</article>
+<article class="rm-item rm-item-done" id="d85-state-of-agent-security-2026-cites-aps">
+<header class="rm-item-h">
+<h3 class="rm-item-title">AgentGraph publishes State of Agent Security 2026 naming APS in §3.7, §3.8, §4</h3>
+<p class="rm-item-meta">
+<span class="rm-item-day">Day 85</span> 
+<span class="rm-item-ws">Standards</span> 
+<span class="rm-item-status">done</span>
+</p>
+</header>
+<p class="rm-item-desc">kenneives at AgentGraph published the State of Agent Security 2026 report. APS named in §3.7 (Proposal Phase: APS listed among five projects driving open standards), §3.8 (canonical publisher of bilateral-delegation and rotation-attestation fixture corpus with eight-implementation byte-match verification), and §4 (verbatim thesis quoted: 'Authority can only narrow, never expand.'). Embargo lifted 05:00 PT / 08:00 ET on May 12. APS substantive ack post-embargo on A2A#1786 confirmed four-commitment cluster: unified error enum hosted at vocab repo, aps-conformance-suite negative-paths scaffolding, v0.3.3 working-doc participation, hippo fixture infrastructure.</p>
+<ul class="rm-item-links"><li><a href="https://agentgraph.co/state-of-agent-security-2026">State of Agent Security 2026</a></li><li><a href="https://github.com/a2aproject/A2A/issues/1786">A2A#1786</a></li></ul>
+</article>
 <article class="rm-item rm-item-done" id="d84-media-html-press-kit-expanded">
 <header class="rm-item-h">
 <h3 class="rm-item-title">media.html press kit expanded with five new sections for State of Agent Security launch</h3>
@@ -3478,7 +3608,7 @@ footer a:hover {
 </p>
 </header>
 <p class="rm-item-desc">Planned as the next protocol build post-v2 swap but killed on Day 61 review. Three-factor check failed on all three axes: concrete external demand (none surfaced), clean scope versus SCITT (substantial overlap), additive value beyond the existing ledger stack (marginal). Postmortem at specs/killed/LEDGER-EVENTS-v0-KILLED-2026-04-17.md with revival criteria for future reference. Former handoff prompt renamed to specs/killed/LEDGER-HANDOFF-PROMPT-STALE-2026-04-18.md with stale banner. Replaced in the v2.1.0 slot by Cognitive Attestation envelope primitive (actual demand, clean scope).</p>
-<p class="rm-item-kill"><strong>Killed:</strong> Killed Day 61 multi-model architectural review (Claude + GPT-5 + Gemini 2.5 Pro). Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. &quot;I can see it coming&quot; is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64).</p>
+<p class="rm-item-kill"><strong>Killed:</strong> Killed Day 61 multi-model architectural review. Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. &quot;I can see it coming&quot; is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64).</p>
 <p class="rm-item-deps"><strong>Depends on:</strong> <code>d61-v2-architecture-separation</code></p>
 </article>
 <article class="rm-item rm-item-killed" id="killed-paper-attribution-standalone-arxiv">
