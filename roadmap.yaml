@@ -1,7 +1,31 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-13 (Day 86). Day 85 catch-up: State of Agent Security 2026 names APS in §3.7, §3.8, §4 with verbatim thesis. budget_authority renames to budget_reservation across PR #91 + ACP#231 + AP2#252 + aeoess#25. cognitive_attestation descriptor doc opens as PR #93 draft. Day 86: PR #67 invariant-survival merges Track A after de-quote, PR #96 Mycelium Trails crosswalk opens Track B with independent review, PR #3 negative-paths scaffold + four-case validator wire, giskard09 adopts all four delegation_ref points and requests APS-anchored crosswalk.
+# Last updated: 2026-05-14 (Day 87). Day 87 — three vocab Track B items reviewed via Consilium and held with conditions; EOD verification layer rewritten and caught a four-day updates-panel drift across 22 pages. Day 86: PR #67 invariant-survival merges Track A after de-quote, PR #96 Mycelium Trails crosswalk opens Track B with independent review, PR #3 negative-paths scaffold + four-case validator wire, giskard09 adopts all four delegation_ref points and requests APS-anchored crosswalk.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 87 — 2026-05-14 ═══
+
+- id: d87-consilium-three-vocab-track-b
+  title: "Three vocab Track B items reviewed via Consilium, all held with conditions"
+  description: "PR #95 (jep.yaml draft-04 to draft-06 refresh), PR #93 (cognitive-attestation rationale doc), and the upstream question of whether cognitive_attestation enters vocabulary.yaml ran through a full three-engine Consilium: Claude, GPT, and Gemini in blind parallel adversarial passes. Seventeen findings, three-way unanimous, zero contested. PR #95 held on a validator-blindness gap plus three new sections that host JEP spec text inside a crosswalk. PR #93 held on placement and an internal pre_commit_chain contradiction. The primitive admitted in principle as a proposed signal_type, not a descriptor dimension, but deferred until the AAIF Contribution Agreement window closes. Comments posted to all three; nothing merged."
+  status: done
+  workstream: vocab
+  day_start: 87
+  day_end: 87
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/issues/94"
+      label: "Issue #94"
+
+- id: d87-self-check-eod-verification-fix
+  title: "EOD verification layer rewritten, catches a four-day updates-panel drift"
+  description: "self-check-propagation.sh Category J still tested pre-redesign markers, so a missed or misplaced end-of-day update passed silently. Rewrote Category J for the post-redesign updates panel and added Category K, a dead-directory guard. On first run the rewritten check caught 22 peer pages carrying a stale updates-panel array: the Day 85/86 EOD sync had only reached index.html and blog.html. sync-updates-panel.py repaired the 21 stale peers, re-run confirms clean. The verification layer now fails loudly on misplaced updates instead of passing vacuously."
+  status: done
+  workstream: infra
+  day_start: 87
+  day_end: 87
+  links:
+    - url: "https://github.com/aeoess/aeoess_web/commit/f236259"
+      label: "self-check fix"
 
 # ═══ DAY 86 — 2026-05-13 ═══
 
