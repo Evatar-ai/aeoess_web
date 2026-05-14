@@ -1,7 +1,98 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-11 (Day 84). Press launch eve. Budget-authority crosswalk v0.1 (PR #91) opened with six canonical verbs and per-verb candidate/proposed status, amavashev approved cycles column after two corrections. A2A#1829 four-way alignment landed across jschoemaker (byte-match verification), kenneives (v0.3.3 working-doc hosting), arian-gogani (canonicalization stance). SSRN approved five APS research papers. Roadmap drift cleanup: eight items flipped (six to done, two to dropped). media.html press kit expanded with five new sections. Klaimee (YC P26) partnership outreach sent.
+# Last updated: 2026-05-13 (Day 86). Day 85 catch-up: State of Agent Security 2026 names APS in §3.7, §3.8, §4 with verbatim thesis. budget_authority renames to budget_reservation across PR #91 + ACP#231 + AP2#252 + aeoess#25. cognitive_attestation descriptor doc opens as PR #93 draft. Day 86: PR #67 invariant-survival merges Track A after de-quote, PR #96 Mycelium Trails crosswalk opens Track B with three-engine review unanimous, PR #3 negative-paths scaffold + four-case validator wire, giskard09 adopts all four delegation_ref points and requests APS-anchored crosswalk.
 # Day 1 = 2026-02-17 (project start)
+
+# ═══ DAY 86 — 2026-05-13 ═══
+
+- id: d86-pr-67-invariant-survival-track-a-close
+  title: "PR #67 invariant-survival.md merges under Track A after de-quote"
+  description: "PR #67 at aeoess/agent-governance-vocabulary sat blocked since May 1 on a verbatim BBIS direct quote at lines 73-75 attributed to QueBallSharken's canonical definition. Audit of four originally-flagged BBIS phrasings found three were shared technical terminology covered by header attribution. The fourth was a verbatim direct quote, replaced in commit 623b80f with paraphrase preserving the substantive principle: refusal capability that exists only in theory does not satisfy during_action; the test is whether refusal can act in time. With no direct quotes remaining, Track A artifact-fix path cleared. Merged 18:19 PT with merge commit bd4961b. Branch docs-invariant-survival-v2 deleted on merge."
+  status: done
+  workstream: vocab
+  day_start: 86
+  day_end: 86
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/67"
+      label: "PR #67"
+
+- id: d86-pr-96-mycelium-trails-crosswalk-track-b-opens
+  title: "Mycelium Trails crosswalk Track B opens at vocab repo, three-engine review unanimous"
+  description: "PR #96 at aeoess/agent-governance-vocabulary lands crosswalk/mycelium-trails.yaml v0.1 documenting TrailRecord byte-contract adoption against the APS attribution_receipt envelope. Three-engine review (Claude + GPT + Gemini) unanimous on two corrections: match: structural → partial (TrailRecord adopts the byte contract but not the broader attribution semantics) and replay_class: full_replay → decision_replay (TrailRecord is decision-replayable, not full-state replayable). Adversarial pass dropped refusal_authority field due to enum gap, fixed local path leak, softened verbatim header. giskard09 tagged for Mycelium-side confirmation. Track B merge gated on PR-MERGE-PROTOCOL v0.3 Consilium pass plus Tima signoff, both complete."
+  status: in_progress
+  workstream: vocab
+  day_start: 86
+  day_end: 86
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/96"
+      label: "PR #96"
+
+- id: d86-pr-3-negative-paths-scaffold-validator-wired
+  title: "Negative-paths scaffold + four-case validator wire at aps-conformance-suite"
+  description: "PR #3 at aeoess/aps-conformance-suite lands fixtures/composition/a2a-1496-negative-paths/ directory scaffold (README + lib.ts + verify.ts) with commit 7935f00, then wires up a minimal four-case validator in commit 25f0300 covering INVALID_CLAIM_SCOPE, DELEGATION_DEPTH_EXCEEDED, INVALID_SIGNATURE, VALIDITY_EXPIRED. Smoke-passes on deterministic inputs. Quirks documented: signature direct-over-bytes (RFC 9421 / CTEF v0.3.2 §A convention, no sha256 wrap), JCS canonicalization preserving null values, camelCase field naming per CTEF substrate (not APS V2 snake_case), chain-level depth check. PR flipped from draft to ready at 14:06 PT. kenneives fixture PR lands as follow-on this week before v0.3.2 publish window May 19-22."
+  status: in_progress
+  workstream: standards
+  day_start: 86
+  day_end: 86
+  links:
+    - url: "https://github.com/aeoess/aps-conformance-suite/pull/3"
+      label: "PR #3"
+    - url: "https://github.com/a2aproject/A2A/issues/1786"
+      label: "A2A#1786"
+    - url: "https://github.com/a2aproject/A2A/issues/1496"
+      label: "A2A#1496"
+
+- id: d86-giskard09-full-adoption-delegation-ref-crosswalk-anchor
+  title: "giskard09 adopts all four delegation_ref composition points, requests APS-side crosswalk anchor"
+  description: "Reply on agent-passport-system#1 from giskard09 at 13:41 PT confirms FULL ADOPTION of the four-point composition for delegation_ref in argentum (URN format, depth/scope/validity invariant carry-through, envelope-level binding, post-commitment receipt chain), plus explicit ask to anchor the crosswalk APS-side rather than argentum-side. Mycelium Trails crosswalk PR #96 opens the same hour, applying the same APS-anchored pattern. Convergence-class signal: an external implementer voluntarily routes their composition through APS primitives and asks APS to be the hub."
+  status: done
+  workstream: composition
+  day_start: 86
+  day_end: 86
+  links:
+    - url: "https://github.com/aeoess/agent-passport-system/issues/1"
+      label: "agent-passport-system#1"
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/96"
+      label: "PR #96"
+
+# ═══ DAY 85 — 2026-05-12 ═══
+
+- id: d85-state-of-agent-security-2026-cites-aps
+  title: "AgentGraph publishes State of Agent Security 2026 naming APS in §3.7, §3.8, §4"
+  description: "kenneives at AgentGraph published the State of Agent Security 2026 report. APS named in §3.7 (Proposal Phase: APS listed among five projects driving open standards), §3.8 (canonical publisher of bilateral-delegation and rotation-attestation fixture corpus with eight-implementation byte-match verification), and §4 (verbatim thesis quoted: 'Authority can only narrow, never expand.'). Embargo lifted 05:00 PT / 08:00 ET on May 12. APS substantive ack post-embargo on A2A#1786 confirmed four-commitment cluster: unified error enum hosted at vocab repo, aps-conformance-suite negative-paths scaffolding, v0.3.3 working-doc participation, hippo fixture infrastructure."
+  status: done
+  workstream: standards
+  day_start: 85
+  day_end: 85
+  links:
+    - url: "https://agentgraph.co/state-of-agent-security-2026"
+      label: "State of Agent Security 2026"
+    - url: "https://github.com/a2aproject/A2A/issues/1786"
+      label: "A2A#1786"
+
+- id: d85-budget-authority-renames-to-budget-reservation
+  title: "budget_authority renames to budget_reservation; domain_incubation crosswalk_type gated"
+  description: "PR #91 at aeoess/agent-governance-vocabulary renames the verb namespace across vocabulary and validator. reserve and query verbs downgraded to proposed status pending Ectsang signoff. Validator now caps crosswalk_type: domain_incubation at three concurrent and 90-day sunset, maintainer-only. Rename coordination posted on ACP#231 (agentic-commerce-protocol public commitment), aeoess#25 (Cycles implementation reference), and AP2#252 (Google A2A x402). Six verb set locked: reserve, commit, release, refund, query_budget, query_reservation. Hostile pass on our own carve-outs caught the rename gap on the same day."
+  status: done
+  workstream: vocab
+  day_start: 85
+  day_end: 85
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/91"
+      label: "PR #91"
+    - url: "https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/issues/231"
+      label: "ACP#231"
+
+- id: d85-cognitive-attestation-descriptor-pr-93-opens
+  title: "cognitive_attestation descriptor doc opens as draft PR grounded in schchit Target Determinability"
+  description: "PR #93 at aeoess/agent-governance-vocabulary grounds the cognitive_attestation descriptor in @schchit's Target Determinability framework. Four determinability classes ordered by strength. Composes with delegation_chain, entity_continuity, invariant_survival to form the four-pillar accountability surface. Draft state pending schchit theory-side review. Vocab repo currently shows 45 external PRs from 23 external accounts."
+  status: in_progress
+  workstream: vocab
+  day_start: 85
+  day_end: 85
+  links:
+    - url: "https://github.com/aeoess/agent-governance-vocabulary/pull/93"
+      label: "PR #93"
 
 # ═══ DAY 84 — 2026-05-11 ═══
 
