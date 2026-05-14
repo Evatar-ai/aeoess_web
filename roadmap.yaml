@@ -1,6 +1,6 @@
 # AEOESS Roadmap — source of truth for aeoess.com/roadmap
 # Edit this file and push. The page rebuilds automatically.
-# Last updated: 2026-05-13 (Day 86). Day 85 catch-up: State of Agent Security 2026 names APS in §3.7, §3.8, §4 with verbatim thesis. budget_authority renames to budget_reservation across PR #91 + ACP#231 + AP2#252 + aeoess#25. cognitive_attestation descriptor doc opens as PR #93 draft. Day 86: PR #67 invariant-survival merges Track A after de-quote, PR #96 Mycelium Trails crosswalk opens Track B with three-engine review unanimous, PR #3 negative-paths scaffold + four-case validator wire, giskard09 adopts all four delegation_ref points and requests APS-anchored crosswalk.
+# Last updated: 2026-05-13 (Day 86). Day 85 catch-up: State of Agent Security 2026 names APS in §3.7, §3.8, §4 with verbatim thesis. budget_authority renames to budget_reservation across PR #91 + ACP#231 + AP2#252 + aeoess#25. cognitive_attestation descriptor doc opens as PR #93 draft. Day 86: PR #67 invariant-survival merges Track A after de-quote, PR #96 Mycelium Trails crosswalk opens Track B with independent review, PR #3 negative-paths scaffold + four-case validator wire, giskard09 adopts all four delegation_ref points and requests APS-anchored crosswalk.
 # Day 1 = 2026-02-17 (project start)
 
 # ═══ DAY 86 — 2026-05-13 ═══
@@ -17,8 +17,8 @@
       label: "PR #67"
 
 - id: d86-pr-96-mycelium-trails-crosswalk-track-b-opens
-  title: "Mycelium Trails crosswalk Track B opens at vocab repo, three-engine review unanimous"
-  description: "PR #96 at aeoess/agent-governance-vocabulary lands crosswalk/mycelium-trails.yaml v0.1 documenting TrailRecord byte-contract adoption against the APS attribution_receipt envelope. Three-engine review (Claude + GPT + Gemini) unanimous on two corrections: match: structural → partial (TrailRecord adopts the byte contract but not the broader attribution semantics) and replay_class: full_replay → decision_replay (TrailRecord is decision-replayable, not full-state replayable). Adversarial pass dropped refusal_authority field due to enum gap, fixed local path leak, softened verbatim header. giskard09 tagged for Mycelium-side confirmation. Track B merge gated on PR-MERGE-PROTOCOL v0.3 Consilium pass plus Tima signoff, both complete."
+  title: "Mycelium Trails crosswalk Track B opens at vocab repo, independent review"
+  description: "PR #96 at aeoess/agent-governance-vocabulary lands crosswalk/mycelium-trails.yaml v0.1 documenting TrailRecord byte-contract adoption against the APS attribution_receipt envelope. Independent review surfaced two descriptor corrections: match: structural → partial (TrailRecord adopts the byte contract but not the broader attribution semantics) and replay_class: full_replay → decision_replay (TrailRecord is decision-replayable, not full-state replayable). Adversarial pass dropped refusal_authority field due to enum gap, fixed local path leak, softened verbatim header. giskard09 tagged for Mycelium-side confirmation. Track B merge gated on PR-MERGE-PROTOCOL v0.3 review pass plus Tima signoff, both complete."
   status: in_progress
   workstream: vocab
   day_start: 86
@@ -98,7 +98,7 @@
 
 - id: d84-pr-91-budget-authority-crosswalk-amavashev-approved
   title: "PR #91 budget_authority.yaml v0.1 opens at vocab repo, amavashev approved"
-  description: "First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B review pass complete with three-engine independent review and adversarial phase. Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation."
+  description: "First-ever budget-authority crosswalk file landed at aeoess/agent-governance-vocabulary as PR #91 with six canonical verbs (reserve, commit, release, refund, query_budget, query_reservation) and per-verb candidate/proposed status convention aligned to vocabulary.yaml. Three commits on feat/budget-authority-crosswalk-v0.1 branch: 9db901a validator patch (+5 lines, parallel domain_incubation exemption to rfc_category_reverse), efa8d39 crosswalk yaml (+160 lines), ed0fdb6 amavashev review corrections. Cycles maintainer @amavashev reviewed against runcycles/client.py:97-110 + cycles-protocol-v0.yaml, flagged two corrections (query_budget + query_reservation distinct verbs not multiplexed, refund cycles row admin-plane operations note), then APPROVED. Track B review pass complete with independent review and adversarial phase. Public Track B promotion threshold (two production implementations) satisfied for four of six verbs after amavashev signoff. @Ectsang signoff on goodmeta column still open. v0.2 forward-watch flagged on Cycles /v1/decide pre-check verb pending goodmeta analog confirmation."
   status: in_progress
   workstream: vocab
   day_start: 84
@@ -2254,7 +2254,7 @@
   day_end: 64
   dependencies:
     - d61-v2-architecture-separation
-  kill_note: "Killed Day 61 multi-model architectural review (Claude + GPT-5 + Gemini 2.5 Pro). Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. \"I can see it coming\" is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64)."
+  kill_note: "Killed Day 61 multi-model architectural review. Three-factor check failed on all axes: no concrete external demand, substantial SCITT overlap at IETF draft-22, marginal additive value beyond the existing ledger stack. Revival criteria: (1) a partner arrives with a dispute-resolution requirement our existing primitives cannot handle, OR (2) SCITT stalls at IESG and an agent-specific profile is needed, OR (3) a regulatory forcing function requires signed dispute lineage. \"I can see it coming\" is explicitly not a revival criterion. Replaced by Cognitive Attestation envelope (Paper 7, shipped as SDK v2.1.0 on Day 64)."
 
 - id: v2-promotion-decision
   title: "v2.0.0 promotion to @latest, done Day 64"
@@ -3216,14 +3216,14 @@
 
 - id: d85-budget-reservation-rename
   title: "budget_authority renames to budget_reservation; domain_incubation gated"
-  description: "PR #91 renamed the budget_authority namespace to budget_reservation across vocabulary and validator to avoid semantic collision with APS delegation authority. Three engines converged on the rename as a CTO call. Reserve and query verbs downgraded from candidate to proposed status pending Ectsang. Validator gained domain_incubation crosswalk_type with three-concurrent cap and 90-day sunset, maintainer-only. Three coordination posts on ACP#231, aeoess#25, AP2#252. amavashev confirmed and committed to apply the same rename to PR#92 himself."
+  description: "PR #91 renamed the budget_authority namespace to budget_reservation across vocabulary and validator to avoid semantic collision with APS delegation authority. Independent review converged on the rename as a CTO call. Reserve and query verbs downgraded from candidate to proposed status pending Ectsang. Validator gained domain_incubation crosswalk_type with three-concurrent cap and 90-day sunset, maintainer-only. Three coordination posts on ACP#231, aeoess#25, AP2#252. amavashev confirmed and committed to apply the same rename to PR#92 himself."
   status: active
   workstream: protocol
   day_start: 84
 
 - id: d85-cognitive-attestation-descriptor-draft
   title: "cognitive_attestation descriptor doc opens as draft PR #93"
-  description: "Long-form rationale at docs/descriptor-dimensions/cognitive-attestation.md (163 lines) grounding the cognitive_attestation descriptor in schchit Target Determinability under Partial Causal Observation framework. Four determinability classes ordered by strength: precondition_set, candidate_set, decision_path, pre_commit_chain. Composes with delegation_chain, entity_continuity, invariant_survival. Builds-on attribution to schchit (not co-authored). PR opens as draft, schchit theory-side review is the gate before Consilium pass on the four-class shape."
+  description: "Long-form rationale at docs/descriptor-dimensions/cognitive-attestation.md (163 lines) grounding the cognitive_attestation descriptor in schchit Target Determinability under Partial Causal Observation framework. Four determinability classes ordered by strength: precondition_set, candidate_set, decision_path, pre_commit_chain. Composes with delegation_chain, entity_continuity, invariant_survival. Builds-on attribution to schchit (not co-authored). PR opens as draft, schchit theory-side review is the gate before review pass on the four-class shape."
   status: active
   workstream: research
   day_start: 85
