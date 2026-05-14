@@ -363,29 +363,125 @@ else
 fi
 
 #
-# CATEGORY J — Daily-rhythm surfaces updated today
+# CATEGORY J — Daily-rhythm surfaces (today)
 #
-# Checks that the 4 daily surfaces were actually touched today:
-# updates-panel, blog (if ship), roadmap (if blog), ecosystem-map.
+# Post-May-4-redesign: the updates panel migrated from the legacy
+# <div class="up-i"> ribbon on index.html to a React-rendered <aside
+# data-updates-panel> whose canonical source is the `var UPDATES`
+# array in opensource.html. This category checks the post-redesign
+# surfaces.
 #
 section "J. Daily-rhythm surfaces (today)"
 
-today_short=$(date +"%b %d" | sed 's/  / /')   # e.g. "Apr 23"
-# Updates panel check
-if grep -q "up-d\">$today_short" "$WEB/index.html" 2>/dev/null; then
-  record_pass "Updates panel has entry for $today_short"
+# Today's needle in the same format the UPDATES array uses
+# (e.g. "May 14", "May 4" — no leading zero on day-of-month).
+today_needle="$(date +"%b") $(date +"%-d")"
+
+# 1) Updates panel — canonical freshness.
+#    Top entry of var UPDATES in opensource.html must equal today.
+#    Use sed (portable) — macOS BSD awk lacks match()-with-array.
+top_update_date=$(awk '/var UPDATES = \[/{found=1; next} found' "$WEB/opensource.html" \
+  | grep -oE "date:[[:space:]]*'[^']+'" | head -1 \
+  | sed -E "s/^date:[[:space:]]*'//; s/'$//")
+
+if [ -z "$top_update_date" ]; then
+  record_fail "Updates panel: could not extract top date: from opensource.html (var UPDATES array missing or malformed)"
+elif [ "$top_update_date" = "$today_needle" ]; then
+  record_pass "Updates panel top entry is today ($today_needle)"
 else
-  record_fail "Updates panel has NO entry for $today_short"
+  record_fail "Updates panel top entry is $top_update_date, expected today ($today_needle) — EOD updates-panel item missing or opensource.html not updated"
 fi
 
-# Roadmap entry check — look for today's date pattern
-today_iso=$(date +"%Y-%m-%d")
-today_dN=$(grep -E "^- id: d[0-9]+" "$WEB/roadmap.yaml" | head -1 | grep -oE "d[0-9]+")
-record_pass "roadmap.yaml most-recent id: $today_dN"
+# 2) Updates panel — peer sync integrity.
+#    Every root *.html file that carries `var UPDATES = [` must have
+#    a byte-identical copy of the canonical array from opensource.html.
+#    md5 the line range from `var UPDATES = [` through the first
+#    subsequent `}];` line (the array's matching close).
+extract_updates_md5() {
+  awk '
+    /var UPDATES = \[/{found=1}
+    found{print}
+    found && /^[[:space:]]*\}\];[[:space:]]*$/{exit}
+  ' "$1" | md5
+}
 
-# Blog latest article check
-latest_blog_date=$(grep -oE 'datetime="[0-9]{4}-[0-9]{2}-[0-9]{2}"' "$WEB/blog.html" | head -1)
-record_pass "blog latest article $latest_blog_date"
+canonical_md5=$(extract_updates_md5 "$WEB/opensource.html")
+peer_total=0
+peer_match=0
+peer_diverge=()
+for f in "$WEB"/*.html; do
+  [ -f "$f" ] || continue
+  [ "$f" = "$WEB/opensource.html" ] && continue
+  grep -q "var UPDATES = \[" "$f" 2>/dev/null || continue
+  peer_total=$((peer_total + 1))
+  peer_md5=$(extract_updates_md5 "$f")
+  if [ "$peer_md5" = "$canonical_md5" ]; then
+    peer_match=$((peer_match + 1))
+  else
+    peer_diverge+=("$(basename "$f")")
+  fi
+done
+
+if [ "${#peer_diverge[@]}" -eq 0 ]; then
+  record_pass "Updates panel: all $peer_match peer pages match opensource.html canonical"
+else
+  for f in "${peer_diverge[@]}"; do
+    record_fail "Updates panel: $f diverges from opensource.html canonical — run sync-updates-panel.py"
+  done
+fi
+
+# 3) Roadmap — newest-first ordering holds.
+#    Don't try to know today's day-N. Just assert the top id >= the
+#    second id. Catches mis-inserted entries and stale top-of-file.
+#    Note: ids like `d86-pr-67-...` carry multiple numbers; we want only
+#    the leading dNNN. Use sed to capture just that token.
+top_dN=$(grep -E "^- id: d[0-9]+" "$WEB/roadmap.yaml" | head -1 | sed -E 's/^- id: d([0-9]+).*/\1/')
+second_dN=$(grep -E "^- id: d[0-9]+" "$WEB/roadmap.yaml" | sed -n '2p' | sed -E 's/^- id: d([0-9]+).*/\1/')
+
+if [ -z "$top_dN" ] || [ -z "$second_dN" ]; then
+  record_fail "roadmap.yaml: could not extract top two d-ids (file empty or malformed)"
+elif [ "$top_dN" -ge "$second_dN" ]; then
+  record_pass "roadmap.yaml newest id: d${top_dN} (ordering ok)"
+else
+  record_fail "roadmap.yaml ordering broken: top is d${top_dN} but next is d${second_dN}"
+fi
+
+# 4) Blog — latest article date (warn-only, never fail).
+#    Not every day ships a blog; a no-blog day is legitimate.
+latest_blog_date=$(grep -oE 'datetime="[0-9]{4}-[0-9]{2}-[0-9]{2}"' "$WEB/blog.html" | head -1 | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+record_pass "blog latest article: ${latest_blog_date:-unknown}"
+
+#
+# CATEGORY K — EOD surface integrity (no writes to dead directories)
+#
+# Two directories in the repo root are off-limits to propagation /
+# EOD scripts: explorations/ (tracked, agent-passport.org design
+# lineage — do not touch) and .pre-swap-snapshot/ (gitignored local
+# scratch). A correctly-behaving daily run must never modify either.
+#
+section "K. EOD surface integrity (dead-dir guard)"
+
+# 1) explorations/ — must have no uncommitted changes.
+explorations_porcelain=$(git -C "$WEB" status --porcelain explorations/ 2>/dev/null)
+if [ -z "$explorations_porcelain" ]; then
+  record_pass "explorations/ has no uncommitted changes (untouched)"
+else
+  record_fail "explorations/ has uncommitted changes — a script wrote to the old-design directory, investigate"
+  echo "$explorations_porcelain" | sed 's/^/    /'
+fi
+
+# 2) .pre-swap-snapshot/ — must have no files modified in last 24h.
+if [ ! -d "$WEB/.pre-swap-snapshot" ]; then
+  record_pass ".pre-swap-snapshot/ not present (nothing to check)"
+else
+  recent=$(find "$WEB/.pre-swap-snapshot" -type f -mtime -1 2>/dev/null)
+  if [ -z "$recent" ]; then
+    record_pass ".pre-swap-snapshot/ untouched in last 24h"
+  else
+    record_fail ".pre-swap-snapshot/ has files modified in last 24h — a script is writing to dead scratch dir"
+    echo "$recent" | sed 's/^/    /'
+  fi
+fi
 
 #
 # FINAL REPORT
