@@ -571,7 +571,7 @@ section.block{padding:120px 0;border-bottom:1px solid var(--line-soft);position:
 .step .primitive b{color:var(--fg-2);font-weight:400}
 
 /* ─── SOLUTIONS ──────────────────────────────────────── */
-.solutions{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;height:680px}
+.solutions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px}
 .sol{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px;position:relative;overflow:hidden;cursor:pointer;transition:all .3s;display:flex;flex-direction:column;justify-content:space-between}
 .sol:hover{border-color:var(--accent);transform:translateY(-2px)}
 .sol .cat{font-family:"Geist Mono",monospace;font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase}
@@ -582,9 +582,6 @@ section.block{padding:120px 0;border-bottom:1px solid var(--line-soft);position:
 .sol .meta span{padding:3px 8px;border:1px solid var(--line);border-radius:4px}
 .sol.big{grid-row:span 2}
 .sol.big h3{font-size:36px}
-.sol .visual{position:absolute;right:-20px;top:50%;transform:translateY(-50%);opacity:.5;transition:opacity .3s}
-.sol:hover .visual{opacity:.85}
-.sol.big .visual{right:-40px}
 
 /* ─── COMPARE ────────────────────────────────────────── */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
@@ -903,16 +900,6 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
           <p>Per-call budgets, merchant allow-lists, signed receipts every customer's bank will recognize. ACH, card, and stablecoin rails.</p>
         </div>
         <div class="meta"><span>ISO 20022</span><span>PCI-DSS L1</span><span>Stripe · Adyen · Coinbase</span></div>
-        <svg class="visual" width="260" height="220" viewBox="0 0 260 220" fill="none">
-          <rect x="40" y="30" width="180" height="110" rx="10" stroke="#2E8B7A" stroke-opacity=".4" stroke-width="1"></rect>
-          <rect x="50" y="40" width="160" height="20" rx="3" fill="#2E8B7A" fill-opacity=".07"></rect>
-          <text x="56" y="54" font-family="Geist Mono" font-size="9" fill="#2E8B7A">CHARGE  $1,200.00</text>
-          <line x1="50" y1="80" x2="200" y2="80" stroke="#2E8B7A" stroke-opacity=".2"></line>
-          <text x="56" y="98" font-family="Geist Mono" font-size="8" fill="#787B83">scope: pay:stripe:invoice</text>
-          <text x="56" y="112" font-family="Geist Mono" font-size="8" fill="#787B83">cap:   $5,000 / 24h</text>
-          <text x="56" y="126" font-family="Geist Mono" font-size="8" fill="#88D8B0">sig:   ed25519:7f2c…ok</text>
-          <circle cx="220" cy="50" r="3" fill="#88D8B0"></circle>
-        </svg>
       </div>
       <div class="sol">
         <div>
@@ -930,7 +917,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         </div>
         <div class="meta"><span>SOC 2 II</span><span>AI Act</span></div>
       </div>
-      <div class="sol">
+      <div class="sol" style="grid-column:2 / -1">
         <div>
           <div class="cat">04 · Enterprise</div>
           <h3>The agent <span class="serif">control plane</span> for the org.</h3>
@@ -938,7 +925,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         </div>
         <div class="meta"><span>SAML / SCIM</span><span>VPC</span></div>
       </div>
-      <div class="sol" style="grid-column:span 2;background:linear-gradient(120deg,#14110A,#0E1014);border-color:#2E8B7A33">
+      <div class="sol" style="grid-column:1 / -1;background:linear-gradient(120deg,#14110A,#0E1014);border-color:#2E8B7A33">
         <div style="display:flex;justify-content:space-between;align-items:flex-end;height:100%;gap:24px">
           <div>
             <div class="cat" style="color:var(--verify)">→ NEW · AEOESS GATEWAY</div>
