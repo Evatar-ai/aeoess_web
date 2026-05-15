@@ -8,6 +8,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="/aeoess-design.css">
+<style>
+/* pricing tiers — aligned cards, CTA pinned to the bottom */
+.tier{display:flex;flex-direction:column}
+.tier.featured{border-color:var(--accent)}
+.t-name{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.t-pop{font-size:9.5px;letter-spacing:.08em;background:var(--accent);color:#0A0B0D;padding:3px 9px;border-radius:999px;font-weight:500}
+.t-price{font-size:42px;font-weight:500;color:var(--fg);margin:16px 0 0;line-height:1;letter-spacing:-0.025em;font-family:"Geist",system-ui,sans-serif}
+.t-price .per{font-size:14px;font-weight:300;color:var(--muted)}
+.t-sub{font-family:"Geist Mono",monospace;font-size:12px;color:var(--muted);margin:10px 0 0;min-height:44px;line-height:1.45}
+.tier ul{margin:22px 0 0;padding:22px 0 0;border-top:1px solid var(--line);list-style:none;display:flex;flex-direction:column;gap:11px}
+.tier ul li{font-size:14.5px;line-height:1.45;color:var(--fg-2);padding-left:20px;position:relative;margin:0;font-weight:300}
+.tier ul li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.t-cta{margin-top:auto;padding-top:26px}
+.t-cta .btn{width:100%;justify-content:center}
+</style>
 </head>
 <body>
 <header class="nav" id="nav">
@@ -49,15 +64,14 @@
     <p class="dek">Protocol defines what governance <em>is</em>. Gateway defines how well it <em>works</em>.</p>
   </div></section>
 
-  <div class="prose"><div class="wrap"><div class="col">
+  <div class="prose"><div class="wrap">
 
     <h2 class="no-rule">Plans</h2>
     <div class="grid-3">
-      <div class="card">
-        <h4>Open Source</h4>
-        <p style="font-size:40px;color:var(--fg);font-weight:500;margin:0;line-height:1">Free</p>
-        <p class="muted" style="font-family:'Geist Mono',monospace;font-size:12px;margin-top:8px">Apache-2.0 · forever</p>
-        <p><a class="btn btn-ghost" href="https://agent-passport.org/passport.html">Read the spec</a></p>
+      <div class="card tier">
+        <p class="t-name">Open Source</p>
+        <p class="t-price">Free</p>
+        <p class="t-sub">Apache-2.0 · forever</p>
         <ul>
           <li>Full SDK (TS + Python)</li>
           <li>MCP server, all 150 tools</li>
@@ -66,12 +80,12 @@
           <li>Conformance test suite</li>
           <li>8 published papers</li>
         </ul>
+        <div class="t-cta"><a class="btn btn-ghost" href="https://agent-passport.org/passport.html">Read the spec</a></div>
       </div>
-      <div class="card">
-        <h4>Production — Most popular</h4>
-        <p style="font-size:40px;color:var(--fg);font-weight:500;margin:0;line-height:1">$299 <span class="muted" style="font-size:14px;font-weight:300">/month</span></p>
-        <p class="muted" style="font-family:'Geist Mono',monospace;font-size:12px;margin-top:8px">For when governance has to work</p>
-        <p><a class="btn btn-primary" href="/portal.html?next=upgrade_pro">Get started</a></p>
+      <div class="card tier featured">
+        <p class="t-name">Production <span class="t-pop">Most popular</span></p>
+        <p class="t-price">$299 <span class="per">/month</span></p>
+        <p class="t-sub">For when governance has to work</p>
         <ul>
           <li>Everything in Open Source</li>
           <li>Hosted gateway, fail-closed enforcement</li>
@@ -80,12 +94,12 @@
           <li>1-year audit retention</li>
           <li>Production support during business hours</li>
         </ul>
+        <div class="t-cta"><a class="btn btn-primary" href="/portal.html?next=upgrade_pro">Get started →</a></div>
       </div>
-      <div class="card">
-        <h4>Enterprise</h4>
-        <p style="font-size:40px;color:var(--fg);font-weight:500;margin:0;line-height:1">Custom</p>
-        <p class="muted" style="font-family:'Geist Mono',monospace;font-size:12px;margin-top:8px">For audit, dispute, regulatory review</p>
-        <p><a class="btn btn-ghost" href="/contact.html">Talk to us</a></p>
+      <div class="card tier">
+        <p class="t-name">Enterprise</p>
+        <p class="t-price">Custom</p>
+        <p class="t-sub">For audit, dispute, regulatory review</p>
         <ul>
           <li>Everything in Production</li>
           <li>SSO, SAML, SCIM</li>
@@ -94,6 +108,7 @@
           <li>Audit retention up to 7 years</li>
           <li>Priority support and onboarding</li>
         </ul>
+        <div class="t-cta"><a class="btn btn-ghost" href="/contact.html">Talk to us</a></div>
       </div>
     </div>
 
@@ -150,7 +165,7 @@
     <hr>
     <p class="muted" style="text-align:center;font-size:13px">For AI agents: <a href="/llms-full.txt">llms-full.txt</a> · <a href="/.well-known/mcp.json">MCP descriptor</a></p>
 
-  </div></div></div>
+  </div></div>
 </main>
 
 <footer>
