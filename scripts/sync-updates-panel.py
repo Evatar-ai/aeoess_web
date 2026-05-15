@@ -7,17 +7,26 @@ opensource.html is the canonical source for both:
   - the static rendered <aside data-updates-panel> block (between BUILD:UPDATES_START / BUILD:UPDATES_END)
 
 This script:
+  0. Regenerates the static block in opensource.html from its var UPDATES
+     array (via scripts/build-updates-panel.mjs), so the baked block can
+     never drift behind the array.
   1. Reads the canonical UPDATES JS array from opensource.html
-  2. Reads the canonical static rendered block (between BUILD:UPDATES markers)
+  2. Reads the (freshly regenerated) static rendered block (between BUILD:UPDATES markers)
   3. Writes both to every peer .html file in aeoess_web/ that has BUILD:UPDATES markers
 
 Run: python3 scripts/sync-updates-panel.py
 """
-import re, sys
+import re, sys, subprocess
 from pathlib import Path
 
 WEB = Path(__file__).resolve().parent.parent
 OPENSOURCE = WEB / 'opensource.html'
+
+# Step 0: regenerate the canonical static <aside data-updates-panel> block in
+# opensource.html from its var UPDATES array, so the baked block can never
+# drift behind the array. Without this, this script faithfully propagates a
+# stale block to every peer page (the bug that froze the panel at May 11).
+subprocess.run(['node', str(WEB / 'scripts' / 'build-updates-panel.mjs')], check=True)
 
 src = OPENSOURCE.read_text()
 
