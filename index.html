@@ -5,7 +5,7 @@
 <title>AEOESS — Governance layer for AI agents</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap">
 <link rel="alternate" type="text/plain" href="https://aeoess.com/llms.txt" title="LLM documentation (compact)">
 <link rel="alternate" type="text/plain" href="https://aeoess.com/llms-full.txt" title="LLM documentation (full)">
 <link rel="alternate" type="text/markdown" href="https://aeoess.com/AGENTS.md" title="Agent instructions (AGENTS.md standard)">
@@ -376,7 +376,7 @@
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Lora';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -385,7 +385,7 @@
 }
 /* latin */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Lora';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -394,7 +394,7 @@
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Lora';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -403,7 +403,7 @@
 }
 /* latin */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Lora';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -433,14 +433,14 @@ window.__TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   --fg-2:#C8C2B2;
   --muted:#787B83;
   --dim:#4A4D55;
-  --accent:#E2A35A;          /* wax-seal copper */
-  --accent-soft:#E2A35A33;
+  --accent:#2E8B7A;          /* wax-seal copper */
+  --accent-soft:#2E8B7A33;
   --verify:#88D8B0;          /* sage verify */
   --warn:#E26A4D;
   --grid:#FFFFFF06;
   --radius:14px;
   --maxw:1320px;
-  --tweak-display-font:"Instrument Serif";
+  --tweak-display-font:"Lora";
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:"Geist",system-ui,sans-serif;font-weight:400;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -454,7 +454,7 @@ body{
 ::selection{background:var(--accent);color:#000}
 a{color:inherit;text-decoration:none}
 .mono{font-family:"Geist Mono",ui-monospace,monospace;font-feature-settings:"ss01","ss02";letter-spacing:-0.01em}
-.serif{font-family:var(--tweak-display-font),"Instrument Serif",serif;font-style:italic;font-weight:400}
+.serif{font-family:var(--tweak-display-font),"Lora",serif;font-style:italic;font-weight:400}
 .muted{color:var(--muted)}
 .dim{color:var(--dim)}
 .eyebrow{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
@@ -526,14 +526,14 @@ a{color:inherit;text-decoration:none}
 .arch-node{position:absolute;background:#0E1014;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-family:"Geist Mono",monospace;font-size:11.5px;color:var(--fg);min-width:160px;z-index:3;box-shadow:0 8px 24px #0006;white-space:nowrap}
 .arch-node .label{color:var(--muted);font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px}
 .arch-node .val{color:var(--fg);font-size:12.5px;letter-spacing:-0.01em}
-.arch-node.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 8px 24px #E2A35A22}
+.arch-node.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 8px 24px #2E8B7A22}
 .arch-node.active .val{color:var(--accent)}
 .arch-node.verify{border-color:#88D8B055}
 .arch-node.verify .val{color:var(--verify)}
 
 .arch-step{position:absolute;display:flex;align-items:center;gap:8px;font-family:"Geist Mono",monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
 .arch-step .n{width:18px;height:18px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--fg-2);font-size:10px}
-.arch-step.active .n{border-color:var(--accent);color:var(--accent);background:#E2A35A11}
+.arch-step.active .n{border-color:var(--accent);color:var(--accent);background:#2E8B7A11}
 
 .arch-receipt{position:absolute;left:20px;right:20px;bottom:20px;background:#0B0D11;border:1px solid var(--line);border-radius:8px;padding:14px;font-family:"Geist Mono",monospace;font-size:11px;z-index:3;overflow:hidden}
 .arch-receipt .row{display:flex;gap:12px;justify-content:space-between;color:var(--muted);padding:3px 0;align-items:baseline}
@@ -576,7 +576,7 @@ section.block{padding:120px 0;border-bottom:1px solid var(--line-soft);position:
 .sol:hover{border-color:var(--accent);transform:translateY(-2px)}
 .sol .cat{font-family:"Geist Mono",monospace;font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase}
 .sol h3{font-size:26px;letter-spacing:-0.025em;margin:14px 0 12px;font-weight:400;line-height:1.08}
-.sol h3 .serif{color:var(--fg-2);font-family:var(--tweak-display-font),"Instrument Serif",serif}
+.sol h3 .serif{color:var(--fg-2);font-family:var(--tweak-display-font),"Lora",serif}
 .sol p{color:var(--fg-2);font-size:14.5px;line-height:1.5;max-width:340px;font-weight:300}
 .sol .meta{font-family:"Geist Mono",monospace;font-size:11px;color:var(--muted);display:flex;gap:14px;margin-top:18px}
 .sol .meta span{padding:3px 8px;border:1px solid var(--line);border-radius:4px}
@@ -642,15 +642,15 @@ section.block{padding:120px 0;border-bottom:1px solid var(--line-soft);position:
 .cite .src{font-family:"Geist Mono",monospace;font-size:11px;color:var(--muted);text-align:right}
 
 .quote{padding:32px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#14110A,#0A0B0D)}
-.quote .mark{font-family:"Instrument Serif",serif;color:var(--accent);font-size:80px;line-height:0.5;margin-bottom:18px;font-style:italic}
-.quote p{font-family:"Instrument Serif",serif;font-family:var(--tweak-display-font),"Instrument Serif",serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--fg);margin:0 0 22px}
+.quote .mark{font-family:"Lora",serif;color:var(--accent);font-size:80px;line-height:0.5;margin-bottom:18px;font-style:italic}
+.quote p{font-family:"Lora",serif;font-family:var(--tweak-display-font),"Lora",serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--fg);margin:0 0 22px}
 .quote .a{font-family:"Geist Mono",monospace;font-size:12px;color:var(--muted);letter-spacing:0.06em}
 
 /* ─── CTA FOOTER ────────────────────────────────────── */
 .cta{padding:140px 0 100px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
 .cta::before{
   content:"";position:absolute;inset:auto 0 -40% 0;height:80%;
-  background:radial-gradient(ellipse at center, #E2A35A22 0%, transparent 60%);
+  background:radial-gradient(ellipse at center, #2E8B7A22 0%, transparent 60%);
   pointer-events:none;
 }
 .cta h2{position:relative;font-size:90px;line-height:0.94;letter-spacing:-0.04em;margin:0 0 32px;font-weight:300}
@@ -764,19 +764,19 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
       <svg class="arch-svg" viewBox="0 0 560 540" preserveAspectRatio="none">
         <defs>
           <linearGradient id="lg" x1="0" x2="1">
-            <stop offset="0" stop-color="#E2A35A" stop-opacity="0"></stop>
-            <stop offset=".5" stop-color="#E2A35A"></stop>
-            <stop offset="1" stop-color="#E2A35A" stop-opacity="0"></stop>
+            <stop offset="0" stop-color="#2E8B7A" stop-opacity="0"></stop>
+            <stop offset=".5" stop-color="#2E8B7A"></stop>
+            <stop offset="1" stop-color="#2E8B7A" stop-opacity="0"></stop>
           </linearGradient>
         </defs>
         <!-- Identity → Delegation -->
-        <path d="M 130 130 Q 250 130 320 220" stroke="#E2A35A" stroke-width="1" fill="none" class="flow" stroke-opacity=".7"></path>
+        <path d="M 130 130 Q 250 130 320 220" stroke="#2E8B7A" stroke-width="1" fill="none" class="flow" stroke-opacity=".7"></path>
         <!-- Delegation → Enforcement -->
-        <path d="M 420 240 Q 470 290 330 360" stroke="#E2A35A" stroke-width="1" fill="none" class="flow" stroke-opacity=".7" style="animation-delay:.5s"></path>
+        <path d="M 420 240 Q 470 290 330 360" stroke="#2E8B7A" stroke-width="1" fill="none" class="flow" stroke-opacity=".7" style="animation-delay:.5s"></path>
         <!-- Enforcement → Receipt (down) -->
         <path d="M 250 380 Q 240 420 240 450" stroke="#88D8B0" stroke-width="1" fill="none" class="flow" stroke-opacity=".7" style="animation-delay:1s"></path>
         <!-- pulsing dots along path -->
-        <circle r="3" fill="#E2A35A">
+        <circle r="3" fill="#2E8B7A">
           <animateMotion dur="3s" repeatCount="indefinite" path="M 130 130 Q 250 130 320 220 Q 470 290 330 360 Q 240 420 240 450"></animateMotion>
         </circle>
       </svg>
@@ -904,10 +904,10 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         </div>
         <div class="meta"><span>ISO 20022</span><span>PCI-DSS L1</span><span>Stripe · Adyen · Coinbase</span></div>
         <svg class="visual" width="260" height="220" viewBox="0 0 260 220" fill="none">
-          <rect x="40" y="30" width="180" height="110" rx="10" stroke="#E2A35A" stroke-opacity=".4" stroke-width="1"></rect>
-          <rect x="50" y="40" width="160" height="20" rx="3" fill="#E2A35A" fill-opacity=".07"></rect>
-          <text x="56" y="54" font-family="Geist Mono" font-size="9" fill="#E2A35A">CHARGE  $1,200.00</text>
-          <line x1="50" y1="80" x2="200" y2="80" stroke="#E2A35A" stroke-opacity=".2"></line>
+          <rect x="40" y="30" width="180" height="110" rx="10" stroke="#2E8B7A" stroke-opacity=".4" stroke-width="1"></rect>
+          <rect x="50" y="40" width="160" height="20" rx="3" fill="#2E8B7A" fill-opacity=".07"></rect>
+          <text x="56" y="54" font-family="Geist Mono" font-size="9" fill="#2E8B7A">CHARGE  $1,200.00</text>
+          <line x1="50" y1="80" x2="200" y2="80" stroke="#2E8B7A" stroke-opacity=".2"></line>
           <text x="56" y="98" font-family="Geist Mono" font-size="8" fill="#787B83">scope: pay:stripe:invoice</text>
           <text x="56" y="112" font-family="Geist Mono" font-size="8" fill="#787B83">cap:   $5,000 / 24h</text>
           <text x="56" y="126" font-family="Geist Mono" font-size="8" fill="#88D8B0">sig:   ed25519:7f2c…ok</text>
@@ -938,7 +938,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         </div>
         <div class="meta"><span>SAML / SCIM</span><span>VPC</span></div>
       </div>
-      <div class="sol" style="grid-column:span 2;background:linear-gradient(120deg,#14110A,#0E1014);border-color:#E2A35A33">
+      <div class="sol" style="grid-column:span 2;background:linear-gradient(120deg,#14110A,#0E1014);border-color:#2E8B7A33">
         <div style="display:flex;justify-content:space-between;align-items:flex-end;height:100%;gap:24px">
           <div>
             <div class="cat" style="color:var(--verify)">→ NEW · AEOESS GATEWAY</div>
@@ -979,11 +979,11 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <h4>With APS</h4>
         <div class="biggie">Identity. Scope. Proof.</div>
         <ul>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#E2A35A" stroke-width="1.4" fill="none"></path></svg><span>Every agent has a key. Every key has a name. Every name has an owner.</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#E2A35A" stroke-width="1.4" fill="none"></path></svg><span>Capabilities are cryptographic, not conversational. Out-of-scope = won't sign.</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#E2A35A" stroke-width="1.4" fill="none"></path></svg><span>One Merkle log per tenant. Verifiable in 11 lines of code.</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#E2A35A" stroke-width="1.4" fill="none"></path></svg><span>Revoke a key, the agent stops. Worldwide. In under 200ms.</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#E2A35A" stroke-width="1.4" fill="none"></path></svg><span>Receipts your auditor, your bank, and your regulator can verify.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Every agent has a key. Every key has a name. Every name has an owner.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Capabilities are cryptographic, not conversational. Out-of-scope = won't sign.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>One Merkle log per tenant. Verifiable in 11 lines of code.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Revoke a key, the agent stops. Worldwide. In under 200ms.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Receipts your auditor, your bank, and your regulator can verify.</span></li>
         </ul>
       </div>
     </div>
