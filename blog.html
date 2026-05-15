@@ -82,11 +82,11 @@ article.post blockquote{margin:0 0 16px;padding:6px 0 6px 20px;border-left:2px s
       <div class="nav-dd">
         <a href="/docs.html">Resources<span class="nav-dd-cv">▼</span></a>
         <div class="nav-dd-panel">
-          <a href="/opensource.html">Open Source</a>
+          <a href="https://agent-passport.org/opensource.html">Open Source</a>
           <a href="/pricing.html">Pricing</a>
           <a href="/blog.html">Blog</a>
-          <a href="/roadmap.html">Roadmap</a>
-          <a href="/passport.html">Spec</a>
+          <a href="https://agent-passport.org/roadmap.html">Roadmap</a>
+          <a href="https://agent-passport.org/passport.html">Spec</a>
           <a href="/faq.html">FAQ</a>
           <a href="/compare.html">Compare</a>
         </div>
@@ -516,7 +516,7 @@ import {
 import { /* anything from the full surface */ } from 'agent-passport-system'</pre>
   <p>The full <code>agent-passport-system</code> import is unchanged. Backward compatible. Nothing was renamed. Nothing was deleted. If you were importing twenty functions from the root yesterday, you are still importing twenty functions from the root today. The subpath is additive. New users start with core. Existing integrations keep working. The people who know they need <code>buildBoundaryProfile</code> or <code>createEmergencyPathway</code> or any of the 32 v2 constitutional modules pull those from the root import by name.</p>
   <p><strong>Wall three: the homepage pitch.</strong> For weeks the hero stat on aeoess.com led with "103 modules" and "132 MCP tools." That is true and it is the wrong thing to lead with. Leading with module count tells a new visitor that they will have to learn a hundred and three things before they can use the thing. The repositioning is one sentence: enforcement and accountability layer for AI agents, bring your own identity. That is what the protocol actually does. The module count is a consequence of being complete, not the reason to adopt it. Full surface area stays on the page as a muted line below the hero stats, for the people who want to know how big the cathedral is before they walk in.</p>
-  <p><strong>What was not done.</strong> Nothing was removed. Nothing was renamed. Nothing was deprecated. Every v1 import path still works. Every MCP tool still exists and is reachable under <code>APS_PROFILE=full</code>. The depth pages (<a href="passport.html">passport.html</a>, threat model, llms-full.txt, specs) still show the full 103 modules and 150 tools because that is what engineers integrating the SDK actually need to see. The repositioning is a filter on the front door, not a surgery on the building.</p>
+  <p><strong>What was not done.</strong> Nothing was removed. Nothing was renamed. Nothing was deprecated. Every v1 import path still works. Every MCP tool still exists and is reachable under <code>APS_PROFILE=full</code>. The depth pages (<a href="https://agent-passport.org/passport.html">passport.html</a>, threat model, llms-full.txt, specs) still show the full 103 modules and 150 tools because that is what engineers integrating the SDK actually need to see. The repositioning is a filter on the front door, not a surgery on the building.</p>
   <p><strong>Where this leaves the story.</strong> The protocol is complete. The front door is smaller. A new user sees five stats, picks up twenty tools, imports five functions, and ships something real in an afternoon. If they need the cathedral, it is still there, one import path away. If they never need it, they never see it. That is the whole shape of this change.</p>
   <p>SDK v1.40.0 with <code>/core</code> subpath on npm. MCP v2.22.2 with <code>APS_PROFILE=essential</code> default on npm. 2,552 tests passing. Full surface unchanged. Published to <a href="https://www.npmjs.com/package/agent-passport-system">npm</a>, <a href="https://pypi.org/project/agent-passport-system/">PyPI</a>, <a href="https://clawhub.ai/aeoess/agent-passport-system">ClawHub</a>.</p>
 </article>
@@ -896,7 +896,7 @@ import { /* anything from the full surface */ } from 'agent-passport-system'</pr
   <p><strong>Threat Model Published.</strong> 38 attack scenarios with direct references to the test suite. Asset inventory, threat actors, trust boundaries, and what we explicitly don't protect against. Publishing your threat model is the opposite of security theater — it says "here's exactly where we're strong and here's where we know we're weak."</p>
   <p><strong>Website Overhaul.</strong> Found and fixed 56 occurrences of "Ed25519" that were misspelled across 3 repos. Rewrote the hero text. Fixed the Quick Start code to match the real API. Updated all meta tags, Open Graph, Schema.org.</p>
   <p><strong>Agent District.</strong> A pixel-art visualization of the entire protocol in operation. Nine buildings — one per layer plus a central square. Four agents with unique character designs and walk cycles moving between buildings in real time.</p>
-  <p><a href="threat-model.html">Read threat model →</a> · <a href="world.html">Watch Agent District live →</a></p>
+  <p><a href="https://agent-passport.org/threat-model.html">Read threat model →</a> · <a href="world.html">Watch Agent District live →</a></p>
 </article>
 <article class="post" id="day-12">
   <time class="post-date" datetime="2026-03-01">March 1, 2026</time>
@@ -1022,15 +1022,15 @@ import { /* anything from the full surface */ } from 'agent-passport-system'</pr
       </div>
       <div>
         <h5>Open Source</h5>
-        <ul><li><a href="/opensource.html">Agent Passport System</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system">SDK · MCP · Python</a></li><li><a href="/passport.html">Spec</a></li><li><a href="/working-group.html">Working group</a></li><li><a href="https://github.com/aeoess">GitHub</a></li></ul>
+        <ul><li><a href="https://agent-passport.org/opensource.html">Agent Passport System</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system">SDK · MCP · Python</a></li><li><a href="https://agent-passport.org/passport.html">Spec</a></li><li><a href="https://agent-passport.org/working-group.html">Working group</a></li><li><a href="https://github.com/aeoess">GitHub</a></li></ul>
       </div>
       <div>
         <h5>Resources</h5>
-        <ul><li><a href="/blog.html">Blog</a></li><li><a href="/roadmap.html">Roadmap</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/compare.html">Compare</a></li><li><a href="/docs.html">Docs</a></li><li><a href="/media.html">Media</a></li><li><a href="/portal.html">Portal</a></li><li><a href="/pricing.html">Pricing</a></li><li><a href="/research.html">Research</a></li></ul>
+        <ul><li><a href="/blog.html">Blog</a></li><li><a href="https://agent-passport.org/roadmap.html">Roadmap</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/compare.html">Compare</a></li><li><a href="/docs.html">Docs</a></li><li><a href="/media.html">Media</a></li><li><a href="/portal.html">Portal</a></li><li><a href="/pricing.html">Pricing</a></li><li><a href="/research.html">Research</a></li></ul>
       </div>
       <div>
         <h5>Company</h5>
-        <ul><li><a href="/contact.html">Contact</a></li><li><a href="/threat-model.html">Threat model</a></li><li><a href="mailto:signal@aeoess.com">signal@aeoess.com</a></li><li><a href="/terms.html">Terms</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/sitemap.html">Sitemap</a></li></ul>
+        <ul><li><a href="/contact.html">Contact</a></li><li><a href="https://agent-passport.org/threat-model.html">Threat model</a></li><li><a href="mailto:signal@aeoess.com">signal@aeoess.com</a></li><li><a href="/terms.html">Terms</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/sitemap.html">Sitemap</a></li></ul>
       </div>
     </div>
     <div class="foot-bot">

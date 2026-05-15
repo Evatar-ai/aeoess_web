@@ -219,7 +219,9 @@ footer a:hover {
     var fromLS;
     try { fromLS = localStorage.getItem('aeoess-theme'); } catch(e) {}
     var fromMQ = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    set(fromHash || fromLS || fromMQ);
+    var embedded = window !== window.top;
+    // embedded: default dark (host pages are dark), honor only an explicit theme=light hash
+    set(fromHash || (embedded ? 'dark' : (fromLS || fromMQ)));
     window.toggleTheme = function() {
       var cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
       set(cur === 'light' ? 'dark' : 'light');
@@ -233,7 +235,7 @@ footer a:hover {
 <style>html.embedded .nav, html.embedded .nav-drawer, html.embedded footer.footer-wrap { display: none !important; }</style>
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" width="158" height="26" style="height:26px;width:auto"></a>
-  <div class="nav-links">Wallet<a href="blog.html">Blog</a><a href="roadmap.html">Roadmap</a><a href="passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
+  <div class="nav-links">Wallet<a href="blog.html">Blog</a><a href="https://agent-passport.org/roadmap.html">Roadmap</a><a href="https://agent-passport.org/passport.html">Spec</a><a href="docs.html">API</a><a href="portal.html" style="font-weight:600">Portal</a><a href="https://github.com/aeoess">GitHub</a><a href="mailto:signal@aeoess.com">Contact</a></div>
   <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button><div class="nav-burger" onclick="this.classList.toggle('open');document.querySelector('.nav-drawer').classList.toggle('open')"><span></span><span></span><span></span></div></div>
 </nav>
 
