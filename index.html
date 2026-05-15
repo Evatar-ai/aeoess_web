@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1440">
-<title>AEOESS — Governance layer for AI agents</title>
+<title>AEOESS: Governance for AI agents acting on your behalf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap">
@@ -11,19 +11,19 @@
 <link rel="alternate" type="text/markdown" href="https://aeoess.com/AGENTS.md" title="Agent instructions (AGENTS.md standard)">
 <link rel="alternate" type="application/json" href="https://aeoess.com/.well-known/mcp.json" title="MCP server discovery">
 <link rel="alternate" type="text/plain" href="https://aeoess.com/.well-known/aps.txt" title="APS governance declaration">
-<meta name="description" content="Open protocol giving AI agents cryptographic identity, scoped delegation, and signed receipts an auditor can verify without trusting the issuer.">
+<meta name="description" content="Open-source infrastructure to enforce, verify, and audit what AI agents do on behalf of people and companies. Cryptographic identity, scoped delegation, signed receipts. Apache 2.0.">
 <link rel="canonical" href="https://aeoess.com/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aeoess.com/">
-<meta property="og:title" content="AEOESS — Governance layer for AI agents">
-<meta property="og:description" content="Open protocol giving AI agents cryptographic identity, scoped delegation, and signed receipts an auditor can verify without trusting the issuer.">
+<meta property="og:title" content="AEOESS: Governance for AI agents acting on your behalf">
+<meta property="og:description" content="Open-source infrastructure to enforce, verify, and audit what AI agents do on behalf of people and companies. Cryptographic identity, scoped delegation, signed receipts.">
 <meta property="og:image" content="https://aeoess.com/assets/images/og-default.png">
 <meta property="og:site_name" content="AEOESS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@aeoess">
-<meta name="twitter:title" content="AEOESS — Governance layer for AI agents">
-<meta name="twitter:description" content="Open protocol giving AI agents cryptographic identity, scoped delegation, and signed receipts an auditor can verify without trusting the issuer.">
+<meta name="twitter:title" content="AEOESS: Governance for AI agents acting on your behalf">
+<meta name="twitter:description" content="Open-source infrastructure to enforce, verify, and audit what AI agents do on behalf of people and companies. Cryptographic identity, scoped delegation, signed receipts.">
 <meta name="twitter:image" content="https://aeoess.com/assets/images/og-default.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <meta name="agent-readable" content="true">
@@ -737,17 +737,17 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
   <div class="hero-grid"></div>
   <div class="wrap hero-inner">
     <div>
-      <span class="hero-tag"><span class="dot"></span>APS v0.7 · draft-pidlisnyi-aps-00 · referenced by IETF</span>
-      <h1>The <span class="serif">governance layer</span><br>for AI agents.</h1>
-      <p class="lede">AEOESS is the cryptographic substrate that lets autonomous agents prove who they are, act within scope, and leave an audit trail an auditor can verify — at sub-millisecond latency.</p>
+      <span class="hero-tag"><span class="dot"></span>Apache 2.0 · IETF draft-pidlisnyi-aps-01 · 8 research papers</span>
+      <h1>Governance for AI agents <span class="serif">acting on your behalf.</span></h1>
+      <p class="lede">Open-source infrastructure to enforce, verify, and audit what AI agents do on behalf of people and companies. Cryptographic identity, scoped delegation, signed receipts.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="/pricing.html">Issue your first passport →</a>
+        <a class="btn btn-primary btn-lg" href="/pricing.html">Get started →</a>
         <a class="btn btn-ghost btn-lg" href="https://agent-passport.org/passport.html">Read the spec</a>
       </div>
       <div class="hero-meta">
-        <div><div class="k">&lt; 2<span style="color:var(--accent)">ms</span></div><div class="l">enforcement decision latency</div></div>
-        <div><div class="k">2,884</div><div class="l">conformance tests, public</div></div>
-        <div><div class="k">8</div><div class="l">research papers</div></div>
+        <div><div class="k">~ 2<span style="color:var(--accent)">ms</span></div><div class="l">p50 policy evaluation</div></div>
+        <div><div class="k">403<span style="color:var(--accent)">/s</span></div><div class="l">sustained throughput</div></div>
+        <div><div class="k">8</div><div class="l">research papers, DOI-indexed</div></div>
       </div>
     </div>
 
@@ -782,7 +782,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
       <!-- nodes -->
       <div class="arch-node active" style="top:50px;left:24px;">
         <div class="label">01 · Identity</div>
-        <div class="val">did:aeo:0xA1F…3c2e</div>
+        <div class="val">did:aps:0xA1F…3c2e</div>
       </div>
       <div class="arch-step active" style="top:48px;right:24px;"><span class="n">1</span><span>issued</span></div>
 
@@ -794,15 +794,15 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
 
       <div class="arch-node" style="top:312px;left:120px;">
         <div class="label">03 · Enforcement</div>
-        <div class="val">policy:allow · 1.4ms</div>
+        <div class="val">policy:allow · 1.9ms</div>
       </div>
       <div class="arch-step" style="top:330px;right:24px;"><span class="n">3</span><span>evaluated</span></div>
 
       <div class="arch-receipt">
         <div class="head"><span>04 · Receipt</span><span>signed · sha-256</span></div>
-        <div class="row"><span>agent</span><b>did:aeo:0xA1F…3c2e</b></div>
+        <div class="row"><span>agent</span><b>did:aps:0xA1F…3c2e</b></div>
         <div class="row"><span>action</span><b>POST /invoices/8821</b></div>
-        <div class="row"><span>ts</span><b>2026-05-14T09:21:47.302Z</b></div>
+        <div class="row"><span>ts</span><b>2026-05-15T17:21:47.302Z</b></div>
         <div class="row sig"><span>sig</span><b>ed25519:7f2c…</b><span class="blink" style="color:var(--verify);flex:0 0 auto;margin-left:-6px">▮</span></div>
       </div>
     </div>
@@ -812,11 +812,11 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
 <!-- ═══════════════ TRUST STRIP ═══════════════ -->
 <section class="trust">
   <div class="wrap trust-inner">
-    <div class="lbl">Built to interoperate with</div>
+    <div class="lbl">Active in standards work at</div>
     <div class="ticker">
       <div class="ticker-inner">
-        <span>IETF · APS WG</span><span>NIST AI RMF</span><span>OpenAI · Realtime</span><span>Anthropic · MCP</span><span>Cloudflare · Workers</span><span>EU AI Act · Art. 22</span><span>Stripe · ACH</span>
-        <span>IETF · APS WG</span><span>NIST AI RMF</span><span>OpenAI · Realtime</span><span>Anthropic · MCP</span><span>Cloudflare · Workers</span><span>EU AI Act · Art. 22</span><span>Stripe · ACH</span>
+        <span>IETF · Internet-Draft</span><span>NIST · CAISI input</span><span>NIST · NCCoE</span><span>W3C · CG threads</span><span>OWASP · AIVSS</span><span>A2A protocol</span><span>ERC-8004</span>
+        <span>IETF · Internet-Draft</span><span>NIST · CAISI input</span><span>NIST · NCCoE</span><span>W3C · CG threads</span><span>OWASP · AIVSS</span><span>A2A protocol</span><span>ERC-8004</span>
       </div>
     </div>
   </div>
@@ -830,7 +830,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <div class="sec-num">01 / Protocol</div>
         <h2 class="sec-title">Four primitives. <span class="serif">One trust fabric.</span></h2>
       </div>
-      <p class="sec-kicker">Every AEOESS interaction is the composition of the same four cryptographic moves. They run anywhere your agent runs — edge, cloud, on-device.</p>
+      <p class="sec-kicker">Every AEOESS interaction composes the same four cryptographic moves. They run wherever your agent runs: edge, cloud, on-device.</p>
     </div>
 
     <div class="steps">
@@ -842,8 +842,8 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
           </svg>
         </div>
         <h3>Identity</h3>
-        <p>A passport is a DID anchored to a key the agent — or its operator — holds. No central registry. No PII required.</p>
-        <div class="primitive"><b>did:aeo:</b> + ed25519 / secp256k1</div>
+        <p>A passport is a DID anchored to a key the agent or its operator holds. No central registry. No PII required.</p>
+        <div class="primitive"><b>keys:</b> ed25519 · cross-chain wallet binding</div>
       </div>
       <div class="step">
         <div class="n">02 · DELEGATE</div>
@@ -853,7 +853,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
           </svg>
         </div>
         <h3>Delegation</h3>
-        <p>The operator hands the agent a scoped capability — what, when, where, how much. Signed. Composable. Revocable.</p>
+        <p>The operator hands the agent a scoped capability: what, when, where, how much. Signed. Composable. Revocable.</p>
         <div class="primitive"><b>caveats:</b> scope · ttl · budget · attest</div>
       </div>
       <div class="step">
@@ -864,8 +864,8 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
           </svg>
         </div>
         <h3>Enforcement</h3>
-        <p>The gateway evaluates the passport, the delegation, and the call. Sub-millisecond, deterministic, runs at the edge.</p>
-        <div class="primitive"><b>policy:</b> rego · cedar · wasm</div>
+        <p>The gateway evaluates the passport, the delegation, and the call. ~2ms p50 against the full enforcement stack. Deterministic. Audit-deniable on every refuse.</p>
+        <div class="primitive"><b>gates:</b> signature · scope · spend · freshness · revocation</div>
       </div>
       <div class="step">
         <div class="n">04 · RECEIPT</div>
@@ -875,8 +875,8 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
           </svg>
         </div>
         <h3>Receipt</h3>
-        <p>Every action emits a signed receipt — what, who, when, what was decided. Tamper-evident. Independently verifiable.</p>
-        <div class="primitive"><b>format:</b> cose · jose · merkle</div>
+        <p>Every action emits a signed receipt: what, who, when, what was decided. Tamper-evident. Independently verifiable.</p>
+        <div class="primitive"><b>format:</b> RFC 8785 JCS · ed25519 · sha-256</div>
       </div>
     </div>
   </div>
@@ -890,7 +890,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <div class="sec-num">02 / Solutions</div>
         <h2 class="sec-title">Built for the jobs <span class="serif">agents already do.</span></h2>
       </div>
-      <p class="sec-kicker">Drop-in patterns for the four domains where unaccountable agents become a liability — and accountable ones become an unfair advantage.</p>
+      <p class="sec-kicker">Drop-in patterns for the four domains where unaccountable agents become a liability, and accountable ones become an advantage.</p>
     </div>
 
     <div class="solutions">
@@ -898,42 +898,42 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <div>
           <div class="cat">01 · Payments</div>
           <h3>Agents that can <span class="serif">spend money</span><br>without spending yours.</h3>
-          <p>Per-call budgets, merchant allow-lists, signed receipts every customer's bank will recognize. ACH, card, and stablecoin rails.</p>
+          <p>Per-call budgets, merchant allow-lists, four-gate spending policy. Signed payment receipts at the protocol layer that compose with ACP, A2A, and ERC-8004 commerce primitives.</p>
         </div>
-        <div class="meta"><span>ISO 20022</span><span>PCI-DSS L1</span><span>Stripe · Adyen · Coinbase</span></div>
+        <div class="meta"><span>Four-gate spending</span><span>Composable receipts</span><span>ACP · A2A · ERC-8004</span></div>
       </div>
       <div class="sol">
         <div>
           <div class="cat">02 · Content</div>
           <h3>Provenance,<br>not just <span class="serif">disclaimers.</span></h3>
-          <p>C2PA-compatible attestations from agent to publisher. Every byte traceable to the keypair that produced it.</p>
+          <p>Governance blocks, signed access receipts, instruction-provenance envelopes. Revocation propagates through derivatives.</p>
         </div>
-        <div class="meta"><span>C2PA</span><span>IPTC</span></div>
+        <div class="meta"><span>Governance blocks</span><span>IPR envelopes</span></div>
       </div>
       <div class="sol">
         <div>
           <div class="cat">03 · Compliance</div>
-          <h3>Receipts your <span class="serif">auditor</span> already trusts.</h3>
-          <p>SOC 2 · ISO 27001 · EU AI Act Article 22. Export a Merkle-rooted log; pass any review.</p>
+          <h3>Receipts an <span class="serif">auditor</span> can verify without trusting us.</h3>
+          <p>Eight governance primitives mapping to EU AI Act, NIST AI RMF, ISO 42001, and SR 11-7. Export a signed log, verify it byte-for-byte against the public spec.</p>
         </div>
-        <div class="meta"><span>SOC 2 II</span><span>AI Act</span></div>
+        <div class="meta"><span>EU AI Act</span><span>NIST AI RMF</span><span>ISO 42001</span></div>
       </div>
       <div class="sol" style="grid-column:2 / -1">
         <div>
           <div class="cat">04 · Enterprise</div>
           <h3>The agent <span class="serif">control plane</span> for the org.</h3>
-          <p>Map agents to humans, teams, vendors. Revoke a key, kill a workflow. SCIM, SSO, on-prem available.</p>
+          <p>Bring your own identity format. did:key, did:web, SPIFFE, OAuth. Map agents to humans, teams, vendors. Revoke a key, the agent stops.</p>
         </div>
-        <div class="meta"><span>SAML / SCIM</span><span>VPC</span></div>
+        <div class="meta"><span>did:key · did:web</span><span>SPIFFE · OAuth</span></div>
       </div>
       <div class="sol" style="grid-column:1 / -1;background:linear-gradient(120deg,#14110A,#0E1014);border-color:#2E8B7A33">
         <div style="display:flex;justify-content:space-between;align-items:flex-end;height:100%;gap:24px">
           <div>
-            <div class="cat" style="color:var(--verify)">→ NEW · AEOESS GATEWAY</div>
-            <h3 style="font-size:38px">A single endpoint. <span class="serif">Every agent governed.</span></h3>
-            <p style="max-width:520px">Point your model traffic at gateway.aeoess.com. Get identity, delegation, enforcement, and receipts as one line of config. Free up to 100k req/mo.</p>
+            <div class="cat" style="color:var(--verify)">→ AEOESS GATEWAY</div>
+            <h3 style="font-size:38px">One endpoint. <span class="serif">Every agent action governed.</span></h3>
+            <p style="max-width:520px">Point your model traffic at gateway.aeoess.com. Identity, delegation, enforcement, and receipts on every call. Self-host free under Apache 2.0, or use the managed tier starting at $299/month for 500K evaluations.</p>
           </div>
-          <a class="btn btn-primary btn-lg" href="/gateway.html" style="white-space:nowrap;flex:0 0 auto">Try the gateway →</a>
+          <a class="btn btn-primary btn-lg" href="/pricing.html" style="white-space:nowrap;flex:0 0 auto">See pricing →</a>
         </div>
       </div>
     </div>
@@ -969,8 +969,8 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <ul>
           <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Every agent has a key. Every key has a name. Every name has an owner.</span></li>
           <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Capabilities are cryptographic, not conversational. Out-of-scope = won't sign.</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>One Merkle log per tenant. Verifiable in 11 lines of code.</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Revoke a key, the agent stops. Worldwide. In under 200ms.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>One signed log per tenant. Verifiable against the public spec in any language.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Revoke a key, the next call denies. Cascade revocation propagates through the delegation chain.</span></li>
           <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="#2E8B7A" stroke-width="1.4" fill="none"></path></svg><span>Receipts your auditor, your bank, and your regulator can verify.</span></li>
         </ul>
       </div>
@@ -986,29 +986,29 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <div class="sec-num">04 / Benchmarks</div>
         <h2 class="sec-title">Numbers you can <span class="serif">put in a board deck.</span></h2>
       </div>
-      <p class="sec-kicker">Performance is a feature. Every claim below is reproducible against the public conformance suite — point it at your environment and run it yourself.</p>
+      <p class="sec-kicker">Numbers below are measured against the SDK's own benchmark suite or pulled from the public source tree. Every metric is reproducible.</p>
     </div>
 
     <div class="metrics">
       <div class="metric">
-        <div class="k">1.4<span class="unit">ms</span></div>
-        <div class="l">p50 enforcement decision</div>
-        <div class="sub">edge · 256-byte token</div>
+        <div class="k">~ 2<span class="unit">ms</span></div>
+        <div class="l">p50 policy evaluation</div>
+        <div class="sub">full enforcement stack</div>
       </div>
       <div class="metric">
-        <div class="k">99.997<span class="unit">%</span></div>
-        <div class="l">gateway availability</div>
-        <div class="sub">last 90 days, 7 regions</div>
+        <div class="k">403<span class="unit">/s</span></div>
+        <div class="l">sustained throughput</div>
+        <div class="sub">100-op burst</div>
       </div>
       <div class="metric">
         <div class="k">2,884</div>
-        <div class="l">conformance tests</div>
-        <div class="sub">CC0 · github.com/aeoess</div>
+        <div class="l">SDK tests passing</div>
+        <div class="sub">Apache 2.0 · github.com/aeoess</div>
       </div>
       <div class="metric">
-        <div class="k">8.2<span class="unit">M</span></div>
-        <div class="l">receipts signed today</div>
-        <div class="sub" id="liveCount">live ▮</div>
+        <div class="k">110</div>
+        <div class="l">protocol modules</div>
+        <div class="sub" id="liveCount">core + v2 · public</div>
       </div>
     </div>
   </div>
@@ -1019,14 +1019,14 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
   <div class="wrap code-section">
     <div class="code-left">
       <div class="sec-num" style="margin-bottom:18px">05 / Integration</div>
-      <h2>One line.<br><span class="serif">Every call governed.</span></h2>
-      <p>Wrap your existing model client. Keep your existing code. Get identity, delegation, enforcement, and receipts for free.</p>
+      <h2>Three calls.<br><span class="serif">Every action accountable.</span></h2>
+      <p>Issue a passport. Delegate scoped authority. Gate every action. Receipts emit at the protocol layer, ed25519-signed, byte-parity-verified across TypeScript and Python.</p>
       <div class="code-pills">
-        <span class="pill">node</span><span class="pill">python</span><span class="pill">go</span><span class="pill">rust</span><span class="pill">edge</span><span class="pill">curl</span>
+        <span class="pill">typescript</span><span class="pill">python</span><span class="pill">curl</span>
       </div>
       <div style="margin-top:32px;display:flex;gap:12px">
-        <a class="btn btn-primary" href="https://www.npmjs.com/package/agent-passport-system">npm i @aeoess/sdk</a>
-        <a class="btn btn-ghost" href="/docs.html">See full docs →</a>
+        <a class="btn btn-primary" href="https://www.npmjs.com/package/agent-passport-system">npm i agent-passport-system</a>
+        <a class="btn btn-ghost" href="https://agent-passport.org/">See full docs →</a>
       </div>
     </div>
 
@@ -1042,55 +1042,75 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
       </div>
       <div class="term-body" id="term">
 <div data-pane="ts">
-<span class="ln"><span class="c">// 1. Issue a passport</span></span>
-<span class="ln"><span class="k">import</span> <span class="v">{ aeoess }</span> <span class="k">from</span> <span class="s">"@aeoess/sdk"</span></span>
+<span class="ln"><span class="c">// 1. Generate keys and issue a passport</span></span>
+<span class="ln"><span class="k">import</span> {</span>
+<span class="ln">  <span class="v">generateKeyPair</span>, <span class="v">createPassport</span>,</span>
+<span class="ln">  <span class="v">createDelegation</span>, <span class="v">commercePreflight</span></span>
+<span class="ln">} <span class="k">from</span> <span class="s">"agent-passport-system/core"</span></span>
 <span class="ln"></span>
-<span class="ln"><span class="k">const</span> agent = <span class="k">await</span> <span class="p">aeoess.passport.issue</span>({</span>
-<span class="ln">  <span class="v">name</span>: <span class="s">"invoice-bot-v2"</span>,</span>
-<span class="ln">  <span class="v">owner</span>: <span class="s">"team:finance"</span>,</span>
-<span class="ln">  <span class="v">scope</span>: [<span class="s">"read:invoices"</span>, <span class="s">"write:stripe"</span>],</span>
-<span class="ln">  <span class="v">budget</span>: <span class="s">"$5_000 / 24h"</span></span>
+<span class="ln"><span class="k">const</span> keys = <span class="p">generateKeyPair</span>()</span>
+<span class="ln"><span class="k">const</span> passport = <span class="p">createPassport</span>({</span>
+<span class="ln">  <span class="v">agent_id</span>: <span class="s">"invoice-bot-v2"</span>,</span>
+<span class="ln">  <span class="v">public_key</span>: keys.publicKey,</span>
+<span class="ln">  <span class="v">capabilities</span>: [<span class="s">"read:invoices"</span>, <span class="s">"write:stripe"</span>]</span>
 <span class="ln">})</span>
 <span class="ln"></span>
-<span class="ln"><span class="c">// 2. Wrap any model client</span></span>
-<span class="ln"><span class="k">const</span> openai = <span class="p">aeoess.wrap</span>(<span class="k">new</span> OpenAI(), { agent })</span>
+<span class="ln"><span class="c">// 2. Delegate scoped authority with a spend cap</span></span>
+<span class="ln"><span class="k">const</span> delegation = <span class="p">createDelegation</span>({</span>
+<span class="ln">  <span class="v">from_agent</span>: <span class="s">"team:finance"</span>,</span>
+<span class="ln">  <span class="v">to_agent</span>: <span class="s">"invoice-bot-v2"</span>,</span>
+<span class="ln">  <span class="v">scope</span>: [<span class="s">"write:stripe"</span>],</span>
+<span class="ln">  <span class="v">spend_limit</span>: <span class="s">5000_00</span>,</span>
+<span class="ln">  <span class="v">private_key</span>: keys.privateKey</span>
+<span class="ln">})</span>
 <span class="ln"></span>
-<span class="ln"><span class="c">// 3. Use it normally — receipts emitted automatically</span></span>
-<span class="ln"><span class="k">await</span> openai.<span class="p">responses.create</span>({ ... })</span>
+<span class="ln"><span class="c">// 3. Gate every action through the 5-gate preflight</span></span>
+<span class="ln"><span class="k">const</span> result = <span class="k">await</span> <span class="p">commercePreflight</span>({ delegation, action })</span>
 <span class="ln"></span>
-<span class="ln"><span class="prompt">→</span> <span class="ok">✓</span> receipt <span class="v">rcpt_01J9X7…</span> · 1.4ms · <span class="ok">signed</span></span>
+<span class="ln"><span class="prompt">→</span> <span class="ok">✓</span> ALLOW · signed receipt · sig <span class="v">ed25519:7f2c…</span></span>
 </div>
 <div data-pane="py" hidden="">
-<span class="ln"><span class="c"># 1. Issue a passport</span></span>
-<span class="ln"><span class="k">from</span> aeoess <span class="k">import</span> Passport, wrap</span>
-<span class="ln"></span>
-<span class="ln">agent = <span class="p">Passport.issue</span>(</span>
-<span class="ln">  name=<span class="s">"invoice-bot-v2"</span>,</span>
-<span class="ln">  owner=<span class="s">"team:finance"</span>,</span>
-<span class="ln">  scope=[<span class="s">"read:invoices"</span>, <span class="s">"write:stripe"</span>],</span>
-<span class="ln">  budget=<span class="s">"$5_000/24h"</span>,</span>
+<span class="ln"><span class="c"># 1. Generate keys and issue a passport</span></span>
+<span class="ln"><span class="k">from</span> agent_passport <span class="k">import</span> (</span>
+<span class="ln">  generate_key_pair, create_passport,</span>
+<span class="ln">  create_delegation, create_action_receipt,</span>
 <span class="ln">)</span>
 <span class="ln"></span>
-<span class="ln"><span class="c"># 2. Wrap your model client</span></span>
-<span class="ln">openai = <span class="p">wrap</span>(OpenAI(), agent=agent)</span>
+<span class="ln">keys = <span class="p">generate_key_pair</span>()</span>
+<span class="ln">passport = <span class="p">create_passport</span>(</span>
+<span class="ln">  agent_id=<span class="s">"invoice-bot-v2"</span>,</span>
+<span class="ln">  public_key=keys[<span class="s">"public_key"</span>],</span>
+<span class="ln">  capabilities=[<span class="s">"write:stripe"</span>],</span>
+<span class="ln">)</span>
 <span class="ln"></span>
-<span class="ln"><span class="c"># 3. Receipts emitted on every call</span></span>
-<span class="ln">openai.responses.create(...)</span>
+<span class="ln"><span class="c"># 2. Delegate scoped authority</span></span>
+<span class="ln">delegation = <span class="p">create_delegation</span>(</span>
+<span class="ln">  from_agent=<span class="s">"team:finance"</span>,</span>
+<span class="ln">  to_agent=<span class="s">"invoice-bot-v2"</span>,</span>
+<span class="ln">  scope=[<span class="s">"write:stripe"</span>],</span>
+<span class="ln">  spend_limit=<span class="s">5000</span>,</span>
+<span class="ln">  private_key=keys[<span class="s">"private_key"</span>],</span>
+<span class="ln">)</span>
 <span class="ln"></span>
-<span class="ln"><span class="prompt">→</span> <span class="ok">✓</span> receipt <span class="v">rcpt_01J9X7…</span> · 1.4ms · <span class="ok">signed</span></span>
+<span class="ln"><span class="c"># 3. Sign each action as a verifiable receipt</span></span>
+<span class="ln">receipt = <span class="p">create_action_receipt</span>(delegation_id=delegation[<span class="s">"id"</span>], ...)</span>
+<span class="ln"></span>
+<span class="ln"><span class="prompt">→</span> <span class="ok">✓</span> byte-parity-verified against TypeScript SDK</span>
 </div>
 <div data-pane="curl" hidden="">
-<span class="ln"><span class="c"># Issue a passport</span></span>
-<span class="ln"><span class="k">curl</span> https://api.aeoess.com/v1/passports \</span>
-<span class="ln">  -H <span class="s">"Authorization: Bearer $AEO_KEY"</span> \</span>
-<span class="ln">  -d <span class="s">'{"name":"invoice-bot-v2","scope":["write:stripe"]}'</span></span>
+<span class="ln"><span class="c"># Install the SDK in your runtime</span></span>
+<span class="ln"><span class="k">npm</span> install agent-passport-system</span>
+<span class="ln"><span class="k">pip</span> install agent-passport-system</span>
 <span class="ln"></span>
-<span class="ln"><span class="c"># Point your model traffic at the gateway</span></span>
-<span class="ln"><span class="k">curl</span> https://gateway.aeoess.com/openai/responses \</span>
+<span class="ln"><span class="c"># Or run the reference gateway locally and route traffic through it</span></span>
+<span class="ln"><span class="k">docker</span> run -p 8080:8080 aeoess/gateway:latest</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">curl</span> http://localhost:8080/v1/evaluate \</span>
 <span class="ln">  -H <span class="s">"X-APS-Passport: $PASSPORT"</span> \</span>
-<span class="ln">  -d <span class="s">'{"model":"gpt-5","input":"draft invoice"}'</span></span>
+<span class="ln">  -H <span class="s">"X-APS-Delegation: $DELEGATION"</span> \</span>
+<span class="ln">  -d <span class="s">'{"action":"write:stripe","amount":4200}'</span></span>
 <span class="ln"></span>
-<span class="ln"><span class="prompt">→</span> <span class="ok">✓</span> 200 · x-aps-receipt: <span class="v">rcpt_01J9X7…</span></span>
+<span class="ln"><span class="prompt">→</span> <span class="ok">✓</span> 200 · x-aps-receipt: <span class="v">ed25519:7f2c…</span> · ~2ms</span>
 </div>
       </div>
     </div>
@@ -1105,15 +1125,15 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
         <div class="sec-num">06 / Reception</div>
         <h2 class="sec-title">Read in <span class="serif">the right rooms.</span></h2>
       </div>
-      <p class="sec-kicker">AEOESS is a public protocol. Eight research papers, an IETF draft, and a 2,884-test conformance suite — all open, all CC0.</p>
+      <p class="sec-kicker">AEOESS is a public protocol. Eight research papers, an IETF Internet-Draft, two NIST federal-record submissions, and cross-implementation byte-parity with peer registries.</p>
     </div>
 
     <div class="cite-list">
-      <div class="cite"><div class="ord">[01]</div><div class="title">draft-pidlisnyi-aps-00 — IETF Internet-Draft, the Agent Passport System.</div><div class="src">datatracker.ietf.org</div></div>
-      <div class="cite"><div class="ord">[02]</div><div class="title">PDR in Production — independently cites APS (University of British Columbia).</div><div class="src">doi.org/10.5281/zenodo.19323172</div></div>
-      <div class="cite"><div class="ord">[03]</div><div class="title">NIST CAISI — AI 800-2 input acknowledged in writing.</div><div class="src">nist.gov</div></div>
-      <div class="cite"><div class="ord">[04]</div><div class="title">NIST NCCoE — public comments filed on the agent identity &amp; authorization concept paper.</div><div class="src">nccoe.nist.gov</div></div>
-      <div class="cite"><div class="ord">[05]</div><div class="title">Eight APS research papers — Zenodo, all DOI-indexed, CC0.</div><div class="src">aeoess.com/research</div></div>
+      <div class="cite"><div class="ord">[01]</div><div class="title">draft-pidlisnyi-aps-01: IETF Internet-Draft for the Agent Passport System. Individual submission, idnits clean.</div><div class="src">datatracker.ietf.org</div></div>
+      <div class="cite"><div class="ord">[02]</div><div class="title">NIST CAISI: AI 800-2 input acknowledged in writing by the program lead.</div><div class="src">nist.gov</div></div>
+      <div class="cite"><div class="ord">[03]</div><div class="title">NIST NCCoE: public comments filed on the Software and AI Agent Identity and Authorization concept paper.</div><div class="src">nccoe.nist.gov</div></div>
+      <div class="cite"><div class="ord">[04]</div><div class="title">Cross-engine receipt interop: independently verified by VeritasActa, protect-mcp, and Nobulex byte-match scripts.</div><div class="src">github.com/aeoess</div></div>
+      <div class="cite"><div class="ord">[05]</div><div class="title">Eight APS research papers, all Zenodo-indexed with DOIs, ORCID 0009-0002-4700-3594.</div><div class="src">aeoess.com/research</div></div>
     </div>
   </div>
 </section>
@@ -1122,9 +1142,9 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
 <section class="cta">
   <div class="wrap">
     <h2>Agents are <span class="serif">already in production.</span><br>Govern them like it.</h2>
-    <p class="lede">Free tier covers 100k requests / month. No card. Self-host the gateway, or point at ours. Open spec, open conformance suite.</p>
+    <p class="lede">Open source under Apache 2.0. Self-host the gateway free, or use the managed tier at $299/month for 500K policy evaluations.</p>
     <div class="cta-btns">
-      <a class="btn btn-primary btn-lg" href="/pricing.html">Issue your first passport →</a>
+      <a class="btn btn-primary btn-lg" href="/pricing.html">See pricing →</a>
       <a class="btn btn-ghost btn-lg" href="/contact.html">Talk to engineering</a>
     </div>
   </div>
