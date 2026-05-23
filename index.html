@@ -738,7 +738,7 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
   <div class="hero-grid"></div>
   <div class="wrap hero-inner">
     <div>
-      <span class="hero-tag"><span class="dot"></span>Agent Passport System · open protocol · 21,574 installs</span>
+      <span class="hero-tag"><span class="dot"></span>Agent Passport System · open protocol · <span id="install-count">22,323</span> installs</span>
       <h1>Governance infrastructure for <span class="serif">the agent economy.</span></h1>
       <p class="lede">Enforce, verify and audit AI agent actions with cryptographic identity, scoped delegation and signed receipts.</p>
       <div class="hero-cta">
@@ -1220,5 +1220,28 @@ footer{padding:64px 0 48px;color:var(--muted);font-size:13px}
 <script type="text/babel" src="440f8b79-c364-42fc-bcf3-d22ae7071225"></script>
 
 
+
+<script>
+/* Live install counter — combined npm downloads of agent-passport-system (SDK)
+   and agent-passport-system-mcp (MCP) since launch on 2026-02-01.
+   Populates #install-count on success; falls back to the static value in markup. */
+(async () => {
+  const today = new Date().toISOString().slice(0, 10);
+  const pkgs = ['agent-passport-system', 'agent-passport-system-mcp'];
+  try {
+    const counts = await Promise.all(pkgs.map(async pkg => {
+      const r = await fetch(`https://api.npmjs.org/downloads/range/2026-02-01:${today}/${pkg}`);
+      if (!r.ok) return 0;
+      const d = await r.json();
+      return (d.downloads || []).reduce((s, x) => s + (x.downloads || 0), 0);
+    }));
+    const total = counts.reduce((s, n) => s + n, 0);
+    if (total > 0) {
+      const el = document.getElementById('install-count');
+      if (el) el.textContent = total.toLocaleString();
+    }
+  } catch (e) { /* static fallback in markup */ }
+})();
+</script>
 
 </body></html>
