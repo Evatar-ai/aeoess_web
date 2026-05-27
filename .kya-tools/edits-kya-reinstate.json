@@ -1,0 +1,22 @@
+[
+  {
+    "label": "REVERT: portal sign-in heading — KYA is the brand, restore",
+    "old": "Sign in to <span style={{ color: GL.primary }}>AEOESS</span>",
+    "new": "Sign in to <span style={{ color: GL.primary }}>KYA</span>"
+  },
+  {
+    "label": "REVERT: nav dropdown compare desc — KYA is the brand",
+    "old": "{ label: 'Compare',     route: 'compare',    desc: 'AEOESS vs. the alternatives.' }",
+    "new": "{ label: 'Compare',     route: 'compare',    desc: 'KYA vs. the alternatives.' }"
+  },
+  {
+    "label": "REVERT: compare table column header — brand column",
+    "old": "background: 'rgba(110,197,217,0.06)' }}>AEOESS</th>",
+    "new": "background: 'rgba(110,197,217,0.06)' }}>KYA</th>"
+  },
+  {
+    "label": "REVERT: blog hero — by the people building KYA (brand)",
+    "old": "Engineering, governance, and standards work — by the people building AEOESS.",
+    "new": "Engineering, governance, and standards work — by the people building KYA."
+  }
+]

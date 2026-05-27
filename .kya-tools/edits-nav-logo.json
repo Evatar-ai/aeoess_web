@@ -1,0 +1,7 @@
+[
+  {
+    "label": "navbar: replace PXLogo + KNOW YOUR AGENT + AEOESS subtitle wordmark cluster with the wide logo image",
+    "old": "<PXLogo size={28} color1={GL.primary} color2={GL.accent} />\n        <div style={{ whiteSpace: 'nowrap' }}>\n          <div style={{ fontFamily: PX.sansDisplay, fontSize: 18, fontWeight: 600, letterSpacing: '0.04em', lineHeight: 1, whiteSpace: 'nowrap' }}>KNOW YOUR AGENT</div>\n          <div data-kya-wordmark-sub style={{ fontFamily: PX.mono, fontSize: 9, color: PX.inkFaint, letterSpacing: '0.24em', marginTop: 3, whiteSpace: 'nowrap' }}>AEOESS · AGENT PASSPORT SYSTEM</div>\n        </div>",
+    "new": "<img src=\"/assets/images/aeoess_logo-05.png\" alt=\"AEOESS — Know Your Agent\" style={{ height: 32, width: 'auto', display: 'block' }} />"
+  }
+]
