@@ -4,8 +4,8 @@ import sys, os, subprocess, json, re
 
 PAGES = ['index','blog','compare','compliance','contact','content','docs',
          'enterprise','faq','opensource','payments','portal','pricing',
-         'privacy','protocol','research','roadmap','sitemap','terms',
-         'threat-model','working-group']
+         'privacy','protocol','roadmap','sitemap','terms',
+         'threat-model']
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 HARNESS = os.path.join(HERE, 'bundle_edit.py')

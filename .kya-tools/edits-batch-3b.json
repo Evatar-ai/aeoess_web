@@ -1,0 +1,7 @@
+[
+  {
+    "label": "task 32 fix: blog needs at least one entry so posts[0] doesn't crash the featured-card render",
+    "old": "const posts = [];",
+    "new": "const posts = [\n    { date: 'soon', cat: 'announcements', title: 'Blog coming soon.', excerpt: 'Engineering notes, governance work, and standards progress from the AEOESS team. Subscribe below to be notified when the first post lands.', read: '—' },\n  ];"
+  }
+]
