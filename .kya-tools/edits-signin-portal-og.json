@@ -1,0 +1,17 @@
+[
+  {
+    "label": "FIX: homepage SubHeader GLNav 'Sign in' was dead <a> — wire to /portal.html",
+    "old": "<a style={{ fontSize: 14, color: PX.ink, fontWeight: 500 }}>Sign in</a>",
+    "new": "<a href=\"/portal.html\" style={{ fontSize: 14, color: PX.ink, fontWeight: 500, textDecoration: 'none' }}>Sign in</a>"
+  },
+  {
+    "label": "FIX: site chrome navbar 'Sign in' was going to /contact, redirect to /portal",
+    "old": "<a data-kya-nav-cta-secondary href={href('contact')} onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} style={{ fontSize: 14, color: PX.ink, fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap' }}>Sign in</a>",
+    "new": "<a data-kya-nav-cta-secondary href={href('portal')} onClick={(e) => { e.preventDefault(); onNavigate('portal'); }} style={{ fontSize: 14, color: PX.ink, fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap' }}>Sign in</a>"
+  },
+  {
+    "label": "FIX: footer Company column — rename 'Sign in' label to 'Portal' (clearer; still routes to portal)",
+    "old": "{ h: 'Company',     items: [\n      ['Contact', 'contact'],\n      ['Sign in', 'portal'],\n      ['Docs', 'docs'],\n      ['Sitemap', 'sitemap'],\n    ]}",
+    "new": "{ h: 'Company',     items: [\n      ['Contact', 'contact'],\n      ['Portal', 'portal'],\n      ['Docs', 'docs'],\n      ['Sitemap', 'sitemap'],\n    ]}"
+  }
+]
