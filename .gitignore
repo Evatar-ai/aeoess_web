@@ -89,3 +89,4 @@ specs/ERIK-NEWTON*
 *.private.md
 .pre-swap-snapshot/
 .gstack/
+.pre-kya-swap-snapshot/
