@@ -1,0 +1,7 @@
+[
+  {
+    "label": "contact sidebar: remove fake Working group + Status links, keep GitHub + Spec",
+    "old": "                <div><span style={{ color: PX.inkDim }}>GitHub · </span>github.com/aeoess</div>\n                <div><span style={{ color: PX.inkDim }}>Spec · </span>agent-passport.org</div>\n                <div><span style={{ color: PX.inkDim }}>Working group · </span>aps-wg@ietf.org</div>\n                <div><span style={{ color: PX.inkDim }}>Status · </span>status.aeoess.com</div>",
+    "new": "                <div><span style={{ color: PX.inkDim }}>GitHub · </span>github.com/aeoess</div>\n                <div><span style={{ color: PX.inkDim }}>Spec · </span>agent-passport.org</div>\n                <div><span style={{ color: PX.inkDim }}>Email · </span>signal@aeoess.com</div>"
+  }
+]

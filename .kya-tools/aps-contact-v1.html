@@ -1,0 +1,142 @@
+<!-- aps-contact-v1 -->
+<script>
+(function() {
+  // Contact form mailto handler. Hooks the KYA ContactPage form so submission
+  // opens the user's mail client with the form contents pre-filled, addressed
+  // to signal@aeoess.com. Topic is selected from the topic-picker buttons
+  // (Engineering / Sales / Press / Security). Survives React rehydration
+  // via event delegation and decorate retries.
+
+  var TO = 'signal@aeoess.com';
+
+  function $$(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+
+  function getActiveTopic() {
+    // Find the currently selected topic button. Topic buttons have a border
+    // that becomes the primary color when active.
+    var topicButtons = $$('button').filter(function(b) {
+      var t = (b.textContent || '').trim();
+      return /^(Engineering|Sales|Press|Security)\b/.test(t);
+    });
+    // The active one has aria-pressed=true OR a different border color in style.
+    // We can't easily read style cleanly, so fall back to: first button whose
+    // background isn't pure white (active state has rgba(110,197,217,0.08)).
+    for (var i = 0; i < topicButtons.length; i++) {
+      var s = topicButtons[i].getAttribute('style') || '';
+      if (/rgba\(110,?\s*197/.test(s) || /aria-pressed="true"/.test(topicButtons[i].outerHTML)) {
+        return topicButtons[i].textContent.split('\n')[0].trim();
+      }
+    }
+    return topicButtons.length ? topicButtons[0].textContent.split('\n')[0].trim() : 'Engineering';
+  }
+
+  function getFormValues() {
+    var form = document.querySelector('form');
+    if (!form) return null;
+    var inputs = $$('input, textarea, select', form);
+    var values = {};
+    inputs.forEach(function(el) {
+      // The form has unlabeled inputs; identify them by placeholder or order.
+      var ph = (el.placeholder || '').toLowerCase();
+      var typ = (el.type || '').toLowerCase();
+      if (typ === 'email' || /email/.test(ph)) values.email = el.value || '';
+      else if (/jane doe|name/.test(ph)) values.name = el.value || '';
+      else if (/acme|company/.test(ph)) values.company = el.value || '';
+      else if (el.tagName === 'SELECT') {
+        // Either monthly-evals (sales) or severity (security)
+        if (/eval/i.test(form.textContent || '')) values.evals = el.value || '';
+        else values.severity = el.value || '';
+      }
+      else if (el.tagName === 'TEXTAREA') values.message = el.value || '';
+    });
+    return values;
+  }
+
+  function buildMailto(topic, v) {
+    var subject = '[' + topic + '] ' + (v.name ? v.name : 'inquiry') +
+                  (v.company ? ' — ' + v.company : '');
+    var bodyLines = [
+      'From: ' + (v.name || '(no name)') + ' <' + (v.email || '(no email)') + '>',
+      v.company ? 'Company: ' + v.company : null,
+      v.evals ? 'Estimated monthly evaluations: ' + v.evals : null,
+      v.severity ? 'Severity: ' + v.severity : null,
+      'Topic: ' + topic,
+      '',
+      v.message || '(no message)'
+    ].filter(Boolean);
+    var body = bodyLines.join('\n');
+    return 'mailto:' + TO +
+           '?subject=' + encodeURIComponent(subject) +
+           '&body=' + encodeURIComponent(body);
+  }
+
+  function statusBar() {
+    var existing = document.getElementById('aps-contact-status');
+    if (existing) return existing;
+    var form = document.querySelector('form');
+    if (!form) return null;
+    var bar = document.createElement('div');
+    bar.id = 'aps-contact-status';
+    bar.style.cssText = 'margin-top:14px;padding:12px 14px;font-size:13px;line-height:1.5;border-radius:8px;display:none;background:rgba(125,201,176,0.14);color:rgb(60,120,90);border:1px solid rgba(125,201,176,0.4);';
+    form.appendChild(bar);
+    return bar;
+  }
+
+  function setStatus(msg) {
+    var bar = statusBar();
+    if (!bar) return;
+    bar.textContent = msg;
+    bar.style.display = 'block';
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var v = getFormValues();
+    if (!v) return;
+    if (!v.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email)) {
+      var bar = statusBar();
+      if (bar) {
+        bar.style.background = 'rgba(217,138,138,0.14)';
+        bar.style.color = 'rgb(160,60,60)';
+        bar.style.border = '1px solid rgba(217,138,138,0.4)';
+        bar.textContent = 'Enter a valid work email to continue.';
+        bar.style.display = 'block';
+      }
+      return;
+    }
+    var topic = getActiveTopic();
+    var url = buildMailto(topic, v);
+    setStatus('Opening your email client to send this to ' + TO + '…');
+    // Open in same tab — mailto: launches the mail handler, page stays put
+    window.location.href = url;
+  }
+
+  // Event delegation — fires before React's onSubmit can intercept
+  document.addEventListener('submit', function(e) {
+    var form = e.target.closest && e.target.closest('form');
+    if (!form) return;
+    // Only intercept on the contact page (route)
+    var pageMatches = /contact/.test(window.location.pathname) ||
+                      /#\/?contact/.test(window.location.hash) ||
+                      /talk to a human/i.test(document.body.textContent || '');
+    if (!pageMatches) return;
+    // Skip the portal sign-in form — that has its own handler
+    if (document.getElementById('aps-password') || form.querySelector('input[type="password"]')) return;
+    handleSubmit(e);
+  }, true);
+
+  // Also catch Send-button clicks directly, in case form submit is suppressed
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest && e.target.closest('button');
+    if (!btn) return;
+    var t = (btn.textContent || '').trim();
+    if (t !== 'Send →' && t !== 'Send') return;
+    var form = btn.closest('form');
+    if (!form) return;
+    // Skip if this is the portal sign-in (has password field)
+    if (form.querySelector('input[type="password"]')) return;
+    handleSubmit(e);
+  }, true);
+})();
+</script>

@@ -1,0 +1,27 @@
+[
+  {
+    "label": "portal task 38a: rename email button to match auth-script selector",
+    "old": "}}>Send sign-in link →</button>",
+    "new": "}}>Continue with email →</button>"
+  },
+  {
+    "label": "portal task 38b: remove Google Workspace SSO button (not wired against backend)",
+    "old": "                <button type=\"button\" style={ssoButtonStyle}><SSOIcon kind=\"google\" /> Continue with Google Workspace</button>\n",
+    "new": ""
+  },
+  {
+    "label": "portal task 38c: remove Microsoft SSO button (not wired)",
+    "old": "                <button type=\"button\" style={ssoButtonStyle}><SSOIcon kind=\"ms\" /> Continue with Microsoft</button>\n",
+    "new": ""
+  },
+  {
+    "label": "portal task 38d: remove Okta SSO button (not wired)",
+    "old": "                <button type=\"button\" style={ssoButtonStyle}><SSOIcon kind=\"okta\" /> Continue with Okta</button>\n",
+    "new": ""
+  },
+  {
+    "label": "portal task 38e: copy below the email box — magic-link wording is wrong; this is password auth",
+    "old": "We send a one-time link to your work email. No passwords.",
+    "new": "Sign in with email and password, or continue with GitHub."
+  }
+]
