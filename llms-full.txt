@@ -162,11 +162,11 @@ URL: https://aeoess.com/pricing.html
 Free to self-host. Managed when you grow. The protocol is open. The implementation is open. The managed gateway is what you pay for — and only after you outgrow your own.
 
 Three tiers:
-- Self-host — Open source, Apache 2.0. Run the gateway anywhere. Unlimited evaluations. All SDKs, all primitives. Community support via GitHub issues.
-- Managed — gateway.aeoess.com. Multi-region. Hosted audit log. Slack support, same-day. Compliance pack included.
-- Enterprise — Dedicated gateway, single-tenant. BYO HSM, BYO KMS. Custom retention, WORM. Compliance liaisons. 24/7 + on-call.
+- Open Source — Free, Apache 2.0 forever. Full SDK (TypeScript + Python), MCP server with all tools, self-host the gateway, IETF-tracked spec, conformance test suite, 8 published papers.
+- Production — $299 per month. Hosted gateway with fail-closed enforcement, 100 active agents, 500K policy evaluations per month, 1-year audit retention, production support during business hours.
+- Enterprise — Custom. Everything in Production plus SSO/SAML/SCIM, dedicated deployment in region of choice, compliance reporting (EU AI Act, NIST AI RMF, ISO 42001), audit retention up to 7 years, priority support and onboarding.
 
-(Real pricing tiers connected to Stripe — see https://aeoess.com/pricing.html for current numbers.)
+Compatibility is permanent. Self-host today, switch to the hosted Production tier later, or never. Your protocol envelopes verify the same way regardless. Production exists for teams that need uptime, durable storage, key management, key rotation, and version migration without operating the gateway themselves.
 
 ---
 
@@ -225,6 +225,19 @@ Compliance:
 - APS maps to EU AI Act (Art. 9–15), NIST AI RMF 1.0, ISO 42001, and SR 11-7 for model risk.
 - No PII is required for a passport — an agent is identified by a cryptographic key, not a person.
 - SOC 2 Type II in progress, expected Q3 2026. ISO 27001 follows.
+
+---
+
+## Blog
+
+URL: https://aeoess.com/blog.html
+
+Engineering notes, governance work, and standards progress from the AEOESS team. Recent posts:
+- Stream A: shipping a Rust verifier with 191 tests (2026-05-15, engineering) — the Rust verifier is the third independent implementation of the APS receipt format
+- PR-MERGE-PROTOCOL v0.3: how AEOESS reviews protocol changes (2026-05-10, governance) — Track A artifacts go to maintainer call, Track B definition changes need Consilium pass plus signoff
+- draft-pidlisnyi-aps: submitting an Internet-Draft to the IETF (2026-04-28, standards) — six months of design notes, one idnits-clean draft
+- Microsoft Agent Governance Toolkit: 3 PRs merged (2026-04-15, ecosystem) — PRs #274, #598, #1328 landed in microsoft/agent-governance-toolkit
+- The open contribution doctrine: how we treat outside contributors (2026-03-24, governance) — the three-surface model (Commons, Candidate, Core) that turns the protocol into how we run the project
 
 ---
 

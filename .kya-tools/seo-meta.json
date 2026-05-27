@@ -2,34 +2,33 @@
   "_comment": "Per-page SEO metadata. Each page gets: title (only adjusting where current is too thin), description, og:title/description/image/url/type, twitter:card/title/description/image, canonical URL.",
   "_og_image_default": "https://aeoess.com/assets/images/og-default.png",
   "_canonical_base": "https://aeoess.com",
-
   "index": {
-    "title": "Know Your Agent — enforcement infrastructure for AI agents | AEOESS",
+    "title": "Know Your Agent \u2014 enforcement infrastructure for AI agents | AEOESS",
     "description": "AEOESS builds enforcement infrastructure for AI agents. The Agent Passport System (APS) is an open Apache 2.0 protocol for cryptographic identity, scoped delegation, and signed receipts. Used by gateway, SDK, and conformance suites in production.",
-    "og_title": "Know Your Agent — enforcement infrastructure for AI agents",
+    "og_title": "Know Your Agent \u2014 enforcement infrastructure for AI agents",
     "og_description": "Open Apache 2.0 protocol for AI agent identity, scoped delegation, gateway enforcement, and signed receipts. Built on the Agent Passport System.",
     "og_type": "website",
     "url_path": "/"
   },
   "protocol": {
-    "title": "Agent Passport System — the open protocol | AEOESS",
-    "description": "Four cryptographic primitives — Identity, Delegation, Enforcement, Receipt — composed into one trust fabric for AI agents. IETF Internet-Draft, Apache 2.0, byte-parity verifiable across SDK implementations.",
-    "og_title": "Agent Passport System — the open protocol",
+    "title": "Agent Passport System \u2014 the open protocol | AEOESS",
+    "description": "Four cryptographic primitives \u2014 Identity, Delegation, Enforcement, Receipt \u2014 composed into one trust fabric for AI agents. IETF Internet-Draft, Apache 2.0, byte-parity verifiable across SDK implementations.",
+    "og_title": "Agent Passport System \u2014 the open protocol",
     "og_description": "Four primitives, one trust fabric. Identity, delegation, enforcement, signed receipts. Open protocol, Apache 2.0.",
     "og_type": "article",
     "url_path": "/protocol.html"
   },
   "payments": {
-    "title": "Agentic payments — bind a key to a budget | AEOESS",
+    "title": "Agentic payments \u2014 bind a key to a budget | AEOESS",
     "description": "Per-agent, per-call, per-day spending caps. Merchant allow-lists. Five-gate preflight before any payment touches the rails. APS receipts compose with ACP, A2A, and ERC-8004 commerce primitives.",
-    "og_title": "Agentic payments — bind a key to a budget",
+    "og_title": "Agentic payments \u2014 bind a key to a budget",
     "og_description": "Per-agent spending caps, allow-listed merchants, five-gate preflight, signed payment receipts.",
     "og_type": "article",
     "url_path": "/payments.html"
   },
   "content": {
     "title": "Content provenance for AI agents | AEOESS",
-    "description": "Governance blocks, signed access receipts, and IPR envelopes. Every page-view by a passport-bound agent leaves a receipt. Revoke a source — derivatives expire across the network.",
+    "description": "Governance blocks, signed access receipts, and IPR envelopes. Every page-view by a passport-bound agent leaves a receipt. Revoke a source \u2014 derivatives expire across the network.",
     "og_title": "Content provenance for AI agents",
     "og_description": "Governance blocks, access receipts, IPR envelopes. Revocation cascades through derivatives.",
     "og_type": "article",
@@ -45,72 +44,72 @@
   },
   "enterprise": {
     "title": "Agent control plane for your org | AEOESS",
-    "description": "Bring your own identity format — did:key, did:web, SPIFFE, OAuth. Inventory, scope, audit, and revoke every agent through one console. Self-host or managed gateway.",
+    "description": "Bring your own identity format \u2014 did:key, did:web, SPIFFE, OAuth. Inventory, scope, audit, and revoke every agent through one console. Self-host or managed gateway.",
     "og_title": "The agent control plane for your org",
     "og_description": "Bring your own identity. Inventory, scope, audit, revoke. Self-host or managed.",
     "og_type": "article",
     "url_path": "/enterprise.html"
   },
   "opensource": {
-    "title": "Open source — Apache 2.0 | AEOESS",
+    "title": "Open source \u2014 Apache 2.0 | AEOESS",
     "description": "The full Agent Passport System stack is Apache 2.0. SDKs in TypeScript and Python, byte-parity-verified. Self-host the gateway free. Specification at agent-passport.org, source at github.com/aeoess.",
-    "og_title": "Open source — Apache 2.0",
+    "og_title": "Open source \u2014 Apache 2.0",
     "og_description": "SDKs in TypeScript and Python. Self-host the gateway free. Apache 2.0 forever.",
     "og_type": "article",
     "url_path": "/opensource.html"
   },
   "pricing": {
-    "title": "Pricing — open by default | AEOESS",
+    "title": "Pricing \u2014 open by default | AEOESS",
     "description": "Self-host the gateway free under Apache 2.0. Managed tier available for teams that don't want to run it themselves. Pricing scales with policy evaluations.",
-    "og_title": "Pricing — open by default",
+    "og_title": "Pricing \u2014 open by default",
     "og_description": "Self-host free. Managed tier for teams. Pricing scales with usage.",
     "og_type": "article",
     "url_path": "/pricing.html"
   },
   "blog": {
     "title": "Blog | AEOESS",
-    "description": "Engineering notes, governance work, and standards progress from the AEOESS team.",
-    "og_title": "Blog — AEOESS",
+    "description": "Engineering, governance, and standards notes from the AEOESS team. Stream A Rust verifier, PR-MERGE-PROTOCOL, IETF draft submission, Microsoft Agent Governance Toolkit integration, and the open contribution doctrine.",
+    "og_title": "Blog \u2014 AEOESS",
     "og_description": "Engineering, governance, and standards notes from the AEOESS team.",
     "og_type": "website",
     "url_path": "/blog.html"
   },
   "faq": {
-    "title": "FAQ — Agent Passport System | AEOESS",
+    "title": "FAQ \u2014 Agent Passport System | AEOESS",
     "description": "Common questions about the Agent Passport System: identity, delegation, enforcement, receipts, latency, deployment, SDKs, compliance, and pricing.",
-    "og_title": "FAQ — Agent Passport System",
+    "og_title": "FAQ \u2014 Agent Passport System",
     "og_description": "Common questions about identity, delegation, enforcement, receipts, and pricing.",
     "og_type": "article",
     "url_path": "/faq.html"
   },
   "compare": {
     "title": "APS vs OAuth, Stripe Issuing, Verifiable Credentials | AEOESS",
-    "description": "How the Agent Passport System composes with OAuth, Stripe Issuing, Verifiable Credentials, and SPIFFE — and what APS uniquely adds for autonomous agents.",
+    "description": "How the Agent Passport System composes with OAuth, Stripe Issuing, Verifiable Credentials, and SPIFFE \u2014 and what APS uniquely adds for autonomous agents.",
     "og_title": "APS vs OAuth, Stripe Issuing, VC",
     "og_description": "How APS composes with the identity and payment layers you already use.",
     "og_type": "article",
     "url_path": "/compare.html"
   },
   "docs": {
-    "title": "Docs — build with the protocol | AEOESS",
+    "title": "Docs \u2014 build with the protocol | AEOESS",
     "description": "Quickstart, SDK reference, gateway configuration, and recipes for the Agent Passport System. TypeScript, Python, and HTTP. Self-host or managed.",
-    "og_title": "Docs — build with the protocol",
+    "og_title": "Docs \u2014 build with the protocol",
     "og_description": "Quickstart, SDK reference, gateway config, and integration recipes.",
     "og_type": "article",
     "url_path": "/docs.html"
   },
   "roadmap": {
-    "title": "Roadmap — what we ship, when | AEOESS",
-    "description": "What's shipped, what's building, what's next, and the long view for the Agent Passport System. Updated when commits land — never aspirational.",
-    "og_title": "Roadmap — what we ship, when",
+    "title": "Roadmap \u2014 what we ship, when | AEOESS",
+    "description": "What's shipped, what's building, what's next, and the long view for the Agent Passport System. Updated when commits land \u2014 never aspirational.",
+    "og_title": "Roadmap \u2014 what we ship, when",
     "og_description": "Shipped, building, next, long view. Updated when commits land.",
     "og_type": "article",
     "url_path": "/roadmap.html"
   },
   "threat-model": {
-    "title": "Threat model — what APS defends against | AEOESS",
+    "title": "Threat model \u2014 what APS defends against | AEOESS",
     "description": "The full set of adversaries the Agent Passport System defends against, the cryptographic guarantees we make, and the failure modes we explicitly do not cover.",
-    "og_title": "Threat model — what APS defends against",
+    "og_title": "Threat model \u2014 what APS defends against",
     "og_description": "Adversaries, guarantees, and explicit non-goals for the Agent Passport System.",
     "og_type": "article",
     "url_path": "/threat-model.html"
@@ -118,7 +117,7 @@
   "contact": {
     "title": "Contact | AEOESS",
     "description": "Engineering, sales, press, or security. We answer within one business day at signal@aeoess.com.",
-    "og_title": "Contact — AEOESS",
+    "og_title": "Contact \u2014 AEOESS",
     "og_description": "Talk to a human. We answer within one business day.",
     "og_type": "website",
     "url_path": "/contact.html"
@@ -126,7 +125,7 @@
   "portal": {
     "title": "Sign in | AEOESS",
     "description": "Sign in to the AEOESS portal.",
-    "og_title": "Sign in — AEOESS",
+    "og_title": "Sign in \u2014 AEOESS",
     "og_description": "Sign in to the AEOESS portal.",
     "og_type": "website",
     "url_path": "/portal.html",
@@ -135,15 +134,15 @@
   "terms": {
     "title": "Terms of service | AEOESS",
     "description": "Plain-language terms for the AEOESS managed gateway. The Agent Passport System protocol and SDKs are open source under Apache 2.0 with their own license.",
-    "og_title": "Terms of service — AEOESS",
+    "og_title": "Terms of service \u2014 AEOESS",
     "og_description": "Plain-language terms for the AEOESS managed gateway.",
     "og_type": "article",
     "url_path": "/terms.html"
   },
   "privacy": {
     "title": "Privacy | AEOESS",
-    "description": "What AEOESS collects, why, and how to get it out. Minimal data collection by design — auditors can verify our claims without trusting us.",
-    "og_title": "Privacy — AEOESS",
+    "description": "What AEOESS collects, why, and how to get it out. Minimal data collection by design \u2014 auditors can verify our claims without trusting us.",
+    "og_title": "Privacy \u2014 AEOESS",
     "og_description": "What we collect, why, and how to get it out.",
     "og_type": "article",
     "url_path": "/privacy.html"
@@ -151,7 +150,7 @@
   "sitemap": {
     "title": "Sitemap | AEOESS",
     "description": "Every page on aeoess.com in one list.",
-    "og_title": "Sitemap — AEOESS",
+    "og_title": "Sitemap \u2014 AEOESS",
     "og_description": "Every page in one list.",
     "og_type": "website",
     "url_path": "/sitemap.html"
