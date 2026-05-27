@@ -1,0 +1,8 @@
+[
+  {"label": "privacy/legal page emails -> signal", "old": "legal@aeoess.com", "new": "signal@aeoess.com"},
+  {"label": "privacy page email -> signal", "old": "privacy@aeoess.com", "new": "signal@aeoess.com"},
+  {"label": "contact page eng -> signal", "old": "eng@aeoess.com", "new": "signal@aeoess.com"},
+  {"label": "contact page press -> signal", "old": "press@aeoess.com", "new": "signal@aeoess.com"},
+  {"label": "contact page sales -> signal", "old": "sales@aeoess.com", "new": "signal@aeoess.com"},
+  {"label": "contact page security -> signal", "old": "security@aeoess.com", "new": "signal@aeoess.com"}
+]
