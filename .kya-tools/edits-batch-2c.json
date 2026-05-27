@@ -1,0 +1,7 @@
+[
+  {
+    "label": "task 21: remove fake $94k overdraft case-study blog post (full posts[] entry including trailing comma+newline)",
+    "old": "    { date: '2026·04·30', cat: 'governance', title: 'How a $5k/d budget cap saved $94k in agent overdraft.', excerpt: 'A finance team rolled out KYA on a misbehaving invoice bot. The four-gate preflight caught the next 420 oversteps before they hit the rails. A debrief.', read: '5 min' },\n",
+    "new": ""
+  }
+]

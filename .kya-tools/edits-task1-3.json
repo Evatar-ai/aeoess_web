@@ -1,0 +1,17 @@
+[
+  {
+    "label": "logo: nav wordmark -> AEOESS image",
+    "old": "<PXLogo size={28} color1={GL.primary} color2={GL.accent} />\n        <div>\n          <div style={{ fontFamily: PX.sansDisplay, fontSize: 18, fontWeight: 600, letterSpacing: '0.04em', lineHeight: 1 }}>KNOW YOUR AGENT</div>\n          <div style={{ fontFamily: PX.mono, fontSize: 9, color: PX.inkFaint, letterSpacing: '0.24em', marginTop: 3 }}>AEOESS · AGENT PASSPORT SYSTEM</div>\n        </div>",
+    "new": "<img src=\"/assets/images/aeoess_logo-05.png\" alt=\"AEOESS\" style={{ height: 28, width: 'auto', display: 'block' }} />"
+  },
+  {
+    "label": "logo: footer wordmark -> AEOESS image",
+    "old": "<PXLogo size={36} color1={GL.primary} color2={GL.accent} />\n            <div>\n              <div style={{ fontFamily: PX.sansDisplay, fontSize: 20, fontWeight: 600, color: PX.ink, letterSpacing: '0.04em', lineHeight: 1 }}>KNOW YOUR AGENT</div>\n              <div style={{ fontFamily: PX.mono, fontSize: 9, color: PX.inkFaint, letterSpacing: '0.24em', marginTop: 3 }}>EST. 2026 · APS PROTOCOL</div>\n            </div>",
+    "new": "<img src=\"/assets/images/aeoess_logo-05.png\" alt=\"AEOESS\" style={{ height: 36, width: 'auto', display: 'block' }} />"
+  },
+  {
+    "label": "drop INC",
+    "old": "AEOESS, INC.",
+    "new": "AEOESS"
+  }
+]

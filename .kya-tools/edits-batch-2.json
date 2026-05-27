@@ -1,0 +1,67 @@
+[
+  {
+    "label": "task 14: NETWORK OPERATIONAL -> GATEWAY OPERATIONAL",
+    "old": "NETWORK OPERATIONAL · ACCEPTING ISSUERS",
+    "new": "GATEWAY OPERATIONAL · ACCEPTING ISSUERS"
+  },
+  {
+    "label": "task 24: drop fabricated Fortune-500 counsel review claim",
+    "old": "Eight governance primitives explicitly mapped to each framework's control surface. Reviewed by counsel at three Fortune 500.",
+    "new": "Eight governance primitives explicitly mapped to each framework's control surface."
+  },
+  {
+    "label": "task 31: 'Start free trial' -> 'Start for free'",
+    "old": "Start free trial",
+    "new": "Start for free"
+  },
+  {
+    "label": "task 37: drop fake Homebrew tap install line",
+    "old": "Issue, delegate, verify, audit — from the shell. brew install aeoess/tap/cli.",
+    "new": "Issue, delegate, verify, audit — from the shell."
+  },
+  {
+    "label": "task 37b: drop the brew line in the developers section",
+    "old": "<span style={{ color: GL.primary, fontWeight: 600 }}>brew</span><span>brew install aeoess/tap/cli</span>",
+    "new": ""
+  },
+  {
+    "label": "task 22: replace NYT with neutral example in content.html revocation cascade lede",
+    "old": "If the New York Times revokes its training license tomorrow, every model and every downstream summary that depended on it is marked invalid in the next verification call — without re-crawling, retraining, or lawsuits.",
+    "new": "If a publisher revokes its training license tomorrow, every model and every downstream summary that depended on it is marked invalid in the next verification call — without re-crawling, retraining, or lawsuits."
+  },
+  {
+    "label": "task 22b: replace nyt.com/.well-known/kya path with example",
+    "old": "nyt.com/.well-known/kya",
+    "new": "publisher.example/.well-known/kya"
+  },
+  {
+    "label": "task 22c: replace did:web:nyt.com publisher field with example",
+    "old": "\"publisher\": \"did:web:nyt.com\"",
+    "new": "\"publisher\": \"did:web:publisher.example\""
+  },
+  {
+    "label": "task 22d: revocation cascade SVG label nyt.com -> publisher",
+    "old": "<text x=\"130\" y=\"172\" fontFamily={PX.sansDisplay} fontSize=\"20\" fontWeight=\"500\" fill={PX.ink} textAnchor=\"middle\" letterSpacing=\"0.04em\">nyt.com</text>",
+    "new": "<text x=\"130\" y=\"172\" fontFamily={PX.sansDisplay} fontSize=\"20\" fontWeight=\"500\" fill={PX.ink} textAnchor=\"middle\" letterSpacing=\"0.04em\">publisher.example</text>"
+  },
+  {
+    "label": "task 22e: IPR envelope mock author did:web:nyt.com -> example",
+    "old": "<span style={{ color: GL.accent }}>\"did:web:nyt.com\"</span>",
+    "new": "<span style={{ color: GL.accent }}>\"did:web:publisher.example\"</span>"
+  },
+  {
+    "label": "task 7-placeholder: 184 network issuers -> TBC number (Tima to confirm collaborating-protocols count)",
+    "old": "<div key={k} style={{ textAlign: 'center' }}>\n              <div style={{ fontFamily: PX.sansDisplay, fontSize: 56, fontWeight: 500, color: PX.ink, letterSpacing: '0.005em', lineHeight: 1 }}>{v}</div>",
+    "new": "<div key={k} style={{ textAlign: 'center' }}>\n              <div style={{ fontFamily: PX.sansDisplay, fontSize: 56, fontWeight: 500, color: PX.ink, letterSpacing: '0.005em', lineHeight: 1 }}>{v}</div>"
+  },
+  {
+    "label": "task 15-placeholder: 12 marketplaces live -> TBC (Tima to confirm gateway-recorded agent count)",
+    "old": "12 marketplaces live",
+    "new": "TBC agents · TODO"
+  },
+  {
+    "label": "task 7: 184 network issuers -> TBC",
+    "old": "['184', 'network issuers']",
+    "new": "['TBC', 'network issuers']"
+  }
+]

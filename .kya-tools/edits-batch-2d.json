@@ -1,0 +1,42 @@
+[
+  {
+    "label": "task 35/36 nav-links: remove 'Working group' entry",
+    "old": "['Working group', 'workinggroup'],\n      ",
+    "new": ""
+  },
+  {
+    "label": "task 35/36 nav-links: remove 'Research' entry",
+    "old": "['Research', 'research'],\n      ",
+    "new": ""
+  },
+  {
+    "label": "task 35/36 sitemap: remove ['Research', 'research'] entry",
+    "old": "['Research', 'research'], ",
+    "new": ""
+  },
+  {
+    "label": "task 35/36 sitemap: remove ['Working group', 'workinggroup'] entry",
+    "old": "['Working group', 'workinggroup'], ",
+    "new": ""
+  },
+  {
+    "label": "task 35: route switch — remove 'workinggroup' case (page-launcher variant with onNavigate)",
+    "old": "    case 'workinggroup': page = <WorkingGroupPage onNavigate={onNavigate} />; break;\n",
+    "new": ""
+  },
+  {
+    "label": "task 36: route switch — remove 'research' case (page-launcher variant with onNavigate)",
+    "old": "    case 'research':     page = <ResearchPage onNavigate={onNavigate} />; break;\n",
+    "new": ""
+  },
+  {
+    "label": "task 35: route switch — remove 'workinggroup' case (KYASite variant with setRoute)",
+    "old": "    case 'workinggroup': page = <WorkingGroupPage onNavigate={setRoute} />; break;\n",
+    "new": ""
+  },
+  {
+    "label": "task 36: route switch — remove 'research' case (KYASite variant with setRoute)",
+    "old": "    case 'research':     page = <ResearchPage onNavigate={setRoute} />; break;\n",
+    "new": ""
+  }
+]
