@@ -1,0 +1,122 @@
+[
+  {
+    "label": "kya rename: enterprise page lede — APS composes (not KYA composes)",
+    "old": "lede=\"KYA doesn't replace your IdP — it composes with it. Map any DID method, SPIFFE workload",
+    "new": "lede=\"APS doesn't replace your IdP — it composes with it. Map any DID method, SPIFFE workload"
+  },
+  {
+    "label": "kya rename: research paper title — 'Composing KYA with...' -> 'Composing APS with...'",
+    "old": "{ n: '07', title: 'Composing KYA with ACP, A2A, and ERC-8004 Commerce Primitives'",
+    "new": "{ n: '07', title: 'Composing APS with ACP, A2A, and ERC-8004 Commerce Primitives'"
+  },
+  {
+    "label": "kya rename: portal sign-in heading — 'Sign in to KYA' -> 'Sign in to AEOESS'",
+    "old": "Sign in to <span style={{ color: GL.primary }}>KYA</span>",
+    "new": "Sign in to <span style={{ color: GL.primary }}>AEOESS</span>"
+  },
+  {
+    "label": "terms: drop ('KYA') abbreviation from legal entity definition",
+    "old": "['1. The service', 'AEOESS, Inc. (\"KYA\") provides a managed gateway at gateway.aeoess.com that evaluates passport-bound",
+    "new": "['1. The service', 'AEOESS, Inc. provides a managed gateway at gateway.aeoess.com that evaluates passport-bound"
+  },
+  {
+    "label": "terms: indemnity clause — 'You indemnify KYA' -> 'You indemnify AEOESS'",
+    "old": "'7. Indemnity', 'You indemnify KYA for claims arising from your use of the service in violation of these terms. KYA indemnifies you for third-party IP claims against the gateway code, subject to standard caps.'",
+    "new": "'7. Indemnity', 'You indemnify AEOESS for claims arising from your use of the service in violation of these terms. AEOESS indemnifies you for third-party IP claims against the gateway code, subject to standard caps.'"
+  },
+  {
+    "label": "terms: children clause — 'KYA is a B2B...' -> 'AEOESS is a B2B...'",
+    "old": "'7. Children', 'KYA is a B2B infrastructure product not directed at anyone under 16.'",
+    "new": "'7. Children', 'AEOESS is a B2B infrastructure product not directed at anyone under 16.'"
+  },
+  {
+    "label": "roadmap: SDK item — 'KYA-attested' -> 'AEOESS-attested'",
+    "old": "Byte-parity receipts. Community-maintained, KYA-attested.'",
+    "new": "Byte-parity receipts. Community-maintained, AEOESS-attested.'"
+  },
+  {
+    "label": "threat-model intro: 'what KYA does not protect against' -> 'what APS does not protect against'",
+    "old": "Here's what KYA does not protect against — by design",
+    "new": "Here's what APS does not protect against — by design"
+  },
+  {
+    "label": "threat-model HSM row: 'KYA cannot help' -> 'APS cannot help'",
+    "old": "'If your root key is extracted from hardware, KYA cannot help. Pair with FIPS 140-3 L3+ for that threat.'",
+    "new": "'If your root key is extracted from hardware, APS cannot help. Pair with FIPS 140-3 L3+ for that threat.'"
+  },
+  {
+    "label": "threat-model exfil row: 'KYA gates the action' -> 'APS gates the action'",
+    "old": "'Out-of-band exfiltration', 'KYA gates the action; it cannot stop a model from speaking secrets in its reply.",
+    "new": "'Out-of-band exfiltration', 'APS gates the action; it cannot stop a model from speaking secrets in its reply."
+  },
+  {
+    "label": "blog hero: 'by the people building KYA' -> 'by the people building AEOESS'",
+    "old": "engineering, governance, and standards work — by the people building KYA.",
+    "new": "engineering, governance, and standards work — by the people building AEOESS."
+  },
+  {
+    "label": "compare table header column: 'KYA' -> 'AEOESS'",
+    "old": "background: 'rgba(110,197,217,0.06)' }}>KYA</th>",
+    "new": "background: 'rgba(110,197,217,0.06)' }}>AEOESS</th>"
+  },
+  {
+    "label": "compare OAuth row: 'KYA holds the agent' -> 'APS holds the agent'",
+    "old": "'Your IdP holds the user. KYA holds the agent. A delegation links them — when the user signs out, the agent",
+    "new": "'Your IdP holds the user. APS holds the agent. A delegation links them — when the user signs out, the agent"
+  },
+  {
+    "label": "compare VC row: 'a KYA delegation' -> 'an APS delegation'",
+    "old": "'A Verifiable Credential can be the input to a KYA delegation.",
+    "new": "'A Verifiable Credential can be the input to an APS delegation."
+  },
+  {
+    "label": "compare SPIFFE row: 'KYA binds the agent' -> 'APS binds the agent'",
+    "old": "'SPIFFE binds the host; KYA binds the agent on top. Same trust root, different question being answered.'",
+    "new": "'SPIFFE binds the host; APS binds the agent on top. Same trust root, different question being answered.'"
+  },
+  {
+    "label": "nav dropdown: 'KYA vs. the alternatives.' -> 'AEOESS vs. the alternatives.'",
+    "old": "{ label: 'Compare',     route: 'compare',    desc: 'KYA vs. the alternatives.' }",
+    "new": "{ label: 'Compare',     route: 'compare',    desc: 'AEOESS vs. the alternatives.' }"
+  },
+  {
+    "label": "content page: .well-known/kya -> .well-known/aps.txt (governance block path)",
+    "old": "'A signed JSON manifest at .well-known/kya defines training, indexing, summarization, and quoting policies. Honoured by APS-aware agents, enforced by the gateway.'",
+    "new": "'A signed JSON manifest at .well-known/aps.txt defines training, indexing, summarization, and quoting policies. Honoured by APS-aware agents, enforced by the gateway.'"
+  },
+  {
+    "label": "content page: example publisher path — .well-known/kya -> .well-known/aps.txt",
+    "old": "publisher.example/.well-known/kya",
+    "new": "publisher.example/.well-known/aps.txt"
+  },
+  {
+    "label": "latency: homepage hero stats strip — 'p50 verify' -> 'p99 verify'",
+    "old": "['0.3–1.1 ms', 'p50 verify']",
+    "new": "['0.3–1.1 ms', 'p99 verify']"
+  },
+  {
+    "label": "latency: research card — 'Median 0.8 ms' -> 'p99 under 1 ms'",
+    "old": "Benchmark methodology and results for the enforcement stack. Median 0.8 ms across the full gate set on commodity hardware.",
+    "new": "Benchmark methodology and results for the enforcement stack. p99 under 1 ms across the full gate set on commodity hardware."
+  },
+  {
+    "label": "latency: docs endpoints table header — 'Latency p50' -> 'Latency p99'",
+    "old": "['Endpoint', 'Method', 'Purpose', 'Latency p50']",
+    "new": "['Endpoint', 'Method', 'Purpose', 'Latency p99']"
+  },
+  {
+    "label": "latency FAQ answer: lead with p99, drop median",
+    "old": "['What\\'s the latency cost?', 'Median policy evaluation is 0.8 ms against the full five-gate stack (signature, scope, spend, freshness, revocation). p99 stays under 1 ms at sustained 403 ops/sec on commodity hardware.']",
+    "new": "['What\\'s the latency cost?', 'p99 policy evaluation stays under 1 ms against the full five-gate stack (signature, scope, spend, freshness, revocation) at sustained 403 ops/sec on commodity hardware.']"
+  },
+  {
+    "label": "enterprise pricing tier: add EU data residency to deployment bullet",
+    "old": "bullets: ['Everything in Production', 'SSO, SAML, SCIM', 'Dedicated deployment, region of choice', 'Compliance reporting (EU AI Act, NIST AI RMF, ISO 42001)', 'Audit retention up to 7 years', 'Priority support and onboarding']",
+    "new": "bullets: ['Everything in Production', 'SSO, SAML, SCIM', 'EU data residency (Frankfurt or Dublin), no transfer to US', 'Dedicated deployment in any region of choice', 'Compliance reporting (EU AI Act, NIST AI RMF, ISO 42001)', 'Audit retention up to 7 years', 'Priority support and onboarding']"
+  },
+  {
+    "label": "FAQ expansion: add 10-question Operations & support section after Compliance",
+    "old": "['Is there a SOC 2 report?', 'SOC 2 Type II is in progress, expected Q3 2026. ISO 27001 follows. In the interim, the managed tier is built on infrastructure that\\'s already attested (AWS, Cloudflare).'],\n      ],\n    },\n  ];",
+    "new": "['Is there a SOC 2 report?', 'SOC 2 Type II is in progress, expected Q3 2026. ISO 27001 follows. In the interim, the managed tier is built on infrastructure that\\'s already attested (AWS, Cloudflare).'],\n      ],\n    },\n    {\n      h: 'Operations & support',\n      items: [\n        ['How do I get started?', 'Three paths. Self-host the gateway under Apache 2.0 for zero cost and zero signup. Spin up the Production tier in two minutes by signing in at aeoess.com/portal — sign-in, then upgrade through Stripe Checkout. For Enterprise, email signal@aeoess.com and we will scope a deployment. Quickstart docs at /docs.'],\n        ['Is there a free trial or money-back guarantee?', 'The self-hosted gateway is free forever under Apache 2.0 — that is the trial. The Production tier ($299/mo) is month-to-month and cancellable anytime through the portal. Enterprise comes with a 30-day evaluation window before the contract starts.'],\n        ['What is the SLA on the Production tier?', 'Production targets 99.5% monthly uptime. Contractual SLAs (99.9% with credits) are available on the Enterprise tier. The protocol itself is fail-closed by design — if the gateway is unreachable, agents deny by default. No silent allow.'],\n        ['Where is my data stored? Can I get EU data residency?', 'Production tier runs in US-East by default. The Enterprise tier offers EU-only data residency in Frankfurt or Dublin, with no transfer to the US and no US sub-processors. Region-of-choice deployment is available for any Enterprise customer.'],\n        ['How do I export my receipts and audit log?', 'Anytime, via the gateway API or portal. Receipts export to Parquet, JSON Lines, or S3. The signed audit log is JCS-canonicalized (RFC 8785) and verifiable byte-for-byte against the public key set — auditors can verify without trusting AEOESS.'],\n        ['How does pricing scale beyond the Production tier?', 'Production covers 100 active agents and 500K policy evaluations per month. Past that you graduate to Enterprise — email signal@aeoess.com for volume pricing. The per-evaluation cost drops materially at higher volumes; Apache 2.0 self-host stays an option at any scale.'],\n        ['What happens to my data if I cancel?', 'You can export everything (receipts, delegations, policy config) in standard formats at any time. After cancellation, your data is retained per the plan retention policy (1 year for Production, up to 7 years for Enterprise) and then permanently deleted. Your agent keys are yours — AEOESS never holds private keys.'],\n        ['What support do you offer at each tier?', 'Open Source: community support via GitHub issues and the public Working Group. Production: email support during business hours (US/EU coverage). Enterprise: priority email plus dedicated Slack channel, named CSM, and quarterly business reviews.'],\n        ['Who is behind AEOESS?', 'AEOESS is led by Tymofii Pidlisnyi (founder). The protocol is Apache 2.0, with 8 peer-reviewed papers on Zenodo (ORCID 0009-0002-4700-3594), an active IETF Internet-Draft (draft-pidlisnyi-aps), three merged contributions to Microsoft Agent Governance Toolkit (#274, #598, #1328), and acknowledged input to NIST CAISI and NCCoE. The protocol is designed to outlive any single vendor.'],\n        ['Can I see a demo?', 'Yes. The /verify demo on the homepage is real — it runs an actual five-gate preflight against a demo passport. For a guided walk-through, email signal@aeoess.com or open the portal to issue your first passport in under five minutes.'],\n      ],\n    },\n  ];"
+  }
+]
