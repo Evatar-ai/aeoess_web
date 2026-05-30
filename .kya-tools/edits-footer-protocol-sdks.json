@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Footer Resources column: 'Open Source' -> 'Protocol' (internal /protocol.html route)",
+    "old": "      ['Open Source', 'opensource'],",
+    "new": "      ['Protocol', 'protocol'],"
+  },
+  {
+    "label": "Footer Protocol column: 'SDKs' -> npm package page (external)",
+    "old": "      ['SDKs', 'opensource'],",
+    "new": "      ['SDKs', null, 'https://www.npmjs.com/package/agent-passport-system'],"
+  },
+  {
+    "label": "Footer link renderer: accept optional 3rd tuple element as external URL",
+    "old": "              {col.items.map(([label, route]) => (\n                <a key={label} href={href(route)} onClick={(e) => { e.preventDefault(); onNavigate(route); }} style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>{label}</a>",
+    "new": "              {col.items.map(([label, route, external]) => (\n                <a key={label} href={external || href(route)} onClick={(e) => { if (external) return; e.preventDefault(); onNavigate(route); }} style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>{label}</a>"
+  }
+]
