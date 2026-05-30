@@ -1,0 +1,17 @@
+[
+  {
+    "label": "NAV_STRUCTURE: Protocol entry -> external https://agent-passport.org/",
+    "old": "  { label: 'Protocol', route: 'protocol' },",
+    "new": "  { label: 'Protocol', external: 'https://agent-passport.org/' },"
+  },
+  {
+    "label": "SiteNav anchor: support item.external on href",
+    "old": "                href={item.route ? href(item.route) : '#'}",
+    "new": "                href={item.external || (item.route ? href(item.route) : '#')}"
+  },
+  {
+    "label": "SiteNav anchor: early return on item.external (let browser navigate)",
+    "old": "                onClick={(e) => {\n                  if (!item.route) { e.preventDefault(); openMenuNow(isOpen ? null : item.label); }\n                  else { e.preventDefault(); onNavigate(item.route); }\n                }}",
+    "new": "                onClick={(e) => {\n                  if (item.external) return;\n                  if (!item.route) { e.preventDefault(); openMenuNow(isOpen ? null : item.label); }\n                  else { e.preventDefault(); onNavigate(item.route); }\n                }}"
+  }
+]
