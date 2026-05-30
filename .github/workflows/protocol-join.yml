@@ -130,9 +130,11 @@ jobs:
 
       - name: Commit and push
         if: steps.register.outputs.valid == 'true'
+        env:
+          AGENT: ${{ steps.register.outputs.agent }}
         run: |
           git config user.name "Protocol Bot"
           git config user.email "protocol@aeoess.com"
           git add protocol-registry.json
-          git commit -m "protocol: registered agent ${{ steps.register.outputs.agent }}"
+          git commit -m "protocol: registered agent ${AGENT}"
           git push

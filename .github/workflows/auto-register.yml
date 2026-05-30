@@ -68,6 +68,8 @@ jobs:
       - name: Comment on failure
         if: steps.validate.outputs.valid == 'false'
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body "❌ Validation failed: ${{ steps.validate.outputs.reason }}. Please fix and push again."
+          gh pr comment "${PR_NUMBER}" --body "❌ Validation failed: ${REASON}. Please fix and push again."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REASON: ${{ steps.validate.outputs.reason }}

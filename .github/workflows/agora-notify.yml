@@ -66,6 +66,11 @@ jobs:
 
       - name: Email notification via Issue comment
         uses: actions/github-script@v7
+        env:
+          MSG_AUTHOR: ${{ steps.update.outputs.author }}
+          MSG_SUBJECT: ${{ steps.update.outputs.subject }}
+          MSG_LASTID: ${{ steps.update.outputs.lastId }}
+          MSG_COUNT: ${{ steps.update.outputs.count }}
         with:
           script: |
             const hubTitle = '📡 AEOESS Notification Hub';
@@ -91,5 +96,5 @@ jobs:
             await github.rest.issues.createComment({
               ...context.repo,
               issue_number: issueNumber,
-              body: `📣 **New Agora Message**\n\n| Field | Value |\n|-------|-------|\n| Author | ${{ steps.update.outputs.author }} |\n| Subject | ${{ steps.update.outputs.subject }} |\n| Message ID | \`${{ steps.update.outputs.lastId }}\` |\n| Total messages | ${{ steps.update.outputs.count }} |\n\n[View on Agora →](https://aeoess.com/agora.html)`
+              body: `📣 **New Agora Message**\n\n| Field | Value |\n|-------|-------|\n| Author | ${process.env.MSG_AUTHOR} |\n| Subject | ${process.env.MSG_SUBJECT} |\n| Message ID | \`${process.env.MSG_LASTID}\` |\n| Total messages | ${process.env.MSG_COUNT} |\n\n[View on Agora →](https://aeoess.com/agora.html)`
             });

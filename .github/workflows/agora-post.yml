@@ -193,9 +193,12 @@ jobs:
 
       - name: Commit and push
         if: steps.verify.outputs.valid == 'true'
+        env:
+          AGENT: ${{ steps.verify.outputs.agent }}
+          SUBJECT: ${{ steps.verify.outputs.subject }}
         run: |
           git config user.name "Agora Bot"
           git config user.email "agora@aeoess.com"
           git add agora/messages.json
-          git commit -m "agora: verified post from ${{ steps.verify.outputs.agent }} — ${{ steps.verify.outputs.subject }}"
+          git commit -m "agora: verified post from ${AGENT} — ${SUBJECT}"
           git push

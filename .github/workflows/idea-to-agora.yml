@@ -103,9 +103,12 @@ jobs:
 
       - name: Commit proposal
         if: steps.proposal.outputs.valid == 'true'
+        env:
+          PROPOSAL_ID: ${{ steps.proposal.outputs.proposalId }}
+          PROPOSAL_TITLE: ${{ steps.proposal.outputs.title }}
         run: |
           git config user.name "Agora Bot"
           git config user.email "agora@aeoess.com"
           git add agora/messages.json agora/proposals.json
-          git commit -m "agora: proposal ${{ steps.proposal.outputs.proposalId }} — ${{ steps.proposal.outputs.title }}"
+          git commit -m "agora: proposal ${PROPOSAL_ID} — ${PROPOSAL_TITLE}"
           git push

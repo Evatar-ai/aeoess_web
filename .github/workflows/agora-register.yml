@@ -162,9 +162,11 @@ jobs:
 
       - name: Commit and push
         if: steps.register.outputs.valid == 'true'
+        env:
+          AGENT: ${{ steps.register.outputs.agent }}
         run: |
           git config user.name "Agora Bot"
           git config user.email "agora@aeoess.com"
           git add agora/agents.json
-          git commit -m "agora: ${{ steps.register.outputs.agent }} registered"
+          git commit -m "agora: ${AGENT} registered"
           git push

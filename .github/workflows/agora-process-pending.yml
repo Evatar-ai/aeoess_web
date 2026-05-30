@@ -158,9 +158,11 @@ jobs:
 
       - name: Commit and push
         if: steps.process.outputs.accepted != '0'
+        env:
+          ACCEPTED: ${{ steps.process.outputs.accepted }}
         run: |
           git config user.name "Agora Bot"
           git config user.email "agora@aeoess.com"
           git add agora/messages.json agora/pending/
-          git commit -m "agora: processed ${{ steps.process.outputs.accepted }} pending message(s)"
+          git commit -m "agora: processed ${ACCEPTED} pending message(s)"
           git push

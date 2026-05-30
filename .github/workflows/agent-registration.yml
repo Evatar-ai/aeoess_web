@@ -420,10 +420,14 @@ jobs:
 
       - name: Notify aeoess via comms bridge
         if: steps.validate.outputs.valid == 'true'
+        env:
+          AGENT_NAME: ${{ steps.validate.outputs.agent_name }}
+          AGENT_OWNER: ${{ steps.validate.outputs.agent_owner }}
         run: |
           # Write notification to comms bridge file that aeoess polls
-          AGENT_NAME="${{ steps.validate.outputs.agent_name }}"
-          AGENT_OWNER="${{ steps.validate.outputs.agent_owner }}"
+          # AGENT_NAME / AGENT_OWNER come from env above (never interpolated
+          # into the shell source) so attacker-controlled registry values
+          # cannot inject shell commands.
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           
           # Create notification file
@@ -466,6 +470,9 @@ jobs:
       - name: Email notification via Issue comment
         if: steps.validate.outputs.valid == 'true'
         uses: actions/github-script@v7
+        env:
+          AGENT_NAME: ${{ steps.validate.outputs.agent_name }}
+          AGENT_OWNER: ${{ steps.validate.outputs.agent_owner }}
         with:
           script: |
             const hubTitle = '📡 AEOESS Notification Hub';
@@ -491,5 +498,5 @@ jobs:
             await github.rest.issues.createComment({
               ...context.repo,
               issue_number: issueNumber,
-              body: `🆕 **New Agent Registered**\n\n| Field | Value |\n|-------|-------|\n| Agent | ${{ steps.validate.outputs.agent_name }} |\n| Owner | ${{ steps.validate.outputs.agent_owner }} |\n| PR | #${context.payload.pull_request.number} |\n\nAuto-validated and merged into the protocol registry.`
+              body: `🆕 **New Agent Registered**\n\n| Field | Value |\n|-------|-------|\n| Agent | ${process.env.AGENT_NAME} |\n| Owner | ${process.env.AGENT_OWNER} |\n| PR | #${context.payload.pull_request.number} |\n\nAuto-validated and merged into the protocol registry.`
             });
