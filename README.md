@@ -24,7 +24,7 @@ Every page is standalone HTML with shared CSS/JS. No build step. No framework. S
 | Page | Path | Purpose | Audience |
 |------|------|---------|----------|
 | **Homepage** | [`index.html`](https://aeoess.com/) | Hero, live updates window, protocol cards, FAQ, Schema.org structured data | Everyone — first impression |
-| **Open Source** | [`opensource.html`](https://aeoess.com/opensource.html) | Architecture overview, layer descriptions, the canonical protocol surface | Developers evaluating the protocol |
+| **Protocol** | [`protocol.html`](https://aeoess.com/protocol.html) | Architecture overview, layer descriptions, the canonical protocol surface | Developers evaluating the protocol |
 | **Passport Deep-Dive** | [`passport.html`](https://aeoess.com/passport.html) | Full protocol surface with code examples, test counts, MCP tool listings, stats block. 110 modules documented in depth. | Engineers integrating the SDK |
 | **Threat Model** | [`threat-model.html`](https://aeoess.com/threat-model.html) | 38 adversarial scenarios covering the full protocol surface, trust assumptions, threat actors, coverage matrix — every attack linked to a specific test file and test name | Security engineers, reviewers |
 | **Comparison** | [`compare.html`](https://aeoess.com/compare.html) | Feature-by-feature comparison table: Agent Passport vs ANP, ACP, Google A2A, MCP | Engineers choosing between protocols |
