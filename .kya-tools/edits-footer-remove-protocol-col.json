@@ -1,0 +1,12 @@
+[
+  {
+    "label": "Footer: remove entire Protocol column (Specification/SDKs/Roadmap/Threat model)",
+    "old": "    { h: 'Protocol',    items: [\n      ['Specification', 'protocol'],\n      ['SDKs', null, 'https://www.npmjs.com/package/agent-passport-system'],\n      ['Roadmap', 'roadmap'],\n      ['Threat model', 'threatmodel'],\n    ]},\n",
+    "new": ""
+  },
+  {
+    "label": "SiteFooter grid: 4 -> 3 columns (scoped via unique 80px-64px-36px padding to avoid GLFooter)",
+    "old": "padding: '80px 64px 36px', borderTop: `1px solid ${PX.border}` }}>\n      <div data-kya-footer-grid style={{ display: 'grid', gridTemplateColumns: '1.3fr repeat(4, 1fr)', gap: 40 }}>",
+    "new": "padding: '80px 64px 36px', borderTop: `1px solid ${PX.border}` }}>\n      <div data-kya-footer-grid style={{ display: 'grid', gridTemplateColumns: '1.3fr repeat(3, 1fr)', gap: 40 }}>"
+  }
+]
