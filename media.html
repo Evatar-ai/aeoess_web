@@ -7,7 +7,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/aeoess-design.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#fff;--ink:#0c1130;--ink2:#454c5c;--muted:#7a818e;--cyan:#6ec5d9;--cyan-deep:#2b8197;--navy:#0c1130;--line:#eceef2;--surface:#f6f8fb;--grid:rgba(12,17,48,.035)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:linear-gradient(var(--grid) 1px,transparent 1px) 0 0/46px 46px,linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/46px 46px,#fff;color:var(--ink2);font-family:'Geist',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px}
+h1,h2,h3,h4,h5{font-family:'Geist',system-ui,sans-serif;color:var(--ink);letter-spacing:-.02em;line-height:1.12;font-weight:700}
+.serif{font-family:inherit;font-style:normal;color:var(--cyan)}
+a{color:var(--cyan-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+strong,b{color:var(--ink);font-weight:600}
+.mono,.eyebrow,code,.card .num{font-family:'Geist Mono',ui-monospace,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+.brand img{height:22px}
+.nav-links{display:flex;align-items:center;gap:30px;font-size:14.5px;font-weight:500}
+.nav-links>a,.nav-dd>a{color:var(--ink2)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.nav-dd{position:relative}
+.nav-dd-cv{font-size:9px;margin-left:4px;color:var(--muted)}
+.nav-dd-panel{position:absolute;top:140%;left:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;min-width:172px;box-shadow:0 16px 40px rgba(12,17,48,.12);display:none;flex-direction:column;gap:2px}
+.nav-dd:hover .nav-dd-panel{display:flex}
+.nav-dd-panel a{padding:9px 12px;border-radius:9px;color:var(--ink2);font-size:14px}
+.nav-dd-panel a:hover{background:var(--surface);color:var(--ink);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;padding:11px 22px;border-radius:999px;transition:.15s;font-family:'Geist',sans-serif}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#161d44;text-decoration:none}
+@media(max-width:860px){.nav-links{display:none}}
+.page-hero{position:relative;padding:96px 0 56px;border-bottom:1px solid var(--line);background:radial-gradient(820px 460px at 88% -8%,rgba(110,197,217,.13),transparent 62%),radial-gradient(620px 460px at -5% 108%,rgba(142,157,223,.10),transparent 60%)}
+.eyebrow{font-family:'Geist Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-deep);margin-bottom:22px}
+.eyebrow:before{content:"\2022  ";color:var(--cyan)}
+.page-hero h1{font-size:clamp(46px,7vw,78px);font-weight:800;letter-spacing:-.03em}
+.dek{margin-top:24px;max-width:680px;font-size:18px;color:var(--muted);line-height:1.62}
+.dek b{color:var(--ink2)}
+.prose{padding:60px 0}
+.prose h2{font-size:clamp(26px,3vw,34px);font-weight:800;margin:54px 0 16px;letter-spacing:-.025em}
+.prose .col>h2:first-child{margin-top:0}
+.prose p{font-size:16px;color:var(--ink2);margin:0 0 14px;max-width:760px;line-height:1.7}
+.prose ul{margin:0 0 18px;list-style:none;max-width:760px}
+.prose li{position:relative;padding-left:24px;margin-bottom:10px;font-size:16px;color:var(--ink2)}
+.prose li:before{content:"";position:absolute;left:3px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+blockquote{margin:12px 0;padding:24px 30px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:0 16px 16px 0;font-size:24px;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+code{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--cyan-deep)}
+hr{border:none;border-top:1px solid var(--line);margin:38px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0 8px}
+@media(max-width:780px){.grid-3{grid-template-columns:1fr}}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;transition:.16s}
+a.card:hover{border-color:var(--cyan);box-shadow:0 8px 34px rgba(12,17,48,.08);text-decoration:none;transform:translateY(-2px)}
+.card h3{font-size:38px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.card h4{font-family:'Geist Mono',monospace;font-size:13px;font-weight:500;color:var(--cyan-deep);margin-bottom:8px;letter-spacing:.02em}
+.card p{font-size:14px;color:var(--muted);margin:6px 0 0}
+.card strong{color:var(--ink)}
+.foot-cta{position:relative;background:var(--navy);color:#fff;text-align:center;padding:60px 24px;overflow:hidden}
+.foot-cta:before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 80% 0,rgba(110,197,217,.18),transparent 60%)}
+.foot-cta h3{position:relative;color:#fff;font-size:30px;font-weight:800;margin-bottom:10px;letter-spacing:-.025em}
+.foot-cta .serif{color:var(--cyan)}
+.foot-cta p{position:relative;color:#aeb6d4;font-size:15px;margin:0 auto 24px;max-width:520px}
+.foot-cta .btn-primary{position:relative;background:var(--cyan);color:var(--navy)}
+.foot-cta .btn-primary:hover{filter:brightness(1.07)}
+footer{border-top:1px solid var(--line);background:#fbfcfd}
+.foot-agents{background:var(--surface);border-bottom:1px solid var(--line);color:var(--muted);font-size:13px;padding:12px 0;font-family:'Geist Mono',monospace}
+.foot-agents a{color:var(--cyan-deep)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:30px;padding:50px 0 0}
+@media(max-width:780px){.foot-grid{grid-template-columns:1fr 1fr}}
+footer h5{font-family:'Geist Mono',monospace;font-weight:500;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:15px}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+.foot-grid a{color:var(--ink2);font-size:14px}
+.foot-grid a:hover{color:var(--cyan-deep);text-decoration:none}
+.foot-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:40px;padding:22px 0 38px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.foot-bot a{color:var(--muted)}
+.foot-bot a:hover{color:var(--cyan-deep)}
+
+.foot-grid{grid-template-columns:1.8fr 1fr 1fr 1fr;gap:30px;padding:64px 0 0;align-items:start}
+.foot-brand p{margin:20px 0 22px;max-width:300px;color:var(--ink2);font-size:14.5px;line-height:1.6}
+.foot-badges{display:flex;gap:10px}
+.chip{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan-deep);background:#eef1fb;border:1px solid #e3e7f7;border-radius:999px;padding:7px 14px}
+.foot-grid a{color:#26304a;font-size:15px}
+.foot-grid a:hover{color:var(--cyan-deep);text-decoration:none}
+.foot-bot{font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:.11em;font-size:11.5px;color:var(--muted);margin-top:52px;padding:24px 0 42px}
+.foot-bot a{color:var(--muted)}
+.foot-bot a:hover{color:var(--cyan-deep)}
+</style>
 </head>
 <body>
 <header class="nav" id="nav">
@@ -54,11 +137,11 @@
 
     <div class="grid-3">
       <div class="card">
-        <h3>110</h3>
+        <h3>107</h3>
         <p>Protocol modules</p>
       </div>
       <div class="card">
-        <h3>2,884</h3>
+        <h3>3,615</h3>
         <p>Tests across 656 suites</p>
       </div>
       <div class="card">
@@ -110,11 +193,11 @@
     <ul>
       <li><strong>Founded:</strong> Day 1 = February 17, 2026</li>
       <li><strong>License:</strong> Apache-2.0</li>
-      <li><strong>Protocol modules:</strong> 110 (84 core + 26 v2 constitutional)</li>
-      <li><strong>Test suite:</strong> 2,884 tests across 656 suites including 38 adversarial scenarios</li>
+      <li><strong>Protocol modules:</strong> 107 (84 core + 23 v2 constitutional)</li>
+      <li><strong>Test suite:</strong> 3,615 tests across 834 suites including 38 adversarial scenarios</li>
       <li><strong>MCP tool surface:</strong> 150 tools across 17 layers</li>
       <li><strong>Research papers:</strong> 8 published, all DOI-indexed</li>
-      <li><strong>Latest releases:</strong> SDK 2.6.0-alpha.3, MCP 3.2.0, Python 2.4.0a2</li>
+      <li><strong>Latest releases:</strong> SDK 2.6.0-alpha.9, MCP 3.2.1, Python 2.4.0a3</li>
       <li><strong>Policy evaluation:</strong> under 2ms latency, 14 constraint dimensions, 403 ops/sec</li>
     </ul>
 
@@ -191,34 +274,35 @@
   </div></div></div>
 </main>
 
+<section class="foot-cta">
+  <h3>Covering agent governance? Let's <span class="serif">talk</span>.</h3>
+  <p>Embargoed quotes, technical clarifications, and on-the-record interviews by arrangement.</p>
+  <a class="btn btn-primary" href="mailto:signal@aeoess.com">Press inquiries &rarr;</a>
+</section>
 <footer>
-  <div class="foot-agents"><div class="wrap">For AI agents: <a href="/llms-full.txt">llms-full.txt</a> · <a href="/.well-known/mcp.json">MCP descriptor</a></div></div>
   <div class="wrap">
     <div class="foot-grid">
-      <div>
-        <a href="/" style="display:inline-block"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style="height:22px;width:auto;display:block"></a>
-        <p style="margin:16px 0 0;max-width:280px;color:var(--fg-2);font-size:13.5px;line-height:1.55;font-weight:300">Enforcement infrastructure for AI agents. Built on the open Agent Passport System protocol.</p>
+      <div class="foot-brand">
+        <a href="/" style="display:inline-block"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style="height:27px;width:auto;display:block"></a>
+        <p>Enforcement infrastructure for AI agents. Built on the open Agent Passport System protocol.</p>
+        <div class="foot-badges"><span class="chip">Apache 2.0</span><span class="chip">Open Protocol</span></div>
       </div>
       <div>
         <h5>Solutions</h5>
         <ul><li><a href="/payments.html">Payments</a></li><li><a href="/content.html">Content</a></li><li><a href="/compliance.html">Compliance</a></li><li><a href="/enterprise.html">Enterprise</a></li></ul>
       </div>
       <div>
-        <h5>Open Source</h5>
-        <ul><li><a href="https://aeoess.com/protocol.html">Agent Passport System</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system">SDK · MCP · Python</a></li><li><a href="https://agent-passport.org/passport.html">Spec</a></li><li><a href="https://agent-passport.org/working-group.html">Working group</a></li><li><a href="https://github.com/aeoess">GitHub</a></li></ul>
-      </div>
-      <div>
         <h5>Resources</h5>
-        <ul><li><a href="/blog.html">Blog</a></li><li><a href="https://agent-passport.org/roadmap.html">Roadmap</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/compare.html">Compare</a></li><li><a href="/docs.html">Docs</a></li><li><a href="/media.html">Media</a></li></ul>
+        <ul><li><a href="/protocol.html">Protocol</a></li><li><a href="/pricing.html">Pricing</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/compare.html">Compare</a></li></ul>
       </div>
       <div>
         <h5>Company</h5>
-        <ul><li><a href="/portal.html">Portal</a></li><li><a href="/pricing.html">Pricing</a></li><li><a href="/research.html">Research</a></li><li><a href="/contact.html">Contact</a></li><li><a href="https://agent-passport.org/threat-model.html">Threat model</a></li></ul>
+        <ul><li><a href="/contact.html">Contact</a></li><li><a href="/portal.html">Portal</a></li><li><a href="/docs.html">Docs</a></li><li><a href="/sitemap.html">Sitemap</a></li><li><a href="/media.html">Media</a></li></ul>
       </div>
     </div>
     <div class="foot-bot">
-      <div>© 2026 AEOESS, Inc. All rights reserved. Built on Agent Passport System, an open-source protocol.</div>
-      <div><a href="mailto:signal@aeoess.com">signal@aeoess.com</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/sitemap.html">Sitemap</a></div>
+      <div>&copy; 2026 &middot; AEOESS &middot; Built on Agent Passport System (APS)</div>
+      <div><a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/sitemap.html">Sitemap</a> &middot; v1.0 &middot; Operational &middot; 99.998%</div>
     </div>
   </div>
 </footer>
