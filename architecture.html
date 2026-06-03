@@ -1832,7 +1832,7 @@ var PACKAGES = [{
   v: 'Skill'
 }, {
   l: 'Python SDK',
-  v: 'v2.4.0a1'
+  v: 'v2.4.0a3'
 }, {
   l: '<a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a>',
   v: '→'
@@ -2175,7 +2175,7 @@ var FAQ = [{
   a: 'Most frameworks handle orchestration. AEOESS handles enforcement: what can this agent do, and what happens when it violates a constraint? Bring your own identity. The gateway is both judge and executor. Works with any framework.'
 }, {
   q: 'Is this production-ready?',
-  a: '110 modules across SDK, MCP, and Python implementations. 2,884 tests. Eight published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks. Apache-2.0 licensed.'
+  a: '107 modules across SDK, MCP, and Python implementations. 2,884 tests. Eight published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks. Apache-2.0 licensed.'
 }, {
   q: 'How does delegation work?',
   a: 'A human delegates authority to an agent with explicit scope: what tools, how much money, which services. The agent can sub-delegate, but authority can only narrow, never expand. Revoke the root and everything downstream dies instantly.'
@@ -2472,7 +2472,7 @@ function AeoessOpenSource(_ref) {
       color: P.ink4,
       marginTop: 14
     }
-  }, "Full surface area: 150 MCP tools, TypeScript + Python SDKs."), showProof && /*#__PURE__*/React.createElement("div", {
+  }, "Full surface area: 150 MCP tools, TypeScript, Python, and Go SDKs."), showProof && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 24,
       padding: '16px 20px',
@@ -3142,7 +3142,7 @@ function AeoessOpenSourceV1(_ref) {
       color: P.ink4,
       marginTop: 14
     }
-  }, "Full surface area: 150 MCP tools, TypeScript + Python SDKs."), /*#__PURE__*/React.createElement("div", {
+  }, "Full surface area: 150 MCP tools, TypeScript, Python, and Go SDKs."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -3272,7 +3272,7 @@ function AeoessOpenSourceV1(_ref) {
       gap: 18,
       marginTop: 14
     }
-  }, ['npm SDK v2.6.0-alpha.9', 'MCP Server v3.2.1', 'ClawHub Skill', 'Python SDK v2.4.0a3', '<a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a> →'].map(function (label) {
+  }, ['npm SDK v2.6.0-alpha.9', 'MCP Server v3.2.1', 'ClawHub Skill', 'Python SDK v2.4.0a3', '<a href="https://pkg.go.dev/github.com/aeoess/agent-passport-go" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">Go SDK v0.2.0-alpha.1</a>', '<a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">8 papers</a> →'].map(function (label) {
     return /*#__PURE__*/React.createElement("a", {
       key: label,
       href: "#",
@@ -4254,7 +4254,7 @@ function AeoessOpenSourceV2(_ref2) {
     v: 'Skill'
   }, {
     l: 'Python SDK',
-    v: 'v2.4.0a1'
+    v: 'v2.4.0a3'
   }, {
     l: 'Papers',
     v: '8 →'
@@ -4358,7 +4358,7 @@ function AeoessOpenSourceV2(_ref2) {
     style: {
       color: P.ink2
     }
-  }, "150 MCP tools, TypeScript + Python SDKs.")), showProof && /*#__PURE__*/React.createElement("div", {
+  }, "150 MCP tools, TypeScript, Python, and Go SDKs.")), showProof && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '12px 22px',
       borderTop: "1px solid ".concat(P.ruleLight),
@@ -6098,7 +6098,7 @@ function AeoessFAQ(_ref) {
       a: 'Most frameworks handle orchestration. AEOESS handles enforcement: what can this agent do, and what happens when it violates a constraint? Bring your own identity. The gateway is both judge and executor. Works with any framework.'
     }, {
       q: 'Is this production-ready?',
-      a: '110 modules across SDK, MCP, and Python implementations. 2,884 tests. Eight published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks.'
+      a: '107 modules across SDK, MCP, and Python implementations. 2,884 tests. Eight published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks.'
     }]
   }, {
     g: 'Identity & delegation',
@@ -9463,7 +9463,7 @@ function AeoessEnterprise(_ref1) {
     palette: P,
     lead: "Charter and office governance.",
     body: "Multi-party approval for high-risk actions. Separation of powers across offices. Amendment rules, dissolution policy. The governance is constitutional, not procedural.",
-    refs: ['src/charter/*', 'src/v2/* (26 constitutional modules)']
+    refs: ['src/charter/*', 'src/v2/* (23 constitutional modules)']
   }), /*#__PURE__*/React.createElement(PillarCard, {
     palette: P,
     lead: "Hosted gateway with managed deployment.",
@@ -9826,7 +9826,7 @@ function AeoessDocs(_ref2) {
       marginTop: 18,
       maxWidth: 680
     }
-  }, "TypeScript and Python SDKs, byte-identical across runtimes. MCP server with two profiles. Every signature shown signs over RFC 8785 canonical bytes with Ed25519."), /*#__PURE__*/React.createElement("div", {
+  }, "TypeScript, Python, and Go SDKs, byte-identical across runtimes. MCP server with two profiles. Every signature shown signs over RFC 8785 canonical bytes with Ed25519."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 8,
@@ -9837,6 +9837,8 @@ function AeoessDocs(_ref2) {
     l: 'npm SDK v2.6.0-alpha.9'
   }, {
     l: 'PyPI 2.4.0a3'
+  }, {
+    l: 'Go v0.2.0-alpha.1'
   }, {
     l: 'MCP v3.2.1'
   }, {
