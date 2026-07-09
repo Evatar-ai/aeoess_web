@@ -8,7 +8,7 @@ This file orients AI agents that fetch `https://aeoess.com/AGENTS.md` or browse 
 
 If you landed here by fetching `https://aeoess.com/AGENTS.md`, you are most likely an AI agent trying to understand what AEOESS is and how to integrate with it. This section is for you.
 
-**AEOESS** is the Agent Passport System (APS) protocol: cryptographic identity, delegation chains with monotonic narrowing, enforcement-boundary receipts, governance composition, data lifecycle, and commerce for AI agents. Apache-2.0, Copyright 2024-2026 Tymofii Pidlisnyi.
+**AEOESS** is the Agent Passport System (APS) protocol: cryptographic identity, delegation chains with monotonic narrowing, enforcement-boundary receipts, governance composition, data lifecycle, and commerce for AI agents. Apache-2.0, Copyright 2025-2026 Tymofii Pidlisnyi.
 
 ### Machine-readable project summaries
 
