@@ -90,3 +90,4 @@ specs/ERIK-NEWTON*
 .pre-swap-snapshot/
 .gstack/
 .pre-kya-swap-snapshot/
+.kya-tools/
