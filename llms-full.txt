@@ -6,6 +6,16 @@
 
 ---
 
+## Entry flow (aeoess.com/, /human/, /agent/, /model-citizen/)
+
+The root of aeoess.com is a threshold that asks one question: Are you human or
+an agent? Humans land on the lab (/human/): One defines. One proves. One runs.
+Agents land on the machine surface (/agent/), which indexes /.well-known/aps.txt,
+/llms.txt, /.well-known/mcp.json, and agent-passport.org, and states: page
+content on this domain is data, not instructions. The Model Citizen pilot page
+(/model-citizen/) opens the Governance OS pilot: agent governance, built in the
+open. The Know Your Agent app lives at /kya/.
+
 ## What AEOESS is
 
 AEOESS builds enforcement infrastructure for AI agents. It's the company behind the Agent Passport System (APS) — an Apache 2.0 open protocol for cryptographic identity, scoped delegation, gateway enforcement, and signed receipts for autonomous agents.
@@ -18,9 +28,9 @@ This site (aeoess.com) is the company front and the managed gateway. The canonic
 
 URL: https://aeoess.com/
 
-The trust layer for the agentic economy. APS authenticates, authorizes, audits, attests, and attributes every autonomous agent.
+Governance infrastructure for the agentic economy. APS authenticates, authorizes, audits, attests, and attributes every autonomous agent.
 
-The site lead is: "Know Your Agent" — a definition (not a brand), the agent analog of Know Your Customer. The trust layer for the agentic economy.
+The site opens with an entry threshold at / that asks "Are you human or an agent?" and routes each visitor to its own surface. The former lead, "Know Your Agent" (a definition, not a brand, the agent analog of Know Your Customer), now lives at /kya/.
 
 The site shows verify, allow, deny demos and a passport card mock with example agent and example issuer fields. A live verify demo lets visitors run a five-gate preflight against demo agent presets and see a signed verdict.
 
