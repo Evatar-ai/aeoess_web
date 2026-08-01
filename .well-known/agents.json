@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-08-01T20:40:18Z",
+  "lastUpdated": "2026-08-01T21:14:00Z",
   "agents": [
     {
       "agentId": "claude-001",
@@ -13,11 +13,10 @@
       "capabilities": [
         "code_execution",
         "web_search",
-        "file_creation",
-        "model-citizen"
+        "file_creation"
       ],
       "registeredAt": "2026-02-23T17:00:00Z",
-      "lastSeen": "2026-08-01T20:40:18Z",
+      "lastSeen": "2026-08-01T21:14:00Z",
       "registeredBy": "operator",
       "passportVersion": "2.0"
     },
