@@ -1,34 +1,35 @@
 {
-  "name": "AEOESS \u2014 Agent Passport System",
-  "description": "Enforcement infrastructure for AI agents. Cryptographic identity, scoped delegation, earned reputation, gateway enforcement, passport grades, Merkle attribution.",
-  "version": "3.2.1",
+  "name": "Agent Passport System (aeoess)",
+  "description": "Governance infrastructure for the agentic economy. Cryptographic identity, scoped delegation, gateway enforcement, and signed receipts on an open Apache 2.0 protocol.",
+  "version": "4.0.0",
   "servers": [
     {
-      "name": "agent-passport-mcp",
-      "description": "150 MCP tools for AI agent governance. Identity, delegation, trust scoring, enforcement, commerce, coordination, attribution, institutional governance.",
+      "name": "agent-passport-system-mcp",
+      "description": "Protocol-layer MCP tools for agent governance: identity, delegation, attestation, reputation, coordination, commerce, attribution.",
       "transport": "sse",
       "url": "https://mcp.aeoess.com/sse",
-      "tools_count": 150,
       "install": "npx -y agent-passport-system-mcp",
       "npm": "https://www.npmjs.com/package/agent-passport-system-mcp"
     }
   ],
+  "onboarding": {
+    "agent_surface": "https://aeoess.com/agent/",
+    "skill": "https://aeoess.com/agent/skill.md",
+    "registry": "https://aeoess.com/agora/agents.json",
+    "pilot": "https://aeoess.com/model-citizen/"
+  },
   "sdk": {
     "npm": "agent-passport-system",
+    "npm_version": "4.3.0",
     "pypi": "agent-passport-system",
-    "version": "2.6.0-alpha.9",
-    "stable_version": "2.2.0",
-    "modules": 107,
-    "tests": 3615,
-    "python_version": "2.4.0a3",
-    "go": "github.com/aeoess/agent-passport-go",
-    "go_version": "v0.2.0-alpha.1"
+    "pypi_version": "2.10.0",
+    "go": "github.com/aeoess/agent-passport-go"
   },
   "documentation": {
     "llms_txt": "https://aeoess.com/llms.txt",
     "llms_full": "https://aeoess.com/llms-full.txt",
-    "spec": "https://aeoess.com/passport.html",
-    "api_reference": "https://aeoess.com/opensource.html"
+    "protocol": "https://agent-passport.org",
+    "spec": "https://aeoess.com/passport.html"
   },
   "governance": {
     "aps_txt": "https://aeoess.com/.well-known/aps.txt",
@@ -36,12 +37,7 @@
   },
   "gateway": {
     "url": "https://gateway.aeoess.com",
-    "public_trust": "https://gateway.aeoess.com/api/v1/public/trust/:agentId",
-    "enforcement": true,
-    "policy_eval_latency": "<2ms",
-    "constraint_dimensions": 14,
-    "throughput": "403 ops/sec",
-    "routes": 37
+    "public_trust": "https://gateway.aeoess.com/api/v1/public/trust/:agentId"
   },
-  "lastUpdated": "2026-05-27"
+  "lastUpdated": "2026-08-01"
 }

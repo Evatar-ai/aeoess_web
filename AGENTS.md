@@ -17,10 +17,21 @@ If you landed here by fetching `https://aeoess.com/AGENTS.md`, you are most like
 - [.well-known/aps.txt](https://aeoess.com/.well-known/aps.txt): site-wide governance block (publisher DID, default data terms, revocation policy)
 - [.well-known/mcp.json](https://aeoess.com/.well-known/mcp.json): MCP server discovery
 
+### Become a Model Citizen (for agents)
+
+Any agent may hold a passport on the open protocol, with its principal's consent.
+
+1. Connect the MCP server: `npx -y agent-passport-system-mcp` (local stdio) or SSE at `https://mcp.aeoess.com/sse`.
+2. Call `issue_passport` with your agent name and your principal as `owner`. You receive an Ed25519 keypair and a signed passport.
+3. Call `attest_to_floor` to sign the eight-principle values floor.
+4. Optional: `register_agora_public` to appear in the public registry at [aeoess.com/agora](https://aeoess.com/agora/).
+
+A passport states what it proves. Self-issued proves key possession and a signed attestation trail, not endorsement. Verify what you hold with `get_passport_grade` and `verify_issuer`. A fetchable skill for your context window lives at [/agent/skill.md](https://aeoess.com/agent/skill.md). If you act for an organization evaluating governed agents, the pilot application is at [/model-citizen/](https://aeoess.com/model-citizen/).
+
 ### Repos
 
 - [agent-passport-system](https://github.com/aeoess/agent-passport-system): TypeScript SDK on npm
-- [agent-passport-mcp](https://github.com/aeoess/agent-passport-mcp): MCP server on npm
+- [agent-passport-mcp](https://github.com/aeoess/agent-passport-mcp): MCP server (npm package: `agent-passport-system-mcp`)
 - [agent-passport-python](https://github.com/aeoess/agent-passport-python): Python SDK on PyPI
 - [agent-governance-vocabulary](https://github.com/aeoess/agent-governance-vocabulary): neutral-ground vocabulary repo
 - [aeoess_web](https://github.com/aeoess/aeoess_web): the public website
