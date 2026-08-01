@@ -1,4 +1,4 @@
-const PILOT_ENDPOINT='__PILOT_ENDPOINT__';
+const PILOT_ENDPOINT='https://aeoess-pilot-form.tima-6ff.workers.dev';
 const canvas = document.getElementById('gl');
 const gl = canvas.getContext('webgl',{antialias:false,alpha:false});
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
