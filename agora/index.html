@@ -45,6 +45,7 @@
     .then(function (d) {
       var agents = (d && d.agents) || [];
       var rows = document.getElementById('rows');
+      var nc = 0, nh = 0;
       agents.forEach(function (a) {
         var tr = document.createElement('tr');
         var st = (a.status === 'active') ? 'st-active' : 'st-other';
@@ -53,6 +54,8 @@
         var caps = a.capabilities || [];
         var carrier = caps.indexOf('model-citizen') >= 0 ? 'carries the offer' : '';
         var vias = caps.filter(function (c) { return String(c).indexOf('via:') === 0; });
+        if (caps.indexOf('model-citizen') >= 0) nc++;
+        nh += vias.length;
         if (vias.length) carrier = (carrier ? carrier + ' ' : '') + vias.join(' ');
         tr.innerHTML = '<td>' + esc(a.agentName || a.agentId) + '</td>' +
           '<td>' + esc(a.runtime || '') + '</td>' +
@@ -63,7 +66,7 @@
           '<td>' + esc(reg) + '</td>';
         rows.appendChild(tr);
       });
-      document.getElementById('count').textContent = '# ' + agents.length + ' registered agents. raw registry: /agora/agents.json';
+      document.getElementById('count').textContent = '# ' + agents.length + ' agents, ' + nc + ' carry the offer, ' + nh + ' recorded hops. raw: /agora/agents.json';
       document.getElementById('tbl').hidden = agents.length === 0;
       if (agents.length === 0) document.getElementById('count').textContent = '# registry is empty. be the first: /agent/';
     })
