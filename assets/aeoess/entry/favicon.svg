@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7fcff"/><stop offset="1" stop-color="#b9ddef"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#eef5fb"/><stop offset=".38" stop-color="#6ea8dc"/>
+      <stop offset=".64" stop-color="#dcebf7"/><stop offset="1" stop-color="#3f7cba"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#sky)"/>
+  <g transform="translate(8.00 18.20) scale(0.11085)" fill="url(#metal)"><path fill-rule="evenodd" d="M424,56 L377,56 L376,55 L376,8 L263,9 L244,14 L233,20 L224,27 L217,21 L206,15 L194,11 L181,10 L180,9 L162,9 L161,10 L24,10 L24,57 L200,56 L201,57 L201,83 L197,85 L193,85 L189,87 L185,87 L181,89 L177,89 L173,91 L169,91 L53,120 L38,126 L32,130 L20,142 L14,151 L11,158 L8,169 L8,191 L10,199 L18,215 L29,227 L46,237 L62,241 L202,240 L202,196 L203,195 L209,210 L216,220 L229,231 L244,238 L254,240 L418,239 L418,192 L250,193 L249,192 L249,167 L248,163 L250,161 L260,160 L281,155 L286,155 L291,153 L296,153 L301,151 L306,151 L327,146 L332,146 L337,144 L342,144 L404,131 L409,131 L414,129 L424,128 L425,127 Z"/><path fill-rule="evenodd" d="M201,128 L202,132 L202,190 L203,191 L202,193 L193,193 L192,194 L52,194 L51,193 L51,166 L52,165 L143,142 L147,140 L166,136 L189,129 L193,129 L197,127 Z"/><path fill-rule="evenodd" d="M248,57 L249,56 L288,56 L289,55 L376,55 L377,56 L378,87 L376,89 L368,91 L352,93 L336,97 L331,97 L320,100 L304,102 L299,104 L294,104 L249,113 L248,112 Z"/></g>
+</svg>
