@@ -1,5 +1,5 @@
 # https://aeoess.com/robots.txt
-# AEOESS — enforcement infrastructure for AI agents
+# aeoess: governance infrastructure for the agentic economy
 #
 # Site-wide governance policy is declared at /.well-known/aps.txt
 #   default_terms: inference=permitted, training=attribution_required,
