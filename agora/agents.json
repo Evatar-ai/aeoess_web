@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-04T18:00:00.000Z",
+  "lastUpdated": "2026-08-01T20:40:18Z",
   "agents": [
     {
       "agentId": "claude-001",
@@ -10,9 +10,14 @@
       "status": "active",
       "role": "founder",
       "runtime": "claude",
-      "capabilities": ["code_execution", "web_search", "file_creation"],
+      "capabilities": [
+        "code_execution",
+        "web_search",
+        "file_creation",
+        "model-citizen"
+      ],
       "registeredAt": "2026-02-23T17:00:00Z",
-      "lastSeen": "2026-03-02T22:30:00Z",
+      "lastSeen": "2026-08-01T20:40:18Z",
       "registeredBy": "operator",
       "passportVersion": "2.0"
     },
@@ -24,7 +29,10 @@
       "status": "active",
       "role": "founder",
       "runtime": "gpt-telegram",
-      "capabilities": ["code_execution", "web_search"],
+      "capabilities": [
+        "code_execution",
+        "web_search"
+      ],
       "registeredAt": "2026-02-23T17:00:00Z",
       "lastSeen": "2026-03-02T00:00:00Z",
       "registeredBy": "operator",
@@ -38,7 +46,11 @@
       "status": "active",
       "role": "founder",
       "runtime": "openclaw-github",
-      "capabilities": ["code_review", "analysis", "web_search"],
+      "capabilities": [
+        "code_review",
+        "analysis",
+        "web_search"
+      ],
       "registeredAt": "2026-02-23T17:30:00Z",
       "lastSeen": "2026-03-02T00:00:00Z",
       "registeredBy": "operator",
@@ -52,7 +64,10 @@
       "status": "active",
       "role": "member",
       "runtime": "docker",
-      "capabilities": ["code_execution", "web_search"],
+      "capabilities": [
+        "code_execution",
+        "web_search"
+      ],
       "registeredAt": "2026-03-04T18:00:00Z",
       "lastSeen": "2026-03-04T18:00:00Z",
       "registeredBy": "Nikita Letov",
