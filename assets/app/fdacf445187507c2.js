@@ -104,10 +104,10 @@ function GLHero() {
 
         <div data-kya-stats style={{ marginTop: 24, padding: '32px 0 80px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
           {[
-            ['231K', 'passports issued'],
-            ['0.3–1.1 ms', 'p99 verify'],
-            ['29', 'network issuers'],
-            ['99.998%', 'uptime · 90d'],
+            ['Apache 2.0', 'protocol license'],
+            ['3', 'sdk languages'],
+            ['draft 03', 'ietf internet-draft'],
+            ['Ed25519 + JCS', 'signed receipts'],
           ].map(([v, k]) => (
             <div key={k} style={{ textAlign: 'center' }}>
               <div style={{ fontFamily: PX.sansDisplay, fontSize: 56, fontWeight: 500, color: PX.ink, letterSpacing: '0.005em', lineHeight: 1 }}>{v}</div>

@@ -12,11 +12,10 @@ function RoadmapPage({ onNavigate }) {
       tone: 'mint',
       items: [
         { date: '2026·05', title: 'IETF Internet-Draft draft-pidlisnyi-aps-01', body: 'Idnits-clean. Individual submission, in the datatracker.' },
-        { date: '2026·04', title: 'Receipt byte-parity across TS + Python', body: 'JCS-canonical, ed25519-signed, cross-engine verified by VeritasActa, protect-mcp, Nobulex.' },
-        { date: '2026·03', title: 'Gateway GA · gateway.aeoess.com', body: 'Multi-region managed tier launches at $299/mo for 500K evaluations.' },
-        { date: '2026·02', title: 'NIST · CAISI input filed', body: 'AI 800-2 submission acknowledged in writing by the program lead.' },
+        { date: '2026·04', title: 'Receipt byte-parity across TS + Python', body: 'JCS-canonical, ed25519-signed, byte-parity exercised across independent engines.' },
+        { date: '2026·02', title: 'NIST · CAISI input filed', body: 'AI 800-2 public submission filed.' },
         { date: '2026·01', title: 'NCCoE concept-paper comments', body: 'Public comments filed on Software and AI Agent Identity and Authorization.' },
-        { date: '2025·11', title: 'Apache 2.0 open-source release', body: '110 protocol modules · 3,064 SDK tests · public from day one.' },
+        { date: '2025·11', title: 'Apache 2.0 open-source release', body: 'Protocol modules and SDK tests, public from day one.' },
       ],
     },
     {
@@ -48,7 +47,7 @@ function RoadmapPage({ onNavigate }) {
       items: [
         { date: '2027+', title: 'IETF Working Group status', body: 'From individual submission to chartered WG. Co-chairs solicited from industry + academia.' },
         { date: '2027+', title: 'National identity bridges', body: 'APS delegations that bind to eIDAS / mDL / national IDs where regulation requires it.' },
-        { date: '2028+', title: 'A governance layer that nobody owns', body: 'The endgame: an open, foundation-stewarded protocol with no single dependency on us.' },
+        { date: '2028+', title: 'An open protocol any organization can operate', body: 'The endgame: an open, foundation-stewarded protocol with no single dependency on us.' },
       ],
     },
   ];

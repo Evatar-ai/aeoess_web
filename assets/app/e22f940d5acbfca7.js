@@ -47,7 +47,7 @@ const NAV_STRUCTURE = [
   {
     label: 'Resources', dropdown: [
       { label: 'Open Source', route: 'opensource', desc: 'Apache 2.0 · GitHub · SDKs.' },
-      { label: 'Pilot',       route: 'pricing',    desc: 'Open pilot program. Access by application.' },
+      { label: 'Pilot',       route: 'pricing',    desc: 'Research pilot. Access by application.' },
       { label: 'Blog',        route: 'blog',       desc: 'Field notes from the protocol.' },
       { label: 'FAQ',         route: 'faq',        desc: 'Questions we hear most.' },
       { label: 'Compare',     route: 'compare',    desc: 'KYA vs. the alternatives.' },

@@ -85,7 +85,7 @@ function FAQPage({ onNavigate }) {
       items: [
         ['Is APS an identity provider?', 'No. APS composes with your existing identity — did:key, did:web, SPIFFE, OAuth. We add the missing piece: cryptographic delegation, enforcement, and signed receipts for agent actions on top of whatever identity layer you already trust.'],
         ['Why DIDs?', 'Decentralized identifiers let an agent prove who it is without a central registry. Pick did:key for standalone keys, did:web for domain-bound discoverability, or SPIFFE for service-mesh workloads. Same passport format underneath.'],
-        ['How is a receipt verifiable without trusting AEOESS?', 'Every receipt is JCS-canonicalized (RFC 8785), hashed with SHA-256, and ed25519-signed by the gateway. Auditors verify against the public keys we publish at aeoess.com/v1/keys. We could not forge a receipt without your verifier catching it.'],
+        ['How is a receipt verifiable without trusting aeoess?', 'Every receipt is JCS-canonicalized (RFC 8785), hashed with SHA-256, and ed25519-signed by the gateway. Auditors verify against the public keys we publish at aeoess.com/v1/keys. We could not forge a receipt without your verifier catching it.'],
       ],
     },
     {
@@ -99,7 +99,7 @@ function FAQPage({ onNavigate }) {
     {
       h: 'Access & open source',
       items: [
-        ['Is it really free to self-host?', 'Yes. Apache 2.0, no usage limits, no telemetry, no upsell. You can run the gateway, SDKs, and CLI without ever talking to AEOESS. The managed tier ($299/mo, 500K evals) exists for teams who don\'t want to run it themselves.'],
+        ['Is it really free to self-host?', 'Yes. Apache 2.0, no usage limits, no telemetry, no upsell. You can run the gateway, SDKs, and CLI without ever talking to aeoess. The managed gateway, for teams who prefer not to run it themselves, is in research pilot.'],
         ['Can I fork it?', 'Please do. The Working Group is public; we accept upstream PRs from anyone, and we encourage organizations to maintain their own builds. The conformance suite ensures forks stay interoperable.'],
         ['What\'s the catch?', 'There isn\'t one. The bet: an open protocol wins because every counterparty has to implement it, and we monetize the convenience of not running infrastructure yourself.'],
       ],
@@ -115,12 +115,12 @@ function FAQPage({ onNavigate }) {
     {
       h: 'Operations & support',
       items: [
-        ['How do I get started?', 'Three paths. Self-host the gateway under Apache 2.0 for zero cost and zero signup. Spin up the Production tier in two minutes by signing in at aeoess.com/portal — sign-in, then upgrade through Stripe Checkout. For Enterprise, email signal@aeoess.com and we will scope a deployment. Quickstart docs at /docs.'],
-        ['Is there a free trial or money-back guarantee?', 'The self-hosted gateway is free forever under Apache 2.0 — that is the trial. The Production tier ($299/mo) is month-to-month and cancellable anytime through the portal. Enterprise comes with a 30-day evaluation window before the contract starts.'],
-        ['What is the SLA on the Production tier?', 'Production targets 99.5% monthly uptime. Contractual SLAs (99.9% with credits) are available on the Enterprise tier. The protocol itself is fail-closed by design — if the gateway is unreachable, agents deny by default. No silent allow.'],
+        ['How do I get started?', 'Three paths. Self-host the gateway under Apache 2.0 for zero cost and zero signup. The managed gateway is available through the Model Citizen research pilot, by application at aeoess.com/model-citizen. Quickstart docs at /docs.'],
+        ['Is there a free trial or money-back guarantee?', 'The self-hosted gateway is free forever under Apache 2.0 — that is the trial. The managed gateway runs as a research pilot; terms are set per engagement.'],
+        ['What is the SLA on the Production tier?', 'The managed gateway is pilot-stage; no contractual SLA is sold today. The protocol itself is fail-closed by design — if the gateway is unreachable, agents deny by default. No silent allow.'],
         ['Where is my data stored? Can I get EU data residency?', 'Production tier runs in US-East by default. The Enterprise tier offers EU-only data residency in Frankfurt or Dublin, with no transfer to the US and no US sub-processors. Region-of-choice deployment is available for any Enterprise customer.'],
         ['How do I export my receipts and audit log?', 'Anytime, via the gateway API or portal. Receipts export to Parquet, JSON Lines, or S3. The signed audit log is JCS-canonicalized (RFC 8785) and verifiable byte-for-byte against the public key set — auditors can verify without trusting AEOESS.'],
-        ['How do we get access to the managed gateway?', 'Access is through the Model Citizen pilot program, by application. The protocol and SDKs are Apache 2.0 and free to self-host.'],
+        ['How do we get access to the managed gateway?', 'Access is through the Model Citizen research pilot, by application. The protocol and SDKs are Apache 2.0 and free to self-host.'],
         ['What happens to my data if I cancel?', 'You can export everything (receipts, delegations, policy config) in standard formats at any time. After cancellation, your data is retained per the plan retention policy (1 year for Production, up to 7 years for Enterprise) and then permanently deleted. Your agent keys are yours — AEOESS never holds private keys.'],
         ['What support do you offer at each tier?', 'Open Source: community support via GitHub issues and the public Working Group. Production: email support during business hours (US/EU coverage). Enterprise: priority email plus dedicated Slack channel, named CSM, and quarterly business reviews.'],
         ['Who is behind AEOESS?', 'AEOESS is led by Tymofii Pidlisnyi (founder). The protocol is Apache 2.0, with 8 peer-reviewed papers on Zenodo (ORCID 0009-0002-4700-3594), an active IETF Internet-Draft (draft-pidlisnyi-aps), three merged contributions to Microsoft Agent Governance Toolkit (#274, #598, #1328), and acknowledged input to NIST CAISI and NCCoE. The protocol is designed to outlive any single vendor.'],
