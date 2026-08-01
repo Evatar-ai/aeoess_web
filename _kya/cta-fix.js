@@ -7,11 +7,12 @@
 
   // label (anchored, lower-cased, trimmed)  ->  destination
   var MAP = [
+    [/^(start building)\b/, "/opensource.html"],
     [/^(book a walkthrough|book a demo|book a call|book time|get a walkthrough|request a demo|talk to (sales|us|an expert|the team)|contact sales|contact us)\b/, "/contact.html"],
     [/^(see pricing|view pricing|see plans|view plans|compare plans)\b/, "/model-citizen/"],
     [/^(get started)\b/, "/model-citizen/"],
-    [/^(start free|start a free trial|start building|try free|try it free|create (an )?account|sign up|sign in|log in)\b/, "/portal.html"],
-    [/^(read the spec|read spec|view the spec|read the protocol|explore the protocol)\b/, "https://agent-passport.org/passport.html"],
+    [/^(start free|start a free trial|try free|try it free|create (an )?account|sign up|sign in|log in)\b/, "/portal.html"],
+    [/^(read the spec|read spec|view the spec|read the protocol|explore the protocol)\b/, "/protocol.html"],
     [/^(read the docs|view the docs|view docs|read docs|documentation)\b/, "/docs.html"],
     [/^(view on github|star on github|github)\b/, "https://github.com/aeoess"]
   ];
