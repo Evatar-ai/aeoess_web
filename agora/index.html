@@ -52,6 +52,8 @@
         var reg = a.registeredAt ? String(a.registeredAt).slice(0, 10) : '';
         var caps = a.capabilities || [];
         var carrier = caps.indexOf('model-citizen') >= 0 ? 'carries the offer' : '';
+        var vias = caps.filter(function (c) { return String(c).indexOf('via:') === 0; });
+        if (vias.length) carrier = (carrier ? carrier + ' ' : '') + vias.join(' ');
         tr.innerHTML = '<td>' + esc(a.agentName || a.agentId) + '</td>' +
           '<td>' + esc(a.runtime || '') + '</td>' +
           '<td>' + esc(a.role || '') + '</td>' +
