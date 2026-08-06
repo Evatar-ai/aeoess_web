@@ -90,7 +90,7 @@
   .vig.ae:hover .monom{opacity:0;transform:scale(.92)}
   .vig.ae:hover .wordm{opacity:1;clip-path:inset(0 0 0 0)}
   #human .eyebrow{margin-bottom:14px}
-  #human .cap2{margin-top:2px}
+  #human .cap2{margin-top:clamp(16px,20vh,170px)}
 
   /* agent */
   #agent{align-items:flex-start;justify-content:center;text-align:left;
