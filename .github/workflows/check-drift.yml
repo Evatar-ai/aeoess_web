@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   scan:
@@ -41,11 +42,12 @@ jobs:
             'ROME-COMPLETE'
           )
 
-          # Files we deliberately allow these patterns in (the workflow itself,
-          # the gitignore block listing the same patterns to keep files out,
-          # the propagate.mjs final-scan source, any other script that
-          # intentionally enumerates the patterns to check for them).
-          EXCLUDE_PATHS='(\.github/workflows/check-drift\.yml|\.gitignore|scripts/check-drift\.sh|scripts/propagate\.mjs)'
+          # Files we deliberately allow these patterns in: the workflow itself,
+          # and the gitignore block listing the same patterns to keep files out.
+          # Both exist in this repo and both necessarily enumerate the patterns.
+          # Nothing else is exempt — an exclusion for a file that does not exist
+          # only creates a hole for whatever later takes that name.
+          EXCLUDE_PATHS='(\.github/workflows/check-drift\.yml|\.gitignore)'
 
           # Shape-only regex patterns for value-style infrastructure leaks.
           # Literal values (specific UUIDs, credentials, etc.) intentionally
@@ -58,10 +60,18 @@ jobs:
             '\+1[0-9]{10}\b'
           )
 
+          # Tracked files, NUL-delimited end to end so a path containing spaces
+          # cannot word-split into two non-existent paths and silently go
+          # unscanned. -r keeps grep from reading stdin when the list is empty.
+          scan_targets() {
+            git ls-files -z | grep -zv -E "$EXCLUDE_PATHS"
+          }
+
           violations=0
           for pat in "${PATTERNS[@]}"; do
-            # Search tracked files only, excluding self-references
-            hits=$(git ls-files | grep -v -E "$EXCLUDE_PATHS" | xargs grep -l -F "$pat" 2>/dev/null || true)
+            # Case-insensitive: this catches accidental inclusion, and an
+            # accident does not preserve the casing of the original token.
+            hits=$(scan_targets | xargs -0 -r grep -l -i -F -- "$pat" 2>/dev/null || true)
             if [ -n "$hits" ]; then
               echo "::error::Forbidden pattern '$pat' found in:"
               echo "$hits" | sed 's/^/  /'
@@ -69,7 +79,7 @@ jobs:
             fi
 
             # Also check filenames themselves
-            file_hits=$(git ls-files | grep -F "$pat" || true)
+            file_hits=$(git ls-files | grep -i -F -- "$pat" || true)
             if [ -n "$file_hits" ]; then
               echo "::error::Forbidden pattern '$pat' in filename(s):"
               echo "$file_hits" | sed 's/^/  /'
@@ -77,8 +87,11 @@ jobs:
             fi
           done
 
+          # Shape regexes stay case-sensitive on purpose: they encode literal
+          # character classes (lowercase hex in the tunnel id) that -i would
+          # widen beyond the shape they are meant to describe.
           for re in "${REGEX_PATTERNS[@]}"; do
-            hits=$(git ls-files | grep -v -E "$EXCLUDE_PATHS" | xargs grep -l -E "$re" 2>/dev/null || true)
+            hits=$(scan_targets | xargs -0 -r grep -l -E -- "$re" 2>/dev/null || true)
             if [ -n "$hits" ]; then
               echo "::error::Forbidden regex pattern '$re' found in:"
               echo "$hits" | sed 's/^/  /'
