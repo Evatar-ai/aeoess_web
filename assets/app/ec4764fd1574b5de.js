@@ -116,7 +116,7 @@ function FAQPage({ onNavigate }) {
       h: 'Operations & support',
       items: [
         ['How do I get started?', 'Three paths. Self-host the gateway under Apache 2.0 for zero cost and zero signup. The managed gateway is available through the Model Citizen research pilot, by application at aeoess.com/model-citizen. Quickstart docs at /docs.'],
-        ['Is there a free trial or money-back guarantee?', 'The self-hosted gateway is free forever under Apache 2.0 — that is the trial. The managed gateway runs as a research pilot; terms are set per engagement.'],
+        ['Is there a free tier?', 'The self-hosted gateway is free forever under Apache 2.0. The managed gateway runs as a research pilot; terms are set per engagement.'],
         ['What is the SLA on the Production tier?', 'The managed gateway is pilot-stage; no contractual SLA is sold today. The protocol itself is fail-closed by design — if the gateway is unreachable, agents deny by default. No silent allow.'],
         ['Where is my data stored? Can I get EU data residency?', 'Production tier runs in US-East by default. The Enterprise tier offers EU-only data residency in Frankfurt or Dublin, with no transfer to the US and no US sub-processors. Region-of-choice deployment is available for any Enterprise customer.'],
         ['How do I export my receipts and audit log?', 'Anytime, via the gateway API or portal. Receipts export to Parquet, JSON Lines, or S3. The signed audit log is JCS-canonicalized (RFC 8785) and verifiable byte-for-byte against the public key set — auditors can verify without trusting AEOESS.'],
