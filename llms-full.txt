@@ -167,20 +167,15 @@ Contribute: The specification lives at agent-passport.org. Source at github.com/
 
 ## Pricing
 
+# Pricing
 URL: https://aeoess.com/pricing.html
 
-Free to self-host. Managed when you grow. The protocol is open. The implementation is open. The managed gateway is what you pay for — and only after you outgrow your own.
+The protocol is open. The implementation is open. Self-host the gateway under Apache 2.0, free forever: the full SDK, the MCP server, the IETF-tracked specification, the conformance suite.
 
-Three tiers:
-- Open Source — Free, Apache 2.0 forever. Full SDK (TypeScript + Python), MCP server with all tools, self-host the gateway, IETF-tracked spec, conformance test suite, 8 published papers.
-- Production — $299 per month. Hosted gateway with fail-closed enforcement, 100 active agents, 500K policy evaluations per month, 1-year audit retention, production support during business hours.
-- Enterprise — Custom. Everything in Production plus SSO/SAML/SCIM, dedicated deployment in region of choice, compliance reporting (EU AI Act, NIST AI RMF, ISO 42001), audit retention up to 7 years, priority support and onboarding.
+The managed gateway is available through the Model Citizen pilot program; terms are set per engagement. No public price list, no trial. Apply at https://aeoess.com/model-citizen/.
 
-Compatibility is permanent. Self-host today, switch to the hosted Production tier later, or never. Your protocol envelopes verify the same way regardless. Production exists for teams that need uptime, durable storage, key management, key rotation, and version migration without operating the gateway themselves.
+Compatibility is permanent. Self-host today, join a pilot later, or never; protocol envelopes verify the same way regardless.
 
----
-
-## Docs
 
 URL: https://aeoess.com/docs.html
 
