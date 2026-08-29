@@ -167,7 +167,6 @@ Contribute: The specification lives at agent-passport.org. Source at github.com/
 
 ## Pricing
 
-# Pricing
 URL: https://aeoess.com/pricing.html
 
 The protocol is open. The implementation is open. Self-host the gateway under Apache 2.0, free forever: the full SDK, the MCP server, the IETF-tracked specification, the conformance suite.
@@ -176,6 +175,9 @@ The managed gateway is available through the Model Citizen pilot program; terms 
 
 Compatibility is permanent. Self-host today, join a pilot later, or never; protocol envelopes verify the same way regardless.
 
+---
+
+## Docs
 
 URL: https://aeoess.com/docs.html
 
