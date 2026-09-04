@@ -25,7 +25,7 @@ This page (`/llms.txt`) is a short machine-readable index for LLM crawlers. The 
 
 ## Open source
 
-- [Open source overview](https://aeoess.com/opensource.html): Apache 2.0 stack, SDKs in TypeScript, Python, and Go
+- [Open source overview](https://aeoess.com/opensource.html): Apache 2.0 stack, SDKs in TypeScript, Python, Rust, and Go
 - [Specification at agent-passport.org](https://agent-passport.org): The canonical protocol site
 - [Source code](https://github.com/aeoess): GitHub organization
 - [npm package](https://www.npmjs.com/package/agent-passport-system): `agent-passport-system`
