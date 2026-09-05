@@ -1812,27 +1812,27 @@ var CAPABILITIES = [{
   v: 'Cascade, one call kills all'
 }];
 var HERO_STATS = [{
-  v: '8',
+  v: '9',
   l: 'Papers'
 }, {
   v: '20',
   l: 'Essential tools'
 }, {
-  v: '4,500',
+  v: '5,281',
   l: 'Tests'
 }];
 var PACKAGES = [{
   l: 'npm SDK',
-  v: 'v4.4.0'
+  v: 'v6.0.0'
 }, {
   l: 'MCP Server',
-  v: 'v5.0.0'
+  v: 'v6.0.0'
 }, {
   l: 'ClawHub',
   v: 'Skill'
 }, {
   l: 'Python SDK',
-  v: 'v2.11.0'
+  v: 'v3.0.0'
 }, {
   l: '<a href="https://orcid.org/0009-0002-4700-3594" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;">9 papers</a>',
   v: '→'
@@ -2175,7 +2175,7 @@ var FAQ = [{
   a: 'Most frameworks handle orchestration. AEOESS handles enforcement: what can this agent do, and what happens when it violates a constraint? Bring your own identity. The gateway is both judge and executor. Works with any framework.'
 }, {
   q: 'Is this production-ready?',
-  a: '107 modules across SDK, MCP, and Python implementations. 4,500 tests. Nine published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks. Apache-2.0 licensed.'
+  a: '107 modules across the TypeScript SDK, the MCP server, and the Python, Rust, and Go SDKs. 5,281 tests. Nine published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks. Apache-2.0 licensed.'
 }, {
   q: 'How does delegation work?',
   a: 'A human delegates authority to an agent with explicit scope: what tools, how much money, which services. The agent can sub-delegate, but authority can only narrow, never expand. Revoke the root and everything downstream dies instantly.'
@@ -2472,7 +2472,7 @@ function AeoessOpenSource(_ref) {
       color: P.ink4,
       marginTop: 14
     }
-  }, "Full surface area: 152 MCP tools, TypeScript, Python, and Go SDKs."), showProof && /*#__PURE__*/React.createElement("div", {
+  }, "Full surface area: 152 MCP tools, TypeScript, Python, Rust, and Go SDKs."), showProof && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 24,
       padding: '16px 20px',
@@ -3142,7 +3142,7 @@ function AeoessOpenSourceV1(_ref) {
       color: P.ink4,
       marginTop: 14
     }
-  }, "Full surface area: 152 MCP tools, TypeScript, Python, and Go SDKs."), /*#__PURE__*/React.createElement("div", {
+  }, "Full surface area: 152 MCP tools, TypeScript, Python, Rust, and Go SDKs."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -4245,16 +4245,16 @@ function AeoessOpenSourceV2(_ref2) {
     }
   }, [{
     l: 'npm SDK',
-    v: 'v4.4.0'
+    v: 'v6.0.0'
   }, {
     l: 'MCP Server',
-    v: 'v5.0.0'
+    v: 'v6.0.0'
   }, {
     l: 'ClawHub',
     v: 'Skill'
   }, {
     l: 'Python SDK',
-    v: 'v2.11.0'
+    v: 'v3.0.0'
   }, {
     l: 'Papers',
     v: '9 →'
@@ -4358,7 +4358,7 @@ function AeoessOpenSourceV2(_ref2) {
     style: {
       color: P.ink2
     }
-  }, "152 MCP tools, TypeScript, Python, and Go SDKs.")), showProof && /*#__PURE__*/React.createElement("div", {
+  }, "152 MCP tools, TypeScript, Python, Rust, and Go SDKs.")), showProof && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '12px 22px',
       borderTop: "1px solid ".concat(P.ruleLight),
@@ -6098,7 +6098,7 @@ function AeoessFAQ(_ref) {
       a: 'Most frameworks handle orchestration. AEOESS handles enforcement: what can this agent do, and what happens when it violates a constraint? Bring your own identity. The gateway is both judge and executor. Works with any framework.'
     }, {
       q: 'Is this production-ready?',
-      a: '107 modules across SDK, MCP, and Python implementations. 4,500 tests. Nine published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks.'
+      a: '107 modules across the TypeScript SDK, the MCP server, and the Python, Rust, and Go SDKs. 5,281 tests. Nine published papers in the federal record. An IETF Internet-Draft. Independently cited by PDR in Production (UBC). 25 vocab crosswalks.'
     }]
   }, {
     g: 'Identity & delegation',
@@ -9826,7 +9826,7 @@ function AeoessDocs(_ref2) {
       marginTop: 18,
       maxWidth: 680
     }
-  }, "TypeScript, Python, and Go SDKs, byte-identical across runtimes. MCP server with two profiles. Every signature shown signs over RFC 8785 canonical bytes with Ed25519."), /*#__PURE__*/React.createElement("div", {
+  }, "TypeScript, Python, Rust, and Go SDKs, byte-identical across runtimes. MCP server with two profiles. Every signature shown signs over RFC 8785 canonical bytes with Ed25519."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 8,
@@ -9836,13 +9836,13 @@ function AeoessDocs(_ref2) {
   }, [{
     l: 'npm SDK v4.4.0'
   }, {
-    l: 'PyPI 2.11.0'
+    l: 'PyPI 3.0.0'
   }, {
     l: 'Go v0.5.0'
   }, {
     l: 'MCP v5.0.0'
   }, {
-    l: '4,500 tests'
+    l: '5,281 tests'
   }].map(function (c) {
     return /*#__PURE__*/React.createElement("span", {
       key: c.l,

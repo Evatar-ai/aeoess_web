@@ -180,7 +180,7 @@ function AeoessPricing({ palette }) {
       cta:{ l:'Read the spec', primary:false },
       features:[
         'Full SDK (TS + Python)',
-        'MCP server, all 150 tools',
+        'MCP server, all 152 tools',
         'Self-host the gateway',
         'IETF-tracked spec',
         'Conformance test suite',

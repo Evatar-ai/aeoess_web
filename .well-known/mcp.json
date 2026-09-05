@@ -1,7 +1,7 @@
 {
   "name": "Agent Passport System (aeoess)",
   "description": "Governance infrastructure for the agentic economy. Cryptographic identity, scoped delegation, gateway enforcement, and signed receipts on an open Apache 2.0 protocol.",
-  "version": "4.0.0",
+  "version": "6.0.0",
   "servers": [
     {
       "name": "agent-passport-system-mcp",
@@ -20,9 +20,9 @@
   },
   "sdk": {
     "npm": "agent-passport-system",
-    "npm_version": "4.3.0",
+    "npm_version": "6.0.0",
     "pypi": "agent-passport-system",
-    "pypi_version": "2.10.0",
+    "pypi_version": "3.0.0",
     "go": "github.com/aeoess/agent-passport-go"
   },
   "documentation": {

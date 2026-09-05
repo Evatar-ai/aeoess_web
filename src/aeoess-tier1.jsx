@@ -57,7 +57,7 @@ function AeoessDocs({ palette }) {
     ]},
     { id:'mcp', label:'MCP', items:[
       { sig:'APS_PROFILE=essential (20 tools)', desc:'Curated set for normal agents.' },
-      { sig:'APS_PROFILE=full (150 tools)', desc:'Complete protocol surface.' },
+      { sig:'APS_PROFILE=full (152 tools)', desc:'Complete protocol surface.' },
       { sig:'mcp://aps/passport.create', desc:'Tool: issue a passport from inside an MCP host.' },
       { sig:'mcp://aps/delegation.narrow', desc:'Tool: narrow an existing delegation.' },
     ]},
